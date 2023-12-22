@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35272B35E97C0080A19F /* UITextField+.swift */; };
+		F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35292B35E9BD0080A19F /* UIStackView+.swift */; };
+		F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B352B2B35EAF50080A19F /* UIView+.swift */; };
+		F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B352D2B35EB270080A19F /* CALayer+.swift */; };
+		F49B35312B35EC760080A19F /* Codable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35302B35EC760080A19F /* Codable+.swift */; };
 		F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521742B3440D7000E6E1E /* AppDelegate.swift */; };
 		F4F521772B3440D7000E6E1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521762B3440D7000E6E1E /* SceneDelegate.swift */; };
 		F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521782B3440D7000E6E1E /* ViewController.swift */; };
@@ -37,6 +42,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F49B35272B35E97C0080A19F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		F49B35292B35E9BD0080A19F /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		F49B352B2B35EAF50080A19F /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		F49B352D2B35EB270080A19F /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
+		F49B35302B35EC760080A19F /* Codable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+.swift"; sourceTree = "<group>"; };
 		F4F521712B3440D7000E6E1E /* Going-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Going-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F521742B3440D7000E6E1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F521762B3440D7000E6E1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +141,11 @@
 		F4F5218D2B346394000E6E1E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F49B35272B35E97C0080A19F /* UITextField+.swift */,
+				F49B35292B35E9BD0080A19F /* UIStackView+.swift */,
+				F49B352B2B35EAF50080A19F /* UIView+.swift */,
+				F49B352D2B35EB270080A19F /* CALayer+.swift */,
+				F49B35302B35EC760080A19F /* Codable+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -360,10 +375,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				F4F521B42B3484B4000E6E1E /* Config.swift in Sources */,
+				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
+				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,
+				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
+				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,
 				F4F521772B3440D7000E6E1E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
