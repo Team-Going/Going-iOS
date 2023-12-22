@@ -20,7 +20,6 @@
 		F4F521B02B347BF2000E6E1E /* KakaoSDKCertCore in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521AF2B347BF2000E6E1E /* KakaoSDKCertCore */; };
 		F4F521B22B347BF2000E6E1E /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521B12B347BF2000E6E1E /* KakaoSDKCommon */; };
 		F4F521B42B3484B4000E6E1E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521B32B3484B4000E6E1E /* Config.swift */; };
-		F4F521B72B348CD2000E6E1E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521B62B348CD2000E6E1E /* LoginViewModel.swift */; };
 		F4F521BE2B34A091000E6E1E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521BD2B34A091000E6E1E /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		F4F5218B2B346373000E6E1E /* UserDefaultToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultToken.swift; sourceTree = "<group>"; };
 		F4F521952B346576000E6E1E /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		F4F521B32B3484B4000E6E1E /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		F4F521B62B348CD2000E6E1E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,7 +232,6 @@
 		F4F5219B2B346843000E6E1E /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				F4F521B52B348CAA000E6E1E /* ViewModels */,
 				F4F5219F2B346875000E6E1E /* Cells */,
 				F4F5219E2B346870000E6E1E /* Models */,
 				F4F5219D2B346867000E6E1E /* Views */,
@@ -269,14 +266,6 @@
 			children = (
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		F4F521B52B348CAA000E6E1E /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				F4F521B62B348CD2000E6E1E /* LoginViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		F4F521BB2B349FDE000E6E1E /* Frameworks */ = {
@@ -373,7 +362,6 @@
 			files = (
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
-				F4F521B72B348CD2000E6E1E /* LoginViewModel.swift in Sources */,
 				F4F521B42B3484B4000E6E1E /* Config.swift in Sources */,
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,
 				F4F521772B3440D7000E6E1E /* SceneDelegate.swift in Sources */,
