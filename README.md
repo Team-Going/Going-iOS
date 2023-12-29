@@ -36,7 +36,7 @@
 
 
 
-## 🍏 Coding Convention
+## 🍏 Coding Convention
 https://www.notion.so/goinggoing/Code-Convention-82804e56becc48469c6cf573d43cb934?pvs=4
 
 
