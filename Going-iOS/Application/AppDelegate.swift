@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKCommon
+import AuthenticationServices
 
 
 @main
@@ -17,6 +18,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let kakaoNativeAppKey = Config.kakaoNativeAppKey
         KakaoSDK.initSDK(appKey: kakaoNativeAppKey)
+        
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        appleIDProvider.getCredentialState(forUserID: "여기에 credential.user 넣기") { (credentialState, error) in
+            switch credentialState {
+                case .authorized:
+                   print("authorized")
+                   // The Apple ID credential is valid.
+//                   DispatchQueue.main.async {
+//                     //authorized된 상태이므로 바로 로그인 완료 화면으로 이동
+//                     self.window?.rootViewController = ViewController()
+//                   }
+                case .revoked:
+                   print("revoked")
+                case .notFound:
+                   // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
+                   print("notFound")
+                       
+                default:
+                    break
+            }
+        }
         
         return true
     }
