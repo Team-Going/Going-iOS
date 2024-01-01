@@ -12,7 +12,7 @@ import SnapKit
 final class SplashViewController: UIViewController {
     
     private enum Size {
-        static let logoHeight: CGFloat = 65 / 194
+        static let logoHeight: CGFloat = 66 / 194
     }
 
     private let splashLogoImageView: UIImageView = {
