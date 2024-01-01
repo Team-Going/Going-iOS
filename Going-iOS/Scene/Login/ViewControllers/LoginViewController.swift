@@ -16,9 +16,6 @@ final class LoginViewController: UIViewController {
     private enum Size {
         static let logoHeight: CGFloat = 66 / 194
         static let ButtonHeight: CGFloat = 44 / 300
-        static let personalHeight: CGFloat = 20 / 99
-
-        
     }
     
     private let titleLabel: UILabel = {
@@ -51,17 +48,6 @@ final class LoginViewController: UIViewController {
     }()
     
     private lazy var personalInformationButton: UIButton = {
-
-//        var config = UIButton.Configuration.plain()
-//        var title = AttributedString.init(StringLiterals.Login.personalInformation)
-//        title.font = .pretendard(.detail2_regular)
-//        title.strokeColor = .gray300
-//        config.attributedTitle = title
-//
-//        config.image = ImageLiterals.Login.warningImage
-//        config.imagePlacement = .leading
-//        let button = UIButton(configuration: config)
-        
         let button = UIButton()
         button.setTitle(StringLiterals.Login.personalInformation, for: .normal)
         button.setTitleColor(.gray300, for: .normal)
@@ -69,6 +55,7 @@ final class LoginViewController: UIViewController {
         button.setImage(ImageLiterals.Login.warningImage, for: .normal)
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .leading
+        button.addTarget(self, action: #selector(webViewButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -133,15 +120,20 @@ final class LoginViewController: UIViewController {
         self.view.backgroundColor = .white000
     }
     
-    
     @objc
     private func appleLoginButtonTapped() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.presentationContextProvider = self
-        controller.performRequests()
-        
+        controller.performRequests()    
+    }
+    
+    @objc
+    private func webViewButtonTapped() {
+        let vc = PersonalInfoWebViewController()
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
     }
 }
 
