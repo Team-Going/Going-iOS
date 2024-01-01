@@ -10,6 +10,14 @@ import UIKit
 import SnapKit
 
 final class SplashViewController: UIViewController {
+    
+    private let testLabel: UILabel = {
+        let label = UILabel()
+        label.text = "test"
+        label.font = .pretendard(.detail3_regular)
+        label.textColor = .white000
+        return label
+    }()
 
     private let testImage: UIImageView = {
         let imageView = UIImageView()
@@ -27,14 +35,13 @@ final class SplashViewController: UIViewController {
     }
     
     private func setHierarchy() {
-        view.addSubview(testImage)
+        view.addSubview(testLabel)
         
     }
     
     private func setLayout() {
-        testImage.snp.makeConstraints {
+        testLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.height.equalTo(100)
         }
         
         
