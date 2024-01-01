@@ -14,7 +14,7 @@ final class SplashViewController: UIViewController {
     private let testLabel: UILabel = {
         let label = UILabel()
         label.text = "test"
-        label.font = .pretendard(.detail3_regular)
+        label.font = .pretendard(.head1)
         label.textColor = .white000
         return label
     }()
@@ -35,13 +35,19 @@ final class SplashViewController: UIViewController {
     }
     
     private func setHierarchy() {
-        view.addSubview(testLabel)
+        view.addSubviews(testImage, testLabel)
         
     }
     
     private func setLayout() {
         testLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
+        }
+        
+        testImage.snp.makeConstraints {
+            $0.top.equalTo(testLabel.snp.bottom).offset(200)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(100)
         }
         
         
