@@ -11,15 +11,11 @@ import SnapKit
 
 final class SplashViewController: UIViewController {
     
-    private let testLabel: UILabel = {
-        let label = UILabel()
-        label.text = "test"
-        label.font = .pretendard(.head1)
-        label.textColor = .white000
-        return label
-    }()
+    private enum Size {
+        static let logoHeight: CGFloat = 66 / 194
+    }
 
-    private let testImage: UIImageView = {
+    private let splashLogoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.Splash.splashLogo
         imageView.contentMode = .scaleAspectFill
@@ -29,28 +25,28 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setStyle()
         setHierarchy()
         setLayout()
 
     }
     
+    private func setStyle() {
+        self.view.backgroundColor = .red400
+    }
+    
     private func setHierarchy() {
-        view.addSubviews(testImage, testLabel)
+        view.addSubview(splashLogoImageView)
         
     }
     
     private func setLayout() {
-        testLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+        
+        splashLogoImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.leading.equalToSuperview().inset(90)
+            $0.height.equalTo(splashLogoImageView.snp.width).multipliedBy(Size.logoHeight)
         }
-        
-        testImage.snp.makeConstraints {
-            $0.top.equalTo(testLabel.snp.bottom).offset(200)
-            $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(100)
-        }
-        
-        
     }
 
 }
