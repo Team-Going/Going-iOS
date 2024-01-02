@@ -63,10 +63,15 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
+        hideNaviBar()
         setHierarchy()
         setLayout()
         setStyle()
+    }
+    
+    private func hideNaviBar() {
+        self.navigationController?.isNavigationBarHidden = true
+
     }
     
     private func setHierarchy() {
