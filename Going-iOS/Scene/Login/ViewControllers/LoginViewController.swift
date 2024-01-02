@@ -13,11 +13,6 @@ import SnapKit
 
 final class LoginViewController: UIViewController {
     
-    private enum Size {
-        static let logoHeight: CGFloat = 66 / 194
-        static let ButtonHeight: CGFloat = 44 / 300
-    }
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = StringLiterals.Login.title
@@ -68,7 +63,7 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.isNavigationBarHidden = true
         setHierarchy()
         setLayout()
         setStyle()
@@ -88,30 +83,27 @@ final class LoginViewController: UIViewController {
         logoImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(17)
             $0.leading.trailing.equalToSuperview().inset(91)
-            $0.height.equalTo(logoImageView.snp.width).multipliedBy(Size.logoHeight)
         }
         
         appleLoginButton.snp.makeConstraints {
-            $0.top.equalTo(logoImageView.snp.bottom).offset(204)
+            $0.bottom.equalTo(kakaoLoginButton.snp.top).offset(-12)
             $0.trailing.leading.equalToSuperview().inset(38)
-            $0.height.equalTo(appleLoginButton.snp.width).multipliedBy(Size.ButtonHeight)
         }
         
         kakaoLoginButton.snp.makeConstraints {
-            $0.top.equalTo(appleLoginButton.snp.bottom).offset(12)
+            $0.bottom.equalTo(personalInformationButton.snp.top).offset(-8)
             $0.trailing.leading.equalToSuperview().inset(38)
-            $0.height.equalTo(appleLoginButton.snp.width).multipliedBy(Size.ButtonHeight)
         }
         
         personalInformationButton.snp.makeConstraints {
-            $0.top.equalTo(kakaoLoginButton.snp.bottom).offset(8)
-            $0.trailing.leading.equalToSuperview().inset(138)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.centerX.equalToSuperview()
         }
         
         underLineView.snp.makeConstraints {
             $0.top.equalTo(personalInformationButton.snp.bottom)
             $0.leading.equalTo(personalInformationButton.snp.leading)
-            $0.trailing.equalTo(personalInformationButton.snp.trailing).offset(-15)
+            $0.trailing.equalTo(personalInformationButton.snp.trailing)
             $0.height.equalTo(1)
         }
     }
