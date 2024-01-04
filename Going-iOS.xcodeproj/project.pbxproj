@@ -7,6 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
+		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
+		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
+		CA8CD6702B46B47600CFDFBF /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66F2B46B47600CFDFBF /* Pretendard-ExtraLight.otf */; };
+		CA8CD6722B46B48100CFDFBF /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6712B46B48100CFDFBF /* Pretendard-Light.otf */; };
+		CA8CD6742B46B48700CFDFBF /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6732B46B48700CFDFBF /* Pretendard-Medium.otf */; };
+		CA8CD6762B46B48F00CFDFBF /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6752B46B48F00CFDFBF /* Pretendard-Regular.otf */; };
+		CA8CD6782B46B49800CFDFBF /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6772B46B49800CFDFBF /* Pretendard-SemiBold.otf */; };
+		CA8CD67F2B46B64000CFDFBF /* OurToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD67E2B46B64000CFDFBF /* OurToDoViewController.swift */; };
+		CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6802B46B70700CFDFBF /* TripHeaderView.swift */; };
+		CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6822B46B72E00CFDFBF /* TripMiddleView.swift */; };
+		CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6842B46B7C100CFDFBF /* OurToDoHeaderView.swift */; };
+		CA8CD6872B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6862B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift */; };
+		CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6882B46B89D00CFDFBF /* ManagerCollectionViewCell.swift */; };
+		CA8CD68B2B46B8CD00CFDFBF /* OurToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD68A2B46B8CD00CFDFBF /* OurToDoCollectionViewCell.swift */; };
+		CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD68C2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift */; };
+		CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */; };
+		CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */; };
+		CA8CD6932B46B9F600CFDFBF /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35272B35E97C0080A19F /* UITextField+.swift */; };
 		F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35292B35E9BD0080A19F /* UIStackView+.swift */; };
@@ -20,14 +39,6 @@
 		F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76B2B4283920008735F /* SplashViewController.swift */; };
 		F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76D2B4286A50008735F /* ImageLiterals.swift */; };
 		F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76F2B4286EA0008735F /* UIImage+.swift */; };
-		F4C5E7792B4296F80008735F /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4C5E7712B4296F80008735F /* Pretendard-Bold.otf */; };
-		F4C5E77A2B4296F90008735F /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4C5E7722B4296F80008735F /* Pretendard-ExtraLight.otf */; };
-		F4C5E77B2B4296F90008735F /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4C5E7732B4296F80008735F /* Pretendard-Medium.otf */; };
-		F4C5E77C2B4296F90008735F /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4C5E7742B4296F80008735F /* Pretendard-Black.otf */; };
-		F4C5E77D2B4296F90008735F /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4C5E7752B4296F80008735F /* Pretendard-Light.otf */; };
-		F4C5E77E2B4296F90008735F /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4C5E7762B4296F80008735F /* Pretendard-SemiBold.otf */; };
-		F4C5E77F2B4296F90008735F /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4C5E7772B4296F80008735F /* Pretendard-Regular.otf */; };
-		F4C5E7802B4296F90008735F /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4C5E7782B4296F80008735F /* Pretendard-ExtraBold.otf */; };
 		F4C5E7822B429B620008735F /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E7812B429B620008735F /* UIFont+.swift */; };
 		F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E7832B42A6830008735F /* UILabel+.swift */; };
 		F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E7852B42A9C80008735F /* LoginViewController.swift */; };
@@ -62,6 +73,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		CA8CD66F2B46B47600CFDFBF /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		CA8CD6712B46B48100CFDFBF /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		CA8CD6732B46B48700CFDFBF /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		CA8CD6752B46B48F00CFDFBF /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		CA8CD6772B46B49800CFDFBF /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		CA8CD67E2B46B64000CFDFBF /* OurToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoViewController.swift; sourceTree = "<group>"; };
+		CA8CD6802B46B70700CFDFBF /* TripHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripHeaderView.swift; sourceTree = "<group>"; };
+		CA8CD6822B46B72E00CFDFBF /* TripMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripMiddleView.swift; sourceTree = "<group>"; };
+		CA8CD6842B46B7C100CFDFBF /* OurToDoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoHeaderView.swift; sourceTree = "<group>"; };
+		CA8CD6862B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControlView.swift; sourceTree = "<group>"; };
+		CA8CD6882B46B89D00CFDFBF /* ManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerCollectionViewCell.swift; sourceTree = "<group>"; };
+		CA8CD68A2B46B8CD00CFDFBF /* OurToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoCollectionViewCell.swift; sourceTree = "<group>"; };
+		CA8CD68C2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFriendsCollectionViewCell.swift; sourceTree = "<group>"; };
+		CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoData.swift; sourceTree = "<group>"; };
+		CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileData.swift; sourceTree = "<group>"; };
+		CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F49B35272B35E97C0080A19F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		F49B35292B35E9BD0080A19F /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
@@ -75,14 +105,6 @@
 		F4C5E76B2B4283920008735F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F4C5E76D2B4286A50008735F /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		F4C5E76F2B4286EA0008735F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		F4C5E7712B4296F80008735F /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Bold.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-Bold.otf"; sourceTree = "<group>"; };
-		F4C5E7722B4296F80008735F /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraLight.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
-		F4C5E7732B4296F80008735F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Medium.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-Medium.otf"; sourceTree = "<group>"; };
-		F4C5E7742B4296F80008735F /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Black.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-Black.otf"; sourceTree = "<group>"; };
-		F4C5E7752B4296F80008735F /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Light.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-Light.otf"; sourceTree = "<group>"; };
-		F4C5E7762B4296F80008735F /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-SemiBold.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
-		F4C5E7772B4296F80008735F /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Regular.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-Regular.otf"; sourceTree = "<group>"; };
-		F4C5E7782B4296F80008735F /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraBold.otf"; path = "../../../../../Pretendard-1.3.9/public/static/Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		F4C5E7812B429B620008735F /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		F4C5E7832B42A6830008735F /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		F4C5E7852B42A9C80008735F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +140,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA8CD6792B46B61000CFDFBF /* OurToDo */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD67D2B46B62B00CFDFBF /* ViewControllers */,
+				CA8CD67C2B46B62500CFDFBF /* Views */,
+				CA8CD67B2B46B61F00CFDFBF /* Models */,
+				CA8CD67A2B46B61A00CFDFBF /* Cells */,
+			);
+			path = OurToDo;
+			sourceTree = "<group>";
+		};
+		CA8CD67A2B46B61A00CFDFBF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD6882B46B89D00CFDFBF /* ManagerCollectionViewCell.swift */,
+				CA8CD68A2B46B8CD00CFDFBF /* OurToDoCollectionViewCell.swift */,
+				CA8CD68C2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		CA8CD67B2B46B61F00CFDFBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */,
+				CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CA8CD67C2B46B62500CFDFBF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD6802B46B70700CFDFBF /* TripHeaderView.swift */,
+				CA8CD6822B46B72E00CFDFBF /* TripMiddleView.swift */,
+				CA8CD6842B46B7C100CFDFBF /* OurToDoHeaderView.swift */,
+				CA8CD6862B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift */,
+				CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CA8CD67D2B46B62B00CFDFBF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD67E2B46B64000CFDFBF /* OurToDoViewController.swift */,
+			);
+			path = ViewControllers;
 		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,14 +319,14 @@
 		F4F521922B34648F000E6E1E /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				F4C5E7742B4296F80008735F /* Pretendard-Black.otf */,
-				F4C5E7712B4296F80008735F /* Pretendard-Bold.otf */,
-				F4C5E7782B4296F80008735F /* Pretendard-ExtraBold.otf */,
-				F4C5E7722B4296F80008735F /* Pretendard-ExtraLight.otf */,
-				F4C5E7752B4296F80008735F /* Pretendard-Light.otf */,
-				F4C5E7732B4296F80008735F /* Pretendard-Medium.otf */,
-				F4C5E7772B4296F80008735F /* Pretendard-Regular.otf */,
-				F4C5E7762B4296F80008735F /* Pretendard-SemiBold.otf */,
+				CA8CD66F2B46B47600CFDFBF /* Pretendard-ExtraLight.otf */,
+				CA8CD6772B46B49800CFDFBF /* Pretendard-SemiBold.otf */,
+				CA8CD6752B46B48F00CFDFBF /* Pretendard-Regular.otf */,
+				CA8CD6732B46B48700CFDFBF /* Pretendard-Medium.otf */,
+				CA8CD6712B46B48100CFDFBF /* Pretendard-Light.otf */,
+				CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */,
+				CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */,
+				CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -313,6 +383,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CA8CD6792B46B61000CFDFBF /* OurToDo */,
 				F4BA26F32B45597600975CC2 /* MakeProfile */,
 				F4F5219B2B346843000E6E1E /* Login */,
 			);
@@ -441,15 +512,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA8CD6702B46B47600CFDFBF /* Pretendard-ExtraLight.otf in Resources */,
 				F4F521812B3440DA000E6E1E /* LaunchScreen.storyboard in Resources */,
-				F4C5E77B2B4296F90008735F /* Pretendard-Medium.otf in Resources */,
-				F4C5E7802B4296F90008735F /* Pretendard-ExtraBold.otf in Resources */,
-				F4C5E7792B4296F80008735F /* Pretendard-Bold.otf in Resources */,
-				F4C5E77E2B4296F90008735F /* Pretendard-SemiBold.otf in Resources */,
-				F4C5E77F2B4296F90008735F /* Pretendard-Regular.otf in Resources */,
-				F4C5E77A2B4296F90008735F /* Pretendard-ExtraLight.otf in Resources */,
-				F4C5E77D2B4296F90008735F /* Pretendard-Light.otf in Resources */,
-				F4C5E77C2B4296F90008735F /* Pretendard-Black.otf in Resources */,
+				CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */,
+				CA8CD6742B46B48700CFDFBF /* Pretendard-Medium.otf in Resources */,
+				CA8CD6722B46B48100CFDFBF /* Pretendard-Light.otf in Resources */,
+				CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */,
+				CA8CD6762B46B48F00CFDFBF /* Pretendard-Regular.otf in Resources */,
+				CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */,
+				CA8CD6782B46B49800CFDFBF /* Pretendard-SemiBold.otf in Resources */,
 				F4F5217E2B3440DA000E6E1E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,23 +533,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
+				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
+				CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */,
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
+				CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */,
+				CA8CD6872B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift in Sources */,
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
+				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
 				F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */,
+				CA8CD68B2B46B8CD00CFDFBF /* OurToDoCollectionViewCell.swift in Sources */,
 				F4F521B42B3484B4000E6E1E /* Config.swift in Sources */,
 				F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */,
+				CA8CD6932B46B9F600CFDFBF /* NavigationBarView.swift in Sources */,
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
+				CA8CD67F2B46B64000CFDFBF /* OurToDoViewController.swift in Sources */,
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,
 				F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */,
+				CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */,
+				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
+				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,

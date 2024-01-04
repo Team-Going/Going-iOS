@@ -20,4 +20,16 @@ extension UIView {
         layer.cornerRadius = cornerRadius
         layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
     }
+    
+    //그라데이션
+    func setGradient(color1:UIColor,color2:UIColor){
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.colors = [color1.cgColor,color2.cgColor]
+        gradient.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: -0.29, b: 0, c: 0, d: -0.25, tx: 0.18, ty: 0.62))
+        gradient.locations = [0.0 , 1.0]
+        gradient.startPoint = CGPoint(x: 0.05, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradient.frame = bounds
+        layer.addSublayer(gradient)
+    }
 }
