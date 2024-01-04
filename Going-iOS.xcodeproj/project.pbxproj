@@ -5,7 +5,7 @@
 	};
 	objectVersion = 56;
 	objects = {
-
+	
 /* Begin PBXBuildFile section */
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
@@ -188,6 +188,8 @@
 				CA8CD67E2B46B64000CFDFBF /* OurToDoViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
 			isa = PBXGroup;
 			children = (
