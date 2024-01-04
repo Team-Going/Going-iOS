@@ -23,8 +23,6 @@ class DOOButton: UIButton {
         case white
     }
     
-   let buttonHeight: CGFloat = 50 / 327
-    
     // 현재 버튼 타입
     var currentType: ButtonType = .unabled {
         didSet {
