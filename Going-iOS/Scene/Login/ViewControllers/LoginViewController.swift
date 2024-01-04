@@ -69,13 +69,36 @@ final class LoginViewController: UIViewController {
         setStyle()
     }
     
+    @objc
+    private func appleLoginButtonTapped() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()    
+    }
+    
+    @objc
+    private func webViewButtonTapped() {
+        let vc = PersonalInfoWebViewController()
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
+    }
+}
+
+extension LoginViewController {
     private func hideNaviBar() {
         self.navigationController?.isNavigationBarHidden = true
 
     }
     
     private func setHierarchy() {
-        self.view.addSubviews(titleLabel, logoImageView, appleLoginButton, kakaoLoginButton, personalInformationButton, underLineView)
+        self.view.addSubviews(titleLabel, 
+                              logoImageView,
+                              appleLoginButton,
+                              kakaoLoginButton,
+                              personalInformationButton,
+                              underLineView)
     }
     
     private func setLayout() {
@@ -115,22 +138,6 @@ final class LoginViewController: UIViewController {
     
     private func setStyle() {
         self.view.backgroundColor = .white000
-    }
-    
-    @objc
-    private func appleLoginButtonTapped() {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()    
-    }
-    
-    @objc
-    private func webViewButtonTapped() {
-        let vc = PersonalInfoWebViewController()
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
     }
 }
 
