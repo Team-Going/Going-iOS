@@ -25,7 +25,7 @@ final class MakeProfileViewController: UIViewController {
         return label
     }()
     
-    private let nameTextField: UITextField = {
+    private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
         textField.setPlaceholder(placeholder: "이름을 입력해주세요", fontColor: .gray200, font: .pretendard(.body3_medi))
@@ -34,7 +34,7 @@ final class MakeProfileViewController: UIViewController {
         textField.textColor = .gray700
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor.gray200.cgColor
-        textField.addTarget(MakeProfileViewController.self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
         return textField
     }()
     
@@ -49,7 +49,7 @@ final class MakeProfileViewController: UIViewController {
     
     private var nameTextFieldCount: Int = 0
     
-    private lazy var nameTextFieldCountLabel: UILabel = {
+    private let nameTextFieldCountLabel: UILabel = {
         let label = UILabel()
         label.text = "0 / 3"
         label.font = .pretendard(.detail2_regular)
@@ -65,7 +65,7 @@ final class MakeProfileViewController: UIViewController {
         return label
     }()
     
-    private let descTextField: UITextField = {
+    private lazy var descTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
         textField.setPlaceholder(placeholder: "당신을 한줄로 표현해보세요.", fontColor: .gray200, font: .pretendard(.body3_medi))
@@ -74,7 +74,7 @@ final class MakeProfileViewController: UIViewController {
         textField.textColor = .gray700
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor.gray200.cgColor
-        textField.addTarget(MakeProfileViewController.self, action: #selector(descTextFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(descTextFieldDidChange), for: .editingChanged)
         return textField
     }()
     
@@ -112,13 +112,63 @@ final class MakeProfileViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    private func setHierarchy() {
-        
-        self.view.addSubviews(nameLabel, nameTextField, nameTextFieldCountLabel, nameWarningLabel, descLabel, descTextField, descTextFieldCountLabel, nextButton)
+    @objc
+    private func nameTextFieldDidChange() {
+        guard let text = nameTextField.text else { return }
+        nameTextFieldCount = text.count
+        nameTextFieldCountLabel.text = "\(nameTextFieldCount) / 3"
+        nameTextFieldBlankCheck()
+        updateNextButtonState()
         
     }
     
-    private func setLayout() {
+    @objc
+    private func descTextFieldDidChange() {
+        guard let text = descTextField.text else { return }
+        descTextFieldCount = text.count
+        descTextFieldCountLabel.text = "\(descTextFieldCount) / 15"
+        updateNextButtonState()
+        
+    }
+    
+    @objc
+    private func nextButtonTapped() {
+        
+        //구조체에 넣어서 서버에 넘겨주기
+        var userData = UserProfileData(name: "", description: "")
+        
+        if let nameText = nameTextField.text {
+            userData.name = nameText
+        }
+        
+        if let descText = descTextField.text {
+            userData.description = descText
+        }
+        
+        // userData를 출력 또는 다음 단계로 전달하는 등의 동작 수행
+        print(userData.name)
+        print(userData.description)
+        //        let nextVC = LoginViewController()
+        //        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+    
+}
+
+private extension MakeProfileViewController {
+    func setHierarchy() {
+        
+        self.view.addSubviews(nameLabel,
+                              nameTextField,
+                              nameTextFieldCountLabel,
+                              nameWarningLabel,
+                              descLabel,
+                              descTextField,
+                              descTextFieldCountLabel,
+                              nextButton)
+    }
+    
+    func setLayout() {
         
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(40)
@@ -165,21 +215,21 @@ final class MakeProfileViewController: UIViewController {
         
     }
     
-    private func setStyle() {
-        self.view.backgroundColor = .white
+    func setStyle() {
+        self.view.backgroundColor = .white000
     }
     
-    private func setDelegate() {
+    func setDelegate() {
         nameTextField.delegate = self
         descTextField.delegate = self
     }
     
-    private func updateNextButtonState() {
+    func updateNextButtonState() {
         // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
-        let isNameTextFieldNotEmpty = !nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
-        let isDescTextFieldNotEmpty = !descTextField.text!.isEmpty
+        let isNameTextFieldEmpty = nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
+        let isDescTextFieldEmpty = descTextField.text!.isEmpty
         
-        nextButton.isEnabled = isNameTextFieldNotEmpty && isDescTextFieldNotEmpty
+        nextButton.isEnabled = !isNameTextFieldEmpty && !isDescTextFieldEmpty
         if nextButton.isEnabled {
             nextButton.backgroundColor = .gray500
             nextButton.titleLabel?.font = .pretendard(.body1_bold)
@@ -191,7 +241,8 @@ final class MakeProfileViewController: UIViewController {
         }
     }
     
-    private func nameTextFieldBlankCheck() {
+    
+    func nameTextFieldBlankCheck() {
         guard let textEmpty = nameTextField.text?.isEmpty else { return }
         if textEmpty {
             nameTextField.layer.borderColor = UIColor.gray700.cgColor
@@ -207,48 +258,6 @@ final class MakeProfileViewController: UIViewController {
             nameWarningLabel.isHidden = true
         }
     }
-    
-    @objc
-    private func nameTextFieldDidChange() {
-        guard let text = nameTextField.text else { return }
-        nameTextFieldCount = text.count
-        nameTextFieldCountLabel.text = "\(nameTextFieldCount) / 3"
-        nameTextFieldBlankCheck()
-        updateNextButtonState()
-        
-    }
-    
-    @objc
-    private func descTextFieldDidChange() {
-        guard let text = descTextField.text else { return }
-        descTextFieldCount = text.count
-        descTextFieldCountLabel.text = "\(descTextFieldCount) / 15"
-        updateNextButtonState()
-        
-    }
-    
-    @objc
-    private func nextButtonTapped() {
-        
-        //구조체에 넣어서 서버에 넘겨주기
-        var userData = UserProfileData(name: "", description: "")
-        
-        if let nameText = nameTextField.text {
-            userData.name = nameText
-        }
-        
-        if let descText = descTextField.text {
-            userData.description = descText
-        }
-        
-        // userData를 출력 또는 다음 단계로 전달하는 등의 동작 수행
-        print(userData.name)
-        print(userData.description)
-        //        let nextVC = LoginViewController()
-        //        self.navigationController?.pushViewController(nextVC, animated: true)
-        
-    }
-    
 }
 
 extension MakeProfileViewController: UITextFieldDelegate {
@@ -286,7 +295,8 @@ extension MakeProfileViewController: UITextFieldDelegate {
             
         default:
             return
-        }    }
+        }
+    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
