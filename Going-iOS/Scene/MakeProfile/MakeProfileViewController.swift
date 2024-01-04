@@ -17,12 +17,6 @@ struct UserProfileData {
 
 final class MakeProfileViewController: UIViewController {
     
-    private enum Size {
-        static let textFieldHeight: CGFloat = 48 / 327
-        static let nextButtonHeight: CGFloat = 50 / 327
-        
-    }
-    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "이름"
@@ -131,7 +125,7 @@ final class MakeProfileViewController: UIViewController {
         nameTextField.snp.makeConstraints {
             $0.top.equalTo(nameLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(nameTextField.snp.width).multipliedBy(Size.textFieldHeight)
+            $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         
         nameTextFieldCountLabel.snp.makeConstraints {
@@ -152,7 +146,7 @@ final class MakeProfileViewController: UIViewController {
         descTextField.snp.makeConstraints {
             $0.top.equalTo(descLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(descTextField.snp.width).multipliedBy(Size.textFieldHeight)
+            $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         
         descTextFieldCountLabel.snp.makeConstraints {
@@ -163,7 +157,7 @@ final class MakeProfileViewController: UIViewController {
         nextButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(nextButton.snp.width).multipliedBy(Size.nextButtonHeight)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
     }
