@@ -9,6 +9,12 @@ import UIKit
 
 enum ImageLiterals {
     
+    enum NavigationBar {
+        static var buttonBack: UIImage { .load(named: "btn_back") }
+        static var buttonSave: UIImage { .load(named: "btn_save")}
+        static var buttonClose: UIImage { .load(named: "btn_close")}
+    }
+    
     enum Splash {
         static var splashLogo: UIImage { .load(named: "splash_logo") }
     }
@@ -18,7 +24,6 @@ enum ImageLiterals {
         static var warningImage: UIImage { .load(named: "ic_warning_mini") }
         static var kakaoLoginButton: UIImage { .load(named: "kakao_login_large_wide") }
         static var appleLoginButton: UIImage { .load(named: "btn_applelogin") }
-
     }
     
     enum TestResult {
@@ -26,7 +31,9 @@ enum ImageLiterals {
         static var verticalLine: UIImage { .load(named: "verti_line") }
     }
     
-    
-    
+    enum CreateTravel {
+        static var buttonCopy: UIImage { .load(named: "ic_copy")}
+        static var ticketImage: UIImage { .load(named: "ticket_img_small")}
+        static var larvaImage: UIImage { .load(named: "larva")}
+    }
 }
-
