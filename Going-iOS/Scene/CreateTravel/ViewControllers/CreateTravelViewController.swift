@@ -254,10 +254,10 @@ private extension CreateTravelViewController {
         }
         
         createTravelButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(createTravelButton.snp.width).multipliedBy(createTravelButton.buttonHeight)
+            $0.height.equalTo(absoluteHeight / 812 * 50)
             $0.width.equalTo(absoluteWidth / 375 * 327)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.centerX.equalToSuperview()
         }
     }
     

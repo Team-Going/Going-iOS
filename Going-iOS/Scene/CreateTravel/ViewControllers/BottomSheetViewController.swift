@@ -15,6 +15,11 @@ protocol BottomSheetDelegate: AnyObject {
 
 final class BottomSheetViewController: UIViewController {
     
+    // MARK: - Size
+    
+    private let absoluteHeight = UIScreen.main.bounds.height
+    private let absoluteWidth = UIScreen.main.bounds.width
+    
     // MARK: - Properties
     
     weak var delegate: BottomSheetDelegate?
@@ -166,8 +171,8 @@ private extension BottomSheetViewController {
         }
         
         confirmButton.snp.makeConstraints {
-            $0.height.equalTo(confirmButton.snp.width).multipliedBy(confirmButton.buttonHeight)
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(absoluteHeight / 812 * 50)
+            $0.width.equalTo(absoluteWidth / 375 * 327)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
             $0.centerX.equalToSuperview()
         }
