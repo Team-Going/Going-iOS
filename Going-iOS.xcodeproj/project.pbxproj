@@ -5,7 +5,7 @@
 	};
 	objectVersion = 56;
 	objects = {
-
+	
 /* Begin PBXBuildFile section */
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
@@ -33,6 +33,9 @@
 		F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B352D2B35EB270080A19F /* CALayer+.swift */; };
 		F49B35312B35EC760080A19F /* Codable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35302B35EC760080A19F /* Codable+.swift */; };
 		F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F12B42D07000975CC2 /* PersonalInfoWebViewController.swift */; };
+		F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */; };
+		F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */; };
+		F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26FB2B471A1800975CC2 /* Constant.swift */; };
 		F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76B2B4283920008735F /* SplashViewController.swift */; };
 		F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76D2B4286A50008735F /* ImageLiterals.swift */; };
 		F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76F2B4286EA0008735F /* UIImage+.swift */; };
@@ -96,6 +99,9 @@
 		F49B352D2B35EB270080A19F /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		F49B35302B35EC760080A19F /* Codable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+.swift"; sourceTree = "<group>"; };
 		F4BA26F12B42D07000975CC2 /* PersonalInfoWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoWebViewController.swift; sourceTree = "<group>"; };
+		F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeProfileViewController.swift; sourceTree = "<group>"; };
+		F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
+		F4BA26FB2B471A1800975CC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		F4C5E76B2B4283920008735F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F4C5E76D2B4286A50008735F /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		F4C5E76F2B4286EA0008735F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -184,6 +190,22 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
+			);
+			path = MakeProfile;
+			sourceTree = "<group>";
+		};
+		F4BA26F82B47197100975CC2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		F4F521682B3440D7000E6E1E = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +249,7 @@
 		F4F521892B3462FC000E6E1E /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F4BA26F82B47197100975CC2 /* Utils */,
 				F4F521932B3464BD000E6E1E /* Settings */,
 				F4F521912B346453000E6E1E /* Resources */,
 				F4F521902B34642A000E6E1E /* UIComponents */,
@@ -267,6 +290,7 @@
 			children = (
 				F4C5E76D2B4286A50008735F /* ImageLiterals.swift */,
 				F4C5E7872B42AC010008735F /* StringLiterals.swift */,
+				F4BA26FB2B471A1800975CC2 /* Constant.swift */,
 			);
 			path = Literals;
 			sourceTree = "<group>";
@@ -362,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				CA8CD6792B46B61000CFDFBF /* OurToDo */,
+				F4BA26F32B45597600975CC2 /* MakeProfile */,
 				F4F5219B2B346843000E6E1E /* Login */,
 			);
 			path = Scene;
@@ -516,6 +541,7 @@
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
 				CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */,
 				CA8CD6872B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift in Sources */,
+				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
@@ -528,6 +554,7 @@
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
+				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				CA8CD67F2B46B64000CFDFBF /* OurToDoViewController.swift in Sources */,
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,
@@ -537,6 +564,7 @@
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
+				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,
 				F4F521772B3440D7000E6E1E /* SceneDelegate.swift in Sources */,
 			);
