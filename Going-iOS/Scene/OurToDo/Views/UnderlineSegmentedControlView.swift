@@ -1,6 +1,6 @@
 import UIKit
 
-class UnderlineSegmentedControlView: UISegmentedControl {
+final class UnderlineSegmentedControlView: UISegmentedControl {
 
     // MARK: - UI Property
     

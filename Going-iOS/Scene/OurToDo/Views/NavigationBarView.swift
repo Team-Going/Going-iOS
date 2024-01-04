@@ -6,7 +6,7 @@ protocol NavigationBarDelegate: AnyObject {
     func popToPreviousView()
 }
 
-class NavigationBarView: UIView {
+final class NavigationBarView: UIView {
 
     // MARK: - UI Property
 
@@ -29,7 +29,6 @@ class NavigationBarView: UIView {
         setHierachy()
         setLayout()
         setStyle()
-        setAddTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -63,7 +62,7 @@ private extension NavigationBarView {
         }
         navigationTitleLabel.snp.makeConstraints{
             $0.centerY.equalToSuperview()
-            $0.height.equalTo(absoluteHeight * 48)
+//            $0.height.equalTo(absoluteHeight * 48)
             $0.leading.equalTo(backButton.snp.trailing).offset(absoluteWidth * 18)
         }
         rightItem.snp.makeConstraints{

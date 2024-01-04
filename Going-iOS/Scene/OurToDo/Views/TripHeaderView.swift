@@ -2,7 +2,7 @@ import UIKit
 
 import SnapKit
 
-class TripHeaderView: UIView {
+final class TripHeaderView: UIView {
     
     // MARK: - UI Property
     
@@ -24,6 +24,7 @@ class TripHeaderView: UIView {
         btn.backgroundColor = UIColor.gray50
         btn.setImage(ImageLiterals.OurToDo.btnOurToDoEdit, for: .normal)
         btn.isUserInteractionEnabled = false
+        btn.addTarget(self, action: #selector(pushToEditTripView(_:)), for: .touchUpInside)
         return btn
     }()
     private let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: ImageLiterals.OurToDo.icCalendar)
@@ -32,9 +33,9 @@ class TripHeaderView: UIView {
     
     let absoluteWidth = UIScreen.main.bounds.width / 375
     let absoluteHeight = UIScreen.main.bounds.height / 812
-    var data: [String]? = ["", "", "", ""]{
+    var tripData: [String]? {
         didSet {
-            guard let data = data else {return}
+            guard let data = tripData else {return}
             self.tripNameLabel.text = data[0]
             self.tripDdayLabel.text = data[1]
             self.tripDateLabel.text = data[2] + " - " + data[3]
@@ -62,7 +63,6 @@ class TripHeaderView: UIView {
         setHierachy()
         setLayout()
         setStyle()
-        setAddTarget()
     }
 
     required init?(coder: NSCoder) {
@@ -96,7 +96,6 @@ private extension TripHeaderView {
         }
         tripDdayLabel.snp.makeConstraints{
             $0.leading.centerY.top.bottom.equalToSuperview()
-            $0.height.equalTo(absoluteHeight * 28)
         }
         editTripButton.snp.makeConstraints{
             $0.leading.equalTo(tripDdayLabel.snp.trailing).offset(3)
@@ -118,10 +117,6 @@ private extension TripHeaderView {
         label.textColor = textColor
         label.textAlignment = .left
         return label
-    }
-    
-    func setAddTarget() {
-        editTripButton.addTarget(self, action: #selector(pushToEditTripView(_:)), for: .touchUpInside)
     }
 }
 

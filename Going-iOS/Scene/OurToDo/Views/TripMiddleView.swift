@@ -1,6 +1,6 @@
 import UIKit
 
-class TripMiddleView: UIView {
+final class TripMiddleView: UIView {
     
     // MARK: - UI Property
     
@@ -23,7 +23,11 @@ class TripMiddleView: UIView {
     }()
     private var tripFriendsContainer: UIView = UIView()
     private lazy var tripFriendsLabel: UILabel = {setLabel(text: "여행 친구들", textAlignment: .left)}()
-    private var tripFriendsBtn: UIButton = UIButton()
+    private var tripFriendsBtn: UIButton = {
+        let btn = UIButton()
+        btn.addTarget(self, action: #selector(pushToInquiryFriendsView), for: .touchUpInside)
+        return btn
+    }()
     private lazy var tripFriendsCollectionView: UICollectionView = {setCollectionView()}()
     private var addButton: UIButton = {
         let btn = UIButton()
@@ -31,6 +35,7 @@ class TripMiddleView: UIView {
         btn.layer.borderWidth = 0.5
         btn.layer.borderColor = UIColor.gray100.cgColor
         btn.setImage(ImageLiterals.OurToDo.btnPlus, for: .normal)
+        btn.addTarget(self, action: #selector(pushToAddFriendsView), for: .touchUpInside)
         return btn
     }()
     private lazy var addLabel: UILabel = {setLabel(text: "추가하기", font: UIFont.pretendard(.detail3_regular), textColor: UIColor.gray500,  textAlignment: .center)}()
@@ -58,7 +63,6 @@ class TripMiddleView: UIView {
         registerCell()
         setLayout()
         setStyle()
-        setAddTarget()
         setDelegate()
     }
 
@@ -109,12 +113,10 @@ private extension TripMiddleView {
             $0.top.equalToSuperview().inset(absoluteHeight * 20)
             $0.leading.equalToSuperview().inset(absoluteWidth * 16)
             $0.width.equalTo(absoluteWidth * 100)
-            $0.height.equalTo(absoluteHeight * 23)
         }
         percentageLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(absoluteHeight * 20)
             $0.trailing.equalToSuperview().inset(absoluteWidth * 16)
-            $0.height.equalTo(absoluteHeight * 23)
         }
         tripProgressBar.snp.makeConstraints{
             $0.top.equalTo(tripProgressLabel.snp.bottom).offset(absoluteHeight * 12)
@@ -130,7 +132,6 @@ private extension TripMiddleView {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.width.equalTo(absoluteWidth * 70)
-            $0.height.equalToSuperview()
         }
         tripFriendsBtn.snp.makeConstraints{
             $0.centerY.equalToSuperview()
@@ -161,15 +162,11 @@ private extension TripMiddleView {
         addButton.snp.makeConstraints{
             $0.size.equalTo(absoluteHeight * 48)
         }
-        
-        addLabel.snp.makeConstraints{
-            $0.height.equalTo(absoluteHeight * 17)
-        }
     }
 
     func setStyle() {
         self.backgroundColor = UIColor.gray50
-        tripFriendsContainer.backgroundColor = .white
+        tripFriendsContainer.backgroundColor = UIColor.white000
         tripFriendsBtn.setImage(ImageLiterals.OurToDo.btnEnter, for: .normal)
         addButton.layer.cornerRadius = absoluteHeight * 23.5
     }
@@ -181,11 +178,6 @@ private extension TripMiddleView {
         label.textColor = textColor
         label.textAlignment = textAlignment
         return label
-    }
-    
-    func setAddTarget() {
-        tripFriendsBtn.addTarget(self, action: #selector(pushToInquiryFriendsView), for: .touchUpInside)
-        addButton.addTarget(self, action: #selector(pushToAddFriendsView), for: .touchUpInside)
     }
     
     func setDelegate() {

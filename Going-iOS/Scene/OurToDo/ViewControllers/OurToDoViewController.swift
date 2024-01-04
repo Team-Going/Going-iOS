@@ -4,16 +4,16 @@ import SnapKit
 
 // TODO: - 네비바 & 탭바 추후 변경
 
-class OurToDoViewController: UIViewController {
+final class OurToDoViewController: UIViewController {
 
     // MARK: - UI Property
 
     private lazy var contentView: UIView = UIView()
-    private var navigationBarview = NavigationBarView()
-    private var tripHeaderView: TripHeaderView = TripHeaderView()
-    private var tripMiddleView: TripMiddleView = TripMiddleView()
+    private let navigationBarview = NavigationBarView()
+    private let tripHeaderView: TripHeaderView = TripHeaderView()
+    private let tripMiddleView: TripMiddleView = TripMiddleView()
     private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
-    private var scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white000
         scrollView.isScrollEnabled = true
@@ -26,13 +26,13 @@ class OurToDoViewController: UIViewController {
         return headerView
     }()
     private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
-    private var addToDoView: UIView = {
+    private let addToDoView: UIView = {
         let view = UIView()
         view.backgroundColor = .red700
         return view
     }()
-    private var addToDoImageView: UIImageView = UIImageView()
-    private var addToDoLabel: UILabel = {
+    private let addToDoImageView: UIImageView = UIImageView()
+    private let addToDoLabel: UILabel = {
         let label = UILabel()
         label.text = "같이 할일"
         label.font = .pretendard(.body1_bold)
@@ -60,7 +60,6 @@ class OurToDoViewController: UIViewController {
         setDelegate()
         setData()
         registerCell()
-        setAddTarget()
         setLayout()
         setStyle()
         self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
@@ -177,6 +176,10 @@ private extension OurToDoViewController {
         tripMiddleView.isUserInteractionEnabled = true
         addToDoView.layer.cornerRadius = absoluteHeight * 26
         addToDoImageView.image = ImageLiterals.OurToDo.btnPlusOurToDo
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToAddToDoView(_ : )))
+        ourToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
+        stickyOurToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
+        addToDoView.addGestureRecognizer(gesture)
     }
     
     func setCollectionView() -> UICollectionView {
@@ -206,22 +209,14 @@ private extension OurToDoViewController {
             i.isComplete ? completedData.append(i) : incompletedData.append(i)
         }
         
-        tripHeaderView.data = [ourToDoData?.tripTitle ?? "", ourToDoData?.tripDeadline ?? "", ourToDoData?.tripStartDate ?? "", ourToDoData?.tripEndDate ?? ""]
+        tripHeaderView.tripData = [ourToDoData?.tripTitle ?? "", ourToDoData?.tripDeadline ?? "", ourToDoData?.tripStartDate ?? "", ourToDoData?.tripEndDate ?? ""]
         tripMiddleView.bindData(percentage: ourToDoData?.percentage ?? 0, friends: ourToDoData?.friends ?? [])
-        
     }
     
     func setDelegate() {
         self.scrollView.delegate = self
         self.ourToDoCollectionView.dataSource = self
         self.ourToDoCollectionView.delegate = self
-    }
-    
-    func setAddTarget() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToAddToDoView(_ : )))
-        self.ourToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
-        self.stickyOurToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
-        self.addToDoView.addGestureRecognizer(gesture)
     }
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
@@ -240,7 +235,6 @@ extension OurToDoViewController: UIScrollViewDelegate {
         let shouldShowSticky = topPadding + scrollView.contentOffset.y > ourToDoHeaderView.frame.minY
         stickyOurToDoHeaderView.isHidden = !shouldShowSticky
         
-        
         if !shouldShowSticky {
             stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex = ourToDoHeaderView.segmentedControl.selectedSegmentIndex
             self.view.backgroundColor = .gray50
@@ -257,7 +251,6 @@ extension OurToDoViewController: UIScrollViewDelegate {
             scrollView.backgroundColor = .white000
         }
     }
-    
 }
 
 extension OurToDoViewController: UICollectionViewDelegate {}

@@ -69,7 +69,7 @@ private extension OurToDoCollectionViewCell {
         }
         todoTitleLabel.snp.makeConstraints{
             $0.top.leading.equalToSuperview().inset(absoluteWidth * 16)
-            $0.height.equalTo(absoluteHeight * 21)
+//            $0.height.equalTo(absoluteHeight * 21)
         }
         managerCollectionView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 16)
@@ -78,7 +78,7 @@ private extension OurToDoCollectionViewCell {
         }
         deadlineLabel.snp.makeConstraints{
             $0.top.trailing.equalToSuperview().inset(absoluteWidth * 16)
-            $0.height.equalTo(18)
+//            $0.height.equalTo(18)
         }
     }
     

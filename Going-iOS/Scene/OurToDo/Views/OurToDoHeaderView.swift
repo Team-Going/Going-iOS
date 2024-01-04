@@ -1,6 +1,6 @@
 import UIKit
 
-class OurToDoHeaderView: UIView {
+final class OurToDoHeaderView: UIView {
     
     //MARK: - Property
     
