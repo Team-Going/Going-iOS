@@ -15,7 +15,6 @@ class OurToDoCollectionViewCell: UICollectionViewCell {
     var manager: [String] = []
     var data: OurToDo? {
         didSet {
-            print("did")
             guard let data = data else {return}
             self.todoTitleLabel.text = data.todoTitle
             self.deadlineLabel.text = data.deadline + "까지"
@@ -52,7 +51,6 @@ class OurToDoCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 // MARK: - Private Method
@@ -139,10 +137,8 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource{
         managerCell.managerData = self.manager[indexPath.row]
         if self.data?.isComplete == false {
             self.manager[indexPath.row] == "지민" ? managerCell.changeLabelColor(color: .red400) : managerCell.changeLabelColor(color: .gray400)
-//            managerCell.isUserInteractionEnabled = true
         }else{
             managerCell.changeLabelColor(color: .gray300)
-//            managerCell.isUserInteractionEnabled = false
         }
         return managerCell
     }

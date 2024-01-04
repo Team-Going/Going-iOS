@@ -55,7 +55,6 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         self.profileImageView.image = UIImage(named: data.profileImg)
         self.friendNameLabel.text = data.name
     }
-    
 }
 
 // MARK: - Private Method

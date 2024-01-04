@@ -37,7 +37,6 @@ class OurToDoHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 //MARK: - private method
@@ -53,7 +52,6 @@ private extension OurToDoHeaderView {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(absoluteHeight * 1)
         }
-        
         segmentedControl.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(underlineView)

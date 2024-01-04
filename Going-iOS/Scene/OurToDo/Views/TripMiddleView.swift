@@ -22,8 +22,7 @@ class TripMiddleView: UIView {
         return progressBar
     }()
     private var tripFriendsContainer: UIView = UIView()
-    private lazy var tripFriendsLabel: UILabel = {setLabel(text: "여행 친구들", textAlignment: .left)
-    }()
+    private lazy var tripFriendsLabel: UILabel = {setLabel(text: "여행 친구들", textAlignment: .left)}()
     private var tripFriendsBtn: UIButton = UIButton()
     private lazy var tripFriendsCollectionView: UICollectionView = {setCollectionView()}()
     private var addButton: UIButton = {

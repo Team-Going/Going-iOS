@@ -51,7 +51,6 @@ class TripHeaderView: UIView {
             let date = NSAttributedString(string: " \(string)" )
             let attachImg = NSAttributedString(attachment: tripDateLabelAttachImg)
             tripDateLabel.labelWithImg(composition: attachImg, date)
-
         }
     }
 
@@ -73,9 +72,7 @@ class TripHeaderView: UIView {
     @objc
     func pushToEditTripView(_ sender: UITapGestureRecognizer) {
         print("pushToEditTripView")
-
     }
-
 }
 
 
@@ -108,7 +105,6 @@ private extension TripHeaderView {
         }
         tripDateLabel.snp.makeConstraints{
             $0.height.equalTo(absoluteHeight * 21)
-
         }
     }
         

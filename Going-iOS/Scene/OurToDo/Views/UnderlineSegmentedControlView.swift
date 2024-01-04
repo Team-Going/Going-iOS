@@ -9,7 +9,6 @@ class UnderlineSegmentedControlView: UISegmentedControl {
         let height = absoluteHeight * 2
         let xPosition = CGFloat(self.selectedSegmentIndex) * width
         let yPosition = self.bounds.size.height - 2.0
-        print("y \(yPosition)")
         let frame = CGRect(x: xPosition, y: yPosition, width: width, height: CGFloat(height))
         let view = UIView(frame: frame)
         view.backgroundColor = .gray500
@@ -47,7 +46,6 @@ class UnderlineSegmentedControlView: UISegmentedControl {
             self.underlineView.frame.origin.x = underlineFinalXPosition
           }
         )
-        print(underlineFinalXPosition)
     }
 }
 
@@ -60,9 +58,7 @@ private extension UnderlineSegmentedControlView {
         self.setBackgroundImage(image, for: .normal, barMetrics: .default)
         self.setBackgroundImage(image, for: .selected, barMetrics: .default)
         self.setBackgroundImage(image, for: .highlighted, barMetrics: .default)
-        
         self.setDividerImage(image, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
     }
-      
 }
 

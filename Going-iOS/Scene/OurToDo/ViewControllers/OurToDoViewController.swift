@@ -7,18 +7,18 @@ import SnapKit
 class OurToDoViewController: UIViewController {
 
     // MARK: - UI Property
-    
+
+    private lazy var contentView: UIView = UIView()
     private var navigationBarview = NavigationBarView()
+    private var tripHeaderView: TripHeaderView = TripHeaderView()
+    private var tripMiddleView: TripMiddleView = TripMiddleView()
+    private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white000
         scrollView.isScrollEnabled = true
         return scrollView
     }()
-    private lazy var contentView: UIView = UIView()
-    private var tripHeaderView: TripHeaderView = TripHeaderView()
-    private var tripMiddleView: TripMiddleView = TripMiddleView()
-    private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
     private let stickyOurToDoHeaderView: OurToDoHeaderView = {
         let headerView = OurToDoHeaderView()
         headerView.isHidden = true
@@ -28,7 +28,6 @@ class OurToDoViewController: UIViewController {
     private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
     private var addToDoView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 26
         view.backgroundColor = .red700
         return view
     }()
@@ -107,7 +106,6 @@ private extension OurToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 10)
             $0.height.equalTo(absoluteHeight * 60)
         }
-        
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
@@ -122,45 +120,38 @@ private extension OurToDoViewController {
             $0.top.equalToSuperview().offset(absoluteHeight * 8)
             $0.height.equalTo(absoluteHeight * 95)
         }
-        
         tripMiddleView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom).offset(absoluteHeight * 20)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(absoluteHeight * 235)
         }
-        
         ourToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(tripMiddleView.snp.bottom).offset(absoluteHeight * 28)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(absoluteHeight * 49)
         }
-                
         ourToDoCollectionView.snp.makeConstraints{
             $0.top.equalTo(ourToDoHeaderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(contentView)
             $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
         }
-        
         stickyOurToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.width.equalTo(scrollView)
             $0.height.equalTo(absoluteHeight * 49)
         }
-        
         addToDoView.snp.makeConstraints{
             $0.width.equalTo(absoluteWidth * 117)
             $0.height.equalTo(absoluteHeight * 50)
             $0.trailing.equalToSuperview().inset(absoluteWidth * 16)
             $0.bottom.equalTo(scrollView).inset(absoluteHeight * 24)
         }
-        
         addToDoLabel.snp.makeConstraints{
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(absoluteHeight * 18)
             $0.height.equalTo(absoluteHeight * 22)
         }
-        
         addToDoImageView.snp.makeConstraints{
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(absoluteHeight * 18)
@@ -169,7 +160,6 @@ private extension OurToDoViewController {
     }
     
     func loadData() {
-        // 데이터 로드 후에 호출되는 메서드 또는 클로저에서
         ourToDoCollectionView.reloadData()
         ourToDoCollectionView.layoutIfNeeded()
         
@@ -185,6 +175,7 @@ private extension OurToDoViewController {
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         tripMiddleView.isUserInteractionEnabled = true
+        addToDoView.layer.cornerRadius = absoluteHeight * 26
         addToDoImageView.image = ImageLiterals.OurToDo.btnPlusOurToDo
     }
     

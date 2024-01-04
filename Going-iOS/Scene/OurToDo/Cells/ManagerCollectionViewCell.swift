@@ -11,7 +11,6 @@ class ManagerCollectionViewCell: UICollectionViewCell {
     var managerData: String? {
         didSet {
             guard let managerData = managerData else {return}
-            print("cell \(managerData)")
             self.managerLabel.text = managerData
         }
     }
@@ -37,7 +36,6 @@ class ManagerCollectionViewCell: UICollectionViewCell {
         
         setHierachy()
         setLayout()
-        setStyle()
     }
     
     required init?(coder: NSCoder) {
@@ -62,10 +60,6 @@ private extension ManagerCollectionViewCell {
         managerLabel.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
-    }
-    
-    func setStyle() {
-        managerLabel.text = self.managerData
     }
 }
 
