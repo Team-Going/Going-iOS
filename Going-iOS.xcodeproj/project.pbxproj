@@ -14,6 +14,7 @@
 		F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B352D2B35EB270080A19F /* CALayer+.swift */; };
 		F49B35312B35EC760080A19F /* Codable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35302B35EC760080A19F /* Codable+.swift */; };
 		F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F12B42D07000975CC2 /* PersonalInfoWebViewController.swift */; };
+		F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */; };
 		F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76B2B4283920008735F /* SplashViewController.swift */; };
 		F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76D2B4286A50008735F /* ImageLiterals.swift */; };
 		F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76F2B4286EA0008735F /* UIImage+.swift */; };
@@ -66,6 +67,7 @@
 		F49B352D2B35EB270080A19F /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		F49B35302B35EC760080A19F /* Codable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+.swift"; sourceTree = "<group>"; };
 		F4BA26F12B42D07000975CC2 /* PersonalInfoWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoWebViewController.swift; sourceTree = "<group>"; };
+		F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeProfileViewController.swift; sourceTree = "<group>"; };
 		F4C5E76B2B4283920008735F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F4C5E76D2B4286A50008735F /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		F4C5E76F2B4286EA0008735F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -112,6 +114,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
+			);
+			path = MakeProfile;
+			sourceTree = "<group>";
+		};
 		F4F521682B3440D7000E6E1E = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +299,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F4BA26F32B45597600975CC2 /* MakeProfile */,
 				F4F5219B2B346843000E6E1E /* Login */,
 			);
 			path = Scene;
@@ -448,6 +459,7 @@
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
+				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,
 				F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */,
