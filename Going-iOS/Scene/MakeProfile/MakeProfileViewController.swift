@@ -34,6 +34,7 @@ final class MakeProfileViewController: UIViewController {
         textField.textColor = .gray700
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor.gray200.cgColor
+        textField.addTarget(MakeProfileViewController.self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
         return textField
     }()
     
@@ -73,6 +74,7 @@ final class MakeProfileViewController: UIViewController {
         textField.textColor = .gray700
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor.gray200.cgColor
+        textField.addTarget(MakeProfileViewController.self, action: #selector(descTextFieldDidChange), for: .editingChanged)
         return textField
     }()
     
@@ -102,7 +104,8 @@ final class MakeProfileViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
-        setTextField()
+        setDelegate()
+        updateNextButtonState()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -166,15 +169,9 @@ final class MakeProfileViewController: UIViewController {
         self.view.backgroundColor = .white
     }
     
-    private func setTextField() {
+    private func setDelegate() {
         nameTextField.delegate = self
         descTextField.delegate = self
-        
-        nameTextField.addTarget(self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
-        descTextField.addTarget(self, action: #selector(descTextFieldDidChange), for: .editingChanged)
-        
-        updateNextButtonState()
-        
     }
     
     private func updateNextButtonState() {
