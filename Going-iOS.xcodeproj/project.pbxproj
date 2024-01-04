@@ -15,6 +15,8 @@
 		F49B35312B35EC760080A19F /* Codable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35302B35EC760080A19F /* Codable+.swift */; };
 		F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F12B42D07000975CC2 /* PersonalInfoWebViewController.swift */; };
 		F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */; };
+		F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */; };
+		F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26FB2B471A1800975CC2 /* Constant.swift */; };
 		F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76B2B4283920008735F /* SplashViewController.swift */; };
 		F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76D2B4286A50008735F /* ImageLiterals.swift */; };
 		F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76F2B4286EA0008735F /* UIImage+.swift */; };
@@ -68,6 +70,8 @@
 		F49B35302B35EC760080A19F /* Codable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+.swift"; sourceTree = "<group>"; };
 		F4BA26F12B42D07000975CC2 /* PersonalInfoWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoWebViewController.swift; sourceTree = "<group>"; };
 		F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeProfileViewController.swift; sourceTree = "<group>"; };
+		F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
+		F4BA26FB2B471A1800975CC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		F4C5E76B2B4283920008735F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F4C5E76D2B4286A50008735F /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		F4C5E76F2B4286EA0008735F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -122,6 +126,14 @@
 			path = MakeProfile;
 			sourceTree = "<group>";
 		};
+		F4BA26F82B47197100975CC2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		F4F521682B3440D7000E6E1E = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +177,7 @@
 		F4F521892B3462FC000E6E1E /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				F4BA26F82B47197100975CC2 /* Utils */,
 				F4F521932B3464BD000E6E1E /* Settings */,
 				F4F521912B346453000E6E1E /* Resources */,
 				F4F521902B34642A000E6E1E /* UIComponents */,
@@ -205,6 +218,7 @@
 			children = (
 				F4C5E76D2B4286A50008735F /* ImageLiterals.swift */,
 				F4C5E7872B42AC010008735F /* StringLiterals.swift */,
+				F4BA26FB2B471A1800975CC2 /* Constant.swift */,
 			);
 			path = Literals;
 			sourceTree = "<group>";
@@ -450,6 +464,7 @@
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
+				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */,
@@ -465,6 +480,7 @@
 				F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
+				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,
 				F4F521772B3440D7000E6E1E /* SceneDelegate.swift in Sources */,
 			);

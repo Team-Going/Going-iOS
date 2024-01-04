@@ -20,9 +20,9 @@ final class MakeProfileViewController: UIViewController {
     private enum Size {
         static let textFieldHeight: CGFloat = 48 / 327
         static let nextButtonHeight: CGFloat = 50 / 327
-
+        
     }
-
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "이름"
@@ -41,6 +41,15 @@ final class MakeProfileViewController: UIViewController {
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor.gray200.cgColor
         return textField
+    }()
+    
+    private let nameWarningLabel: UILabel = {
+        let label = UILabel()
+        label.text = "이름을 입력해주세요"
+        label.textColor = .red400
+        label.font = .pretendard(.detail2_regular)
+        label.isHidden = true
+        return label
     }()
     
     private var nameTextFieldCount: Int = 0
@@ -75,9 +84,9 @@ final class MakeProfileViewController: UIViewController {
     
     private var descTextFieldCount: Int = 0
     
-    private lazy var descTextFieldCountLabel: UILabel = {
+    private let descTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0 / 15"        
+        label.text = "0 / 15"
         label.font = .pretendard(.detail2_regular)
         label.textColor = .gray200
         return label
@@ -87,12 +96,11 @@ final class MakeProfileViewController: UIViewController {
         let button = UIButton()
         button.setTitle("유형 검사 하러가기", for: .normal)
         button.setTitleColor(UIColor.gray200, for: .normal)
-//        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 6
         button.backgroundColor = .gray50
         return button
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,15 +108,16 @@ final class MakeProfileViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
+        setTextField()
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
     
     private func setHierarchy() {
         
-        self.view.addSubviews(nameLabel, nameTextField, nameTextFieldCountLabel, descLabel, descTextField, descTextFieldCountLabel, nextButton)
+        self.view.addSubviews(nameLabel, nameTextField, nameTextFieldCountLabel, nameWarningLabel, descLabel, descTextField, descTextFieldCountLabel, nextButton)
         
     }
     
@@ -128,6 +137,11 @@ final class MakeProfileViewController: UIViewController {
         nameTextFieldCountLabel.snp.makeConstraints {
             $0.top.equalTo(nameTextField.snp.bottom).offset(4)
             $0.trailing.equalTo(nameTextField.snp.trailing).offset(-4)
+        }
+        
+        nameWarningLabel.snp.makeConstraints {
+            $0.top.equalTo(nameTextFieldCountLabel.snp.top)
+            $0.leading.equalTo(nameTextField.snp.leading).offset(4)
         }
         
         descLabel.snp.makeConstraints {
@@ -157,7 +171,155 @@ final class MakeProfileViewController: UIViewController {
     private func setStyle() {
         self.view.backgroundColor = .white
     }
+    
+    private func setTextField() {
+        nameTextField.delegate = self
+        descTextField.delegate = self
+        
+        nameTextField.addTarget(self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
+        descTextField.addTarget(self, action: #selector(descTextFieldDidChange), for: .editingChanged)
+        
+        updateNextButtonState()
+        
+    }
+    
+    private func updateNextButtonState() {
+        // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
+        let isNameTextFieldNotEmpty = !nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
+        let isDescTextFieldNotEmpty = !descTextField.text!.isEmpty
+        
+        nextButton.isEnabled = isNameTextFieldNotEmpty && isDescTextFieldNotEmpty
+        if nextButton.isEnabled {
+            nextButton.backgroundColor = .gray500
+            nextButton.titleLabel?.font = .pretendard(.body1_bold)
+            nextButton.titleLabel?.textColor = .white000
+        } else {
+            nextButton.backgroundColor = .gray50
+            nextButton.titleLabel?.font = .pretendard(.body1_bold)
+            nextButton.titleLabel?.textColor = .gray200
+        }
+    }
+    
+    private func nameTextFieldBlankCheck() {
+        guard let textEmpty = nameTextField.text?.isEmpty else { return }
+        if textEmpty {
+            nameTextField.layer.borderColor = UIColor.gray700.cgColor
+            self.nameTextFieldCountLabel.textColor = .gray400
+            nameWarningLabel.isHidden = true
+        } else if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false {
+            nameTextField.layer.borderColor = UIColor.red400.cgColor
+            self.nameTextFieldCountLabel.textColor = .red400
+            nameWarningLabel.isHidden = false
+        } else {
+            nameTextField.layer.borderColor = UIColor.gray700.cgColor
+            self.nameTextFieldCountLabel.textColor = .gray400
+            nameWarningLabel.isHidden = true
+        }
+    }
+    
+    @objc
+    private func nameTextFieldDidChange() {
+        guard let text = nameTextField.text else { return }
+        nameTextFieldCount = text.count
+        nameTextFieldCountLabel.text = "\(nameTextFieldCount) / 3"
+        nameTextFieldBlankCheck()
+        updateNextButtonState()
+        
+    }
+    
+    @objc
+    private func descTextFieldDidChange() {
+        guard let text = descTextField.text else { return }
+        descTextFieldCount = text.count
+        descTextFieldCountLabel.text = "\(descTextFieldCount) / 15"
+        updateNextButtonState()
+        
+    }
+    
+    @objc
+    private func nextButtonTapped() {
+        
+        //구조체에 넣어서 서버에 넘겨주기
+        var userData = UserProfileData(name: "", description: "")
+        
+        if let nameText = nameTextField.text {
+            userData.name = nameText
+        }
+        
+        if let descText = descTextField.text {
+            userData.description = descText
+        }
+        
+        // userData를 출력 또는 다음 단계로 전달하는 등의 동작 수행
+        print(userData.name)
+        print(userData.description)
+        //        let nextVC = LoginViewController()
+        //        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+    
+}
 
+extension MakeProfileViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 백스페이스 처리
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        
+        switch textField {
+        case nameTextField:
+            guard textField.text!.count < 3 else { return false }
+            
+        case descTextField:
+            guard textField.text!.count < 15 else { return false }
+            
+        default:
+            return true
+        }
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case nameTextField:
+            nameTextFieldBlankCheck()
+            
+        case descTextField:
+            textField.layer.borderColor = UIColor.gray700.cgColor
+            self.descTextFieldCountLabel.textColor = .gray400
+            
+        default:
+            return
+        }    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        switch textField {
+        case nameTextField:
+            nameTextFieldBlankCheck()
+            if let text = textField.text, text.isEmpty {
+                textField.layer.borderColor = UIColor.gray200.cgColor
+            }
+            
+        case descTextField:
+            if descTextField.isEmpty {
+                descTextField.layer.borderColor = UIColor.gray200.cgColor
+                descTextFieldCountLabel.textColor = .gray200
+            } else {
+                textField.layer.borderColor = UIColor.gray700.cgColor
+                descTextFieldCountLabel.textColor = .gray400
+            }
+            
+        default:
+            return
+        }
+        
+    }
 }
 
 
