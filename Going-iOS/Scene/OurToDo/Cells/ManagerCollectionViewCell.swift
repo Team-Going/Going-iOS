@@ -1,7 +1,7 @@
-
 import UIKit
 
 class ManagerCollectionViewCell: UICollectionViewCell {
+    
     // MARK: - Property
     
     static let identifier = "ManagerCollectionViewCell"

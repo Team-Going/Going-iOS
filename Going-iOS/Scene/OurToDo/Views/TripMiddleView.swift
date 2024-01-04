@@ -172,7 +172,6 @@ private extension TripMiddleView {
         tripFriendsContainer.backgroundColor = .white
         tripFriendsBtn.setImage(ImageLiterals.OurToDo.btnEnter, for: .normal)
         addButton.layer.cornerRadius = absoluteHeight * 23.5
-
     }
     
     func setLabel(text: String? = "", font: UIFont? = UIFont.pretendard(.body2_medi), textColor: UIColor? = UIColor.gray700, textAlignment: NSTextAlignment) -> UILabel {
@@ -214,10 +213,11 @@ private extension TripMiddleView {
     }
 }
 
+// MARK: - Extension
 
-extension TripMiddleView: UICollectionViewDelegate{}
+extension TripMiddleView: UICollectionViewDelegate {}
 
-extension TripMiddleView: UICollectionViewDataSource{
+extension TripMiddleView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.friendProfile.count
     }
@@ -231,8 +231,5 @@ extension TripMiddleView: UICollectionViewDataSource{
         let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToFriendProfileView(_:)))
         friendsCell.profileStackView.addGestureRecognizer(gesture)
         return friendsCell
-
     }
-    
 }
-

@@ -49,7 +49,6 @@ class UnderlineSegmentedControlView: UISegmentedControl {
     }
 }
 
-
 // MARK: - private method
 
 private extension UnderlineSegmentedControlView {

@@ -122,9 +122,9 @@ private extension OurToDoCollectionViewCell {
     
 }
 
-extension OurToDoCollectionViewCell: UICollectionViewDelegate{}
+extension OurToDoCollectionViewCell: UICollectionViewDelegate {}
 
-extension OurToDoCollectionViewCell: UICollectionViewDataSource{
+extension OurToDoCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.manager.count
@@ -142,6 +142,4 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource{
         }
         return managerCell
     }
-    
 }
-

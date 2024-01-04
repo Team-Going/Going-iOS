@@ -50,7 +50,6 @@ struct Friend {
     ]
 }
 
-
 struct OurToDo {
     let todoTitle: String
     let manager: [String]
@@ -84,8 +83,7 @@ struct OurToDo {
         .init(todoTitle: "지민 완", manager: ["지민"], deadline: "2023.09.23", isComplete: true),
         .init(todoTitle: "영서", manager: ["영서"], deadline: "2023.09.25", isComplete: false),
         .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.21", isComplete: false),
-        .init(todoTitle: "성준 희슬 영서 완", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: true),
-
+        .init(todoTitle: "성준 희슬 영서 완", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: true)
     ]
 }
 

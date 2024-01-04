@@ -201,13 +201,12 @@ private extension OurToDoViewController {
     
     func setData() {
         self.ourToDoData = OurToDoData.ourToDoData
-        
+    
         for i in ourToDoData?.ourToDo ?? [] {
             i.isComplete ? completedData.append(i) : incompletedData.append(i)
         }
         
         tripHeaderView.data = [ourToDoData?.tripTitle ?? "", ourToDoData?.tripDeadline ?? "", ourToDoData?.tripStartDate ?? "", ourToDoData?.tripEndDate ?? ""]
-        
         tripMiddleView.bindData(percentage: ourToDoData?.percentage ?? 0, friends: ourToDoData?.friends ?? [])
         
     }
@@ -261,9 +260,9 @@ extension OurToDoViewController: UIScrollViewDelegate {
     
 }
 
-extension OurToDoViewController: UICollectionViewDelegate{}
+extension OurToDoViewController: UICollectionViewDelegate {}
 
-extension OurToDoViewController: UICollectionViewDataSource{
+extension OurToDoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let ourToDoHeaderIndex = self.ourToDoHeaderView.segmentedControl.selectedSegmentIndex
@@ -317,6 +316,5 @@ extension OurToDoViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("pushToInquiryToDoView")
     }
-    
 }
 
