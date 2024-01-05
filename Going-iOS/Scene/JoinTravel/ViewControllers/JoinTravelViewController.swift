@@ -183,7 +183,7 @@ extension JoinTravelViewController: UITextFieldDelegate {
             }
             
             // 최대 길이를 초과하면 입력을 막음
-            return newText.count < maxLength
+            return newText.count <= maxLength
         }
         return true
     }
