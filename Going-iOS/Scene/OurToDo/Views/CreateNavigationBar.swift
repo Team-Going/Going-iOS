@@ -6,7 +6,7 @@ protocol NavigationBarDelegate: AnyObject {
     func popToPreviousView()
 }
 
-final class NavigationBarView: UIView {
+final class CreateNavigationBar: UIView {
 
     // MARK: - UI Property
 
@@ -44,7 +44,7 @@ final class NavigationBarView: UIView {
 
 // MARK: - Private method
 
-private extension NavigationBarView {
+private extension CreateNavigationBar {
     
     func setHierachy() {
         self.addSubview(navigationBarView)

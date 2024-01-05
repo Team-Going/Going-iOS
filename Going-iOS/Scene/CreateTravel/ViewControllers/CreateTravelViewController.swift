@@ -22,8 +22,8 @@ final class CreateTravelViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    private let navigationBar: NavigationBarView = {
-        let nav = NavigationBarView()
+    private let navigationBar: NavigationView = {
+        let nav = NavigationView()
         nav.titleLabel.text = "여행 생성하기"
         return nav
     }()

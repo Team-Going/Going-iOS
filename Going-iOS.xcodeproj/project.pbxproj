@@ -5,8 +5,9 @@
 	};
 	objectVersion = 56;
 	objects = {
-	
+
 /* Begin PBXBuildFile section */
+		9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431CDC62B47F0C500CB452E /* NavigationView.swift */; };
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
 		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
 		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
@@ -30,7 +31,7 @@
 		CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD68C2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift */; };
 		CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */; };
 		CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */; };
-		CA8CD6932B46B9F600CFDFBF /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */; };
+		CA8CD6932B46B9F600CFDFBF /* CreateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35272B35E97C0080A19F /* UITextField+.swift */; };
 		F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35292B35E9BD0080A19F /* UIStackView+.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9431CDC62B47F0C500CB452E /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
 		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -101,7 +103,7 @@
 		CA8CD68C2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoData.swift; sourceTree = "<group>"; };
 		CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileData.swift; sourceTree = "<group>"; };
-		CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNavigationBar.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F49B35272B35E97C0080A19F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		F49B35292B35E9BD0080A19F /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
@@ -163,6 +165,21 @@
 			isa = PBXGroup;
 			children = (
 				94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */,
+				9431CDC62B47F0C500CB452E /* NavigationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		94C2C9A42B46FE4E00B92CAC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */,
+				94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */,
+				94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		CA8CD6792B46B61000CFDFBF /* OurToDo */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,17 +217,11 @@
 				CA8CD6822B46B72E00CFDFBF /* TripMiddleView.swift */,
 				CA8CD6842B46B7C100CFDFBF /* OurToDoHeaderView.swift */,
 				CA8CD6862B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift */,
-				CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */,
+				CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		94C2C9A42B46FE4E00B92CAC /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */,
-				94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */,
-				94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */,
 		CA8CD67D2B46B62B00CFDFBF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,7 +581,6 @@
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
 				CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */,
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
-				94C2C9A82B46FEE900B92CAC /* NavigationBarView.swift in Sources */,
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
 				CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */,
 				CA8CD6872B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift in Sources */,
@@ -583,11 +593,12 @@
 				CA8CD68B2B46B8CD00CFDFBF /* OurToDoCollectionViewCell.swift in Sources */,
 				F4F521B42B3484B4000E6E1E /* Config.swift in Sources */,
 				F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */,
-				CA8CD6932B46B9F600CFDFBF /* NavigationBarView.swift in Sources */,
+				CA8CD6932B46B9F600CFDFBF /* CreateNavigationBar.swift in Sources */,
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
+				9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
 				94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */,

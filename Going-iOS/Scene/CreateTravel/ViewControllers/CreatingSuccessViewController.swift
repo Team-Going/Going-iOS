@@ -20,8 +20,8 @@ final class CreatingSuccessViewController: UIViewController {
     
     // TODO: - Dummy Data 생성
     
-    private let navigationBar: NavigationBarView = {
-        let nav = NavigationBarView()
+    private let navigationBar: NavigationView = {
+        let nav = NavigationView()
         nav.titleLabel.text = ""
         nav.backgroundColor = .gray50
         return nav
