@@ -39,6 +39,7 @@
 		F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */; };
 		F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */; };
 		F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26FB2B471A1800975CC2 /* Constant.swift */; };
+		F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4BF2B480DAE0074B1B2 /* DOOLabel.swift */; };
 		F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76B2B4283920008735F /* SplashViewController.swift */; };
 		F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76D2B4286A50008735F /* ImageLiterals.swift */; };
 		F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76F2B4286EA0008735F /* UIImage+.swift */; };
@@ -108,6 +109,7 @@
 		F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeProfileViewController.swift; sourceTree = "<group>"; };
 		F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
 		F4BA26FB2B471A1800975CC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		F4BEB4BF2B480DAE0074B1B2 /* DOOLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOLabel.swift; sourceTree = "<group>"; };
 		F4C5E76B2B4283920008735F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F4C5E76D2B4286A50008735F /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		F4C5E76F2B4286EA0008735F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 		F4F521902B34642A000E6E1E /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				F4BEB4BF2B480DAE0074B1B2 /* DOOLabel.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */,
 				CA8CD6872B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift in Sources */,
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
+				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
