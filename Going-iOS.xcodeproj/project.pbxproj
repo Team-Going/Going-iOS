@@ -10,7 +10,7 @@
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
 		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
 		94C2C9A82B46FEE900B92CAC /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A72B46FEE900B92CAC /* NavigationBarView.swift */; };
-		94C2C9AA2B47096200B92CAC /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* BottomSheetViewController.swift */; };
+		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
 		94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */; };
 		94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */; };
 		94C2C9B92B4717D600B92CAC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B12B4717D500B92CAC /* Pretendard-Light.otf */; };
@@ -68,7 +68,7 @@
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
 		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A72B46FEE900B92CAC /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
-		94C2C9A92B47096200B92CAC /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
 		94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingSuccessViewController.swift; sourceTree = "<group>"; };
 		94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		94C2C9B12B4717D500B92CAC /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */,
-				94C2C9A92B47096200B92CAC /* BottomSheetViewController.swift */,
+				94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */,
 				94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */,
 			);
 			path = ViewControllers;
@@ -493,7 +493,7 @@
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
-				94C2C9AA2B47096200B92CAC /* BottomSheetViewController.swift in Sources */,
+				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,

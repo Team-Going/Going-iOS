@@ -13,7 +13,7 @@ protocol BottomSheetDelegate: AnyObject {
     func didSelectDate(date: Date)
 }
 
-final class BottomSheetViewController: UIViewController {
+final class DatePickerBottomSheetViewController: UIViewController {
     
     // MARK: - Size
     
@@ -86,12 +86,12 @@ final class BottomSheetViewController: UIViewController {
         hideBottomSheetAndGoBack()
     }
     
-    @objc private func buttonTapped() {
+    @objc private func confirmButtonTapped() {
         hideBottomSheetAndGoBack()
     }
     
     /// UISwipeGestureRecognizer 연결 메서드
-    @objc func panGesture(_ recognizer: UISwipeGestureRecognizer) {
+    @objc private func panGesture(_ recognizer: UISwipeGestureRecognizer) {
         if recognizer.state == .ended {
             switch recognizer.direction {
             case .down:
@@ -111,7 +111,7 @@ final class BottomSheetViewController: UIViewController {
 
 // MARK: - Private Extension
 
-private extension BottomSheetViewController {
+private extension DatePickerBottomSheetViewController {
     
     func setStyle() {
         view.backgroundColor = .clear

@@ -93,7 +93,7 @@ final class CreateTravelViewController: UIViewController {
     
     private let createTravelButton = DOOButton(type: .unabled, title: "생성하기")
     
-    private let bottomSheetVC = BottomSheetViewController()
+    private let bottomSheetVC = DatePickerBottomSheetViewController()
     
     // MARK: - Life Cycles
     
