@@ -81,6 +81,16 @@ final class OurToDoViewController: UIViewController {
     func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
         print("pushToAddToDoView")
         
+        var manager: [Manager] = []
+        for i in self.tripMiddleView.friendProfile {
+            manager.append(Manager(name: i.name, isManager: false))
+        }
+        
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = "추가"
+        todoVC.manager = manager
+        todoVC.isActivateView = true
+        self.navigationController?.pushViewController(todoVC, animated: false)
     }
 
     @objc private func didChangeValue(segment: UISegmentedControl) {

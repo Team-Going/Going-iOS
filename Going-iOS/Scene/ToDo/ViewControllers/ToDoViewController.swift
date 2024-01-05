@@ -2,11 +2,11 @@ import UIKit
 
 import SnapKit
 
-class ToDoViewController: UIViewController {
+final class ToDoViewController: UIViewController {
 
     // MARK: - UI Components
 
-    private let navigationBarView = {
+    private lazy var navigationBarView = {
         let navView = NavigationView()
         navView.titleLabel.text = "할일 추가"
         navView.backButton.addTarget(self, action: #selector(popToOurToDoView), for: .touchUpInside)
@@ -48,7 +48,7 @@ class ToDoViewController: UIViewController {
         return label
     }()
     private let dropdownContainer: UIView = UIView()
-    private let dropdownButton: UIButton = {
+    private lazy var dropdownButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.ToDo.disabledDropdown, for: .normal)
         btn.backgroundColor = .white000
@@ -60,7 +60,9 @@ class ToDoViewController: UIViewController {
         label.setTitleLabel(title: "누가하나요?")
         return label
     }()
-    private lazy var todoManagerCollectionView: UICollectionView = {setCollectionView()}()
+    private lazy var todoManagerCollectionView: UICollectionView = {
+        setCollectionView()
+    }()
     private let memoLabel: UILabel = {
         let label = UILabel()
         label.setTitleLabel(title: "메모")
@@ -80,8 +82,8 @@ class ToDoViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var navigationBarTitle: String = ""
-    private lazy var isActivateView: Bool = true
+    lazy var navigationBarTitle: String = ""
+    lazy var isActivateView: Bool = true
     var getToDoData: ToDoData?
     var manager: [Manager] = []
     var memoTextviewPlaceholder: String = ""
