@@ -31,6 +31,12 @@ enum ImageLiterals {
         static var verticalLine: UIImage { .load(named: "verti_line") }
     }
     
+    enum CreateTravel {
+        static var buttonCopy: UIImage { .load(named: "ic_copy")}
+        static var ticketImage: UIImage { .load(named: "ticket_img_small")}
+        static var larvaImage: UIImage { .load(named: "larva")}
+    }
+  
     enum OurToDo {
         static var btnBack: UIImage { .load(named: "btn_back") }
         static var ticketBox: UIImage { .load(named: "ticket_box") }
@@ -39,11 +45,5 @@ enum ImageLiterals {
         static var btnEnter: UIImage { .load(named: "btn_enter")}
         static var btnPlus: UIImage { .load(named: "btn_plus") }
         static var btnPlusOurToDo: UIImage { .load(named: "btn_plus_ourtodo") }
-    }
-    
-    enum CreateTravel {
-        static var buttonCopy: UIImage { .load(named: "ic_copy")}
-        static var ticketImage: UIImage { .load(named: "ticket_img_small")}
-        static var larvaImage: UIImage { .load(named: "larva")}
-    }
+    }    
 }

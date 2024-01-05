@@ -7,6 +7,11 @@
 	objects = {
 	
 /* Begin PBXBuildFile section */
+		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
+		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
+		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
+		94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */; };
+		94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
 		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
@@ -26,20 +31,6 @@
 		CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */; };
 		CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */; };
 		CA8CD6932B46B9F600CFDFBF /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */; };
-		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
-		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
-		94C2C9A82B46FEE900B92CAC /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A72B46FEE900B92CAC /* NavigationBarView.swift */; };
-		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
-		94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */; };
-		94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */; };
-		94C2C9B92B4717D600B92CAC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B12B4717D500B92CAC /* Pretendard-Light.otf */; };
-		94C2C9BA2B4717D600B92CAC /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B22B4717D500B92CAC /* Pretendard-Regular.otf */; };
-		94C2C9BB2B4717D600B92CAC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B32B4717D500B92CAC /* Pretendard-Medium.otf */; };
-		94C2C9BC2B4717D600B92CAC /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B42B4717D500B92CAC /* Pretendard-ExtraLight.otf */; };
-		94C2C9BD2B4717D600B92CAC /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B52B4717D500B92CAC /* Pretendard-Bold.otf */; };
-		94C2C9BE2B4717D600B92CAC /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B62B4717D500B92CAC /* Pretendard-SemiBold.otf */; };
-		94C2C9BF2B4717D600B92CAC /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B72B4717D600B92CAC /* Pretendard-ExtraBold.otf */; };
-		94C2C9C02B4717D600B92CAC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 94C2C9B82B4717D600B92CAC /* Pretendard-Black.otf */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35272B35E97C0080A19F /* UITextField+.swift */; };
 		F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35292B35E9BD0080A19F /* UIStackView+.swift */; };
@@ -87,6 +78,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
+		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
+		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
+		94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingSuccessViewController.swift; sourceTree = "<group>"; };
+		94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -106,20 +102,6 @@
 		CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoData.swift; sourceTree = "<group>"; };
 		CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileData.swift; sourceTree = "<group>"; };
 		CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
-		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
-		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
-		94C2C9A72B46FEE900B92CAC /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
-		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
-		94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingSuccessViewController.swift; sourceTree = "<group>"; };
-		94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
-		94C2C9B12B4717D500B92CAC /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
-		94C2C9B22B4717D500B92CAC /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
-		94C2C9B32B4717D500B92CAC /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
-		94C2C9B42B4717D500B92CAC /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
-		94C2C9B52B4717D500B92CAC /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
-		94C2C9B62B4717D500B92CAC /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
-		94C2C9B72B4717D600B92CAC /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
-		94C2C9B82B4717D600B92CAC /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F49B35272B35E97C0080A19F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		F49B35292B35E9BD0080A19F /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
@@ -168,6 +150,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94C2C9A22B46FE3500B92CAC /* CreateTravel */ = {
+			isa = PBXGroup;
+			children = (
+				94C2C9A42B46FE4E00B92CAC /* ViewControllers */,
+				94C2C9A32B46FE4200B92CAC /* Views */,
+			);
+			path = CreateTravel;
+			sourceTree = "<group>";
+		};
+		94C2C9A32B46FE4200B92CAC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */,
 		CA8CD6792B46B61000CFDFBF /* OurToDo */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,34 +201,20 @@
 				CA8CD6842B46B7C100CFDFBF /* OurToDoHeaderView.swift */,
 				CA8CD6862B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift */,
 				CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */,
-		94C2C9A22B46FE3500B92CAC /* CreateTravel */ = {
-			isa = PBXGroup;
-			children = (
-				94C2C9A42B46FE4E00B92CAC /* ViewControllers */,
-				94C2C9A32B46FE4200B92CAC /* Views */,
-			);
-			path = CreateTravel;
-			sourceTree = "<group>";
-		};
-		94C2C9A32B46FE4200B92CAC /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				94C2C9A72B46FEE900B92CAC /* NavigationBarView.swift */,
-				94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CA8CD67D2B46B62B00CFDFBF /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				CA8CD67E2B46B64000CFDFBF /* OurToDoViewController.swift */,
 		94C2C9A42B46FE4E00B92CAC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */,
 				94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */,
 				94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */,
+		CA8CD67D2B46B62B00CFDFBF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD67E2B46B64000CFDFBF /* OurToDoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -378,14 +359,6 @@
 				CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */,
 				CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */,
 				CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */,
-				94C2C9B82B4717D600B92CAC /* Pretendard-Black.otf */,
-				94C2C9B52B4717D500B92CAC /* Pretendard-Bold.otf */,
-				94C2C9B72B4717D600B92CAC /* Pretendard-ExtraBold.otf */,
-				94C2C9B42B4717D500B92CAC /* Pretendard-ExtraLight.otf */,
-				94C2C9B12B4717D500B92CAC /* Pretendard-Light.otf */,
-				94C2C9B32B4717D500B92CAC /* Pretendard-Medium.otf */,
-				94C2C9B22B4717D500B92CAC /* Pretendard-Regular.otf */,
-				94C2C9B62B4717D500B92CAC /* Pretendard-SemiBold.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -442,9 +415,9 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				94C2C9A22B46FE3500B92CAC /* CreateTravel */,
 				CA8CD6792B46B61000CFDFBF /* OurToDo */,
 				F4BA26F32B45597600975CC2 /* MakeProfile */,
-				94C2C9A22B46FE3500B92CAC /* CreateTravel */,
 				F4F5219B2B346843000E6E1E /* Login */,
 			);
 			path = Scene;
@@ -581,15 +554,6 @@
 				CA8CD6762B46B48F00CFDFBF /* Pretendard-Regular.otf in Resources */,
 				CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */,
 				CA8CD6782B46B49800CFDFBF /* Pretendard-SemiBold.otf in Resources */,
-				94C2C9BC2B4717D600B92CAC /* Pretendard-ExtraLight.otf in Resources */,
-				94C2C9BD2B4717D600B92CAC /* Pretendard-Bold.otf in Resources */,
-				F4F521812B3440DA000E6E1E /* LaunchScreen.storyboard in Resources */,
-				94C2C9BE2B4717D600B92CAC /* Pretendard-SemiBold.otf in Resources */,
-				94C2C9C02B4717D600B92CAC /* Pretendard-Black.otf in Resources */,
-				94C2C9BA2B4717D600B92CAC /* Pretendard-Regular.otf in Resources */,
-				94C2C9BB2B4717D600B92CAC /* Pretendard-Medium.otf in Resources */,
-				94C2C9B92B4717D600B92CAC /* Pretendard-Light.otf in Resources */,
-				94C2C9BF2B4717D600B92CAC /* Pretendard-ExtraBold.otf in Resources */,
 				F4F5217E2B3440DA000E6E1E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -602,9 +566,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
+				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
 				CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */,
-				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
 				94C2C9A82B46FEE900B92CAC /* NavigationBarView.swift in Sources */,
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
@@ -624,6 +588,9 @@
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
+				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
+				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
+				94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */,
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				CA8CD67F2B46B64000CFDFBF /* OurToDoViewController.swift in Sources */,
@@ -631,12 +598,6 @@
 				F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */,
 				CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */,
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
-				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
-				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
-				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
-				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,
-				F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */,
-				94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
