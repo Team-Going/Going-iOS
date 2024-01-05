@@ -76,8 +76,9 @@ private extension NavigationView {
         }
 
         navigationBottomLineView.snp.makeConstraints {
-            $0.width.equalTo(absoluteWidth / 375 * 375)
+            $0.trailing.leading.equalToSuperview()
             $0.top.equalTo(backButton.snp.bottom).offset(4)
+            $0.height.equalTo(1)
         }
     }
 }
