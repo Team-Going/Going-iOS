@@ -12,9 +12,9 @@ import SnapKit
 final class JoinTravelViewController: UIViewController {
     
     // TODO: - Dummy Data 생성
-
+    
     // MARK: - UI Properties
-        
+    
     private let navigationBar: NavigationView = {
         let nav = NavigationView()
         nav.titleLabel.text = "여행 입장하기"
@@ -66,6 +66,10 @@ final class JoinTravelViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeKeyboardNotifications()
     }
     
     // MARK: - @objc Methods
@@ -159,6 +163,14 @@ private extension JoinTravelViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // 노티피케이션을 제거하는 메서드
+    func removeKeyboardNotifications(){
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     func updateNextButtonState() {
         let isCodeTextFieldEmpty = codeTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
         nextButton.currentType = (!isCodeTextFieldEmpty) ? .enabled : .unabled
@@ -173,7 +185,7 @@ extension JoinTravelViewController: UITextFieldDelegate {
             let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
             let maxLength = 6
             characterCountLabel.text = "\(newText.count)/\(maxLength)"
-
+            
             if newText.count >= 1 {
                 textField.layer.borderColor = UIColor.gray700.cgColor
                 characterCountLabel.textColor = .gray400
