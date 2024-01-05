@@ -46,6 +46,9 @@
 		F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */; };
 		F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BA26FB2B471A1800975CC2 /* Constant.swift */; };
 		F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4BF2B480DAE0074B1B2 /* DOOLabel.swift */; };
+		F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4C92B482FDC0074B1B2 /* UserTestResultViewController.swift */; };
+		F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4CC2B4833D30074B1B2 /* TestResultView.swift */; };
+		F4BEB4CF2B4838B60074B1B2 /* TestResultTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4CE2B4838B60074B1B2 /* TestResultTicketView.swift */; };
 		F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76B2B4283920008735F /* SplashViewController.swift */; };
 		F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76D2B4286A50008735F /* ImageLiterals.swift */; };
 		F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76F2B4286EA0008735F /* UIImage+.swift */; };
@@ -122,6 +125,9 @@
 		F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
 		F4BA26FB2B471A1800975CC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		F4BEB4BF2B480DAE0074B1B2 /* DOOLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOLabel.swift; sourceTree = "<group>"; };
+		F4BEB4C92B482FDC0074B1B2 /* UserTestResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestResultViewController.swift; sourceTree = "<group>"; };
+		F4BEB4CC2B4833D30074B1B2 /* TestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultView.swift; sourceTree = "<group>"; };
+		F4BEB4CE2B4838B60074B1B2 /* TestResultTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultTicketView.swift; sourceTree = "<group>"; };
 		F4C5E76B2B4283920008735F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F4C5E76D2B4286A50008735F /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		F4C5E76F2B4286EA0008735F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -286,6 +292,32 @@
 				F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		F4BEB4C72B482FBB0074B1B2 /* UserTestResult */ = {
+			isa = PBXGroup;
+			children = (
+				F4BEB4CB2B4833B50074B1B2 /* Views */,
+				F4BEB4C82B482FCC0074B1B2 /* ViewControllers */,
+			);
+			path = UserTestResult;
+			sourceTree = "<group>";
+		};
+		F4BEB4C82B482FCC0074B1B2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F4BEB4C92B482FDC0074B1B2 /* UserTestResultViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F4BEB4CB2B4833B50074B1B2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F4BEB4CC2B4833D30074B1B2 /* TestResultView.swift */,
+				F4BEB4CE2B4838B60074B1B2 /* TestResultTicketView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F4F521682B3440D7000E6E1E = {
@@ -469,6 +501,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F4BEB4C72B482FBB0074B1B2 /* UserTestResult */,
 				F485D4872B47CB43007317F4 /* UserTest */,
 				94C2C9A22B46FE3500B92CAC /* CreateTravel */,
 				CA8CD6792B46B61000CFDFBF /* OurToDo */,
@@ -627,6 +660,7 @@
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
 				CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */,
+				F4BEB4CF2B4838B60074B1B2 /* TestResultTicketView.swift in Sources */,
 				CA8CD6872B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift in Sources */,
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
@@ -646,6 +680,7 @@
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */,
+				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
 				94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */,
@@ -658,6 +693,7 @@
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
+				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
