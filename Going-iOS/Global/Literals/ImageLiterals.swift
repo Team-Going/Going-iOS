@@ -36,4 +36,14 @@ enum ImageLiterals {
         static var ticketImage: UIImage { .load(named: "ticket_img_small")}
         static var larvaImage: UIImage { .load(named: "larva")}
     }
+  
+    enum OurToDo {
+        static var btnBack: UIImage { .load(named: "btn_back") }
+        static var ticketBox: UIImage { .load(named: "ticket_box") }
+        static var btnOurToDoEdit: UIImage { .load(named: "btn_ourtodo_edit") }
+        static var icCalendar: UIImage { .load(named: "ic_calendar") }
+        static var btnEnter: UIImage { .load(named: "btn_enter")}
+        static var btnPlus: UIImage { .load(named: "btn_plus") }
+        static var btnPlusOurToDo: UIImage { .load(named: "btn_plus_ourtodo") }
+    }    
 }

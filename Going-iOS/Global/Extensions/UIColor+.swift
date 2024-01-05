@@ -8,6 +8,9 @@
 import UIKit
 
 extension UIColor {
+    static var red700: UIColor {
+        return UIColor(hex: "#FD4000")
+    }
     static var red600: UIColor {
         return UIColor(hex: "#E03600")
     }
@@ -46,6 +49,9 @@ extension UIColor {
     }
     static var gray200: UIColor {
         return UIColor(hex: "#C3C4CE")
+    }
+    static var gray100: UIColor {
+        return UIColor(hex: "#E4E5ED")
     }
     static var gray50: UIColor {
         return UIColor(hex: "#F3F3F6")
