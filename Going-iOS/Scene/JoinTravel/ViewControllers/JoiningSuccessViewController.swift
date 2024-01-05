@@ -10,11 +10,6 @@ import UIKit
 import SnapKit
 
 final class JoiningSuccessViewController: UIViewController {
-    
-    // MARK: - Size
-    
-    let absoluteWidth = UIScreen.main.bounds.width
-    let absoluteHeight = UIScreen.main.bounds.height
 
     // MARK: - UI Properties
     
@@ -122,7 +117,7 @@ private extension JoiningSuccessViewController {
         backButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(46)
             $0.leading.equalToSuperview().inset(10)
-            $0.size.equalTo(absoluteWidth / 375 * 48)
+            $0.size.equalTo(ScreenUtils.getHeight(48))
         }
         
         joinSuccessLabel.snp.makeConstraints {
@@ -134,8 +129,8 @@ private extension JoiningSuccessViewController {
         ticketImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(joinSuccessLabel.snp.bottom).offset(24)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
-            $0.height.equalTo(absoluteHeight / 812 * 125)
+            $0.width.equalTo(ScreenUtils.getWidth(327))
+            $0.height.equalTo(ScreenUtils.getHeight(125))
         }
         
         characterImage.snp.makeConstraints {
@@ -146,8 +141,8 @@ private extension JoiningSuccessViewController {
         dDayLabelBackgroundView.snp.makeConstraints {
             $0.leading.equalTo(ticketImage.snp.leading).offset(102)
             $0.bottom.equalTo(travelTitleLabel.snp.top).offset(-4)
-            $0.height.equalTo(absoluteHeight / 812 * 22)
-            $0.width.equalTo(absoluteWidth / 375 * 44)
+            $0.height.equalTo(ScreenUtils.getHeight(22))
+            $0.width.equalTo(ScreenUtils.getWidth(44))
         }
         
         dDayLabel.snp.makeConstraints {
@@ -166,8 +161,8 @@ private extension JoiningSuccessViewController {
         
         entranceToTestButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(absoluteHeight / 812 * 50)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
         }
     }

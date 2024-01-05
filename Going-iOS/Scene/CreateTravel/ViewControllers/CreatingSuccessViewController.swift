@@ -11,11 +11,6 @@ import SnapKit
 
 final class CreatingSuccessViewController: UIViewController {
     
-    // MARK: - Size
-    
-    let absoluteWidth = UIScreen.main.bounds.width
-    let absoluteHeight = UIScreen.main.bounds.height
-
     // MARK: - UI Properties
     
     // TODO: - Dummy Data 생성
@@ -152,7 +147,7 @@ private extension CreatingSuccessViewController {
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(absoluteHeight / 812 * 50)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
         createSuccessLabel.snp.makeConstraints {
@@ -164,8 +159,8 @@ private extension CreatingSuccessViewController {
         ticketImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(createSuccessLabel.snp.bottom).offset(28)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
-            $0.height.equalTo(absoluteHeight / 812 * 125)
+            $0.width.equalTo(ScreenUtils.getWidth(327))
+            $0.height.equalTo(ScreenUtils.getHeight(125))
         }
         
         characterImage.snp.makeConstraints {
@@ -176,8 +171,8 @@ private extension CreatingSuccessViewController {
         dDayLabelBackgroundView.snp.makeConstraints {
             $0.leading.equalTo(ticketImage.snp.leading).offset(102)
             $0.bottom.equalTo(travelTitleLabel.snp.top).offset(-4)
-            $0.height.equalTo(absoluteHeight / 812 * 22)
-            $0.width.equalTo(absoluteWidth / 375 * 44)
+            $0.height.equalTo(ScreenUtils.getHeight(22))
+            $0.width.equalTo(ScreenUtils.getWidth(44))
         }
         
         dDayLabel.snp.makeConstraints {
@@ -202,8 +197,8 @@ private extension CreatingSuccessViewController {
         inviteCardView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(inviteTitleLabel.snp.bottom).offset(8)
-            $0.height.equalTo(absoluteHeight / 812 * 83)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
+            $0.height.equalTo(ScreenUtils.getHeight(83))
+            $0.width.equalTo(ScreenUtils.getWidth(327))
         }
         
         inviteCodeLabel.snp.makeConstraints {
@@ -218,15 +213,15 @@ private extension CreatingSuccessViewController {
         
         sendToKaKaoButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(absoluteHeight / 812 * 50)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalTo(entranceToMainButton.snp.top).offset(-12)
         }
         
         entranceToMainButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(absoluteHeight / 812 * 50)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
         }
     }

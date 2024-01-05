@@ -11,10 +11,6 @@ import SnapKit
 
 final class NavigationView: UIView {
 
-    // MARK: - Size
-
-    let absoluteWidth = UIScreen.main.bounds.width
-
     // MARK: - UI Properties
 
     let titleLabel: UILabel = {
@@ -72,12 +68,13 @@ private extension NavigationView {
         backButton.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(10)
-            $0.size.equalTo(absoluteWidth / 375 * 48)
+            $0.size.equalTo(ScreenUtils.getWidth(48))
         }
 
         navigationBottomLineView.snp.makeConstraints {
-            $0.width.equalTo(absoluteWidth / 375 * 375)
+            $0.width.equalTo(ScreenUtils.getWidth(375))
             $0.top.equalTo(backButton.snp.bottom).offset(4)
+            $0.height.equalTo(1)
         }
     }
 }

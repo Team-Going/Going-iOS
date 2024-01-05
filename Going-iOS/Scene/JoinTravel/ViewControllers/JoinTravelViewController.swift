@@ -11,15 +11,10 @@ import SnapKit
 
 final class JoinTravelViewController: UIViewController {
     
-    // MARK: - Size
-    
-    let absoluteWidth = UIScreen.main.bounds.width
-    let absoluteHeight = UIScreen.main.bounds.height
-    
-    // MARK: - UI Properties
-    
     // TODO: - Dummy Data 생성
-    
+
+    // MARK: - UI Properties
+        
     private let navigationBar: NavigationView = {
         let nav = NavigationView()
         nav.titleLabel.text = "여행 입장하기"
@@ -127,7 +122,7 @@ private extension JoinTravelViewController {
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(absoluteHeight / 812 * 50)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
         codeTitleLabel.snp.makeConstraints {
@@ -138,8 +133,8 @@ private extension JoinTravelViewController {
         codeTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(codeTitleLabel.snp.bottom).offset(8)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
-            $0.height.equalTo(absoluteHeight / 812 * 48)
+            $0.width.equalTo(ScreenUtils.getWidth(327))
+            $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         
         characterCountLabel.snp.makeConstraints {
@@ -149,8 +144,8 @@ private extension JoinTravelViewController {
         
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(absoluteHeight / 812 * 50)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
         }
     }
