@@ -17,13 +17,10 @@ struct UserProfileData {
 
 final class MakeProfileViewController: UIViewController {
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "이름"
-        label.font = .pretendard(.body2_bold)
-        label.textColor = .gray700
-        return label
-    }()
+    private let nameLabel = DOOLabel(font: .pretendard(.body2_bold), 
+                                     color: .gray700,
+                                     text: "이름")
+  
     
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
