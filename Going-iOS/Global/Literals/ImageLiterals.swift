@@ -46,4 +46,8 @@ enum ImageLiterals {
         static var btnPlus: UIImage { .load(named: "btn_plus") }
         static var btnPlusOurToDo: UIImage { .load(named: "btn_plus_ourtodo") }
     }    
+    
+    enum TravelTest {
+        static var indexImage: UIImage { .load(named: "round_background_image")}
+    }
 }
