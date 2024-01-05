@@ -133,3 +133,18 @@ private extension TravelTestCollectionViewCell {
         }
     }
 }
+
+// MARK: - Extension
+
+extension TravelTestCollectionViewCell {
+    
+    // MARK: - Bind Data Method
+    
+    func bindData(data: TravelTestQuestionStruct) {
+        self.questionIndexLabel.text = "\(data.questionIndex)"
+        self.questionLabel.text = data.questionContent
+        self.leftOptionLabel.text = data.optionContent.leftOption
+        self.middleOptionLabel.text = data.optionContent.middleOption
+        self.rightOptionLabel.text = data.optionContent.rightOption
+    }
+}

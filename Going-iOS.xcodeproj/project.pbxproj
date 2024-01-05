@@ -12,6 +12,7 @@
 		9457F04E2B48597B009ACF25 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */; };
 		9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */; };
 		9457F0552B485A68009ACF25 /* TravelTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0542B485A68009ACF25 /* TravelTestCollectionViewCell.swift */; };
+		9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */; };
 		946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */; };
 		946190A82B47FAC100A38A42 /* JoinTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */; };
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
@@ -94,6 +95,7 @@
 		9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		9457F0542B485A68009ACF25 /* TravelTestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestCollectionViewCell.swift; sourceTree = "<group>"; };
+		9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestQuestionStruct.swift; sourceTree = "<group>"; };
 		946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningSuccessViewController.swift; sourceTree = "<group>"; };
 		946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */,
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
 				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,

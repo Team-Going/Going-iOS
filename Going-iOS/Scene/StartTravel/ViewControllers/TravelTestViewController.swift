@@ -112,6 +112,18 @@ private extension TravelTestViewController {
 
 extension TravelTestViewController: UICollectionViewDelegate { }
 
+extension TravelTestViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return travelTestDummy.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
+        cell.bindData(data: travelTestDummy[indexPath.row])
+        return cell
+    }
+}
+
 extension TravelTestViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
