@@ -227,6 +227,18 @@ private extension ToDoViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = .white000
+        contentView.backgroundColor = .white000
+        navigationBarView.backgroundColor = .white000
+        dropdownContainer.backgroundColor = .white
+        switch navigationBarTitle {
+        case "추가": navigationBarView.titleLabel.text = "할일 추가"
+            setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager , "메모를 입력해주세요."]
+        case "조회": navigationBarView.titleLabel.text = "할일 조회"
+            setDefaultValue = ["조회", "조회", self.manager , "조회"]
+        case "수정": navigationBarView.titleLabel.text = "할일 수정"
+            setDefaultValue = ["수정", "수정", self.manager , "수정"]
+        default: return
+        }
     }
     
     func setDelegate() {
