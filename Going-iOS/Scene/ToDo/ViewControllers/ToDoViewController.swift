@@ -91,6 +91,7 @@ final class ToDoViewController: UIViewController {
         label.textColor = .gray200
         return label
     }()
+    private let buttonView: UIView = UIView()
     private lazy var singleButtonView: DOOButton = {
         let singleBtn = DOOButton(type: .unabled, title: "저장")
         singleBtn.addTarget(self, action: #selector(saveToDo), for: .touchUpInside)
@@ -197,7 +198,8 @@ private extension ToDoViewController {
             todoManagerCollectionView,
             memoLabel,
             memoTextView,
-            countMemoCharacterLabel
+            countMemoCharacterLabel,
+            buttonView
         )
         deadlineTextfieldLabel.addSubview(dropdownButton)
 
@@ -214,7 +216,7 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(60))
         }
-        isActivateView ? setButtonView(buttonView: singleButtonView) : setButtonView(buttonView: doubleButtonView)
+        isActivateView ? setButtonView(button: singleButtonView) : setButtonView(button: doubleButtonView)
         todoLabel.snp.makeConstraints{
             $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))
             $0.leading.trailing.equalToSuperview()
@@ -267,6 +269,11 @@ private extension ToDoViewController {
         countMemoCharacterLabel.snp.makeConstraints{
             $0.top.equalTo(memoTextView.snp.bottom).offset(4)
             $0.trailing.equalTo(memoTextView.snp.trailing).inset(4)
+        }
+        buttonView.snp.makeConstraints{
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
     }
     
@@ -330,13 +337,11 @@ private extension ToDoViewController {
     }
     
     // 추가, 조회 뷰에 따라 하단 버튼을 세팅해주는 메서드
-    func setButtonView(buttonView: UIView) {
+    func setButtonView(button: UIView) {
         isActivateView = navigationBarTitle != "조회" ? true : false
-        contentView.addSubview(buttonView)
-        buttonView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(50))
+        buttonView.addSubview(button)
+        button.snp.makeConstraints{
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -380,10 +385,12 @@ extension ToDoViewController: UICollectionViewDataSource{
     }
 }
 
-
 extension ToDoViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing (_ textView: UITextView) {
+        todoTextfield.resignFirstResponder()
+        textView.becomeFirstResponder()
+
         if textView.text == memoTextviewPlaceholder {
             textView.text = ""
             textView.textColor = .gray700
@@ -419,6 +426,8 @@ extension ToDoViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing (_ textField: UITextField) {
         textField.placeholder = ""
+        textField.becomeFirstResponder()
+        memoTextView.resignFirstResponder()
     }
     func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
         guard  let text = textField.text else { return  false }

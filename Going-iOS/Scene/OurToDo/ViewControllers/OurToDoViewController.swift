@@ -42,9 +42,6 @@ final class OurToDoViewController: UIViewController {
     
     // MARK: - Property
     
-    let absoluteWidth = UIScreen.main.bounds.width / 375
-    let absoluteHeight = UIScreen.main.bounds.height / 812
-    
     var ourToDoData: OurToDoData?
     var incompletedData: [OurToDo] = []
     var completedData: [OurToDo] = []
@@ -111,9 +108,9 @@ private extension OurToDoViewController {
     
     func setLayout() {
         navigationBarview.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(absoluteHeight * 44)
-            $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 10)
-            $0.height.equalTo(absoluteHeight * 60)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(44))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(10))
+            $0.height.equalTo(ScreenUtils.getHeight(60))
         }
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
@@ -126,18 +123,18 @@ private extension OurToDoViewController {
         }
         tripHeaderView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(absoluteHeight * 8)
-            $0.height.equalTo(absoluteHeight * 95)
+            $0.top.equalToSuperview().offset(ScreenUtils.getHeight(8))
+            $0.height.equalTo(ScreenUtils.getHeight(95))
         }
         tripMiddleView.snp.makeConstraints{
-            $0.top.equalTo(tripHeaderView.snp.bottom).offset(absoluteHeight * 20)
+            $0.top.equalTo(tripHeaderView.snp.bottom).offset(ScreenUtils.getHeight(20))
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(absoluteHeight * 235)
+            $0.height.equalTo(ScreenUtils.getHeight(235))
         }
         ourToDoHeaderView.snp.makeConstraints{
-            $0.top.equalTo(tripMiddleView.snp.bottom).offset(absoluteHeight * 28)
+            $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(28))
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(absoluteHeight * 49)
+            $0.height.equalTo(ScreenUtils.getHeight(49))
         }
         ourToDoCollectionView.snp.makeConstraints{
             $0.top.equalTo(ourToDoHeaderView.snp.bottom)
@@ -148,23 +145,23 @@ private extension OurToDoViewController {
         stickyOurToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.width.equalTo(scrollView)
-            $0.height.equalTo(absoluteHeight * 49)
+            $0.height.equalTo(ScreenUtils.getHeight(49))
         }
         addToDoView.snp.makeConstraints{
-            $0.width.equalTo(absoluteWidth * 117)
-            $0.height.equalTo(absoluteHeight * 50)
-            $0.trailing.equalToSuperview().inset(absoluteWidth * 16)
-            $0.bottom.equalTo(scrollView).inset(absoluteHeight * 24)
+            $0.width.equalTo(ScreenUtils.getWidth(117))
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.bottom.equalTo(scrollView).inset(ScreenUtils.getHeight(24))
         }
         addToDoLabel.snp.makeConstraints{
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(absoluteHeight * 18)
-            $0.height.equalTo(absoluteHeight * 22)
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(18))
+            $0.height.equalTo(ScreenUtils.getHeight(22))
         }
         addToDoImageView.snp.makeConstraints{
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(absoluteHeight * 18)
-            $0.height.equalTo(absoluteHeight * 14)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
+            $0.height.equalTo(ScreenUtils.getHeight(14))
         }
     }
     
@@ -184,7 +181,7 @@ private extension OurToDoViewController {
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         tripMiddleView.isUserInteractionEnabled = true
-        addToDoView.layer.cornerRadius = absoluteHeight * 26
+        addToDoView.layer.cornerRadius = ScreenUtils.getHeight(26)
         addToDoImageView.image = ImageLiterals.OurToDo.btnPlusOurToDo
         let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToAddToDoView(_ : )))
         ourToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
@@ -203,8 +200,8 @@ private extension OurToDoViewController {
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: absoluteWidth * 331 , height: absoluteHeight * 81)
-        flowLayout.sectionInset = UIEdgeInsets(top: absoluteHeight * 18, left: 1.0, bottom: 1.0, right: 1.0)
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(331) , height: ScreenUtils.getHeight(81))
+        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(18), left: 1.0, bottom: 1.0, right: 1.0)
         return flowLayout
     }
     
