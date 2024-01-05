@@ -49,8 +49,7 @@ final class CreateTravelViewController: UIViewController {
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: "여행 이름을 입력해주세요.", forBorderColor: .gray200)
-        field.roundCorners(cornerRadius: 6,
-                                         maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+        field.layer.cornerRadius = 6
         return field
     }()
     
@@ -91,8 +90,11 @@ final class CreateTravelViewController: UIViewController {
         return label
     }()
     
-    private let createTravelButton = DOOButton(type: .unabled, title: "생성하기")
-    
+    private let createTravelButton: DOOButton = {
+        let btn = DOOButton(type: .unabled, title: "생성하기")
+        btn.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+        return btn
+    }()
     private let bottomSheetVC = DatePickerBottomSheetViewController()
     
     // MARK: - Life Cycles
@@ -105,7 +107,6 @@ final class CreateTravelViewController: UIViewController {
         setLayout()
         setGestureRecognizer()
         setProperty()
-        setAddTarget()
         setDelegate()
         setNotification()
     }
@@ -281,13 +282,8 @@ private extension CreateTravelViewController {
             label.textColor = .gray200
             label.layer.borderColor = UIColor.gray200.cgColor
             label.layer.borderWidth = 1
-            label.roundCorners(cornerRadius: 6, 
-                               maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+            label.layer.cornerRadius = 6
         }
-    }
-    
-    func setAddTarget() {
-        createTravelButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
     }
     
     func setDelegate() {

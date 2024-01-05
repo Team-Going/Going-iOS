@@ -51,8 +51,7 @@ final class CreatingSuccessViewController: UIViewController {
     private let dDayLabelBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .red100
-        view.roundCorners(cornerRadius: 6,
-                          maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+        view.layer.cornerRadius = 6
         return view
     }()
     
@@ -91,8 +90,7 @@ final class CreatingSuccessViewController: UIViewController {
     private let inviteCardView: UIView = {
         let view = UIView()
         view.backgroundColor = .white000
-        view.roundCorners(cornerRadius: 6,
-                                    maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner])
+        view.layer.cornerRadius = 6
         return view
     }()
     

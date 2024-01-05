@@ -37,7 +37,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
     private let dimmedBackView: UIView = {
         let view = UIView()
         view.alpha = 0.7
-        view.layer.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        view.layer.backgroundColor = UIColor.black000.cgColor
         return view
     }()
     
@@ -104,7 +104,6 @@ final class DatePickerBottomSheetViewController: UIViewController {
     
     @objc private func confirmButtonTapped(_ sender: UIButton) {
         delegate?.didSelectDate(date: datePickerView.datePicker.date)
-        print(datePickerView.datePicker.date)
         hideBottomSheetAndGoBack()
     }
 }
@@ -128,7 +127,6 @@ private extension DatePickerBottomSheetViewController {
     }
     
     func setGestureRecognizer() {
-        
         /// 흐린 부분 탭할 때, 바텀시트를 내리는 TapGesture
         let dimmedTap = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
         dimmedBackView.addGestureRecognizer(dimmedTap)

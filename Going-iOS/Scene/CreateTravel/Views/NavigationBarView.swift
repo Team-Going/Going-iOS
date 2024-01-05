@@ -63,10 +63,6 @@ private extension NavigationBarView {
     }
     
     func setLayout() {
-//        self.snp.makeConstraints {
-//            $0.width.equalTo(375)
-//            $0.height.equalTo(60)
-//        }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalTo(backButton)
