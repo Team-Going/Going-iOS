@@ -90,11 +90,12 @@ final class CreateTravelViewController: UIViewController {
         return label
     }()
     
-    private let createTravelButton: DOOButton = {
+    private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "생성하기")
         btn.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
         return btn
     }()
+    
     private let bottomSheetVC = DatePickerBottomSheetViewController()
     
     // MARK: - Life Cycles
@@ -158,21 +159,6 @@ final class CreateTravelViewController: UIViewController {
     @objc
     func dismissKeyboard() {
         view.endEditing(true)
-    }
-    
-    /// 여행 이름 텍스트 필드 채우지 않고 넘어갔을 때 경고 보여주는 메서드
-    @objc
-    func outsideTapped(_ sender: UITapGestureRecognizer) {
-        if travelNameTextField.text?.isEmpty ?? true {
-            // travelNameTextField가 비어 있다면
-            travelNameTextField.layer.borderColor = UIColor.red500.cgColor
-            characterCountLabel.textColor = .red500
-            warningLabel.isHidden = false
-        } else {
-            // travelNameTextField에 텍스트가 있으면
-            travelNameTextField.layer.borderColor = UIColor.gray700.cgColor
-            warningLabel.isHidden = true
-        }
     }
     
     @objc
@@ -269,9 +255,6 @@ private extension CreateTravelViewController {
         let endDateTapGesture = UITapGestureRecognizer(target: self, action: #selector(endDateLabelTapped))
         endDateLabel.isUserInteractionEnabled = true
         endDateLabel.addGestureRecognizer(endDateTapGesture)
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(outsideTapped(_:)))
-        view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     func setProperty() {
@@ -318,14 +301,31 @@ private extension CreateTravelViewController {
     // MARK: - Validation Methods
     
     func updateCreateButtonState() {
-        let isTravelNameEntered = !(travelNameTextField.text?.isEmpty ?? true)
-        
+        let isTravelNameTextFieldEmpty = travelNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
+
         // TODO: - Label에 Padding 주는 형식으로 변경
         
         let isStartDateSet = startDateLabel.text != "   시작일"
         let isEndDateSet = endDateLabel.text != "   종료일"
         
-        createTravelButton.currentType = (isTravelNameEntered && isStartDateSet && isEndDateSet) ? .enabled : .unabled
+        createTravelButton.currentType = (!isTravelNameTextFieldEmpty && isStartDateSet && isEndDateSet) ? .enabled : .unabled
+    }
+    
+    func travelNameTextFieldBlankCheck() {
+        guard let textEmpty = travelNameTextField.text?.isEmpty else { return }
+        if textEmpty {
+            travelNameTextField.layer.borderColor = UIColor.gray700.cgColor
+            self.characterCountLabel.textColor = .gray400
+            warningLabel.isHidden = true
+        } else if travelNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false {
+            travelNameTextField.layer.borderColor = UIColor.red400.cgColor
+            self.characterCountLabel.textColor = .red400
+            warningLabel.isHidden = false
+        } else {
+            travelNameTextField.layer.borderColor = UIColor.gray700.cgColor
+            self.characterCountLabel.textColor = .gray400
+            warningLabel.isHidden = true
+        }
     }
 }
 
@@ -370,6 +370,17 @@ extension CreateTravelViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField == travelNameTextField {
             updateCreateButtonState()
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        travelNameTextFieldBlankCheck()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        travelNameTextFieldBlankCheck()
+        if let text = textField.text, text.isEmpty {
+            textField.layer.borderColor = UIColor.gray200.cgColor
         }
     }
 }
