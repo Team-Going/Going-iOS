@@ -76,7 +76,7 @@ final class OurToDoViewController: UIViewController {
         print("popToDashBoardView")
     }
     
-    // TODO: - '할일 추가' 뷰 연결
+    // TODO: - 아이디 값으로 본인 확인 필요
     @objc
     func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
         print("pushToAddToDoView")

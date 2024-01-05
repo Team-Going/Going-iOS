@@ -93,16 +93,22 @@ final class ToDoViewController: UIViewController {
         label.textColor = .gray200
         return label
     }()
+    private lazy var singleButtonView: DOOButton = {
+        let singleBtn = DOOButton(type: .unabled, title: "저장")
+        singleBtn.addTarget(self, action: #selector(saveToDo), for: .touchUpInside)
+        return singleBtn
+    }()
+    private lazy var doubleButtonView = DoubleButtonView()
     
     // MARK: - Properties
     
     lazy var navigationBarTitle: String = ""
     lazy var isActivateView: Bool = true
-    var getToDoData: ToDoData?
-    var manager: [Manager] = []
-    var memoTextviewPlaceholder: String = ""
-    var todoTextfieldPlaceholder: String = ""
-    var saveToDoData: ToDoData?
+    lazy var manager: [Manager] = []
+    private var getToDoData: ToDoData?
+    private var memoTextviewPlaceholder: String = ""
+    private var todoTextfieldPlaceholder: String = ""
+    private var saveToDoData: ToDoData?
     var data: ToDoData? {
         didSet {
             guard let todoData = data else {return}
@@ -163,6 +169,17 @@ final class ToDoViewController: UIViewController {
             manager[sender.tag].isManager = sender.isSelected ? true : false
         }
     }
+    
+    // 저장 버튼 탭 시 데이터를 배열에 담아주고 아워투두 뷰로 돌아가는 메서드
+    @objc
+    func saveToDo() {
+        let todo = todoTextfield.text ?? ""
+        let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해주세요." ? "" : deadlineTextfieldLabel.text) ?? ""
+        let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
+        self.saveToDoData = ToDoData(todo: todo, deadline: deadline, manager: manager, memo: memo)
+        print("save \(self.saveToDoData)")
+        self.navigationController?.popViewController(animated: false)
+    }
 }
 
 // MARK: - Prviate Methods
@@ -198,6 +215,7 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(60))
         }
+        isActivateView ? setButtonView(buttonView: singleButtonView) : setButtonView(buttonView: doubleButtonView)
         todoLabel.snp.makeConstraints{
             $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))
             $0.leading.trailing.equalToSuperview()
@@ -302,10 +320,23 @@ private extension ToDoViewController {
     func changeButtonConfig(isSelected: Bool, btn: UIButton) {
         if !isSelected {
             btn.setTitleColor(.white000, for: .normal)
-            btn.backgroundColor = .gray400
+            btn.backgroundColor = btn.tag == 0 ? UIColor.red500 : UIColor.gray400
+            btn.layer.borderColor = btn.tag == 0 ? UIColor.red500.cgColor : UIColor.gray400.cgColor
         }else {
             btn.setTitleColor(.gray300, for: .normal)
             btn.backgroundColor = .white000
+            btn.layer.borderColor = UIColor.gray300.cgColor
+        }
+    }
+    
+    // 추가, 조회 뷰에 따라 하단 버튼을 세팅해주는 메서드
+    func setButtonView(buttonView: UIView) {
+        isActivateView = navigationBarTitle != "조회" ? true : false
+        contentView.addSubview(buttonView)
+        buttonView.snp.makeConstraints{
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
     }
 }
@@ -330,6 +361,7 @@ extension ToDoViewController: UICollectionViewDataSource{
             managerCell.managerButton.isSelected = true
             managerCell.managerButton.setTitleColor(.white000, for: .normal)
             managerCell.managerButton.backgroundColor = .red500
+            managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
         }
         return managerCell
     }
@@ -384,10 +416,12 @@ extension ToDoViewController: UITextFieldDelegate {
         if newLength == 0 {
             textField.layer.borderColor =  UIColor.gray200.cgColor
             countToDoCharacterLabel.textColor = .gray200
+            singleButtonView.currentType = .unabled
         } else if newLength < 16 {
             textField.layer.borderColor =  UIColor.gray700.cgColor
             countToDoCharacterLabel.textColor = .gray700
             countToDoCharacterLabel.text = "\(newLength)" + "/15"
+            singleButtonView.currentType = .enabled
         }
         return  !(newLength > 15)
     }
