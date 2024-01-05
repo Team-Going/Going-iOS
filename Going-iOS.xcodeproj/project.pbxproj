@@ -222,10 +222,18 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+		F485D4902B47DDBE007317F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F485D4902B47DDBE007317F4 /* ViewControllers */,
 			);
 			path = MakeProfile;
 			sourceTree = "<group>";
