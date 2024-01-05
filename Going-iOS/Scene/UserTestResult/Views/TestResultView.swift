@@ -28,6 +28,9 @@ final class TestResultView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        nameLabel.text = "곽성준은"
+        userTypeLabel.text = "여행을 좋아해"
+        userTypeLabel
     }
     
     required init?(coder: NSCoder) {
@@ -46,7 +49,8 @@ extension TestResultView {
     }
     
     func setHierarchy() {
-        
+        self.addSubviews(nameLabel, userTypeLabel, subTitleLabel, tagStackView)
+        tagStackView.addArrangedSubviews(firstTagLabel, secondTagLabel, thirdTagLabel)
     }
     
     func setLayout() {

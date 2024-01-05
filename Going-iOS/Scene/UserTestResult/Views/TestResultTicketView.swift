@@ -42,7 +42,7 @@ final class TestResultTicketView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        titleLabel.text = "서진이 사랑해애!!!!!"
+        titleLabel.text = "성주누누누누누누눈"
     }
     
     required init?(coder: NSCoder) {
@@ -55,7 +55,7 @@ private extension TestResultTicketView {
     
     func makeLabel() -> DOOLabel {
         let label = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700)
-        label.text = "서진이❤️"
+        label.text = "성주누눈"
         let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
         label.labelWithImg(composition: NSAttributedString(attachment: imageAttachment))
         return label
