@@ -33,7 +33,6 @@ final class UserTestViewController: UIViewController {
         label.font = .pretendard(.head3)
         label.textColor = .gray300
         label.textColor = .darkGray
-        label.text = " ㅇㅇ"
         return label
     }()
     
@@ -41,7 +40,6 @@ final class UserTestViewController: UIViewController {
         let label = UILabel()
         label.font = .pretendard(.head3)
         label.textColor = .gray700
-        label.text = " ㅇㅇ"
         return label
     }()
     
