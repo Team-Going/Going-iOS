@@ -232,7 +232,7 @@ private extension UserTestViewController {
             resetButtons()
             buttonIndexList.append(self.buttonIndex)
             
-            // nextButton 상태 갱신
+            // nextButton 상태 초기화
             nextButton.backgroundColor = .gray50
             nextButton.titleLabel?.textColor = .gray200
             
