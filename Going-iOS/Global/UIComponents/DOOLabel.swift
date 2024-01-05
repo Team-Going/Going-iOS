@@ -12,11 +12,15 @@ final class DOOLabel: UILabel {
     
     init(font: UIFont,
          color: UIColor,
-         text: String? = nil) {
+         text: String? = nil,
+         numberOfLine: Int? = 1,
+         alignment: NSTextAlignment? = .left) {
         super.init(frame: .zero)
         self.font = font
         self.textColor = color
         self.text = text
+        self.numberOfLines = numberOfLine
+        self.textAlignment = alignment
     }
     
     required init?(coder: NSCoder) {
