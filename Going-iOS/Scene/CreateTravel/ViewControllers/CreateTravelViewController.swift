@@ -155,12 +155,6 @@ final class CreateTravelViewController: UIViewController {
         }
     }
     
-    /// 뷰 탭 시 키보드 내리는 메서드
-    @objc
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
     @objc
     func createButtonTapped() {
         let vc = CreatingSuccessViewController()
@@ -290,12 +284,6 @@ private extension CreateTravelViewController {
     func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(CreateTravelViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
     }
     
     // MARK: - Validation Methods
