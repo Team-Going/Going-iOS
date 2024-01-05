@@ -9,7 +9,7 @@ final class OurToDoViewController: UIViewController {
     // MARK: - UI Property
 
     private lazy var contentView: UIView = UIView()
-    private let navigationBarview = NavigationBarView()
+    private let navigationBarview = CreateNavigationBar()
     private let tripHeaderView: TripHeaderView = TripHeaderView()
     private let tripMiddleView: TripMiddleView = TripMiddleView()
     private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
