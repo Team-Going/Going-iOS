@@ -20,13 +20,10 @@ final class ToDoViewController: UIViewController {
     }()
     private let todoTextfield: UITextField = {
         let tf = UITextField()
+        tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
         tf.font = .pretendard(.body3_medi)
         tf.textColor = .gray700
         tf.backgroundColor = .white000
-        tf.borderStyle = .roundedRect
-        tf.layer.borderColor = UIColor.gray200.cgColor
-        tf.layer.cornerRadius = 6
-        tf.layer.borderWidth = 1
         tf.setLeftPadding(amount: 12)
         return tf
     }()
@@ -54,12 +51,13 @@ final class ToDoViewController: UIViewController {
         label.isUserInteractionEnabled = true
         return label
     }()
+    private let bottomSheetVC = DatePickerBottomSheetViewController()
     private let dropdownContainer: UIView = UIView()
     private lazy var dropdownButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.ToDo.disabledDropdown, for: .normal)
         btn.backgroundColor = .white000
-        btn.addTarget(self, action: #selector(presentToDatePicker(_:)), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(presentToDatePicker), for: .touchUpInside)
         return btn
     }()
     private let managerLabel: UILabel = {
@@ -156,8 +154,9 @@ final class ToDoViewController: UIViewController {
     }
     
     @objc
-    func presentToDatePicker(_ sender: UITapGestureRecognizer) {
+    func presentToDatePicker(for button: UIButton) {
         print("presentToDatePicker")
+        showDatePicker(for: button)
     }
     
     // 담당자 버튼 탭 시 버튼 색상 변경 & 배열에 담아주는 메서드
@@ -295,6 +294,7 @@ private extension ToDoViewController {
         todoTextfield.delegate = self
         todoManagerCollectionView.dataSource = self
         memoTextView.delegate = self
+        bottomSheetVC.delegate = self
     }
     
     func setCollectionView() -> UICollectionView {
@@ -316,7 +316,7 @@ private extension ToDoViewController {
         self.todoManagerCollectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
     }
     
-    /// 버튼 클릭 시 버튼 스타일 변경해주는 메소드
+    /// 담당자 버튼 클릭 시 버튼 스타일 변경해주는 메소드
     func changeButtonConfig(isSelected: Bool, btn: UIButton) {
         if !isSelected {
             btn.setTitleColor(.white000, for: .normal)
@@ -339,6 +339,20 @@ private extension ToDoViewController {
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
     }
+    
+    /// 텍스트 필드에 들어갈 텍스트를 DateFormatter로  변환하는 메서드
+    func dateFormat(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        return formatter.string(from: date)
+    }
+    
+    /// DatePicker Presnet 하는 메서드
+    func showDatePicker(for button: UIButton) {
+        bottomSheetVC.modalPresentationStyle = .overFullScreen
+        self.present(bottomSheetVC, animated: false, completion: nil)
+    }
 }
 
 // MARK: - Extension
@@ -353,7 +367,6 @@ extension ToDoViewController: UICollectionViewDataSource{
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoManagerCollectionViewCell.identifier, for: indexPath) as? ToDoManagerCollectionViewCell else {return UICollectionViewCell()}
         
         let name = manager[indexPath.row].name
-        
         managerCell.managerButton.setTitle(name, for: .normal)
         managerCell.managerButton.tag = indexPath.row
         managerCell.managerButton.addTarget(self, action: #selector(didTapToDoManagerButton(_:)), for: .touchUpInside)
@@ -385,6 +398,7 @@ extension ToDoViewController: UITextViewDelegate {
         if newLength == 0 {
             textView.layer.borderColor =  UIColor.gray200.cgColor
             countMemoCharacterLabel.textColor = .gray200
+            countMemoCharacterLabel.text = "\(newLength)" + "/1000"
         } else if newLength < 1000 {
             textView.layer.borderColor =  UIColor.gray700.cgColor
             countMemoCharacterLabel.textColor = .gray700
@@ -409,14 +423,13 @@ extension ToDoViewController: UITextFieldDelegate {
     func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
         guard  let text = textField.text else { return  false }
 
-        // newLength:
-        // 텍스트 필드의 현재 문자열 길이 + 사용자가 입력하는 문자열 길이 - 꺼질 길이
-        let newLength = text.count + string.count - range.length
+         let newLength = text.count + string.count - range.length
 
         if newLength == 0 {
             textField.layer.borderColor =  UIColor.gray200.cgColor
             countToDoCharacterLabel.textColor = .gray200
             singleButtonView.currentType = .unabled
+            countToDoCharacterLabel.text = "\(newLength)" + "/15"
         } else if newLength < 16 {
             textField.layer.borderColor =  UIColor.gray700.cgColor
             countToDoCharacterLabel.textColor = .gray700
@@ -427,3 +440,12 @@ extension ToDoViewController: UITextFieldDelegate {
     }
 }
 
+extension ToDoViewController: BottomSheetDelegate {
+    func didSelectDate(date: Date) {
+        let formattedDate = dateFormat(date: date)
+        deadlineTextfieldLabel.text = formattedDate
+        deadlineTextfieldLabel.textColor = .gray700
+        deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
+        dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
+    }
+}

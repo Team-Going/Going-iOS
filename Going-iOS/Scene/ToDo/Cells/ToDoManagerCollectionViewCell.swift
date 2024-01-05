@@ -2,19 +2,11 @@ import UIKit
 
 import SnapKit
 
-class ToDoManagerCollectionViewCell: UICollectionViewCell {
+final class ToDoManagerCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
     static let identifier = "ToDoManagerCollectionViewCell"
-//    var manager: [String] = []
-//    var managerData: [String]? {
-//        didSet {
-//            guard let data = managerData else {return}
-//            print("cell \(data)")
-//            self.manager = data
-//        }
-//    }
     
     // MARK: - UI Components
     

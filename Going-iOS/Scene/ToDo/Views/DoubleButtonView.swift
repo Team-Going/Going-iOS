@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DoubleButtonView: UIView {
+final class DoubleButtonView: UIView {
 
     // MARK: - UI Components
     
