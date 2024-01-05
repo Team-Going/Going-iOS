@@ -240,7 +240,6 @@ private extension CreateTravelViewController {
         
         dateHorizontalStackView.snp.makeConstraints {
             $0.top.equalTo(travelDateLabel.snp.bottom).offset(8)
-            $0.height.equalTo(46)
             $0.leading.trailing.equalToSuperview().inset(24)
         }
         

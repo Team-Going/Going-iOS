@@ -11,6 +11,10 @@ import SnapKit
 
 final class DatePickerView: UIView {
     
+    // MARK: - Size
+    
+    let absoluteHeight = UIScreen.main.bounds.height
+    
     // MARK: - UI Properties
     
     let datePicker: UIDatePicker = {
@@ -53,9 +57,9 @@ private extension DatePickerView {
     
     func setLayout() {
         datePicker.snp.makeConstraints {
+            $0.height.equalTo(absoluteHeight / 812 * 159)
             $0.top.equalToSuperview().inset(37)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(80)
         }
     }
 }
