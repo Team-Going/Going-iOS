@@ -22,4 +22,9 @@ enum StringLiterals {
     enum JoiningSuccess {
         static let title = "멋진 여행에 초대받으셨네요!"
     }
+    
+    enum JoinTravel {
+        static let inviteCodeTitle = "초대코드"
+        static let placeHolder = "초대코드를 입력해주세요."
+    }
 }

@@ -68,6 +68,44 @@ final class JoinTravelViewController: UIViewController {
         setDelegate()
         setNotification()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - @objc Methods
+    
+    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            // 키보드 높이
+            let keyboardHeight = keyboardFrame.height
+            
+            // Bottom Safe Area 높이
+            let safeAreaBottomInset = view.safeAreaInsets.bottom
+            
+            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
+            UIView.animate(withDuration: 0.3) {
+                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
+            }
+        }
+    }
+    
+    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.nextButton.transform = .identity
+        }
+    }
+    
+    @objc
+    func nextButtonTapped() {
+        let vc = JoiningSuccessViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 // MARK: - Private Extension
 
@@ -117,3 +155,47 @@ private extension JoinTravelViewController {
         }
     }
     
+    func setDelegate() {
+        codeTextField.delegate = self
+    }
+    
+    func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func updateNextButtonState() {
+        let isCodeTextFieldEmpty = codeTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
+        nextButton.currentType = (!isCodeTextFieldEmpty) ? .enabled : .unabled
+    }
+}
+
+extension JoinTravelViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == codeTextField {
+            /// 현재 텍스트 필드의 텍스트와 입력된 문자를 합쳐서 길이를 계산
+            let currentText = textField.text ?? ""
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+            let maxLength = 6
+            characterCountLabel.text = "\(newText.count)/\(maxLength)"
+
+            if newText.count >= 1 {
+                textField.layer.borderColor = UIColor.gray700.cgColor
+                characterCountLabel.textColor = .gray400
+                updateNextButtonState()
+            } else {
+                textField.layer.borderColor = UIColor.gray200.cgColor
+            }
+            
+            // 최대 길이를 초과하면 입력을 막음
+            return newText.count < maxLength
+        }
+        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField == codeTextField {
+            updateNextButtonState()
+        }
+    }
+}

@@ -20,9 +20,10 @@ final class JoiningSuccessViewController: UIViewController {
     
     // TODO: - Dummy Data 생성
     
-    private let backButton: UIButton = {
+    private lazy var backButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonBack, for: .normal)
+        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -88,6 +89,13 @@ final class JoiningSuccessViewController: UIViewController {
         setStyle()
         setHierachy()
         setLayout()
+    }
+    
+    // MARK: - @objc Methods
+    
+    @objc
+    func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
