@@ -46,4 +46,9 @@ enum ImageLiterals {
         static var btnPlus: UIImage { .load(named: "btn_plus") }
         static var btnPlusOurToDo: UIImage { .load(named: "btn_plus_ourtodo") }
     }    
+    
+    enum ToDo {
+        static var enabledDropdown: UIImage { .load(named: "enabled_ic_dropdown") }
+        static var disabledDropdown: UIImage { .load(named: "disabled_ic_dropdown") }
+    }
 }
