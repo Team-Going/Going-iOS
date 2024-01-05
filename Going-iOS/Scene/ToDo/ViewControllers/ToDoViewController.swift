@@ -30,6 +30,13 @@ final class ToDoViewController: UIViewController {
         tf.setLeftPadding(amount: 12)
         return tf
     }()
+    private let countToDoCharacterLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0/15"
+        label.font = .pretendard(.detail2_regular)
+        label.textColor = .gray200
+        return label
+    }()
     private let deadlineLabel: UILabel = {
         let label = UILabel()
         label.setTitleLabel(title: "언제까지")
@@ -78,6 +85,13 @@ final class ToDoViewController: UIViewController {
         tv.layer.cornerRadius = 6
         tv.layer.borderWidth = 1
         return tv
+    }()
+    private let countMemoCharacterLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0/1000"
+        label.font = .pretendard(.detail2_regular)
+        label.textColor = .gray200
+        return label
     }()
     
     // MARK: - Properties
@@ -140,6 +154,7 @@ final class ToDoViewController: UIViewController {
         print("presentToDatePicker")
     }
     
+    // 담당자 버튼 탭 시 버튼 색상 변경 & 배열에 담아주는 메서드
     @objc
     func didTapToDoManagerButton(_ sender: UIButton) {
         if isActivateView {
@@ -156,7 +171,18 @@ private extension ToDoViewController {
     
     func setHierachy() {
         self.view.addSubviews(navigationBarView, contentView)
-        contentView.addSubviews(todoLabel, todoTextfield, deadlineLabel, deadlineTextfieldLabel, managerLabel, todoManagerCollectionView, memoLabel, memoTextView)
+        contentView.addSubviews(
+            todoLabel,
+            todoTextfield,
+            countToDoCharacterLabel,
+            deadlineLabel,
+            deadlineTextfieldLabel,
+            managerLabel,
+            todoManagerCollectionView,
+            memoLabel,
+            memoTextView,
+            countMemoCharacterLabel
+        )
         deadlineTextfieldLabel.addSubview(dropdownButton)
 
     }
@@ -172,7 +198,6 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(60))
         }
-        
         todoLabel.snp.makeConstraints{
             $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))
             $0.leading.trailing.equalToSuperview()
@@ -182,6 +207,10 @@ private extension ToDoViewController {
             $0.top.equalTo(todoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(48))
+        }
+        countToDoCharacterLabel.snp.makeConstraints{
+            $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
+            $0.trailing.equalTo(todoTextfield.snp.trailing).inset(4)
         }
         deadlineLabel.snp.makeConstraints{
             $0.top.equalTo(todoTextfield.snp.bottom).offset(ScreenUtils.getHeight(28))
@@ -218,7 +247,10 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(143))
         }
-        
+        countMemoCharacterLabel.snp.makeConstraints{
+            $0.top.equalTo(memoTextView.snp.bottom).offset(4)
+            $0.trailing.equalTo(memoTextView.snp.trailing).inset(4)
+        }
     }
     
     // TODO: - 할일 조회 일 경우 placeholder 값이 이전에 세팅된 값이어야 함
@@ -242,7 +274,9 @@ private extension ToDoViewController {
     }
     
     func setDelegate() {
+        todoTextfield.delegate = self
         todoManagerCollectionView.dataSource = self
+        memoTextView.delegate = self
     }
     
     func setCollectionView() -> UICollectionView {
@@ -300,3 +334,62 @@ extension ToDoViewController: UICollectionViewDataSource{
         return managerCell
     }
 }
+
+
+extension ToDoViewController: UITextViewDelegate {
+
+    func textViewDidBeginEditing (_ textView: UITextView) {
+        if textView.text == memoTextviewPlaceholder {
+            textView.text = ""
+            textView.textColor = .gray700
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard  let string = textView.text else { return  false }
+        
+        // newLength: 텍스트 필드의 현재 문자열 길이 + 사용자가 입력하는 문자열 길이 - 꺼질 길이
+        let newLength = string.count + text.count - range.length
+        if newLength == 0 {
+            textView.layer.borderColor =  UIColor.gray200.cgColor
+            countMemoCharacterLabel.textColor = .gray200
+        } else if newLength < 1000 {
+            textView.layer.borderColor =  UIColor.gray700.cgColor
+            countMemoCharacterLabel.textColor = .gray700
+            countMemoCharacterLabel.text = "\(newLength)" + "/1000"
+        }
+        return  !(newLength > 1000)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = memoTextviewPlaceholder
+            textView.textColor = .gray200
+        }
+    }
+}
+
+extension ToDoViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing (_ textField: UITextField) {
+        textField.placeholder = ""
+    }
+    func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
+        guard  let text = textField.text else { return  false }
+
+        // newLength:
+        // 텍스트 필드의 현재 문자열 길이 + 사용자가 입력하는 문자열 길이 - 꺼질 길이
+        let newLength = text.count + string.count - range.length
+
+        if newLength == 0 {
+            textField.layer.borderColor =  UIColor.gray200.cgColor
+            countToDoCharacterLabel.textColor = .gray200
+        } else if newLength < 16 {
+            textField.layer.borderColor =  UIColor.gray700.cgColor
+            countToDoCharacterLabel.textColor = .gray700
+            countToDoCharacterLabel.text = "\(newLength)" + "/15"
+        }
+        return  !(newLength > 15)
+    }
+}
+
