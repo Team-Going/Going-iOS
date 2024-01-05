@@ -15,15 +15,14 @@ final class TestResultTicketView: UIView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 16
-        stack.distribution = .fillEqually
         stack.alignment = .center
         return stack
     }()
     
-    private let titleLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .gray700)
+    private let titleLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .gray700, numberOfLine: 2, alignment: .center)
     private let vertiLineImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.image = ImageLiterals.TestResult.verticalLine
         return imageView
     }()
@@ -33,6 +32,7 @@ final class TestResultTicketView: UIView {
         stack.axis = .vertical
         stack.spacing = 4
         stack.distribution = .fillEqually
+        stack.backgroundColor = .gray200
         return stack
     }()
     private lazy var firstDescLabel = makeLabel()
@@ -42,7 +42,11 @@ final class TestResultTicketView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        titleLabel.text = "성주누누누누누누눈"
+        titleLabel.text = "성주누누ㄴㄴㄴs"
+        
+        setHierarchy()
+        setLayout()
+        setStyle()
     }
     
     required init?(coder: NSCoder) {
@@ -55,9 +59,8 @@ private extension TestResultTicketView {
     
     func makeLabel() -> DOOLabel {
         let label = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700)
-        label.text = "성주누눈"
         let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
-        label.labelWithImg(composition: NSAttributedString(attachment: imageAttachment))
+        label.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: "꼼꼼하고 부지런해 맡은 일에서 실수가 적어요"))
         return label
     }
     
@@ -71,16 +74,30 @@ private extension TestResultTicketView {
         wholeStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(14)
             $0.top.bottom.equalToSuperview().inset(16)
+            $0.height.equalTo(ScreenUtils.getHeight(110))
         }
         
         vertiLineImageView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.width.equalTo(1)
         }
+        
+        titleLabel.snp.makeConstraints {
+            $0.width.equalTo(ScreenUtils.getWidth(52))
+            $0.height.equalTo(ScreenUtils.getHeight(36))
+        }
+        
+        descStackView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(17)
+        }
+        
     }
     
     func setStyle() {
-        self.backgroundColor = .white000
+        self.backgroundColor = .gray50
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = 6
+        self.layer.borderColor = UIColor.gray200.cgColor
     }
     
 }

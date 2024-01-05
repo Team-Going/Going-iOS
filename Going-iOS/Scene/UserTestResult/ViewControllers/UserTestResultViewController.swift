@@ -28,6 +28,8 @@ final class UserTestResultViewController: UIViewController {
         return imageView
     }()
     
+    private let resultView = TestResultView()
+    
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .darkGray
@@ -41,6 +43,7 @@ final class UserTestResultViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
+        resultView.backgroundColor = .white
         
     }
 }
@@ -53,6 +56,7 @@ private extension UserTestResultViewController {
     func setHierarchy() {
         view.addSubviews(testResultScrollView)
         testResultScrollView.addSubviews(contentView)
+        contentView.addSubviews(resultImageView, resultView)
     }
     
     func setLayout() {
@@ -66,6 +70,18 @@ private extension UserTestResultViewController {
             $0.edges.equalTo(testResultScrollView.contentLayoutGuide)
             $0.width.equalTo(testResultScrollView.frameLayoutGuide)
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
+        }
+        
+        resultImageView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.height.equalTo(228)
+            $0.width.equalTo(Constant.Screen.width)
+        }
+        
+        resultView.snp.makeConstraints {
+            $0.top.equalTo(resultImageView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
         
     }

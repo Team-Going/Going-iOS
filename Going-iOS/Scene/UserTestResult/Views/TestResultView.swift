@@ -26,11 +26,29 @@ final class TestResultView: UIView {
     private lazy var secondTagLabel: DOOLabel = makeLabel()
     private lazy var thirdTagLabel: DOOLabel = makeLabel()
     
+    private let ticketStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+//        stack.distribution =
+        stack.alignment = .center
+        return stack
+    }()
+    
+    private let firstTickeView = TestResultTicketView()
+    private let secondTickeView = TestResultTicketView()
+    private let thirdTickeView = TestResultTicketView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         nameLabel.text = "곽성준은"
         userTypeLabel.text = "여행을 좋아해"
-        userTypeLabel
+        subTitleLabel.text = "여행좋아함"
+        
+        setHierarchy()
+        setLayout()
+        setStyle()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -41,23 +59,54 @@ final class TestResultView: UIView {
 
 extension TestResultView {
     func makeLabel() -> DOOLabel {
-        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red300)
+        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red300, alignment: .center)
         label.layer.borderWidth = 0.5
         label.layer.borderColor = UIColor.red300.cgColor
         label.layer.cornerRadius = 10
+        label.text = "test"
         return label
     }
     
     func setHierarchy() {
-        self.addSubviews(nameLabel, userTypeLabel, subTitleLabel, tagStackView)
+        self.addSubviews(nameLabel, userTypeLabel, subTitleLabel, tagStackView, firstTickeView, ticketStackView)
+        ticketStackView.addArrangedSubviews(firstTickeView, secondTickeView, thirdTickeView)
         tagStackView.addArrangedSubviews(firstTagLabel, secondTagLabel, thirdTagLabel)
     }
     
     func setLayout() {
+        nameLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(32)
+            $0.centerX.equalToSuperview()
+        }
         
+        userTypeLabel.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(4)
+            $0.centerX.equalToSuperview()
+        }
+        
+        subTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(userTypeLabel.snp.bottom)
+            $0.centerX.equalToSuperview()
+        }
+        
+        tagStackView.snp.makeConstraints {
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(8)
+            $0.centerX.equalToSuperview()
+        }
+        
+        ticketStackView.snp.makeConstraints {
+            $0.top.equalTo(tagStackView.snp.bottom).offset(28)
+            $0.leading.trailing.equalToSuperview().inset(24)
+        }
+        
+        
+        firstTagLabel.snp.makeConstraints {
+            $0.width.equalTo(ScreenUtils.getWidth(55))
+            $0.height.equalTo(ScreenUtils.getHeight(20))
+        }
     }
     
     func setStyle() {
-        
+        self.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMaxXMinYCorner])
     }
 }
