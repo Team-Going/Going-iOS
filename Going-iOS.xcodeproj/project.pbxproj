@@ -33,6 +33,7 @@
 		CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */; };
 		CA8CD6932B46B9F600CFDFBF /* CreateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */; };
 		CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */; };
+		CA8CD6A02B47FDB200CFDFBF /* LeftPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD69F2B47FDB200CFDFBF /* LeftPaddingLabel.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35272B35E97C0080A19F /* UITextField+.swift */; };
 		F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35292B35E9BD0080A19F /* UIStackView+.swift */; };
@@ -106,6 +107,7 @@
 		CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileData.swift; sourceTree = "<group>"; };
 		CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNavigationBar.swift; sourceTree = "<group>"; };
 		CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
+		CA8CD69F2B47FDB200CFDFBF /* LeftPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftPaddingLabel.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F49B35272B35E97C0080A19F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		F49B35292B35E9BD0080A19F /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				94C2C9A02B46F94000B92CAC /* DOOButton.swift */,
+				CA8CD69F2B47FDB200CFDFBF /* LeftPaddingLabel.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
+				CA8CD6A02B47FDB200CFDFBF /* LeftPaddingLabel.swift in Sources */,
 				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
 				F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */,
 				CA8CD68B2B46B8CD00CFDFBF /* OurToDoCollectionViewCell.swift in Sources */,
