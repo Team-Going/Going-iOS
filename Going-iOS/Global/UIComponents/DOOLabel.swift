@@ -13,8 +13,8 @@ final class DOOLabel: UILabel {
     init(font: UIFont,
          color: UIColor,
          text: String? = nil,
-         numberOfLine: Int? = 1,
-         alignment: NSTextAlignment? = .left) {
+         numberOfLine: Int = 1,
+         alignment: NSTextAlignment = .left) {
         super.init(frame: .zero)
         self.font = font
         self.textColor = color

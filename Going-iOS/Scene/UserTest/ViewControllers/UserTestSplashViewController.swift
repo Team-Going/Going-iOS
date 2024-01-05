@@ -11,15 +11,11 @@ import SnapKit
 
 final class UserTestSplashViewController: UIViewController {
 
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = StringLiterals.UserTest.userTestSplashTitle
-        label.textAlignment = .center
-        label.font = .pretendard(.head3)
-        label.textColor = .gray700
-        label.numberOfLines = 2
-        return label
-    }()
+    private let titleLabel = DOOLabel(font: .pretendard(.head3),
+                                      color: .gray700,
+                                      text: StringLiterals.UserTest.userTestSplashTitle,
+                                      numberOfLine: 2,
+                                      alignment: .center)
     
     private let userTestSplashImageView: UIImageView = {
         let imageView = UIImageView()
@@ -78,6 +74,7 @@ private extension UserTestSplashViewController {
     }
     
     @objc func nextButtonTapped() {
-        print("Push To NextVC")
+        let nextVC = UserTestViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

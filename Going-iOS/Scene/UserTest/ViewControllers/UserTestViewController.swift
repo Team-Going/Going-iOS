@@ -28,21 +28,8 @@ final class UserTestViewController: UIViewController {
         return progress
     }()
     
-//    private let testIndexLabel: UILabel = {
-//        let label = UILabel()
-//        label.font = .pretendard(.head3)
-//        label.textColor = .gray300
-//        return label
-//    }()
-    
     private let testIndexLabel = DOOLabel(font: .pretendard(.head3), color: .gray300)
-    
-    private let questionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.head3)
-        label.textColor = .gray700
-        return label
-    }()
+    private let questionLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
     
     private let questionStackView: UIStackView = {
         let stackView = UIStackView()
