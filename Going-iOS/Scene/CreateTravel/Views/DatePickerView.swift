@@ -53,9 +53,7 @@ private extension DatePickerView {
     
     func setLayout() {
         datePicker.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.getHeight(159))
-            $0.top.equalToSuperview().inset(37)
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }

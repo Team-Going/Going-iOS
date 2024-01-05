@@ -19,19 +19,12 @@ final class DatePickerBottomSheetViewController: UIViewController {
     
     weak var delegate: BottomSheetDelegate?
     
-    // TODO: - height 기기대응되게 변경
-    
-    let bottomHeight: CGFloat = 340
-    
-    // bottomSheet가 view의 상단에서 떨어진 거리
-    private var bottomSheetViewTopConstraint: NSLayoutConstraint!
-    
     // MARK: - UI Properties
     
     // 기존 화면을 흐려지게 만들기 위한 뷰
-    private let dimmedBackView: UIView = {
+    let dimmedBackView: UIView = {
         let view = UIView()
-        view.alpha = 0.7
+        view.alpha = 0.1
         view.layer.backgroundColor = UIColor.black000.cgColor
         return view
     }()
@@ -109,16 +102,11 @@ private extension DatePickerBottomSheetViewController {
     
     func setStyle() {
         view.backgroundColor = .clear
-        
-        dimmedBackView.alpha = 0.0
     }
     
     func setHierachy() {
-        view.addSubviews(dimmedBackView,
-                         bottomSheetView,
-                         datePickerView,
-                         dismissIndicatorView,
-                         confirmButton)
+        view.addSubviews(dimmedBackView, bottomSheetView)
+        bottomSheetView.addSubviews(datePickerView, dismissIndicatorView, confirmButton)
     }
     
     func setGestureRecognizer() {
@@ -136,31 +124,26 @@ private extension DatePickerBottomSheetViewController {
     // 레이아웃 세팅
     func setLayout() {
         dimmedBackView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(bottomSheetView.snp.top).offset(10)
         }
-
-        bottomSheetView.translatesAutoresizingMaskIntoConstraints = false
-        let topConstant = view.safeAreaInsets.bottom + view.safeAreaLayoutGuide.layoutFrame.height
         
-        bottomSheetViewTopConstraint = bottomSheetView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstant)
-        
-        NSLayoutConstraint.activate([
-            bottomSheetView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            bottomSheetView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bottomSheetView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomSheetViewTopConstraint
-        ])
+        bottomSheetView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(492)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
         
         dismissIndicatorView.snp.makeConstraints {
-            $0.top.equalTo(bottomSheetView.snp.top).offset(12)
-            $0.centerX.equalTo(bottomSheetView)
+            $0.top.equalToSuperview().inset(12)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(5)
             $0.width.equalTo(35)
         }
         
         datePickerView.snp.makeConstraints {
-            $0.top.equalTo(bottomSheetView.snp.top).offset(10)
+            $0.top.equalToSuperview().inset(47)
             $0.leading.trailing.equalToSuperview().inset(8)
+            $0.bottom.equalTo(confirmButton.snp.top).offset(-24)
         }
         
         confirmButton.snp.makeConstraints {
@@ -177,11 +160,6 @@ private extension DatePickerBottomSheetViewController {
     
     /// 바텀 시트 표출 애니메이션 메서드
     func showBottomSheet() {
-        let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
-        let bottomPadding: CGFloat = view.safeAreaInsets.bottom
-        
-        bottomSheetViewTopConstraint.constant = (safeAreaHeight + bottomPadding) - bottomHeight
-        
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.dimmedBackView.alpha = 0.5
             self.view.layoutIfNeeded()
@@ -190,11 +168,6 @@ private extension DatePickerBottomSheetViewController {
     
     /// 바텀 시트 사라지는 애니메이션 메서드
     func hideBottomSheetAndGoBack() {
-        let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.height
-        let bottomPadding = view.safeAreaInsets.bottom
-        
-        bottomSheetViewTopConstraint.constant = safeAreaHeight + bottomPadding
-        
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.dimmedBackView.alpha = 0.0
             self.view.layoutIfNeeded()
