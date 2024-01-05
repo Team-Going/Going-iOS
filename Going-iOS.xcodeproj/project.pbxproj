@@ -5,7 +5,7 @@
 	};
 	objectVersion = 56;
 	objects = {
-	
+
 /* Begin PBXBuildFile section */
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
@@ -27,6 +27,7 @@
 		CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */; };
 		CA8CD6932B46B9F600CFDFBF /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
+		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35272B35E97C0080A19F /* UITextField+.swift */; };
 		F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B35292B35E9BD0080A19F /* UIStackView+.swift */; };
 		F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B352B2B35EAF50080A19F /* UIView+.swift */; };
@@ -93,6 +94,7 @@
 		CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileData.swift; sourceTree = "<group>"; };
 		CA8CD6922B46B9F600CFDFBF /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F49B35272B35E97C0080A19F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		F49B35292B35E9BD0080A19F /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		F49B352B2B35EAF50080A19F /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -188,6 +190,14 @@
 				CA8CD67E2B46B64000CFDFBF /* OurToDoViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F485D4872B47CB43007317F4 /* UserTest */ = {
+			isa = PBXGroup;
+			children = (
+				F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */,
+			);
+			path = UserTest;
 			sourceTree = "<group>";
 		};
 		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
@@ -385,6 +395,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F485D4872B47CB43007317F4 /* UserTest */,
 				CA8CD6792B46B61000CFDFBF /* OurToDo */,
 				F4BA26F32B45597600975CC2 /* MakeProfile */,
 				F4F5219B2B346843000E6E1E /* Login */,
@@ -554,6 +565,7 @@
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
+				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				CA8CD67F2B46B64000CFDFBF /* OurToDoViewController.swift in Sources */,
