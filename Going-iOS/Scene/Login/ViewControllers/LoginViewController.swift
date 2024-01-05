@@ -13,13 +13,7 @@ import SnapKit
 
 final class LoginViewController: UIViewController {
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = StringLiterals.Login.title
-        label.textColor = .gray500
-        label.font = .pretendard(.head3)
-        return label
-    }()
+    private let titleLabel = DOOLabel(font: .pretendard(.head3), color: .gray50, text: StringLiterals.Login.title)
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()

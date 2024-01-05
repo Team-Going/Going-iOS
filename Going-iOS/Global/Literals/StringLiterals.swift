@@ -13,6 +13,10 @@ enum StringLiterals {
         static let personalInformation  = " 개인정보처리방침"
     }
     
+    enum UserTest {
+        static let userTestSplashTitle = "9개의 질문으로\n여행 성향을 분석해보세요 "
+    }
+  
     enum CreatingSuccess {
         static let title = "새로운 여행이 생성되었어요!"
         static let inviteCodeTitle = "친구 초대코드"
