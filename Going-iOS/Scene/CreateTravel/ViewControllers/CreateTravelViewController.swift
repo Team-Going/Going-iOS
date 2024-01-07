@@ -23,44 +23,25 @@ final class CreateTravelViewController: UIViewController {
         return nav
     }()
     
-    private let travelNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.body2_bold)
-        label.text = "여행 이름"
-        label.textColor = .gray700
-        return label
-    }()
+    private let travelNameLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "여행 이름")
     
-    private let travelDateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.body2_bold)
-        label.text = "여행 날짜"
-        label.textColor = .gray700
-        return label
-    }()
+    private let travelDateLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "여행 날짜")
     
     private let travelNameTextField: UITextField = {
         let field = UITextField()
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
-        field.setTextField(forPlaceholder: "여행 이름을 입력해주세요.", forBorderColor: .gray200)
+        field.setTextField(forPlaceholder: StringLiterals.CreateTravel.namePlaceHolder, forBorderColor: .gray200)
         field.layer.cornerRadius = 6
         return field
     }()
-    
-    private let characterCountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0/15"
-        label.font = .pretendard(.detail2_regular)
-        label.textColor = .gray200
-        return label
-    }()
-    
-    private let warningLabel: UILabel = {
-        let label = UILabel()
-        label.text = "여행 이름을 입력해주세요."
-        label.font = .pretendard(.body3_medi)
-        label.textColor = .red400
+
+    private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular), 
+                                               color: .gray200,
+                                               text: "0/15")
+
+    private let warningLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400, text: StringLiterals.CreateTravel.warning)
         label.isHidden = true
         return label
     }()
@@ -76,14 +57,7 @@ final class CreateTravelViewController: UIViewController {
     private let startDateLabel = UILabel()
     private let endDateLabel = UILabel()
     
-    private let dashLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.detail2_regular)
-        label.text = "-"
-        label.textColor = .gray700
-        label.textAlignment = .center
-        return label
-    }()
+    private let dashLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700, text: "-")
     
     private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "생성하기")
