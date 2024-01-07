@@ -19,7 +19,7 @@ final class TripHeaderView: UIView {
     lazy var tripNameLabel: UILabel = {setLabel()}()
     lazy var tripDdayLabel: UILabel = {setLabel()}()
     lazy var tripDateLabel: UILabel = {setLabel(font: UIFont.pretendard(.body3_medi), textColor: UIColor.gray300)}()
-    private lazy var editTripButton: UIButton = {
+    lazy var editTripButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = UIColor.gray50
         btn.setImage(ImageLiterals.OurToDo.btnOurToDoEdit, for: .normal)
@@ -31,6 +31,7 @@ final class TripHeaderView: UIView {
 
     // MARK: - Property
     
+    //ourtodo header data
     var tripData: [String]? {
         didSet {
             guard let data = tripData else {return}
@@ -50,6 +51,23 @@ final class TripHeaderView: UIView {
             let date = NSAttributedString(string: " \(string)" )
             let attachImg = NSAttributedString(attachment: tripDateLabelAttachImg)
             tripDateLabel.labelWithImg(composition: attachImg, date)
+        }
+    }
+    
+    //mytodo header data
+    var myToDoHeaderData: [String]? {
+        didSet {
+            guard let data = myToDoHeaderData else {return}
+            self.tripNameLabel.text = data[0]
+            self.tripDdayLabel.text = data[1]
+            
+            let text = tripDdayLabel.text ?? ""
+            let splitText = tripDdayLabel.text?.split(separator: " ") ?? []
+            let firstString = NSMutableAttributedString(string: text)
+            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: String(splitText[0])))
+            firstString.addAttribute(.foregroundColor, value: UIColor.red400, range: (text as NSString).range(of: String(splitText[1])))
+            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: String(splitText[2])))
+            tripDdayLabel.attributedText = firstString
         }
     }
 
