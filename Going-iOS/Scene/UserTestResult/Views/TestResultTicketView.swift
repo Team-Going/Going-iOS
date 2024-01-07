@@ -31,8 +31,8 @@ final class TestResultTicketView: UIView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 4
-        stack.distribution = .fillEqually
         stack.backgroundColor = .gray200
+        stack.distribution = .fillEqually
         return stack
     }()
     private lazy var firstDescLabel = makeLabel()
@@ -60,7 +60,8 @@ private extension TestResultTicketView {
     func makeLabel() -> DOOLabel {
         let label = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700)
         let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
-        label.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: "꼼꼼하고 부지런해 맡은 일에서 실수가 적어요"))
+        imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
+        label.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: "  꼼꼼하고 부지런해 맡은 일에서 실수가 적어요"))
         return label
     }
     
@@ -89,8 +90,8 @@ private extension TestResultTicketView {
         
         descStackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(17)
+            $0.width.equalTo(ScreenUtils.getWidth(216))
         }
-        
     }
     
     func setStyle() {

@@ -15,7 +15,7 @@ final class UserTestResultViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.alwaysBounceVertical = true
+        scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
     
@@ -103,11 +103,11 @@ private extension UserTestResultViewController {
         gradientView.snp.makeConstraints {
             $0.bottom.equalTo(nextButton.snp.top)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(20))
+            $0.height.equalTo(ScreenUtils.getHeight(40))
         }
         
         contentView.snp.makeConstraints {
-            $0.edges.equalTo(testResultScrollView.contentLayoutGuide)
+            $0.edges.equalToSuperview()
             $0.width.equalTo(testResultScrollView.frameLayoutGuide)
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
@@ -121,7 +121,7 @@ private extension UserTestResultViewController {
         resultView.snp.makeConstraints {
             $0.top.equalTo(resultImageView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(contentView.snp.bottom)
         }
         
     }

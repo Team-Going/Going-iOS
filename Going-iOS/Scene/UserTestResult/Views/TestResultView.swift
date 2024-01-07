@@ -96,6 +96,7 @@ extension TestResultView {
         ticketStackView.snp.makeConstraints {
             $0.top.equalTo(tagStackView.snp.bottom).offset(28)
             $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalToSuperview()
         }
         
         
@@ -103,6 +104,7 @@ extension TestResultView {
             $0.width.equalTo(ScreenUtils.getWidth(55))
             $0.height.equalTo(ScreenUtils.getHeight(20))
         }
+        
     }
     
     func setStyle() {
