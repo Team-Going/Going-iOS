@@ -53,9 +53,10 @@ private extension OurToDoHeaderView {
             $0.height.equalTo(absoluteHeight * 1)
         }
         segmentedControl.snp.makeConstraints{
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(underlineView)
-            $0.width.equalTo(absoluteWidth * 147)
+//            $0.width.equalTo(absolurteWidth * 147)
             $0.height.equalTo(absoluteHeight * 49)
         }
     }

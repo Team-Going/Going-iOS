@@ -11,6 +11,13 @@ class MyToDoViewController: UIViewController {
 
     // MARK: - UI Property
     
+    var selectIndex: Int = 0 {
+        didSet {
+            stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = selectIndex
+            myToDoHeaderView.segmentedControl.selectedSegmentIndex = selectIndex
+        }
+    }
+    
     private lazy var contentView: UIView = UIView()
     private let navigationBarview = CreateNavigationBar()
     private let tripHeaderView = TripHeaderView()
@@ -21,11 +28,18 @@ class MyToDoViewController: UIViewController {
         return scrollView
     }()
     private lazy var myToDoCollectionView: UICollectionView = {setCollectionView()}()
-    private let myToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
-    private let stickyMyToDoHeaderView: OurToDoHeaderView = {
+    private lazy var myToDoHeaderView: OurToDoHeaderView = {
+        let header = OurToDoHeaderView()
+        header.segmentedControl.addTarget(self, action: #selector(didChangeValue(sender: )), for: .valueChanged)
+        return header
+    }()
+    
+    private lazy var stickyMyToDoHeaderView: OurToDoHeaderView = {
         let headerView = OurToDoHeaderView()
         headerView.isHidden = true
         headerView.backgroundColor = .white000
+        headerView.segmentedControl.addTarget(self, action: #selector(didChangeValue(sender: )), for: .valueChanged)
+
         return headerView
     }()
     
@@ -52,8 +66,8 @@ class MyToDoViewController: UIViewController {
         registerCell()
         setLayout()
         setStyle()
-        self.didChangeValue(segment: self.myToDoHeaderView.segmentedControl)
-        self.didChangeValue(segment: self.stickyMyToDoHeaderView.segmentedControl)
+        self.didChangeValue(sender: self.myToDoHeaderView.segmentedControl)
+        self.didChangeValue(sender: self.stickyMyToDoHeaderView.segmentedControl)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -71,7 +85,14 @@ class MyToDoViewController: UIViewController {
     }
     
     @objc 
-    func didChangeValue(segment: UISegmentedControl) {
+    func didChangeValue(sender: UISegmentedControl) {
+        
+        if stickyMyToDoHeaderView.isHidden {
+            stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = myToDoHeaderView.segmentedControl.selectedSegmentIndex
+        } else {
+            myToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
+        }
+        
         loadData()
     }
     
@@ -146,8 +167,7 @@ private extension MyToDoViewController {
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         tripHeaderView.editTripButton.isHidden = true
-        myToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
-        stickyMyToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
+        
     }
     
     func setData() {
@@ -194,7 +214,6 @@ private extension MyToDoViewController {
         myToDoCollectionView.snp.updateConstraints {
             $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
         }
-        scrollView.contentSize = myToDoCollectionView.frame.size
     }
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
@@ -217,11 +236,9 @@ extension MyToDoViewController: UIScrollViewDelegate {
         stickyMyToDoHeaderView.isHidden = !shouldShowSticky
         
         if !shouldShowSticky {
-            stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = myToDoHeaderView.segmentedControl.selectedSegmentIndex
             self.view.backgroundColor = .gray50
             self.navigationBarview.backgroundColor = .gray50
         } else {
-            myToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
             self.view.backgroundColor = .white000
             self.navigationBarview.backgroundColor = .white000
         }
@@ -232,6 +249,7 @@ extension MyToDoViewController: UIScrollViewDelegate {
             scrollView.backgroundColor = .white000
         }
     }
+
 }
 
 extension MyToDoViewController: MyToDoCollectionViewDelegate {
@@ -246,24 +264,11 @@ extension MyToDoViewController: UICollectionViewDelegate {}
 extension MyToDoViewController: UICollectionViewDataSource{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let myToDoHeaderIndex = self.myToDoHeaderView.segmentedControl.selectedSegmentIndex
-        let stickHeaderIndex = self.stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
-        if self.stickyMyToDoHeaderView.isHidden {
-            if (myToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1){
-                self.loadData()
-                return self.incompletedData.count
-            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
-                self.loadData()
-                return self.completedData.count
-            }else { return 0}
-        }else {
-            if (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 0){
-                self.loadData()
-                return self.incompletedData.count
-            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
-                self.loadData()
-                return self.completedData.count
-            }else {return 0}
+        
+        if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            return self.incompletedData.count
+        } else {
+            return self.completedData.count
         }
     }
 
@@ -271,26 +276,13 @@ extension MyToDoViewController: UICollectionViewDataSource{
 
         guard let myToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyToDoCollectionViewCell.identifier, for: indexPath) as? MyToDoCollectionViewCell else {return UICollectionViewCell()}
         myToDoCell.delegate = self
-
-        let myToDoHeaderIndex = self.myToDoHeaderView.segmentedControl.selectedSegmentIndex
-        let stickHeaderIndex = self.stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
-
-        if self.stickyMyToDoHeaderView.isHidden {
-            if (myToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1){
-                self.setCellStyle(cell: myToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true, buttonImg: ImageLiterals.MyToDo.btnCheckBoxIncomplete)
-                    myToDoCell.index = indexPath.row
-            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
-                self.setCellStyle(cell: myToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false, buttonImg: ImageLiterals.MyToDo.btnCheckBoxComplete)
-                    myToDoCell.index = indexPath.row
-            }else {}
-        }else {
-            if (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 0){
-                self.setCellStyle(cell: myToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true, buttonImg: ImageLiterals.MyToDo.btnCheckBoxIncomplete)
-                    myToDoCell.index = indexPath.row
-            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
-                self.setCellStyle(cell: myToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false, buttonImg: ImageLiterals.MyToDo.btnCheckBoxComplete)
-                    myToDoCell.index = indexPath.row
-            }else {}
+        
+        if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            self.setCellStyle(cell: myToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true, buttonImg: ImageLiterals.MyToDo.btnCheckBoxIncomplete)
+                myToDoCell.index = indexPath.row
+        } else {
+            self.setCellStyle(cell: myToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false, buttonImg: ImageLiterals.MyToDo.btnCheckBoxComplete)
+                myToDoCell.index = indexPath.row
         }
         return myToDoCell
     }
