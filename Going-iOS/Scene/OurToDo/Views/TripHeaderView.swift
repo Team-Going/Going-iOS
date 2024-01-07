@@ -58,7 +58,7 @@ final class TripHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         setLayout()
         setStyle()
     }
@@ -78,7 +78,7 @@ final class TripHeaderView: UIView {
 
 private extension TripHeaderView {
 
-    func setHierachy() {
+    func setHierarchy() {
         self.addSubviews(tripHeaderStackView, editTripButton)
         tripHeaderStackView.addArrangedSubviews(tripNameLabel, tripDdayLabel, tripDateLabel)
     }

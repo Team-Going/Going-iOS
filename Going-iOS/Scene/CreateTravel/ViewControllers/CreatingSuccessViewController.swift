@@ -115,7 +115,7 @@ final class CreatingSuccessViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
-        setHierachy()
+        setHierarchy()
         setLayout()
     }
 }
@@ -129,7 +129,7 @@ private extension CreatingSuccessViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         view.addSubviews(navigationBar,
                          createSuccessLabel,
                          ticketImage,

@@ -58,7 +58,7 @@ final class JoinTravelViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
-        setHierachy()
+        setHierarchy()
         setLayout()
         setDelegate()
         setNotification()
@@ -114,7 +114,7 @@ private extension JoinTravelViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         view.addSubviews(navigationBar,
                          codeTitleLabel,
                          codeTextField,

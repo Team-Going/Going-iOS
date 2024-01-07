@@ -40,7 +40,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         setLayout()
         setStyle()
     }
@@ -61,7 +61,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
 
 private extension TripFriendsCollectionViewCell {
     
-    func setHierachy() {
+    func setHierarchy() {
         contentView.addSubview(profileStackView)
         profileStackView.addArrangedSubviews(profileImageView, friendNameLabel)
     }

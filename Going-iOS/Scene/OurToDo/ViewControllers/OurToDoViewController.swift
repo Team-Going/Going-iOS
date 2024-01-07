@@ -53,7 +53,7 @@ final class OurToDoViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = false
-        setHierachy()
+        setHierarchy()
         setDelegate()
         setData()
         registerCell()
@@ -99,7 +99,7 @@ final class OurToDoViewController: UIViewController {
 
 private extension OurToDoViewController {
     
-    func setHierachy() {
+    func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoView)
         addToDoView.addSubviews(addToDoImageView, addToDoLabel)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)

@@ -30,7 +30,7 @@ final class DatePickerView: UIView {
         super.init(frame: frame)
                 
         setStyle()
-        setHierachy()
+        setHierarchy()
         setLayout()
     }
     
@@ -47,15 +47,13 @@ private extension DatePickerView {
         self.backgroundColor = .white000
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         addSubview(datePicker)
     }
     
     func setLayout() {
         datePicker.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.getHeight(159))
-            $0.top.equalToSuperview().inset(37)
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }
