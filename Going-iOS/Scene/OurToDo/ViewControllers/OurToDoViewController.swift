@@ -79,8 +79,8 @@ final class OurToDoViewController: UIViewController {
         print("pushToAddToDoView")
         
         var manager: [Manager] = []
-        for i in self.tripMiddleView.friendProfile {
-            manager.append(Manager(name: i.name, isManager: false))
+        for friendProfile in self.tripMiddleView.friendProfile {
+            manager.append(Manager(name: friendProfile.name, isManager: false))
         }
         
         let todoVC = ToDoViewController()
