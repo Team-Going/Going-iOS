@@ -25,9 +25,10 @@ class DashBoardViewController: UIViewController {
     private var navigationTitle = DOOLabel(font: .pretendard(.head1), color: .gray700)
     
     // TODO: - 뷰 연결
-    private let settingsButton: UIButton = {
+    private lazy var settingsButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.DashBoard.btnSetting, for: .normal)
+        btn.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -172,6 +173,13 @@ private extension DashBoardViewController {
             filteredTravelList = travelListDummy.detailInfos.filter { $0.dueDate < 0}
         }
         dashBoardCollectionView.reloadData()
+    }
+    
+    @objc
+    func settingsButtonTapped() {
+//        let vc = ()
+//        navigationController?.pushViewController(vc, animated: true)
+        print("push")
     }
 }
 
