@@ -45,6 +45,7 @@
 		CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */; };
 		CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */; };
 		CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */; };
+		CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02552B4ACC50001FCE89 /* MyToDoData.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -138,6 +139,7 @@
 		CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonView.swift; sourceTree = "<group>"; };
 		CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoViewController.swift; sourceTree = "<group>"; };
+		CADA02552B4ACC50001FCE89 /* MyToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoData.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 		CADA024F2B4AC701001FCE89 /* MyToDo */ = {
 			isa = PBXGroup;
 			children = (
+				CADA02542B4ACC35001FCE89 /* Models */,
 				CADA02512B4AC759001FCE89 /* ViewControllers */,
 			);
 			path = MyToDo;
@@ -380,6 +383,14 @@
 				CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CADA02542B4ACC35001FCE89 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CADA02552B4ACC50001FCE89 /* MyToDoData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
@@ -837,6 +848,7 @@
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
+				CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */,
 				94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */,
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
