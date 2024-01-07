@@ -18,6 +18,19 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     weak var delegate: TravelTestCollectionViewCellDelegate?
+    
+    private let test = TravelTestQuestionStruct.travelTestDummy
+    
+    var travelTestData: TravelTestQuestionStruct? {
+        didSet {
+            guard let data = travelTestData else {return}
+            self.questionIndexLabel.text = "\(data.questionIndex)"
+            self.questionLabel.text = data.questionContent
+            self.leftOptionLabel.text = data.optionContent.leftOption
+            self.middleOptionLabel.text = data.optionContent.middleOption
+            self.rightOptionLabel.text = data.optionContent.rightOption
+        }
+    }
 
     // MARK: - UI Components
     

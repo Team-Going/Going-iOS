@@ -127,8 +127,7 @@ extension TravelTestViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
-        
-        cell.bindData(data: travelTestDummy[indexPath.row])
+        cell.travelTestData = travelTestDummy[indexPath.row]
         cell.delegate = self
         return cell
     }
