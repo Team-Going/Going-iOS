@@ -94,13 +94,13 @@ private extension UserTestResultViewController {
         }
         
         saveImageButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(32)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
             $0.leading.equalToSuperview().inset(24)
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(160))
         }
         nextButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(32)
+            $0.bottom.equalTo(saveImageButton.snp.bottom)
             $0.leading.equalTo(saveImageButton.snp.trailing).offset(7)
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(160))
