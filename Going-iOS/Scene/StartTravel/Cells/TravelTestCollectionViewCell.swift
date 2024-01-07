@@ -9,10 +9,16 @@ import UIKit
 
 import SnapKit
 
-class TravelTestCollectionViewCell: UICollectionViewCell {
+protocol TravelTestCollectionViewCellDelegate: AnyObject {
+    func didSelectAnswer(in cell: TravelTestCollectionViewCell, selectedAnswer: Int)
+}
+
+final class TravelTestCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
+    weak var delegate: TravelTestCollectionViewCellDelegate?
+
     // MARK: - UI Components
     
     private let indexBackgroundImage: UIImageView = {
@@ -49,6 +55,15 @@ class TravelTestCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - @objc Methods
+    
+    @objc
+    func answerButtonTapped(_ sender: UIButton) {
+        answerButtons.forEach { $0.backgroundColor = .gray50 }
+        sender.backgroundColor = .gray400
+        delegate?.didSelectAnswer(in: self, selectedAnswer: sender.tag)
     }
 }
 
@@ -114,9 +129,8 @@ private extension TravelTestCollectionViewCell {
     func createButton(tag: Int) -> UIButton {
         let button = UIButton()
         button.tag = tag
-//        button.setTitle("\(tag)", for: .normal)
         button.backgroundColor = .gray50
-        //        button.addTarget(self, action: #selector(answerButtonTapped(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(answerButtonTapped(_:)), for: .touchUpInside)
         button.layer.cornerRadius = 4
         return button
     }

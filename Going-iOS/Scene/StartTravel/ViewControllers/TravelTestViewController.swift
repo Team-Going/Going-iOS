@@ -13,7 +13,10 @@ final class TravelTestViewController: UIViewController {
     
     // MARK: - Properties
     
-    let travelTestDummy = TravelTestQuestionStruct.travelTestDummy
+    private let travelTestDummy = TravelTestQuestionStruct.travelTestDummy
+    
+    /// 선택된 답변을 저장할 배열
+    private lazy var selectedAnswers: [Int?] = Array(repeating: nil, count: travelTestDummy.count)
     
     // MARK: - UI Properties
     
@@ -42,9 +45,8 @@ final class TravelTestViewController: UIViewController {
         setHierachy()
         setLayout()
         setCollectionView()
-        setDelegate()
     }
-
+    
     
     // MARK: - @objc Methods
     
@@ -54,6 +56,7 @@ final class TravelTestViewController: UIViewController {
     func nextButtonTapped() {
         let vc = JoiningSuccessViewController()
         navigationController?.pushViewController(vc, animated: true)
+        print(selectedAnswers)
     }
 }
 
@@ -84,7 +87,7 @@ private extension TravelTestViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(nextButton.snp.top).offset(-28)
         }
-
+        
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
@@ -103,8 +106,13 @@ private extension TravelTestViewController {
                                           forCellWithReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier)
     }
     
-    func setDelegate() {
+    ///  모든 답변이 완료되었는지 확인하는 메서드
+    func checkIfAllAnswersCompleted() {
+        // 모든 질문에 대한 답변이 있는지 확인
+        let isAllAnswered = selectedAnswers.allSatisfy { $0 != nil }
         
+        // 모든 답변이 완료되었으면 nextButton 활성화
+        nextButton.currentType = isAllAnswered ? .enabled : .unabled
     }
 }
 
@@ -119,7 +127,9 @@ extension TravelTestViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
+        
         cell.bindData(data: travelTestDummy[indexPath.row])
+        cell.delegate = self
         return cell
     }
 }
@@ -127,7 +137,7 @@ extension TravelTestViewController: UICollectionViewDataSource {
 extension TravelTestViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-      return 12
+        return 12
     }
     
     /// cell size
@@ -140,5 +150,15 @@ extension TravelTestViewController: UICollectionViewDelegateFlowLayout {
     /// content margin
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24)
+    }
+}
+
+/// 선택된 답변 처리 메서드
+extension TravelTestViewController: TravelTestCollectionViewCellDelegate {
+    func didSelectAnswer(in cell: TravelTestCollectionViewCell, selectedAnswer: Int) {
+        if let indexPath = travelTestCollectionView.indexPath(for: cell) {
+            selectedAnswers[indexPath.row] = selectedAnswer
+            checkIfAllAnswersCompleted()
+        }
     }
 }
