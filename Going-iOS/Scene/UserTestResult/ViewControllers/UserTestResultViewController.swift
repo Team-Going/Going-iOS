@@ -37,6 +37,19 @@ final class UserTestResultViewController: UIViewController {
         button.backgroundColor = .gray500
         button.setTitle("완성된 프로필", for: .normal)
         button.titleLabel?.font = .pretendard(.body1_bold)
+        button.layer.cornerRadius = 6
+        return button
+    }()
+    
+    private lazy var saveImageButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white000
+        button.setTitle("이미지로 저장", for: .normal)
+        button.setTitleColor(.gray600, for: .normal)
+        button.titleLabel?.font = .pretendard(.body1_bold)
+        button.layer.cornerRadius = 6
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.gray300.cgColor
         return button
     }()
     
@@ -67,7 +80,7 @@ private extension UserTestResultViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(testResultScrollView, nextButton, gradientView)
+        view.addSubviews(testResultScrollView, nextButton, saveImageButton, gradientView)
         testResultScrollView.addSubviews(contentView)
         contentView.addSubviews(resultImageView, resultView)
     }
@@ -80,10 +93,18 @@ private extension UserTestResultViewController {
             $0.leading.trailing.equalToSuperview()
         }
         
+        saveImageButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(32)
+            $0.leading.equalToSuperview().inset(24)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.width.equalTo(ScreenUtils.getWidth(160))
+        }
         nextButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(32)
-            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.leading.equalTo(saveImageButton.snp.trailing).offset(7)
             $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.width.equalTo(ScreenUtils.getWidth(160))
+
         }
         
         gradientView.snp.makeConstraints {
