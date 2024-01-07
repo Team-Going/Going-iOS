@@ -12,6 +12,7 @@
 		94442EBA2B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EB92B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift */; };
 		94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EBC2B4AC6F500FDBB26 /* TravelInfoStruct.swift */; };
 		94442EC02B4AD49D00FDBB26 /* DashBoardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EBF2B4AD49D00FDBB26 /* DashBoardHeaderView.swift */; };
+		94442EC82B4B18E500FDBB26 /* StartTravelSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EC72B4B18E500FDBB26 /* StartTravelSplashViewController.swift */; };
 		9457F04C2B4853AC009ACF25 /* TravelTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */; };
 		9457F04E2B48597B009ACF25 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */; };
 		9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */; };
@@ -108,6 +109,7 @@
 		94442EB92B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		94442EBC2B4AC6F500FDBB26 /* TravelInfoStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInfoStruct.swift; sourceTree = "<group>"; };
 		94442EBF2B4AD49D00FDBB26 /* DashBoardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardHeaderView.swift; sourceTree = "<group>"; };
+		94442EC72B4B18E500FDBB26 /* StartTravelSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTravelSplashViewController.swift; sourceTree = "<group>"; };
 		9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestViewController.swift; sourceTree = "<group>"; };
 		9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
@@ -243,6 +245,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		94442EC12B4B0C8000FDBB26 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		9457F0492B485169009ACF25 /* StartTravel */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */,
+				94442EC72B4B18E500FDBB26 /* StartTravelSplashViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -297,6 +307,7 @@
 		94C2C9A22B46FE3500B92CAC /* CreateTravel */ = {
 			isa = PBXGroup;
 			children = (
+				94442EC12B4B0C8000FDBB26 /* Models */,
 				94C2C9A42B46FE4E00B92CAC /* ViewControllers */,
 				94C2C9A32B46FE4200B92CAC /* Views */,
 			);
@@ -870,6 +881,7 @@
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
 				9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */,
+				94442EC82B4B18E500FDBB26 /* StartTravelSplashViewController.swift in Sources */,
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
