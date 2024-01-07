@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431CDC62B47F0C500CB452E /* NavigationView.swift */; };
+		94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EB52B4ABB4A00FDBB26 /* DashBoardViewController.swift */; };
+		94442EBA2B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EB92B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift */; };
+		94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EBC2B4AC6F500FDBB26 /* TravelInfoStruct.swift */; };
+		94442EC02B4AD49D00FDBB26 /* DashBoardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EBF2B4AD49D00FDBB26 /* DashBoardHeaderView.swift */; };
 		9457F04C2B4853AC009ACF25 /* TravelTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */; };
 		9457F04E2B48597B009ACF25 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */; };
 		9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */; };
@@ -100,6 +104,10 @@
 
 /* Begin PBXFileReference section */
 		9431CDC62B47F0C500CB452E /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		94442EB52B4ABB4A00FDBB26 /* DashBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
+		94442EB92B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		94442EBC2B4AC6F500FDBB26 /* TravelInfoStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInfoStruct.swift; sourceTree = "<group>"; };
+		94442EBF2B4AD49D00FDBB26 /* DashBoardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardHeaderView.swift; sourceTree = "<group>"; };
 		9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestViewController.swift; sourceTree = "<group>"; };
 		9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
@@ -192,6 +200,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94442EB22B4AB5EF00FDBB26 /* DashBoard */ = {
+			isa = PBXGroup;
+			children = (
+				94442EBE2B4AD48C00FDBB26 /* Views */,
+				94442EBB2B4AC6C000FDBB26 /* Models */,
+				94442EB82B4ABC0500FDBB26 /* Cells */,
+				94442EB42B4AB64400FDBB26 /* ViewControllers */,
+			);
+			path = DashBoard;
+			sourceTree = "<group>";
+		};
+		94442EB42B4AB64400FDBB26 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				94442EB52B4ABB4A00FDBB26 /* DashBoardViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		94442EB82B4ABC0500FDBB26 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				94442EB92B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		94442EBB2B4AC6C000FDBB26 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				94442EBC2B4AC6F500FDBB26 /* TravelInfoStruct.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		94442EBE2B4AD48C00FDBB26 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				94442EBF2B4AD49D00FDBB26 /* DashBoardHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9457F0492B485169009ACF25 /* StartTravel */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +399,22 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		CA8CD69B2B47F5AC00CFDFBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CA8CD69C2B47F5BE00CFDFBF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,14 +433,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		CA8CD69B2B47F5AC00CFDFBF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		F485D48B2B47CF15007317F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,28 +441,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CA8CD69C2B47F5BE00CFDFBF /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-        F4BA26F32B45597600975CC2 /* MakeProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F485D4902B47DDBE007317F4 /* ViewControllers */,
-			);
-			path = MakeProfile;
-			sourceTree = "<group>";
-		};
 		F485D4902B47DDBE007317F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F485D4902B47DDBE007317F4 /* ViewControllers */,
+			);
+			path = MakeProfile;
 			sourceTree = "<group>";
 		};
 		F4BA26F82B47197100975CC2 /* Utils */ = {
@@ -625,6 +676,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				94442EB22B4AB5EF00FDBB26 /* DashBoard */,
 				F4BEB4C72B482FBB0074B1B2 /* UserTestResult */,
 				9457F0492B485169009ACF25 /* StartTravel */,
 				CA8CD6982B47F57100CFDFBF /* ToDo */,
@@ -795,6 +847,7 @@
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
+				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				CA8CD6A02B47FDB200CFDFBF /* PaddingLabel.swift in Sources */,
@@ -813,12 +866,15 @@
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
 				F4BEB4D12B4A79AB0074B1B2 /* UIButton+.swift in Sources */,
+				94442EBA2B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift in Sources */,
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
+				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
 				9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */,
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
 				94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */,
+				94442EC02B4AD49D00FDBB26 /* DashBoardHeaderView.swift in Sources */,
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				CA8CD67F2B46B64000CFDFBF /* OurToDoViewController.swift in Sources */,
