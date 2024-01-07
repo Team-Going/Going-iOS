@@ -31,8 +31,8 @@ extension UIView {
         gradient.colors = [firstColor.cgColor, secondColor.cgColor]
         if axis == .horizontal {
             gradient.locations = [0.0 , 1.0]
-            gradient.startPoint = CGPoint(x: 1.0, y: 1.0)
-            gradient.endPoint = CGPoint(x: 0.05, y: 1.0)
+            gradient.startPoint = CGPoint(x: 0.05, y: 1.0)
+            gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
         } else if axis == .vertical {
             gradient.locations = [0.0 , 1.0]
             gradient.startPoint = CGPoint(x: 0.0, y: 0.05)

@@ -68,7 +68,7 @@ final class OurToDoViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         loadData()
-        tripMiddleView.gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), axis: .horizontal)
+        tripMiddleView.gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .horizontal)
     }
         
     @objc
