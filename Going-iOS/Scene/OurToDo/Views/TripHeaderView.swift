@@ -107,12 +107,6 @@ private extension TripHeaderView {
             $0.top.equalToSuperview()
             $0.height.equalToSuperview()
         }
-        tripNameLabel.snp.makeConstraints{
-            $0.height.equalTo(ScreenUtils.getHeight(28))
-        }
-        tripDdayLabel.snp.makeConstraints{
-            $0.leading.centerY.top.bottom.equalToSuperview()
-        }
         editTripButton.snp.makeConstraints{
             $0.leading.equalTo(tripDdayLabel.snp.trailing).offset(3)
             $0.size.equalTo(ScreenUtils.getHeight(28))
