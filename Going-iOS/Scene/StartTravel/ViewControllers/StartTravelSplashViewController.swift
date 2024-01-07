@@ -17,9 +17,18 @@ class StartTravelSplashViewController: UIViewController {
                                                  color: .gray700,
                                                  text: StringLiterals.StartTravel.startTravelTitle)
     
-    private let startTravelButton = DOOButton(type: .white, title: "새로운 여행 시작하기")
-    private let joinTravelButton = DOOButton(type: .enabled, title: "여행 입장하기")
+    private lazy var createTravelButton: DOOButton = {
+        let btn = DOOButton(type: .white, title: "새로운 여행 시작하기")
+        btn.addTarget(self, action: #selector(createTravelButtonTapped), for: .touchUpInside)
+        return btn
+    }()
     
+    private lazy var joinTravelButton: DOOButton = {
+        let btn = DOOButton(type: .enabled, title: "여행 입장하기")
+        btn.addTarget(self, action: #selector(joinTravelButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -37,7 +46,7 @@ private extension StartTravelSplashViewController {
     }
     
     func setHierarchy() {
-        self.view.addSubviews(startTravelTitleLabel, startTravelButton, joinTravelButton)
+        self.view.addSubviews(startTravelTitleLabel, createTravelButton, joinTravelButton)
     }
     
     func setLayout() {
@@ -46,7 +55,7 @@ private extension StartTravelSplashViewController {
             $0.centerX.equalToSuperview()
         }
         
-        startTravelButton.snp.makeConstraints {
+        createTravelButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
@@ -59,5 +68,19 @@ private extension StartTravelSplashViewController {
             $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-6)
         }
+    }
+    
+    // MARK: - @objc Methods
+    
+    @objc
+    func createTravelButtonTapped() {
+        let vc = CreateTravelViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc
+    func joinTravelButtonTapped() {
+        let vc = JoinTravelViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
