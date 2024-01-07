@@ -71,6 +71,7 @@ extension DOOButton {
             self.layer.borderColor = UIColor.gray200.cgColor
             self.setTitleColor(.gray600, for: .normal)
             self.isEnabled = true
+            self.layer.borderWidth = 1
         }
     }
 }
