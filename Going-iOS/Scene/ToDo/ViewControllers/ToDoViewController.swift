@@ -40,7 +40,7 @@ final class ToDoViewController: UIViewController {
         return label
     }()
     private let deadlineTextfieldLabel: UILabel = {
-        let label = LeftPaddingLabel(padding: UIEdgeInsets(top: 0.0, left: 18.0, bottom: 0.0, right: 18.0))
+        let label = PaddingLabel(padding: UIEdgeInsets(top: 0.0, left: 18.0, bottom: 0.0, right: 18.0))
         label.font = .pretendard(.body3_medi)
         label.textColor = .gray200
         label.backgroundColor = .white000
