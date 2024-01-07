@@ -32,7 +32,9 @@ final class CreateTravelViewController: UIViewController {
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.CreateTravel.namePlaceHolder, forBorderColor: .gray200)
+        field.setPlaceholderColor(.gray200)
         field.layer.cornerRadius = 6
+        field.textColor = .gray700
         return field
     }()
 

@@ -28,6 +28,7 @@ final class JoinTravelViewController: UIViewController {
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, forBorderColor: .gray200, forCornerRadius: 6)
+        field.setPlaceholderColor(.gray700)
         field.keyboardType = .numberPad
         return field
     }()
