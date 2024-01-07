@@ -49,5 +49,9 @@ enum ImageLiterals {
     
     enum TravelTest {
         static var indexImage: UIImage { .load(named: "round_background_image")}
+      
+    enum ToDo {
+        static var enabledDropdown: UIImage { .load(named: "enabled_ic_dropdown") }
+        static var disabledDropdown: UIImage { .load(named: "disabled_ic_dropdown") }
     }
 }
