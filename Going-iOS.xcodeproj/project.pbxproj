@@ -49,6 +49,7 @@
 		F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4C92B482FDC0074B1B2 /* UserTestResultViewController.swift */; };
 		F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4CC2B4833D30074B1B2 /* TestResultView.swift */; };
 		F4BEB4CF2B4838B60074B1B2 /* TestResultTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4CE2B4838B60074B1B2 /* TestResultTicketView.swift */; };
+		F4BEB4D12B4A79AB0074B1B2 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BEB4D02B4A79AB0074B1B2 /* UIButton+.swift */; };
 		F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76B2B4283920008735F /* SplashViewController.swift */; };
 		F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76D2B4286A50008735F /* ImageLiterals.swift */; };
 		F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E76F2B4286EA0008735F /* UIImage+.swift */; };
@@ -128,6 +129,7 @@
 		F4BEB4C92B482FDC0074B1B2 /* UserTestResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestResultViewController.swift; sourceTree = "<group>"; };
 		F4BEB4CC2B4833D30074B1B2 /* TestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultView.swift; sourceTree = "<group>"; };
 		F4BEB4CE2B4838B60074B1B2 /* TestResultTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultTicketView.swift; sourceTree = "<group>"; };
+		F4BEB4D02B4A79AB0074B1B2 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		F4C5E76B2B4283920008735F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F4C5E76D2B4286A50008735F /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		F4C5E76F2B4286EA0008735F /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				F4C5E76F2B4286EA0008735F /* UIImage+.swift */,
 				F4C5E7812B429B620008735F /* UIFont+.swift */,
 				F4C5E7832B42A6830008735F /* UILabel+.swift */,
+				F4BEB4D02B4A79AB0074B1B2 /* UIButton+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
+				F4BEB4D12B4A79AB0074B1B2 /* UIButton+.swift in Sources */,
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */,
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,

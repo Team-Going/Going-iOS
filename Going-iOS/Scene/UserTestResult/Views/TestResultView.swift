@@ -30,7 +30,6 @@ final class TestResultView: UIView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 8
-//        stack.distribution =
         stack.alignment = .center
         return stack
     }()
@@ -107,6 +106,6 @@ extension TestResultView {
     }
     
     func setStyle() {
-        self.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMaxXMinYCorner])
+        self.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
     }
 }
