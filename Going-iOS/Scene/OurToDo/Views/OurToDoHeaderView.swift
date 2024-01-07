@@ -11,7 +11,7 @@ final class OurToDoHeaderView: UIView {
     //MARK: - UI Property
     
     let segmentedControl: UnderlineSegmentedControlView = {
-        let segmentedControl = UnderlineSegmentedControlView(items: ["미완료 todo", "   완료 todo"])
+        let segmentedControl = UnderlineSegmentedControlView(items: ["미완료 todo", "완료 todo"])
         segmentedControl.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.gray200,
             .font: UIFont.pretendard(.body2_bold)], for: .normal)

@@ -60,4 +60,3 @@ private extension UnderlineSegmentedControlView {
         self.setDividerImage(image, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
     }
 }
-
