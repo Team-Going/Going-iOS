@@ -99,7 +99,7 @@ final class CreateTravelViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
-        setHierachy()
+        setHierarchy()
         setLayout()
         setGestureRecognizer()
         setProperty()
@@ -170,7 +170,7 @@ private extension CreateTravelViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         view.addSubviews(navigationBar,
                          travelNameLabel,
                          travelDateLabel,

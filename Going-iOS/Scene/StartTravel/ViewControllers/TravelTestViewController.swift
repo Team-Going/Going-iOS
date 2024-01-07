@@ -42,21 +42,11 @@ final class TravelTestViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
-        setHierachy()
+        setHierarchy()
         setLayout()
         setCollectionView()
-    }
-    
-    
-    // MARK: - @objc Methods
-    
-    // TODO: - 분기처리 필요
-    
-    @objc
-    func nextButtonTapped() {
-        let vc = JoiningSuccessViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        print(selectedAnswers)
+        setDelegate()
+        registerCell()
     }
 }
 
@@ -68,7 +58,7 @@ private extension TravelTestViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         view.addSubviews(navigationBar,
                          travelTestCollectionView,
                          nextButton)
@@ -100,8 +90,14 @@ private extension TravelTestViewController {
         travelTestCollectionView.collectionViewLayout = layout
         travelTestCollectionView.backgroundColor = .gray200
         travelTestCollectionView.showsVerticalScrollIndicator = false
+    }
+    
+    func setDelegate() {
         travelTestCollectionView.delegate = self
         travelTestCollectionView.dataSource = self
+    }
+    
+    func registerCell() {
         travelTestCollectionView.register(TravelTestCollectionViewCell.self,
                                           forCellWithReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier)
     }
@@ -113,6 +109,17 @@ private extension TravelTestViewController {
         
         // 모든 답변이 완료되었으면 nextButton 활성화
         nextButton.currentType = isAllAnswered ? .enabled : .unabled
+    }
+    
+    // MARK: - @objc Methods
+    
+    // TODO: - 분기처리 필요
+    
+    @objc
+    func nextButtonTapped() {
+        let vc = JoiningSuccessViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        print(selectedAnswers)
     }
 }
 

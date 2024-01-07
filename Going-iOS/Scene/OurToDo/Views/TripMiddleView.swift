@@ -59,7 +59,7 @@ final class TripMiddleView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setHierachy()
+        setHierarchy()
         registerCell()
         setLayout()
         setStyle()
@@ -97,7 +97,7 @@ final class TripMiddleView: UIView {
 
 private extension TripMiddleView {
 
-    func setHierachy() {
+    func setHierarchy() {
         self.addSubview(ticketBoxImgView)
         ticketBoxImgView.addSubviews(tripProgressLabel, percentageLabel, tripProgressBar, tripFriendsContainer, tripFriendsCollectionView, gradientView, addStackView)
         tripFriendsContainer.addSubviews(tripFriendsLabel, tripFriendsBtn)

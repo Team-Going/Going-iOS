@@ -82,7 +82,7 @@ final class JoiningSuccessViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
-        setHierachy()
+        setHierarchy()
         setLayout()
     }
     
@@ -103,7 +103,7 @@ private extension JoiningSuccessViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         view.addSubviews(backButton,
                          joinSuccessLabel,
                          ticketImage,

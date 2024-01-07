@@ -61,7 +61,7 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setStyle()
-        setHierachy()
+        setHierarchy()
         setButton()
         setLayout()
     }
@@ -90,7 +90,7 @@ private extension TravelTestCollectionViewCell {
         layer.borderWidth = 1
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         addSubviews(indexBackgroundImage,
                     questionLabel,
                     answerStackView,

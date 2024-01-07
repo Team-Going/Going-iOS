@@ -55,7 +55,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
-        setHierachy()
+        setHierarchy()
         setLayout()
         setGestureRecognizer()
         setAddTarget()
@@ -104,7 +104,7 @@ private extension DatePickerBottomSheetViewController {
         view.backgroundColor = .clear
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         view.addSubviews(dimmedBackView, bottomSheetView)
         bottomSheetView.addSubviews(datePickerView, dismissIndicatorView, confirmButton)
     }

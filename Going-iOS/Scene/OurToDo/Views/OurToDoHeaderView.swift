@@ -29,7 +29,7 @@ final class OurToDoHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         setLayout()
         setStyle()
     }
@@ -43,7 +43,7 @@ final class OurToDoHeaderView: UIView {
 
 private extension OurToDoHeaderView {
     
-    func setHierachy() {
+    func setHierarchy() {
         self.addSubviews(underlineView, segmentedControl)
     }
     

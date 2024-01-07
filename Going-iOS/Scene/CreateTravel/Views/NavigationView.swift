@@ -38,7 +38,7 @@ final class NavigationView: UIView {
         super.init(frame: frame)
 
         setStyles()
-        setHierachy()
+        setHierarchy()
         setLayout()
     }
 
@@ -54,7 +54,7 @@ private extension NavigationView {
         self.backgroundColor = .white
     }
 
-    func setHierachy() {
+    func setHierarchy() {
         addSubviews(titleLabel, backButton, navigationBottomLineView)
     }
 
