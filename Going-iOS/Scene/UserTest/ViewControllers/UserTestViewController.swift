@@ -143,7 +143,11 @@ private extension UserTestViewController {
             nextButton.isEnabled = true
         }
         nextButton.backgroundColor = nextButton.isEnabled ? .gray500 : .gray50
-        nextButton.titleLabel?.textColor = nextButton.isEnabled ? .white000 : .gray200
+        if nextButton.isEnabled {
+            nextButton.setTitleColor(.white000, for: .normal)
+        } else {
+            nextButton.setTitleColor(.gray200, for: .normal)
+        }
     }
     
     func resetButtons() {
@@ -222,7 +226,7 @@ private extension UserTestViewController {
             
             // nextButton 상태 초기화
             nextButton.backgroundColor = .gray50
-            nextButton.titleLabel?.textColor = .gray200
+            nextButton.setTitleColor(.gray200, for: .normal)
             
         } else {
             // 질문이 마지막인 경우
