@@ -24,14 +24,26 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             self.todoTitleLabel.text = data.todoTitle
             self.deadlineLabel.text = data.deadline + "까지"
             self.manager = (data.manager[0] == "지민") && data.isPrivate ? ["나만보기"] : data.manager
-            
-            self.managerCollectionView.reloadData()
+//            self.managerCollectionView.reloadData()
         }
     }
     var index: Int? {
         didSet {
             guard let index = index else {return}
             self.index = index
+            self.managerCollectionView.reloadData()
+        }
+    }
+    var textColor: UIColor? {
+        didSet {
+            guard let textColor = textColor else {return}
+            self.todoTitleLabel.textColor = textColor
+        }
+    }
+    var buttonImg: UIImage? {
+        didSet {
+            guard let btnImg = buttonImg else {return}
+            self.checkButton.setImage(btnImg, for: .normal)
             self.managerCollectionView.reloadData()
         }
     }

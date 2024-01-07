@@ -215,14 +215,6 @@ private extension MyToDoViewController {
             $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
         }
     }
-    
-    /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
-    func setCellStyle(cell: MyToDoCollectionViewCell, data: MyToDo, textColor: UIColor, isUserInteractionEnabled: Bool, buttonImg: UIImage) {
-        cell.myToDoData = data
-        cell.todoTitleLabel.textColor = textColor
-        cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
-        cell.checkButton.setImage(buttonImg, for: .normal)
-    }
 }
 
 // MARK: - Extension
@@ -278,10 +270,14 @@ extension MyToDoViewController: UICollectionViewDataSource{
         myToDoCell.delegate = self
         
         if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
-            self.setCellStyle(cell: myToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true, buttonImg: ImageLiterals.MyToDo.btnCheckBoxIncomplete)
+            myToDoCell.myToDoData = self.incompletedData[indexPath.row]
+            myToDoCell.textColor = UIColor.gray400
+            myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxIncomplete
                 myToDoCell.index = indexPath.row
         } else {
-            self.setCellStyle(cell: myToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false, buttonImg: ImageLiterals.MyToDo.btnCheckBoxComplete)
+            myToDoCell.myToDoData = self.completedData[indexPath.row]
+            myToDoCell.textColor = UIColor.gray300
+            myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxComplete
                 myToDoCell.index = indexPath.row
         }
         return myToDoCell
