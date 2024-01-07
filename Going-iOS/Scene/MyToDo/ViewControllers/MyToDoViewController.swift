@@ -35,6 +35,7 @@ class MyToDoViewController: UIViewController {
         case main
     }
     private var dataSource: UICollectionViewDiffableDataSource<Section, MyToDo>!
+    private var index: Int = 0
     var myToDoData: MyToDoData?
     var incompletedData: [MyToDo] = []
     var completedData: [MyToDo] = []
@@ -49,8 +50,6 @@ class MyToDoViewController: UIViewController {
         setDelegate()
         setData()
         registerCell()
-        setDiffableDataSource()
-        performQuery()
         setLayout()
         setStyle()
         self.didChangeValue(segment: self.myToDoHeaderView.segmentedControl)
@@ -73,26 +72,24 @@ class MyToDoViewController: UIViewController {
     
     @objc 
     func didChangeValue(segment: UISegmentedControl) {
-        self.performQuery()
+        loadData()
     }
     
-    @objc func checkButtonTapped(_ sender: UIButton) {
-        print("checkButtonTapped")
+    func checkButtonTapped(index: Int, image: UIImage) {
         var todo: MyToDo = MyToDo(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
-        if sender.imageView?.image == ImageLiterals.MyToDo.btnCheckBoxComplete {
-            todo = completedData[sender.tag]
+        if image == ImageLiterals.MyToDo.btnCheckBoxComplete {
+            todo = completedData[index]
             todo.isComplete = false
             incompletedData.append(todo)
-            completedData.remove(at: sender.tag)
-        } else {
-            todo = incompletedData[sender.tag]
+            completedData.remove(at: index)
+        } else if image == ImageLiterals.MyToDo.btnCheckBoxIncomplete {
+            todo = incompletedData[index]
             todo.isComplete = true
             completedData.append(todo)
-            incompletedData.remove(at: sender.tag)
+            incompletedData.remove(at: index)
         }
-        self.performQuery()
+        loadData()
     }
-    
 }
 
 // MARK: - Private method
@@ -164,6 +161,8 @@ private extension MyToDoViewController {
     
     func setDelegate() {
         self.scrollView.delegate = self
+        self.myToDoCollectionView.delegate = self
+        self.myToDoCollectionView.dataSource = self
     }
     
     func setCollectionView() -> UICollectionView {
@@ -188,7 +187,7 @@ private extension MyToDoViewController {
     
     func loadData() {
         // 데이터 로드 후에 호출되는 메서드 또는 클로저에서
-        performQuery()
+        self.myToDoCollectionView.reloadData()
         myToDoCollectionView.layoutIfNeeded()
         
         // Update the constraint based on the new content size
@@ -198,71 +197,12 @@ private extension MyToDoViewController {
         scrollView.contentSize = myToDoCollectionView.frame.size
     }
     
-    func performQuery() {
-        let myToDoHeaderIndex = self.myToDoHeaderView.segmentedControl.selectedSegmentIndex
-        let stickHeaderIndex = self.stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
-        var filteredData: [MyToDo] = []
-        print("perform \(self.incompletedData)")
-        print("perform \(self.completedData)")
-
-        if stickyMyToDoHeaderView.isHidden {
-            if (myToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1){
-                filteredData = self.incompletedData
-            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
-                filteredData = self.completedData
-            }else {
-                
-            }
-        }else {
-            if (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 0){
-                filteredData = self.incompletedData
-            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
-                filteredData = self.completedData
-            }else {
-            }
-        }
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Section, MyToDo>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(filteredData)
-        self.dataSource.apply(snapshot, animatingDifferences: true)
-    }
-    
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
     func setCellStyle(cell: MyToDoCollectionViewCell, data: MyToDo, textColor: UIColor, isUserInteractionEnabled: Bool, buttonImg: UIImage) {
         cell.myToDoData = data
         cell.todoTitleLabel.textColor = textColor
         cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
         cell.checkButton.setImage(buttonImg, for: .normal)
-    }
-    
-    func setDiffableDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource<Section, MyToDo>(collectionView: self.myToDoCollectionView) { (collectionView, indexPath, dj) -> UICollectionViewCell? in
-            guard let myToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyToDoCollectionViewCell.identifier, for: indexPath) as? MyToDoCollectionViewCell else { preconditionFailure() }
-            
-            let myToDoHeaderIndex = self.myToDoHeaderView.segmentedControl.selectedSegmentIndex
-            let stickHeaderIndex = self.stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
-
-            if self.stickyMyToDoHeaderView.isHidden {
-                if (myToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1){
-                    self.setCellStyle(cell: myToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true, buttonImg: ImageLiterals.MyToDo.btnCheckBoxIncomplete)
-                    myToDoCell.checkButton.addTarget(self, action: #selector(self.checkButtonTapped), for: .touchUpInside)
-                }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
-                    self.setCellStyle(cell: myToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false, buttonImg: ImageLiterals.MyToDo.btnCheckBoxComplete)
-                    myToDoCell.checkButton.addTarget(self, action: #selector(self.checkButtonTapped), for: .touchUpInside)
-                }else {}
-            }else {
-                if (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 0){
-                    self.setCellStyle(cell: myToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true, buttonImg: ImageLiterals.MyToDo.btnCheckBoxIncomplete)
-                    myToDoCell.checkButton.addTarget(self, action: #selector(self.checkButtonTapped), for: .touchUpInside)
-                }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
-                    self.setCellStyle(cell: myToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false, buttonImg: ImageLiterals.MyToDo.btnCheckBoxComplete)
-                    myToDoCell.checkButton.addTarget(self, action: #selector(self.checkButtonTapped), for: .touchUpInside)
-                }else {}
-            }
-            return myToDoCell
-        }
-        myToDoCollectionView.dataSource = self.dataSource
     }
 }
 
@@ -291,5 +231,67 @@ extension MyToDoViewController: UIScrollViewDelegate {
         }else {
             scrollView.backgroundColor = .white000
         }
+    }
+}
+
+extension MyToDoViewController: MyToDoCollectionViewDelegate {
+    func getButtonIndex(index: Int, image: UIImage) {
+        checkButtonTapped(index: index, image: image)
+    }
+
+}
+
+extension MyToDoViewController: UICollectionViewDelegate {}
+
+extension MyToDoViewController: UICollectionViewDataSource{
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let myToDoHeaderIndex = self.myToDoHeaderView.segmentedControl.selectedSegmentIndex
+        let stickHeaderIndex = self.stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
+        if self.stickyMyToDoHeaderView.isHidden {
+            if (myToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1){
+                self.loadData()
+                return self.incompletedData.count
+            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
+                self.loadData()
+                return self.completedData.count
+            }else { return 0}
+        }else {
+            if (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 0){
+                self.loadData()
+                return self.incompletedData.count
+            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
+                self.loadData()
+                return self.completedData.count
+            }else {return 0}
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let myToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyToDoCollectionViewCell.identifier, for: indexPath) as? MyToDoCollectionViewCell else {return UICollectionViewCell()}
+        myToDoCell.delegate = self
+
+        let myToDoHeaderIndex = self.myToDoHeaderView.segmentedControl.selectedSegmentIndex
+        let stickHeaderIndex = self.stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
+
+        if self.stickyMyToDoHeaderView.isHidden {
+            if (myToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1){
+                self.setCellStyle(cell: myToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true, buttonImg: ImageLiterals.MyToDo.btnCheckBoxIncomplete)
+                    myToDoCell.index = indexPath.row
+            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
+                self.setCellStyle(cell: myToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false, buttonImg: ImageLiterals.MyToDo.btnCheckBoxComplete)
+                    myToDoCell.index = indexPath.row
+            }else {}
+        }else {
+            if (myToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 0){
+                self.setCellStyle(cell: myToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true, buttonImg: ImageLiterals.MyToDo.btnCheckBoxIncomplete)
+                    myToDoCell.index = indexPath.row
+            }else if (myToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (myToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
+                self.setCellStyle(cell: myToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false, buttonImg: ImageLiterals.MyToDo.btnCheckBoxComplete)
+                    myToDoCell.index = indexPath.row
+            }else {}
+        }
+        return myToDoCell
     }
 }

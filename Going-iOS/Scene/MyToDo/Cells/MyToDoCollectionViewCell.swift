@@ -7,20 +7,31 @@
 
 import UIKit
 
+protocol MyToDoCollectionViewDelegate: AnyObject {
+    func getButtonIndex(index: Int, image: UIImage)
+}
+
 class MyToDoCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     static let identifier = "MyToDoCollectionViewCell"
+    weak var delegate: MyToDoCollectionViewDelegate?
     var manager: [String] = []
     // TODO: - 사용자 id 값 비교해서 담당자가 본인인지 확인
     var myToDoData: MyToDo? {
         didSet {
             guard let data = myToDoData else {return}
-            print("cell \(data)")
             self.todoTitleLabel.text = data.todoTitle
             self.deadlineLabel.text = data.deadline + "까지"
             self.manager = (data.manager[0] == "지민") && data.isPrivate ? ["나만보기"] : data.manager
             
+            self.managerCollectionView.reloadData()
+        }
+    }
+    var index: Int? {
+        didSet {
+            guard let index = index else {return}
+            self.index = index
             self.managerCollectionView.reloadData()
         }
     }
@@ -51,6 +62,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     lazy var checkButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.MyToDo.btnCheckBoxIncomplete, for: .normal)
+        btn.addTarget(self, action: #selector(checkButtonTap), for: .touchUpInside)
         return btn
     }()
     
@@ -68,6 +80,13 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc
+    func checkButtonTap() {
+        let index = self.index ?? 0
+        let image = self.checkButton.imageView?.image ?? UIImage()
+        self.delegate?.getButtonIndex(index: index, image: image)
     }
 }
 
@@ -169,7 +188,7 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
         attachment.image = image
         // 이미지와 라벨 수직 정렬 맞춰주기
         attachment.bounds = CGRect(x: 0, y: ScreenUtils.getHeight(-1), width: image.size.width, height: image.size.height)
-        var attachImg = NSAttributedString(attachment: attachment)
+        let attachImg = NSAttributedString(attachment: attachment)
         if data.isPrivate {
             managerCell.managerLabel.labelWithImg(composition: attachImg, string)
         }else {
@@ -185,19 +204,18 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
         }
         return managerCell
     }
-    
 }
 
 extension MyToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
 
-        print("manager size: \(self.manager[indexPath.row])")
+//        print("manager size: \(self.manager[indexPath.row])")
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
         layout.minimumLineSpacing = ScreenUtils.getWidth(4)
         
-        var stringLength = self.manager[indexPath.row] == "나만보기"
+        let stringLength = self.manager[indexPath.row] == "나만보기"
         ? self.manager[indexPath.row].size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
         : self.manager[indexPath.row].size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
         return CGSize(width: stringLength + ScreenUtils.getWidth(12), height: ScreenUtils.getHeight(20))
