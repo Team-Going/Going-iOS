@@ -84,12 +84,12 @@ extension TestResultView {
         }
         
         subTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(userTypeLabel.snp.bottom)
+            $0.top.equalTo(userTypeLabel.snp.bottom).offset(1)
             $0.centerX.equalToSuperview()
         }
         
         tagStackView.snp.makeConstraints {
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(8)
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(12)
             $0.centerX.equalToSuperview()
         }
         
@@ -109,5 +109,6 @@ extension TestResultView {
     
     func setStyle() {
         self.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
+        self.backgroundColor = .white000
     }
 }

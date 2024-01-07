@@ -55,7 +55,6 @@ final class UserTestResultViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
-        resultView.backgroundColor = .white
         
     }
     
@@ -73,6 +72,7 @@ private extension UserTestResultViewController {
     func setStyle() {
         contentView.backgroundColor = .blue
         view.backgroundColor = .white000
+        resultView.backgroundColor = .white
     }
     
     func setHierarchy() {

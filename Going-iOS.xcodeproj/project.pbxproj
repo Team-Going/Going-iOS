@@ -44,6 +44,7 @@
 		CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */; };
 		CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */; };
 		CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */; };
+		F430A9832B4AAEA900D482C4 /* CompleteProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -136,6 +137,7 @@
 		CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoData.swift; sourceTree = "<group>"; };
 		CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonView.swift; sourceTree = "<group>"; };
+		F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewController.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -348,6 +350,38 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		CA8CD69B2B47F5AC00CFDFBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CA8CD69C2B47F5BE00CFDFBF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		F430A9812B4AAE4D00D482C4 /* CompleteProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F430A9842B4ABFC200D482C4 /* ViewControllers */,
+			);
+			path = CompleteProfile;
+			sourceTree = "<group>";
+		};
+		F430A9842B4ABFC200D482C4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,14 +400,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		CA8CD69B2B47F5AC00CFDFBF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		F485D48B2B47CF15007317F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,28 +408,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CA8CD69C2B47F5BE00CFDFBF /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-        F4BA26F32B45597600975CC2 /* MakeProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F485D4902B47DDBE007317F4 /* ViewControllers */,
-			);
-			path = MakeProfile;
-			sourceTree = "<group>";
-		};
 		F485D4902B47DDBE007317F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F485D4902B47DDBE007317F4 /* ViewControllers */,
+			);
+			path = MakeProfile;
 			sourceTree = "<group>";
 		};
 		F4BA26F82B47197100975CC2 /* Utils */ = {
@@ -625,6 +643,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F430A9812B4AAE4D00D482C4 /* CompleteProfile */,
 				F4BEB4C72B482FBB0074B1B2 /* UserTestResult */,
 				9457F0492B485169009ACF25 /* StartTravel */,
 				CA8CD6982B47F57100CFDFBF /* ToDo */,
@@ -827,6 +846,7 @@
 				CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */,
 				946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */,
 				CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */,
+				F430A9832B4AAEA900D482C4 /* CompleteProfileViewController.swift in Sources */,
 				9457F0552B485A68009ACF25 /* TravelTestCollectionViewCell.swift in Sources */,
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
