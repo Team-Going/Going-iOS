@@ -41,7 +41,7 @@ class OurToDoCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         registerCell()
         setLayout()
         setStyle()
@@ -57,7 +57,7 @@ class OurToDoCollectionViewCell: UICollectionViewCell {
 
 private extension OurToDoCollectionViewCell {
     
-    func setHierachy() {
+    func setHierarchy() {
         contentView.addSubview(todoBackgroundView)
         todoBackgroundView.addSubviews(todoTitleLabel, managerCollectionView, deadlineLabel)
     }

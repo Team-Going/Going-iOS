@@ -36,7 +36,7 @@ enum ImageLiterals {
         static var ticketImage: UIImage { .load(named: "ticket_img_small")}
         static var larvaImage: UIImage { .load(named: "larva")}
     }
-  
+    
     enum OurToDo {
         static var btnBack: UIImage { .load(named: "btn_back") }
         static var ticketBox: UIImage { .load(named: "ticket_box") }
@@ -45,5 +45,15 @@ enum ImageLiterals {
         static var btnEnter: UIImage { .load(named: "btn_enter")}
         static var btnPlus: UIImage { .load(named: "btn_plus") }
         static var btnPlusOurToDo: UIImage { .load(named: "btn_plus_ourtodo") }
-    }    
+    }
+    
+    enum TravelTest {
+        static var indexImage: UIImage { .load(named: "round_background_image")}
+    }
+    
+    enum ToDo {
+        static var enabledDropdown: UIImage { .load(named: "enabled_ic_dropdown") }
+        static var disabledDropdown: UIImage { .load(named: "disabled_ic_dropdown") }
+    }
 }
+

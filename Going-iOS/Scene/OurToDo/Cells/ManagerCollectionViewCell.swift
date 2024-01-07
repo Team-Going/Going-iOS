@@ -34,7 +34,7 @@ class ManagerCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         setLayout()
     }
     
@@ -52,7 +52,7 @@ class ManagerCollectionViewCell: UICollectionViewCell {
 
 private extension ManagerCollectionViewCell {
     
-    func setHierachy() {
+    func setHierarchy() {
         contentView.addSubview(managerLabel)
     }
     

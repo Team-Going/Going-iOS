@@ -11,11 +11,6 @@ import SnapKit
 
 final class CreateTravelViewController: UIViewController {
     
-    // MARK: - Size
-        
-    private let absoluteHeight = UIScreen.main.bounds.height
-    private let absoluteWidth = UIScreen.main.bounds.width
-    
     // MARK: - Properties
     
     private weak var activeLabel: UILabel?
@@ -104,7 +99,7 @@ final class CreateTravelViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
-        setHierachy()
+        setHierarchy()
         setLayout()
         setGestureRecognizer()
         setProperty()
@@ -114,6 +109,10 @@ final class CreateTravelViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeKeyboardNotifications()
     }
     
     // MARK: - @objc Methods
@@ -155,12 +154,6 @@ final class CreateTravelViewController: UIViewController {
         }
     }
     
-    /// 뷰 탭 시 키보드 내리는 메서드
-    @objc
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
     @objc
     func createButtonTapped() {
         let vc = CreatingSuccessViewController()
@@ -177,7 +170,7 @@ private extension CreateTravelViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         view.addSubviews(navigationBar,
                          travelNameLabel,
                          travelDateLabel,
@@ -194,7 +187,7 @@ private extension CreateTravelViewController {
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(absoluteHeight / 812 * 50)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
         travelNameLabel.snp.makeConstraints {
@@ -205,8 +198,8 @@ private extension CreateTravelViewController {
         travelNameTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(travelNameLabel.snp.bottom).offset(8)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
-            $0.height.equalTo(absoluteHeight / 812 * 48)
+            $0.width.equalTo(ScreenUtils.getWidth(327))
+            $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         
         warningLabel.snp.makeConstraints {
@@ -230,18 +223,18 @@ private extension CreateTravelViewController {
         }
         
         startDateLabel.snp.makeConstraints {
-            $0.height.equalTo(absoluteHeight / 812 * 48)
-            $0.width.equalTo(absoluteWidth / 375 * 154)
+            $0.height.equalTo(ScreenUtils.getHeight(48))
+            $0.width.equalTo(ScreenUtils.getWidth(154))
         }
         
         endDateLabel.snp.makeConstraints {
-            $0.height.equalTo(absoluteHeight / 812 * 48)
-            $0.width.equalTo(absoluteWidth / 375 * 154)
+            $0.height.equalTo(ScreenUtils.getHeight(48))
+            $0.width.equalTo(ScreenUtils.getWidth(154))
         }
         
         createTravelButton.snp.makeConstraints {
-            $0.height.equalTo(absoluteHeight / 812 * 50)
-            $0.width.equalTo(absoluteWidth / 375 * 327)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
             $0.centerX.equalToSuperview()
         }
@@ -292,10 +285,12 @@ private extension CreateTravelViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(CreateTravelViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+    // 노티피케이션을 제거하는 메서드
+    func removeKeyboardNotifications(){
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - Validation Methods

@@ -4,7 +4,7 @@ final class TripMiddleView: UIView {
     
     // MARK: - UI Property
     
-    private var ticketBoxImgView: UIImageView = {
+    private let ticketBoxImgView: UIImageView = {
         let imgView = UIImageView()
         imgView.image = ImageLiterals.OurToDo.ticketBox
         imgView.isUserInteractionEnabled = true
@@ -21,15 +21,15 @@ final class TripMiddleView: UIView {
         progressBar.layer.cornerRadius = 6
         return progressBar
     }()
-    private var tripFriendsContainer: UIView = UIView()
+    private let tripFriendsContainer: UIView = UIView()
     private lazy var tripFriendsLabel: UILabel = {setLabel(text: "여행 친구들", textAlignment: .left)}()
-    private var tripFriendsBtn: UIButton = {
+    private lazy var tripFriendsBtn: UIButton = {
         let btn = UIButton()
         btn.addTarget(self, action: #selector(pushToInquiryFriendsView), for: .touchUpInside)
         return btn
     }()
     private lazy var tripFriendsCollectionView: UICollectionView = {setCollectionView()}()
-    private var addButton: UIButton = {
+    private lazy var addButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .gray50
         btn.layer.borderWidth = 0.5
@@ -50,8 +50,6 @@ final class TripMiddleView: UIView {
     
     // MARK: - Property
     
-    let absoluteWidth = UIScreen.main.bounds.width / 375
-    let absoluteHeight = UIScreen.main.bounds.height / 812
     var friendProfile: [Friend] = []
     
     // MARK: - Life Cycle
@@ -59,7 +57,7 @@ final class TripMiddleView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setHierachy()
+        setHierarchy()
         registerCell()
         setLayout()
         setStyle()
@@ -97,7 +95,7 @@ final class TripMiddleView: UIView {
 
 private extension TripMiddleView {
 
-    func setHierachy() {
+    func setHierarchy() {
         self.addSubview(ticketBoxImgView)
         ticketBoxImgView.addSubviews(tripProgressLabel, percentageLabel, tripProgressBar, tripFriendsContainer, tripFriendsCollectionView, gradientView, addStackView)
         tripFriendsContainer.addSubviews(tripFriendsLabel, tripFriendsBtn)
@@ -106,32 +104,32 @@ private extension TripMiddleView {
 
     func setLayout() {
         ticketBoxImgView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 25)
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(25))
             $0.top.bottom.equalToSuperview()
         }
         tripProgressLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(absoluteHeight * 20)
-            $0.leading.equalToSuperview().inset(absoluteWidth * 16)
-            $0.width.equalTo(absoluteWidth * 100)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(20))
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.width.equalTo(ScreenUtils.getWidth(100))
         }
         percentageLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(absoluteHeight * 20)
-            $0.trailing.equalToSuperview().inset(absoluteWidth * 16)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(20))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
         }
         tripProgressBar.snp.makeConstraints{
-            $0.top.equalTo(tripProgressLabel.snp.bottom).offset(absoluteHeight * 12)
-            $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 16)
-            $0.height.equalTo(absoluteHeight * 10)
+            $0.top.equalTo(tripProgressLabel.snp.bottom).offset(ScreenUtils.getHeight(12))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.height.equalTo(ScreenUtils.getHeight(10))
         }
         tripFriendsContainer.snp.makeConstraints{
-            $0.top.equalTo(tripProgressBar.snp.bottom).offset(absoluteHeight * 52)
-            $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 16)
-            $0.height.equalTo(absoluteHeight * 23)
+            $0.top.equalTo(tripProgressBar.snp.bottom).offset(ScreenUtils.getHeight(52))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.height.equalTo(ScreenUtils.getHeight(23))
         }
         tripFriendsLabel.snp.makeConstraints{
             $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview()
-            $0.width.equalTo(absoluteWidth * 70)
+            $0.width.equalTo(ScreenUtils.getWidth(70))
         }
         tripFriendsBtn.snp.makeConstraints{
             $0.centerY.equalToSuperview()
@@ -139,28 +137,28 @@ private extension TripMiddleView {
         }
         
         tripFriendsCollectionView.snp.makeConstraints{
-            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(absoluteHeight * 12)
-            $0.leading.equalToSuperview().inset(absoluteWidth * 16)
-            $0.trailing.equalToSuperview().inset(absoluteWidth * 64)
-            $0.height.equalTo(absoluteHeight * 67)
+            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(ScreenUtils.getHeight(12))
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(64))
+            $0.height.equalTo(ScreenUtils.getHeight(67))
         }
         
         addStackView.snp.makeConstraints{
-            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(absoluteHeight * 12)
-            $0.trailing.equalToSuperview().inset(absoluteWidth * 16)
-            $0.width.equalTo(absoluteHeight * 48)
-            $0.height.equalTo(absoluteHeight * 67)
+            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(ScreenUtils.getHeight(12))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.width.equalTo(ScreenUtils.getHeight(48))
+            $0.height.equalTo(ScreenUtils.getHeight(67))
         }
         
         gradientView.snp.makeConstraints{
-            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(absoluteHeight * 12)
+            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(ScreenUtils.getHeight(12))
             $0.trailing.equalTo(addStackView.snp.leading)
-            $0.width.equalTo(absoluteWidth * 40)
-            $0.height.equalTo(absoluteHeight * 67)
+            $0.width.equalTo(ScreenUtils.getWidth(49))
+            $0.height.equalTo(ScreenUtils.getHeight(67))
         }
         
         addButton.snp.makeConstraints{
-            $0.size.equalTo(absoluteHeight * 48)
+            $0.size.equalTo(ScreenUtils.getHeight(48))
         }
     }
 
@@ -168,7 +166,7 @@ private extension TripMiddleView {
         self.backgroundColor = UIColor.gray50
         tripFriendsContainer.backgroundColor = UIColor.white000
         tripFriendsBtn.setImage(ImageLiterals.OurToDo.btnEnter, for: .normal)
-        addButton.layer.cornerRadius = absoluteHeight * 23.5
+        addButton.layer.cornerRadius = ScreenUtils.getHeight(23.5)
     }
     
     func setLabel(text: String? = "", font: UIFont? = UIFont.pretendard(.body2_medi), textColor: UIColor? = UIColor.gray700, textAlignment: NSTextAlignment) -> UILabel {
@@ -196,7 +194,7 @@ private extension TripMiddleView {
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: absoluteHeight * 48 , height: absoluteHeight * 67)
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getHeight(48) , height: ScreenUtils.getHeight(67))
         return flowLayout
     }
     

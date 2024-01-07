@@ -26,7 +26,7 @@ final class CreateNavigationBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         setLayout()
         setStyle()
     }
@@ -46,7 +46,7 @@ final class CreateNavigationBar: UIView {
 
 private extension CreateNavigationBar {
     
-    func setHierachy() {
+    func setHierarchy() {
         self.addSubview(navigationBarView)
         navigationBarView.addSubviews(backButton, navigationTitleLabel, rightItem)
     }
