@@ -44,6 +44,7 @@
 		CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */; };
 		CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */; };
 		CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */; };
+		CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -136,6 +137,7 @@
 		CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoData.swift; sourceTree = "<group>"; };
 		CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonView.swift; sourceTree = "<group>"; };
+		CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoViewController.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -348,6 +350,38 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		CA8CD69B2B47F5AC00CFDFBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CA8CD69C2B47F5BE00CFDFBF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		CADA024F2B4AC701001FCE89 /* MyToDo */ = {
+			isa = PBXGroup;
+			children = (
+				CADA02512B4AC759001FCE89 /* ViewControllers */,
+			);
+			path = MyToDo;
+			sourceTree = "<group>";
+		};
+		CADA02512B4AC759001FCE89 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,14 +400,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		CA8CD69B2B47F5AC00CFDFBF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		F485D48B2B47CF15007317F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,28 +408,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CA8CD69C2B47F5BE00CFDFBF /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-        F4BA26F32B45597600975CC2 /* MakeProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F485D4902B47DDBE007317F4 /* ViewControllers */,
-			);
-			path = MakeProfile;
-			sourceTree = "<group>";
-		};
 		F485D4902B47DDBE007317F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F485D4902B47DDBE007317F4 /* ViewControllers */,
+			);
+			path = MakeProfile;
 			sourceTree = "<group>";
 		};
 		F4BA26F82B47197100975CC2 /* Utils */ = {
@@ -625,6 +643,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CADA024F2B4AC701001FCE89 /* MyToDo */,
 				F4BEB4C72B482FBB0074B1B2 /* UserTestResult */,
 				9457F0492B485169009ACF25 /* StartTravel */,
 				CA8CD6982B47F57100CFDFBF /* ToDo */,
@@ -832,6 +851,7 @@
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
 				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
+				CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
