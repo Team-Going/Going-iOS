@@ -55,5 +55,10 @@ enum ImageLiterals {
         static var enabledDropdown: UIImage { .load(named: "enabled_ic_dropdown") }
         static var disabledDropdown: UIImage { .load(named: "disabled_ic_dropdown") }
     }
+    
+    enum DashBoard {
+        static var btnSetting: UIImage { .load(named: "btn_setting") }
+        static var btnSave: UIImage { .load(named: "btn_save") }
+        static var btnProfile: UIImage { .load(named: "btn_profile") }
+    }
 }
-

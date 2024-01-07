@@ -31,4 +31,13 @@ enum StringLiterals {
         static let inviteCodeTitle = "초대코드"
         static let placeHolder = "초대코드를 입력해주세요."
     }
+    
+    enum CreateTravel {
+        static let namePlaceHolder = "여행 이름을 입력해주세요."
+        static let warning = "여행 이름을 입력해주세요."
+    }
+    
+    enum StartTravel {
+        static let startTravelTitle = "여행을 시작해보세요."
+    }
 }

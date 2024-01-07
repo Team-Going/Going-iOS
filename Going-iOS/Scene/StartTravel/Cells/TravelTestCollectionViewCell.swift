@@ -18,13 +18,11 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     weak var delegate: TravelTestCollectionViewCellDelegate?
-    
-    private let test = TravelTestQuestionStruct.travelTestDummy
-    
+        
     var travelTestData: TravelTestQuestionStruct? {
         didSet {
-            guard let data = travelTestData else {return}
-            self.questionIndexLabel.text = "\(data.questionIndex)"
+            guard let data = travelTestData else { return }
+            self.questionIndexLabel.text = "0\(data.questionIndex)"
             self.questionLabel.text = data.questionContent
             self.leftOptionLabel.text = data.optionContent.leftOption
             self.middleOptionLabel.text = data.optionContent.middleOption
@@ -158,20 +156,5 @@ private extension TravelTestCollectionViewCell {
                 $0.height.equalTo(ScreenUtils.getHeight(16))
             }
         }
-    }
-}
-
-// MARK: - Extension
-
-extension TravelTestCollectionViewCell {
-    
-    // MARK: - Bind Data Method
-    
-    func bindData(data: TravelTestQuestionStruct) {
-        self.questionIndexLabel.text = "\(data.questionIndex)"
-        self.questionLabel.text = data.questionContent
-        self.leftOptionLabel.text = data.optionContent.leftOption
-        self.middleOptionLabel.text = data.optionContent.middleOption
-        self.rightOptionLabel.text = data.optionContent.rightOption
     }
 }
