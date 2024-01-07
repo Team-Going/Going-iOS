@@ -320,7 +320,7 @@
 				CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>"
+			sourceTree = "<group>";
 		};
 		F485D48B2B47CF15007317F4 /* Models */ = {
 			isa = PBXGroup;
@@ -338,20 +338,20 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+        F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F485D4902B47DDBE007317F4 /* ViewControllers */,
+			);
+			path = MakeProfile;
+			sourceTree = "<group>";
+		};
 		F485D4902B47DDBE007317F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F485D4902B47DDBE007317F4 /* ViewControllers */,
-			);
-			path = MakeProfile;
 			sourceTree = "<group>";
 		};
 		F4BA26F82B47197100975CC2 /* Utils */ = {
