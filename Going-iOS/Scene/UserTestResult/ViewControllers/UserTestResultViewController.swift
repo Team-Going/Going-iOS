@@ -40,15 +40,6 @@ final class UserTestResultViewController: UIViewController {
         return button
     }()
     
-    private lazy var backToTestButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("다시 해볼래요", for: .normal)
-        button.titleLabel?.font = .pretendard(.detail2_regular)
-        button.setTitleColor(.gray300, for: .normal)
-        button.setUnderline()
-        return button
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,7 +67,7 @@ private extension UserTestResultViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(testResultScrollView, nextButton, backToTestButton, gradientView)
+        view.addSubviews(testResultScrollView, nextButton, gradientView)
         testResultScrollView.addSubviews(contentView)
         contentView.addSubviews(resultImageView, resultView)
     }
@@ -93,11 +84,6 @@ private extension UserTestResultViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(32)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(ScreenUtils.getHeight(50))
-        }
-        
-        backToTestButton.snp.makeConstraints {
-            $0.top.equalTo(nextButton.snp.bottom).offset(9)
-            $0.centerX.equalTo(nextButton)
         }
         
         gradientView.snp.makeConstraints {

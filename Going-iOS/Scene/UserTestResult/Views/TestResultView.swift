@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class TestResultView: UIView {
-
+    
     private let nameLabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray600)
     private let userTypeLabel = DOOLabel(font: .pretendard(.head1), color: .red500)
     private let subTitleLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray300)
@@ -37,7 +37,18 @@ final class TestResultView: UIView {
     private let firstTickeView = TestResultTicketView()
     private let secondTickeView = TestResultTicketView()
     private let thirdTickeView = TestResultTicketView()
-
+    
+    private lazy var backToTestButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("다시 해볼래요", for: .normal)
+        button.titleLabel?.font = .pretendard(.detail2_regular)
+        button.setTitleColor(.gray300, for: .normal)
+        button.setUnderline()
+        return button
+    }()
+    
+    private let whiteView = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         nameLabel.text = "곽성준은"
@@ -67,7 +78,7 @@ extension TestResultView {
     }
     
     func setHierarchy() {
-        self.addSubviews(nameLabel, userTypeLabel, subTitleLabel, tagStackView, firstTickeView, ticketStackView)
+        self.addSubviews(nameLabel, userTypeLabel, subTitleLabel, tagStackView, firstTickeView, ticketStackView, backToTestButton, whiteView)
         ticketStackView.addArrangedSubviews(firstTickeView, secondTickeView, thirdTickeView)
         tagStackView.addArrangedSubviews(firstTagLabel, secondTagLabel, thirdTagLabel)
     }
@@ -96,10 +107,23 @@ extension TestResultView {
         ticketStackView.snp.makeConstraints {
             $0.top.equalTo(tagStackView.snp.bottom).offset(28)
             $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(backToTestButton.snp.top).offset(-12)
         }
         
+        backToTestButton.snp.makeConstraints {
+            $0.trailing.equalTo(ticketStackView.snp.trailing)
+            $0.width.equalTo(ScreenUtils.getWidth(66))
+            $0.height.equalTo(ScreenUtils.getHeight(18))
+            $0.bottom.equalTo(whiteView.snp.top)
+        }
         
+        whiteView.snp.makeConstraints {
+            $0.top.equalTo(backToTestButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(30))
+            $0.bottom.equalToSuperview()
+            
+        }
         firstTagLabel.snp.makeConstraints {
             $0.width.equalTo(ScreenUtils.getWidth(55))
             $0.height.equalTo(ScreenUtils.getHeight(20))
@@ -110,5 +134,6 @@ extension TestResultView {
     func setStyle() {
         self.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         self.backgroundColor = .white000
+        whiteView.backgroundColor = .white000
     }
 }
