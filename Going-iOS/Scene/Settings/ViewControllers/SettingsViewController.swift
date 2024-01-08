@@ -23,11 +23,12 @@ final class SettingsViewController: UIViewController {
         return nav
     }()
     
-    private let resignButton: UIButton = {
+    private lazy var resignButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("회원탈퇴", for: .normal)
         btn.titleLabel?.textColor = .gray300
         btn.setImage(ImageLiterals.Settings.btnResign, for: .normal)
+        btn.addTarget(self, action: #selector(resignButtonTapped), for: .touchUpInside)
         btn.setUnderline()
         return btn
     }()
@@ -87,6 +88,13 @@ private extension SettingsViewController {
     
     func registerCell() {
         settingsCollectionView.register(SettingsCollectionViewCell.self, forCellWithReuseIdentifier: SettingsCollectionViewCell.cellIdentifier)
+    }
+    
+    // MARK: - @objc Methods
+    
+    @objc
+    func resignButtonTapped() {
+        print("tapped")
     }
 }
 
