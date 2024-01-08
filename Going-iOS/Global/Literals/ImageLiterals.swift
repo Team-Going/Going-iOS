@@ -64,5 +64,6 @@ enum ImageLiterals {
     
     enum Settings {
         static var btnResign: UIImage { .load(named: "ic_unsubscribe") }
+        static var btnEnterLarge: UIImage { .load(named: "btn_enter_large")}
     }
 }
