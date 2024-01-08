@@ -24,7 +24,6 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             self.todoTitleLabel.text = data.todoTitle
             self.deadlineLabel.text = data.deadline + "까지"
             self.manager = (data.manager[0] == "지민") && data.isPrivate ? ["나만보기"] : data.manager
-//            self.managerCollectionView.reloadData()
         }
     }
     var index: Int? {
@@ -124,7 +123,6 @@ private extension MyToDoCollectionViewCell {
         todoTitleLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.leading.equalTo(checkButton.snp.trailing).offset(ScreenUtils.getWidth(12))
-//            $0.height.equalTo(ScreenUtils.getHeight(20))
         }
         managerCollectionView.snp.makeConstraints{
             $0.leading.equalTo(checkButton.snp.trailing).offset(ScreenUtils.getWidth(12))
@@ -188,7 +186,6 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
-//        print("our \(self.manager)")
         let data = self.myToDoData ?? MyToDo(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
         
         // 나만보기인 경우 이미지 세팅
@@ -222,7 +219,6 @@ extension MyToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
 
-//        print("manager size: \(self.manager[indexPath.row])")
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
         layout.minimumLineSpacing = ScreenUtils.getWidth(4)
