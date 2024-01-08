@@ -56,6 +56,20 @@ enum ImageLiterals {
         static var disabledDropdown: UIImage { .load(named: "disabled_ic_dropdown") }
     }
     
+    enum MyToDo {
+        static var btnCheckBoxIncomplete: UIImage {
+            .load(named: "btn_checkbox_incomplete")
+        }
+        static var btnCheckBoxComplete: UIImage {
+            .load(named: "btn_checkbox_complete")
+        }
+        static var icLockDark: UIImage {
+            .load(named: "ic_lock_dark")
+        }
+        static var icLockLight: UIImage {
+            .load(named: "ic_lock_light")
+        }
+    }
     enum DashBoard {
         static var btnSetting: UIImage { .load(named: "btn_setting") }
         static var btnSave: UIImage { .load(named: "btn_save") }
