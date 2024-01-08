@@ -42,4 +42,14 @@ extension UIView {
         layer.addSublayer(gradient)
     }
     
+    //imageView를 이미지로 바꿔줌
+    func convertUIImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+    
+    
+    
 }

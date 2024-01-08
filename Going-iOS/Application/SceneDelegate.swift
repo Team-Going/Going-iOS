@@ -6,8 +6,11 @@
 //
 
 import UIKit
-import KakaoSDKAuth
+
 import AuthenticationServices
+import KakaoSDKAuth
+import Photos
+
 
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -21,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 2.
         self.window = UIWindow(windowScene: windowScene)
         // 3.
-        let navigationController = UINavigationController(rootViewController: MyToDoViewController())
+        let navigationController = UINavigationController(rootViewController: SplashViewController())
         self.window?.rootViewController = navigationController
         // 4.
         self.window?.makeKeyAndVisible()
@@ -51,10 +54,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 case .notFound:
                    // The Apple ID credential is either revoked or was not found, so show the sign-in UI.
                    print("notFound")
-                       
                 default:
                     break
             }
         }
     }
+    
+    // 사진 라이브러리 권한 확인 및 처리
+//       private func checkPhotoLibraryPermission() {
+//           let status = PHPhotoLibrary.authorizationStatus()
+//
+//           switch status {
+//           case .authorized:
+//               // 이미 권한이 허용된 상태
+//               print("Photo Library access is authorized.")
+//           case .denied, .restricted:
+//               // 권한이 거부되거나 제한된 상태
+//               print("Photo Library access is denied or restricted.")
+//               // 여기에서 권한을 변경하는 액션을 수행할 수 있음
+//           case .notDetermined:
+//               // 권한이 아직 요청되지 않은 상태
+//               PHPhotoLibrary.requestAuthorization { (newStatus) in
+//                   if newStatus == .authorized {
+//                       print("Photo Library access is granted.")
+//                   } else {
+//                       print("Photo Library access is still not authorized.")
+//                       // 여기에서 권한을 변경하는 액션을 수행할 수 있음
+//                   }
+//               }
+//           case .limited:
+//               break
+//           @unknown default:
+//               break
+//           }
+//       }
+
 }

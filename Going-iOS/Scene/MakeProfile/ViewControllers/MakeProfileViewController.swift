@@ -17,10 +17,9 @@ struct UserProfileData {
 
 final class MakeProfileViewController: UIViewController {
     
-    private let nameLabel = DOOLabel(font: .pretendard(.body2_bold), 
+    private let nameLabel = DOOLabel(font: .pretendard(.body2_bold),
                                      color: .gray700,
                                      text: "이름")
-  
     
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
@@ -104,53 +103,16 @@ final class MakeProfileViewController: UIViewController {
         setLayout()
         setDelegate()
         updateNextButtonState()
+        setNotification()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
     
-    @objc
-    private func nameTextFieldDidChange() {
-        guard let text = nameTextField.text else { return }
-        nameTextFieldCount = text.count
-        nameTextFieldCountLabel.text = "\(nameTextFieldCount) / 3"
-        nameTextFieldBlankCheck()
-        updateNextButtonState()
-        
+    override func viewWillDisappear(_ animated: Bool) {
+        removeKeyboardNotifications()
     }
-    
-    @objc
-    private func descTextFieldDidChange() {
-        guard let text = descTextField.text else { return }
-        descTextFieldCount = text.count
-        descTextFieldCountLabel.text = "\(descTextFieldCount) / 15"
-        updateNextButtonState()
-        
-    }
-    
-    @objc
-    private func nextButtonTapped() {
-        
-        //구조체에 넣어서 서버에 넘겨주기
-        var userData = UserProfileData(name: "", description: "")
-        
-        if let nameText = nameTextField.text {
-            userData.name = nameText
-        }
-        
-        if let descText = descTextField.text {
-            userData.description = descText
-        }
-        
-        // userData를 출력 또는 다음 단계로 전달하는 등의 동작 수행
-        print(userData.name)
-        print(userData.description)
-        //        let nextVC = LoginViewController()
-        //        self.navigationController?.pushViewController(nextVC, animated: true)
-        
-    }
-    
 }
 
 private extension MakeProfileViewController {
@@ -255,6 +217,82 @@ private extension MakeProfileViewController {
             self.nameTextFieldCountLabel.textColor = .gray400
             nameWarningLabel.isHidden = true
         }
+    }
+    
+    func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            // 키보드 높이
+            let keyboardHeight = keyboardFrame.height
+            
+            // Bottom Safe Area 높이
+            let safeAreaBottomInset = view.safeAreaInsets.bottom
+            
+            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
+            UIView.animate(withDuration: 0.3) {
+                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
+            }
+        }
+    }
+    
+    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.nextButton.transform = .identity
+        }
+    }
+    
+    @objc
+    func nameTextFieldDidChange() {
+        guard let text = nameTextField.text else { return }
+        nameTextFieldCount = text.count
+        nameTextFieldCountLabel.text = "\(nameTextFieldCount) / 3"
+        nameTextFieldBlankCheck()
+        updateNextButtonState()
+    }
+    
+    func removeKeyboardNotifications(){
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc
+    func descTextFieldDidChange() {
+        guard let text = descTextField.text else { return }
+        descTextFieldCount = text.count
+        descTextFieldCountLabel.text = "\(descTextFieldCount) / 15"
+        updateNextButtonState()
+        
+    }
+    
+    @objc
+    func nextButtonTapped() {
+        
+        //구조체에 넣어서 서버에 넘겨주기
+        var userData = UserProfileData(name: "", description: "")
+        
+        if let nameText = nameTextField.text {
+            userData.name = nameText
+        }
+        
+        if let descText = descTextField.text {
+            userData.description = descText
+        }
+        
+        // userData를 출력 또는 다음 단계로 전달하는 등의 동작 수행
+        print(userData.name)
+        print(userData.description)
+        //        let nextVC = LoginViewController()
+        //        self.navigationController?.pushViewController(nextVC, animated: true)
+        
     }
 }
 

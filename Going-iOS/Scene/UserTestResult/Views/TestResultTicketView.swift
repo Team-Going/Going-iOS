@@ -58,10 +58,12 @@ final class TestResultTicketView: UIView {
 private extension TestResultTicketView {
     
     func makeLabel() -> DOOLabel {
-        let label = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700)
+        let label = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700, numberOfLine: 2)
+        
         let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
         imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
-        label.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: "  꼼꼼하고 부지런해 맡은 일에서 실수가 적어요"))
+        label.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: "  꼼꼼하고 부지런해 맡은 일에서 실수가 적어요ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"))
+        
         return label
     }
     
@@ -89,8 +91,8 @@ private extension TestResultTicketView {
         }
         
         descStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(17)
-            $0.width.equalTo(ScreenUtils.getWidth(216))
+            $0.centerY.equalTo(vertiLineImageView)
+            $0.width.equalTo(ScreenUtils.getWidth(213))
         }
     }
     

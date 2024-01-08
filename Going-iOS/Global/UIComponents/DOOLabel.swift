@@ -21,6 +21,9 @@ final class DOOLabel: UILabel {
         self.text = text
         self.numberOfLines = numberOfLine
         self.textAlignment = alignment
+        
+        //글자단위로 줄바꿈
+        self.lineBreakMode = .byCharWrapping
     }
     
     required init?(coder: NSCoder) {
