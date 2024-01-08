@@ -54,4 +54,14 @@ extension UITextField {
             self.layer.cornerRadius = 0
         }
     }
+    
+    func setPlaceholderColor(_ placeholderColor: UIColor) {
+        attributedPlaceholder = NSAttributedString(
+            string: placeholder ?? "",
+            attributes: [
+                .foregroundColor: placeholderColor,
+                .font: font
+            ].compactMapValues { $0 }
+        )
+    }
  }

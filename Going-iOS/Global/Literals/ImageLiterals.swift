@@ -70,5 +70,9 @@ enum ImageLiterals {
             .load(named: "ic_lock_light")
         }
     }
+    enum DashBoard {
+        static var btnSetting: UIImage { .load(named: "btn_setting") }
+        static var btnSave: UIImage { .load(named: "btn_save") }
+        static var btnProfile: UIImage { .load(named: "btn_profile") }
+    }
 }
-

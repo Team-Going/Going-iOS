@@ -20,31 +20,20 @@ final class JoinTravelViewController: UIViewController {
         nav.titleLabel.text = "여행 입장하기"
         return nav
     }()
-    
-    private let codeTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = StringLiterals.JoinTravel.inviteCodeTitle
-        label.font = .pretendard(.body2_bold)
-        label.textColor = .gray700
-        return label
-    }()
+
+    private let codeTitleLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.JoinTravel.inviteCodeTitle)
     
     private let codeTextField: UITextField = {
         let field = UITextField()
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, forBorderColor: .gray200, forCornerRadius: 6)
+        field.setPlaceholderColor(.gray700)
         field.keyboardType = .numberPad
         return field
     }()
     
-    private let characterCountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0/6"
-        label.font = .pretendard(.detail2_regular)
-        label.textColor = .gray200
-        return label
-    }()
+    private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/6")
     
     private lazy var nextButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")

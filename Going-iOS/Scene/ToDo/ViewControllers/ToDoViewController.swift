@@ -22,6 +22,7 @@ final class ToDoViewController: UIViewController {
         let tf = UITextField()
         tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
         tf.font = .pretendard(.body3_medi)
+        tf.setPlaceholderColor(.gray700)
         tf.textColor = .gray700
         tf.backgroundColor = .white000
         tf.setLeftPadding(amount: 12)

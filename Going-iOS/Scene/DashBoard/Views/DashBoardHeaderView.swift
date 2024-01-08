@@ -1,17 +1,22 @@
+//
+//  DashBoardHeaderView.swift
+//  Going-iOS
+//
+//  Created by 윤영서 on 1/7/24.
+//
+
 import UIKit
 
-final class OurToDoHeaderView: UIView {
+final class DashBoardHeaderView: UIView {
     
-    //MARK: - Property
+    // MARK: - Properties
     
-    static let identifier = "OurToDoHeaderView"
-    let absoluteWidth = UIScreen.main.bounds.width / 375
-    let absoluteHeight = UIScreen.main.bounds.height / 812
+    static let identifier = "DashBoardHeaderView"
     
-    //MARK: - UI Property
+    // MARK: - UI Properties
     
     let segmentedControl: UnderlineSegmentedControlView = {
-        let segmentedControl = UnderlineSegmentedControlView(items: ["미완료 todo", "완료 todo"])
+        let segmentedControl = UnderlineSegmentedControlView(items: ["진행중인 여행", "완료된 여행"])
         segmentedControl.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.gray200,
             .font: UIFont.pretendard(.body2_bold)], for: .normal)
@@ -22,9 +27,10 @@ final class OurToDoHeaderView: UIView {
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
+    
     private let underlineView: UIView = UIView()
 
-    //MARK: - LifeCycle
+    // MARK: - LifeCycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,9 +45,9 @@ final class OurToDoHeaderView: UIView {
     }
 }
 
-//MARK: - private method
+// MARK: - Private Methods
 
-private extension OurToDoHeaderView {
+private extension DashBoardHeaderView {
     
     func setHierarchy() {
         self.addSubviews(underlineView, segmentedControl)
@@ -50,22 +56,21 @@ private extension OurToDoHeaderView {
     func setLayout() {
         underlineView.snp.makeConstraints{
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(absoluteHeight * 1)
+            $0.height.equalTo(1)
         }
+        
         segmentedControl.snp.makeConstraints{
-            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(underlineView)
-//            $0.width.equalTo(absolurteWidth * 147)
-            $0.height.equalTo(absoluteHeight * 49)
+            $0.width.equalTo(ScreenUtils.getWidth(147))
+            $0.height.equalTo(ScreenUtils.getHeight(49))
         }
     }
     
     func setStyle() {
         self.backgroundColor = .white000
         underlineView.backgroundColor = .gray200
-        segmentedControl.setWidth(absoluteWidth * 375 / 2, forSegmentAt: 0)
-        segmentedControl.setWidth(absoluteWidth * 375 / 2, forSegmentAt: 1)
+        segmentedControl.setWidth(ScreenUtils.getWidth(375) / 2, forSegmentAt: 0)
+        segmentedControl.setWidth(ScreenUtils.getWidth(375) / 2, forSegmentAt: 1)
     }
 }
-
