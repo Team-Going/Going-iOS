@@ -9,9 +9,11 @@ import UIKit
 
 import SnapKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     
     // MARK: - Properties
+    
+    private let settingsItem: [SettingsItem] = SettingsItem.settingsDummy
     
     // MARK: - UI Properties
     
@@ -33,6 +35,7 @@ class SettingsViewController: UIViewController {
     private let settingsCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.backgroundColor = .clear
+        view.isScrollEnabled = false
         return view
     }()
     
@@ -90,12 +93,12 @@ private extension SettingsViewController {
 
 extension SettingsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return settingsItem.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = settingsCollectionView.dequeueReusableCell(withReuseIdentifier: SettingsCollectionViewCell.cellIdentifier, for: indexPath) as? SettingsCollectionViewCell else { return UICollectionViewCell() }
-        
+        cell.settingsData = settingsItem[indexPath.row]
         return cell
     }
 }
