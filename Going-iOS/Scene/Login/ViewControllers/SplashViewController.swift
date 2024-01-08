@@ -11,6 +11,9 @@ import SnapKit
 
 final class SplashViewController: UIViewController {
     
+    let testUserDefault = UserDefaults.standard.bool(forKey: "ImageSave")
+    
+    
     private enum Size {
         static let logoHeight: CGFloat = 66 / 194
     }
