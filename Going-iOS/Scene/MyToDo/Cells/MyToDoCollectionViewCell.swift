@@ -172,6 +172,18 @@ private extension MyToDoCollectionViewCell {
     func registerCell() {
         self.managerCollectionView.register(ManagerCollectionViewCell.self, forCellWithReuseIdentifier: ManagerCollectionViewCell.identifier)
     }
+    
+    func setLabelWithImage(label: UILabel, string: String, isComplete: Bool) {
+        let string = NSAttributedString(string: " \(string)" )
+        let attachment = NSTextAttachment()
+        // 완료/미완료에 따라 자물쇠 이미지 세팅
+        let image = isComplete ? ImageLiterals.MyToDo.icLockLight : ImageLiterals.MyToDo.icLockDark
+        attachment.image = image
+        // 이미지와 라벨 수직 정렬 맞춰주기
+        attachment.bounds = CGRect(x: 0, y: ScreenUtils.getHeight(-1), width: image.size.width, height: image.size.height)
+        let attachImg = NSAttributedString(attachment: attachment)
+        label.labelWithImg(composition: attachImg, string)
+    }
 }
 
 // MARK: - Extension
@@ -186,22 +198,15 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
-        let data = self.myToDoData ?? MyToDo(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
+        let data = self.myToDoData ?? MyToDo.emptyMyToDo
         
-        // 나만보기인 경우 이미지 세팅
-        let name = self.manager[indexPath.row]
-        let string = NSAttributedString(string: " \(name)" )
-        let attachment = NSTextAttachment()
-        // 완료/미완료에 따라 자물쇠 이미지 세팅
-        let image = data.isComplete ? ImageLiterals.MyToDo.icLockLight : ImageLiterals.MyToDo.icLockDark
-        attachment.image = image
-        // 이미지와 라벨 수직 정렬 맞춰주기
-        attachment.bounds = CGRect(x: 0, y: ScreenUtils.getHeight(-1), width: image.size.width, height: image.size.height)
-        let attachImg = NSAttributedString(attachment: attachment)
         if data.isPrivate {
-            managerCell.managerLabel.labelWithImg(composition: attachImg, string)
+            setLabelWithImage(
+                label: managerCell.managerLabel,
+                string: self.manager[indexPath.row],
+                isComplete: data.isComplete)
         }else {
-            managerCell.managerLabel.text = name
+            managerCell.managerLabel.text = self.manager[indexPath.row]
         }
         
         // 미완료 / 완료 / 나만보기 태그 색상 세팅

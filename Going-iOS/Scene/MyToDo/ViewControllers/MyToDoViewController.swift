@@ -9,16 +9,9 @@ import UIKit
 
 import SnapKit
 
-class MyToDoViewController: UIViewController {
+final class MyToDoViewController: UIViewController {
 
     // MARK: - UI Property
-    
-    var selectIndex: Int = 0 {
-        didSet {
-            stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = selectIndex
-            myToDoHeaderView.segmentedControl.selectedSegmentIndex = selectIndex
-        }
-    }
     
     private lazy var contentView: UIView = UIView()
     private let navigationBarview = CreateNavigationBar()
