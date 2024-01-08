@@ -79,7 +79,7 @@ private extension UserTestResultViewController {
     }
     
     func setStyle() {
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .black000
         view.backgroundColor = .white000
         resultView.backgroundColor = .white
     }

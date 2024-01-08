@@ -21,7 +21,6 @@ final class MakeProfileViewController: UIViewController {
                                      color: .gray700,
                                      text: "이름")
     
-    
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)

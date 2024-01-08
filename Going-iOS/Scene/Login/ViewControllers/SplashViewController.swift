@@ -48,7 +48,7 @@ final class SplashViewController: UIViewController {
         splashLogoImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.leading.equalToSuperview().inset(90)
-            $0.height.equalTo(splashLogoImageView.snp.width).multipliedBy(Size.logoHeight)
+            $0.height.equalTo(ScreenUtils.getHeight(66))
         }
     }
 
