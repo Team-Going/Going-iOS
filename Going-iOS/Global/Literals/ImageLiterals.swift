@@ -75,4 +75,9 @@ enum ImageLiterals {
         static var btnSave: UIImage { .load(named: "btn_save") }
         static var btnProfile: UIImage { .load(named: "btn_profile") }
     }
+    
+    enum Settings {
+        static var btnResign: UIImage { .load(named: "ic_unsubscribe") }
+        static var btnEnterLarge: UIImage { .load(named: "btn_enter_large")}
+    }
 }

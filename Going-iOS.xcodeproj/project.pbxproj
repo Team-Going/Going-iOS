@@ -25,6 +25,9 @@
 		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
 		94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */; };
 		94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */; };
+		94C7DDB32B4C754300541567 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C7DDB22B4C754300541567 /* SettingsViewController.swift */; };
+		94C7DDB52B4C756600541567 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C7DDB42B4C756600541567 /* SettingsCollectionViewCell.swift */; };
+		94C7DDBA2B4C77FF00541567 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C7DDB92B4C77FF00541567 /* SettingsItem.swift */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
 		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
@@ -127,6 +130,9 @@
 		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
 		94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingSuccessViewController.swift; sourceTree = "<group>"; };
 		94C2C9AD2B470ACD00B92CAC /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		94C7DDB22B4C754300541567 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		94C7DDB42B4C756600541567 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
+		94C7DDB92B4C77FF00541567 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -255,13 +261,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		94442EC12B4B0C8000FDBB26 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		9457F0492B485169009ACF25 /* StartTravel */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,10 +313,19 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		948767A22B4C23A700BCF843 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				94C7DDB62B4C77C100541567 /* Models */,
+				94C7DDB12B4C752000541567 /* Cells */,
+				94C7DDB02B4C751600541567 /* ViewControllers */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		94C2C9A22B46FE3500B92CAC /* CreateTravel */ = {
 			isa = PBXGroup;
 			children = (
-				94442EC12B4B0C8000FDBB26 /* Models */,
 				94C2C9A42B46FE4E00B92CAC /* ViewControllers */,
 				94C2C9A32B46FE4200B92CAC /* Views */,
 			);
@@ -341,6 +349,30 @@
 				94C2C9AB2B4709A200B92CAC /* CreatingSuccessViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		94C7DDB02B4C751600541567 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				94C7DDB22B4C754300541567 /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		94C7DDB12B4C752000541567 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				94C7DDB42B4C756600541567 /* SettingsCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		94C7DDB62B4C77C100541567 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				94C7DDB92B4C77FF00541567 /* SettingsItem.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CA8CD6792B46B61000CFDFBF /* OurToDo */ = {
@@ -756,6 +788,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				948767A22B4C23A700BCF843 /* Settings */,
 				CADA024F2B4AC701001FCE89 /* MyToDo */,
 				94442EB22B4AB5EF00FDBB26 /* DashBoard */,
 				F430A9812B4AAE4D00D482C4 /* CompleteProfile */,
@@ -923,6 +956,7 @@
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
 				F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */,
+				94C7DDBA2B4C77FF00541567 /* SettingsItem.swift in Sources */,
 				9457F04C2B4853AC009ACF25 /* TravelTestViewController.swift in Sources */,
 				CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */,
 				F4BEB4CF2B4838B60074B1B2 /* TestResultTicketView.swift in Sources */,
@@ -935,6 +969,7 @@
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				CA8CD6A02B47FDB200CFDFBF /* PaddingLabel.swift in Sources */,
 				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
+				94C7DDB52B4C756600541567 /* SettingsCollectionViewCell.swift in Sources */,
 				F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */,
 				CA8CD68B2B46B8CD00CFDFBF /* OurToDoCollectionViewCell.swift in Sources */,
 				F4F521B42B3484B4000E6E1E /* Config.swift in Sources */,
@@ -950,6 +985,7 @@
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
 				F4BEB4D12B4A79AB0074B1B2 /* UIButton+.swift in Sources */,
 				94442EBA2B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift in Sources */,
+				94C7DDB32B4C754300541567 /* SettingsViewController.swift in Sources */,
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
 				9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */,
