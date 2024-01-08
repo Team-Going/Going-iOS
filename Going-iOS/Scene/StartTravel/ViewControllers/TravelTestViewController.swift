@@ -25,16 +25,16 @@ final class TravelTestViewController: UIViewController {
         nav.titleLabel.text = "이번 여행은!"
         return nav
     }()
-    
-    private let layout = UICollectionViewFlowLayout()
-    
-    private lazy var travelTestCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+    private lazy var travelTestCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private lazy var nextButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")
         btn.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return btn
     }()
+    
+    private let gradientView = UIView()
     
     // MARK: - Life Cycles
     
@@ -47,6 +47,10 @@ final class TravelTestViewController: UIViewController {
         setCollectionView()
         setDelegate()
         registerCell()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setGradient()
     }
 }
 
@@ -61,6 +65,7 @@ private extension TravelTestViewController {
     func setHierarchy() {
         view.addSubviews(navigationBar,
                          travelTestCollectionView,
+                         gradientView,
                          nextButton)
     }
     
@@ -75,7 +80,13 @@ private extension TravelTestViewController {
             // TODO: - DOONav로 바꾸고나서 top 레이아웃 수정
             $0.top.equalTo(navigationBar.snp.bottom).offset(3)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(nextButton.snp.top).offset(-28)
+            $0.bottom.equalTo(nextButton.snp.top)
+        }
+        
+        gradientView.snp.makeConstraints {
+            $0.bottom.equalTo(nextButton.snp.top)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(40))
         }
         
         nextButton.snp.makeConstraints {
@@ -87,8 +98,7 @@ private extension TravelTestViewController {
     }
     
     func setCollectionView() {
-        travelTestCollectionView.collectionViewLayout = layout
-        travelTestCollectionView.backgroundColor = .gray200
+        travelTestCollectionView.backgroundColor = .gray50
         travelTestCollectionView.showsVerticalScrollIndicator = false
     }
     
@@ -100,6 +110,10 @@ private extension TravelTestViewController {
     func registerCell() {
         travelTestCollectionView.register(TravelTestCollectionViewCell.self,
                                           forCellWithReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier)
+    }
+    
+    func setGradient() {
+        gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .vertical)
     }
     
     ///  모든 답변이 완료되었는지 확인하는 메서드
@@ -123,7 +137,7 @@ private extension TravelTestViewController {
     }
 }
 
-// MARK: - Extensions
+// MARK: - Extensions  
 
 extension TravelTestViewController: UICollectionViewDelegate { }
 

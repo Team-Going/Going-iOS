@@ -97,6 +97,12 @@ final class CreatingSuccessViewController: UIViewController {
         return label
     }()
     
+    private let codeUnderLineView: UIView = {
+        let line = UIView()
+        line.backgroundColor = .gray300
+        return line
+    }()
+    
     private let codeCopyButton: UIButton = {
         let button = UIButton()
         button.setTitle(StringLiterals.CreatingSuccess.copyCode, for: .normal)
@@ -140,7 +146,7 @@ private extension CreatingSuccessViewController {
         
         ticketImage.addSubviews(characterImage, dDayLabelBackgroundView, travelTitleLabel, dateLabel)
         dDayLabelBackgroundView.addSubview(dDayLabel)
-        inviteCardView.addSubviews(inviteCodeLabel, codeCopyButton)
+        inviteCardView.addSubviews(inviteCodeLabel, codeUnderLineView, codeCopyButton)
     }
     
     func setLayout() {
@@ -169,7 +175,7 @@ private extension CreatingSuccessViewController {
         }
         
         dDayLabelBackgroundView.snp.makeConstraints {
-            $0.leading.equalTo(ticketImage.snp.leading).offset(102)
+            $0.leading.equalTo(characterImage.snp.trailing).offset(50)
             $0.bottom.equalTo(travelTitleLabel.snp.top).offset(-4)
             $0.height.equalTo(ScreenUtils.getHeight(22))
             $0.width.equalTo(ScreenUtils.getWidth(44))
@@ -204,6 +210,13 @@ private extension CreatingSuccessViewController {
         inviteCodeLabel.snp.makeConstraints {
             $0.top.equalTo(inviteCardView.snp.top).offset(16)
             $0.centerX.equalTo(inviteCardView)
+        }
+        
+        codeUnderLineView.snp.makeConstraints {
+            $0.top.equalTo(codeCopyButton.snp.bottom)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.getWidth(102))
+            $0.height.equalTo(0.5)
         }
         
         codeCopyButton.snp.makeConstraints {

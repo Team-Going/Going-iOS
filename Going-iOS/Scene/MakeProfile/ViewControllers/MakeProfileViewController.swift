@@ -27,6 +27,7 @@ final class MakeProfileViewController: UIViewController {
         textField.setPlaceholder(placeholder: "이름을 입력해주세요", fontColor: .gray200, font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
+        textField.setPlaceholderColor(.gray700)
         textField.textColor = .gray700
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor.gray200.cgColor
