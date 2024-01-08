@@ -9,9 +9,25 @@ import UIKit
 
 import SnapKit
 
-class SettingsCollectionViewCell: UICollectionViewCell {
+final class SettingsCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
+    
+    var settingsData: SettingsItem? {
+        didSet {
+            guard let data = settingsData else { return }
+            self.titleLabel.text = data.title
+            
+            if data.title == "서비스 방침" {
+                self.settingsIcon.isHidden = true
+                self.versionInfoLabel.isHidden = false
+            } else if data.title == "로그아웃" {
+                self.settingsIcon.isHidden = true
+                self.versionInfoLabel.isHidden = true
+                self.titleLabel.textColor = .red500
+            } 
+        }
+    }
     
     // MARK: - UI Properties
     
