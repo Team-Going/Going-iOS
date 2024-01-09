@@ -63,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
+        
     }
     
     //    func photoLibraryDidChange(_ changeInstance: PHChange) {

@@ -11,9 +11,6 @@ import SnapKit
 
 final class SplashViewController: UIViewController {
     
-    let testUserDefault = UserDefaults.standard.bool(forKey: "ImageSave")
-    
-    
     private enum Size {
         static let logoHeight: CGFloat = 66 / 194
     }
@@ -34,16 +31,24 @@ final class SplashViewController: UIViewController {
 
     }
     
-    private func setStyle() {
+    override func viewDidAppear(_ animated: Bool) {
+        performActionBasedOnPermission()
+    }
+
+    
+}
+
+private extension SplashViewController {
+     func setStyle() {
         self.view.backgroundColor = .red400
     }
     
-    private func setHierarchy() {
+     func setHierarchy() {
         view.addSubview(splashLogoImageView)
         
     }
     
-    private func setLayout() {
+    func setLayout() {
         
         splashLogoImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -51,5 +56,24 @@ final class SplashViewController: UIViewController {
             $0.height.equalTo(ScreenUtils.getHeight(66))
         }
     }
-
+    
+    func performActionBasedOnPermission() {
+        if UserDefaults.standard.bool(forKey: "photoPermissionKey") {
+            // 권한이 설정된 경우의 동작
+            print("설정 가능")
+            let nextVC = UserTestResultViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            // 권한이 거부된 경우의 동작
+            print("설정 불가능")
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
+    
+//    @objc
+//    func userDefaultsDidChange() {
+//        let moveToUserTestResult = UserTestResultViewController()
+//        self.navigationController?.pushViewController(moveToUserTestResult, animated: true)
+//    }
 }

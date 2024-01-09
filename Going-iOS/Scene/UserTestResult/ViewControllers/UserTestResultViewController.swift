@@ -139,32 +139,7 @@ private extension UserTestResultViewController {
     
     @objc
     func saveImageButtonTapped() {
-        
-        switch PHPhotoLibrary.authorizationStatus(for: .addOnly) {
-            
-        case .notDetermined:
-            print("not determined")
-            PHPhotoLibrary.requestAuthorization(for: .addOnly) { [weak self] status in
-                switch status {
-                case .authorized, .limited:
-                    print("권한설정됐다는 토스트? 띄우면 좋을듯")
-                case .denied:
-                    DispatchQueue.main.async {
-                        self?.showPermissionAlert()
-                    }
-                default:
-                    print("그 밖의 권한이 부여 되었습니다.")
-                }
-            }
-        case .restricted, .limited, .authorized:
-            saveImage()
-        case .denied:
-            DispatchQueue.main.async {
-                self.showPermissionAlert()
-            }
-        @unknown default:
-            print("unKnown")
-        }
+        checkAccess()
     }
     
     func saveImage() {
@@ -191,6 +166,35 @@ private extension UserTestResultViewController {
             
             self.present(alert, animated: true)
             
+        }
+    }
+}
+
+extension UserTestResultViewController: CheckPhotoAccessProtocol {
+    func checkAccess() {
+        switch PHPhotoLibrary.authorizationStatus(for: .addOnly) {
+            
+        case .notDetermined, .denied:
+            UserDefaults.standard.set(false, forKey: "photoPermissionKey")
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { [weak self] status in
+                switch status {
+                case .authorized, .limited:
+                    UserDefaults.standard.set(true, forKey: "photoPermissionKey")
+                    print("권한설정됐다는 토스트? 띄우면 좋을듯")
+                case .denied:
+                    DispatchQueue.main.async {
+                        self?.showPermissionAlert()
+                    }
+                default:
+                    print("그 밖의 권한이 부여 되었습니다.")
+                }
+                
+            }
+        case .restricted, .limited, .authorized:
+            saveImage()
+            UserDefaults.standard.set(true, forKey: "photoPermissionKey")
+        @unknown default:
+            print("unKnown")
         }
     }
 }
