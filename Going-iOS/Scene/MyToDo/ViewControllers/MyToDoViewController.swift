@@ -82,20 +82,10 @@ final class MyToDoViewController: UIViewController {
 
     @objc
     func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
-        print("pushToAddToDoView")
-        var manager: [Manager] = []
-        let todoData = ToDoData.todoData
-        for friendProfile in todoData.manager {
-            manager.append(Manager(name: friendProfile.name, isManager: false))
-        }
-        let todoVC = ToDoViewController()
-        todoVC.navigationBarTitle = "추가"
-        todoVC.manager = manager
-        todoVC.isActivateView = false
-        self.navigationController?.pushViewController(todoVC, animated: false)
+        setToDoView(naviBarTitle: "추가", isActivate: true)
     }
     
-    @objc 
+    @objc
     func didChangeValue(sender: UISegmentedControl) {
         
         if stickyMyToDoHeaderView.isHidden {
@@ -111,34 +101,7 @@ final class MyToDoViewController: UIViewController {
     
     @objc
     func pushToInquiryToDo() {
-        print("pushToInquiryToDo")
-        
-        var manager: [Manager] = []
-        let todoData = ToDoData.todoData
-        for friendProfile in todoData.manager {
-            manager.append(Manager(name: friendProfile.name, isManager: false))
-        }
-        let todoVC = ToDoViewController()
-        todoVC.navigationBarTitle = "조회"
-        todoVC.manager = manager
-        todoVC.isActivateView = false
-        self.navigationController?.pushViewController(todoVC, animated: false)
-    }
-    
-    func checkButtonTapped(index: Int, image: UIImage) {
-        var todo: MyToDo = MyToDo(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
-        if image == ImageLiterals.MyToDo.btnCheckBoxComplete {
-            todo = completedData[index]
-            todo.isComplete = false
-            incompletedData.append(todo)
-            completedData.remove(at: index)
-        } else if image == ImageLiterals.MyToDo.btnCheckBoxIncomplete {
-            todo = incompletedData[index]
-            todo.isComplete = true
-            completedData.append(todo)
-            incompletedData.remove(at: index)
-        }
-        loadData()
+        setToDoView(naviBarTitle: "조회", isActivate: false)
     }
 }
 
@@ -249,6 +212,37 @@ private extension MyToDoViewController {
         myToDoCollectionView.snp.updateConstraints {
             $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
         }
+    }
+    
+    /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
+    func setToDoView(naviBarTitle: String, isActivate: Bool) {
+        var manager: [Manager] = []
+        let todoData = ToDoData.todoData
+        for friendProfile in todoData.manager {
+            manager.append(Manager(name: friendProfile.name, isManager: false))
+        }
+        
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = naviBarTitle
+        todoVC.manager = manager
+        todoVC.isActivateView = isActivate
+        self.navigationController?.pushViewController(todoVC, animated: false)
+    }
+    
+    func checkButtonTapped(index: Int, image: UIImage) {
+        var todo: MyToDo = MyToDo(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
+        if image == ImageLiterals.MyToDo.btnCheckBoxComplete {
+            todo = completedData[index]
+            todo.isComplete = false
+            incompletedData.append(todo)
+            completedData.remove(at: index)
+        } else if image == ImageLiterals.MyToDo.btnCheckBoxIncomplete {
+            todo = incompletedData[index]
+            todo.isComplete = true
+            completedData.append(todo)
+            incompletedData.remove(at: index)
+        }
+        loadData()
     }
 }
 

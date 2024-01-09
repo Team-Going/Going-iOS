@@ -34,7 +34,7 @@ final class OurToDoViewController: UIViewController {
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
         btn.imageView?.tintColor = .white000
-        btn.addTarget(self, action: #selector(pushToAddToDoView(_:)), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
         btn.semanticContentAttribute = .forceLeftToRight
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
@@ -67,45 +67,27 @@ final class OurToDoViewController: UIViewController {
         loadData()
         tripMiddleView.gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .horizontal)
     }
-        
+    
+    // MARK: - objc method
+    
     @objc
     func popToDashBoardView(_ sender: UITapGestureRecognizer) {
         print("popToDashBoardView")
     }
-    
+
     // TODO: - 아이디 값으로 본인 확인 필요
     @objc
-    func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
-        print("pushToAddToDoView")
-        
-        var manager: [Manager] = []
-        for friendProfile in self.tripMiddleView.friendProfile {
-            manager.append(Manager(name: friendProfile.name, isManager: false))
-        }
-        
-        let todoVC = ToDoViewController()
-        todoVC.navigationBarTitle = "추가"
-        todoVC.manager = manager
-        todoVC.isActivateView = true
-        self.navigationController?.pushViewController(todoVC, animated: false)
+    func pushToAddToDoView() {
+        setToDoView(naviBarTitle: "추가", isActivate: true)
     }
 
     @objc
     func pushToInquiryToDo() {
-        print("pushToInquiryToDo")
-        
-        var manager: [Manager] = []
-        for friendProfile in self.tripMiddleView.friendProfile {
-            manager.append(Manager(name: friendProfile.name, isManager: false))
-        }
-        let todoVC = ToDoViewController()
-        todoVC.navigationBarTitle = "조회"
-        todoVC.manager = manager
-        todoVC.isActivateView = false
-        self.navigationController?.pushViewController(todoVC, animated: false)
+        setToDoView(naviBarTitle: "조회", isActivate: false)
     }
-    
-    @objc private func didChangeValue(segment: UISegmentedControl) {
+
+    @objc
+    func didChangeValue(segment: UISegmentedControl) {
         self.ourToDoCollectionView.reloadData()
     }
 }
@@ -231,6 +213,20 @@ private extension OurToDoViewController {
         cell.ourToDoData = data
         cell.todoTitleLabel.textColor = textColor
         cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
+    }
+    
+    /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
+    func setToDoView(naviBarTitle: String, isActivate: Bool) {
+        var manager: [Manager] = []
+        for friendProfile in self.tripMiddleView.friendProfile {
+            manager.append(Manager(name: friendProfile.name, isManager: false))
+        }
+        
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = naviBarTitle
+        todoVC.manager = manager
+        todoVC.isActivateView = isActivate
+        self.navigationController?.pushViewController(todoVC, animated: false)
     }
 }
 
