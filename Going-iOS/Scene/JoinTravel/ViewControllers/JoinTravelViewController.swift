@@ -14,13 +14,14 @@ final class JoinTravelViewController: UIViewController {
     // TODO: - Dummy Data 생성
     
     // MARK: - UI Properties
-    
-    private let navigationBar: NavigationView = {
-        let nav = NavigationView()
-        nav.titleLabel.text = "여행 입장하기"
-        return nav
-    }()
 
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
+    private let navigationBottomLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
+        return view
+    }()
+    
     private let codeTitleLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.JoinTravel.inviteCodeTitle)
     
     private let codeTextField: UITextField = {
@@ -28,7 +29,7 @@ final class JoinTravelViewController: UIViewController {
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, forBorderColor: .gray200, forCornerRadius: 6)
-        field.setPlaceholderColor(.gray700)
+        field.setPlaceholderColor(.gray200)
         field.keyboardType = .numberPad
         return field
     }()
@@ -105,6 +106,7 @@ private extension JoinTravelViewController {
     
     func setHierarchy() {
         view.addSubviews(navigationBar,
+                         navigationBottomLineView,
                          codeTitleLabel,
                          codeTextField,
                          characterCountLabel,
@@ -116,6 +118,12 @@ private extension JoinTravelViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        navigationBottomLineView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
         codeTitleLabel.snp.makeConstraints {

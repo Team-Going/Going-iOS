@@ -17,14 +17,14 @@ final class CreateTravelViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    private let navigationBar: NavigationView = {
-        let nav = NavigationView()
-        nav.titleLabel.text = "여행 생성하기"
-        return nav
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 생성하기"))
+    private let navigationBottomLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
+        return view
     }()
     
     private let travelNameLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "여행 이름")
-    
     private let travelDateLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "여행 날짜")
     
     private let travelNameTextField: UITextField = {
@@ -132,7 +132,7 @@ final class CreateTravelViewController: UIViewController {
     
     @objc
     func createButtonTapped() {
-        let vc = CreatingSuccessViewController()
+        let vc = TravelTestViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -148,6 +148,7 @@ private extension CreateTravelViewController {
     
     func setHierarchy() {
         view.addSubviews(navigationBar,
+                         navigationBottomLineView,
                          travelNameLabel,
                          travelDateLabel,
                          travelNameTextField,
@@ -164,6 +165,12 @@ private extension CreateTravelViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        navigationBottomLineView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
         travelNameLabel.snp.makeConstraints {

@@ -16,11 +16,12 @@ final class SettingsViewController: UIViewController {
     private let settingsItem: [SettingsItem] = SettingsItem.settingsDummy
     
     // MARK: - UI Properties
-    
-    private let navigationBar: NavigationView = {
-        let nav = NavigationView()
-        nav.titleLabel.text = "설정"
-        return nav
+
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("설정"))
+    private let navigationBottomLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
+        return view
     }()
     
     private lazy var resignButton: UIButton = {
@@ -29,13 +30,14 @@ final class SettingsViewController: UIViewController {
         btn.titleLabel?.textColor = .gray300
         btn.setImage(ImageLiterals.Settings.btnResign, for: .normal)
         btn.addTarget(self, action: #selector(resignButtonTapped), for: .touchUpInside)
+        btn.semanticContentAttribute = .forceRightToLeft
         btn.setUnderline()
         return btn
     }()
     
     private let settingsCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        view.backgroundColor = .clear
+        view.backgroundColor = .gray50
         view.isScrollEnabled = false
         return view
     }()
@@ -55,19 +57,25 @@ final class SettingsViewController: UIViewController {
 
 private extension SettingsViewController {
     func setStyle() {
-        self.view.backgroundColor = .gray50
+        self.view.backgroundColor = .white000
         self.navigationController?.isNavigationBarHidden = true
     }
     
     func setHierarchy() {
-        self.view.addSubviews(settingsCollectionView, navigationBar, resignButton)
+        self.view.addSubviews(settingsCollectionView, navigationBar, navigationBottomLineView, resignButton)
     }
     
     func setLayout() {
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
-            $0.width.equalToSuperview()
+        }
+        
+        navigationBottomLineView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
         settingsCollectionView.snp.makeConstraints {

@@ -13,7 +13,9 @@ class StartTravelSplashViewController: UIViewController {
     
     // MARK: - UI Components
     
-    private let startTravelTitleLabel = DOOLabel(font: .pretendard(.head3), 
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly)
+    
+    private let startTravelTitleLabel = DOOLabel(font: .pretendard(.head3),
                                                  color: .gray700,
                                                  text: StringLiterals.StartTravel.startTravelTitle)
     
@@ -43,13 +45,23 @@ class StartTravelSplashViewController: UIViewController {
 private extension StartTravelSplashViewController {
     func setStyle() {
         self.view.backgroundColor = .white000
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     func setHierarchy() {
-        self.view.addSubviews(startTravelTitleLabel, createTravelButton, joinTravelButton)
+        self.view.addSubviews(navigationBar,
+                              startTravelTitleLabel,
+                              createTravelButton,
+                              joinTravelButton)
     }
     
     func setLayout() {
+        navigationBar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
         startTravelTitleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(224)
             $0.centerX.equalToSuperview()

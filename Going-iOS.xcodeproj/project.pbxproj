@@ -427,22 +427,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		F430A9812B4AAE4D00D482C4 /* CompleteProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F430A9842B4ABFC200D482C4 /* ViewControllers */,
-			);
-			path = CompleteProfile;
-			sourceTree = "<group>";
-		};
-		F430A9842B4ABFC200D482C4 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		CA8CD6982B47F57100CFDFBF /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +504,30 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F430A9812B4AAE4D00D482C4 /* CompleteProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F430A9842B4ABFC200D482C4 /* ViewControllers */,
+			);
+			path = CompleteProfile;
+			sourceTree = "<group>";
+		};
+		F430A9842B4ABFC200D482C4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F430A9882B4ACFFE00D482C4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,20 +554,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F485D4902B47DDBE007317F4 /* ViewControllers */,
-			);
-			path = MakeProfile;
-			sourceTree = "<group>";
-		};
 		F485D4902B47DDBE007317F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F485D4902B47DDBE007317F4 /* ViewControllers */,
+			);
+			path = MakeProfile;
 			sourceTree = "<group>";
 		};
 		F4BA26F82B47197100975CC2 /* Utils */ = {
@@ -595,14 +603,6 @@
 				F4BEB4CE2B4838B60074B1B2 /* TestResultTicketView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		F430A9882B4ACFFE00D482C4 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		F4F521682B3440D7000E6E1E = {
