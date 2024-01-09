@@ -24,26 +24,26 @@ final class DOOToastView: UIView {
     }
 }
 
-extension DOOToastView {
+private extension DOOToastView {
     
-    private func setHierarchy() {
+    func setHierarchy() {
         self.addSubview(messageLabel)
-
+        
     }
     
-    private func setLayout() {
-        self.snp.makeConstraints { 
+    func setLayout() {
+        self.snp.makeConstraints {
             $0.width.equalTo(ScreenUtils.getWidth(230))
-            $0.height.equalTo(ScreenUtils.getHeight(40))   
+            $0.height.equalTo(ScreenUtils.getHeight(40))
             
         }
         self.messageLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-
+        
     }
     
-    private func setStyle() {
+    func setStyle() {
         self.layer.cornerRadius = 6
         self.clipsToBounds = true
         self.backgroundColor = .gray700
