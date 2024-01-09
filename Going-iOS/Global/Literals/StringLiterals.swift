@@ -40,4 +40,13 @@ enum StringLiterals {
     enum StartTravel {
         static let startTravelTitle = "여행을 시작해보세요."
     }
+    
+    enum Settings {
+        static let myProfile = "내 프로필"
+        static let inquiry = "문의하기"
+        static let serviceVersion = "서비스 버전"
+        static let policy = "약관 및 정책"
+        static let aboutService = "About doorip"
+        static let logout = "로그아웃"
+    }
 }

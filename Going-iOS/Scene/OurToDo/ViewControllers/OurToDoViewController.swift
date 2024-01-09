@@ -26,18 +26,18 @@ final class OurToDoViewController: UIViewController {
         return headerView
     }()
     private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
-    private let addToDoView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red700
-        return view
-    }()
-    private let addToDoImageView: UIImageView = UIImageView()
-    private let addToDoLabel: UILabel = {
-        let label = UILabel()
-        label.text = "같이 할일"
-        label.font = .pretendard(.body1_bold)
-        label.textColor = .white000
-        return label
+    private lazy var addToDoButton: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .red700
+        btn.setTitle(" 같이 할일", for: .normal)
+        btn.setTitleColor(.white000, for: .normal)
+        btn.titleLabel?.font = .pretendard(.body1_bold)
+        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
+        btn.imageView?.tintColor = .white000
+        btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
+        btn.semanticContentAttribute = .forceLeftToRight
+        btn.layer.cornerRadius = ScreenUtils.getHeight(26)
+        return btn
     }()
     
     // MARK: - Property
@@ -67,32 +67,6 @@ final class OurToDoViewController: UIViewController {
         loadData()
         tripMiddleView.gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .horizontal)
     }
-        
-    @objc
-    func popToDashBoardView(_ sender: UITapGestureRecognizer) {
-        print("popToDashBoardView")
-    }
-    
-    // TODO: - 아이디 값으로 본인 확인 필요
-    @objc
-    func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
-        print("pushToAddToDoView")
-        
-        var manager: [Manager] = []
-        for friendProfile in self.tripMiddleView.friendProfile {
-            manager.append(Manager(name: friendProfile.name, isManager: false))
-        }
-        
-        let todoVC = ToDoViewController()
-        todoVC.navigationBarTitle = "추가"
-        todoVC.manager = manager
-        todoVC.isActivateView = true
-        self.navigationController?.pushViewController(todoVC, animated: false)
-    }
-
-    @objc private func didChangeValue(segment: UISegmentedControl) {
-        self.ourToDoCollectionView.reloadData()
-    }
 }
 
 // MARK: - Private method
@@ -100,8 +74,7 @@ final class OurToDoViewController: UIViewController {
 private extension OurToDoViewController {
     
     func setHierarchy() {
-        self.view.addSubviews(navigationBarview, scrollView, addToDoView)
-        addToDoView.addSubviews(addToDoImageView, addToDoLabel)
+        self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoHeaderView, ourToDoCollectionView)
     }
@@ -147,21 +120,11 @@ private extension OurToDoViewController {
             $0.leading.trailing.width.equalTo(scrollView)
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
-        addToDoView.snp.makeConstraints{
+        addToDoButton.snp.makeConstraints{
             $0.width.equalTo(ScreenUtils.getWidth(117))
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.bottom.equalTo(scrollView).inset(ScreenUtils.getHeight(24))
-        }
-        addToDoLabel.snp.makeConstraints{
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(22))
-        }
-        addToDoImageView.snp.makeConstraints{
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(14))
         }
     }
     
@@ -181,12 +144,8 @@ private extension OurToDoViewController {
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         tripMiddleView.isUserInteractionEnabled = true
-        addToDoView.layer.cornerRadius = ScreenUtils.getHeight(26)
-        addToDoImageView.image = ImageLiterals.OurToDo.btnPlusOurToDo
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToAddToDoView(_ : )))
         ourToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         stickyOurToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
-        addToDoView.addGestureRecognizer(gesture)
     }
     
     func setCollectionView() -> UICollectionView {
@@ -228,9 +187,46 @@ private extension OurToDoViewController {
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
     func setCellStyle(cell: OurToDoCollectionViewCell, data: OurToDo, textColor: UIColor, isUserInteractionEnabled: Bool) {
-        cell.data = data
+        cell.ourToDoData = data
         cell.todoTitleLabel.textColor = textColor
         cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
+    }
+    
+    /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
+    func setToDoView(naviBarTitle: String, isActivate: Bool) {
+        var manager: [Manager] = []
+        for friendProfile in self.tripMiddleView.friendProfile {
+            manager.append(Manager(name: friendProfile.name, isManager: false))
+        }
+        
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = naviBarTitle
+        todoVC.manager = manager
+        todoVC.isActivateView = isActivate
+        self.navigationController?.pushViewController(todoVC, animated: false)
+    }
+    
+    // MARK: - objc method
+    
+    @objc
+    func popToDashBoardView(_ sender: UITapGestureRecognizer) {
+        print("popToDashBoardView")
+    }
+
+    // TODO: - 아이디 값으로 본인 확인 필요
+    @objc
+    func pushToAddToDoView() {
+        setToDoView(naviBarTitle: "추가", isActivate: true)
+    }
+
+    @objc
+    func pushToInquiryToDo() {
+        setToDoView(naviBarTitle: "조회", isActivate: false)
+    }
+
+    @objc
+    func didChangeValue(segment: UISegmentedControl) {
+        self.ourToDoCollectionView.reloadData()
     }
 }
 
@@ -260,6 +256,11 @@ extension OurToDoViewController: UIScrollViewDelegate {
     }
 }
 
+extension OurToDoViewController: OurToDoCollectionViewDelegate {
+    func pushToToDo() {
+        setToDoView(naviBarTitle: "조회", isActivate: false)
+    }
+}
 extension OurToDoViewController: UICollectionViewDelegate {}
 
 extension OurToDoViewController: UICollectionViewDataSource {
@@ -290,23 +291,17 @@ extension OurToDoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let ourToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: OurToDoCollectionViewCell.identifier, for: indexPath) as? OurToDoCollectionViewCell else {return UICollectionViewCell()}
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToInquiryToDo))
+        ourToDoCell.addGestureRecognizer(gesture)
         
-        let ourToDoHeaderIndex = self.ourToDoHeaderView.segmentedControl.selectedSegmentIndex
-        let stickHeaderIndex = self.stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
-
-        if stickyOurToDoHeaderView.isHidden {
-            if (ourToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 1){
-                setCellStyle(cell: ourToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true)
-            }else if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (ourToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
-                setCellStyle(cell: ourToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false)
-            }else {}
-        }else {
-            if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 0){
-                setCellStyle(cell: ourToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true)
-            }else if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
-                setCellStyle(cell: ourToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false)
-
-            }else {}
+        if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            ourToDoCell.ourToDoData = self.incompletedData[indexPath.row]
+            ourToDoCell.textColor = UIColor.gray400
+            ourToDoCell.index = indexPath.row
+        } else {
+            ourToDoCell.ourToDoData = self.completedData[indexPath.row]
+            ourToDoCell.textColor = UIColor.gray300
+            ourToDoCell.index = indexPath.row
         }
         return ourToDoCell
     }

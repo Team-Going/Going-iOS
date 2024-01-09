@@ -18,10 +18,10 @@ final class SettingsCollectionViewCell: UICollectionViewCell {
             guard let data = settingsData else { return }
             self.titleLabel.text = data.title
             
-            if data.title == "서비스 방침" {
+            if data.title == StringLiterals.Settings.serviceVersion {
                 self.settingsIcon.isHidden = true
                 self.versionInfoLabel.isHidden = false
-            } else if data.title == "로그아웃" {
+            } else if data.title == StringLiterals.Settings.logout {
                 self.settingsIcon.isHidden = true
                 self.versionInfoLabel.isHidden = true
                 self.titleLabel.textColor = .red500

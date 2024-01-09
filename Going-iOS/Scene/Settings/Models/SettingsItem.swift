@@ -13,11 +13,11 @@ struct SettingsItem {
 
 extension SettingsItem {
     static let settingsDummy: [SettingsItem] = [
-        SettingsItem(title: "내 프로필"),
-        SettingsItem(title: "모임하기"),
-        SettingsItem(title: "서비스 방침"),
-        SettingsItem(title: "알림 및 설정"),
-        SettingsItem(title: "About doorip"),
-        SettingsItem(title: "로그아웃")
+        SettingsItem(title: StringLiterals.Settings.myProfile),
+        SettingsItem(title: StringLiterals.Settings.inquiry),
+        SettingsItem(title: StringLiterals.Settings.serviceVersion),
+        SettingsItem(title: StringLiterals.Settings.policy),
+        SettingsItem(title: StringLiterals.Settings.aboutService),
+        SettingsItem(title: StringLiterals.Settings.logout)
     ]
 }
