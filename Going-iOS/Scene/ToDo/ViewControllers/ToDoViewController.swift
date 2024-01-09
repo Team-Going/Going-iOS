@@ -40,12 +40,9 @@ final class ToDoViewController: UIViewController {
         label.setTitleLabel(title: "언제까지")
         return label
     }()
-    private let deadlineTextfieldLabel: UILabel = {
-        let label = PaddingLabel(padding: UIEdgeInsets(top: 0.0, left: 18.0, bottom: 0.0, right: 18.0))
-        label.font = .pretendard(.body3_medi)
-        label.textColor = .gray200
+    private let deadlineTextfieldLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, alignment: .left, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.backgroundColor = .white000
-        label.textAlignment = .left
         label.layer.borderColor = UIColor.gray200.cgColor
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
@@ -253,7 +250,7 @@ private extension ToDoViewController {
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         dropdownButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(19))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(12))
             $0.centerY.equalToSuperview()
             $0.size.equalTo(ScreenUtils.getHeight(22))
         }

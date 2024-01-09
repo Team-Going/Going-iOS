@@ -48,7 +48,6 @@
 		CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */; };
 		CA8CD6932B46B9F600CFDFBF /* CreateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */; };
 		CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */; };
-		CA8CD6A02B47FDB200CFDFBF /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD69F2B47FDB200CFDFBF /* PaddingLabel.swift */; };
 		CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */; };
 		CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */; };
 		CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */; };
@@ -153,7 +152,6 @@
 		CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileData.swift; sourceTree = "<group>"; };
 		CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNavigationBar.swift; sourceTree = "<group>"; };
 		CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
-		CA8CD69F2B47FDB200CFDFBF /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoData.swift; sourceTree = "<group>"; };
 		CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonView.swift; sourceTree = "<group>"; };
@@ -425,22 +423,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		F430A9812B4AAE4D00D482C4 /* CompleteProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F430A9842B4ABFC200D482C4 /* ViewControllers */,
-			);
-			path = CompleteProfile;
-			sourceTree = "<group>";
-		};
-		F430A9842B4ABFC200D482C4 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		CA8CD6982B47F57100CFDFBF /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +500,30 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F430A9812B4AAE4D00D482C4 /* CompleteProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F430A9842B4ABFC200D482C4 /* ViewControllers */,
+			);
+			path = CompleteProfile;
+			sourceTree = "<group>";
+		};
+		F430A9842B4ABFC200D482C4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F430A9882B4ACFFE00D482C4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,20 +550,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F485D4902B47DDBE007317F4 /* ViewControllers */,
-			);
-			path = MakeProfile;
-			sourceTree = "<group>";
-		};
 		F485D4902B47DDBE007317F4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				F4BA26F42B455A7300975CC2 /* MakeProfileViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F485D4902B47DDBE007317F4 /* ViewControllers */,
+			);
+			path = MakeProfile;
 			sourceTree = "<group>";
 		};
 		F4BA26F82B47197100975CC2 /* Utils */ = {
@@ -593,14 +599,6 @@
 				F4BEB4CE2B4838B60074B1B2 /* TestResultTicketView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		F430A9882B4ACFFE00D482C4 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		F4F521682B3440D7000E6E1E = {
@@ -707,7 +705,6 @@
 			children = (
 				F4BEB4BF2B480DAE0074B1B2 /* DOOLabel.swift */,
 				94C2C9A02B46F94000B92CAC /* DOOButton.swift */,
-				CA8CD69F2B47FDB200CFDFBF /* PaddingLabel.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -967,7 +964,6 @@
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
-				CA8CD6A02B47FDB200CFDFBF /* PaddingLabel.swift in Sources */,
 				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
 				94C7DDB52B4C756600541567 /* SettingsCollectionViewCell.swift in Sources */,
 				F4C5E76C2B4283920008735F /* SplashViewController.swift in Sources */,
