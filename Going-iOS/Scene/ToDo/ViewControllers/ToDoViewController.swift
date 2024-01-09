@@ -40,12 +40,9 @@ final class ToDoViewController: UIViewController {
         label.setTitleLabel(title: "언제까지")
         return label
     }()
-    private let deadlineTextfieldLabel: UILabel = {
-        let label = PaddingLabel(padding: UIEdgeInsets(top: 0.0, left: 18.0, bottom: 0.0, right: 18.0))
-        label.font = .pretendard(.body3_medi)
-        label.textColor = .gray200
+    private let deadlineTextfieldLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, alignment: .left, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.backgroundColor = .white000
-        label.textAlignment = .left
         label.layer.borderColor = UIColor.gray200.cgColor
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
@@ -103,7 +100,6 @@ final class ToDoViewController: UIViewController {
     // MARK: - Properties
     
     lazy var navigationBarTitle: String = ""
-    lazy var isActivateView: Bool = true
     lazy var manager: [Manager] = []
     private var getToDoData: ToDoData?
     private var memoTextviewPlaceholder: String = ""
@@ -111,8 +107,8 @@ final class ToDoViewController: UIViewController {
     private var saveToDoData: ToDoData?
     var data: ToDoData? {
         didSet {
-            guard let todoData = data else {return}
-            self.getToDoData = todoData
+            guard let data else {return}
+            self.getToDoData = data
             todoTextfield.text = self.getToDoData?.todo
             deadlineTextfieldLabel.text = self.getToDoData?.deadline
             manager = self.getToDoData?.manager ?? []
@@ -128,6 +124,16 @@ final class ToDoViewController: UIViewController {
             manager = value[2] as! [Manager]
             memoTextviewPlaceholder = value[3] as! String
             memoTextView.text = memoTextviewPlaceholder
+        }
+    }
+    
+    var isActivateView: Bool? = false {
+        didSet {
+            guard let isActivateView else {return}
+            self.todoTextfield.isUserInteractionEnabled = isActivateView ? true : false
+            self.deadlineTextfieldLabel.isUserInteractionEnabled = isActivateView ? true : false
+            self.todoManagerCollectionView.isUserInteractionEnabled = isActivateView ? true : false
+            self.memoTextView.isUserInteractionEnabled = isActivateView ? true : false
         }
     }
     
@@ -164,6 +170,7 @@ final class ToDoViewController: UIViewController {
     // 담당자 버튼 탭 시 버튼 색상 변경 & 배열에 담아주는 메서드
     @objc
     func didTapToDoManagerButton(_ sender: UIButton) {
+        guard let isActivateView = self.isActivateView else {return}
         if isActivateView {
             changeButtonConfig(isSelected: sender.isSelected, btn: sender)
             sender.isSelected = sender.isSelected ? false : true
@@ -178,7 +185,6 @@ final class ToDoViewController: UIViewController {
         let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해주세요." ? "" : deadlineTextfieldLabel.text) ?? ""
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         self.saveToDoData = ToDoData(todo: todo, deadline: deadline, manager: manager, memo: memo)
-        print("save \(self.saveToDoData)")
         self.navigationController?.popViewController(animated: false)
     }
 }
@@ -217,6 +223,7 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(60))
         }
+        guard let isActivateView else {return}
         isActivateView ? setButtonView(button: singleButtonView) : setButtonView(button: doubleButtonView)
         todoLabel.snp.makeConstraints{
             $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))
@@ -243,7 +250,7 @@ private extension ToDoViewController {
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         dropdownButton.snp.makeConstraints{
-            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(19))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(12))
             $0.centerY.equalToSuperview()
             $0.size.equalTo(ScreenUtils.getHeight(22))
         }

@@ -1,10 +1,10 @@
 import UIKit
 
 protocol OurToDoCollectionViewDelegate: AnyObject {
-    func getManagersData()
+    func pushToToDo()
 }
 
-class OurToDoCollectionViewCell: UICollectionViewCell {
+final class OurToDoCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Property
     
@@ -13,14 +13,27 @@ class OurToDoCollectionViewCell: UICollectionViewCell {
     let absoluteHeight = UIScreen.main.bounds.height / 812
     weak var delegate: OurToDoCollectionViewDelegate?
     var manager: [String] = []
-    var data: OurToDo? {
+    var ourToDoData: OurToDo? {
         didSet {
-            guard let data = data else {return}
-            self.todoTitleLabel.text = data.todoTitle
-            self.deadlineLabel.text = data.deadline + "까지"
-            self.manager = data.manager
+            guard let ourToDoData else {return}
+            self.todoTitleLabel.text = ourToDoData.todoTitle
+            self.deadlineLabel.text = ourToDoData.deadline + "까지"
+            self.manager = ourToDoData.manager
             
             self.managerCollectionView.reloadData()
+        }
+    }
+    var index: Int? {
+        didSet {
+            guard let index else {return}
+            self.index = index
+            self.managerCollectionView.reloadData()
+        }
+    }
+    var textColor: UIColor? {
+        didSet {
+            guard let textColor else {return}
+            self.todoTitleLabel.textColor = textColor
         }
     }
     
@@ -51,6 +64,11 @@ class OurToDoCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @objc
+    func tapManagerCollectionView(_ sender: UITapGestureRecognizer) {
+        self.delegate?.pushToToDo()
+    }
 }
 
 // MARK: - Private Method
@@ -69,7 +87,6 @@ private extension OurToDoCollectionViewCell {
         }
         todoTitleLabel.snp.makeConstraints{
             $0.top.leading.equalToSuperview().inset(absoluteWidth * 16)
-//            $0.height.equalTo(absoluteHeight * 21)
         }
         managerCollectionView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 16)
@@ -78,7 +95,6 @@ private extension OurToDoCollectionViewCell {
         }
         deadlineLabel.snp.makeConstraints{
             $0.top.trailing.equalToSuperview().inset(absoluteWidth * 16)
-//            $0.height.equalTo(18)
         }
     }
     
@@ -135,7 +151,7 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource {
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
         print("our \(self.manager[indexPath.row])")
         managerCell.managerData = self.manager[indexPath.row]
-        if self.data?.isComplete == false {
+        if self.ourToDoData?.isComplete == false {
             self.manager[indexPath.row] == "지민" ? managerCell.changeLabelColor(color: .red400) : managerCell.changeLabelColor(color: .gray400)
         }else{
             managerCell.changeLabelColor(color: .gray300)

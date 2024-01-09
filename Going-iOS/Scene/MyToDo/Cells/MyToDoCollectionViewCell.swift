@@ -9,6 +9,7 @@ import UIKit
 
 protocol MyToDoCollectionViewDelegate: AnyObject {
     func getButtonIndex(index: Int, image: UIImage)
+    func pushToToDo()
 }
 
 class MyToDoCollectionViewCell: UICollectionViewCell {
@@ -20,29 +21,29 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     // TODO: - 사용자 id 값 비교해서 담당자가 본인인지 확인
     var myToDoData: MyToDo? {
         didSet {
-            guard let data = myToDoData else {return}
-            self.todoTitleLabel.text = data.todoTitle
-            self.deadlineLabel.text = data.deadline + "까지"
-            self.manager = (data.manager[0] == "지민") && data.isPrivate ? ["나만보기"] : data.manager
+            guard let myToDoData else {return}
+            self.todoTitleLabel.text = myToDoData.todoTitle
+            self.deadlineLabel.text = myToDoData.deadline + "까지"
+            self.manager = (myToDoData.manager[0] == "지민") && myToDoData.isPrivate ? ["나만보기"] : myToDoData.manager
         }
     }
     var index: Int? {
         didSet {
-            guard let index = index else {return}
+            guard let index else {return}
             self.index = index
             self.managerCollectionView.reloadData()
         }
     }
     var textColor: UIColor? {
         didSet {
-            guard let textColor = textColor else {return}
+            guard let textColor else {return}
             self.todoTitleLabel.textColor = textColor
         }
     }
     var buttonImg: UIImage? {
         didSet {
-            guard let btnImg = buttonImg else {return}
-            self.checkButton.setImage(btnImg, for: .normal)
+            guard let buttonImg else {return}
+            self.checkButton.setImage(buttonImg, for: .normal)
             self.managerCollectionView.reloadData()
         }
     }
@@ -99,6 +100,11 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         let image = self.checkButton.imageView?.image ?? UIImage()
         self.delegate?.getButtonIndex(index: index, image: image)
     }
+    
+    @objc
+    func tapManagerCollectionView(_ sender: UITapGestureRecognizer) {
+        self.delegate?.pushToToDo()
+    }
 }
 
 // MARK: - Private Method
@@ -152,6 +158,7 @@ private extension MyToDoCollectionViewCell {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
+        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
         return collectionView
     }
     

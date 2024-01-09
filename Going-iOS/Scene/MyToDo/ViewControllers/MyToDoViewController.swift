@@ -28,22 +28,29 @@ final class MyToDoViewController: UIViewController {
         header.segmentedControl.addTarget(self, action: #selector(didChangeValue(sender: )), for: .valueChanged)
         return header
     }()
-    
     private lazy var stickyMyToDoHeaderView: OurToDoHeaderView = {
         let headerView = OurToDoHeaderView()
         headerView.isHidden = true
         headerView.backgroundColor = .white000
         headerView.segmentedControl.addTarget(self, action: #selector(didChangeValue(sender: )), for: .valueChanged)
-
         return headerView
+    }()
+    private lazy var addToDoButton: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .red700
+        btn.setTitle(" 나의 할일", for: .normal)
+        btn.setTitleColor(.white000, for: .normal)
+        btn.titleLabel?.font = .pretendard(.body1_bold)
+        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
+        btn.imageView?.tintColor = .white000
+        btn.addTarget(self, action: #selector(pushToAddToDoView(_:)), for: .touchUpInside)
+        btn.semanticContentAttribute = .forceLeftToRight
+        btn.layer.cornerRadius = ScreenUtils.getHeight(26)
+        return btn
     }()
     
     // MARK: - Properties
     
-    enum Section: CaseIterable {
-        case main
-    }
-    private var dataSource: UICollectionViewDiffableDataSource<Section, MyToDo>!
     private var index: Int = 0
     var myToDoData: MyToDoData?
     var incompletedData: [MyToDo] = []
@@ -68,44 +75,6 @@ final class MyToDoViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         loadData()
     }
-    
-    // MARK: - objc Method
-
-    @objc
-    func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
-        print("pushToAddToDoView")
-        let todoVC = ToDoViewController()
-        todoVC.navigationBarTitle = "추가"
-        self.navigationController?.pushViewController(todoVC, animated: false)
-    }
-    
-    @objc 
-    func didChangeValue(sender: UISegmentedControl) {
-        
-        if stickyMyToDoHeaderView.isHidden {
-            stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = myToDoHeaderView.segmentedControl.selectedSegmentIndex
-        } else {
-            myToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
-        }
-        
-        loadData()
-    }
-    
-    func checkButtonTapped(index: Int, image: UIImage) {
-        var todo: MyToDo = MyToDo(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
-        if image == ImageLiterals.MyToDo.btnCheckBoxComplete {
-            todo = completedData[index]
-            todo.isComplete = false
-            incompletedData.append(todo)
-            completedData.remove(at: index)
-        } else if image == ImageLiterals.MyToDo.btnCheckBoxIncomplete {
-            todo = incompletedData[index]
-            todo.isComplete = true
-            completedData.append(todo)
-            incompletedData.remove(at: index)
-        }
-        loadData()
-    }
 }
 
 // MARK: - Private method
@@ -113,7 +82,7 @@ final class MyToDoViewController: UIViewController {
 private extension MyToDoViewController {
     
     func setHierachy() {
-        self.view.addSubviews(navigationBarview, scrollView)
+        self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyMyToDoHeaderView)
         contentView.addSubviews(tripHeaderView, myToDoHeaderView, myToDoCollectionView)
     }
@@ -153,6 +122,12 @@ private extension MyToDoViewController {
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.width.equalTo(scrollView)
             $0.height.equalTo(ScreenUtils.getHeight(49))
+        }
+        addToDoButton.snp.makeConstraints{
+            $0.width.equalTo(ScreenUtils.getWidth(117))
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.bottom.equalTo(scrollView).inset(ScreenUtils.getHeight(24))
         }
     }
     
@@ -210,6 +185,65 @@ private extension MyToDoViewController {
             $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
         }
     }
+    
+    /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
+    func setToDoView(naviBarTitle: String, isActivate: Bool) {
+        var manager: [Manager] = []
+        let todoData = ToDoData.todoData
+        for friendProfile in todoData.manager {
+            manager.append(Manager(name: friendProfile.name, isManager: false))
+        }
+        
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = naviBarTitle
+        todoVC.manager = manager
+        todoVC.isActivateView = isActivate
+        self.navigationController?.pushViewController(todoVC, animated: false)
+    }
+    
+    func checkButtonTapped(index: Int, image: UIImage) {
+        var todo: MyToDo = MyToDo(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
+        if image == ImageLiterals.MyToDo.btnCheckBoxComplete {
+            todo = completedData[index]
+            todo.isComplete = false
+            incompletedData.append(todo)
+            completedData.remove(at: index)
+        } else if image == ImageLiterals.MyToDo.btnCheckBoxIncomplete {
+            todo = incompletedData[index]
+            todo.isComplete = true
+            completedData.append(todo)
+            incompletedData.remove(at: index)
+        }
+        loadData()
+    }
+    
+    // MARK: - objc Method
+
+    //TODO: - 서버통신 데이터 수정 필요
+
+    @objc
+    func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
+        setToDoView(naviBarTitle: "추가", isActivate: true)
+    }
+    
+    @objc
+    func didChangeValue(sender: UISegmentedControl) {
+        
+        if stickyMyToDoHeaderView.isHidden {
+            stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = myToDoHeaderView.segmentedControl.selectedSegmentIndex
+        } else {
+            myToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
+        }
+        
+        loadData()
+    }
+    
+    //TODO: - 서버통신 데이터 수정 필요
+    
+    @objc
+    func pushToInquiryToDo() {
+        setToDoView(naviBarTitle: "조회", isActivate: false)
+    }
 }
 
 // MARK: - Extension
@@ -240,6 +274,10 @@ extension MyToDoViewController: UIScrollViewDelegate {
 }
 
 extension MyToDoViewController: MyToDoCollectionViewDelegate {
+    func pushToToDo() {
+        setToDoView(naviBarTitle: "조회", isActivate: false)
+    }
+    
     func getButtonIndex(index: Int, image: UIImage) {
         checkButtonTapped(index: index, image: image)
     }
@@ -268,13 +306,17 @@ extension MyToDoViewController: UICollectionViewDataSource{
             myToDoCell.myToDoData = self.incompletedData[indexPath.row]
             myToDoCell.textColor = UIColor.gray400
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxIncomplete
-                myToDoCell.index = indexPath.row
+            myToDoCell.index = indexPath.row
         } else {
             myToDoCell.myToDoData = self.completedData[indexPath.row]
             myToDoCell.textColor = UIColor.gray300
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxComplete
-                myToDoCell.index = indexPath.row
+            myToDoCell.index = indexPath.row
         }
         return myToDoCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        pushToInquiryToDo()
     }
 }
