@@ -144,6 +144,7 @@ private extension UserTestResultViewController {
     
     func saveImage() {
         UIImageWriteToSavedPhotosAlbum(UIImage(systemName: "pencil")!, self, nil, nil)
+        DOOToast.show(message: "이미지가 저장되었습니다.", insetFromBottom: 114)
     }
     
     @objc
