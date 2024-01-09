@@ -92,7 +92,7 @@ private extension MyToDoViewController {
     func setLayout() {
         navigationBarview.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(44))
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(10))
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(60))
         }
         tabBarView.snp.makeConstraints{
@@ -141,9 +141,7 @@ private extension MyToDoViewController {
         self.view.backgroundColor = .gray50
         self.navigationController?.navigationBar.barTintColor = .white000
         contentView.backgroundColor = .gray50
-        tripHeaderView.isUserInteractionEnabled = true
-        tripHeaderView.editTripButton.isHidden = true
-        
+        tripHeaderView.isUserInteractionEnabled = true        
     }
     
     func setData() {

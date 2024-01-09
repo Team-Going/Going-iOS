@@ -38,6 +38,7 @@ final class OurToDoViewController: UIViewController {
         btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
         btn.semanticContentAttribute = .forceLeftToRight
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
+        btn.isHighlighted = false
         return btn
     }()
     
@@ -88,7 +89,7 @@ private extension OurToDoViewController {
     func setLayout() {
         navigationBarview.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(44))
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(10))
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(60))
         }
         tabBarView.snp.makeConstraints{
