@@ -28,22 +28,29 @@ final class MyToDoViewController: UIViewController {
         header.segmentedControl.addTarget(self, action: #selector(didChangeValue(sender: )), for: .valueChanged)
         return header
     }()
-    
     private lazy var stickyMyToDoHeaderView: OurToDoHeaderView = {
         let headerView = OurToDoHeaderView()
         headerView.isHidden = true
         headerView.backgroundColor = .white000
         headerView.segmentedControl.addTarget(self, action: #selector(didChangeValue(sender: )), for: .valueChanged)
-
         return headerView
+    }()
+    private lazy var addToDoButton: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .red700
+        btn.setTitle(" 나의 할일", for: .normal)
+        btn.setTitleColor(.white000, for: .normal)
+        btn.titleLabel?.font = .pretendard(.body1_bold)
+        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
+        btn.imageView?.tintColor = .white000
+        btn.addTarget(self, action: #selector(pushToAddToDoView(_:)), for: .touchUpInside)
+        btn.semanticContentAttribute = .forceLeftToRight
+        btn.layer.cornerRadius = ScreenUtils.getHeight(26)
+        return btn
     }()
     
     // MARK: - Properties
     
-    enum Section: CaseIterable {
-        case main
-    }
-    private var dataSource: UICollectionViewDiffableDataSource<Section, MyToDo>!
     private var index: Int = 0
     var myToDoData: MyToDoData?
     var incompletedData: [MyToDo] = []
@@ -71,11 +78,20 @@ final class MyToDoViewController: UIViewController {
     
     // MARK: - objc Method
 
+    //TODO: - 서버통신 데이터 수정 필요
+
     @objc
     func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
         print("pushToAddToDoView")
+        var manager: [Manager] = []
+        let todoData = ToDoData.todoData
+        for friendProfile in todoData.manager {
+            manager.append(Manager(name: friendProfile.name, isManager: false))
+        }
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = "추가"
+        todoVC.manager = manager
+        todoVC.isActivateView = false
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
@@ -89,6 +105,24 @@ final class MyToDoViewController: UIViewController {
         }
         
         loadData()
+    }
+    
+    //TODO: - 서버통신 데이터 수정 필요
+    
+    @objc
+    func pushToInquiryToDo() {
+        print("pushToInquiryToDo")
+        
+        var manager: [Manager] = []
+        let todoData = ToDoData.todoData
+        for friendProfile in todoData.manager {
+            manager.append(Manager(name: friendProfile.name, isManager: false))
+        }
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = "조회"
+        todoVC.manager = manager
+        todoVC.isActivateView = false
+        self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
     func checkButtonTapped(index: Int, image: UIImage) {
@@ -113,7 +147,7 @@ final class MyToDoViewController: UIViewController {
 private extension MyToDoViewController {
     
     func setHierachy() {
-        self.view.addSubviews(navigationBarview, scrollView)
+        self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyMyToDoHeaderView)
         contentView.addSubviews(tripHeaderView, myToDoHeaderView, myToDoCollectionView)
     }
@@ -153,6 +187,12 @@ private extension MyToDoViewController {
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.width.equalTo(scrollView)
             $0.height.equalTo(ScreenUtils.getHeight(49))
+        }
+        addToDoButton.snp.makeConstraints{
+            $0.width.equalTo(ScreenUtils.getWidth(117))
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.bottom.equalTo(scrollView).inset(ScreenUtils.getHeight(24))
         }
     }
     
@@ -263,6 +303,8 @@ extension MyToDoViewController: UICollectionViewDataSource{
 
         guard let myToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyToDoCollectionViewCell.identifier, for: indexPath) as? MyToDoCollectionViewCell else {return UICollectionViewCell()}
         myToDoCell.delegate = self
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToInquiryToDo))
+        myToDoCell.addGestureRecognizer(gesture)
         
         if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             myToDoCell.myToDoData = self.incompletedData[indexPath.row]

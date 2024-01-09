@@ -103,7 +103,6 @@ final class ToDoViewController: UIViewController {
     // MARK: - Properties
     
     lazy var navigationBarTitle: String = ""
-    lazy var isActivateView: Bool = true
     lazy var manager: [Manager] = []
     private var getToDoData: ToDoData?
     private var memoTextviewPlaceholder: String = ""
@@ -128,6 +127,16 @@ final class ToDoViewController: UIViewController {
             manager = value[2] as! [Manager]
             memoTextviewPlaceholder = value[3] as! String
             memoTextView.text = memoTextviewPlaceholder
+        }
+    }
+    
+    var isActivateView: Bool? = false {
+        didSet {
+            guard let isActivateView = self.isActivateView else {return}
+            self.todoTextfield.isUserInteractionEnabled = isActivateView ? true : false
+            self.deadlineTextfieldLabel.isUserInteractionEnabled = isActivateView ? true : false
+            self.todoManagerCollectionView.isUserInteractionEnabled = isActivateView ? true : false
+            self.memoTextView.isUserInteractionEnabled = isActivateView ? true : false
         }
     }
     
@@ -164,6 +173,7 @@ final class ToDoViewController: UIViewController {
     // 담당자 버튼 탭 시 버튼 색상 변경 & 배열에 담아주는 메서드
     @objc
     func didTapToDoManagerButton(_ sender: UIButton) {
+        guard let isActivateView = self.isActivateView else {return}
         if isActivateView {
             changeButtonConfig(isSelected: sender.isSelected, btn: sender)
             sender.isSelected = sender.isSelected ? false : true
@@ -178,7 +188,6 @@ final class ToDoViewController: UIViewController {
         let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해주세요." ? "" : deadlineTextfieldLabel.text) ?? ""
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         self.saveToDoData = ToDoData(todo: todo, deadline: deadline, manager: manager, memo: memo)
-        print("save \(self.saveToDoData)")
         self.navigationController?.popViewController(animated: false)
     }
 }
@@ -217,6 +226,7 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(60))
         }
+        guard let isActivateView = self.isActivateView else {return}
         isActivateView ? setButtonView(button: singleButtonView) : setButtonView(button: doubleButtonView)
         todoLabel.snp.makeConstraints{
             $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))

@@ -26,18 +26,18 @@ final class OurToDoViewController: UIViewController {
         return headerView
     }()
     private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
-    private let addToDoView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red700
-        return view
-    }()
-    private let addToDoImageView: UIImageView = UIImageView()
-    private let addToDoLabel: UILabel = {
-        let label = UILabel()
-        label.text = "같이 할일"
-        label.font = .pretendard(.body1_bold)
-        label.textColor = .white000
-        return label
+    private lazy var addToDoButton: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = .red700
+        btn.setTitle(" 같이 할일", for: .normal)
+        btn.setTitleColor(.white000, for: .normal)
+        btn.titleLabel?.font = .pretendard(.body1_bold)
+        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
+        btn.imageView?.tintColor = .white000
+        btn.addTarget(self, action: #selector(pushToAddToDoView(_:)), for: .touchUpInside)
+        btn.semanticContentAttribute = .forceLeftToRight
+        btn.layer.cornerRadius = ScreenUtils.getHeight(26)
+        return btn
     }()
     
     // MARK: - Property
@@ -90,6 +90,21 @@ final class OurToDoViewController: UIViewController {
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
 
+    @objc
+    func pushToInquiryToDo() {
+        print("pushToInquiryToDo")
+        
+        var manager: [Manager] = []
+        for friendProfile in self.tripMiddleView.friendProfile {
+            manager.append(Manager(name: friendProfile.name, isManager: false))
+        }
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = "조회"
+        todoVC.manager = manager
+        todoVC.isActivateView = false
+        self.navigationController?.pushViewController(todoVC, animated: false)
+    }
+    
     @objc private func didChangeValue(segment: UISegmentedControl) {
         self.ourToDoCollectionView.reloadData()
     }
@@ -100,8 +115,8 @@ final class OurToDoViewController: UIViewController {
 private extension OurToDoViewController {
     
     func setHierarchy() {
-        self.view.addSubviews(navigationBarview, scrollView, addToDoView)
-        addToDoView.addSubviews(addToDoImageView, addToDoLabel)
+        self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
+//        addToDoView.addSubviews(addToDoImageView, addToDoLabel)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoHeaderView, ourToDoCollectionView)
     }
@@ -147,22 +162,22 @@ private extension OurToDoViewController {
             $0.leading.trailing.width.equalTo(scrollView)
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
-        addToDoView.snp.makeConstraints{
+        addToDoButton.snp.makeConstraints{
             $0.width.equalTo(ScreenUtils.getWidth(117))
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.bottom.equalTo(scrollView).inset(ScreenUtils.getHeight(24))
         }
-        addToDoLabel.snp.makeConstraints{
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(22))
-        }
-        addToDoImageView.snp.makeConstraints{
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(14))
-        }
+//        addToDoLabel.snp.makeConstraints{
+//            $0.centerY.equalToSuperview()
+//            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(18))
+//            $0.height.equalTo(ScreenUtils.getHeight(22))
+//        }
+//        addToDoImageView.snp.makeConstraints{
+//            $0.centerY.equalToSuperview()
+//            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
+//            $0.height.equalTo(ScreenUtils.getHeight(14))
+//        }
     }
     
     func loadData() {
@@ -181,12 +196,8 @@ private extension OurToDoViewController {
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         tripMiddleView.isUserInteractionEnabled = true
-        addToDoView.layer.cornerRadius = ScreenUtils.getHeight(26)
-        addToDoImageView.image = ImageLiterals.OurToDo.btnPlusOurToDo
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToAddToDoView(_ : )))
         ourToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         stickyOurToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
-        addToDoView.addGestureRecognizer(gesture)
     }
     
     func setCollectionView() -> UICollectionView {
@@ -290,6 +301,8 @@ extension OurToDoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let ourToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: OurToDoCollectionViewCell.identifier, for: indexPath) as? OurToDoCollectionViewCell else {return UICollectionViewCell()}
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToInquiryToDo))
+        ourToDoCell.addGestureRecognizer(gesture)
         
         let ourToDoHeaderIndex = self.ourToDoHeaderView.segmentedControl.selectedSegmentIndex
         let stickHeaderIndex = self.stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
