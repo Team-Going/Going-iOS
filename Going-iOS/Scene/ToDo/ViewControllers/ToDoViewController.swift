@@ -82,13 +82,7 @@ final class ToDoViewController: UIViewController {
         tv.layer.borderWidth = 1
         return tv
     }()
-    private let countMemoCharacterLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0/1000"
-        label.font = .pretendard(.detail2_regular)
-        label.textColor = .gray200
-        return label
-    }()
+    private let countMemoCharacterLabel: UILabel = {DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/1000")}()
     private let buttonView: UIView = UIView()
     private lazy var singleButtonView: DOOButton = {
         let singleBtn = DOOButton(type: .unabled, title: "저장")

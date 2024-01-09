@@ -56,20 +56,8 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor.gray50
         return view
     }()
-    lazy var todoTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.pretendard(.body3_medi)
-        label.textColor = UIColor.gray700
-        label.textAlignment = .left
-        return label
-    }()
-    private let deadlineLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.pretendard(.detail3_regular)
-        label.textColor = UIColor.gray300
-        label.textAlignment = .center
-        return label
-    }()
+    lazy var todoTitleLabel: UILabel = {DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)}()
+    private let deadlineLabel: UILabel = {DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)}()
     lazy var managerCollectionView: UICollectionView = {setCollectionView()}()
     lazy var checkButton: UIButton = {
         let btn = UIButton()

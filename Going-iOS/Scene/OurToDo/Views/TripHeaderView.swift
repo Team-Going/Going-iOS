@@ -16,9 +16,9 @@ final class TripHeaderView: UIView {
         stackView.spacing = 8
         return stackView
     }()
-    lazy var tripNameLabel: UILabel = {setLabel()}()
-    lazy var tripDdayLabel: UILabel = {setLabel()}()
-    lazy var tripDateLabel: UILabel = {setLabel(font: UIFont.pretendard(.body3_medi), textColor: UIColor.gray300)}()
+    lazy var tripNameLabel: UILabel = {DOOLabel(font: .pretendard(.head2), color: .gray700, alignment: .left)}()
+    lazy var tripDdayLabel: UILabel = {DOOLabel(font: .pretendard(.head2), color: .gray700, alignment: .left)}()
+    lazy var tripDateLabel: UILabel = {DOOLabel(font: .pretendard(.body3_medi), color: .gray300, alignment: .left)}()
     private let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: ImageLiterals.OurToDo.icCalendar)
 
     // MARK: - Property
