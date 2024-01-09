@@ -203,17 +203,29 @@ private extension MakeProfileViewController {
     func nameTextFieldBlankCheck() {
         guard let textEmpty = nameTextField.text?.isEmpty else { return }
         if textEmpty {
-            nameTextField.layer.borderColor = UIColor.gray700.cgColor
-            self.nameTextFieldCountLabel.textColor = .gray400
+            nameTextField.layer.borderColor = UIColor.gray200.cgColor
+            self.nameTextFieldCountLabel.textColor = .gray200
             nameWarningLabel.isHidden = true
         } else if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false {
             nameTextField.layer.borderColor = UIColor.red400.cgColor
             self.nameTextFieldCountLabel.textColor = .red400
+            nameWarningLabel.text = "이름에는 공백만 입력할 수 없어요."
             nameWarningLabel.isHidden = false
         } else {
             nameTextField.layer.borderColor = UIColor.gray700.cgColor
             self.nameTextFieldCountLabel.textColor = .gray400
             nameWarningLabel.isHidden = true
+        }
+    }
+    
+    func descTextFieldBlankCheck() {
+        guard let textEmpty = descTextField.text?.isEmpty else { return }
+        if textEmpty {
+            descTextField.layer.borderColor = UIColor.gray200.cgColor
+            self.descTextFieldCountLabel.textColor = .gray200
+        } else {
+            descTextField.layer.borderColor = UIColor.gray700.cgColor
+            self.descTextFieldCountLabel.textColor = .gray400
         }
     }
     
@@ -267,6 +279,7 @@ private extension MakeProfileViewController {
         guard let text = descTextField.text else { return }
         descTextFieldCount = text.count
         descTextFieldCountLabel.text = "\(descTextFieldCount) / 15"
+        descTextFieldBlankCheck()
         updateNextButtonState()
         
     }
@@ -295,7 +308,7 @@ private extension MakeProfileViewController {
 }
 
 extension MakeProfileViewController: UITextFieldDelegate {
-
+    
     //TextField에 변경사항이 생기면, 화면의 TextField에 실제로 작성되기 전에 호출되는 함수
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -309,6 +322,7 @@ extension MakeProfileViewController: UITextFieldDelegate {
             return false
         }
         
+        //모든 예시는 NameTextField 기준으로 적음
         let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
         let addedText = string // 입력한 text 입니다.
         let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합칩니다.
@@ -319,25 +333,37 @@ extension MakeProfileViewController: UITextFieldDelegate {
             return true
         }
         
+        
+        //여기는
         let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)]) // 입력하기 전 text의 마지막 글자 입니다.
         let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) } // 입력하기 전 text의 마지막 글자를 자음과 모음으로 분리해줍니다.
         let separatedCharactersCount = separatedCharacters.count // 분리된 자음, 모음의 개수입니다.
         
-        if separatedCharactersCount == 1 && !addedText.isConsonant { // -- A
+        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 1개이고, 새로 입력되는 글자가 자음이 아닐 경우 입력이 됨
+        // ex)"곽성ㅈ" 에서 입력할 때!
+        if separatedCharactersCount == 1 && !addedText.isConsonant {
             return true
         }
         
-        if separatedCharactersCount == 2 && addedText.isConsonant { // -- B
+        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 2개이고, 새로 입력되는 글자가 자음일 경우 입력이 되도록 함
+        // ex) "곽성주" 에서 입력할 때!
+        if separatedCharactersCount == 2 && addedText.isConsonant {
             return true
         }
         
-        if separatedCharactersCount == 3 && addedText.isConsonant { // -- C
+        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 3개이고, 새로 입력되는 글자가 자음일 경우 입력이 되도록 함, 예를 들어 받침에 자음이 두개 들어가는 경우 밑에서 처리해줘야 됨
+        // ex) "곽성준" 에서 입력할 때!
+        if separatedCharactersCount == 3 && addedText.isConsonant {
+            return true
+        }
+        
+        if separatedCharactersCount == 2 && !addedText.isConsonant {
             return true
         }
         return false
     }
     
-    //TextField에 변경사항이 생기면, 화면의 TextField에 실제로 작성된 후에 호출되는 메서드
+    //TextField에 변경사항이 생기면, TextField에 작성된 후에 호출되는 메서드
     func textFieldDidChangeSelection(_ textField: UITextField) {
         
         var text = textField.text ?? ""
@@ -351,6 +377,7 @@ extension MakeProfileViewController: UITextFieldDelegate {
             return
         }
         
+        //
         if text.count > maxLength {
             let startIndex = text.startIndex
             let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
@@ -358,7 +385,26 @@ extension MakeProfileViewController: UITextFieldDelegate {
             textField.text = fixedText
         }
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case nameTextField:
+            nameTextFieldBlankCheck()
+        case descTextField:
+            descTextFieldBlankCheck()
+        default:
+            return
+        }
+        
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            switch textField {
+            case nameTextField:
+                nameTextFieldBlankCheck()
+            case descTextField:
+                descTextFieldBlankCheck()
+            default:
+                return
+            }
+        }
+    }
 }
-
-
-
