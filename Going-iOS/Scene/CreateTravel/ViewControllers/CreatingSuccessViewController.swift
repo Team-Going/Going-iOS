@@ -87,7 +87,7 @@ final class CreatingSuccessViewController: UIViewController {
     private let inviteCodeLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(.head4)
-        label.textColor = .black000
+        label.textColor = .gray700
         label.text = "083549"
         return label
     }()
@@ -98,12 +98,13 @@ final class CreatingSuccessViewController: UIViewController {
         return line
     }()
     
-    private let codeCopyButton: UIButton = {
+    private lazy var codeCopyButton: UIButton = {
         let button = UIButton()
         button.setTitle(StringLiterals.CreatingSuccess.copyCode, for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
         button.setTitleColor(.gray300, for: .normal)
         button.setImage(ImageLiterals.CreateTravel.buttonCopy, for: .normal)
+        button.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -124,7 +125,6 @@ final class CreatingSuccessViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension CreatingSuccessViewController {
-    
     func setStyle() {
         view.backgroundColor = .gray50
         self.navigationController?.isNavigationBarHidden = true
@@ -217,6 +217,8 @@ private extension CreatingSuccessViewController {
         codeCopyButton.snp.makeConstraints {
             $0.bottom.equalTo(inviteCardView.snp.bottom).inset(16)
             $0.centerX.equalTo(inviteCardView)
+            $0.width.equalTo(ScreenUtils.getWidth(102))
+            $0.height.equalTo(ScreenUtils.getHeight(20))
         }
         
         sendToKaKaoButton.snp.makeConstraints {
