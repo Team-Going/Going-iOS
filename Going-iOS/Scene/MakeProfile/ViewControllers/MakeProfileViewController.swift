@@ -24,10 +24,9 @@ final class MakeProfileViewController: UIViewController {
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
-        textField.setPlaceholder(placeholder: "이름을 입력해주세요", fontColor: .gray200, font: .pretendard(.body3_medi))
+        textField.setPlaceholder(placeholder: "당신을 한줄로 표현해보세요.", fontColor: .gray200, font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
-        textField.setPlaceholderColor(.gray700)
         textField.textColor = .gray700
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor.gray200.cgColor
@@ -37,7 +36,6 @@ final class MakeProfileViewController: UIViewController {
     
     private let nameWarningLabel: UILabel = {
         let label = UILabel()
-        label.text = "이름을 입력해주세요"
         label.textColor = .red400
         label.font = .pretendard(.detail2_regular)
         label.isHidden = true

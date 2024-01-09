@@ -102,7 +102,8 @@ private extension SettingsViewController {
     
     @objc
     func resignButtonTapped() {
-        print("tapped")
+        let nextVC = DeleteUserPopUpViewController()
+        self.present(nextVC, animated: false)
     }
 }
 
@@ -119,7 +120,28 @@ extension SettingsViewController: UICollectionViewDataSource {
     }
 }
 
-extension SettingsViewController: UICollectionViewDelegate { }
+extension SettingsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = settingsItem[indexPath.row]
+        
+        switch item.title {
+        case "내 프로필":
+            let profileVC = MakeProfileViewController()
+            navigationController?.pushViewController(profileVC, animated: true)
+        case "문의하기":
+            let inquiryVC = InquiryWebViewController()
+            self.present(inquiryVC, animated: true, completion: nil)
+        case "약관 및 정책":
+            let policyVC = PolicyWebViewController()
+            self.present(policyVC, animated: true, completion: nil)
+        case "About doorip":
+            let aboutServiceVC = ServiceInfoWebViewController()
+            self.present(aboutServiceVC, animated: true, completion: nil)
+        default:
+            break
+        }
+    }
+}
 
 extension SettingsViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing

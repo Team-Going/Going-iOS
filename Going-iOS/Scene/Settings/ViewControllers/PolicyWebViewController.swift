@@ -1,15 +1,15 @@
 //
-//  PersonalInfoWebViewController.swift
+//  PolicyWebViewController.swift
 //  Going-iOS
 //
-//  Created by 곽성준 on 1/1/24.
+//  Created by 윤영서 on 1/10/24.
 //
 
 import UIKit
 
 import WebKit
 
-final class PersonalInfoWebViewController: UIViewController {
+final class PolicyWebViewController: UIViewController {
     
     private var webView: WKWebView?
     private let urlString = "https://useworld.github.io/iOS/webview/"
@@ -27,7 +27,7 @@ final class PersonalInfoWebViewController: UIViewController {
     }
 }
 
-private extension PersonalInfoWebViewController {
+private extension PolicyWebViewController {
     func setWebView() {
         if let url = URL(string: urlString) {
             let request = URLRequest(url: url)
