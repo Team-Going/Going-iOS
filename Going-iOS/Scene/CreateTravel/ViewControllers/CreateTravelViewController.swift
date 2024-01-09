@@ -280,13 +280,30 @@ private extension CreateTravelViewController {
     
     func updateCreateButtonState() {
         let isTravelNameTextFieldEmpty = travelNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
-
-        // TODO: - Label에 Padding 주는 형식으로 변경
         
-        let isStartDateSet = startDateLabel.text != "   시작일"
-        let isEndDateSet = endDateLabel.text != "   종료일"
+        let isStartDateSet = startDateLabel.text != "시작일"
+        let isEndDateSet = endDateLabel.text != "종료일"
         
-        createTravelButton.currentType = (!isTravelNameTextFieldEmpty && isStartDateSet && isEndDateSet) ? .enabled : .unabled
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        var isDateValid = true
+        var isEndDateNotPast = true
+        
+        if let startDateText = startDateLabel.text?.trimmingCharacters(in: .whitespaces),
+           let endDateText = endDateLabel.text?.trimmingCharacters(in: .whitespaces),
+           let startDate = dateFormatter.date(from: startDateText),
+           let endDate = dateFormatter.date(from: endDateText) {
+            isDateValid = startDate <= endDate
+            let today = Date()
+            isEndDateNotPast = endDate >= today
+        }
+        
+        createTravelButton.currentType = (!isTravelNameTextFieldEmpty 
+                                          && isStartDateSet
+                                          && isEndDateSet
+                                          && isDateValid
+                                          && isEndDateNotPast) ? .enabled : .unabled
     }
     
     func travelNameTextFieldBlankCheck() {
