@@ -233,4 +233,11 @@ private extension CreatingSuccessViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
         }
     }
+    
+    // MARK: - @objc Methods
+    
+    @objc
+    func copyButtonTapped() {
+        DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: 314)
+    }
 }
