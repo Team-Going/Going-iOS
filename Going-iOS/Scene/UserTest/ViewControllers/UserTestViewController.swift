@@ -139,10 +139,9 @@ private extension UserTestViewController {
     
     func updateNextButtonState() {
         // 선택된 버튼이 있는지 확인하고 nextButton의 활성화 여부를 결정
-        if selectedButton != nil {
-            nextButton.isEnabled = true
-        }
+        nextButton.isEnabled = selectedButton == nil ? false : true
         nextButton.backgroundColor = nextButton.isEnabled ? .gray500 : .gray50
+
         if nextButton.isEnabled {
             nextButton.setTitleColor(.white000, for: .normal)
         } else {
@@ -177,7 +176,6 @@ private extension UserTestViewController {
         }) { [self] _ in
             // fade out 애니메이션 종료 후 실행될 코드
             updateLabel()
-            
             UIView.animate(withDuration: 0.5) {
                 viewsToAnimate.forEach { $0?.alpha = 1.0 }
             }
@@ -214,28 +212,30 @@ private extension UserTestViewController {
     
     @objc
     func nextButtonTapped() {
-        
+        resetButtons()
         if index < userTestDataStruct.count - 1 {
             
             // 질문이 마지막이 아닌 경우
             testProgressView.setProgress(testProgressView.progress + 0.1111111, animated: true)
             index += 1
             setAnimation()
-            resetButtons()
             buttonIndexList.append(self.buttonIndex)
             
             // nextButton 상태 초기화
             nextButton.backgroundColor = .gray50
             nextButton.setTitleColor(.gray200, for: .normal)
+            updateNextButtonState()
             
         } else {
             // 질문이 마지막인 경우
             setAnimation()
             buttonIndexList.append(self.buttonIndex)
             handleLastQuestion()
+            
         }
         if index == 8 {
             nextButton.setTitle("제출하기", for: .normal)
+            updateNextButtonState()
         }
     }
 }
