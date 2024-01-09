@@ -126,7 +126,7 @@ extension SettingsViewController: UICollectionViewDelegate {
         
         switch item.title {
         case "내 프로필":
-            let profileVC = MakeProfileViewController()
+            let profileVC = UserTestResultViewController()
             navigationController?.pushViewController(profileVC, animated: true)
         case "문의하기":
             let inquiryVC = InquiryWebViewController()
@@ -137,6 +137,9 @@ extension SettingsViewController: UICollectionViewDelegate {
         case "About doorip":
             let aboutServiceVC = ServiceInfoWebViewController()
             self.present(aboutServiceVC, animated: true, completion: nil)
+        case "로그아웃":
+            let logOutVC = LogOutPopUpViewController()
+            self.present(logOutVC, animated: false)
         default:
             break
         }

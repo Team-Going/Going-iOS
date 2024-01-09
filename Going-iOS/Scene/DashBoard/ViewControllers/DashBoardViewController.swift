@@ -177,9 +177,8 @@ private extension DashBoardViewController {
     
     @objc
     func settingsButtonTapped() {
-//        let vc = ()
-//        navigationController?.pushViewController(vc, animated: true)
-        print("push")
+        let vc = SettingsViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
