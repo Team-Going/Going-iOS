@@ -4,7 +4,7 @@ protocol OurToDoCollectionViewDelegate: AnyObject {
     func getManagersData()
 }
 
-class OurToDoCollectionViewCell: UICollectionViewCell {
+final class OurToDoCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Property
     
@@ -13,14 +13,27 @@ class OurToDoCollectionViewCell: UICollectionViewCell {
     let absoluteHeight = UIScreen.main.bounds.height / 812
     weak var delegate: OurToDoCollectionViewDelegate?
     var manager: [String] = []
-    var data: OurToDo? {
+    var ourToDoData: OurToDo? {
         didSet {
-            guard let data = data else {return}
+            guard let data = ourToDoData else {return}
             self.todoTitleLabel.text = data.todoTitle
             self.deadlineLabel.text = data.deadline + "까지"
             self.manager = data.manager
             
             self.managerCollectionView.reloadData()
+        }
+    }
+    var index: Int? {
+        didSet {
+            guard let index = index else {return}
+            self.index = index
+            self.managerCollectionView.reloadData()
+        }
+    }
+    var textColor: UIColor? {
+        didSet {
+            guard let textColor = textColor else {return}
+            self.todoTitleLabel.textColor = textColor
         }
     }
     
@@ -135,7 +148,7 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource {
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
         print("our \(self.manager[indexPath.row])")
         managerCell.managerData = self.manager[indexPath.row]
-        if self.data?.isComplete == false {
+        if self.ourToDoData?.isComplete == false {
             self.manager[indexPath.row] == "지민" ? managerCell.changeLabelColor(color: .red400) : managerCell.changeLabelColor(color: .gray400)
         }else{
             managerCell.changeLabelColor(color: .gray300)

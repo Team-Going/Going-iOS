@@ -116,7 +116,6 @@ private extension OurToDoViewController {
     
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
-//        addToDoView.addSubviews(addToDoImageView, addToDoLabel)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoHeaderView, ourToDoCollectionView)
     }
@@ -168,16 +167,6 @@ private extension OurToDoViewController {
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.bottom.equalTo(scrollView).inset(ScreenUtils.getHeight(24))
         }
-//        addToDoLabel.snp.makeConstraints{
-//            $0.centerY.equalToSuperview()
-//            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(18))
-//            $0.height.equalTo(ScreenUtils.getHeight(22))
-//        }
-//        addToDoImageView.snp.makeConstraints{
-//            $0.centerY.equalToSuperview()
-//            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-//            $0.height.equalTo(ScreenUtils.getHeight(14))
-//        }
     }
     
     func loadData() {
@@ -239,7 +228,7 @@ private extension OurToDoViewController {
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
     func setCellStyle(cell: OurToDoCollectionViewCell, data: OurToDo, textColor: UIColor, isUserInteractionEnabled: Bool) {
-        cell.data = data
+        cell.ourToDoData = data
         cell.todoTitleLabel.textColor = textColor
         cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
     }
@@ -304,22 +293,14 @@ extension OurToDoViewController: UICollectionViewDataSource {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToInquiryToDo))
         ourToDoCell.addGestureRecognizer(gesture)
         
-        let ourToDoHeaderIndex = self.ourToDoHeaderView.segmentedControl.selectedSegmentIndex
-        let stickHeaderIndex = self.stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
-
-        if stickyOurToDoHeaderView.isHidden {
-            if (ourToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 1){
-                setCellStyle(cell: ourToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true)
-            }else if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (ourToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
-                setCellStyle(cell: ourToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false)
-            }else {}
-        }else {
-            if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 0){
-                setCellStyle(cell: ourToDoCell, data: self.incompletedData[indexPath.row], textColor: UIColor.gray400, isUserInteractionEnabled: true)
-            }else if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
-                setCellStyle(cell: ourToDoCell, data: self.completedData[indexPath.row], textColor: UIColor.gray300, isUserInteractionEnabled: false)
-
-            }else {}
+        if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            ourToDoCell.ourToDoData = self.incompletedData[indexPath.row]
+            ourToDoCell.textColor = UIColor.gray400
+            ourToDoCell.index = indexPath.row
+        } else {
+            ourToDoCell.ourToDoData = self.completedData[indexPath.row]
+            ourToDoCell.textColor = UIColor.gray300
+            ourToDoCell.index = indexPath.row
         }
         return ourToDoCell
     }
