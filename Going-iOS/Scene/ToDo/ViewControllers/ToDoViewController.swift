@@ -107,8 +107,8 @@ final class ToDoViewController: UIViewController {
     private var saveToDoData: ToDoData?
     var data: ToDoData? {
         didSet {
-            guard let todoData = data else {return}
-            self.getToDoData = todoData
+            guard let data else {return}
+            self.getToDoData = data
             todoTextfield.text = self.getToDoData?.todo
             deadlineTextfieldLabel.text = self.getToDoData?.deadline
             manager = self.getToDoData?.manager ?? []
@@ -129,7 +129,7 @@ final class ToDoViewController: UIViewController {
     
     var isActivateView: Bool? = false {
         didSet {
-            guard let isActivateView = self.isActivateView else {return}
+            guard let isActivateView else {return}
             self.todoTextfield.isUserInteractionEnabled = isActivateView ? true : false
             self.deadlineTextfieldLabel.isUserInteractionEnabled = isActivateView ? true : false
             self.todoManagerCollectionView.isUserInteractionEnabled = isActivateView ? true : false
@@ -223,7 +223,7 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(60))
         }
-        guard let isActivateView = self.isActivateView else {return}
+        guard let isActivateView else {return}
         isActivateView ? setButtonView(button: singleButtonView) : setButtonView(button: doubleButtonView)
         todoLabel.snp.makeConstraints{
             $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))

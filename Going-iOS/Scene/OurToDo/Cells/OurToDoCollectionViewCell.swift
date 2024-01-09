@@ -15,24 +15,24 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
     var manager: [String] = []
     var ourToDoData: OurToDo? {
         didSet {
-            guard let data = ourToDoData else {return}
-            self.todoTitleLabel.text = data.todoTitle
-            self.deadlineLabel.text = data.deadline + "까지"
-            self.manager = data.manager
+            guard let ourToDoData else {return}
+            self.todoTitleLabel.text = ourToDoData.todoTitle
+            self.deadlineLabel.text = ourToDoData.deadline + "까지"
+            self.manager = ourToDoData.manager
             
             self.managerCollectionView.reloadData()
         }
     }
     var index: Int? {
         didSet {
-            guard let index = index else {return}
+            guard let index else {return}
             self.index = index
             self.managerCollectionView.reloadData()
         }
     }
     var textColor: UIColor? {
         didSet {
-            guard let textColor = textColor else {return}
+            guard let textColor else {return}
             self.todoTitleLabel.textColor = textColor
         }
     }
