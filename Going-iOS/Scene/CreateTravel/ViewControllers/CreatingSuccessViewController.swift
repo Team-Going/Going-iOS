@@ -14,14 +14,9 @@ final class CreatingSuccessViewController: UIViewController {
     // MARK: - UI Properties
     
     // TODO: - Dummy Data 생성
-    
-    private let navigationBar: NavigationView = {
-        let nav = NavigationView()
-        nav.titleLabel.text = ""
-        nav.backgroundColor = .gray50
-        return nav
-    }()
-    
+
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
+
     private let createSuccessLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(.head2)

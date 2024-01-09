@@ -11,8 +11,9 @@ enum ImageLiterals {
     
     enum NavigationBar {
         static var buttonBack: UIImage { .load(named: "btn_back") }
-        static var buttonSave: UIImage { .load(named: "btn_save")}
-        static var buttonClose: UIImage { .load(named: "btn_close")}
+        static var buttonSave: UIImage { .load(named: "btn_save") }
+        static var buttonClose: UIImage { .load(named: "btn_close") }
+        static var buttonProfile: UIImage { .load(named: "btn_profile") }
     }
     
     enum Splash {
