@@ -69,6 +69,7 @@ final class MyToDoViewController: UIViewController {
         registerCell()
         setLayout()
         setStyle()
+        setTapBarImage()
         self.didChangeValue(sender: self.myToDoHeaderView.segmentedControl)
         self.didChangeValue(sender: self.stickyMyToDoHeaderView.segmentedControl)
     }
@@ -221,6 +222,11 @@ private extension MyToDoViewController {
             incompletedData.remove(at: index)
         }
         loadData()
+    }
+    
+    func setTapBarImage() {
+        self.tabBarView.ourToDoTab.imageView?.tintColor = .gray200
+        self.tabBarView.myToDoTab.imageView?.tintColor = .red500
     }
     
     // MARK: - objc Method

@@ -60,6 +60,7 @@ final class OurToDoViewController: UIViewController {
         registerCell()
         setLayout()
         setStyle()
+        setTapBarImage()
         self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
         self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
     }
@@ -223,6 +224,11 @@ private extension OurToDoViewController {
             axis: .horizontal)
     }
     
+    func setTapBarImage() {
+        self.tabBarView.ourToDoTab.imageView?.tintColor = .red500
+        self.tabBarView.myToDoTab.imageView?.tintColor = .gray200
+    }
+    
     // MARK: - objc method
     
     @objc
@@ -289,7 +295,8 @@ extension OurToDoViewController: TabBarDelegate {
     func tapMyToDo() {
         let myToDoVC = MyToDoViewController()
         print("mytodo")
-
+        self.tabBarView.ourToDoTab.setImage(UIImage(systemName: "person.fill"), for: .normal)
+        self.tabBarView.ourToDoTab.setImage(UIImage(systemName: "pencil"), for: .normal)
         self.navigationController?.pushViewController(myToDoVC, animated: false)
     }
 }

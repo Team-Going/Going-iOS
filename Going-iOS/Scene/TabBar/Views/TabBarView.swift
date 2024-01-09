@@ -31,7 +31,7 @@ final class TabBarView: UIView {
         stackView.axis = .horizontal
         return stackView
     }()
-    private lazy var ourToDoTab: UIButton = {
+    lazy var ourToDoTab: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .white000
         btn.setImage(UIImage(systemName: "person.fill"), for: .normal)
@@ -40,7 +40,7 @@ final class TabBarView: UIView {
         btn.tag = 1
         return btn
     }()
-    private lazy var myToDoTab: UIButton = {
+    lazy var myToDoTab: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .white000
         btn.setImage(UIImage(systemName: "person.fill"), for: .normal)
@@ -73,6 +73,7 @@ final class TabBarView: UIView {
 
     @objc
     func tapOurToDoTabBar() {
+
         print("tapOurToDoTabBar")
         self.delegate?.tapOurToDo()
     }
