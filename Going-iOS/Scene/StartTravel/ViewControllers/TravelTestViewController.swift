@@ -20,12 +20,13 @@ final class TravelTestViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    private let navigationBar: NavigationView = {
-        let nav = NavigationView()
-        nav.titleLabel.text = "이번 여행은!"
-        return nav
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("이번 여행은!"))
+    private let navigationBottomLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
+        return view
     }()
-        
+    
     private lazy var travelTestCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private lazy var nextButton: DOOButton = {
@@ -63,8 +64,9 @@ private extension TravelTestViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar,
-                         travelTestCollectionView,
+        view.addSubviews(travelTestCollectionView,
+                         navigationBar,
+                         navigationBottomLineView,
                          gradientView,
                          nextButton)
     }
@@ -76,9 +78,14 @@ private extension TravelTestViewController {
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
+        navigationBottomLineView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
         travelTestCollectionView.snp.makeConstraints {
-            // TODO: - DOONav로 바꾸고나서 top 레이아웃 수정
-            $0.top.equalTo(navigationBar.snp.bottom).offset(3)
+            $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(nextButton.snp.top)
         }

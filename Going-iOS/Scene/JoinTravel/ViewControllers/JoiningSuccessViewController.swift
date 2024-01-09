@@ -15,12 +15,7 @@ final class JoiningSuccessViewController: UIViewController {
     
     // TODO: - Dummy Data 생성
     
-    private lazy var backButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(ImageLiterals.NavigationBar.buttonBack, for: .normal)
-        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        return btn
-    }()
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
     
     private let joinSuccessLabel: UILabel = {
         let label = UILabel()
@@ -85,13 +80,6 @@ final class JoiningSuccessViewController: UIViewController {
         setHierarchy()
         setLayout()
     }
-    
-    // MARK: - @objc Methods
-    
-    @objc
-    func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
-    }
 }
 
 // MARK: - Private Extension
@@ -104,7 +92,7 @@ private extension JoiningSuccessViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(backButton,
+        view.addSubviews(navigationBar,
                          joinSuccessLabel,
                          ticketImage,
                          entranceToTestButton)
@@ -114,10 +102,10 @@ private extension JoiningSuccessViewController {
     }
     
     func setLayout() {
-        backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(46)
-            $0.leading.equalToSuperview().inset(10)
-            $0.size.equalTo(ScreenUtils.getHeight(48))
+        navigationBar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
         joinSuccessLabel.snp.makeConstraints {

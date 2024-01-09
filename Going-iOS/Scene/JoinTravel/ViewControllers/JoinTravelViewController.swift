@@ -14,13 +14,14 @@ final class JoinTravelViewController: UIViewController {
     // TODO: - Dummy Data 생성
     
     // MARK: - UI Properties
-    
-    private let navigationBar: NavigationView = {
-        let nav = NavigationView()
-        nav.titleLabel.text = "여행 입장하기"
-        return nav
-    }()
 
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
+    private let navigationBottomLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
+        return view
+    }()
+    
     private let codeTitleLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.JoinTravel.inviteCodeTitle)
     
     private let codeTextField: UITextField = {
@@ -28,7 +29,7 @@ final class JoinTravelViewController: UIViewController {
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, forBorderColor: .gray200, forCornerRadius: 6)
-        field.setPlaceholderColor(.gray700)
+        field.setPlaceholderColor(.gray200)
         field.keyboardType = .numberPad
         return field
     }()
@@ -105,6 +106,7 @@ private extension JoinTravelViewController {
     
     func setHierarchy() {
         view.addSubviews(navigationBar,
+                         navigationBottomLineView,
                          codeTitleLabel,
                          codeTextField,
                          characterCountLabel,
@@ -116,6 +118,12 @@ private extension JoinTravelViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        navigationBottomLineView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
         codeTitleLabel.snp.makeConstraints {
@@ -161,32 +169,28 @@ private extension JoinTravelViewController {
     }
     
     func updateNextButtonState() {
-        let isCodeTextFieldEmpty = codeTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
-        nextButton.currentType = (!isCodeTextFieldEmpty) ? .enabled : .unabled
+        let isCodeTextFieldIsFilled = codeTextField.text!.trimmingCharacters(in: .whitespaces).count == 6
+        nextButton.currentType = (isCodeTextFieldIsFilled) ? .enabled : .unabled
     }
 }
 
 extension JoinTravelViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == codeTextField {
-            /// 현재 텍스트 필드의 텍스트와 입력된 문자를 합쳐서 길이를 계산
-            let currentText = textField.text ?? ""
-            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-            let maxLength = 6
-            characterCountLabel.text = "\(newText.count)/\(maxLength)"
-            
-            if newText.count >= 1 {
-                textField.layer.borderColor = UIColor.gray700.cgColor
-                characterCountLabel.textColor = .gray400
-                updateNextButtonState()
-            } else {
-                textField.layer.borderColor = UIColor.gray200.cgColor
-            }
-            
-            // 최대 길이를 초과하면 입력을 막음
-            return newText.count <= maxLength
+    func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
+        guard let text = textField.text else { return  false }
+
+        let newLength = text.count + string.count - range.length
+        let maxLength = 6
+        
+        if newLength == 0 {
+            textField.layer.borderColor =  UIColor.gray200.cgColor
+            characterCountLabel.textColor = .gray200
+            characterCountLabel.text = "\(newLength)/" + "\(maxLength)"
+        } else if newLength < maxLength + 1 {
+            textField.layer.borderColor =  UIColor.gray700.cgColor
+            characterCountLabel.textColor = .gray700
+            characterCountLabel.text = "\(newLength)/" + "\(maxLength)"
         }
-        return true
+        return  !(newLength > maxLength)
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
