@@ -61,6 +61,8 @@
 		F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461012B4D6D4800674D74 /* DOOToast.swift */; };
 		F44461042B4D77F200674D74 /* DOOToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461032B4D77F200674D74 /* DOOToastView.swift */; };
 		F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461052B4D7F1100674D74 /* UIWindow+.swift */; };
+		F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */; };
+		F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -170,6 +172,8 @@
 		F44461012B4D6D4800674D74 /* DOOToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOToast.swift; sourceTree = "<group>"; };
 		F44461032B4D77F200674D74 /* DOOToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOToastView.swift; sourceTree = "<group>"; };
 		F44461052B4D7F1100674D74 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
+		F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDimmedViewController.swift; sourceTree = "<group>"; };
+		F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOPopUpContainerView.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -543,6 +547,15 @@
 			path = DOOToast;
 			sourceTree = "<group>";
 		};
+		F44461072B4D8E9000674D74 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */,
+				F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -808,6 +821,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F44461072B4D8E9000674D74 /* PopUp */,
 				948767A22B4C23A700BCF843 /* Settings */,
 				CADA024F2B4AC701001FCE89 /* MyToDo */,
 				94442EB22B4AB5EF00FDBB26 /* DashBoard */,
@@ -1033,9 +1047,11 @@
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
+				F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */,
 				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
 				CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
+				F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
 				F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */,
