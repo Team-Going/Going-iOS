@@ -13,7 +13,7 @@ import Photos
 
 
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate, CheckPhotoAccessProtocol {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
@@ -24,10 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, CheckPhotoAccessProtoco
         // 2.
         self.window = UIWindow(windowScene: windowScene)
         // 3.
-        let navigationController = UINavigationController(rootViewController: UserTestViewController())
+        let navigationController = UINavigationController(rootViewController: SplashViewController())
         self.window?.rootViewController = navigationController
         // 4.
         self.window?.makeKeyAndVisible()
+        
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -58,6 +59,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, CheckPhotoAccessProtoco
                 break
             }
         }
-        checkAccess()
     }
 }

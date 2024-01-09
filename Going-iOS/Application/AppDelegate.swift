@@ -13,10 +13,13 @@ import Photos
 
 //PHPhotoLibraryChangeObserver
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CheckPhotoAccessProtocol {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //앱이 처음 실행될 때, Access체크를 해서 UserDefault값을 변경해준다. 재실행해도 상관x
+        checkAccess()
         
         let kakaoNativeAppKey = Config.kakaoNativeAppKey
         KakaoSDK.initSDK(appKey: kakaoNativeAppKey)
@@ -41,9 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 break
             }
         }
-        
-//        PHPhotoLibrary.shared().register(self)
-        
         return true
     }
     
@@ -61,24 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        
-    }
-    
-    //    func photoLibraryDidChange(_ changeInstance: PHChange) {
-    //           // 사진 라이브러리 변경 사항 감지
-    //           // 권한 변경 여부 확인 및 필요한 작업 수행
-    //           if let details = changeInstance.changeDetails(for: PHAssetCollection.fetchTopLevelUserCollections(with: nil)) {
-    //               // 권한 변경 여부 확인
-    //               if details.hasIncrementalChanges {
-    //                   // 변경이 감지되었을 때 필요한 작업 수행
-    //                   print("Photo library permissions might have changed.")
-    //               }
-    //           }
-    //       }
-    
-    
-    
+
 }
 

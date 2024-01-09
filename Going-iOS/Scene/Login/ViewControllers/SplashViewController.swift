@@ -10,10 +10,6 @@ import UIKit
 import SnapKit
 
 final class SplashViewController: UIViewController {
-    
-    private enum Size {
-        static let logoHeight: CGFloat = 66 / 194
-    }
 
     private let splashLogoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -32,10 +28,8 @@ final class SplashViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        performActionBasedOnPermission()
+        pushActionBasedOnPermission()
     }
-
-    
 }
 
 private extension SplashViewController {
@@ -57,7 +51,7 @@ private extension SplashViewController {
         }
     }
     
-    func performActionBasedOnPermission() {
+    func pushActionBasedOnPermission() {
         if UserDefaults.standard.bool(forKey: "photoPermissionKey") {
             // 권한이 설정된 경우의 동작
             print("설정 가능")
@@ -70,10 +64,4 @@ private extension SplashViewController {
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
-    
-//    @objc
-//    func userDefaultsDidChange() {
-//        let moveToUserTestResult = UserTestResultViewController()
-//        self.navigationController?.pushViewController(moveToUserTestResult, animated: true)
-//    }
 }
