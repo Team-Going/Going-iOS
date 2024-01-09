@@ -18,14 +18,11 @@ class ManagerCollectionViewCell: UICollectionViewCell {
     // MARK: - UI Properties
     
     var managerLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.pretendard(.detail2_regular)
-        label.textColor = UIColor.gray400
+        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .clear, alignment: .center)
         label.backgroundColor = UIColor.gray50
         label.layer.cornerRadius = 4
         label.layer.borderWidth = 0.75
         label.layer.borderColor = UIColor.gray400.cgColor
-        label.textAlignment = .center
         return label
     }()
 

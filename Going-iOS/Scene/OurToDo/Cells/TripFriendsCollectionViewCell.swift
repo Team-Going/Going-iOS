@@ -27,13 +27,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         imageView.layer.masksToBounds = true
         return imageView
     }()
-    var friendNameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.gray500
-        label.textAlignment = .center
-        label.font = UIFont.pretendard(.detail3_regular)
-        return label
-    }()
+    var friendNameLabel: UILabel = {DOOLabel(font: .pretendard(.detail3_regular), color: .gray500, alignment: .center)}()
 
     // MARK: - Life Cycle
 
