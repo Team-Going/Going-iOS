@@ -256,6 +256,11 @@ extension OurToDoViewController: UIScrollViewDelegate {
     }
 }
 
+extension OurToDoViewController: OurToDoCollectionViewDelegate {
+    func pushToToDo() {
+        setToDoView(naviBarTitle: "조회", isActivate: false)
+    }
+}
 extension OurToDoViewController: UICollectionViewDelegate {}
 
 extension OurToDoViewController: UICollectionViewDataSource {

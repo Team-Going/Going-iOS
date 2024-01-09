@@ -274,6 +274,10 @@ extension MyToDoViewController: UIScrollViewDelegate {
 }
 
 extension MyToDoViewController: MyToDoCollectionViewDelegate {
+    func pushToToDo() {
+        setToDoView(naviBarTitle: "조회", isActivate: false)
+    }
+    
     func getButtonIndex(index: Int, image: UIImage) {
         checkButtonTapped(index: index, image: image)
     }
@@ -297,20 +301,22 @@ extension MyToDoViewController: UICollectionViewDataSource{
 
         guard let myToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyToDoCollectionViewCell.identifier, for: indexPath) as? MyToDoCollectionViewCell else {return UICollectionViewCell()}
         myToDoCell.delegate = self
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToInquiryToDo))
-        myToDoCell.addGestureRecognizer(gesture)
         
         if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             myToDoCell.myToDoData = self.incompletedData[indexPath.row]
             myToDoCell.textColor = UIColor.gray400
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxIncomplete
-                myToDoCell.index = indexPath.row
+            myToDoCell.index = indexPath.row
         } else {
             myToDoCell.myToDoData = self.completedData[indexPath.row]
             myToDoCell.textColor = UIColor.gray300
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxComplete
-                myToDoCell.index = indexPath.row
+            myToDoCell.index = indexPath.row
         }
         return myToDoCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        pushToInquiryToDo()
     }
 }

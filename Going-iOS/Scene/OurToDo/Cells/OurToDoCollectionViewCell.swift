@@ -1,7 +1,7 @@
 import UIKit
 
 protocol OurToDoCollectionViewDelegate: AnyObject {
-    func getManagersData()
+    func pushToToDo()
 }
 
 final class OurToDoCollectionViewCell: UICollectionViewCell {
@@ -64,6 +64,11 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @objc
+    func tapManagerCollectionView(_ sender: UITapGestureRecognizer) {
+        self.delegate?.pushToToDo()
+    }
 }
 
 // MARK: - Private Method
@@ -82,7 +87,6 @@ private extension OurToDoCollectionViewCell {
         }
         todoTitleLabel.snp.makeConstraints{
             $0.top.leading.equalToSuperview().inset(absoluteWidth * 16)
-//            $0.height.equalTo(absoluteHeight * 21)
         }
         managerCollectionView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 16)
@@ -91,7 +95,6 @@ private extension OurToDoCollectionViewCell {
         }
         deadlineLabel.snp.makeConstraints{
             $0.top.trailing.equalToSuperview().inset(absoluteWidth * 16)
-//            $0.height.equalTo(18)
         }
     }
     
