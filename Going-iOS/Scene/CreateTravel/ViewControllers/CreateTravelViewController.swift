@@ -37,11 +37,11 @@ final class CreateTravelViewController: UIViewController {
         field.textColor = .gray700
         return field
     }()
-
-    private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular), 
+    
+    private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular),
                                                color: .gray200,
                                                text: "0/15")
-
+    
     private let warningLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400, text: StringLiterals.CreateTravel.warning)
         label.isHidden = true
@@ -55,10 +55,23 @@ final class CreateTravelViewController: UIViewController {
         stack.spacing = 6
         return stack
     }()
-    
-    private let startDateLabel = UILabel()
-    private let endDateLabel = UILabel()
-    
+        
+    private let startDateLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "시작일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+        label.layer.cornerRadius = 6
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.gray200.cgColor
+        return label
+    }()
+  
+    private let endDateLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "종료일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+        label.layer.cornerRadius = 6
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.gray200.cgColor
+        return label
+    }()
+
     private let dashLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700, text: "-")
     
     private lazy var createTravelButton: DOOButton = {
@@ -78,7 +91,6 @@ final class CreateTravelViewController: UIViewController {
         setHierarchy()
         setLayout()
         setGestureRecognizer()
-        setProperty()
         setDelegate()
         setNotification()
     }
@@ -233,17 +245,6 @@ private extension CreateTravelViewController {
         endDateLabel.addGestureRecognizer(endDateTapGesture)
     }
     
-    func setProperty() {
-        [startDateLabel, endDateLabel].forEach { label in
-            label.text = "   " + (label == startDateLabel ? "시작일" : "종료일")
-            label.font = .pretendard(.body3_medi)
-            label.textColor = .gray200
-            label.layer.borderColor = UIColor.gray200.cgColor
-            label.layer.borderWidth = 1
-            label.layer.cornerRadius = 6
-        }
-    }
-    
     func setDelegate() {
         bottomSheetVC.delegate = self
         travelNameTextField.delegate = self
@@ -257,7 +258,7 @@ private extension CreateTravelViewController {
         return formatter.string(from: date)
     }
     
-    /// DatePicker Presnet 하는 메서드
+    /// DatePicker Present 하는 메서드
     func showDatePicker(for label: UILabel) {
         bottomSheetVC.modalPresentationStyle = .overFullScreen
         self.present(bottomSheetVC, animated: false, completion: nil)
@@ -326,7 +327,7 @@ private extension CreateTravelViewController {
 
 extension CreateTravelViewController: BottomSheetDelegate {
     func didSelectDate(date: Date) {
-        let formattedDate = "   " + dateFormat(date: date)
+        let formattedDate = dateFormat(date: date)
         activeLabel?.text = formattedDate
         activeLabel?.textColor = .gray700
         activeLabel?.layer.borderColor = UIColor.gray700.cgColor
