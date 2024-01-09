@@ -33,7 +33,7 @@ class PopUpDimmedViewController: UIViewController {
         }
         
         UIView.animate(withDuration: 0.2) {
-            self.dimmedView.alpha = 0.8
+            self.dimmedView.alpha = 0.7
         }
     }
     

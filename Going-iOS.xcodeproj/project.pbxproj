@@ -63,6 +63,7 @@
 		F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461052B4D7F1100674D74 /* UIWindow+.swift */; };
 		F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */; };
 		F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */; };
+		F444610E2B4D90E100674D74 /* DeleteUserPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444610D2B4D90E100674D74 /* DeleteUserPopUpViewController.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -174,6 +175,7 @@
 		F44461052B4D7F1100674D74 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDimmedViewController.swift; sourceTree = "<group>"; };
 		F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOPopUpContainerView.swift; sourceTree = "<group>"; };
+		F444610D2B4D90E100674D74 /* DeleteUserPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserPopUpViewController.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -550,10 +552,19 @@
 		F44461072B4D8E9000674D74 /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
+				F444610C2B4D90B100674D74 /* DeleteUserPopUp */,
 				F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */,
 				F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */,
 			);
 			path = PopUp;
+			sourceTree = "<group>";
+		};
+		F444610C2B4D90B100674D74 /* DeleteUserPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				F444610D2B4D90E100674D74 /* DeleteUserPopUpViewController.swift */,
+			);
+			path = DeleteUserPopUp;
 			sourceTree = "<group>";
 		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
@@ -1029,6 +1040,7 @@
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
+				F444610E2B4D90E100674D74 /* DeleteUserPopUpViewController.swift in Sources */,
 				CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */,
 				94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */,
 				94442EC02B4AD49D00FDBB26 /* DashBoardHeaderView.swift in Sources */,

@@ -102,7 +102,8 @@ private extension SettingsViewController {
     
     @objc
     func resignButtonTapped() {
-        print("tapped")
+        let nextVC = DeleteUserPopUpViewController()
+        self.present(nextVC, animated: false)
     }
 }
 

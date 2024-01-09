@@ -10,9 +10,9 @@ import UIKit
 final class DOOPopUpContainerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        self.clipsToBounds = false
-        self.layer.cornerRadius = 10
+        self.backgroundColor = .white000
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 6
     }
     
     required init?(coder: NSCoder) {
