@@ -24,15 +24,20 @@ final class SettingsViewController: UIViewController {
         return view
     }()
     
-    private lazy var resignButton: UIButton = {
+    private lazy var deleteUserButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("회원탈퇴", for: .normal)
-        btn.titleLabel?.textColor = .gray300
+        btn.titleLabel?.font = .pretendard(.detail2_regular)
+        btn.setTitleColor(.gray300, for: .normal)
         btn.setImage(ImageLiterals.Settings.btnResign, for: .normal)
         btn.addTarget(self, action: #selector(resignButtonTapped), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
-        btn.setUnderline()
         return btn
+    }()
+    private let deleteButtonUnderLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray300
+        return view
     }()
     
     private let settingsCollectionView: UICollectionView = {
@@ -62,7 +67,11 @@ private extension SettingsViewController {
     }
     
     func setHierarchy() {
-        self.view.addSubviews(settingsCollectionView, navigationBar, navigationBottomLineView, resignButton)
+        self.view.addSubviews(settingsCollectionView,
+                              navigationBar,
+                              navigationBottomLineView,
+                              deleteUserButton,
+                              deleteButtonUnderLine)
     }
     
     func setLayout() {
@@ -83,10 +92,18 @@ private extension SettingsViewController {
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        resignButton.snp.makeConstraints {
+        deleteUserButton.snp.makeConstraints {
+            $0.width.equalTo(ScreenUtils.getWidth(60))
+            $0.height.equalTo(ScreenUtils.getHeight(20))
             $0.trailing.equalToSuperview().inset(24)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-6)
         }
+        
+        deleteButtonUnderLine.snp.makeConstraints {
+            $0.width.equalTo(ScreenUtils.getWidth(60))
+            $0.height.equalTo(ScreenUtils.getHeight(0.5))
+            $0.top.equalTo(deleteUserButton.snp.bottom)
+            $0.trailing.equalToSuperview().inset(24)        }
     }
     
     func setDelegate() {
@@ -126,7 +143,7 @@ extension SettingsViewController: UICollectionViewDelegate {
         
         switch item.title {
         case "내 프로필":
-            let profileVC = MakeProfileViewController()
+            let profileVC = UserTestResultViewController()
             navigationController?.pushViewController(profileVC, animated: true)
         case "문의하기":
             let inquiryVC = InquiryWebViewController()
@@ -137,6 +154,9 @@ extension SettingsViewController: UICollectionViewDelegate {
         case "About doorip":
             let aboutServiceVC = ServiceInfoWebViewController()
             self.present(aboutServiceVC, animated: true, completion: nil)
+        case "로그아웃":
+            let logOutVC = LogOutPopUpViewController()
+            self.present(logOutVC, animated: false)
         default:
             break
         }

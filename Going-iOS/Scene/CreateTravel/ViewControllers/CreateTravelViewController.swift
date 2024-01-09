@@ -204,7 +204,7 @@ private extension CreateTravelViewController {
         
         characterCountLabel.snp.makeConstraints {
             $0.top.equalTo(travelNameTextField.snp.bottom).offset(4)
-            $0.trailing.equalTo(travelNameTextField.snp.trailing).offset(4)
+            $0.trailing.equalTo(travelNameTextField.snp.trailing).offset(-4)
         }
         
         travelDateLabel.snp.makeConstraints {
