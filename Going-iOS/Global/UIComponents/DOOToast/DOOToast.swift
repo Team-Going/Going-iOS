@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class DOOToast {
-    static func show (message: String, duration: TimeInterval = 1, isTabBar: Bool = false, insetFromBottom: ConstraintInsetTarget, completion: (() -> Void)? = nil) {
+    static func show (message: String, duration: TimeInterval = 1, insetFromBottom: ConstraintInsetTarget, completion: (() -> Void)? = nil) {
         let toastView = DOOToastView(message: message)
         guard let window = UIWindow.current else { return }
         window.subviews
