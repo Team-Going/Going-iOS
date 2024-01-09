@@ -64,9 +64,9 @@ private extension TravelTestViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar,
-                        navigationBottomLineView,
-                         travelTestCollectionView,
+        view.addSubviews(travelTestCollectionView,
+                         navigationBar,
+                         navigationBottomLineView,
                          gradientView,
                          nextButton)
     }
@@ -85,8 +85,7 @@ private extension TravelTestViewController {
         }
         
         travelTestCollectionView.snp.makeConstraints {
-            // TODO: - DOONav로 바꾸고나서 top 레이아웃 수정
-            $0.top.equalTo(navigationBar.snp.bottom).offset(3)
+            $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(nextButton.snp.top)
         }
