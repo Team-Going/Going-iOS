@@ -12,6 +12,7 @@ import WebKit
 final class InquiryWebViewController: UIViewController {
     
     private var webView: WKWebView?
+    private let urlString = "https://useworld.github.io/iOS/webview/"
     
     override func loadView() {
         super.loadView()
@@ -22,11 +23,17 @@ final class InquiryWebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 나중에 URL 변경
-        let sURL = "https://useworld.github.io/iOS/webview/"
-        let uURL = URL(string: sURL)
-        let request = URLRequest(url: uURL!)
-        guard let web = webView else { return }
-        web.load(request)
+        setWebView()
+    }
+}
+
+private extension InquiryWebViewController {
+    func setWebView() {
+        if let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            webView?.load(request)
+        } else {
+            print("Invalid URL string.")
+        }
     }
 }
