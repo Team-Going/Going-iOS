@@ -20,6 +20,9 @@
 		9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */; };
 		946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */; };
 		946190A82B47FAC100A38A42 /* JoinTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */; };
+		948242DB2B4D948700A24E98 /* InquiryWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948242DA2B4D948700A24E98 /* InquiryWebViewController.swift */; };
+		948242DD2B4D971C00A24E98 /* PolicyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948242DC2B4D971C00A24E98 /* PolicyWebViewController.swift */; };
+		948242E12B4DA09000A24E98 /* ServiceInfoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948242E02B4DA09000A24E98 /* ServiceInfoWebViewController.swift */; };
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
 		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
 		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
@@ -126,6 +129,9 @@
 		9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestQuestionStruct.swift; sourceTree = "<group>"; };
 		946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningSuccessViewController.swift; sourceTree = "<group>"; };
 		946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelViewController.swift; sourceTree = "<group>"; };
+		948242DA2B4D948700A24E98 /* InquiryWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryWebViewController.swift; sourceTree = "<group>"; };
+		948242DC2B4D971C00A24E98 /* PolicyWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyWebViewController.swift; sourceTree = "<group>"; };
+		948242E02B4DA09000A24E98 /* ServiceInfoWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoWebViewController.swift; sourceTree = "<group>"; };
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
 		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -357,6 +363,9 @@
 			isa = PBXGroup;
 			children = (
 				94C7DDB22B4C754300541567 /* SettingsViewController.swift */,
+				948242DA2B4D948700A24E98 /* InquiryWebViewController.swift */,
+				948242DC2B4D971C00A24E98 /* PolicyWebViewController.swift */,
+				948242E02B4DA09000A24E98 /* ServiceInfoWebViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -953,6 +962,7 @@
 				9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */,
 				CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */,
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
+				948242E12B4DA09000A24E98 /* ServiceInfoWebViewController.swift in Sources */,
 				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
 				CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */,
@@ -967,6 +977,7 @@
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
+				948242DD2B4D971C00A24E98 /* PolicyWebViewController.swift in Sources */,
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
@@ -994,6 +1005,7 @@
 				9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */,
 				94442EC82B4B18E500FDBB26 /* StartTravelSplashViewController.swift in Sources */,
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
+				948242DB2B4D948700A24E98 /* InquiryWebViewController.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
 				CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */,
