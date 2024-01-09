@@ -295,66 +295,70 @@ private extension MakeProfileViewController {
 }
 
 extension MakeProfileViewController: UITextFieldDelegate {
-    
+
+    //TextField에 변경사항이 생기면, 화면의 TextField에 실제로 작성되기 전에 호출되는 함수
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // 백스페이스 처리
-        if let char = string.cString(using: String.Encoding.utf8) {
-            let isBackSpace = strcmp(char, "\\b")
-            if isBackSpace == -92 {
-                return true
-            }
-        }
         
+        var maxLength = 0
         switch textField {
         case nameTextField:
-            guard textField.text!.count < 3 else { return false }
-            
+            maxLength = 3
         case descTextField:
-            guard textField.text!.count < 15 else { return false }
-            
+            maxLength = 15
         default:
+            return false
+        }
+        
+        let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
+        let addedText = string // 입력한 text 입니다.
+        let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합칩니다.
+        let newTextLength = newText.count // 합쳐진 text의 길이 입니다.
+        
+        // 글자수 제한
+        if newTextLength <= maxLength {
             return true
         }
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        switch textField {
-        case nameTextField:
-            nameTextFieldBlankCheck()
-            
-        case descTextField:
-            textField.layer.borderColor = UIColor.gray700.cgColor
-            self.descTextFieldCountLabel.textColor = .gray400
-            
-        default:
-            return
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
         
+        let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)]) // 입력하기 전 text의 마지막 글자 입니다.
+        let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) } // 입력하기 전 text의 마지막 글자를 자음과 모음으로 분리해줍니다.
+        let separatedCharactersCount = separatedCharacters.count // 분리된 자음, 모음의 개수입니다.
+        
+        if separatedCharactersCount == 1 && !addedText.isConsonant { // -- A
+            return true
+        }
+        
+        if separatedCharactersCount == 2 && addedText.isConsonant { // -- B
+            return true
+        }
+        
+        if separatedCharactersCount == 3 && addedText.isConsonant { // -- C
+            return true
+        }
+        return false
+    }
+    
+    //TextField에 변경사항이 생기면, 화면의 TextField에 실제로 작성된 후에 호출되는 메서드
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        var text = textField.text ?? ""
+        var maxLength = 0
         switch textField {
         case nameTextField:
-            nameTextFieldBlankCheck()
-            if let text = textField.text, text.isEmpty {
-                textField.layer.borderColor = UIColor.gray200.cgColor
-            }
-            
+            maxLength = 3
         case descTextField:
-            if descTextField.isEmpty {
-                descTextField.layer.borderColor = UIColor.gray200.cgColor
-                descTextFieldCountLabel.textColor = .gray200
-            } else {
-                textField.layer.borderColor = UIColor.gray700.cgColor
-                descTextFieldCountLabel.textColor = .gray400
-            }
-            
+            maxLength = 15
         default:
             return
         }
         
+        if text.count > maxLength {
+            let startIndex = text.startIndex
+            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
+            let fixedText = String(text[startIndex...endIndex])
+            textField.text = fixedText
+        }
     }
 }
+
 
 
