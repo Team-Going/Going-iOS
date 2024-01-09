@@ -23,8 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         // 2.
         self.window = UIWindow(windowScene: windowScene)
-        // 3.
-        let navigationController = UINavigationController(rootViewController: UserTestResultViewController())
+        // 3.M
+        let navigationController = UINavigationController(rootViewController: MakeProfileViewController())
         self.window?.rootViewController = navigationController
         // 4.
         self.window?.makeKeyAndVisible()
