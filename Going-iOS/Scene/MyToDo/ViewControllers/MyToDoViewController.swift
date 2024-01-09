@@ -75,34 +75,6 @@ final class MyToDoViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         loadData()
     }
-    
-    // MARK: - objc Method
-
-    //TODO: - 서버통신 데이터 수정 필요
-
-    @objc
-    func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
-        setToDoView(naviBarTitle: "추가", isActivate: true)
-    }
-    
-    @objc
-    func didChangeValue(sender: UISegmentedControl) {
-        
-        if stickyMyToDoHeaderView.isHidden {
-            stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = myToDoHeaderView.segmentedControl.selectedSegmentIndex
-        } else {
-            myToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
-        }
-        
-        loadData()
-    }
-    
-    //TODO: - 서버통신 데이터 수정 필요
-    
-    @objc
-    func pushToInquiryToDo() {
-        setToDoView(naviBarTitle: "조회", isActivate: false)
-    }
 }
 
 // MARK: - Private method
@@ -243,6 +215,34 @@ private extension MyToDoViewController {
             incompletedData.remove(at: index)
         }
         loadData()
+    }
+    
+    // MARK: - objc Method
+
+    //TODO: - 서버통신 데이터 수정 필요
+
+    @objc
+    func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
+        setToDoView(naviBarTitle: "추가", isActivate: true)
+    }
+    
+    @objc
+    func didChangeValue(sender: UISegmentedControl) {
+        
+        if stickyMyToDoHeaderView.isHidden {
+            stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = myToDoHeaderView.segmentedControl.selectedSegmentIndex
+        } else {
+            myToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
+        }
+        
+        loadData()
+    }
+    
+    //TODO: - 서버통신 데이터 수정 필요
+    
+    @objc
+    func pushToInquiryToDo() {
+        setToDoView(naviBarTitle: "조회", isActivate: false)
     }
 }
 

@@ -67,29 +67,6 @@ final class OurToDoViewController: UIViewController {
         loadData()
         tripMiddleView.gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .horizontal)
     }
-    
-    // MARK: - objc method
-    
-    @objc
-    func popToDashBoardView(_ sender: UITapGestureRecognizer) {
-        print("popToDashBoardView")
-    }
-
-    // TODO: - 아이디 값으로 본인 확인 필요
-    @objc
-    func pushToAddToDoView() {
-        setToDoView(naviBarTitle: "추가", isActivate: true)
-    }
-
-    @objc
-    func pushToInquiryToDo() {
-        setToDoView(naviBarTitle: "조회", isActivate: false)
-    }
-
-    @objc
-    func didChangeValue(segment: UISegmentedControl) {
-        self.ourToDoCollectionView.reloadData()
-    }
 }
 
 // MARK: - Private method
@@ -227,6 +204,29 @@ private extension OurToDoViewController {
         todoVC.manager = manager
         todoVC.isActivateView = isActivate
         self.navigationController?.pushViewController(todoVC, animated: false)
+    }
+    
+    // MARK: - objc method
+    
+    @objc
+    func popToDashBoardView(_ sender: UITapGestureRecognizer) {
+        print("popToDashBoardView")
+    }
+
+    // TODO: - 아이디 값으로 본인 확인 필요
+    @objc
+    func pushToAddToDoView() {
+        setToDoView(naviBarTitle: "추가", isActivate: true)
+    }
+
+    @objc
+    func pushToInquiryToDo() {
+        setToDoView(naviBarTitle: "조회", isActivate: false)
+    }
+
+    @objc
+    func didChangeValue(segment: UISegmentedControl) {
+        self.ourToDoCollectionView.reloadData()
     }
 }
 
