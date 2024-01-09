@@ -14,8 +14,9 @@ final class MyToDoViewController: UIViewController {
     // MARK: - UI Property
     
     private lazy var contentView: UIView = UIView()
-    private let navigationBarview = CreateNavigationBar()
+    private lazy var navigationBarview = DOONavigationBar(self, type: .backButtonWithProfileButton, backgroundColor: .gray50)
     private let tripHeaderView = TripHeaderView()
+    private let tabBarView: TabBarView = TabBarView()
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white000
@@ -82,7 +83,7 @@ final class MyToDoViewController: UIViewController {
 private extension MyToDoViewController {
     
     func setHierachy() {
-        self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
+        self.view.addSubviews(navigationBarview, tabBarView, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyMyToDoHeaderView)
         contentView.addSubviews(tripHeaderView, myToDoHeaderView, myToDoCollectionView)
     }
@@ -93,10 +94,14 @@ private extension MyToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(10))
             $0.height.equalTo(ScreenUtils.getHeight(60))
         }
+        tabBarView.snp.makeConstraints{
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(90))
+        }
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(tabBarView.snp.top)
         }
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(myToDoCollectionView.contentSize.height).priority(.low)
@@ -153,6 +158,7 @@ private extension MyToDoViewController {
         self.scrollView.delegate = self
         self.myToDoCollectionView.delegate = self
         self.myToDoCollectionView.dataSource = self
+        self.tabBarView.delegate = self
     }
     
     func setCollectionView() -> UICollectionView {
@@ -282,6 +288,18 @@ extension MyToDoViewController: MyToDoCollectionViewDelegate {
         checkButtonTapped(index: index, image: image)
     }
 
+}
+
+extension MyToDoViewController: TabBarDelegate {
+    func tapOurToDo() {
+        let ourToDoVC = OurToDoViewController()
+        self.navigationController?.pushViewController(ourToDoVC, animated: false)
+    }
+    
+    func tapMyToDo() {
+        let myToDoVC = MyToDoViewController()
+        self.navigationController?.pushViewController(myToDoVC, animated: false)
+    }
 }
 
 extension MyToDoViewController: UICollectionViewDelegate {}

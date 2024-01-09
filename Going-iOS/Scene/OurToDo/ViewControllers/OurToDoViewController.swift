@@ -9,7 +9,7 @@ final class OurToDoViewController: UIViewController {
     // MARK: - UI Property
 
     private lazy var contentView: UIView = UIView()
-    private let navigationBarview = CreateNavigationBar()
+    private lazy var navigationBarview = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
     private let tripHeaderView: TripHeaderView = TripHeaderView()
     private let tripMiddleView: TripMiddleView = TripMiddleView()
     private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
@@ -26,6 +26,7 @@ final class OurToDoViewController: UIViewController {
         return headerView
     }()
     private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
+    private let tabBarView: TabBarView = TabBarView()
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .red700
@@ -65,7 +66,11 @@ final class OurToDoViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         loadData()
-        tripMiddleView.gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .horizontal)
+        setGradient()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setGradient()
     }
 }
 
@@ -74,7 +79,7 @@ final class OurToDoViewController: UIViewController {
 private extension OurToDoViewController {
     
     func setHierarchy() {
-        self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
+        self.view.addSubviews(navigationBarview, tabBarView, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoHeaderView, ourToDoCollectionView)
     }
@@ -85,10 +90,14 @@ private extension OurToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(10))
             $0.height.equalTo(ScreenUtils.getHeight(60))
         }
+        tabBarView.snp.makeConstraints{
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(90))
+        }
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(tabBarView.snp.top)
         }
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(ourToDoCollectionView.contentSize.height).priority(.low)
@@ -183,6 +192,7 @@ private extension OurToDoViewController {
         self.scrollView.delegate = self
         self.ourToDoCollectionView.dataSource = self
         self.ourToDoCollectionView.delegate = self
+        self.tabBarView.delegate = self
     }
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
@@ -204,6 +214,13 @@ private extension OurToDoViewController {
         todoVC.manager = manager
         todoVC.isActivateView = isActivate
         self.navigationController?.pushViewController(todoVC, animated: false)
+    }
+    
+    func setGradient() {
+        tripMiddleView.gradientView.setGradient(
+            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
+            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+            axis: .horizontal)
     }
     
     // MARK: - objc method
@@ -261,6 +278,22 @@ extension OurToDoViewController: OurToDoCollectionViewDelegate {
         setToDoView(naviBarTitle: "조회", isActivate: false)
     }
 }
+
+extension OurToDoViewController: TabBarDelegate {
+    func tapOurToDo() {
+        let ourToDoVC = OurToDoViewController()
+        print("ourtodo")
+        self.navigationController?.pushViewController(ourToDoVC, animated: false)
+    }
+    
+    func tapMyToDo() {
+        let myToDoVC = MyToDoViewController()
+        print("mytodo")
+
+        self.navigationController?.pushViewController(myToDoVC, animated: false)
+    }
+}
+
 extension OurToDoViewController: UICollectionViewDelegate {}
 
 extension OurToDoViewController: UICollectionViewDataSource {

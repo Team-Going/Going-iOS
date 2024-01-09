@@ -9,6 +9,11 @@ import UIKit
 
 import SnapKit
 
+protocol TabBarDelegate: AnyObject {
+    func tapOurToDo()
+    func tapMyToDo()
+}
+
 final class TabBarView: UIView {
 
     // MARK: - UI Components
@@ -31,7 +36,7 @@ final class TabBarView: UIView {
         btn.backgroundColor = .white000
         btn.setImage(UIImage(systemName: "person.fill"), for: .normal)
         btn.imageView?.tintColor = .red500
-        btn.addTarget(self, action: #selector(tapTabBar), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(tapOurToDoTabBar), for: .touchUpInside)
         btn.tag = 1
         return btn
     }()
@@ -40,13 +45,14 @@ final class TabBarView: UIView {
         btn.backgroundColor = .white000
         btn.setImage(UIImage(systemName: "person.fill"), for: .normal)
         btn.imageView?.tintColor = .gray200
-        btn.addTarget(self, action: #selector(tapTabBar), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(tapMyToDoTabBar), for: .touchUpInside)
         btn.tag = 2
         return btn
     }()
     
     // MARK: - Properties
     
+    weak var delegate: TabBarDelegate?
     
     // MARK: - Life Cycle
     
@@ -55,6 +61,7 @@ final class TabBarView: UIView {
         
         setHierarchy()
         setLayout()
+        setStyle()
     }
     
     required init?(coder: NSCoder) {
@@ -65,10 +72,16 @@ final class TabBarView: UIView {
     // MARK: - objc method
 
     @objc
-    func tapTabBar(_ sender: UIButton) {
-        print("tapTabBar")
+    func tapOurToDoTabBar() {
+        print("tapOurToDoTabBar")
+        self.delegate?.tapOurToDo()
     }
     
+    @objc
+    func tapMyToDoTabBar() {
+        print("tapMyToDoTabBar")
+        self.delegate?.tapMyToDo()
+    }
 }
 
 // MARK: - private method
@@ -89,6 +102,16 @@ private extension TabBarView {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(76))
             $0.bottom.equalToSuperview()
         }
+        for tab in [ourToDoTab, myToDoTab] {
+            tab.snp.makeConstraints{
+                $0.size.equalTo(ScreenUtils.getHeight(56))
+                $0.centerY.equalToSuperview()
+            }
+        }
+    }
+    
+    func setStyle() {
+        self.backgroundColor = .white000
     }
 }
 
