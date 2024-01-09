@@ -102,7 +102,8 @@ private extension SettingsViewController {
     
     @objc
     func resignButtonTapped() {
-        print("tapped")
+        let nextVC = DeleteUserPopUpViewController()
+        self.present(nextVC, animated: false)
     }
 }
 
@@ -134,7 +135,7 @@ extension SettingsViewController: UICollectionViewDelegate {
             let policyVC = PolicyWebViewController()
             self.present(policyVC, animated: true, completion: nil)
         case "About doorip":
-            let aboutServiceVC = AboutServiceViewController()
+            let aboutServiceVC = ServiceInfoWebViewController()
             self.present(aboutServiceVC, animated: true, completion: nil)
         default:
             break

@@ -61,6 +61,12 @@
 		F430A9832B4AAEA900D482C4 /* CompleteProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */; };
 		F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */; };
 		F44460FD2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */; };
+		F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461012B4D6D4800674D74 /* DOOToast.swift */; };
+		F44461042B4D77F200674D74 /* DOOToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461032B4D77F200674D74 /* DOOToastView.swift */; };
+		F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461052B4D7F1100674D74 /* UIWindow+.swift */; };
+		F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */; };
+		F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */; };
+		F444610E2B4D90E100674D74 /* DeleteUserPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444610D2B4D90E100674D74 /* DeleteUserPopUpViewController.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -170,6 +176,12 @@
 		F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewController.swift; sourceTree = "<group>"; };
 		F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeTestResultAppData.swift; sourceTree = "<group>"; };
 		F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhotoAccessProtocol.swift; sourceTree = "<group>"; };
+		F44461012B4D6D4800674D74 /* DOOToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOToast.swift; sourceTree = "<group>"; };
+		F44461032B4D77F200674D74 /* DOOToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOToastView.swift; sourceTree = "<group>"; };
+		F44461052B4D7F1100674D74 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
+		F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDimmedViewController.swift; sourceTree = "<group>"; };
+		F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOPopUpContainerView.swift; sourceTree = "<group>"; };
+		F444610D2B4D90E100674D74 /* DeleteUserPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserPopUpViewController.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -537,6 +549,33 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F44461002B4D6D2900674D74 /* DOOToast */ = {
+			isa = PBXGroup;
+			children = (
+				F44461012B4D6D4800674D74 /* DOOToast.swift */,
+				F44461032B4D77F200674D74 /* DOOToastView.swift */,
+			);
+			path = DOOToast;
+			sourceTree = "<group>";
+		};
+		F44461072B4D8E9000674D74 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				F444610C2B4D90B100674D74 /* DeleteUserPopUp */,
+				F44461082B4D8EB300674D74 /* PopUpDimmedViewController.swift */,
+				F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		F444610C2B4D90B100674D74 /* DeleteUserPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				F444610D2B4D90E100674D74 /* DeleteUserPopUpViewController.swift */,
+			);
+			path = DeleteUserPopUp;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,6 +731,7 @@
 				F4BEB4D02B4A79AB0074B1B2 /* UIButton+.swift */,
 				9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */,
 				9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */,
+				F44461052B4D7F1100674D74 /* UIWindow+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -717,6 +757,7 @@
 		F4F521902B34642A000E6E1E /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				F44461002B4D6D2900674D74 /* DOOToast */,
 				F4BEB4BF2B480DAE0074B1B2 /* DOOLabel.swift */,
 				94C2C9A02B46F94000B92CAC /* DOOButton.swift */,
 				94C7DDBB2B4CA08800541567 /* DOONavigationBar.swift */,
@@ -800,6 +841,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F44461072B4D8E9000674D74 /* PopUp */,
 				948767A22B4C23A700BCF843 /* Settings */,
 				CADA024F2B4AC701001FCE89 /* MyToDo */,
 				94442EB22B4AB5EF00FDBB26 /* DashBoard */,
@@ -993,8 +1035,10 @@
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
 				CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
+				F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */,
 				9457F04E2B48597B009ACF25 /* UICollectionViewCell+.swift in Sources */,
 				F49B352C2B35EAF50080A19F /* UIView+.swift in Sources */,
+				F44461042B4D77F200674D74 /* DOOToastView.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
 				F4BEB4D12B4A79AB0074B1B2 /* UIButton+.swift in Sources */,
 				94442EBA2B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift in Sources */,
@@ -1008,6 +1052,7 @@
 				948242DB2B4D948700A24E98 /* InquiryWebViewController.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
+				F444610E2B4D90E100674D74 /* DeleteUserPopUpViewController.swift in Sources */,
 				CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */,
 				94C2C9AC2B4709A200B92CAC /* CreatingSuccessViewController.swift in Sources */,
 				94442EC02B4AD49D00FDBB26 /* DashBoardHeaderView.swift in Sources */,
@@ -1026,11 +1071,14 @@
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
+				F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */,
 				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
 				CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
+				F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
+				F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */,
 				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,
 				9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */,
 				946190A82B47FAC100A38A42 /* JoinTravelViewController.swift in Sources */,

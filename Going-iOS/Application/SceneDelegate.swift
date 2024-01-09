@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 2.
         self.window = UIWindow(windowScene: windowScene)
         // 3.
-        let navigationController = UINavigationController(rootViewController: SettingsViewController())
+        let navigationController = UINavigationController(rootViewController: MyToDoViewController())
         self.window?.rootViewController = navigationController
         // 4.
         self.window?.makeKeyAndVisible()
