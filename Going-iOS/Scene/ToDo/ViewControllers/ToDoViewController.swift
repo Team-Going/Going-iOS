@@ -460,6 +460,11 @@ extension ToDoViewController: UITextFieldDelegate {
 }
 
 extension ToDoViewController: BottomSheetDelegate {
+    func datePickerDidChanged(date: Date) {
+        print("dddd")
+        // 실시간 반영 구현 해야합니다 ㅠㅠ
+    }
+    
     func didSelectDate(date: Date) {
         let formattedDate = dateFormat(date: date)
         deadlineTextfieldLabel.text = formattedDate
