@@ -24,7 +24,7 @@ final class DOONavigationBar: UIView {
         return btn
     }()
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(.body1_bold)
         label.textColor = .gray700

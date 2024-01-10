@@ -6,12 +6,7 @@ final class ToDoViewController: UIViewController {
 
     // MARK: - UI Components
 
-    private lazy var navigationBarView = {
-        let navView = NavigationView()
-        navView.titleLabel.text = "할일 추가"
-        navView.backButton.addTarget(self, action: #selector(popToOurToDoView), for: .touchUpInside)
-        return navView
-    }()
+    private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle("할일 추가"), backgroundColor: .white000)
     private let contentView: UIView = UIView()
     private let todoLabel: UILabel = {
         let label = UILabel()
@@ -49,20 +44,6 @@ final class ToDoViewController: UIViewController {
         label.isUserInteractionEnabled = true
         return label
     }()
-    
-//    private let deadlineTextfieldLabel: UILabel = {
-//        let label = PaddingLabel(padding: UIEdgeInsets(top: 0.0, left: 18.0, bottom: 0.0, right: 18.0))
-//        label.font = .pretendard(.body3_medi)
-//        label.textColor = .gray200
-//        label.backgroundColor = .white000
-//        label.textAlignment = .left
-//        label.layer.borderColor = UIColor.gray200.cgColor
-//        label.layer.cornerRadius = 6
-//        label.layer.borderWidth = 1
-//        label.isUserInteractionEnabled = true
-//        return label
-//    }()
-    
     private let bottomSheetVC = DatePickerBottomSheetViewController()
     private let dropdownContainer: UIView = UIView()
     private lazy var dropdownButton: UIButton = {
@@ -194,7 +175,9 @@ final class ToDoViewController: UIViewController {
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         self.saveToDoData = ToDoData(todo: todo, deadline: deadline, manager: manager, memo: memo)
         self.navigationController?.popViewController(animated: false)
+        DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
     }
+    
 }
 
 // MARK: - Prviate Methods
@@ -229,7 +212,7 @@ private extension ToDoViewController {
         contentView.snp.makeConstraints{
             $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(60))
+            $0.bottom.equalToSuperview()
         }
         guard let isActivateView else {return}
         isActivateView ? setButtonView(button: singleButtonView) : setButtonView(button: doubleButtonView)
@@ -290,6 +273,7 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(40))
         }
     }
     
@@ -322,6 +306,7 @@ private extension ToDoViewController {
         todoManagerCollectionView.dataSource = self
         memoTextView.delegate = self
         bottomSheetVC.delegate = self
+        doubleButtonView.delegate = self
     }
     
     func setCollectionView() -> UICollectionView {
@@ -477,4 +462,16 @@ extension ToDoViewController: BottomSheetDelegate {
         deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
     }
+}
+
+extension ToDoViewController: DoubleButtonDelegate {
+    func tapEditButton() {
+        DOOToast.show(message: "해당 기능은 추후 업데이트 예정이에요 :)", insetFromBottom: ScreenUtils.getHeight(107))
+    }
+    
+    func tapDeleteButton() {
+        self.navigationController?.popViewController(animated: false)
+        DOOToast.show(message: "할일이 삭제되었어요.", insetFromBottom: ScreenUtils.getHeight(107))
+    }
+    
 }

@@ -195,6 +195,7 @@ private extension OurToDoViewController {
         self.ourToDoCollectionView.dataSource = self
         self.ourToDoCollectionView.delegate = self
         self.tabBarView.delegate = self
+        self.tripMiddleView.delegate = self
     }
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
@@ -244,13 +245,19 @@ private extension OurToDoViewController {
     }
 
     @objc
-    func pushToInquiryToDo() {
+    func pushToInquiryToDoVC() {
         setToDoView(naviBarTitle: "조회", isActivate: false)
     }
 
     @objc
     func didChangeValue(segment: UISegmentedControl) {
-        self.ourToDoCollectionView.reloadData()
+        if stickyOurToDoHeaderView.isHidden {
+            stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex = ourToDoHeaderView.segmentedControl.selectedSegmentIndex
+        } else {
+            ourToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
+        }
+        
+        loadData()
     }
 }
 
@@ -289,15 +296,11 @@ extension OurToDoViewController: OurToDoCollectionViewDelegate {
 extension OurToDoViewController: TabBarDelegate {
     func tapOurToDo() {
         let ourToDoVC = OurToDoViewController()
-        print("ourtodo")
         self.navigationController?.pushViewController(ourToDoVC, animated: false)
     }
     
     func tapMyToDo() {
         let myToDoVC = MyToDoViewController()
-        print("mytodo")
-        self.tabBarView.ourToDoTab.setImage(UIImage(systemName: "person.fill"), for: .normal)
-        self.tabBarView.ourToDoTab.setImage(UIImage(systemName: "pencil"), for: .normal)
         self.navigationController?.pushViewController(myToDoVC, animated: false)
     }
 }
@@ -307,33 +310,16 @@ extension OurToDoViewController: UICollectionViewDelegate {}
 extension OurToDoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let ourToDoHeaderIndex = self.ourToDoHeaderView.segmentedControl.selectedSegmentIndex
-        let stickHeaderIndex = self.stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
-        
-        if stickyOurToDoHeaderView.isHidden {
-            if (ourToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 1){
-                return self.incompletedData.count
-            }else if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (ourToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
-                return self.completedData.count
-            }else {
-                return 0
-            }
-        }else {
-            if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 0){
-                return self.incompletedData.count
-            }else if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
-                return self.completedData.count
-            }else {
-                return 0
-            }
+        if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            return self.incompletedData.count
+        } else {
+            return self.completedData.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         guard let ourToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: OurToDoCollectionViewCell.identifier, for: indexPath) as? OurToDoCollectionViewCell else {return UICollectionViewCell()}
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToInquiryToDo))
-        ourToDoCell.addGestureRecognizer(gesture)
+        ourToDoCell.delegate = self
         
         if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             ourToDoCell.ourToDoData = self.incompletedData[indexPath.row]
@@ -350,7 +336,14 @@ extension OurToDoViewController: UICollectionViewDataSource {
     // TODO: - '할일 조회' 뷰 연결
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("pushToInquiryToDoView")
+        pushToInquiryToDoVC()
     }
 }
 
+extension OurToDoViewController: TripMiddleViewDelegate {
+    func presentToInviteFriendVC() {
+        let inviteFriendVC = InviteFriendPopUpViewController()
+        self.present(inviteFriendVC, animated: false)
+    }
+    
+}
