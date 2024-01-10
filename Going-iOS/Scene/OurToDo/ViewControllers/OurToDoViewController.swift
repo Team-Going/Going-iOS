@@ -195,6 +195,7 @@ private extension OurToDoViewController {
         self.ourToDoCollectionView.dataSource = self
         self.ourToDoCollectionView.delegate = self
         self.tabBarView.delegate = self
+        self.tripMiddleView.delegate = self
     }
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
@@ -257,7 +258,6 @@ private extension OurToDoViewController {
         }
         
         loadData()
-//        self.ourToDoCollectionView.reloadData()
     }
 }
 
@@ -340,7 +340,14 @@ extension OurToDoViewController: UICollectionViewDataSource {
     // TODO: - '할일 조회' 뷰 연결
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("pushToInquiryToDoView")
+        pushToInquiryToDo()
     }
 }
 
+extension OurToDoViewController: TripMiddleViewDelegate {
+    func inviteFriend() {
+        let inviteFriendVC = InviteFriendPopUpViewController()
+        self.present(inviteFriendVC, animated: false)
+    }
+    
+}

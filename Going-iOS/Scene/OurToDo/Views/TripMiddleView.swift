@@ -1,5 +1,8 @@
 import UIKit
 
+protocol TripMiddleViewDelegate: AnyObject {
+    func inviteFriend()
+}
 final class TripMiddleView: UIView {
     
     // MARK: - UI Property
@@ -51,6 +54,7 @@ final class TripMiddleView: UIView {
     // MARK: - Property
     
     var friendProfile: [Friend] = []
+    weak var delegate: TripMiddleViewDelegate?
     
     // MARK: - Life Cycle
 
@@ -69,8 +73,8 @@ final class TripMiddleView: UIView {
     }
     
     @objc
-        func pushToAddFriendsView() {
-        print("pushToAddFriendsView")
+    func pushToAddFriendsView() {
+        self.delegate?.inviteFriend()
     }
     
     @objc
