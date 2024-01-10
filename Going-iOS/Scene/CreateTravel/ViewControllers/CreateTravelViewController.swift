@@ -102,51 +102,6 @@ final class CreateTravelViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         removeKeyboardNotifications()
     }
-    
-    // MARK: - @objc Methods
-    
-    @objc
-    func startDateLabelTapped() {
-        activeLabel = startDateLabel
-        showDatePicker(for: startDateLabel)
-    }
-    
-    @objc
-    func endDateLabelTapped() {
-        activeLabel = endDateLabel
-        showDatePicker(for: endDateLabel)
-    }
-    
-    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
-    @objc
-    func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            // 키보드 높이
-            let keyboardHeight = keyboardFrame.height
-            
-            // Bottom Safe Area 높이
-            let safeAreaBottomInset = view.safeAreaInsets.bottom
-            
-            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
-            UIView.animate(withDuration: 0.3) {
-                self.createTravelButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
-            }
-        }
-    }
-    
-    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
-    @objc
-    func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.createTravelButton.transform = .identity
-        }
-    }
-    
-    @objc
-    func createButtonTapped() {
-        let vc = TravelTestViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
 // MARK: - Private Extension
@@ -277,6 +232,11 @@ private extension CreateTravelViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    func pushToTravelTestVC() {
+        let vc = TravelTestViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     // MARK: - Validation Methods
     
     func updateCreateButtonState() {
@@ -322,6 +282,50 @@ private extension CreateTravelViewController {
             self.characterCountLabel.textColor = .gray400
             warningLabel.isHidden = true
         }
+    }
+    
+    // MARK: - @objc Methods
+    
+    @objc
+    func startDateLabelTapped() {
+        activeLabel = startDateLabel
+        showDatePicker(for: startDateLabel)
+    }
+    
+    @objc
+    func endDateLabelTapped() {
+        activeLabel = endDateLabel
+        showDatePicker(for: endDateLabel)
+    }
+    
+    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            // 키보드 높이
+            let keyboardHeight = keyboardFrame.height
+            
+            // Bottom Safe Area 높이
+            let safeAreaBottomInset = view.safeAreaInsets.bottom
+            
+            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
+            UIView.animate(withDuration: 0.3) {
+                self.createTravelButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
+            }
+        }
+    }
+    
+    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.createTravelButton.transform = .identity
+        }
+    }
+    
+    @objc
+    func createButtonTapped() {
+        pushToTravelTestVC()
     }
 }
 

@@ -155,12 +155,21 @@ private extension DashBoardViewController {
         gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .vertical)
     }
     
+    func pushToCreateTravelVC() {
+        let vc = CreateTravelViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func pushToSettingsVC() {
+        let vc = SettingsViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     // MARK: - @objc Methods
     
     @objc
     func createTravelButtonTapped() {
-        let vc = CreateTravelViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        pushToCreateTravelVC()
     }
 
     @objc
@@ -177,8 +186,7 @@ private extension DashBoardViewController {
     
     @objc
     func settingsButtonTapped() {
-        let vc = SettingsViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        pushToSettingsVC()
     }
 }
 

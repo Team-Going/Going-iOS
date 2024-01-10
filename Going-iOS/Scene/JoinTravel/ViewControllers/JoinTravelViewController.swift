@@ -92,8 +92,7 @@ final class JoinTravelViewController: UIViewController {
     
     @objc
     func nextButtonTapped() {
-        let vc = JoiningSuccessViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        pushToJoiningSuccessVC()
     }
 }
 
@@ -172,6 +171,11 @@ private extension JoinTravelViewController {
     func updateNextButtonState() {
         let isCodeTextFieldIsFilled = codeTextField.text!.trimmingCharacters(in: .whitespaces).count == 6
         nextButton.currentType = (isCodeTextFieldIsFilled) ? .enabled : .unabled
+    }
+    
+    func pushToJoiningSuccessVC() {
+        let vc = JoiningSuccessViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
