@@ -5,8 +5,8 @@ final class UnderlineSegmentedControlView: UISegmentedControl {
     // MARK: - UI Property
     
     private lazy var underlineView: UIView = {
-        let width = absoluteWidth * 375 / 2
-        let height = absoluteHeight * 2
+        let width = ScreenUtils.getWidth(375) / 2
+        let height = 2
         let xPosition = CGFloat(self.selectedSegmentIndex) * width
         let yPosition = self.bounds.size.height - 2.0
         let frame = CGRect(x: xPosition, y: yPosition, width: width, height: CGFloat(height))
@@ -15,11 +15,6 @@ final class UnderlineSegmentedControlView: UISegmentedControl {
         self.addSubview(view)
         return view
     }()
-    
-    // MARK: - Property
-    
-    let absoluteWidth = UIScreen.main.bounds.width / 375
-    let absoluteHeight = UIScreen.main.bounds.height / 812
     
     // MARK: - Life Cycle
     

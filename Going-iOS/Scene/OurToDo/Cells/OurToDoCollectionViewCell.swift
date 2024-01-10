@@ -9,8 +9,6 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
     // MARK: - Property
     
     static let identifier = "OurToDoCollectionViewCell"
-    let absoluteWidth = UIScreen.main.bounds.width / 375
-    let absoluteHeight = UIScreen.main.bounds.height / 812
     weak var delegate: OurToDoCollectionViewDelegate?
     var manager: [String] = []
     var ourToDoData: OurToDo? {
@@ -45,8 +43,8 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor.gray50
         return view
     }()
-    lazy var todoTitleLabel: UILabel = {DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)}()
-    private lazy var deadlineLabel: UILabel = {DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)}()
+    lazy var todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)
+    private lazy var deadlineLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)
     lazy var managerCollectionView: UICollectionView = {setCollectionView()}()
 
     // MARK: - Life Cycle
@@ -86,15 +84,15 @@ private extension OurToDoCollectionViewCell {
             $0.top.bottom.equalToSuperview()
         }
         todoTitleLabel.snp.makeConstraints{
-            $0.top.leading.equalToSuperview().inset(absoluteWidth * 16)
+            $0.top.leading.equalToSuperview().inset(ScreenUtils.getWidth(16))
         }
         managerCollectionView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview().inset(absoluteWidth * 16)
-            $0.bottom.equalToSuperview().inset(absoluteHeight * 16)
-            $0.height.equalTo(absoluteHeight * 20)
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(16))
+            $0.height.equalTo(ScreenUtils.getHeight(20))
         }
         deadlineLabel.snp.makeConstraints{
-            $0.top.trailing.equalToSuperview().inset(absoluteWidth * 16)
+            $0.top.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
         }
     }
     
@@ -121,9 +119,9 @@ private extension OurToDoCollectionViewCell {
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = absoluteWidth * 4
-        flowLayout.minimumLineSpacing = absoluteWidth * 4
-        flowLayout.itemSize = CGSize(width: absoluteWidth * 42 , height: absoluteHeight * 20)
+        flowLayout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
+        flowLayout.minimumLineSpacing = ScreenUtils.getWidth(4)
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(42) , height: ScreenUtils.getHeight(20))
         return flowLayout
     }
     

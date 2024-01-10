@@ -8,11 +8,7 @@ final class ToDoViewController: UIViewController {
 
     private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle("할일 추가"), backgroundColor: .white000)
     private let contentView: UIView = UIView()
-    private let todoLabel: UILabel = {
-        let label = UILabel()
-        label.setTitleLabel(title: "할 일")
-        return label
-    }()
+    private let todoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "할 일")
     private let todoTextfield: UITextField = {
         let tf = UITextField()
         tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
@@ -23,18 +19,8 @@ final class ToDoViewController: UIViewController {
         tf.setLeftPadding(amount: 12)
         return tf
     }()
-    private let countToDoCharacterLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0/15"
-        label.font = .pretendard(.detail2_regular)
-        label.textColor = .gray200
-        return label
-    }()
-    private let deadlineLabel: UILabel = {
-        let label = UILabel()
-        label.setTitleLabel(title: "언제까지")
-        return label
-    }()
+    private let countToDoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/15")
+    private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "언제까지")
     private let deadlineTextfieldLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, alignment: .left, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.backgroundColor = .white000
@@ -53,19 +39,11 @@ final class ToDoViewController: UIViewController {
         btn.addTarget(self, action: #selector(presentToDatePicker), for: .touchUpInside)
         return btn
     }()
-    private let managerLabel: UILabel = {
-        let label = UILabel()
-        label.setTitleLabel(title: "누가하나요?")
-        return label
-    }()
+    private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "누가하나요?")
     private lazy var todoManagerCollectionView: UICollectionView = {
         setCollectionView()
     }()
-    private let memoLabel: UILabel = {
-        let label = UILabel()
-        label.setTitleLabel(title: "메모")
-        return label
-    }()
+    private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "메모")
     private let memoTextView: UITextView = {
         let tv = UITextView()
         tv.backgroundColor = .white000
@@ -77,7 +55,7 @@ final class ToDoViewController: UIViewController {
         tv.layer.borderWidth = 1
         return tv
     }()
-    private let countMemoCharacterLabel: UILabel = {DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/1000")}()
+    private let countMemoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/1000")
     private let buttonView: UIView = UIView()
     private lazy var singleButtonView: DOOButton = {
         let singleBtn = DOOButton(type: .unabled, title: "저장")
