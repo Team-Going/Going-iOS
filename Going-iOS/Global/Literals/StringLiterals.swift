@@ -18,9 +18,10 @@ enum StringLiterals {
     }
   
     enum CreatingSuccess {
-        static let title = "새로운 여행이 생성되었어요!"
-        static let inviteCodeTitle = "친구 초대코드"
+        static let title = "새로운 여행을 만들었어요!"
         static let copyCode = " 초대코드 복사하기"
+        static let kakaoBtn = "친구에게 초대 코드 보내기"
+        static let entranceBtn = "바로 여행 시작하기"
     }
     
     enum JoiningSuccess {

@@ -34,8 +34,6 @@ enum ImageLiterals {
     
     enum CreateTravel {
         static var buttonCopy: UIImage { .load(named: "ic_copy") }
-        static var ticketImage: UIImage { .load(named: "ticket_img_small") }
-        static var larvaImage: UIImage { .load(named: "larva") }
         static var ticketLargeImage: UIImage { .load(named: "img_ticket_copy") }
     }
     
@@ -75,6 +73,7 @@ enum ImageLiterals {
             .load(named: "empty_view_icon")
         }
     }
+    
     enum DashBoard {
         static var btnSetting: UIImage { .load(named: "btn_setting") }
         static var btnSave: UIImage { .load(named: "btn_save") }
