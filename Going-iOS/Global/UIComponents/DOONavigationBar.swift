@@ -121,7 +121,8 @@ private extension DOONavigationBar {
     
     @objc
     func profileButtonTapped() {
-        print("tapped!")
+        let vc = MyProfileViewController()
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func toDoBackButtonTapped() {

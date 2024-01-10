@@ -143,7 +143,7 @@ extension SettingsViewController: UICollectionViewDelegate {
         
         switch item.title {
         case "내 프로필":
-            let profileVC = UserTestResultViewController()
+            let profileVC = MyProfileViewController()
             navigationController?.pushViewController(profileVC, animated: true)
         case "문의하기":
             let inquiryVC = WebViewController(urlString: "https://www.naver.com/")
