@@ -38,7 +38,7 @@ enum StringLiterals {
     }
     
     enum StartTravel {
-        static let startTravelTitle = "여행을 시작해보세요."
+        static let startTravelTitle = "doorip으로\n모두가 함께 하는 여행!"
     }
     
     enum Settings {
