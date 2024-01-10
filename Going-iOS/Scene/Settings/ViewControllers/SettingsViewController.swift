@@ -146,14 +146,14 @@ extension SettingsViewController: UICollectionViewDelegate {
             let profileVC = UserTestResultViewController()
             navigationController?.pushViewController(profileVC, animated: true)
         case "문의하기":
-            let inquiryVC = InquiryWebViewController()
-            self.present(inquiryVC, animated: true, completion: nil)
+            let inquiryVC = WebViewController(urlString: "https://www.naver.com/")
+            self.present(inquiryVC, animated: true)
         case "약관 및 정책":
-            let policyVC = PolicyWebViewController()
-            self.present(policyVC, animated: true, completion: nil)
+            let policyVC = WebViewController(urlString: "https://www.youtube.com/")
+            self.present(policyVC, animated: true)
         case "About doorip":
-            let aboutServiceVC = ServiceInfoWebViewController()
-            self.present(aboutServiceVC, animated: true, completion: nil)
+            let aboutServiceVC = WebViewController(urlString: "https://music.youtube.com/")
+            self.present(aboutServiceVC, animated: true)
         case "로그아웃":
             let logOutVC = LogOutPopUpViewController()
             self.present(logOutVC, animated: false)
