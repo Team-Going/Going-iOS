@@ -22,7 +22,7 @@ final class TripMiddleView: UIView {
         return progressBar
     }()
     private let tripFriendsContainer: UIView = UIView()
-    private lazy var tripFriendsLabel: UILabel = {DOOLabel(font: .pretendard(.body2_medi), color: .red400, text: "여행 친구들", alignment: .left)}()
+    private lazy var tripFriendsLabel: UILabel = {DOOLabel(font: .pretendard(.body2_medi), color: .gray700, text: "여행 친구들", alignment: .left)}()
     private lazy var tripFriendsBtn: UIButton = {
         let btn = UIButton()
         btn.addTarget(self, action: #selector(pushToInquiryFriendsView), for: .touchUpInside)
