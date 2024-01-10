@@ -192,7 +192,7 @@ private extension UserTestViewController {
             UIView.animate(withDuration: 0.5) {
                 questButton.forEach {
                     $0.titleLabel?.alpha = 1.0
-                    $0.isEnabled = true4
+                    $0.isEnabled = true
                 }
             }
         }
