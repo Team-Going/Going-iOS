@@ -250,7 +250,14 @@ private extension OurToDoViewController {
 
     @objc
     func didChangeValue(segment: UISegmentedControl) {
-        self.ourToDoCollectionView.reloadData()
+        if stickyOurToDoHeaderView.isHidden {
+            stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex = ourToDoHeaderView.segmentedControl.selectedSegmentIndex
+        } else {
+            ourToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
+        }
+        
+        loadData()
+//        self.ourToDoCollectionView.reloadData()
     }
 }
 
@@ -307,33 +314,16 @@ extension OurToDoViewController: UICollectionViewDelegate {}
 extension OurToDoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let ourToDoHeaderIndex = self.ourToDoHeaderView.segmentedControl.selectedSegmentIndex
-        let stickHeaderIndex = self.stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
-        
-        if stickyOurToDoHeaderView.isHidden {
-            if (ourToDoHeaderIndex == 0 && stickHeaderIndex == 0) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 1){
-                return self.incompletedData.count
-            }else if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (ourToDoHeaderIndex == 1 && stickHeaderIndex == 0) {
-                return self.completedData.count
-            }else {
-                return 0
-            }
-        }else {
-            if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 0) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 0){
-                return self.incompletedData.count
-            }else if (ourToDoHeaderIndex == 1 && stickHeaderIndex == 1) || (ourToDoHeaderIndex == 0 && stickHeaderIndex == 1) {
-                return self.completedData.count
-            }else {
-                return 0
-            }
+        if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            return self.incompletedData.count
+        } else {
+            return self.completedData.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         guard let ourToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: OurToDoCollectionViewCell.identifier, for: indexPath) as? OurToDoCollectionViewCell else {return UICollectionViewCell()}
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToInquiryToDo))
-        ourToDoCell.addGestureRecognizer(gesture)
+        ourToDoCell.delegate = self
         
         if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             ourToDoCell.ourToDoData = self.incompletedData[indexPath.row]
