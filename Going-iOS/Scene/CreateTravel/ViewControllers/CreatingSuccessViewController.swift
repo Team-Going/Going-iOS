@@ -234,6 +234,7 @@ private extension CreatingSuccessViewController {
     @objc
     func kakaoButtonTapped() {
         let templateId = 102829
+        let templateId = Constant.KaKaoMessageTemplate.id
         
         // 카카오톡 설치여부 확인
         if ShareApi.isKakaoTalkSharingAvailable() {

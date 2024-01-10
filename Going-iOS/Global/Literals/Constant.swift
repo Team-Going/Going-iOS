@@ -12,4 +12,8 @@ enum Constant {
         public static let width = UIScreen.main.bounds.width
         public static let height = UIScreen.main.bounds.height
     }
+    
+    struct KaKaoMessageTemplate {
+        public static let id = 102829
+    }
 }
