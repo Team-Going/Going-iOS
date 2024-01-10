@@ -25,7 +25,8 @@ enum StringLiterals {
     }
     
     enum JoiningSuccess {
-        static let title = "멋진 여행에 초대받으셨네요!"
+        static let title = "초대받은 여행이 맞는지\n확인해 주세요"
+        static let confirmButton = "초대받은 여행이 맞아요!"
     }
     
     enum JoinTravel {

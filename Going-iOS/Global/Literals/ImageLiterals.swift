@@ -91,7 +91,7 @@ enum ImageLiterals {
     }
     
     enum JoinTravel {
-        static var imgJoinMessage: UIImage { .load(named: "img_tripmessage") }
+        static var imgJoinMessage: UIImage { .load(named: "img_tripmassage") }
     }
     
     enum Profile {
