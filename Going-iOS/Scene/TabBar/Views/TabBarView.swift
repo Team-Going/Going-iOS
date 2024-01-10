@@ -73,14 +73,11 @@ final class TabBarView: UIView {
 
     @objc
     func tapOurToDoTabBar() {
-
-        print("tapOurToDoTabBar")
         self.delegate?.tapOurToDo()
     }
     
     @objc
     func tapMyToDoTabBar() {
-        print("tapMyToDoTabBar")
         self.delegate?.tapMyToDo()
     }
 }

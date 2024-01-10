@@ -120,7 +120,6 @@ private extension InviteFriendPopUpViewController {
     @objc
     func copyButtonTapped() {
         UIPasteboard.general.string = self.codeLabel.text
-        print("copy \(UIPasteboard.general.string)")
     }
     
     @objc

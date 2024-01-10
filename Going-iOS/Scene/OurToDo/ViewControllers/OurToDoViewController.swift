@@ -245,7 +245,7 @@ private extension OurToDoViewController {
     }
 
     @objc
-    func pushToInquiryToDo() {
+    func pushToInquiryToDoVC() {
         setToDoView(naviBarTitle: "조회", isActivate: false)
     }
 
@@ -296,15 +296,11 @@ extension OurToDoViewController: OurToDoCollectionViewDelegate {
 extension OurToDoViewController: TabBarDelegate {
     func tapOurToDo() {
         let ourToDoVC = OurToDoViewController()
-        print("ourtodo")
         self.navigationController?.pushViewController(ourToDoVC, animated: false)
     }
     
     func tapMyToDo() {
         let myToDoVC = MyToDoViewController()
-        print("mytodo")
-        self.tabBarView.ourToDoTab.setImage(UIImage(systemName: "person.fill"), for: .normal)
-        self.tabBarView.ourToDoTab.setImage(UIImage(systemName: "pencil"), for: .normal)
         self.navigationController?.pushViewController(myToDoVC, animated: false)
     }
 }
@@ -340,12 +336,12 @@ extension OurToDoViewController: UICollectionViewDataSource {
     // TODO: - '할일 조회' 뷰 연결
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushToInquiryToDo()
+        pushToInquiryToDoVC()
     }
 }
 
 extension OurToDoViewController: TripMiddleViewDelegate {
-    func inviteFriend() {
+    func presentToInviteFriendVC() {
         let inviteFriendVC = InviteFriendPopUpViewController()
         self.present(inviteFriendVC, animated: false)
     }

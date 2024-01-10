@@ -1,7 +1,7 @@
 import UIKit
 
 protocol TripMiddleViewDelegate: AnyObject {
-    func inviteFriend()
+    func presentToInviteFriendVC()
 }
 final class TripMiddleView: UIView {
     
@@ -74,7 +74,7 @@ final class TripMiddleView: UIView {
     
     @objc
     func pushToAddFriendsView() {
-        self.delegate?.inviteFriend()
+        self.delegate?.presentToInviteFriendVC()
     }
     
     @objc
