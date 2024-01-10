@@ -62,6 +62,7 @@
 		CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */; };
 		CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02552B4ACC50001FCE89 /* MyToDoData.swift */; };
 		CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */; };
+		F41F5D792B4EF431000D0472 /* ToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41F5D782B4EF431000D0472 /* ToDoService.swift */; };
 		F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */; };
 		F44460FD2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */; };
 		F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461012B4D6D4800674D74 /* DOOToast.swift */; };
@@ -71,6 +72,16 @@
 		F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */; };
 		F444610E2B4D90E100674D74 /* DeleteUserPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444610D2B4D90E100674D74 /* DeleteUserPopUpViewController.swift */; };
 		F44461102B4DD2BF00674D74 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444610F2B4DD2BE00674D74 /* String+.swift */; };
+		F44D985A2B4E9ED400341893 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D98592B4E9ED400341893 /* BaseResponse.swift */; };
+		F44D985C2B4EB5F600341893 /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D985B2B4EB5F600341893 /* NameSpace.swift */; };
+		F44D985E2B4EB6E000341893 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D985D2B4EB6E000341893 /* HTTPMethod.swift */; };
+		F44D98602B4EB70500341893 /* HTTPHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D985F2B4EB70500341893 /* HTTPHeaderField.swift */; };
+		F44D98622B4EB72300341893 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D98612B4EB72300341893 /* NetworkError.swift */; };
+		F44D98642B4EB79700341893 /* Serviceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D98632B4EB79700341893 /* Serviceable.swift */; };
+		F44D98662B4EB7F700341893 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D98652B4EB7F700341893 /* NetworkRequest.swift */; };
+		F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D98672B4EC71900341893 /* ViewControllerServiceable.swift */; };
+		F44D986C2B4ECACC00341893 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986B2B4ECACC00341893 /* Token.swift */; };
+		F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -181,6 +192,7 @@
 		CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoViewController.swift; sourceTree = "<group>"; };
 		CADA02552B4ACC50001FCE89 /* MyToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoData.swift; sourceTree = "<group>"; };
 		CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoCollectionViewCell.swift; sourceTree = "<group>"; };
+		F41F5D782B4EF431000D0472 /* ToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoService.swift; sourceTree = "<group>"; };
 		F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeTestResultAppData.swift; sourceTree = "<group>"; };
 		F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhotoAccessProtocol.swift; sourceTree = "<group>"; };
 		F44461012B4D6D4800674D74 /* DOOToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOToast.swift; sourceTree = "<group>"; };
@@ -190,6 +202,16 @@
 		F444610A2B4D8EDE00674D74 /* DOOPopUpContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOPopUpContainerView.swift; sourceTree = "<group>"; };
 		F444610D2B4D90E100674D74 /* DeleteUserPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserPopUpViewController.swift; sourceTree = "<group>"; };
 		F444610F2B4DD2BE00674D74 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		F44D98592B4E9ED400341893 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		F44D985B2B4EB5F600341893 /* NameSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSpace.swift; sourceTree = "<group>"; };
+		F44D985D2B4EB6E000341893 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		F44D985F2B4EB70500341893 /* HTTPHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderField.swift; sourceTree = "<group>"; };
+		F44D98612B4EB72300341893 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		F44D98632B4EB79700341893 /* Serviceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serviceable.swift; sourceTree = "<group>"; };
+		F44D98652B4EB7F700341893 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		F44D98672B4EC71900341893 /* ViewControllerServiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerServiceable.swift; sourceTree = "<group>"; };
+		F44D986B2B4ECACC00341893 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeProtocol.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -634,6 +656,14 @@
 			path = DeleteUserPopUp;
 			sourceTree = "<group>";
 		};
+		F44D986A2B4ECABE00341893 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F44D986B2B4ECACC00341893 /* Token.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,6 +831,7 @@
 				F4C5E76D2B4286A50008735F /* ImageLiterals.swift */,
 				F4C5E7872B42AC010008735F /* StringLiterals.swift */,
 				F4BA26FB2B471A1800975CC2 /* Constant.swift */,
+				F44D985B2B4EB5F600341893 /* NameSpace.swift */,
 			);
 			path = Literals;
 			sourceTree = "<group>";
@@ -809,6 +840,9 @@
 			isa = PBXGroup;
 			children = (
 				F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */,
+				F44D98632B4EB79700341893 /* Serviceable.swift */,
+				F44D98672B4EC71900341893 /* ViewControllerServiceable.swift */,
+				F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -879,6 +913,7 @@
 		F4F521972B34676D000E6E1E /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				F44D986A2B4ECABE00341893 /* Auth */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -886,6 +921,7 @@
 		F4F521982B346778000E6E1E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F41F5D782B4EF431000D0472 /* ToDoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -893,6 +929,11 @@
 		F4F521992B346782000E6E1E /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				F44D98592B4E9ED400341893 /* BaseResponse.swift */,
+				F44D985D2B4EB6E000341893 /* HTTPMethod.swift */,
+				F44D985F2B4EB70500341893 /* HTTPHeaderField.swift */,
+				F44D98612B4EB72300341893 /* NetworkError.swift */,
+				F44D98652B4EB7F700341893 /* NetworkRequest.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1066,9 +1107,13 @@
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
 				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
+				F44D98602B4EB70500341893 /* HTTPHeaderField.swift in Sources */,
+				F44D985C2B4EB5F600341893 /* NameSpace.swift in Sources */,
 				CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */,
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
+				F44D98642B4EB79700341893 /* Serviceable.swift in Sources */,
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
+				F44D985A2B4E9ED400341893 /* BaseResponse.swift in Sources */,
 				F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */,
 				94C7DDBA2B4C77FF00541567 /* SettingsItem.swift in Sources */,
 				9457F04C2B4853AC009ACF25 /* TravelTestViewController.swift in Sources */,
@@ -1078,6 +1123,7 @@
 				CA3EEE312B4D9A2500C23A41 /* TabBarView.swift in Sources */,
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
+				F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
@@ -1092,6 +1138,8 @@
 				F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */,
 				CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */,
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
+				F44D98662B4EB7F700341893 /* NetworkRequest.swift in Sources */,
+				F44D985E2B4EB6E000341893 /* HTTPMethod.swift in Sources */,
 				CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */,
@@ -1103,6 +1151,7 @@
 				94442EBA2B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift in Sources */,
 				9478E5412B4F00500027606D /* MyResultView.swift in Sources */,
 				94C7DDB32B4C754300541567 /* SettingsViewController.swift in Sources */,
+				F41F5D792B4EF431000D0472 /* ToDoService.swift in Sources */,
 				F44460FD2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift in Sources */,
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
@@ -1122,9 +1171,12 @@
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */,
+				F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */,
+				F44D986C2B4ECACC00341893 /* Token.swift in Sources */,
 				CA8CD67F2B46B64000CFDFBF /* OurToDoViewController.swift in Sources */,
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,
 				F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */,
+				F44D98622B4EB72300341893 /* NetworkError.swift in Sources */,
 				94C7DDBC2B4CA08800541567 /* DOONavigationBar.swift in Sources */,
 				9478E53C2B4EFCB90027606D /* MyProfileViewController.swift in Sources */,
 				CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */,
