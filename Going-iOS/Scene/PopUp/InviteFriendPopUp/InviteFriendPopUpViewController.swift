@@ -14,7 +14,8 @@ final class InviteFriendPopUpViewController: PopUpDimmedViewController {
         view.layer.cornerRadius = 6
         return view
     }()
-    private let codeLabel = DOOLabel(font: .pretendard(.head4), color: .gray700)
+    // TODO: - 초대코드 받아온 걸로 수정
+    private let codeLabel = DOOLabel(font: .pretendard(.head4), color: .gray700, text: "083539")
     private lazy var copyButton: UIButton = {
         let button = UIButton()
         button.setTitle("초대코드 복사하기", for: .normal)
@@ -118,7 +119,8 @@ private extension InviteFriendPopUpViewController {
     
     @objc
     func copyButtonTapped() {
-        print("copy")
+        UIPasteboard.general.string = self.codeLabel.text
+        print("copy \(UIPasteboard.general.string)")
     }
     
     @objc
