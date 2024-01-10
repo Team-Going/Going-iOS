@@ -61,7 +61,6 @@
 		CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */; };
 		CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02552B4ACC50001FCE89 /* MyToDoData.swift */; };
 		CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */; };
-		F430A9832B4AAEA900D482C4 /* CompleteProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */; };
 		F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */; };
 		F44460FD2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */; };
 		F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461012B4D6D4800674D74 /* DOOToast.swift */; };
@@ -180,7 +179,6 @@
 		CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoViewController.swift; sourceTree = "<group>"; };
 		CADA02552B4ACC50001FCE89 /* MyToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoData.swift; sourceTree = "<group>"; };
 		CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoCollectionViewCell.swift; sourceTree = "<group>"; };
-		F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewController.swift; sourceTree = "<group>"; };
 		F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeTestResultAppData.swift; sourceTree = "<group>"; };
 		F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhotoAccessProtocol.swift; sourceTree = "<group>"; };
 		F44461012B4D6D4800674D74 /* DOOToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOToast.swift; sourceTree = "<group>"; };
@@ -566,22 +564,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		F430A9812B4AAE4D00D482C4 /* CompleteProfile */ = {
-			isa = PBXGroup;
-			children = (
-				F430A9842B4ABFC200D482C4 /* ViewControllers */,
-			);
-			path = CompleteProfile;
-			sourceTree = "<group>";
-		};
-		F430A9842B4ABFC200D482C4 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				F430A9822B4AAEA900D482C4 /* CompleteProfileViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		F430A9882B4ACFFE00D482C4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -889,7 +871,6 @@
 				948767A22B4C23A700BCF843 /* Settings */,
 				CADA024F2B4AC701001FCE89 /* MyToDo */,
 				94442EB22B4AB5EF00FDBB26 /* DashBoard */,
-				F430A9812B4AAE4D00D482C4 /* CompleteProfile */,
 				F4BEB4C72B482FBB0074B1B2 /* UserTestResult */,
 				9457F0492B485169009ACF25 /* StartTravel */,
 				CA8CD6982B47F57100CFDFBF /* ToDo */,
@@ -1114,7 +1095,6 @@
 				CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */,
 				946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */,
 				CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */,
-				F430A9832B4AAEA900D482C4 /* CompleteProfileViewController.swift in Sources */,
 				9457F0552B485A68009ACF25 /* TravelTestCollectionViewCell.swift in Sources */,
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,

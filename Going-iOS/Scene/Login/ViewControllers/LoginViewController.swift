@@ -13,7 +13,7 @@ import SnapKit
 
 final class LoginViewController: UIViewController {
     
-    private let titleLabel = DOOLabel(font: .pretendard(.head3), color: .gray50, text: StringLiterals.Login.title)
+    private let titleLabel = DOOLabel(font: .pretendard(.head3), color: .gray500, text: StringLiterals.Login.title)
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -32,7 +32,7 @@ final class LoginViewController: UIViewController {
     private lazy var kakaoLoginButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(ImageLiterals.Login.kakaoLoginButton, for: .normal)
-        //            button.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
+                    button.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -63,31 +63,17 @@ final class LoginViewController: UIViewController {
         setStyle()
     }
     
-    @objc
-    private func appleLoginButtonTapped() {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()    
-    }
     
-    @objc
-    private func webViewButtonTapped() {
-        let vc = PersonalInfoWebViewController()
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
-    }
 }
 
-extension LoginViewController {
-    private func hideNaviBar() {
+private extension LoginViewController {
+    func hideNaviBar() {
         self.navigationController?.isNavigationBarHidden = true
-
+        
     }
     
-    private func setHierarchy() {
-        self.view.addSubviews(titleLabel, 
+    func setHierarchy() {
+        self.view.addSubviews(titleLabel,
                               logoImageView,
                               appleLoginButton,
                               kakaoLoginButton,
@@ -95,7 +81,7 @@ extension LoginViewController {
                               underLineView)
     }
     
-    private func setLayout() {
+    func setLayout() {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(282)
@@ -132,6 +118,34 @@ extension LoginViewController {
     
     private func setStyle() {
         self.view.backgroundColor = .white000
+    }
+    
+    @objc
+    func kakaoLoginButtonTapped() {
+        
+        //뷰연결 테스트용도
+        let nextVC = MakeProfileViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc
+    func appleLoginButtonTapped() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+        
+        //뷰연결용
+        let nextVC = MakeProfileViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc
+    func webViewButtonTapped() {
+        let vc = PersonalInfoWebViewController()
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
     }
 }
 

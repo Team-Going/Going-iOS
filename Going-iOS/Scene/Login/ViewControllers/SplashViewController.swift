@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class SplashViewController: UIViewController {
-
+    
     private let splashLogoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.Splash.splashLogo
@@ -24,7 +24,9 @@ final class SplashViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
-
+        
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,11 +35,11 @@ final class SplashViewController: UIViewController {
 }
 
 private extension SplashViewController {
-     func setStyle() {
+    func setStyle() {
         self.view.backgroundColor = .red400
     }
     
-     func setHierarchy() {
+    func setHierarchy() {
         view.addSubview(splashLogoImageView)
         
     }
@@ -52,16 +54,19 @@ private extension SplashViewController {
     }
     
     func pushActionBasedOnPermission() {
-        if UserDefaults.standard.bool(forKey: "photoPermissionKey") {
-            // 권한이 설정된 경우의 동작
-            print("설정 가능")
-            let nextVC = UserTestResultViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        } else {
-            // 권한이 거부된 경우의 동작
-            print("설정 불가능")
-            let nextVC = LoginViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            if UserDefaults.standard.bool(forKey: "photoPermissionKey") {
+                // 권한이 설정된 경우의 동작
+                print("설정 가능")
+                let nextVC = UserTestResultViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            } else {
+                // 권한이 거부된 경우의 동작
+                print("설정 불가능")
+                let nextVC = LoginViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
         }
+       
     }
 }

@@ -21,6 +21,14 @@ final class MakeProfileViewController: UIViewController {
                                      color: .gray700,
                                      text: "이름")
     
+    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("프로필 생성"))
+    
+    private let naviUnderLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
+        return view
+    }()
+    
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
@@ -116,7 +124,9 @@ final class MakeProfileViewController: UIViewController {
 private extension MakeProfileViewController {
     func setHierarchy() {
         
-        self.view.addSubviews(nameLabel,
+        self.view.addSubviews(navigationBar,
+                              naviUnderLineView,
+                              nameLabel,
                               nameTextField,
                               nameTextFieldCountLabel,
                               nameWarningLabel,
@@ -128,8 +138,20 @@ private extension MakeProfileViewController {
     
     func setLayout() {
         
+        navigationBar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        naviUnderLineView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(40)
+            $0.top.equalTo(navigationBar.snp.bottom).offset(40)
             $0.leading.equalToSuperview().inset(24)
         }
         
@@ -299,10 +321,10 @@ private extension MakeProfileViewController {
         }
         
         // userData를 출력 또는 다음 단계로 전달하는 등의 동작 수행
-        print(userData.name)
-        print(userData.description)
-        //        let nextVC = LoginViewController()
-        //        self.navigationController?.pushViewController(nextVC, animated: true)
+        //        print(userData.name)
+        //        print(userData.description)
+        let nextVC = UserTestSplashViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
         
     }
 }
