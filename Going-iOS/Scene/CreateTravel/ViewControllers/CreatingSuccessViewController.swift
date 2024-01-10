@@ -80,6 +80,12 @@ final class CreatingSuccessViewController: UIViewController {
         return btn
     }()
     
+    private lazy var entranceToMainButton: DOOButton = {
+        let btn = DOOButton(type: .enabled, title: "입장하기")
+        btn.addTarget(self, action: #selector(entranceButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
@@ -211,6 +217,11 @@ private extension CreatingSuccessViewController {
         self.dateLabel.text = data.travelDate
         self.inviteCodeLabel.text = data.inviteCode
     }
+    
+    func pushToOurToDoVC() {
+        let vc = OurToDoViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
     // MARK: - @objc Methods
     
@@ -247,5 +258,10 @@ private extension CreatingSuccessViewController {
                 self.present(vc, animated: true)
             }
         }
+    }
+    
+    @objc
+    func entranceButtonTapped() {
+        pushToOurToDoVC()
     }
 }
