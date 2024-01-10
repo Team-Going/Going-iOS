@@ -12,5 +12,4 @@ struct BaseResponse<T: Response>: Response {
     let message: String
     let code: String
     let data: T?
-    
 }
