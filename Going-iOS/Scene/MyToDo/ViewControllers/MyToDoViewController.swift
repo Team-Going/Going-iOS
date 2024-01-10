@@ -14,7 +14,7 @@ final class MyToDoViewController: UIViewController {
     // MARK: - UI Property
     
     private lazy var contentView: UIView = UIView()
-    private lazy var navigationBarview = DOONavigationBar(self, type: .backButtonWithProfileButton, backgroundColor: .gray50)
+    private lazy var navigationBarview = DOONavigationBar(self, type: .myToDo, backgroundColor: .gray50)
     private let tripHeaderView = TripHeaderView()
     private let tabBarView: TabBarView = TabBarView()
     private let scrollView: UIScrollView = {

@@ -8,6 +8,9 @@
 import UIKit
 
 import SnapKit
+import KakaoSDKTemplate
+import KakaoSDKCommon
+import KakaoSDKShare
 
 final class CreatingSuccessViewController: UIViewController {
     
@@ -70,9 +73,18 @@ final class CreatingSuccessViewController: UIViewController {
         line.backgroundColor = .gray300
         return line
     }()
-
-    private let sendToKaKaoButton = DOOButton(type: .white, title: "카카오톡으로 초대코드 보내기")
-    private let entranceToMainButton = DOOButton(type: .enabled, title: "입장하기")
+    
+    private lazy var sendToKaKaoButton: DOOButton = {
+        let btn = DOOButton(type: .white, title: "카카오톡으로 초대코드 보내기")
+        btn.addTarget(self, action: #selector(kakaoButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var entranceToMainButton: DOOButton = {
+        let btn = DOOButton(type: .enabled, title: "입장하기")
+        btn.addTarget(self, action: #selector(entranceButtonTapped), for: .touchUpInside)
+        return btn
+    }()
     
     // MARK: - Life Cycles
     
@@ -205,6 +217,33 @@ private extension CreatingSuccessViewController {
         self.dateLabel.text = data.travelDate
         self.inviteCodeLabel.text = data.inviteCode
     }
+    
+    func sendKakaoMessage() {
+        let templateId = Constant.KaKaoMessageTemplate.id
+        
+        // 카카오톡 설치여부 확인
+        if ShareApi.isKakaoTalkSharingAvailable() {
+            // 카카오톡으로 카카오톡 공유 가능
+            ShareApi.shared.shareCustom(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {(sharingResult, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("shareCustom() success.")
+                    if let sharingResult = sharingResult {
+                        UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+        }
+        else {
+            // 카카오톡 미설치 시, 웹 뷰
+            if ShareApi.shared.makeCustomUrl(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) != nil {
+                let kakaoVC = WebViewController(urlString: "https://accounts.kakao.com")
+                self.present(kakaoVC, animated: true)
+            }
+        }
+    }
 
     // MARK: - @objc Methods
     
@@ -212,5 +251,16 @@ private extension CreatingSuccessViewController {
     func copyButtonTapped() {
         DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: ScreenUtils.getHeight(284))
         UIPasteboard.general.string = inviteCodeLabel.text
+    }
+    
+    @objc
+    func kakaoButtonTapped() {
+       sendKakaoMessage()
+    }
+    
+    @objc
+    func pushToOurToDoVC() {
+        let vc = OurToDoViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

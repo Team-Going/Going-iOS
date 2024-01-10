@@ -28,7 +28,7 @@ class DashBoardViewController: UIViewController {
     private lazy var settingsButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.DashBoard.btnSetting, for: .normal)
-        btn.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToSettingsVC), for: .touchUpInside)
         return btn
     }()
     
@@ -38,7 +38,7 @@ class DashBoardViewController: UIViewController {
     
     private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .enabled, title: "여행 생성하기")
-        btn.addTarget(self, action: #selector(createTravelButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToCreateTravelVC), for: .touchUpInside)
         return btn
     }()
     
@@ -158,7 +158,7 @@ private extension DashBoardViewController {
     // MARK: - @objc Methods
     
     @objc
-    func createTravelButtonTapped() {
+    func pushToCreateTravelVC() {
         let vc = CreateTravelViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -176,7 +176,7 @@ private extension DashBoardViewController {
     }
     
     @objc
-    func settingsButtonTapped() {
+    func pushToSettingsVC() {
         let vc = SettingsViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -16,9 +16,9 @@ final class JoinTravelViewController: UIViewController {
     // MARK: - UI Properties
 
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
-    private let navigationBottomLineView: UIView = {
+    private let navigationUnderlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray200
+        view.backgroundColor = .gray100
         return view
     }()
     
@@ -39,7 +39,7 @@ final class JoinTravelViewController: UIViewController {
     
     private lazy var nextButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")
-        btn.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToJoiningSuccessVC), for: .touchUpInside)
         return btn
     }()
     
@@ -62,39 +62,6 @@ final class JoinTravelViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         removeKeyboardNotifications()
     }
-    
-    // MARK: - @objc Methods
-    
-    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
-    @objc
-    func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            // 키보드 높이
-            let keyboardHeight = keyboardFrame.height
-            
-            // Bottom Safe Area 높이
-            let safeAreaBottomInset = view.safeAreaInsets.bottom
-            
-            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
-            UIView.animate(withDuration: 0.3) {
-                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
-            }
-        }
-    }
-    
-    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
-    @objc
-    func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.nextButton.transform = .identity
-        }
-    }
-    
-    @objc
-    func nextButtonTapped() {
-        let vc = JoiningSuccessViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
 // MARK: - Private Extension
@@ -107,7 +74,7 @@ private extension JoinTravelViewController {
     
     func setHierarchy() {
         view.addSubviews(navigationBar,
-                         navigationBottomLineView,
+                         navigationUnderlineView,
                          codeTitleLabel,
                          codeTextField,
                          characterCountLabel,
@@ -121,7 +88,7 @@ private extension JoinTravelViewController {
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
-        navigationBottomLineView.snp.makeConstraints {
+        navigationUnderlineView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
@@ -172,6 +139,39 @@ private extension JoinTravelViewController {
     func updateNextButtonState() {
         let isCodeTextFieldIsFilled = codeTextField.text!.trimmingCharacters(in: .whitespaces).count == 6
         nextButton.currentType = (isCodeTextFieldIsFilled) ? .enabled : .unabled
+    }
+    
+    // MARK: - @objc Methods
+    
+    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            // 키보드 높이
+            let keyboardHeight = keyboardFrame.height
+            
+            // Bottom Safe Area 높이
+            let safeAreaBottomInset = view.safeAreaInsets.bottom
+            
+            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
+            UIView.animate(withDuration: 0.3) {
+                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
+            }
+        }
+    }
+    
+    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.nextButton.transform = .identity
+        }
+    }
+    
+    @objc
+    func pushToJoiningSuccessVC() {
+        let vc = JoiningSuccessViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

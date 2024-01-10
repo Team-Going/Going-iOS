@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 2.
         self.window = UIWindow(windowScene: windowScene)
         // 3.
-        let navigationController = UINavigationController(rootViewController: UserTestViewController())
+        let navigationController = UINavigationController(rootViewController: ShowCreatedProfileViewController())
         self.window?.rootViewController = navigationController
         navigationController.isNavigationBarHidden = true
         // 4.

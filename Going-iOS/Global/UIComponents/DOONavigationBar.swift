@@ -6,21 +6,24 @@
 //
 
 import UIKit
+
 import SnapKit
 
 final class DOONavigationBar: UIView {
     
     enum NavigationBarType {
         case backButtonOnly
+        case ourToDo
+        case myToDo
         case titleLabelOnly(String)
         case backButtonWithTitle(String)
-        case backButtonWithProfileButton
     }
-    
+        
     private lazy var backButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonBack, for: .normal)
-        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
         return btn
     }()
     
@@ -35,7 +38,7 @@ final class DOONavigationBar: UIView {
     private lazy var profileButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonProfile, for: .normal)
-        btn.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToMyProfileVC), for: .touchUpInside)
         return btn
     }()
     
@@ -70,6 +73,28 @@ private extension DOONavigationBar {
                 $0.centerY.equalToSuperview()
             }
             
+        case .ourToDo:
+            addSubview(backButton)
+            backButton.snp.makeConstraints {
+                $0.leading.equalToSuperview().inset(10)
+                $0.centerY.equalToSuperview()
+            }
+            backButton.removeTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
+            backButton.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
+            
+        case .myToDo:
+            addSubviews(backButton, profileButton)
+            backButton.snp.makeConstraints {
+                $0.leading.equalToSuperview().inset(10)
+                $0.centerY.equalToSuperview()
+            }
+            profileButton.snp.makeConstraints {
+                $0.trailing.equalToSuperview().inset(10)
+                $0.centerY.equalToSuperview()
+            }
+            backButton.removeTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
+            backButton.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
+        
         case .titleLabelOnly(let title):
             titleLabel.text = title
             addSubview(titleLabel)
@@ -87,27 +112,21 @@ private extension DOONavigationBar {
             titleLabel.snp.makeConstraints {
                 $0.center.equalToSuperview()
             }
-            
-        case .backButtonWithProfileButton:
-            addSubviews(backButton, profileButton)
-            backButton.snp.makeConstraints { make in
-                make.leading.equalToSuperview().inset(10)
-                make.centerY.equalToSuperview()
-            }
-            profileButton.snp.makeConstraints { make in
-                make.trailing.equalToSuperview().inset(18)
-                make.centerY.equalToSuperview()
-            }
         }
     }
     
     @objc 
-    func backButtonTapped() {
+    func popToPreviousVC() {
         viewController?.navigationController?.popViewController(animated: true)
     }
     
     @objc
-    func profileButtonTapped() {
-        print("tapped!")
+    func pushToMyProfileVC() {
+        let vc = MyProfileViewController()
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func popToRootVC() {
+        viewController?.navigationController?.popToRootViewController(animated: true)
     }
 }
