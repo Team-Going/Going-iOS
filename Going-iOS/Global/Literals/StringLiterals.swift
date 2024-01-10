@@ -9,12 +9,13 @@ import Foundation
 
 enum StringLiterals {
     enum Login {
-        static let title = "우리만의 여행을 하다"
+        static let title = "우리다운 여행을 하다"
         static let personalInformation  = " 개인정보처리방침"
     }
     
     enum UserTest {
-        static let userTestSplashTitle = "9개의 질문으로\n여행 성향을 분석해보세요 "
+        static let userTestSplashTitle = "여행을 할 때 우리는 어떤 모습일까?"
+        static let userTestSplashSubTitle = "9개의 질문으로 \n나를 대신할 여행 캐릭터를 찾아보세요"
     }
   
     enum CreatingSuccess {

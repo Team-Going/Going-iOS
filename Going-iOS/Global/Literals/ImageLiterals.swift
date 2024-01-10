@@ -18,6 +18,7 @@ enum ImageLiterals {
     
     enum Splash {
         static var splashLogo: UIImage { .load(named: "splash_logo") }
+        static var userTestSplash: UIImage { .load(named: "img_testsplash") }
     }
     
     enum Login {
