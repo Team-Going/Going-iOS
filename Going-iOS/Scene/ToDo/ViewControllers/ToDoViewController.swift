@@ -7,6 +7,11 @@ final class ToDoViewController: UIViewController {
     // MARK: - UI Components
 
     private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle("할일 추가"), backgroundColor: .white000)
+    private let underlineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        return view
+    }()
     private let contentView: UIView = UIView()
     private let todoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "할 일")
     private let todoTextfield: UITextField = {
@@ -166,7 +171,7 @@ final class ToDoViewController: UIViewController {
 private extension ToDoViewController {
     
     func setHierachy() {
-        self.view.addSubviews(navigationBarView, contentView)
+        self.view.addSubviews(navigationBarView, underlineView, contentView)
         contentView.addSubviews(
             todoLabel,
             todoTextfield,
@@ -190,8 +195,13 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
+        underlineView.snp.makeConstraints{
+            $0.top.equalTo(navigationBarView.snp.bottom)
+            $0.height.equalTo(1)
+            $0.leading.trailing.equalToSuperview()
+        }
         contentView.snp.makeConstraints{
-            $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))
+            $0.top.equalTo(underlineView.snp.bottom).offset(ScreenUtils.getHeight(40))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.bottom.equalToSuperview()
         }
