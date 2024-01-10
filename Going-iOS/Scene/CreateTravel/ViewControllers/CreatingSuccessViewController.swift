@@ -82,7 +82,7 @@ final class CreatingSuccessViewController: UIViewController {
     
     private lazy var entranceToMainButton: DOOButton = {
         let btn = DOOButton(type: .enabled, title: "입장하기")
-        btn.addTarget(self, action: #selector(entranceButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToOurToDoVC), for: .touchUpInside)
         return btn
     }()
     

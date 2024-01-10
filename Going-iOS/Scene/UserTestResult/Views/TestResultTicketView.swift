@@ -31,7 +31,7 @@ final class TestResultTicketView: UIView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 4
-        stack.backgroundColor = .gray200
+        stack.backgroundColor = .clear
         stack.distribution = .fillEqually
         return stack
     }()
