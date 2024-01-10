@@ -11,8 +11,6 @@ import AuthenticationServices
 import KakaoSDKAuth
 import Photos
 
-
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?

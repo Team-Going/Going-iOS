@@ -311,6 +311,12 @@ extension MakeProfileViewController: UITextFieldDelegate {
     
     //TextField에 변경사항이 생기면, 화면의 TextField에 실제로 작성되기 전에 호출되는 함수
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
         
         var maxLength = 0
         switch textField {
@@ -323,18 +329,17 @@ extension MakeProfileViewController: UITextFieldDelegate {
         }
         
         //모든 예시는 NameTextField 기준으로 적음
-        let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
+        var oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
         let addedText = string // 입력한 text 입니다.
         let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합칩니다.
         let newTextLength = newText.count // 합쳐진 text의 길이 입니다.
         
-        // 글자수 제한
         if newTextLength <= maxLength {
             return true
         }
         
         
-        //여기는
+        //여기는 "곽성ㅈ" 처럼 3번째에 하나라도 뭔가 있으면 위의 If문을 무시하고 넘어온다.
         let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)]) // 입력하기 전 text의 마지막 글자 입니다.
         let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) } // 입력하기 전 text의 마지막 글자를 자음과 모음으로 분리해줍니다.
         let separatedCharactersCount = separatedCharacters.count // 분리된 자음, 모음의 개수입니다.
@@ -345,9 +350,9 @@ extension MakeProfileViewController: UITextFieldDelegate {
             return true
         }
         
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 2개이고, 새로 입력되는 글자가 자음일 경우 입력이 되도록 함
+        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 2개이고, 새로 입력되는 글자가 자음 혹은 모음일 경우 입력이 되도록 함
         // ex) "곽성주" 에서 입력할 때!
-        if separatedCharactersCount == 2 && addedText.isConsonant {
+        if separatedCharactersCount == 2 {
             return true
         }
         
@@ -356,16 +361,11 @@ extension MakeProfileViewController: UITextFieldDelegate {
         if separatedCharactersCount == 3 && addedText.isConsonant {
             return true
         }
-        
-        if separatedCharactersCount == 2 && !addedText.isConsonant {
-            return true
-        }
         return false
     }
     
     //TextField에 변경사항이 생기면, TextField에 작성된 후에 호출되는 메서드
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        
         var text = textField.text ?? ""
         var maxLength = 0
         switch textField {
@@ -377,12 +377,12 @@ extension MakeProfileViewController: UITextFieldDelegate {
             return
         }
         
-        //
         if text.count > maxLength {
             let startIndex = text.startIndex
             let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
             let fixedText = String(text[startIndex...endIndex])
             textField.text = fixedText
+            return
         }
     }
     
