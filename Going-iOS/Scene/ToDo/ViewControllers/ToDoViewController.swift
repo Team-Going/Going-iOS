@@ -115,7 +115,10 @@ final class ToDoViewController: UIViewController {
         setDelegate()
         setStyle()
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        setInquiryStyle()
+    }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationBarView.backgroundColor = .gray50
         self.tabBarController?.tabBar.isHidden = false
@@ -271,7 +274,8 @@ private extension ToDoViewController {
         case "조회": 
             navigationBarView.titleLabel.text = "할일 조회"
             setDefaultValue = ["조회", "조회", self.manager , "조회"]
-        case "수정": 
+            setInquiryStyle()
+        case "수정":
             navigationBarView.titleLabel.text = "할일 수정"
             setDefaultValue = ["수정", "수정", self.manager , "수정"]
         default: 
@@ -326,6 +330,19 @@ private extension ToDoViewController {
         button.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
+    }
+    
+    // 조회 뷰 스타일 세팅 메서드
+    // TODO: - 서버 통신 할 때 버튼 색상 변경 로직 추가 + placeholder랑 비교해서 빈값인지 확인
+    func setInquiryStyle() {
+        todoTextfield.layer.borderColor = UIColor.gray700.cgColor
+        todoTextfield.tintColor = .gray700
+        deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
+        deadlineTextfieldLabel.textColor = .gray700
+        dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
+        memoTextView.layer.borderColor = UIColor.gray700.cgColor
+        memoTextView.textColor = .gray700
+        
     }
     
     /// 텍스트 필드에 들어갈 텍스트를 DateFormatter로  변환하는 메서드
