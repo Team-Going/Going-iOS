@@ -34,6 +34,7 @@
 		94C7DDB52B4C756600541567 /* SettingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C7DDB42B4C756600541567 /* SettingsCollectionViewCell.swift */; };
 		94C7DDBA2B4C77FF00541567 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C7DDB92B4C77FF00541567 /* SettingsItem.swift */; };
 		94C7DDBC2B4CA08800541567 /* DOONavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C7DDBB2B4CA08800541567 /* DOONavigationBar.swift */; };
+		CA3EEE312B4D9A2500C23A41 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE302B4D9A2500C23A41 /* TabBarView.swift */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
 		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
@@ -152,6 +153,7 @@
 		94C7DDB42B4C756600541567 /* SettingsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		94C7DDB92B4C77FF00541567 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 		94C7DDBB2B4CA08800541567 /* DOONavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOONavigationBar.swift; sourceTree = "<group>"; };
+		CA3EEE302B4D9A2500C23A41 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -419,6 +421,22 @@
 				94C7DDB92B4C77FF00541567 /* SettingsItem.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CA3EEE2E2B4D99F800C23A41 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				CA3EEE2F2B4D9A1100C23A41 /* Views */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		CA3EEE2F2B4D9A1100C23A41 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CA3EEE302B4D9A2500C23A41 /* TabBarView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CA8CD6792B46B61000CFDFBF /* OurToDo */ = {
@@ -866,6 +884,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CA3EEE2E2B4D99F800C23A41 /* TabBar */,
 				F44461072B4D8E9000674D74 /* PopUp */,
 				948767A22B4C23A700BCF843 /* Settings */,
 				CADA024F2B4AC701001FCE89 /* MyToDo */,
@@ -1041,6 +1060,7 @@
 				CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */,
 				F4BEB4CF2B4838B60074B1B2 /* TestResultTicketView.swift in Sources */,
 				CA8CD6872B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift in Sources */,
+				CA3EEE312B4D9A2500C23A41 /* TabBarView.swift in Sources */,
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,

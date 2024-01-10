@@ -16,17 +16,9 @@ final class TripHeaderView: UIView {
         stackView.spacing = 8
         return stackView
     }()
-    lazy var tripNameLabel: UILabel = {setLabel()}()
-    lazy var tripDdayLabel: UILabel = {setLabel()}()
-    lazy var tripDateLabel: UILabel = {setLabel(font: UIFont.pretendard(.body3_medi), textColor: UIColor.gray300)}()
-    lazy var editTripButton: UIButton = {
-        let btn = UIButton()
-        btn.backgroundColor = UIColor.gray50
-        btn.setImage(ImageLiterals.OurToDo.btnOurToDoEdit, for: .normal)
-        btn.isUserInteractionEnabled = false
-        btn.addTarget(self, action: #selector(pushToEditTripView(_:)), for: .touchUpInside)
-        return btn
-    }()
+    lazy var tripNameLabel: UILabel = {DOOLabel(font: .pretendard(.head2), color: .gray700, alignment: .left)}()
+    lazy var tripDdayLabel: UILabel = {DOOLabel(font: .pretendard(.head2), color: .gray700, alignment: .left)}()
+    lazy var tripDateLabel: UILabel = {DOOLabel(font: .pretendard(.body3_medi), color: .gray300, alignment: .left)}()
     private let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: ImageLiterals.OurToDo.icCalendar)
 
     // MARK: - Property
@@ -97,7 +89,7 @@ final class TripHeaderView: UIView {
 private extension TripHeaderView {
 
     func setHierarchy() {
-        self.addSubviews(tripHeaderStackView, editTripButton)
+        self.addSubviews(tripHeaderStackView)
         tripHeaderStackView.addArrangedSubviews(tripNameLabel, tripDdayLabel, tripDateLabel)
     }
 
@@ -106,11 +98,6 @@ private extension TripHeaderView {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(25))
             $0.top.equalToSuperview()
             $0.height.equalToSuperview()
-        }
-        editTripButton.snp.makeConstraints{
-            $0.leading.equalTo(tripDdayLabel.snp.trailing).offset(3)
-            $0.size.equalTo(ScreenUtils.getHeight(28))
-            $0.centerY.equalTo(tripDdayLabel)
         }
         tripDateLabel.snp.makeConstraints{
             $0.height.equalTo(ScreenUtils.getHeight(21))

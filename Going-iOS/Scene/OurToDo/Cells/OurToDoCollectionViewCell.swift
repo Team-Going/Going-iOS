@@ -45,8 +45,8 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor.gray50
         return view
     }()
-    lazy var todoTitleLabel: UILabel = {setLabel(font: UIFont.pretendard(.body3_medi), textColor: UIColor.gray700, alignment: .left)}()
-    private lazy var deadlineLabel: UILabel = {setLabel(font: UIFont.pretendard(.detail3_regular), textColor: UIColor.gray300, alignment: .center)}()
+    lazy var todoTitleLabel: UILabel = {DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)}()
+    private lazy var deadlineLabel: UILabel = {DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)}()
     lazy var managerCollectionView: UICollectionView = {setCollectionView()}()
 
     // MARK: - Life Cycle
