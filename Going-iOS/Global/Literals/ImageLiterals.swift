@@ -33,9 +33,10 @@ enum ImageLiterals {
     }
     
     enum CreateTravel {
-        static var buttonCopy: UIImage { .load(named: "ic_copy")}
-        static var ticketImage: UIImage { .load(named: "ticket_img_small")}
-        static var larvaImage: UIImage { .load(named: "larva")}
+        static var buttonCopy: UIImage { .load(named: "ic_copy") }
+        static var ticketImage: UIImage { .load(named: "ticket_img_small") }
+        static var larvaImage: UIImage { .load(named: "larva") }
+        static var ticketLargeImage: UIImage { .load(named: "img_ticket_copy") }
     }
     
     enum OurToDo {
@@ -78,10 +79,30 @@ enum ImageLiterals {
         static var btnSetting: UIImage { .load(named: "btn_setting") }
         static var btnSave: UIImage { .load(named: "btn_save") }
         static var btnProfile: UIImage { .load(named: "btn_profile") }
+        static var imgDashBoard: UIImage { .load(named: "img_dashboard") }
     }
     
     enum Settings {
         static var btnResign: UIImage { .load(named: "ic_unsubscribe") }
         static var btnEnterLarge: UIImage { .load(named: "btn_enter_large")}
+    }
+    
+    enum StartTravelSplash {
+        static var imgTripSplash: UIImage { .load(named: "img_tripsplash") }
+    }
+    
+    enum JoinTravel {
+        static var imgJoinMessage: UIImage { .load(named: "img_tripmessage") }
+    }
+    
+    enum Profile {
+        static var imgCircleAEI: UIImage { .load(named: "img_profile_aei") }
+        static var imgHexagonAEP: UIImage { .load(named: "img_profile_aep") }
+        static var imgCloudARI: UIImage { .load(named: "img_profile_ari") }
+        static var imgCloverARP: UIImage { .load(named: "img_profile_arp") }
+        static var imgSquareSEI: UIImage { .load(named: "img_profile_sei") }
+        static var imgTriangleSEP: UIImage { .load(named: "img_profile_sep") }
+        static var imgSnowmanSRI: UIImage { .load(named: "img_profile_sri") }
+        static var imgHeartSRP: UIImage { .load(named: "img_profile_srp") }
     }
 }
