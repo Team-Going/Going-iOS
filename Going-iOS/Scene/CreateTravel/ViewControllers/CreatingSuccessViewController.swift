@@ -241,5 +241,6 @@ private extension CreatingSuccessViewController {
     @objc
     func copyButtonTapped() {
         DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: 314)
+        UIPasteboard.general.string = inviteCodeLabel.text
     }
 }
