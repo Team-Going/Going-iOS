@@ -36,8 +36,20 @@ class DashBoardViewController: UIViewController {
     
     private let dashBoardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
+    private let noDataview: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray50
+        return view
+    }()
+    private let noDataLabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "새로운 여행을 시작해 보세요")
+    private let characterImage:  UIImageView = {
+        let img = UIImageView()
+        img.image = ImageLiterals.DashBoard.imgDashBoard
+        return img
+    }()
+    
     private lazy var createTravelButton: DOOButton = {
-        let btn = DOOButton(type: .enabled, title: "여행 생성하기")
+        let btn = DOOButton(type: .enabled, title: "여행 추가하기")
         btn.addTarget(self, action: #selector(pushToCreateTravelVC), for: .touchUpInside)
         return btn
     }()
@@ -78,9 +90,11 @@ private extension DashBoardViewController {
         self.view.addSubviews(dashBoardNavigationBar, 
                               dashBoardHeaderView,
                               dashBoardCollectionView,
+                              noDataview,
                               gradientView,
                               createTravelButton)
         dashBoardNavigationBar.addSubviews(navigationTitle, settingsButton)
+        noDataview.addSubviews(noDataLabel, characterImage)
     }
     
     func setLayout() {
@@ -106,11 +120,11 @@ private extension DashBoardViewController {
             $0.width.equalToSuperview()
         }
         
-        dashBoardCollectionView.snp.makeConstraints {
-            $0.top.equalTo(dashBoardHeaderView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(createTravelButton.snp.top)
-        }
+//        dashBoardCollectionView.snp.makeConstraints {
+//            $0.top.equalTo(dashBoardHeaderView.snp.bottom)
+//            $0.leading.trailing.equalToSuperview()
+//            $0.bottom.equalTo(createTravelButton.snp.top)
+//        }
         
         createTravelButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -124,6 +138,8 @@ private extension DashBoardViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(40))
         }
+        
+        setNoDataView()
     }
     
     func setDelegate() {
@@ -153,6 +169,32 @@ private extension DashBoardViewController {
     
     func setGradient() {
         gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .vertical)
+    }
+    
+    func setNoDataView() {
+        if travelListDummy.detailInfos.isEmpty {
+            noDataview.snp.makeConstraints {
+                $0.top.equalTo(dashBoardHeaderView.snp.bottom)
+                $0.leading.trailing.equalToSuperview()
+                $0.bottom.equalTo(createTravelButton.snp.top)
+            }
+            noDataLabel.snp.makeConstraints {
+                $0.top.equalToSuperview().inset(107)
+                $0.leading.equalToSuperview().inset(109)
+            }
+            characterImage.snp.makeConstraints {
+                $0.trailing.equalToSuperview()
+                $0.width.equalTo(ScreenUtils.getWidth(236))
+                $0.height.equalTo(ScreenUtils.getHeight(364))
+                $0.top.equalTo(noDataLabel.snp.top).offset(40)
+            }
+        } else {
+            dashBoardCollectionView.snp.makeConstraints {
+                $0.top.equalTo(dashBoardHeaderView.snp.bottom)
+                $0.leading.trailing.equalToSuperview()
+                $0.bottom.equalTo(createTravelButton.snp.top)
+            }
+        }
     }
     
     // MARK: - @objc Methods
