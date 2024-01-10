@@ -180,12 +180,8 @@ final class ToDoViewController: UIViewController {
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         self.saveToDoData = ToDoData(todo: todo, deadline: deadline, manager: manager, memo: memo)
         self.navigationController?.popViewController(animated: false)
+        DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
     }
-    
-//    @objc
-//    func editToDo() {
-//        DOOToast.show(message: "해당 기능은 추후 업데이트 예정이에요 :)", insetFromBottom: ScreenUtils.getHeight(107))
-//    }
     
 }
 
