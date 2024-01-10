@@ -222,18 +222,8 @@ private extension CreatingSuccessViewController {
         let vc = OurToDoViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-
-    // MARK: - @objc Methods
     
-    @objc
-    func copyButtonTapped() {
-        DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: ScreenUtils.getHeight(284))
-        UIPasteboard.general.string = inviteCodeLabel.text
-    }
-    
-    @objc
-    func kakaoButtonTapped() {
-        let templateId = 102829
+    func sendKakaoMessage() {
         let templateId = Constant.KaKaoMessageTemplate.id
         
         // 카카오톡 설치여부 확인
@@ -253,12 +243,24 @@ private extension CreatingSuccessViewController {
         }
         else {
             // 카카오톡 미설치 시, 웹 뷰
-            // TODO: - 카카오 로그인 웹뷰로 변경
             if ShareApi.shared.makeCustomUrl(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) != nil {
                 let kakaoVC = WebViewController(urlString: "https://accounts.kakao.com")
                 self.present(kakaoVC, animated: true)
             }
         }
+    }
+
+    // MARK: - @objc Methods
+    
+    @objc
+    func copyButtonTapped() {
+        DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: ScreenUtils.getHeight(284))
+        UIPasteboard.general.string = inviteCodeLabel.text
+    }
+    
+    @objc
+    func kakaoButtonTapped() {
+       sendKakaoMessage()
     }
     
     @objc
