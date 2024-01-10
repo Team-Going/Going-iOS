@@ -34,11 +34,11 @@ final class OurToDoViewController: UIViewController {
         btn.setTitleColor(.white000, for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
+        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
         btn.imageView?.tintColor = .white000
         btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
         btn.semanticContentAttribute = .forceLeftToRight
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
-        btn.isHighlighted = false
         return btn
     }()
     private let emptyView: UIView = {
