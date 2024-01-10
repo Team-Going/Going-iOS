@@ -178,7 +178,7 @@ private extension UserTestResultViewController {
         // UI처리를 위해 main thread내에서 팝업을 띄우도록 함.
         DispatchQueue.main.async {
             
-            let alert = UIAlertController(title: nil, message: "사진 접근 권한이 없습니다. 설정으로 이동하여 권한 설정을 해주세요.", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: "설정으로 이동하여 권한을 허용해주세요. 내 여행 프로필에서 다시 저장할 수 있어요.", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "설정으로 이동", style: .default, handler: { _ in
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)

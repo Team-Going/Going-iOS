@@ -182,6 +182,7 @@ private extension UserTestViewController {
 
         UIView.animate(withDuration: 0.5, animations: {
             viewsToAnimate.forEach { $0?.alpha = 0.0 }
+//            views
         }) { [self] _ in
             // fade out 애니메이션 종료 후 실행될 코드
             updateLabel()
