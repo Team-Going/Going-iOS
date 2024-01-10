@@ -6,12 +6,7 @@ final class ToDoViewController: UIViewController {
 
     // MARK: - UI Components
 
-    private lazy var navigationBarView = {
-        let navView = NavigationView()
-        navView.titleLabel.text = "할일 추가"
-        navView.backButton.addTarget(self, action: #selector(popToOurToDoView), for: .touchUpInside)
-        return navView
-    }()
+    private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle("할일 추가"), backgroundColor: .white000)
     private let contentView: UIView = UIView()
     private let todoLabel: UILabel = {
         let label = UILabel()
