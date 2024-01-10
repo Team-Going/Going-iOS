@@ -62,6 +62,11 @@ final class MyToDoViewController: UIViewController {
         return imageView
     }()
     private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "할일을 추가해주세요.", alignment: .center)
+    private let myToDoMainImageView: UIImageView = {
+        let imgView = UIImageView()
+        imgView.image = ImageLiterals.MyToDo.mainViewIcon
+        return imgView
+    }()
     
     // MARK: - Properties
     
@@ -100,7 +105,7 @@ private extension MyToDoViewController {
     func setHierachy() {
         self.view.addSubviews(navigationBarview, tabBarView, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyMyToDoHeaderView)
-        contentView.addSubviews(tripHeaderView, myToDoHeaderView, myToDoCollectionView, emptyView)
+        contentView.addSubviews(tripHeaderView, myToDoMainImageView, myToDoHeaderView, myToDoCollectionView, emptyView)
         emptyView.addSubviews(emptyViewIcon, emptyViewLabel)
     }
     
@@ -127,6 +132,12 @@ private extension MyToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview().offset(ScreenUtils.getHeight(8))
             $0.height.equalTo(ScreenUtils.getHeight(95))
+        }
+        myToDoMainImageView.snp.makeConstraints {
+            $0.top.equalTo(tripHeaderView)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.width.equalTo(ScreenUtils.getWidth(137))
+            $0.height.equalTo(ScreenUtils.getHeight(100))
         }
         myToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom)
@@ -246,8 +257,8 @@ private extension MyToDoViewController {
                 $0.leading.trailing.equalToSuperview()
             }
             emptyViewIcon.snp.makeConstraints {
-                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(196))
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(144))
+                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(150))
+                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(114))
             }
             emptyViewLabel.snp.makeConstraints {
                 $0.top.equalTo(emptyViewIcon.snp.bottom).offset(ScreenUtils.getHeight(16))
