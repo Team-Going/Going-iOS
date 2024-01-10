@@ -40,7 +40,8 @@ struct MyToDo: Hashable {
     
     static var emptyMyToDo: MyToDo = .init(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
     
-    static var myToDo: [MyToDo] = [
+    static var myToDo: [MyToDo] =
+    [
         .init(todoTitle: "지민", manager: ["지민"], deadline: "2023.09.23", isComplete: false, isPrivate: true),
         .init (todoTitle: "아린 현진 완", manager: ["아린", "현진"], deadline: "2023.09.21", isComplete: true, isPrivate: false),
         .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: false, isPrivate: false),

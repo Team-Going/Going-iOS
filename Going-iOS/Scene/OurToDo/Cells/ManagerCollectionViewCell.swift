@@ -5,8 +5,6 @@ class ManagerCollectionViewCell: UICollectionViewCell {
     // MARK: - Property
     
     static let identifier = "ManagerCollectionViewCell"
-    let absoluteWidth = UIScreen.main.bounds.width / 375
-    let absoluteHeight = UIScreen.main.bounds.height / 812
     var manager: [String] = []
     var managerData: String? {
         didSet {

@@ -7,8 +7,6 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     // MARK: - Property
     
     static let identifier = "TripFriendsCollectionViewCell"
-    let absoluteWidth = UIScreen.main.bounds.width / 375
-    let absoluteHeight = UIScreen.main.bounds.height / 812
     
     // MARK: - UI Properties
     
@@ -27,7 +25,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         imageView.layer.masksToBounds = true
         return imageView
     }()
-    var friendNameLabel: UILabel = {DOOLabel(font: .pretendard(.detail3_regular), color: .gray500, alignment: .center)}()
+    let friendNameLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray500, alignment: .center)
 
     // MARK: - Life Cycle
 
@@ -66,16 +64,16 @@ private extension TripFriendsCollectionViewCell {
         }
         
         profileImageView.snp.makeConstraints{
-            $0.size.equalTo(absoluteHeight * 48)
+            $0.size.equalTo(ScreenUtils.getHeight(48))
         }
         
         friendNameLabel.snp.makeConstraints{
-            $0.height.equalTo(absoluteHeight * 17)
+            $0.height.equalTo(ScreenUtils.getHeight(17))
         }
     }
     
     func setStyle() {
-        profileImageView.layer.cornerRadius = absoluteHeight * 23.5
+        profileImageView.layer.cornerRadius = ScreenUtils.getHeight(23.5)
     }
 }
 

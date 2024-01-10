@@ -43,12 +43,25 @@ final class MyToDoViewController: UIViewController {
         btn.setTitleColor(.white000, for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
+        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
         btn.imageView?.tintColor = .white000
         btn.addTarget(self, action: #selector(pushToAddToDoView(_:)), for: .touchUpInside)
         btn.semanticContentAttribute = .forceLeftToRight
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
     }()
+    private let emptyView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    private let emptyViewIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.MyToDo.emptyViewIcon
+        imageView.tintColor = .gray100
+        return imageView
+    }()
+    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "할일을 추가해주세요.", alignment: .center)
     
     // MARK: - Properties
     
@@ -76,6 +89,7 @@ final class MyToDoViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         loadData()
+        setEmptyView()
     }
 }
 
@@ -86,7 +100,8 @@ private extension MyToDoViewController {
     func setHierachy() {
         self.view.addSubviews(navigationBarview, tabBarView, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyMyToDoHeaderView)
-        contentView.addSubviews(tripHeaderView, myToDoHeaderView, myToDoCollectionView)
+        contentView.addSubviews(tripHeaderView, myToDoHeaderView, myToDoCollectionView, emptyView)
+        emptyView.addSubviews(emptyViewIcon, emptyViewLabel)
     }
     
     func setLayout() {
@@ -118,12 +133,7 @@ private extension MyToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
-        myToDoCollectionView.snp.makeConstraints{
-            $0.top.equalTo(myToDoHeaderView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(contentView)
-            $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
-        }
+        setEmptyView()
         stickyMyToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.width.equalTo(scrollView)
@@ -225,6 +235,33 @@ private extension MyToDoViewController {
     func setTapBarImage() {
         self.tabBarView.ourToDoTab.imageView?.tintColor = .gray200
         self.tabBarView.myToDoTab.imageView?.tintColor = .red500
+    }
+    
+    /// 투두 없는 경우 empty view 띄워주는 메소드
+    func setEmptyView() {
+        if self.myToDoData?.myToDo.isEmpty ?? true {
+            emptyView.snp.makeConstraints {
+                $0.top.equalTo(myToDoHeaderView.snp.bottom)
+                $0.bottom.equalTo(contentView)
+                $0.leading.trailing.equalToSuperview()
+            }
+            emptyViewIcon.snp.makeConstraints {
+                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(196))
+                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(144))
+            }
+            emptyViewLabel.snp.makeConstraints {
+                $0.top.equalTo(emptyViewIcon.snp.bottom).offset(ScreenUtils.getHeight(16))
+                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
+            }
+            emptyView.backgroundColor = .white000
+        }else {
+            myToDoCollectionView.snp.makeConstraints {
+                $0.top.equalTo(myToDoHeaderView.snp.bottom)
+                $0.leading.trailing.equalToSuperview()
+                $0.bottom.equalTo(contentView)
+                $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
+            }
+        }
     }
     
     // MARK: - objc Method

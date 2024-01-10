@@ -35,6 +35,7 @@ final class TabBarView: UIView {
         let btn = UIButton()
         btn.backgroundColor = .white000
         btn.setImage(UIImage(systemName: "person.fill"), for: .normal)
+        btn.setImage(UIImage(systemName: "person.fill"), for: .highlighted)
         btn.imageView?.tintColor = .red500
         btn.addTarget(self, action: #selector(tapOurToDoTabBar), for: .touchUpInside)
         btn.tag = 1
@@ -44,6 +45,7 @@ final class TabBarView: UIView {
         let btn = UIButton()
         btn.backgroundColor = .white000
         btn.setImage(UIImage(systemName: "person.fill"), for: .normal)
+        btn.setImage(UIImage(systemName: "person.fill"), for: .highlighted)
         btn.imageView?.tintColor = .gray200
         btn.addTarget(self, action: #selector(tapMyToDoTabBar), for: .touchUpInside)
         btn.tag = 2

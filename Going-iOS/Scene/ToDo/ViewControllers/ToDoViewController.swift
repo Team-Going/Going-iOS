@@ -7,12 +7,13 @@ final class ToDoViewController: UIViewController {
     // MARK: - UI Components
 
     private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle("할일 추가"), backgroundColor: .white000)
-    private let contentView: UIView = UIView()
-    private let todoLabel: UILabel = {
-        let label = UILabel()
-        label.setTitleLabel(title: "할 일")
-        return label
+    private let underlineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        return view
     }()
+    private let contentView: UIView = UIView()
+    private let todoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "할 일")
     private let todoTextfield: UITextField = {
         let tf = UITextField()
         tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
@@ -23,18 +24,8 @@ final class ToDoViewController: UIViewController {
         tf.setLeftPadding(amount: 12)
         return tf
     }()
-    private let countToDoCharacterLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0/15"
-        label.font = .pretendard(.detail2_regular)
-        label.textColor = .gray200
-        return label
-    }()
-    private let deadlineLabel: UILabel = {
-        let label = UILabel()
-        label.setTitleLabel(title: "언제까지")
-        return label
-    }()
+    private let countToDoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/15")
+    private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "언제까지")
     private let deadlineTextfieldLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, alignment: .left, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.backgroundColor = .white000
@@ -53,19 +44,11 @@ final class ToDoViewController: UIViewController {
         btn.addTarget(self, action: #selector(presentToDatePicker), for: .touchUpInside)
         return btn
     }()
-    private let managerLabel: UILabel = {
-        let label = UILabel()
-        label.setTitleLabel(title: "누가하나요?")
-        return label
-    }()
+    private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "누가하나요?")
     private lazy var todoManagerCollectionView: UICollectionView = {
         setCollectionView()
     }()
-    private let memoLabel: UILabel = {
-        let label = UILabel()
-        label.setTitleLabel(title: "메모")
-        return label
-    }()
+    private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "메모")
     private let memoTextView: UITextView = {
         let tv = UITextView()
         tv.backgroundColor = .white000
@@ -77,7 +60,7 @@ final class ToDoViewController: UIViewController {
         tv.layer.borderWidth = 1
         return tv
     }()
-    private let countMemoCharacterLabel: UILabel = {DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/1000")}()
+    private let countMemoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/1000")
     private let buttonView: UIView = UIView()
     private lazy var singleButtonView: DOOButton = {
         let singleBtn = DOOButton(type: .unabled, title: "저장")
@@ -137,7 +120,10 @@ final class ToDoViewController: UIViewController {
         setDelegate()
         setStyle()
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        setInquiryStyle()
+    }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationBarView.backgroundColor = .gray50
         self.tabBarController?.tabBar.isHidden = false
@@ -185,7 +171,7 @@ final class ToDoViewController: UIViewController {
 private extension ToDoViewController {
     
     func setHierachy() {
-        self.view.addSubviews(navigationBarView, contentView)
+        self.view.addSubviews(navigationBarView, underlineView, contentView)
         contentView.addSubviews(
             todoLabel,
             todoTextfield,
@@ -209,8 +195,13 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
+        underlineView.snp.makeConstraints{
+            $0.top.equalTo(navigationBarView.snp.bottom)
+            $0.height.equalTo(1)
+            $0.leading.trailing.equalToSuperview()
+        }
         contentView.snp.makeConstraints{
-            $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))
+            $0.top.equalTo(underlineView.snp.bottom).offset(ScreenUtils.getHeight(40))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.bottom.equalToSuperview()
         }
@@ -293,7 +284,8 @@ private extension ToDoViewController {
         case "조회": 
             navigationBarView.titleLabel.text = "할일 조회"
             setDefaultValue = ["조회", "조회", self.manager , "조회"]
-        case "수정": 
+            setInquiryStyle()
+        case "수정":
             navigationBarView.titleLabel.text = "할일 수정"
             setDefaultValue = ["수정", "수정", self.manager , "수정"]
         default: 
@@ -348,6 +340,19 @@ private extension ToDoViewController {
         button.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
+    }
+    
+    // 조회 뷰 스타일 세팅 메서드
+    // TODO: - 서버 통신 할 때 버튼 색상 변경 로직 추가 + placeholder랑 비교해서 빈값인지 확인
+    func setInquiryStyle() {
+        todoTextfield.layer.borderColor = UIColor.gray700.cgColor
+        todoTextfield.tintColor = .gray700
+        deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
+        deadlineTextfieldLabel.textColor = .gray700
+        dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
+        memoTextView.layer.borderColor = UIColor.gray700.cgColor
+        memoTextView.textColor = .gray700
+        
     }
     
     /// 텍스트 필드에 들어갈 텍스트를 DateFormatter로  변환하는 메서드

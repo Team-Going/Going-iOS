@@ -54,7 +54,6 @@
 		CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD68C2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift */; };
 		CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */; };
 		CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */; };
-		CA8CD6932B46B9F600CFDFBF /* CreateNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */; };
 		CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */; };
 		CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */; };
 		CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */; };
@@ -173,7 +172,6 @@
 		CA8CD68C2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD68E2B46B96E00CFDFBF /* OurToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoData.swift; sourceTree = "<group>"; };
 		CA8CD6902B46B9A100CFDFBF /* FriendProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendProfileData.swift; sourceTree = "<group>"; };
-		CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNavigationBar.swift; sourceTree = "<group>"; };
 		CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoData.swift; sourceTree = "<group>"; };
 		CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -484,7 +482,6 @@
 				CA8CD6822B46B72E00CFDFBF /* TripMiddleView.swift */,
 				CA8CD6842B46B7C100CFDFBF /* OurToDoHeaderView.swift */,
 				CA8CD6862B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift */,
-				CA8CD6922B46B9F600CFDFBF /* CreateNavigationBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1068,7 +1065,6 @@
 				F44461102B4DD2BF00674D74 /* String+.swift in Sources */,
 				F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */,
 				F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */,
-				CA8CD6932B46B9F600CFDFBF /* CreateNavigationBar.swift in Sources */,
 				CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */,
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
 				CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */,

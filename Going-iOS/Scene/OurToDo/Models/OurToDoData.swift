@@ -63,7 +63,8 @@ struct OurToDo {
         self.isComplete = isComplete
     }
     
-    static var ourToDo: [OurToDo] = [
+    static var ourToDo: [OurToDo] = 
+    [
         .init(todoTitle: "지민", manager: ["지민"], deadline: "2023.09.23", isComplete: false),
         .init (todoTitle: "아린 현진 완", manager: ["아린", "현진"], deadline: "2023.09.21", isComplete: true),
         .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: false),
