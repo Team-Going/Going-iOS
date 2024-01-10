@@ -11,6 +11,8 @@ import SnapKit
 
 final class UserTestViewController: UIViewController {
     
+    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 성향은?"))
+    
     private var buttonIndexList: [Int] = []
     
     private var index: Int = 0
@@ -80,13 +82,19 @@ private extension UserTestViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(testProgressView, testIndexLabel, questionLabel, questionStackView, nextButton)
+        view.addSubviews(navigationBar, testProgressView, testIndexLabel, questionLabel, questionStackView, nextButton)
         self.questionStackView.addArrangedSubviews(firstButton, secondButton, thirdButton, fourthButton)
     }
     
     func setLayout() {
-        testProgressView.snp.makeConstraints {
+        
+        navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        testProgressView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
             $0.trailing.leading.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(8))
         }
@@ -164,20 +172,28 @@ private extension UserTestViewController {
     
     func handleLastQuestion() {
         print(buttonIndexList)
-        print("Push To NextVC")
+        let nextVC = UserTestResultViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func setAnimation() {
-        let viewsToAnimate = [firstButton.titleLabel, secondButton.titleLabel,
-                              thirdButton.titleLabel, fourthButton.titleLabel]
+        let questButton = [firstButton, secondButton,
+                              thirdButton, fourthButton]
 
         UIView.animate(withDuration: 0.5, animations: {
-            viewsToAnimate.forEach { $0?.alpha = 0.0 }
+            questButton.forEach {
+                $0.isEnabled = false
+                $0.titleLabel?.alpha = 0.0
+            }
+//            views
         }) { [self] _ in
             // fade out 애니메이션 종료 후 실행될 코드
             updateLabel()
             UIView.animate(withDuration: 0.5) {
-                viewsToAnimate.forEach { $0?.alpha = 1.0 }
+                questButton.forEach {
+                    $0.titleLabel?.alpha = 1.0
+                    $0.isEnabled = true
+                }
             }
         }
     }
@@ -234,7 +250,7 @@ private extension UserTestViewController {
             
         }
         if index == 8 {
-            nextButton.setTitle("제출하기", for: .normal)
+            nextButton.setTitle("결과보기", for: .normal)
             updateNextButtonState()
         }
     }

@@ -12,6 +12,14 @@ import Photos
 
 final class UserTestResultViewController: UIViewController {
     
+    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("유형 검사 결과"))
+    
+    private let naviUnderLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray100
+        return view
+    }()
+    
     private let testResultScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
@@ -85,15 +93,27 @@ private extension UserTestResultViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(testResultScrollView, nextButton, saveImageButton, gradientView)
+        view.addSubviews(navigationBar, naviUnderLineView, testResultScrollView, nextButton, saveImageButton, gradientView)
         testResultScrollView.addSubviews(contentView)
         contentView.addSubviews(resultImageView, resultView)
     }
     
     func setLayout() {
         
-        testResultScrollView.snp.makeConstraints {
+        navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        naviUnderLineView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        testResultScrollView.snp.makeConstraints {
+            $0.top.equalTo(naviUnderLineView.snp.bottom)
             $0.bottom.equalTo(nextButton.snp.top)
             $0.leading.trailing.equalToSuperview()
         }
@@ -149,8 +169,8 @@ private extension UserTestResultViewController {
     
     @objc
     func nextButtonTapped() {
-        let nextVC = CompleteProfileViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+//        let nextVC = CompleteProfileViewController()
+//        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func showPermissionAlert() {
@@ -158,7 +178,7 @@ private extension UserTestResultViewController {
         // UI처리를 위해 main thread내에서 팝업을 띄우도록 함.
         DispatchQueue.main.async {
             
-            let alert = UIAlertController(title: nil, message: "사진 접근 권한이 없습니다. 설정으로 이동하여 권한 설정을 해주세요.", preferredStyle: .alert)
+            let alert = UIAlertController(title: nil, message: "설정으로 이동하여 권한을 허용해주세요. 내 여행 프로필에서 다시 저장할 수 있어요.", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "설정으로 이동", style: .default, handler: { _ in
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
