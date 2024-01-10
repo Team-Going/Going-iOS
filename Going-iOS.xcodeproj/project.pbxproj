@@ -21,6 +21,7 @@
 		946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */; };
 		946190A82B47FAC100A38A42 /* JoinTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */; };
 		94761A072B4DD18B00D7C589 /* LogOutPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94761A062B4DD18B00D7C589 /* LogOutPopUpViewController.swift */; };
+		94761A0A2B4E5F5200D7C589 /* CreateTravelStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94761A092B4E5F5200D7C589 /* CreateTravelStruct.swift */; };
 		948242DB2B4D948700A24E98 /* InquiryWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948242DA2B4D948700A24E98 /* InquiryWebViewController.swift */; };
 		948242DD2B4D971C00A24E98 /* PolicyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948242DC2B4D971C00A24E98 /* PolicyWebViewController.swift */; };
 		948242E12B4DA09000A24E98 /* ServiceInfoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948242E02B4DA09000A24E98 /* ServiceInfoWebViewController.swift */; };
@@ -137,6 +138,7 @@
 		946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningSuccessViewController.swift; sourceTree = "<group>"; };
 		946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelViewController.swift; sourceTree = "<group>"; };
 		94761A062B4DD18B00D7C589 /* LogOutPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutPopUpViewController.swift; sourceTree = "<group>"; };
+		94761A092B4E5F5200D7C589 /* CreateTravelStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelStruct.swift; sourceTree = "<group>"; };
 		948242DA2B4D948700A24E98 /* InquiryWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryWebViewController.swift; sourceTree = "<group>"; };
 		948242DC2B4D971C00A24E98 /* PolicyWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyWebViewController.swift; sourceTree = "<group>"; };
 		948242E02B4DA09000A24E98 /* ServiceInfoWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInfoWebViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +345,14 @@
 			path = LogOutPopUp;
 			sourceTree = "<group>";
 		};
+		94761A082B4E5F2A00D7C589 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				94761A092B4E5F5200D7C589 /* CreateTravelStruct.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		948767A22B4C23A700BCF843 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +366,7 @@
 		94C2C9A22B46FE3500B92CAC /* CreateTravel */ = {
 			isa = PBXGroup;
 			children = (
+				94761A082B4E5F2A00D7C589 /* Models */,
 				94C2C9A42B46FE4E00B92CAC /* ViewControllers */,
 				94C2C9A32B46FE4200B92CAC /* Views */,
 			);
@@ -1058,6 +1069,7 @@
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
 				9431CDC72B47F0C500CB452E /* NavigationView.swift in Sources */,
+				94761A0A2B4E5F5200D7C589 /* CreateTravelStruct.swift in Sources */,
 				94442EC82B4B18E500FDBB26 /* StartTravelSplashViewController.swift in Sources */,
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				948242DB2B4D948700A24E98 /* InquiryWebViewController.swift in Sources */,
