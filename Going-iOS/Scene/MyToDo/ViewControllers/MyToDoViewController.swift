@@ -39,14 +39,14 @@ final class MyToDoViewController: UIViewController {
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .red700
-        btn.setTitle(" 나의 할일", for: .normal)
+        btn.setTitle(StringLiterals.MyToDo.mytodo, for: .normal)
         btn.setTitleColor(.white000, for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
         btn.imageView?.tintColor = .white000
         btn.addTarget(self, action: #selector(pushToAddToDoView(_:)), for: .touchUpInside)
-        btn.semanticContentAttribute = .forceLeftToRight
+        btn.semanticContentAttribute = .forceRightToLeft
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
     }()
@@ -61,7 +61,7 @@ final class MyToDoViewController: UIViewController {
         imageView.tintColor = .gray100
         return imageView
     }()
-    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "할일을 추가해주세요.", alignment: .center)
+    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: StringLiterals.OurToDo.pleaseAddToDo, alignment: .center)
     private let myToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.image = ImageLiterals.MyToDo.mainViewIcon
@@ -281,7 +281,7 @@ private extension MyToDoViewController {
 
     @objc
     func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
-        setToDoView(naviBarTitle: "추가", isActivate: true)
+        setToDoView(naviBarTitle: StringLiterals.ToDo.add, isActivate: true)
     }
     
     @objc
@@ -300,7 +300,7 @@ private extension MyToDoViewController {
     
     @objc
     func pushToInquiryToDo() {
-        setToDoView(naviBarTitle: "조회", isActivate: false)
+        setToDoView(naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
     }
 }
 
@@ -333,7 +333,7 @@ extension MyToDoViewController: UIScrollViewDelegate {
 
 extension MyToDoViewController: MyToDoCollectionViewDelegate {
     func pushToToDo() {
-        setToDoView(naviBarTitle: "조회", isActivate: false)
+        setToDoView(naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
     }
     
     func getButtonIndex(index: Int, image: UIImage) {

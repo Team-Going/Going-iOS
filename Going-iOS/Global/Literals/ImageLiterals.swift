@@ -57,6 +57,7 @@ enum ImageLiterals {
     enum ToDo {
         static var enabledDropdown: UIImage { .load(named: "enabled_ic_dropdown") }
         static var disabledDropdown: UIImage { .load(named: "disabled_ic_dropdown") }
+        static var tappedDropdown: UIImage { .load(named: "tap_ic_dropdown") }
     }
     
     enum MyToDo {

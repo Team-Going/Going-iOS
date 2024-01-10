@@ -30,14 +30,14 @@ final class OurToDoViewController: UIViewController {
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .red700
-        btn.setTitle(" 같이 할일", for: .normal)
+        btn.setTitle(StringLiterals.OurToDo.ourtodo, for: .normal)
         btn.setTitleColor(.white000, for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
         btn.imageView?.tintColor = .white000
         btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
-        btn.semanticContentAttribute = .forceLeftToRight
+        btn.semanticContentAttribute = .forceRightToLeft
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
     }()
@@ -52,7 +52,7 @@ final class OurToDoViewController: UIViewController {
         imageView.tintColor = .gray100
         return imageView
     }()
-    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "할일을 추가해주세요.", alignment: .center)
+    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: StringLiterals.OurToDo.pleaseAddToDo, alignment: .center)
     private let ourToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.image = ImageLiterals.OurToDo.mainViewIcon
