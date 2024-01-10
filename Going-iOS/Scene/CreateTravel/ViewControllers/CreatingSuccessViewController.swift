@@ -92,12 +92,6 @@ final class CreatingSuccessViewController: UIViewController {
         return label
     }()
     
-    private let codeUnderLineView: UIView = {
-        let line = UIView()
-        line.backgroundColor = .gray300
-        return line
-    }()
-    
     private lazy var codeCopyButton: UIButton = {
         let button = UIButton()
         button.setTitle(StringLiterals.CreatingSuccess.copyCode, for: .normal)
@@ -108,6 +102,12 @@ final class CreatingSuccessViewController: UIViewController {
         return button
     }()
     
+    private let codeUnderLineView: UIView = {
+        let line = UIView()
+        line.backgroundColor = .gray300
+        return line
+    }()
+
     private let sendToKaKaoButton = DOOButton(type: .white, title: "카카오톡으로 초대코드 보내기")
     private let entranceToMainButton = DOOButton(type: .enabled, title: "입장하기")
     
@@ -203,8 +203,14 @@ private extension CreatingSuccessViewController {
         }
         
         inviteCodeLabel.snp.makeConstraints {
-            $0.top.equalTo(inviteCardView.snp.top).offset(16)
+            $0.top.equalToSuperview().inset(16)
             $0.centerX.equalTo(inviteCardView)
+        }
+        
+        codeCopyButton.snp.makeConstraints {
+            $0.bottom.equalTo(inviteCardView.snp.bottom).inset(16)
+            $0.centerX.equalTo(inviteCardView)
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(112))
         }
         
         codeUnderLineView.snp.makeConstraints {
@@ -213,14 +219,7 @@ private extension CreatingSuccessViewController {
             $0.width.equalTo(ScreenUtils.getWidth(102))
             $0.height.equalTo(0.5)
         }
-        
-        codeCopyButton.snp.makeConstraints {
-            $0.bottom.equalTo(inviteCardView.snp.bottom).inset(16)
-            $0.centerX.equalTo(inviteCardView)
-            $0.width.equalTo(ScreenUtils.getWidth(102))
-            $0.height.equalTo(ScreenUtils.getHeight(20))
-        }
-        
+
         sendToKaKaoButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
@@ -240,7 +239,7 @@ private extension CreatingSuccessViewController {
     
     @objc
     func copyButtonTapped() {
-        DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: 314)
+        DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: ScreenUtils.getHeight(284))
         UIPasteboard.general.string = inviteCodeLabel.text
     }
 }
