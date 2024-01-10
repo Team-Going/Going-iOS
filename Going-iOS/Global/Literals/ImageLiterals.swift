@@ -95,4 +95,8 @@ enum ImageLiterals {
         static var sriCharac: UIImage { .load(named: "img_testresult_sri")}
         static var srpCharac: UIImage { .load(named: "img_testresult_srp")}
     }
+    
+    enum UserTest {
+        static var background: UIImage { .load(named: "img_test")}
+    }
 }

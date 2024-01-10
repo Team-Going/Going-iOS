@@ -30,6 +30,13 @@ final class UserTestViewController: UIViewController {
         return progress
     }()
     
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.UserTest.background
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     private let testIndexLabel = DOOLabel(font: .pretendard(.head3), color: .gray300)
     private let questionLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
     
@@ -81,7 +88,7 @@ private extension UserTestViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar, testProgressView, testIndexLabel, questionLabel, questionStackView, nextButton)
+        view.addSubviews(navigationBar, testProgressView, testIndexLabel, questionLabel, questionStackView, nextButton, backgroundImageView)
         self.questionStackView.addArrangedSubviews(firstButton, secondButton, thirdButton, fourthButton)
     }
     
@@ -122,6 +129,11 @@ private extension UserTestViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(68))
+        }
+        
+        backgroundImageView.snp.makeConstraints {
+            $0.bottom.equalTo(nextButton.snp.top)
+            $0.trailing.equalToSuperview()
         }
     }
     
