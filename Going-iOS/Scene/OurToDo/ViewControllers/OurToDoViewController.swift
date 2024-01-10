@@ -46,7 +46,7 @@ final class OurToDoViewController: UIViewController {
         view.backgroundColor = .black
         return view
     }()
-    private let emptyViewIcon: UIImageView = {
+    private let emptyViewIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.MyToDo.emptyViewIcon
         imageView.tintColor = .gray100
@@ -97,7 +97,7 @@ private extension OurToDoViewController {
         self.view.addSubviews(navigationBarview, tabBarView, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoHeaderView, ourToDoCollectionView, emptyView)
-        emptyView.addSubviews(emptyViewIcon, emptyViewLabel)
+        emptyView.addSubviews(emptyViewIconImageView, emptyViewLabel)
     }
     
     func setLayout() {
@@ -249,12 +249,12 @@ private extension OurToDoViewController {
                 $0.bottom.equalTo(contentView)
                 $0.leading.trailing.equalToSuperview()
             }
-            emptyViewIcon.snp.makeConstraints {
+            emptyViewIconImageView.snp.makeConstraints {
                 $0.top.equalToSuperview().inset(ScreenUtils.getHeight(56))
                 $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(144))
             }
             emptyViewLabel.snp.makeConstraints {
-                $0.top.equalTo(emptyViewIcon.snp.bottom).offset(ScreenUtils.getHeight(16))
+                $0.top.equalTo(emptyViewIconImageView.snp.bottom).offset(ScreenUtils.getHeight(16))
                 $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
             }
             emptyView.backgroundColor = .white000

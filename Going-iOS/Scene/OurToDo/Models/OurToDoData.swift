@@ -63,28 +63,28 @@ struct OurToDo {
         self.isComplete = isComplete
     }
     
-    static var ourToDo: [OurToDo] = []
-//    [
-//        .init(todoTitle: "지민", manager: ["지민"], deadline: "2023.09.23", isComplete: false),
-//        .init (todoTitle: "아린 현진 완", manager: ["아린", "현진"], deadline: "2023.09.21", isComplete: true),
-//        .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: false),
-//        .init(todoTitle: "성준", manager: ["성준"], deadline: "2023.09.29", isComplete: false),
-//        .init(todoTitle: "희슬 영서", manager: ["희슬", "영서"], deadline: "2023.09.23", isComplete: false),
-//        .init(todoTitle: "지민 희슬 영서 완", manager: ["지민", "희슬", "영서"], deadline: "2023.09.23", isComplete: true),
-//        .init(todoTitle: "지민 완", manager: ["지민"], deadline: "2023.09.23", isComplete: true),
-//        .init(todoTitle: "영서", manager: ["영서"], deadline: "2023.09.25", isComplete: false),
-//        .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.21", isComplete: false),
-//        .init(todoTitle: "성준 희슬 영서 완", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: true),
-//        .init(todoTitle: "지민", manager: ["지민"], deadline: "2023.09.23", isComplete: false),
-//        .init (todoTitle: "아린 현진 완", manager: ["아린", "현진"], deadline: "2023.09.21", isComplete: true),
-//        .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: false),
-//        .init(todoTitle: "성준", manager: ["성준"], deadline: "2023.09.29", isComplete: false),
-//        .init(todoTitle: "희슬 영서", manager: ["희슬", "영서"], deadline: "2023.09.23", isComplete: false),
-//        .init(todoTitle: "지민 희슬 영서 완", manager: ["지민", "희슬", "영서"], deadline: "2023.09.23", isComplete: true),
-//        .init(todoTitle: "지민 완", manager: ["지민"], deadline: "2023.09.23", isComplete: true),
-//        .init(todoTitle: "영서", manager: ["영서"], deadline: "2023.09.25", isComplete: false),
-//        .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.21", isComplete: false),
-//        .init(todoTitle: "성준 희슬 영서 완", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: true)
-//    ]
+    static var ourToDo: [OurToDo] = 
+    [
+        .init(todoTitle: "지민", manager: ["지민"], deadline: "2023.09.23", isComplete: false),
+        .init (todoTitle: "아린 현진 완", manager: ["아린", "현진"], deadline: "2023.09.21", isComplete: true),
+        .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: false),
+        .init(todoTitle: "성준", manager: ["성준"], deadline: "2023.09.29", isComplete: false),
+        .init(todoTitle: "희슬 영서", manager: ["희슬", "영서"], deadline: "2023.09.23", isComplete: false),
+        .init(todoTitle: "지민 희슬 영서 완", manager: ["지민", "희슬", "영서"], deadline: "2023.09.23", isComplete: true),
+        .init(todoTitle: "지민 완", manager: ["지민"], deadline: "2023.09.23", isComplete: true),
+        .init(todoTitle: "영서", manager: ["영서"], deadline: "2023.09.25", isComplete: false),
+        .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.21", isComplete: false),
+        .init(todoTitle: "성준 희슬 영서 완", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: true),
+        .init(todoTitle: "지민", manager: ["지민"], deadline: "2023.09.23", isComplete: false),
+        .init (todoTitle: "아린 현진 완", manager: ["아린", "현진"], deadline: "2023.09.21", isComplete: true),
+        .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: false),
+        .init(todoTitle: "성준", manager: ["성준"], deadline: "2023.09.29", isComplete: false),
+        .init(todoTitle: "희슬 영서", manager: ["희슬", "영서"], deadline: "2023.09.23", isComplete: false),
+        .init(todoTitle: "지민 희슬 영서 완", manager: ["지민", "희슬", "영서"], deadline: "2023.09.23", isComplete: true),
+        .init(todoTitle: "지민 완", manager: ["지민"], deadline: "2023.09.23", isComplete: true),
+        .init(todoTitle: "영서", manager: ["영서"], deadline: "2023.09.25", isComplete: false),
+        .init(todoTitle: "성준 희슬 영서", manager: ["성준", "희슬", "영서"], deadline: "2023.09.21", isComplete: false),
+        .init(todoTitle: "성준 희슬 영서 완", manager: ["성준", "희슬", "영서"], deadline: "2023.09.18", isComplete: true)
+    ]
 }
 

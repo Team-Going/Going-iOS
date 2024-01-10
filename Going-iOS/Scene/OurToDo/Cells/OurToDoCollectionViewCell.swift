@@ -43,7 +43,7 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor.gray50
         return view
     }()
-    lazy var todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)
+    let todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)
     private lazy var deadlineLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)
     lazy var managerCollectionView: UICollectionView = {setCollectionView()}()
 
@@ -113,6 +113,7 @@ private extension OurToDoCollectionViewCell {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
+        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
         return collectionView
     }
     
