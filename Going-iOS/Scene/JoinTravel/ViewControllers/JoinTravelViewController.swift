@@ -16,9 +16,9 @@ final class JoinTravelViewController: UIViewController {
     // MARK: - UI Properties
 
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
-    private let navigationBottomLineView: UIView = {
+    private let navigationUnderlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray200
+        view.backgroundColor = .gray100
         return view
     }()
     
@@ -107,7 +107,7 @@ private extension JoinTravelViewController {
     
     func setHierarchy() {
         view.addSubviews(navigationBar,
-                         navigationBottomLineView,
+                         navigationUnderlineView,
                          codeTitleLabel,
                          codeTextField,
                          characterCountLabel,
@@ -121,7 +121,7 @@ private extension JoinTravelViewController {
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
-        navigationBottomLineView.snp.makeConstraints {
+        navigationUnderlineView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
