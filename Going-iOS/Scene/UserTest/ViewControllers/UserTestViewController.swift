@@ -49,11 +49,10 @@ final class UserTestViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .gray200
+        button.backgroundColor = .gray50
         button.isEnabled = false
         button.titleLabel?.font = .pretendard(.body1_bold)
-        button.layer.cornerRadius = 6
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -120,9 +119,9 @@ private extension UserTestViewController {
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(68))
         }
     }
     
