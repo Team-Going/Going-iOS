@@ -132,7 +132,6 @@ extension TestResultView {
     }
     
     func setStyle() {
-        self.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         self.backgroundColor = .white000
         whiteView.backgroundColor = .white000
     }

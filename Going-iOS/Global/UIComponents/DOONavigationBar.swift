@@ -17,7 +17,7 @@ final class DOONavigationBar: UIView {
         case myToDo
         case titleLabelOnly(String)
         case backButtonWithTitle(String)
-        case testResult
+        case testResult(String)
     }
     
     private lazy var backButton: UIButton = {
@@ -28,7 +28,7 @@ final class DOONavigationBar: UIView {
         return btn
     }()
     
-    private lazy var saveImageButton: UIButton = {
+    lazy var saveImageButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonSave, for: .normal)
         btn.addTarget(self, action: #selector(saveImageButtonTapped), for: .touchUpInside)

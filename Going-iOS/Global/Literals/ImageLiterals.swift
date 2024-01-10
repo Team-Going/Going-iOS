@@ -84,4 +84,15 @@ enum ImageLiterals {
         static var btnResign: UIImage { .load(named: "ic_unsubscribe") }
         static var btnEnterLarge: UIImage { .load(named: "btn_enter_large")}
     }
+    
+    enum UserTestTypeCharacter {
+        static var aeiCharac: UIImage { .load(named: "img_testresult_aei")}
+        static var aepCharac: UIImage { .load(named: "img_testresult_aep")}
+        static var ariCharac: UIImage { .load(named: "img_testresult_ari")}
+        static var arpCharac: UIImage { .load(named: "img_testresult_arp")}
+        static var seiCharac: UIImage { .load(named: "img_testresult_sei")}
+        static var sepCharac: UIImage { .load(named: "img_testresult_sep")}
+        static var sriCharac: UIImage { .load(named: "img_testresult_sri")}
+        static var srpCharac: UIImage { .load(named: "img_testresult_srp")}
+    }
 }
