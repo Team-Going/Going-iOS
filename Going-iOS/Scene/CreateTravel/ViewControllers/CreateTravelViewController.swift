@@ -76,7 +76,7 @@ final class CreateTravelViewController: UIViewController {
     
     private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "생성하기")
-        btn.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToTravelTestVC), for: .touchUpInside)
         return btn
     }()
     
@@ -232,11 +232,6 @@ private extension CreateTravelViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func pushToTravelTestVC() {
-        let vc = TravelTestViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     // MARK: - Validation Methods
     
     func updateCreateButtonState() {
@@ -324,8 +319,9 @@ private extension CreateTravelViewController {
     }
     
     @objc
-    func createButtonTapped() {
-        pushToTravelTestVC()
+    func pushToTravelTestVC() {
+        let vc = TravelTestViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -39,7 +39,7 @@ final class JoinTravelViewController: UIViewController {
     
     private lazy var nextButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")
-        btn.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToJoiningSuccessVC), for: .touchUpInside)
         return btn
     }()
     
@@ -61,38 +61,6 @@ final class JoinTravelViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         removeKeyboardNotifications()
-    }
-    
-    // MARK: - @objc Methods
-    
-    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
-    @objc
-    func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            // 키보드 높이
-            let keyboardHeight = keyboardFrame.height
-            
-            // Bottom Safe Area 높이
-            let safeAreaBottomInset = view.safeAreaInsets.bottom
-            
-            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
-            UIView.animate(withDuration: 0.3) {
-                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
-            }
-        }
-    }
-    
-    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
-    @objc
-    func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.nextButton.transform = .identity
-        }
-    }
-    
-    @objc
-    func nextButtonTapped() {
-        pushToJoiningSuccessVC()
     }
 }
 
@@ -173,6 +141,34 @@ private extension JoinTravelViewController {
         nextButton.currentType = (isCodeTextFieldIsFilled) ? .enabled : .unabled
     }
     
+    // MARK: - @objc Methods
+    
+    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
+    @objc
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            // 키보드 높이
+            let keyboardHeight = keyboardFrame.height
+            
+            // Bottom Safe Area 높이
+            let safeAreaBottomInset = view.safeAreaInsets.bottom
+            
+            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
+            UIView.animate(withDuration: 0.3) {
+                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
+            }
+        }
+    }
+    
+    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
+    @objc
+    func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.nextButton.transform = .identity
+        }
+    }
+    
+    @objc
     func pushToJoiningSuccessVC() {
         let vc = JoiningSuccessViewController()
         navigationController?.pushViewController(vc, animated: true)

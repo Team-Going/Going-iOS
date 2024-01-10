@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 import SnapKit
 
 final class DOONavigationBar: UIView {
@@ -21,8 +22,8 @@ final class DOONavigationBar: UIView {
     private lazy var backButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonBack, for: .normal)
-        btn.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        btn.addTarget(self, action: #selector(toDoBackButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
         return btn
     }()
     
@@ -37,7 +38,7 @@ final class DOONavigationBar: UIView {
     private lazy var profileButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonProfile, for: .normal)
-        btn.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(pushToMyProfileVC), for: .touchUpInside)
         return btn
     }()
     
@@ -78,8 +79,8 @@ private extension DOONavigationBar {
                 $0.leading.equalToSuperview().inset(10)
                 $0.centerY.equalToSuperview()
             }
-            backButton.removeTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-            backButton.addTarget(self, action: #selector(toDoBackButtonTapped), for: .touchUpInside)
+            backButton.removeTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
+            backButton.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
             
         case .myToDo:
             addSubviews(backButton, profileButton)
@@ -91,8 +92,8 @@ private extension DOONavigationBar {
                 $0.trailing.equalToSuperview().inset(10)
                 $0.centerY.equalToSuperview()
             }
-            backButton.removeTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-            backButton.addTarget(self, action: #selector(toDoBackButtonTapped), for: .touchUpInside)
+            backButton.removeTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
+            backButton.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
         
         case .titleLabelOnly(let title):
             titleLabel.text = title
@@ -115,17 +116,17 @@ private extension DOONavigationBar {
     }
     
     @objc 
-    func backButtonTapped() {
+    func popToPreviousVC() {
         viewController?.navigationController?.popViewController(animated: true)
     }
     
     @objc
-    func profileButtonTapped() {
+    func pushToMyProfileVC() {
         let vc = MyProfileViewController()
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func toDoBackButtonTapped() {
+    @objc func popToRootVC() {
         viewController?.navigationController?.popToRootViewController(animated: true)
     }
 }

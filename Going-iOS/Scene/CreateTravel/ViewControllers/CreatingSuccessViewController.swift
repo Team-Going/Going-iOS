@@ -218,11 +218,6 @@ private extension CreatingSuccessViewController {
         self.inviteCodeLabel.text = data.inviteCode
     }
     
-    func pushToOurToDoVC() {
-        let vc = OurToDoViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     func sendKakaoMessage() {
         let templateId = Constant.KaKaoMessageTemplate.id
         
@@ -264,7 +259,8 @@ private extension CreatingSuccessViewController {
     }
     
     @objc
-    func entranceButtonTapped() {
-        pushToOurToDoVC()
+    func pushToOurToDoVC() {
+        let vc = OurToDoViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
