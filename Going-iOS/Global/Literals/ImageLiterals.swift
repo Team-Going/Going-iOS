@@ -70,6 +70,9 @@ enum ImageLiterals {
         static var icLockLight: UIImage {
             .load(named: "ic_lock_light")
         }
+        static var emptyViewIcon: UIImage {
+            .load(named: "empty_view_icon")
+        }
     }
     enum DashBoard {
         static var btnSetting: UIImage { .load(named: "btn_setting") }
