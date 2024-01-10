@@ -25,6 +25,14 @@ struct NetworkRequest {
     func makeURLRequest() throws -> URLRequest {
         var urlComponents = URLComponents(string: Config.baseURL)
 
+        //쿼리에 들어갈 것을 바로 딕셔너리로 넣어주는 것이 아니라,
+        //구조체를 만들어두고 toDictionary()를 활용해서 딕셔너리로 변환시켜주고 쿼리에 넣어준다
+        //아래와 같은 구조체를 선언해두고, NetworkRequest(여기에 넣어주고 값만 설정해준다.)
+//        struct queryStruct: Codable {
+//            let name: String
+//            let age: Int
+//        }
+        
         if let query = self.query {
             let queries = query.toDictionary()
             let queryItemArray = queries.map {
