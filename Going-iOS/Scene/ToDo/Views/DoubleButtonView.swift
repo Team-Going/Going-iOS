@@ -9,6 +9,7 @@ import UIKit
 
 protocol DoubleButtonDelegate: AnyObject {
     func tapEditButton()
+    func tapDeleteButton()
 }
 
 final class DoubleButtonView: UIView {
@@ -23,8 +24,9 @@ final class DoubleButtonView: UIView {
         stackView.backgroundColor = .white000
         return stackView
     }()
-    private let button1: DOOButton = {
+    private lazy var button1: DOOButton = {
         let btn = DOOButton(type: .white, title: "삭제하기")
+        btn.addTarget(self, action: #selector(tapDeleteButton), for: .touchUpInside)
         btn.tag = 1
         return btn
     }()
@@ -74,6 +76,11 @@ private extension DoubleButtonView {
     @objc
     func tapEditButton() {
         self.delegate?.tapEditButton()
+    }
+    
+    @objc
+    func tapDeleteButton() {
+        self.delegate?.tapDeleteButton()
     }
     
 }

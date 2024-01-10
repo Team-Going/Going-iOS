@@ -474,4 +474,9 @@ extension ToDoViewController: DoubleButtonDelegate {
         DOOToast.show(message: "해당 기능은 추후 업데이트 예정이에요 :)", insetFromBottom: ScreenUtils.getHeight(107))
     }
     
+    func tapDeleteButton() {
+        self.navigationController?.popViewController(animated: false)
+        DOOToast.show(message: "할일이 삭제되었어요.", insetFromBottom: ScreenUtils.getHeight(107))
+    }
+    
 }
