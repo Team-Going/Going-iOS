@@ -36,7 +36,6 @@ final class TabBarView: UIView {
         btn.backgroundColor = .white000
         btn.setImage(ImageLiterals.TabBar.tabbarOurToDoSelected, for: .normal)
         btn.setImage(ImageLiterals.TabBar.tabbarOurToDoSelected, for: .highlighted)
-        btn.imageView?.tintColor = .red500
         btn.addTarget(self, action: #selector(tapOurToDoTabBar), for: .touchUpInside)
         btn.tag = 1
         return btn
@@ -46,7 +45,6 @@ final class TabBarView: UIView {
         btn.backgroundColor = .white000
         btn.setImage(ImageLiterals.TabBar.tabbarMyToDoUnselected, for: .normal)
         btn.setImage(ImageLiterals.TabBar.tabbarMyToDoUnselected, for: .highlighted)
-        btn.imageView?.tintColor = .gray200
         btn.addTarget(self, action: #selector(tapMyToDoTabBar), for: .touchUpInside)
         btn.tag = 2
         return btn

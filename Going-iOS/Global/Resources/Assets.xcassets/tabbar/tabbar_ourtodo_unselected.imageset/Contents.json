@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "tabbar_ourtodo_unselected.svg",
+      "filename" : "btn_ourtodo_disabled_navi.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tabbar_ourtodo_unselected 1.svg",
+      "filename" : "btn_ourtodo_disabled_navi@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tabbar_ourtodo_unselected 2.svg",
+      "filename" : "btn_ourtodo_disabled_navi@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

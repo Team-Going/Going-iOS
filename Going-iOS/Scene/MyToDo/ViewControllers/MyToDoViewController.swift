@@ -233,8 +233,8 @@ private extension MyToDoViewController {
     }
     
     func setTapBarImage() {
-        self.tabBarView.ourToDoTab.imageView?.tintColor = .gray200
-        self.tabBarView.myToDoTab.imageView?.tintColor = .red500
+        self.tabBarView.ourToDoTab.setImage(ImageLiterals.TabBar.tabbarOurToDoUnselected, for: .normal)
+        self.tabBarView.myToDoTab.setImage(ImageLiterals.TabBar.tabbarMyToDoSelected, for: .normal)
     }
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
