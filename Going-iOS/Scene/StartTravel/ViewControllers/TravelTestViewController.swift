@@ -30,7 +30,7 @@ final class TravelTestViewController: UIViewController {
     private lazy var travelTestCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private lazy var nextButton: DOOButton = {
-        let btn = DOOButton(type: .unabled, title: "다음")
+        let btn = DOOButton(type: .unabled, title: "저장하고 여행 시작하기")
         btn.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return btn
     }()
@@ -138,7 +138,7 @@ private extension TravelTestViewController {
     
     @objc
     func nextButtonTapped() {
-        let vc = JoiningSuccessViewController()
+        let vc = OurToDoViewController()
         navigationController?.pushViewController(vc, animated: true)
         print(selectedAnswers)
     }
