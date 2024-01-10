@@ -21,7 +21,7 @@ final class JoiningSuccessViewController: UIViewController {
         let label = UILabel()
         label.font = .pretendard(.head2)
         label.textColor = .gray700
-        label.text = StringLiterals.CreatingSuccess.title
+        label.text = StringLiterals.JoiningSuccess.title
         label.numberOfLines = 0
         return label
     }()

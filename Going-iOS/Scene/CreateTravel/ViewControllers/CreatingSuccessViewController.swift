@@ -13,18 +13,9 @@ final class CreatingSuccessViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    // TODO: - Dummy Data 생성
-
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
-
-    private let createSuccessLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.head2)
-        label.textColor = .gray700
-        label.text = StringLiterals.CreatingSuccess.title
-        label.numberOfLines = 0
-        return label
-    }()
+    
+    private let createSuccessLabel = DOOLabel(font: .pretendard(.head2), color: .gray700, text: StringLiterals.CreatingSuccess.title)
     
     private let ticketImage: UIImageView = {
         let img = UIImageView()
@@ -45,29 +36,9 @@ final class CreatingSuccessViewController: UIViewController {
         return view
     }()
     
-    private let dDayLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.detail2_bold)
-        label.textColor = .red400
-        label.text = "D-16"
-        return label
-    }()
-    
-    private let travelTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.body1_bold)
-        label.textColor = .gray700
-        label.text = "두릅과 스페인"
-        return label
-    }()
-    
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.detail3_regular)
-        label.textColor = .gray300
-        label.text = "12월 16일 - 12월 25일"
-        return label
-    }()
+    private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .red400)
+    private let travelTitleLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray700)
+    private let dateLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300)
     
     private let inviteTitleLabel: UILabel = {
         let label = UILabel()
@@ -83,30 +54,23 @@ final class CreatingSuccessViewController: UIViewController {
         view.layer.cornerRadius = 6
         return view
     }()
-    
-    private let inviteCodeLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.head4)
-        label.textColor = .black000
-        label.text = "083549"
-        return label
-    }()
-    
-    private let codeUnderLineView: UIView = {
-        let line = UIView()
-        line.backgroundColor = .gray300
-        return line
-    }()
-    
-    private let codeCopyButton: UIButton = {
+    private let inviteCodeLabel = DOOLabel(font: .pretendard(.head4), color: .gray700)
+
+    private lazy var codeCopyButton: UIButton = {
         let button = UIButton()
         button.setTitle(StringLiterals.CreatingSuccess.copyCode, for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
         button.setTitleColor(.gray300, for: .normal)
         button.setImage(ImageLiterals.CreateTravel.buttonCopy, for: .normal)
+        button.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
         return button
     }()
-    
+    private let codeUnderLineView: UIView = {
+        let line = UIView()
+        line.backgroundColor = .gray300
+        return line
+    }()
+
     private let sendToKaKaoButton = DOOButton(type: .white, title: "카카오톡으로 초대코드 보내기")
     private let entranceToMainButton = DOOButton(type: .enabled, title: "입장하기")
     
@@ -118,13 +82,13 @@ final class CreatingSuccessViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
+        setData(data: CreateTravelStruct.createTravelDummy)
     }
 }
 
 // MARK: - Private Extension
 
 private extension CreatingSuccessViewController {
-    
     func setStyle() {
         view.backgroundColor = .gray50
         self.navigationController?.isNavigationBarHidden = true
@@ -186,7 +150,7 @@ private extension CreatingSuccessViewController {
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(8)
+            $0.bottom.equalToSuperview().inset(26)
             $0.leading.equalTo(travelTitleLabel)
         }
         
@@ -203,8 +167,14 @@ private extension CreatingSuccessViewController {
         }
         
         inviteCodeLabel.snp.makeConstraints {
-            $0.top.equalTo(inviteCardView.snp.top).offset(16)
+            $0.top.equalToSuperview().inset(16)
             $0.centerX.equalTo(inviteCardView)
+        }
+        
+        codeCopyButton.snp.makeConstraints {
+            $0.bottom.equalTo(inviteCardView.snp.bottom).inset(16)
+            $0.centerX.equalTo(inviteCardView)
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(112))
         }
         
         codeUnderLineView.snp.makeConstraints {
@@ -213,12 +183,7 @@ private extension CreatingSuccessViewController {
             $0.width.equalTo(ScreenUtils.getWidth(102))
             $0.height.equalTo(0.5)
         }
-        
-        codeCopyButton.snp.makeConstraints {
-            $0.bottom.equalTo(inviteCardView.snp.bottom).inset(16)
-            $0.centerX.equalTo(inviteCardView)
-        }
-        
+
         sendToKaKaoButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
@@ -232,5 +197,20 @@ private extension CreatingSuccessViewController {
             $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
         }
+    }
+    
+    func setData(data: CreateTravelStruct) {
+        self.dDayLabel.text = "D-" + "\(data.dueDate)"
+        self.travelTitleLabel.text = data.travelTitle
+        self.dateLabel.text = data.travelDate
+        self.inviteCodeLabel.text = data.inviteCode
+    }
+
+    // MARK: - @objc Methods
+    
+    @objc
+    func copyButtonTapped() {
+        DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: ScreenUtils.getHeight(284))
+        UIPasteboard.general.string = inviteCodeLabel.text
     }
 }

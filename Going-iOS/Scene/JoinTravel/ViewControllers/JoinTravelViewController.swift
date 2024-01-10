@@ -30,6 +30,7 @@ final class JoinTravelViewController: UIViewController {
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, forBorderColor: .gray200, forCornerRadius: 6)
         field.setPlaceholderColor(.gray200)
+        field.textColor = .gray700
         field.keyboardType = .numberPad
         return field
     }()
@@ -140,7 +141,7 @@ private extension JoinTravelViewController {
         
         characterCountLabel.snp.makeConstraints {
             $0.top.equalTo(codeTextField.snp.bottom).offset(4)
-            $0.trailing.equalTo(codeTextField.snp.trailing).offset(4)
+            $0.trailing.equalTo(codeTextField.snp.trailing).offset(-4)
         }
         
         nextButton.snp.makeConstraints {
