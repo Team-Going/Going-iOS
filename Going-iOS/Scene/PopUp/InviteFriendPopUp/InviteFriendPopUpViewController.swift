@@ -120,6 +120,7 @@ private extension InviteFriendPopUpViewController {
     @objc
     func copyButtonTapped() {
         UIPasteboard.general.string = self.codeLabel.text
+        DOOToast.show(message: "초대코드가 복사되었어요", insetFromBottom: ScreenUtils.getHeight(101))
     }
     
     @objc
