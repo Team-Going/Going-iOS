@@ -15,14 +15,16 @@ import SnapKit
 
 final class LoginViewController: UIViewController {
     
-    private var kakaoAccessToken: String? {
+    var socialType: SocialPlatform?
+    
+    private var socialToken: String? {
         didSet {
-            guard let token = kakaoAccessToken else { return }
-            
+            guard let token = socialToken else { return }
+            guard let platform = socialType else { return }
             //로그인API
             Task {
                 do {
-                    let isPushToDashView = try await AuthService.shared.login(token: token, platform: .kakao)
+                    let isPushToDashView = try await AuthService.shared.login(token: token, platform: platform)
                     //true면 대시보드로 이동
                     //false면 성향테스트스플래시뷰로 이동
                     print(isPushToDashView)
@@ -56,7 +58,7 @@ final class LoginViewController: UIViewController {
     private lazy var kakaoLoginButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(ImageLiterals.Login.kakaoLoginButton, for: .normal)
-                    button.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -145,15 +147,16 @@ private extension LoginViewController {
         self.view.backgroundColor = .white000
     }
     
-
+    
     private func loginKakaoWithApp() {
         UserApi.shared.loginWithKakaoTalk { oAuthToken, error in
             guard error == nil else { return }
             print("Login with KAKAO App Success !!")
             guard let oAuthToken = oAuthToken else { return }
-            print(oAuthToken.accessToken)
-            self.kakaoAccessToken = oAuthToken.accessToken
-
+            self.socialType = .kakao
+            self.socialToken = oAuthToken.accessToken
+            
+            
         }
     }
     
@@ -164,9 +167,9 @@ private extension LoginViewController {
                 return }
             print("Login with KAKAO Web Success !!")
             guard let oAuthToken = oAuthToken else { return }
-            print(oAuthToken.accessToken)
-            self.kakaoAccessToken = oAuthToken.accessToken
-
+            self.socialType = .kakao
+            self.socialToken = oAuthToken.accessToken
+            
         }
     }
     
@@ -192,8 +195,8 @@ private extension LoginViewController {
         controller.performRequests()
         
         //뷰연결용
-        let nextVC = MakeProfileViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        //        let nextVC = MakeProfileViewController()
+        //        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc
@@ -215,26 +218,29 @@ extension LoginViewController: ViewControllerServiceable {
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }
-
+    
 }
 
+//애플로그인
 extension LoginViewController: ASAuthorizationControllerDelegate {
     
     //애플로그인 성공했을 때
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            
-            //이거로 자동로그인 판별
-            let userIdentifier = credential.user
-            
+            guard let userIdentifier = credential.identityToken else {
+                DOOToast.show(message: "애플로그인에 실패하셨습니다.", insetFromBottom: 80)
+                return
+            }
+            self.socialType = .apple
+            self.socialToken = String(data: userIdentifier, encoding: .utf8)
             // .authorizationCode와 .identityToken은 Generate and valid tokens, revoke tokens에서 사용
-            
         }
     }
     
     //애플로그인 실패했을 때
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        
         print("login failed - \(error.localizedDescription)")
         
     }

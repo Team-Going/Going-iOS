@@ -29,14 +29,10 @@ final class AuthService: Serviceable {
         let refresh = model.refreshToken
         let isToDashBoardView = model.isResult
         
-        print(access)
-        print(refresh)
-        
         //UserDefaults에 jwt토큰 저장
         UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
     
-        
         // true면 LoginVC에서 대시보드뷰로 이동
         // false면 LoginVC에서 성향테스트스플래시뷰로 이동
         if isToDashBoardView {
