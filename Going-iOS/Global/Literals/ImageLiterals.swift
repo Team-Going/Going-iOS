@@ -34,9 +34,8 @@ enum ImageLiterals {
     }
     
     enum CreateTravel {
-        static var buttonCopy: UIImage { .load(named: "ic_copy")}
-        static var ticketImage: UIImage { .load(named: "ticket_img_small")}
-        static var larvaImage: UIImage { .load(named: "larva")}
+        static var buttonCopy: UIImage { .load(named: "ic_copy") }
+        static var ticketLargeImage: UIImage { .load(named: "img_ticket_copy") }
     }
     
     enum OurToDo {
@@ -81,10 +80,12 @@ enum ImageLiterals {
             .load(named: "img_mytodo_main")
         }
     }
+    
     enum DashBoard {
         static var btnSetting: UIImage { .load(named: "btn_setting") }
         static var btnSave: UIImage { .load(named: "btn_save") }
         static var btnProfile: UIImage { .load(named: "btn_profile") }
+        static var imgDashBoard: UIImage { .load(named: "img_dashboard") }
     }
     
     enum Settings {
@@ -92,12 +93,36 @@ enum ImageLiterals {
         static var btnEnterLarge: UIImage { .load(named: "btn_enter_large")}
     }
     
+    enum StartTravelSplash {
+        static var imgTripSplash: UIImage { .load(named: "img_tripsplash") }
+    }
+    
+    enum JoinTravel {
+        static var imgJoinMessage: UIImage { .load(named: "img_tripmassage") }
+    }
+    
+    enum Profile {
+        static var imgCircleAEI: UIImage { .load(named: "img_profile_aei") }
+        static var imgHexagonAEP: UIImage { .load(named: "img_profile_aep") }
+        static var imgCloudARI: UIImage { .load(named: "img_profile_ari") }
+        static var imgCloverARP: UIImage { .load(named: "img_profile_arp") }
+        static var imgSquareSEI: UIImage { .load(named: "img_profile_sei") }
+        static var imgTriangleSEP: UIImage { .load(named: "img_profile_sep") }
+        static var imgSnowmanSRI: UIImage { .load(named: "img_profile_sri") }
+        static var imgHeartSRP: UIImage { .load(named: "img_profile_srp") }
+    }
+    
+    enum TripFriends {
+        static var ticketLine: UIImage { .load(named: "line_ticket_large")}
+    }
+  
     enum TabBar {
         static var tabbarMyToDoUnselected: UIImage { .load(named: "tabbar_mytodo_unselected") }
         static var tabbarOurToDoSelected: UIImage { .load(named: "tabbar_ourtodo_selected") }
         static var tabbarOurToDoUnselected: UIImage { .load(named: "tabbar_ourtodo_unselected") }
         static var tabbarMyToDoSelected: UIImage { .load(named: "tabbar_mytodo_selected") }
     }
+  
     enum UserTestTypeCharacter {
         static var aeiCharac: UIImage { .load(named: "img_testresult_aei")}
         static var aepCharac: UIImage { .load(named: "img_testresult_aep")}

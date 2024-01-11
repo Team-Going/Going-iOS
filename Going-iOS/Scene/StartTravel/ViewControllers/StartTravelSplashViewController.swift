@@ -15,9 +15,16 @@ class StartTravelSplashViewController: UIViewController {
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly)
     
+    private let characterImage: UIImageView = {
+        let img = UIImageView()
+        img.image = ImageLiterals.StartTravelSplash.imgTripSplash
+        return img
+    }()
     private let startTravelTitleLabel = DOOLabel(font: .pretendard(.head3),
                                                  color: .gray700,
-                                                 text: StringLiterals.StartTravel.startTravelTitle)
+                                                 text: StringLiterals.StartTravel.startTravelTitle,
+                                                 numberOfLine: 2,
+                                                 alignment: .center)
     
     private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .white, title: "새로운 여행 시작하기")
@@ -50,6 +57,7 @@ private extension StartTravelSplashViewController {
     
     func setHierarchy() {
         self.view.addSubviews(navigationBar,
+                              characterImage,
                               startTravelTitleLabel,
                               createTravelButton,
                               joinTravelButton)
@@ -62,8 +70,15 @@ private extension StartTravelSplashViewController {
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
+        characterImage.snp.makeConstraints {
+            $0.width.equalTo(ScreenUtils.getWidth(230))
+            $0.height.equalTo(ScreenUtils.getHeight(140))
+            $0.top.equalTo(navigationBar.snp.bottom).offset(152)
+            $0.centerX.equalToSuperview()
+        }
+        
         startTravelTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(224)
+            $0.bottom.equalTo(createTravelButton.snp.top).offset(-194)
             $0.centerX.equalToSuperview()
         }
         

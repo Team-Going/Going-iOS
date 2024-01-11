@@ -43,8 +43,8 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     
     //TODO: - 서버통신 할 때 이미지 세팅 수정 필요
     
-    func bindData(data: Friend) {
-        self.profileImageView.image = UIImage(named: data.profileImg)
+    func bindData(data: Participant) {
+        self.profileImageView.image = ImageLiterals.OurToDo.mainViewIcon
         self.friendNameLabel.text = data.name
     }
 }

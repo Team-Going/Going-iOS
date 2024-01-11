@@ -16,7 +16,7 @@ final class DashBoardHeaderView: UIView {
     // MARK: - UI Properties
     
     let segmentedControl: UnderlineSegmentedControlView = {
-        let segmentedControl = UnderlineSegmentedControlView(items: ["진행중인 여행", "완료된 여행"])
+        let segmentedControl = UnderlineSegmentedControlView(items: ["진행 중인 여행", "지나간 여행"])
         segmentedControl.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.gray200,
             .font: UIFont.pretendard(.body2_bold)], for: .normal)

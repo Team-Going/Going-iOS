@@ -19,13 +19,15 @@ enum StringLiterals {
     }
   
     enum CreatingSuccess {
-        static let title = "새로운 여행이 생성되었어요!"
-        static let inviteCodeTitle = "친구 초대코드"
+        static let title = "새로운 여행을 만들었어요!"
         static let copyCode = " 초대코드 복사하기"
+        static let kakaoBtn = "친구에게 초대 코드 보내기"
+        static let entranceBtn = "바로 여행 시작하기"
     }
     
     enum JoiningSuccess {
-        static let title = "멋진 여행에 초대받으셨네요!"
+        static let title = "초대받은 여행이 맞는지\n확인해 주세요"
+        static let confirmButton = "초대받은 여행이 맞아요!"
     }
     
     enum JoinTravel {
@@ -34,12 +36,14 @@ enum StringLiterals {
     }
     
     enum CreateTravel {
-        static let namePlaceHolder = "여행 이름을 입력해주세요."
+        static let namePlaceHolder = "이번 여행의 이름을 지어주세요"
         static let warning = "여행 이름을 입력해주세요."
+        static let nameTitle = "새로운 여행 만들기"
+        static let dateTitle = "여행 일정을 알려주세요"
     }
     
     enum StartTravel {
-        static let startTravelTitle = "여행을 시작해보세요."
+        static let startTravelTitle = "doorip으로\n모두가 함께 하는 여행!"
     }
     
     enum Settings {
