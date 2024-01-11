@@ -93,7 +93,7 @@ final class MakeProfileViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let button = UIButton()
-        button.setTitle("유형 검사 하러가기", for: .normal)
+        button.setTitle("다음", for: .normal)
         button.setTitleColor(UIColor.gray200, for: .normal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 6

@@ -30,14 +30,14 @@ final class OurToDoViewController: UIViewController {
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .red700
-        btn.setTitle(" 같이 할일", for: .normal)
+        btn.setTitle(StringLiterals.OurToDo.ourtodo, for: .normal)
         btn.setTitleColor(.white000, for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
         btn.imageView?.tintColor = .white000
         btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
-        btn.semanticContentAttribute = .forceLeftToRight
+        btn.semanticContentAttribute = .forceRightToLeft
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
     }()
@@ -52,7 +52,12 @@ final class OurToDoViewController: UIViewController {
         imageView.tintColor = .gray100
         return imageView
     }()
-    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "할일을 추가해주세요.", alignment: .center)
+    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: StringLiterals.OurToDo.pleaseAddToDo, alignment: .center)
+    private let ourToDoMainImageView: UIImageView = {
+        let imgView = UIImageView()
+        imgView.image = ImageLiterals.OurToDo.mainViewIcon
+        return imgView
+    }()
     
     // MARK: - Property
     
@@ -96,7 +101,7 @@ private extension OurToDoViewController {
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, tabBarView, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
-        contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoHeaderView, ourToDoCollectionView, emptyView)
+        contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoMainImageView, ourToDoHeaderView, ourToDoCollectionView, emptyView)
         emptyView.addSubviews(emptyViewIconImageView, emptyViewLabel)
     }
     
@@ -121,13 +126,19 @@ private extension OurToDoViewController {
         }
         tripHeaderView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(ScreenUtils.getHeight(8))
+            $0.top.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(95))
         }
         tripMiddleView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom).offset(ScreenUtils.getHeight(20))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(235))
+        }
+        ourToDoMainImageView.snp.makeConstraints {
+            $0.top.equalTo(tripHeaderView)
+            $0.trailing.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.getWidth(112))
+            $0.height.equalTo(ScreenUtils.getHeight(135))
         }
         ourToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(28))
@@ -237,8 +248,8 @@ private extension OurToDoViewController {
     }
     
     func setTapBarImage() {
-        self.tabBarView.ourToDoTab.imageView?.tintColor = .red500
-        self.tabBarView.myToDoTab.imageView?.tintColor = .gray200
+        self.tabBarView.ourToDoTab.setImage(ImageLiterals.TabBar.tabbarOurToDoSelected, for: .normal)
+        self.tabBarView.myToDoTab.setImage(ImageLiterals.TabBar.tabbarMyToDoUnselected, for: .normal)
     }
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
@@ -250,11 +261,11 @@ private extension OurToDoViewController {
                 $0.leading.trailing.equalToSuperview()
             }
             emptyViewIconImageView.snp.makeConstraints {
-                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(56))
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(144))
+                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(40))
+                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(100))
             }
             emptyViewLabel.snp.makeConstraints {
-                $0.top.equalTo(emptyViewIconImageView.snp.bottom).offset(ScreenUtils.getHeight(16))
+                $0.top.equalTo(emptyViewIconImageView.snp.bottom).offset(ScreenUtils.getHeight(8))
                 $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
             }
             emptyView.backgroundColor = .white000

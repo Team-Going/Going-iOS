@@ -123,6 +123,7 @@
 		F4F521B22B347BF2000E6E1E /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521B12B347BF2000E6E1E /* KakaoSDKCommon */; };
 		F4F521B42B3484B4000E6E1E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521B32B3484B4000E6E1E /* Config.swift */; };
 		F4F521BE2B34A091000E6E1E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521BD2B34A091000E6E1E /* SnapKit */; };
+		F4FE6B802B4FCCA4009C935E /* GetProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -252,6 +253,7 @@
 		F4F5218B2B346373000E6E1E /* UserDefaultToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultToken.swift; sourceTree = "<group>"; };
 		F4F521952B346576000E6E1E /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		F4F521B32B3484B4000E6E1E /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -919,6 +921,7 @@
 		F4F521972B34676D000E6E1E /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				F4FE6B7D2B4FCC83009C935E /* Profile */,
 				F44D986A2B4ECABE00341893 /* Auth */,
 			);
 			path = DTO;
@@ -1013,6 +1016,22 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4FE6B7D2B4FCC83009C935E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F4FE6B7E2B4FCC8B009C935E /* Response */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		F4FE6B7E2B4FCC8B009C935E /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1166,6 +1185,7 @@
 				9478E5362B4EF4850027606D /* WebViewController.swift in Sources */,
 				94442EC82B4B18E500FDBB26 /* StartTravelSplashViewController.swift in Sources */,
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
+				F4FE6B802B4FCCA4009C935E /* GetProfileDTO.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
 				F444610E2B4D90E100674D74 /* DeleteUserPopUpViewController.swift in Sources */,

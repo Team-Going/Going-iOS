@@ -11,25 +11,32 @@ import SnapKit
 
 final class UserTestSplashViewController: UIViewController {
 
-    private let titleLabel = DOOLabel(font: .pretendard(.head3),
-                                      color: .gray700,
-                                      text: StringLiterals.UserTest.userTestSplashTitle,
-                                      numberOfLine: 2,
-                                      alignment: .center)
     
     private let userTestSplashImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemOrange
-        imageView.contentMode = .scaleAspectFill
+        imageView.image = ImageLiterals.Splash.userTestSplash
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
+    private let titleLabel = DOOLabel(font: .pretendard(.head3),
+                                      color: .gray700,
+                                      text: StringLiterals.UserTest.userTestSplashTitle,
+                                      alignment: .center
+                                      )
+    
+    private let subTitleLabel = DOOLabel(font: .pretendard(.body3_medi),
+                                      color: .gray300,
+                                      text: StringLiterals.UserTest.userTestSplashSubTitle,
+                                      numberOfLine: 2,
+                                      alignment: .center
+                                      )
+  
     private lazy var nextButton: UIButton = {
         let button = UIButton()
-        button.setTitle("시작하기", for: .normal)
+        button.setTitle("테스트 시작하기", for: .normal)
         button.titleLabel?.textColor = .white000
         button.titleLabel?.font = .pretendard(.body1_bold)
-        button.layer.cornerRadius = 6
         button.backgroundColor = .gray500
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
@@ -40,32 +47,36 @@ final class UserTestSplashViewController: UIViewController {
         setHierarchy()
         setLayout()
         setStyle()
-
     }
 }
 
 private extension UserTestSplashViewController {
     
     func setHierarchy() {
-        view.addSubviews(titleLabel, userTestSplashImageView, nextButton)
+        view.addSubviews(userTestSplashImageView, titleLabel, subTitleLabel ,nextButton)
     }
     
     func setLayout() {
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(209)
-            $0.leading.trailing.equalToSuperview().inset(87)
-        }
         
         userTestSplashImageView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(14)
-            $0.leading.trailing.equalToSuperview().inset(87)
-            $0.height.equalTo(ScreenUtils.getHeight(126))
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(202)
+            $0.centerX.equalToSuperview()
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(userTestSplashImageView.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+        }
+        
+        subTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(12)
+            $0.centerX.equalToSuperview()
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(68))
         }
     }
     

@@ -11,6 +11,30 @@ import SnapKit
 
 final class TestResultTicketView: UIView {
     
+    var firstString: String = "" {
+        didSet {
+            let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
+            imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
+            firstDescLabel.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: firstString))
+        }
+    }
+    
+    var secondString: String = "" {
+        didSet {
+            let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
+            imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
+            secondDescLabel.labelWithImg(composition: NSAttributedString(attachment: NSTextAttachment(image: ImageLiterals.TestResult.dotImage)), NSAttributedString(string: secondString))
+        }
+    }
+    var thirdString: String = "" {
+        didSet {
+            let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
+            imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
+            thirdDescLabel.labelWithImg(composition: NSAttributedString(attachment: NSTextAttachment(image: ImageLiterals.TestResult.dotImage)), NSAttributedString(string: thirdString))
+        }
+    }
+    
+    
     private let wholeStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -19,7 +43,8 @@ final class TestResultTicketView: UIView {
         return stack
     }()
     
-    private let titleLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .gray700, numberOfLine: 2, alignment: .center)
+    let titleLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .gray700, numberOfLine: 2, alignment: .center)
+    
     private let vertiLineImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -32,18 +57,16 @@ final class TestResultTicketView: UIView {
         stack.axis = .vertical
         stack.spacing = 4
         stack.backgroundColor = .clear
-        stack.distribution = .fillEqually
+        stack.distribution = .equalSpacing
         return stack
     }()
-    private lazy var firstDescLabel = makeLabel()
-    private lazy var secondDescLabel = makeLabel()
-    private lazy var thirdDescLabel = makeLabel()
     
+    lazy var firstDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700, numberOfLine: 2)
+    lazy var secondDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700, numberOfLine: 2)
+    lazy var thirdDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700, numberOfLine: 2)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        titleLabel.text = "성주누누ㄴㄴㄴs"
-        
         setHierarchy()
         setLayout()
         setStyle()
@@ -52,20 +75,9 @@ final class TestResultTicketView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 private extension TestResultTicketView {
-    
-    func makeLabel() -> DOOLabel {
-        let label = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700, numberOfLine: 2)
-        
-        let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
-        imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
-        label.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: "  꼼꼼하고 부지런해 맡은 일에서 실수가 적어요ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"))
-        
-        return label
-    }
     
     func setHierarchy() {
         self.addSubviews(wholeStackView)
