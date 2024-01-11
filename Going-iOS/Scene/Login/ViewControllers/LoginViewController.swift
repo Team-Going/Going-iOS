@@ -13,13 +13,36 @@ import KakaoSDKUser
 import SnapKit
 
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, ViewControllerServiceable {
     
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .clientError(let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+            
+        }
+    }
+
     private var kakaoAccessToken: String? {
         didSet {
             guard let token = kakaoAccessToken else { return }
-            print("여기서 로그인에이피아이이ㅣ이")
+            
             //로그인API
+            Task {
+                do {
+                    let isPushToDashView = try await AuthService.shared.login(kakaoToken: token, platform: "kakao")
+                    //true면 대시보드로 이동
+                    //false면 성향테스트스플래시뷰로 이동
+                    print(isPushToDashView)
+                    
+                }
+                catch {
+                    guard let error = error as? NetworkError else { return }
+                    handleError(error)
+                }
+            }
         }
     }
     

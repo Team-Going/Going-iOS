@@ -122,6 +122,9 @@
 		F4F521B42B3484B4000E6E1E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521B32B3484B4000E6E1E /* Config.swift */; };
 		F4F521BE2B34A091000E6E1E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521BD2B34A091000E6E1E /* SnapKit */; };
 		F4FE6B802B4FCCA4009C935E /* GetProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */; };
+		F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B862B504C8C009C935E /* AuthService.swift */; };
+		F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */; };
+		F4FE6B902B5051E4009C935E /* LoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -250,6 +253,9 @@
 		F4F521952B346576000E6E1E /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		F4F521B32B3484B4000E6E1E /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDTO.swift; sourceTree = "<group>"; };
+		F4FE6B862B504C8C009C935E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
+		F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -661,6 +667,8 @@
 		F44D986A2B4ECABE00341893 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				F4FE6B8C2B505125009C935E /* Request */,
+				F4FE6B8B2B50511C009C935E /* Response */,
 				F44D986B2B4ECACC00341893 /* Token.swift */,
 			);
 			path = Auth;
@@ -925,6 +933,7 @@
 			isa = PBXGroup;
 			children = (
 				F41F5D782B4EF431000D0472 /* ToDoService.swift */,
+				F4FE6B862B504C8C009C935E /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1028,6 +1037,22 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		F4FE6B8B2B50511C009C935E /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		F4FE6B8C2B505125009C935E /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1128,6 +1153,7 @@
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
 				F44D98602B4EB70500341893 /* HTTPHeaderField.swift in Sources */,
 				F44D985C2B4EB5F600341893 /* NameSpace.swift in Sources */,
+				F4FE6B902B5051E4009C935E /* LoginResponseDTO.swift in Sources */,
 				CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */,
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
 				F44D98642B4EB79700341893 /* Serviceable.swift in Sources */,
@@ -1190,6 +1216,7 @@
 				94761A072B4DD18B00D7C589 /* LogOutPopUpViewController.swift in Sources */,
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
+				F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */,
 				CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */,
 				F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */,
 				F44D986C2B4ECACC00341893 /* Token.swift in Sources */,
@@ -1214,6 +1241,7 @@
 				F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
+				F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */,
 				F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */,
 				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,
 				9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */,
