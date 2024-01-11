@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "tabbar_mytodo_selected.svg",
+      "filename" : "btn_mytodo_enabled_navi.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tabbar_mytodo_selected 1.svg",
+      "filename" : "btn_mytodo_enabled_navi@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tabbar_mytodo_selected 2.svg",
+      "filename" : "btn_mytodo_enabled_navi@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
