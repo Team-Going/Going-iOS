@@ -14,4 +14,8 @@ struct MyToDoHeaderAppData: AppData {
 
 extension MyToDoHeaderAppData {
     static var EmptyData = MyToDoHeaderAppData(name: "", count: 0)
+    
+    static func dummy() -> MyToDoHeaderAppData {
+        return .init(name: "희슬이랑 파리", count: 1)
+    }
 }

@@ -10,6 +10,7 @@ import UIKit
 final class MyToDoService: Serviceable {
     
     static let shared = MyToDoService()
+    
     private init() {}
     
     func getMyToDoHeader(tripId: Int) async throws -> MyToDoHeaderAppData {
@@ -25,7 +26,4 @@ final class MyToDoService: Serviceable {
         
         return model.toAppData()
     }
-    
-    
-    
 }

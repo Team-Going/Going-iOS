@@ -16,7 +16,8 @@ final class MyToDoViewController: UIViewController {
     private var headerData: MyToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
-            self.tripHeaderView.tripData = [data.name, "\(data.count)"]
+            print("data \(data)")
+            self.tripHeaderView.myToDoHeaderData = [data.name, "\(data.count)"]
         }
     }
     
@@ -91,6 +92,7 @@ final class MyToDoViewController: UIViewController {
         setHierachy()
         setDelegate()
 //        getMyToDoHeaderData()
+        toAppData()
         setData()
         registerCell()
         setLayout()
@@ -179,7 +181,8 @@ private extension MyToDoViewController {
         for i in myToDoData?.myToDo ?? [] {
             i.isComplete ? completedData.append(i) : incompletedData.append(i)
         }
-        tripHeaderView.myToDoHeaderData = [headerData?.name ?? "", "\(headerData?.count)"]
+        headerData = toAppData()
+        tripHeaderView.myToDoHeaderData = [headerData?.name ?? "", String(headerData?.count ?? 0)]
         print("trip\(tripHeaderView.myToDoHeaderData)")
     }
     
@@ -282,6 +285,11 @@ private extension MyToDoViewController {
                 $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
             }
         }
+    }
+    
+    func toAppData() -> MyToDoHeaderAppData {
+            var dummy = MyToDoHeaderAppData.dummy()
+            return dummy
     }
     
     // MARK: - objc Method

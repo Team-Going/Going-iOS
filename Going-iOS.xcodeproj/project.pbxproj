@@ -41,6 +41,8 @@
 		CA3EEE3B2B4FED8300C23A41 /* MyToDoHeaderAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE3A2B4FED8300C23A41 /* MyToDoHeaderAppData.swift */; };
 		CA3EEE3D2B4FEF8700C23A41 /* MyToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE3C2B4FEF8700C23A41 /* MyToDoService.swift */; };
 		CA3EEE3F2B50221A00C23A41 /* OurToDoHeaderAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE3E2B50221A00C23A41 /* OurToDoHeaderAppData.swift */; };
+		CA3EEE412B50258700C23A41 /* OurToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE402B50258700C23A41 /* OurToDoService.swift */; };
+		CA3EEE442B50276500C23A41 /* GetOurToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE432B50276500C23A41 /* GetOurToDoResponseDTO.swift */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
 		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
@@ -175,6 +177,8 @@
 		CA3EEE3A2B4FED8300C23A41 /* MyToDoHeaderAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoHeaderAppData.swift; sourceTree = "<group>"; };
 		CA3EEE3C2B4FEF8700C23A41 /* MyToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoService.swift; sourceTree = "<group>"; };
 		CA3EEE3E2B50221A00C23A41 /* OurToDoHeaderAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoHeaderAppData.swift; sourceTree = "<group>"; };
+		CA3EEE402B50258700C23A41 /* OurToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoService.swift; sourceTree = "<group>"; };
+		CA3EEE432B50276500C23A41 /* GetOurToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOurToDoResponseDTO.swift; sourceTree = "<group>"; };
 		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -507,6 +511,14 @@
 				CA3EEE382B4FE96E00C23A41 /* GetMyToDoResponseDTO.swift */,
 			);
 			path = MyToDo;
+			sourceTree = "<group>";
+		};
+		CA3EEE422B50273C00C23A41 /* OurToDo */ = {
+			isa = PBXGroup;
+			children = (
+				CA3EEE432B50276500C23A41 /* GetOurToDoResponseDTO.swift */,
+			);
+			path = OurToDo;
 			sourceTree = "<group>";
 		};
 		CA8CD6792B46B61000CFDFBF /* OurToDo */ = {
@@ -931,6 +943,7 @@
 		F4F521972B34676D000E6E1E /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				CA3EEE422B50273C00C23A41 /* OurToDo */,
 				CA3EEE372B4FE8AE00C23A41 /* MyToDo */,
 				F44D986A2B4ECABE00341893 /* Auth */,
 			);
@@ -942,6 +955,7 @@
 			children = (
 				F41F5D782B4EF431000D0472 /* ToDoService.swift */,
 				CA3EEE3C2B4FEF8700C23A41 /* MyToDoService.swift */,
+				CA3EEE402B50258700C23A41 /* OurToDoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1202,6 +1216,7 @@
 				F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */,
 				F44D98622B4EB72300341893 /* NetworkError.swift in Sources */,
 				94C7DDBC2B4CA08800541567 /* DOONavigationBar.swift in Sources */,
+				CA3EEE442B50276500C23A41 /* GetOurToDoResponseDTO.swift in Sources */,
 				9478E53C2B4EFCB90027606D /* MyProfileViewController.swift in Sources */,
 				CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */,
 				946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */,
@@ -1214,6 +1229,7 @@
 				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
 				9478E5432B4F283F0027606D /* ShowCreatedProfileViewController.swift in Sources */,
 				CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */,
+				CA3EEE412B50258700C23A41 /* OurToDoService.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
 				F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
