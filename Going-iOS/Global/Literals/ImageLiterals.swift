@@ -104,4 +104,8 @@ enum ImageLiterals {
         static var imgSnowmanSRI: UIImage { .load(named: "img_profile_sri") }
         static var imgHeartSRP: UIImage { .load(named: "img_profile_srp") }
     }
+    
+    enum TripFriends {
+        static var ticketLine: UIImage { .load(named: "line_ticket_large")}
+    }
 }
