@@ -6,4 +6,8 @@
 //
 
 import Foundation
-// UserDefault에 우리가 저장하는 구조체
+
+enum UserDefaultToken: String {
+    case accessToken
+    case refreshToken
+}

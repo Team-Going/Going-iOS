@@ -41,9 +41,7 @@
 		CA3EEE342B4E908E00C23A41 /* InviteFriendPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE332B4E908E00C23A41 /* InviteFriendPopUpViewController.swift */; };
 		CA3EEE392B4FE96E00C23A41 /* GetMyToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE382B4FE96E00C23A41 /* GetMyToDoResponseDTO.swift */; };
 		CA3EEE3B2B4FED8300C23A41 /* MyToDoHeaderAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE3A2B4FED8300C23A41 /* MyToDoHeaderAppData.swift */; };
-		CA3EEE3D2B4FEF8700C23A41 /* MyToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE3C2B4FEF8700C23A41 /* MyToDoService.swift */; };
 		CA3EEE3F2B50221A00C23A41 /* OurToDoHeaderAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE3E2B50221A00C23A41 /* OurToDoHeaderAppData.swift */; };
-		CA3EEE412B50258700C23A41 /* OurToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE402B50258700C23A41 /* OurToDoService.swift */; };
 		CA3EEE442B50276500C23A41 /* GetOurToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE432B50276500C23A41 /* GetOurToDoResponseDTO.swift */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
@@ -130,6 +128,13 @@
 		F4F521B42B3484B4000E6E1E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521B32B3484B4000E6E1E /* Config.swift */; };
 		F4F521BE2B34A091000E6E1E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521BD2B34A091000E6E1E /* SnapKit */; };
 		F4FE6B802B4FCCA4009C935E /* GetProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */; };
+		F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B862B504C8C009C935E /* AuthService.swift */; };
+		F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */; };
+		F4FE6B902B5051E4009C935E /* LoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */; };
+		F4FE6B922B50861A009C935E /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B912B50861A009C935E /* LoginType.swift */; };
+		F4FE6B942B50863D009C935E /* SocialPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B932B50863D009C935E /* SocialPlatform.swift */; };
+		F4FE6B982B508B95009C935E /* OurToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B962B508B3F009C935E /* OurToDoService.swift */; };
+		F4FE6B9C2B508C2C009C935E /* MyToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B9A2B508BFB009C935E /* MyToDoService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -266,6 +271,13 @@
 		F4F521952B346576000E6E1E /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		F4F521B32B3484B4000E6E1E /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDTO.swift; sourceTree = "<group>"; };
+		F4FE6B862B504C8C009C935E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
+		F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseDTO.swift; sourceTree = "<group>"; };
+		F4FE6B912B50861A009C935E /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
+		F4FE6B932B50863D009C935E /* SocialPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPlatform.swift; sourceTree = "<group>"; };
+		F4FE6B962B508B3F009C935E /* OurToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoService.swift; sourceTree = "<group>"; };
+		F4FE6B9A2B508BFB009C935E /* MyToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -697,6 +709,8 @@
 		F44D986A2B4ECABE00341893 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				F4FE6B8C2B505125009C935E /* Request */,
+				F4FE6B8B2B50511C009C935E /* Response */,
 				F44D986B2B4ECACC00341893 /* Token.swift */,
 			);
 			path = Auth;
@@ -785,6 +799,7 @@
 				F4F521732B3440D7000E6E1E /* Going-iOS */,
 				F4F521722B3440D7000E6E1E /* Products */,
 				F4F521BB2B349FDE000E6E1E /* Frameworks */,
+				F4FE6B952B508959009C935E /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -962,9 +977,10 @@
 		F4F521982B346778000E6E1E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F4FE6B9A2B508BFB009C935E /* MyToDoService.swift */,
+				F4FE6B962B508B3F009C935E /* OurToDoService.swift */,
 				F41F5D782B4EF431000D0472 /* ToDoService.swift */,
-				CA3EEE3C2B4FEF8700C23A41 /* MyToDoService.swift */,
-				CA3EEE402B50258700C23A41 /* OurToDoService.swift */,
+				F4FE6B862B504C8C009C935E /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -977,6 +993,8 @@
 				F44D985F2B4EB70500341893 /* HTTPHeaderField.swift */,
 				F44D98612B4EB72300341893 /* NetworkError.swift */,
 				F44D98652B4EB7F700341893 /* NetworkRequest.swift */,
+				F4FE6B912B50861A009C935E /* LoginType.swift */,
+				F4FE6B932B50863D009C935E /* SocialPlatform.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1066,6 +1084,31 @@
 				F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		F4FE6B8B2B50511C009C935E /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		F4FE6B8C2B505125009C935E /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		F4FE6B952B508959009C935E /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				CA3EEE3C2B4FEF8700C23A41 /* MyToDoService.swift */,
+				CA3EEE402B50258700C23A41 /* OurToDoService.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1161,13 +1204,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4FE6B9C2B508C2C009C935E /* MyToDoService.swift in Sources */,
+				F4FE6B982B508B95009C935E /* OurToDoService.swift in Sources */,
+				F4FE6B942B50863D009C935E /* SocialPlatform.swift in Sources */,
 				9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */,
+				F4FE6B922B50861A009C935E /* LoginType.swift in Sources */,
 				CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */,
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
 				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
 				F44D98602B4EB70500341893 /* HTTPHeaderField.swift in Sources */,
 				F44D985C2B4EB5F600341893 /* NameSpace.swift in Sources */,
+				F4FE6B902B5051E4009C935E /* LoginResponseDTO.swift in Sources */,
 				CA8CD68F2B46B96E00CFDFBF /* OurToDoData.swift in Sources */,
 				F4C5E7702B4286EA0008735F /* UIImage+.swift in Sources */,
 				F44D98642B4EB79700341893 /* Serviceable.swift in Sources */,
@@ -1210,7 +1258,6 @@
 				CA3EEE3F2B50221A00C23A41 /* OurToDoHeaderAppData.swift in Sources */,
 				F49B35282B35E97C0080A19F /* UITextField+.swift in Sources */,
 				F4BEB4D12B4A79AB0074B1B2 /* UIButton+.swift in Sources */,
-				CA3EEE3D2B4FEF8700C23A41 /* MyToDoService.swift in Sources */,
 				94442EBA2B4ABC2300FDBB26 /* DashBoardCollectionViewCell.swift in Sources */,
 				9478E5412B4F00500027606D /* MyResultView.swift in Sources */,
 				94C7DDB32B4C754300541567 /* SettingsViewController.swift in Sources */,
@@ -1234,6 +1281,7 @@
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				CA3EEE3B2B4FED8300C23A41 /* MyToDoHeaderAppData.swift in Sources */,
+				F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */,
 				CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */,
 				F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */,
 				F44D986C2B4ECACC00341893 /* Token.swift in Sources */,
@@ -1255,13 +1303,13 @@
 				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
 				9478E5432B4F283F0027606D /* ShowCreatedProfileViewController.swift in Sources */,
 				CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */,
-				CA3EEE412B50258700C23A41 /* OurToDoService.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
 				F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				94747F592B4FE13400510226 /* OurTestResultView.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
 				94747F5B2B4FE15C00510226 /* TestProgressView.swift in Sources */,
+				F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */,
 				F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */,
 				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,
 				9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */,

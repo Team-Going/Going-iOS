@@ -8,10 +8,34 @@
 import UIKit
 
 import AuthenticationServices
+import KakaoSDKAuth
+import KakaoSDKUser
 import SnapKit
 
 
 final class LoginViewController: UIViewController {
+    
+    private var kakaoAccessToken: String? {
+        didSet {
+            guard let token = kakaoAccessToken else { return }
+            
+            //로그인API
+            Task {
+                do {
+                    let isPushToDashView = try await AuthService.shared.login(token: token, platform: .kakao)
+                    //true면 대시보드로 이동
+                    //false면 성향테스트스플래시뷰로 이동
+                    print(isPushToDashView)
+                    
+                }
+                catch {
+                    guard let error = error as? NetworkError else { return }
+                    handleError(error)
+                }
+            }
+            kakaoLoginButton.isEnabled = true
+        }
+    }
     
     private let titleLabel = DOOLabel(font: .pretendard(.head3), color: .gray500, text: StringLiterals.Login.title)
     
@@ -117,16 +141,46 @@ private extension LoginViewController {
         }
     }
     
-    private func setStyle() {
+    func setStyle() {
         self.view.backgroundColor = .white000
+    }
+    
+
+    private func loginKakaoWithApp() {
+        UserApi.shared.loginWithKakaoTalk { oAuthToken, error in
+            guard error == nil else { return }
+            print("Login with KAKAO App Success !!")
+            guard let oAuthToken = oAuthToken else { return }
+            print(oAuthToken.accessToken)
+            self.kakaoAccessToken = oAuthToken.accessToken
+
+        }
+    }
+    
+    private func loginKakaoWithWeb() {
+        UserApi.shared.loginWithKakaoAccount { oAuthToken, error in
+            guard error == nil else {
+                self.kakaoLoginButton.isEnabled = true
+                return }
+            print("Login with KAKAO Web Success !!")
+            guard let oAuthToken = oAuthToken else { return }
+            print(oAuthToken.accessToken)
+            self.kakaoAccessToken = oAuthToken.accessToken
+
+        }
     }
     
     @objc
     func kakaoLoginButtonTapped() {
         
-        //뷰연결 테스트용도
-        let nextVC = MakeProfileViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        //카카오톡앱이 있으면 카카오앱으로 연결, 없으면 웹을 띄워줌
+        if UserApi.isKakaoTalkLoginAvailable() {
+            kakaoLoginButton.isEnabled = false
+            loginKakaoWithApp()
+        } else {
+            kakaoLoginButton.isEnabled = false
+            loginKakaoWithWeb()
+        }
     }
     
     @objc
@@ -148,6 +202,20 @@ private extension LoginViewController {
         vc.modalPresentationStyle = .automatic
         self.present(vc, animated: true)
     }
+}
+
+extension LoginViewController: ViewControllerServiceable {
+    
+    //추후에 에러코드에 따른 토스트 메세지 구현해야됨
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .clientError(let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+    }
+
 }
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
@@ -172,10 +240,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
 }
 
+
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
-    
-    
 }
+
+
