@@ -10,14 +10,13 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "OurToDoCollectionViewCell"
     weak var delegate: OurToDoCollectionViewDelegate?
-    var manager: [String] = []
-    var ourToDoData: OurToDo? {
+    var manager: [Allocators] = []
+    var ourToDoData: ToDoAppData? {
         didSet {
             guard let ourToDoData else {return}
-            self.todoTitleLabel.text = ourToDoData.todoTitle
-            self.deadlineLabel.text = ourToDoData.deadline + "까지"
-            self.manager = ourToDoData.manager
-            
+            self.todoTitleLabel.text = ourToDoData.title
+            self.deadlineLabel.text = ourToDoData.endDate + "까지"
+            self.manager = ourToDoData.allocators
             self.managerCollectionView.reloadData()
         }
     }
@@ -32,6 +31,11 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let textColor else {return}
             self.todoTitleLabel.textColor = textColor
+        }
+    }
+    var isComplete: Bool? {
+        didSet {
+            self.managerCollectionView.reloadData()
         }
     }
     
@@ -148,10 +152,9 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
-        print("our \(self.manager[indexPath.row])")
-        managerCell.managerData = self.manager[indexPath.row]
-        if self.ourToDoData?.isComplete == false {
-            self.manager[indexPath.row] == "지민" ? managerCell.changeLabelColor(color: .red400) : managerCell.changeLabelColor(color: .gray400)
+        managerCell.managerData = self.manager[indexPath.row].name
+        if isComplete == false {
+            ourToDoData?.allocators[indexPath.row].isOwner == true ? managerCell.changeLabelColor(color: .red400) : managerCell.changeLabelColor(color: .gray400)
         }else{
             managerCell.changeLabelColor(color: .gray300)
         }

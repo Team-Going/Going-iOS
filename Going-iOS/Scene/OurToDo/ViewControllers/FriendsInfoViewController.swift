@@ -133,7 +133,7 @@ extension FriendsInfoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = tripFriendsCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell else { return UICollectionViewCell() }
-        cell.bindData(data: Friend.friendData[indexPath.row])
+//        cell.bindData(data: Friend.friendData[indexPath.row])
         return cell
     }
 }

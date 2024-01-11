@@ -73,9 +73,16 @@ final class OurToDoViewController: UIViewController {
             self.tripMiddleView.participants = data.participants
         }
     }
+    private var todoData: [ToDoAppData]? {
+        didSet {
+            guard let data = todoData else { return }
+            incompletedData = data
+            completedData = data
+        }
+    }
     var ourToDoData: OurToDoData?
-    var incompletedData: [OurToDo] = []
-    var completedData: [OurToDo] = []
+    var incompletedData: [ToDoAppData] = []
+    var completedData: [ToDoAppData] = []
 
     // MARK: - Life Cycle
     
@@ -214,11 +221,8 @@ private extension OurToDoViewController {
     
     func setData() {
         self.ourToDoData = OurToDoData.ourToDoData
-    
-        for i in ourToDoData?.ourToDo ?? [] {
-            i.isComplete ? completedData.append(i) : incompletedData.append(i)
-        }
-        headerData = toAppData()
+        headerData = toHeaderAppData()
+        todoData = toToDoAppData()
     }
     
     func setDelegate() {
@@ -230,7 +234,7 @@ private extension OurToDoViewController {
     }
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
-    func setCellStyle(cell: OurToDoCollectionViewCell, data: OurToDo, textColor: UIColor, isUserInteractionEnabled: Bool) {
+    func setCellStyle(cell: OurToDoCollectionViewCell, data: ToDoAppData, textColor: UIColor, isUserInteractionEnabled: Bool) {
         cell.ourToDoData = data
         cell.todoTitleLabel.textColor = textColor
         cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
@@ -289,8 +293,12 @@ private extension OurToDoViewController {
         }
     }
     
-    func toAppData() -> OurToDoHeaderAppData {
+    func toHeaderAppData() -> OurToDoHeaderAppData {
         return OurToDoHeaderAppData.dummy()
+    }
+    
+    func toToDoAppData() -> [ToDoAppData] {
+        return ToDoAppData.dummy()
     }
     
     // MARK: - objc method
@@ -387,10 +395,12 @@ extension OurToDoViewController: UICollectionViewDataSource {
             ourToDoCell.ourToDoData = self.incompletedData[indexPath.row]
             ourToDoCell.textColor = UIColor.gray400
             ourToDoCell.index = indexPath.row
+            ourToDoCell.isComplete = false
         } else {
             ourToDoCell.ourToDoData = self.completedData[indexPath.row]
             ourToDoCell.textColor = UIColor.gray300
             ourToDoCell.index = indexPath.row
+            ourToDoCell.isComplete = true
         }
         return ourToDoCell
     }

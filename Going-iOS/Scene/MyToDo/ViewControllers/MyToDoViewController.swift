@@ -21,6 +21,13 @@ final class MyToDoViewController: UIViewController {
         }
     }
     
+    private var todoData: [ToDoAppData]? {
+        didSet {
+            guard let data = todoData else { return }
+            incompletedData = data
+            completedData = data
+        }
+    }
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .myToDo, backgroundColor: .gray50)
     private let tripHeaderView = TripHeaderView()
@@ -80,8 +87,8 @@ final class MyToDoViewController: UIViewController {
     
     private var index: Int = 0
     var myToDoData: MyToDoData?
-    var incompletedData: [MyToDo] = []
-    var completedData: [MyToDo] = []
+    var incompletedData: [ToDoAppData] = []
+    var completedData: [ToDoAppData] = []
     
     // MARK: - Life Cycle
     
@@ -92,7 +99,7 @@ final class MyToDoViewController: UIViewController {
         setHierachy()
         setDelegate()
 //        getMyToDoHeaderData()
-        toAppData()
+        toHeaderAppData()
         setData()
         registerCell()
         setLayout()
@@ -177,13 +184,9 @@ private extension MyToDoViewController {
     
     func setData() {
         self.myToDoData = MyToDoData.myToDoData
-
-        for i in myToDoData?.myToDo ?? [] {
-            i.isComplete ? completedData.append(i) : incompletedData.append(i)
-        }
-        headerData = toAppData()
+        headerData = toHeaderAppData()
+        todoData = toToDoAppData()
         tripHeaderView.myToDoHeaderData = [headerData?.name ?? "", String(headerData?.count ?? 0)]
-        print("trip\(tripHeaderView.myToDoHeaderData)")
     }
     
     func setDelegate() {
@@ -240,15 +243,13 @@ private extension MyToDoViewController {
     }
     
     func checkButtonTapped(index: Int, image: UIImage) {
-        var todo: MyToDo = MyToDo(todoTitle: "", manager: [], deadline: "", isComplete: false, isPrivate: false)
+        var todo: ToDoAppData = ToDoAppData.EmptyData
         if image == ImageLiterals.MyToDo.btnCheckBoxComplete {
             todo = completedData[index]
-            todo.isComplete = false
             incompletedData.append(todo)
             completedData.remove(at: index)
         } else if image == ImageLiterals.MyToDo.btnCheckBoxIncomplete {
             todo = incompletedData[index]
-            todo.isComplete = true
             completedData.append(todo)
             incompletedData.remove(at: index)
         }
@@ -287,9 +288,14 @@ private extension MyToDoViewController {
         }
     }
     
-    func toAppData() -> MyToDoHeaderAppData {
-            var dummy = MyToDoHeaderAppData.dummy()
-            return dummy
+    func toHeaderAppData() -> MyToDoHeaderAppData {
+        let dummy = MyToDoHeaderAppData.dummy()
+        return dummy
+    }
+    
+    func toToDoAppData() -> [ToDoAppData] {
+        let dummy = ToDoAppData.dummy()
+        return dummy
     }
     
     // MARK: - objc Method
@@ -394,11 +400,13 @@ extension MyToDoViewController: UICollectionViewDataSource{
             myToDoCell.textColor = UIColor.gray400
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxIncomplete
             myToDoCell.index = indexPath.row
+            myToDoCell.isComplete = false
         } else {
             myToDoCell.myToDoData = self.completedData[indexPath.row]
             myToDoCell.textColor = UIColor.gray300
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxComplete
             myToDoCell.index = indexPath.row
+            myToDoCell.isComplete = true
         }
         return myToDoCell
     }
