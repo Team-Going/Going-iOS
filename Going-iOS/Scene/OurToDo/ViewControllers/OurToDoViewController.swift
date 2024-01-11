@@ -70,7 +70,7 @@ final class OurToDoViewController: UIViewController {
             let newEndDate = "\(splitEndDate[1])월 \(splitEndDate[2])일"
             self.tripHeaderView.tripData = [data.title, "\(data.day)", newStartDate, newEndDate]
             self.tripMiddleView.progress = data.progress
-            self.tripMiddleView.participants = data.participants
+//            self.tripMiddleView.participants = data.participants
         }
     }
     var ourToDoData: OurToDoData?

@@ -16,7 +16,7 @@ final class MyToDoService: Serviceable {
     func getMyToDoHeader(tripId: Int) async throws -> MyToDoHeaderAppData {
         
         /// 1. URLRequest 생성
-        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)/my", httpMethod: .get).makeURLRequest()
+        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)/my", httpMethod: .get).makeURLRequest(networkType: .withJWT)
         /// 2. 서버통신
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         /// 3. 에러 핸들링
