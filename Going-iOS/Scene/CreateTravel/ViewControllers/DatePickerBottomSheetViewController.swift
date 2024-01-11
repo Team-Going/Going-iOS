@@ -11,12 +11,13 @@ import SnapKit
 
 protocol BottomSheetDelegate: AnyObject {
     func didSelectDate(date: Date)
+    func datePickerDidChanged(date: Date)
 }
 
 final class DatePickerBottomSheetViewController: UIViewController {
     
     // MARK: - Properties
-    
+
     weak var delegate: BottomSheetDelegate?
     
     // MARK: - UI Properties
@@ -36,8 +37,25 @@ final class DatePickerBottomSheetViewController: UIViewController {
         view.roundCorners(cornerRadius: 6, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
         return view
     }()
-    
-    private let datePickerView = DatePickerView()
+//    
+//    private lazy var datePickerView: DatePickerView = {
+//        let picker = DatePickerView()
+//        picker.datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
+//        return picker
+//    }()
+//    
+    private lazy var datePickerView: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.isUserInteractionEnabled = true
+        picker.locale = Locale(identifier: "ko-KR")
+        picker.tintColor = .gray700
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+        }
+        picker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
+        return picker
+    }()
     
     // dismiss Indicator View UI 구성 부분
     private let dismissIndicatorView: UIView = {
@@ -91,7 +109,8 @@ final class DatePickerBottomSheetViewController: UIViewController {
     }
     
     @objc private func confirmButtonTapped(_ sender: UIButton) {
-        delegate?.didSelectDate(date: datePickerView.datePicker.date)
+        delegate?.didSelectDate(date: datePickerView.date)
+//        delegate?.didSelectDate(date: onDate)
         hideBottomSheetAndGoBack()
     }
 }
@@ -176,5 +195,20 @@ private extension DatePickerBottomSheetViewController {
                 self.dismiss(animated: false, completion: nil)
             }
         }
+    }
+    
+    /// 텍스트 필드에 들어갈 텍스트를 DateFormatter로  변환하는 메서드
+    func dateFormat(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        
+        return formatter.string(from: date)
+    }
+    
+    // MARK: - @ojbc Methods
+    
+    @objc func datePickerChanged() {
+        let selectedDate = datePickerView.date
+        delegate?.datePickerDidChanged(date: selectedDate)
     }
 }

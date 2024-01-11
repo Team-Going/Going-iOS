@@ -109,10 +109,9 @@ private extension TestResultTicketView {
     }
     
     func setStyle() {
-        self.backgroundColor = .gray50
+        self.backgroundColor = .white
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 6
-        self.layer.borderColor = UIColor.gray200.cgColor
+        self.layer.borderColor = UIColor.gray100.cgColor
     }
-    
 }
