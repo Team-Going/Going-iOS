@@ -11,9 +11,35 @@ import SnapKit
 
 final class TestResultView: UIView {
     
+    var resultViewData: UserTypeTestResultAppData? {
+        didSet {
+            guard let data = resultViewData else { return }
+            self.nameLabel.text = data.userName
+            self.userTypeLabel.text = data.userType
+            self.typeDescLabel.text = data.userTypeDesc
+            
+            self.firstTagLabel.text = data.userTypeTag.firstTag
+            self.secondTagLabel.text = data.userTypeTag.secondTag
+            self.thirdTagLabel.text = data.userTypeTag.thirdTag
+            
+            self.firstTickeView.firstString = data.likePoint.firstPoint
+            self.firstTickeView.secondString = data.likePoint.secondPoint
+            self.firstTickeView.thirdString = data.likePoint.thirdPoint
+            
+            self.secondTickeView.firstString = data.warningPoint.firstPoint
+            self.secondTickeView.secondString = data.warningPoint.secondPoint
+            self.secondTickeView.thirdString = data.warningPoint.thirdPoint
+            
+            self.thirdTickeView.firstString = data.goodToDoPoint.firstPoint
+            self.thirdTickeView.secondString = data.goodToDoPoint.secondPoint
+            self.thirdTickeView.thirdString = data.goodToDoPoint.thirdPoint
+        }
+    }
+    
     private let nameLabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray600)
+    
     private let userTypeLabel = DOOLabel(font: .pretendard(.head1), color: .red500)
-    private let subTitleLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray300)
+    private let typeDescLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray300)
     
     private let tagStackView: UIStackView = {
         let stack = UIStackView()
@@ -22,6 +48,7 @@ final class TestResultView: UIView {
         stack.distribution = .fillEqually
         return stack
     }()
+    
     private lazy var firstTagLabel: DOOLabel = makeLabel()
     private lazy var secondTagLabel: DOOLabel = makeLabel()
     private lazy var thirdTagLabel: DOOLabel = makeLabel()
@@ -51,13 +78,11 @@ final class TestResultView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        nameLabel.text = "곽성준은"
-        userTypeLabel.text = "여행을 좋아해"
-        subTitleLabel.text = "여행좋아함"
         
         setHierarchy()
         setLayout()
         setStyle()
+        setTicketViewText()
         
     }
     
@@ -68,6 +93,13 @@ final class TestResultView: UIView {
 }
 
 extension TestResultView {
+    
+    func setTicketViewText() {
+        self.firstTickeView.titleLabel.text = "이런 점이 \n좋아요"
+        self.secondTickeView.titleLabel.text = "이런 점은 \n주의해줘요"
+        self.thirdTickeView.titleLabel.text = "이런 걸 \n잘해요"
+    }
+    
     func makeLabel() -> DOOLabel {
         let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red300, alignment: .center)
         label.layer.borderWidth = 0.5
@@ -78,7 +110,7 @@ extension TestResultView {
     }
     
     func setHierarchy() {
-        self.addSubviews(nameLabel, userTypeLabel, subTitleLabel, tagStackView, firstTickeView, ticketStackView, backToTestButton, whiteView)
+        self.addSubviews(nameLabel, userTypeLabel, typeDescLabel, tagStackView, firstTickeView, ticketStackView, backToTestButton, whiteView)
         ticketStackView.addArrangedSubviews(firstTickeView, secondTickeView, thirdTickeView)
         tagStackView.addArrangedSubviews(firstTagLabel, secondTagLabel, thirdTagLabel)
     }
@@ -94,13 +126,13 @@ extension TestResultView {
             $0.centerX.equalToSuperview()
         }
         
-        subTitleLabel.snp.makeConstraints {
+        typeDescLabel.snp.makeConstraints {
             $0.top.equalTo(userTypeLabel.snp.bottom).offset(1)
             $0.centerX.equalToSuperview()
         }
         
         tagStackView.snp.makeConstraints {
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(12)
+            $0.top.equalTo(typeDescLabel.snp.bottom).offset(12)
             $0.centerX.equalToSuperview()
         }
         

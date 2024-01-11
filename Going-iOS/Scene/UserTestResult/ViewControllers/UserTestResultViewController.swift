@@ -12,6 +12,14 @@ import Photos
 
 final class UserTestResultViewController: UIViewController {
     
+    var testResultDummy: UserTypeTestResultAppData? {
+        didSet {
+            guard let data = testResultDummy else { return }
+            self.resultImageView.image = data.typeImage
+            self.resultView.resultViewData = data
+        }
+    }
+    
     private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 캐릭터"))
     
     private let naviUnderLineView: UIView = {
