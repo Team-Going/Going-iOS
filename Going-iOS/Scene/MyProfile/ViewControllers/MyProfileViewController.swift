@@ -145,7 +145,7 @@ private extension MyProfileViewController {
     func saveImage() {
         UIImageWriteToSavedPhotosAlbum(UIImage(systemName: "pencil")!, self, nil, nil)
         // TODO: - height 다시 잡기
-        DOOToast.show(message: "이미지로 저장되었어요\n친구에게 내 캐릭터를 공유해 보세요", insetFromBottom: 114)
+        DOOToast.show(message: "이미지로 저장되었어요\n친구에게 내 캐릭터를 공유해 보세요", insetFromBottom: 70)
     }
     
     func showPermissionAlert() {
