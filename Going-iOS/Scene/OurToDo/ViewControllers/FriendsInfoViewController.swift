@@ -31,7 +31,7 @@ class FriendsInfoViewController: UIViewController {
         return view
     }()
     
-    private let ourTasteTitleLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "우리의 취향 태그")
+    private let ourTasteTitleLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "우리의 이번 여행은!")
     
     private let ourTestResultView = OurTestResultView()
     

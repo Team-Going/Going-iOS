@@ -16,7 +16,7 @@ final class TestProgressView: UIView {
         let view = UIProgressView()
         view.progress = 0.4
         view.trackTintColor = .gray50
-        view.progressTintColor = .red500
+        view.progressTintColor = .gray400
         view.layer.cornerRadius = 4
         view.clipsToBounds = true
         return view
@@ -58,7 +58,7 @@ private extension TestProgressView {
         progressBarView.snp.makeConstraints {
             $0.top.equalTo(questionLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(16))
+            $0.height.equalTo(ScreenUtils.getHeight(10))
         }
         
         leftOption.snp.makeConstraints {
