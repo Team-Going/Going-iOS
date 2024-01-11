@@ -13,13 +13,13 @@ final class AuthService: Serviceable {
     
     private init() {}
     
-    func login(kakaoToken: String, platform: String) async throws -> Bool {
+    func login(token: String, platform: SocialPlatform) async throws -> Bool {
         
-        let platformDTO = LoginRequestDTO(platform: platform)
+        let platformDTO = LoginRequestDTO(platform: platform.rawValue)
         let param = platformDTO.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
         
-        let urlRequest = try NetworkRequest(path: "/api/users/signin", httpMethod: .post, body: body, kakaoToken: kakaoToken).makeURLRequest(networkType: .withSocialToken)
+        let urlRequest = try NetworkRequest(path: "/api/users/signin", httpMethod: .post, body: body, token: token).makeURLRequest(networkType: .withSocialToken)
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
@@ -31,6 +31,7 @@ final class AuthService: Serviceable {
         
         print(access)
         print(refresh)
+        
         //UserDefaults에 jwt토큰 저장
         UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)

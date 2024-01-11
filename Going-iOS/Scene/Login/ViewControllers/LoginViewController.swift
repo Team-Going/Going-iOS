@@ -22,7 +22,7 @@ final class LoginViewController: UIViewController {
             //로그인API
             Task {
                 do {
-                    let isPushToDashView = try await AuthService.shared.login(kakaoToken: token, platform: "kakao")
+                    let isPushToDashView = try await AuthService.shared.login(token: token, platform: .kakao)
                     //true면 대시보드로 이동
                     //false면 성향테스트스플래시뷰로 이동
                     print(isPushToDashView)
@@ -153,7 +153,6 @@ private extension LoginViewController {
             guard let oAuthToken = oAuthToken else { return }
             print(oAuthToken.accessToken)
             self.kakaoAccessToken = oAuthToken.accessToken
-            self.kakaoLoginButton.isEnabled = false
 
         }
     }
@@ -167,7 +166,6 @@ private extension LoginViewController {
             guard let oAuthToken = oAuthToken else { return }
             print(oAuthToken.accessToken)
             self.kakaoAccessToken = oAuthToken.accessToken
-            self.kakaoLoginButton.isEnabled = false
 
         }
     }

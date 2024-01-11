@@ -125,6 +125,8 @@
 		F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B862B504C8C009C935E /* AuthService.swift */; };
 		F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */; };
 		F4FE6B902B5051E4009C935E /* LoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */; };
+		F4FE6B922B50861A009C935E /* LoginType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B912B50861A009C935E /* LoginType.swift */; };
+		F4FE6B942B50863D009C935E /* SocialPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B932B50863D009C935E /* SocialPlatform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -256,6 +258,8 @@
 		F4FE6B862B504C8C009C935E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
 		F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseDTO.swift; sourceTree = "<group>"; };
+		F4FE6B912B50861A009C935E /* LoginType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginType.swift; sourceTree = "<group>"; };
+		F4FE6B932B50863D009C935E /* SocialPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPlatform.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -946,6 +950,8 @@
 				F44D985F2B4EB70500341893 /* HTTPHeaderField.swift */,
 				F44D98612B4EB72300341893 /* NetworkError.swift */,
 				F44D98652B4EB7F700341893 /* NetworkRequest.swift */,
+				F4FE6B912B50861A009C935E /* LoginType.swift */,
+				F4FE6B932B50863D009C935E /* SocialPlatform.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1146,7 +1152,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4FE6B942B50863D009C935E /* SocialPlatform.swift in Sources */,
 				9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */,
+				F4FE6B922B50861A009C935E /* LoginType.swift in Sources */,
 				CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */,
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
 				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,

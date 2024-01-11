@@ -7,27 +7,21 @@
 
 import Foundation
 
-enum LoginType {
-    case withJWT
-    case withRefresh
-    case withSocialToken
-}
-
 struct NetworkRequest {
     let path: String
     let httpMethod: HttpMethod
     let query: Request?
     let body: Data?
     let header: [String: String]?
-    let kakaoToken: String?
+    let token: String?
 
-    init(path: String, httpMethod: HttpMethod, query: Request? = nil, body: Data? = nil, header: [String : String]? = nil, kakaoToken: String? = "") {
+    init(path: String, httpMethod: HttpMethod, query: Request? = nil, body: Data? = nil, header: [String : String]? = nil, token: String? = "") {
         self.path = path
         self.httpMethod = httpMethod
         self.query = query
         self.body = body
         self.header = header
-        self.kakaoToken = kakaoToken
+        self.token = token
     }
 
     func makeURLRequest(networkType: LoginType) throws -> URLRequest {
@@ -75,7 +69,7 @@ struct NetworkRequest {
             urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
             
         case .withSocialToken:
-            guard let token = kakaoToken else { throw NetworkError.clientError(message: "kakaoToken 없음") }
+            guard let token = self.token else { throw NetworkError.clientError(message: "kakaoToken 없음") }
             urlRequest.setValue("\(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
         }
     
