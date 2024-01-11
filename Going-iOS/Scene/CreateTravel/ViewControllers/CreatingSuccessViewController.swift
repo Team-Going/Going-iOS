@@ -19,16 +19,15 @@ final class CreatingSuccessViewController: UIViewController {
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
     
     private let createSuccessLabel = DOOLabel(font: .pretendard(.head2), color: .gray700, text: StringLiterals.CreatingSuccess.title)
-    
-    private let ticketImage: UIImageView = {
+    private let characterImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.CreateTravel.ticketImage
+        img.image = ImageLiterals.StartTravelSplash.imgTripSplash
         return img
     }()
     
-    private let characterImage: UIImageView = {
+    private let ticketImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.CreateTravel.larvaImage
+        img.image = ImageLiterals.CreateTravel.ticketLargeImage
         return img
     }()
     
@@ -40,23 +39,9 @@ final class CreatingSuccessViewController: UIViewController {
     }()
     
     private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .red400)
-    private let travelTitleLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray700)
-    private let dateLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300)
+    private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
+    private let dateLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray300)
     
-    private let inviteTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.body1_bold)
-        label.textColor = .gray700
-        label.text = StringLiterals.CreatingSuccess.inviteCodeTitle
-        return label
-    }()
-    
-    private let inviteCardView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white000
-        view.layer.cornerRadius = 6
-        return view
-    }()
     private let inviteCodeLabel = DOOLabel(font: .pretendard(.head4), color: .gray700)
 
     private lazy var codeCopyButton: UIButton = {
@@ -75,13 +60,13 @@ final class CreatingSuccessViewController: UIViewController {
     }()
     
     private lazy var sendToKaKaoButton: DOOButton = {
-        let btn = DOOButton(type: .white, title: "카카오톡으로 초대코드 보내기")
+        let btn = DOOButton(type: .white, title: StringLiterals.CreatingSuccess.kakaoBtn)
         btn.addTarget(self, action: #selector(kakaoButtonTapped), for: .touchUpInside)
         return btn
     }()
     
     private lazy var entranceToMainButton: DOOButton = {
-        let btn = DOOButton(type: .enabled, title: "입장하기")
+        let btn = DOOButton(type: .enabled, title: StringLiterals.CreatingSuccess.entranceBtn)
         btn.addTarget(self, action: #selector(pushToOurToDoVC), for: .touchUpInside)
         return btn
     }()
@@ -110,14 +95,17 @@ private extension CreatingSuccessViewController {
         view.addSubviews(navigationBar,
                          createSuccessLabel,
                          ticketImage,
-                         inviteTitleLabel,
-                         inviteCardView,
+                         characterImage,
                          sendToKaKaoButton,
                          entranceToMainButton)
-        
-        ticketImage.addSubviews(characterImage, dDayLabelBackgroundView, travelTitleLabel, dateLabel)
+
+        ticketImage.addSubviews(dDayLabelBackgroundView, 
+                                travelTitleLabel,
+                                dateLabel,
+                                inviteCodeLabel,
+                                codeUnderLineView,
+                                codeCopyButton)
         dDayLabelBackgroundView.addSubview(dDayLabel)
-        inviteCardView.addSubviews(inviteCodeLabel, codeUnderLineView, codeCopyButton)
     }
     
     func setLayout() {
@@ -128,27 +116,28 @@ private extension CreatingSuccessViewController {
         }
         
         createSuccessLabel.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom).offset(64)
-            $0.leading.equalToSuperview().inset(64)
-            $0.trailing.equalToSuperview().inset(65)
+            $0.top.equalTo(navigationBar.snp.bottom).offset(76)
+            $0.centerX.equalToSuperview()
+        }
+        
+        characterImage.snp.makeConstraints {
+            $0.top.equalTo(createSuccessLabel.snp.bottom).offset(12)
+            $0.width.equalTo(ScreenUtils.getWidth(218))
+            $0.height.equalTo(ScreenUtils.getHeight(132))
+            $0.centerX.equalToSuperview()
         }
         
         ticketImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(createSuccessLabel.snp.bottom).offset(28)
+            $0.top.equalTo(createSuccessLabel.snp.bottom).offset(118)
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.height.equalTo(ScreenUtils.getHeight(125))
+            $0.height.equalTo(ScreenUtils.getHeight(235))
         }
-        
-        characterImage.snp.makeConstraints {
-            $0.centerY.equalTo(ticketImage)
-            $0.leading.equalTo(ticketImage.snp.leading).offset(22)
-        }
-        
+
         dDayLabelBackgroundView.snp.makeConstraints {
-            $0.leading.equalTo(characterImage.snp.trailing).offset(50)
-            $0.bottom.equalTo(travelTitleLabel.snp.top).offset(-4)
-            $0.height.equalTo(ScreenUtils.getHeight(22))
+            $0.top.equalToSuperview().inset(38)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(20))
             $0.width.equalTo(ScreenUtils.getWidth(44))
         }
         
@@ -157,43 +146,35 @@ private extension CreatingSuccessViewController {
         }
         
         travelTitleLabel.snp.makeConstraints {
-            $0.centerY.equalTo(characterImage)
-            $0.leading.equalTo(dDayLabelBackgroundView)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(dDayLabelBackgroundView.snp.bottom).offset(8)
+            $0.height.equalTo(ScreenUtils.getHeight(30))
         }
         
         dateLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(26)
-            $0.leading.equalTo(travelTitleLabel)
-        }
-        
-        inviteTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(ticketImage.snp.bottom).offset(40)
-            $0.leading.equalToSuperview().inset(24)
-        }
-        
-        inviteCardView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(inviteTitleLabel.snp.bottom).offset(8)
-            $0.height.equalTo(ScreenUtils.getHeight(83))
-            $0.width.equalTo(ScreenUtils.getWidth(327))
+            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(2)
+            $0.height.equalTo(ScreenUtils.getHeight(20))
         }
-        
+
         inviteCodeLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16)
-            $0.centerX.equalTo(inviteCardView)
+            $0.bottom.equalToSuperview().inset(42)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(27))
         }
         
         codeCopyButton.snp.makeConstraints {
-            $0.bottom.equalTo(inviteCardView.snp.bottom).inset(16)
-            $0.centerX.equalTo(inviteCardView)
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(112))
+            $0.bottom.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(112)
+            $0.width.equalTo(ScreenUtils.getWidth(110))
+            $0.height.equalTo(ScreenUtils.getHeight(20))
         }
         
         codeUnderLineView.snp.makeConstraints {
             $0.top.equalTo(codeCopyButton.snp.bottom)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.getWidth(102))
-            $0.height.equalTo(0.5)
+            $0.width.equalTo(codeCopyButton)
+            $0.height.equalTo(1)
         }
 
         sendToKaKaoButton.snp.makeConstraints {
@@ -249,7 +230,7 @@ private extension CreatingSuccessViewController {
     
     @objc
     func copyButtonTapped() {
-        DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: ScreenUtils.getHeight(284))
+        DOOToast.show(message: "초대코드가 복사되었어요.", insetFromBottom: ScreenUtils.getHeight(228))
         UIPasteboard.general.string = inviteCodeLabel.text
     }
     

@@ -17,13 +17,20 @@ final class DOONavigationBar: UIView {
         case myToDo
         case titleLabelOnly(String)
         case backButtonWithTitle(String)
+        case testResult(String)
     }
-        
+    
     private lazy var backButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonBack, for: .normal)
         btn.addTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
-        btn.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var saveImageButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(ImageLiterals.NavigationBar.buttonSave, for: .normal)
+        btn.addTarget(self, action: #selector(saveImageButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -51,7 +58,7 @@ final class DOONavigationBar: UIView {
         super.init(frame: .zero)
         self.backgroundColor = backgroundColor
         setStyle()
-        setLayout()
+        setNavibarByType()
     }
     
     required init?(coder: NSCoder) {
@@ -64,7 +71,7 @@ private extension DOONavigationBar {
         self.backgroundColor = .clear
     }
     
-    func setLayout() {
+    func setNavibarByType() {
         switch type {
         case .backButtonOnly:
             addSubview(backButton)
@@ -94,7 +101,7 @@ private extension DOONavigationBar {
             }
             backButton.removeTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
             backButton.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
-        
+            
         case .titleLabelOnly(let title):
             titleLabel.text = title
             addSubview(titleLabel)
@@ -112,10 +119,15 @@ private extension DOONavigationBar {
             titleLabel.snp.makeConstraints {
                 $0.center.equalToSuperview()
             }
+        case .testResult:
+            saveImageButton.snp.makeConstraints {
+                $0.width.height.equalTo(ScreenUtils.getHeight(48))
+                $0.trailing.equalToSuperview().inset(10)
+            }
         }
     }
     
-    @objc 
+    @objc
     func popToPreviousVC() {
         viewController?.navigationController?.popViewController(animated: true)
     }
@@ -126,7 +138,13 @@ private extension DOONavigationBar {
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func popToRootVC() {
+    @objc
+    func popToRootVC() {
         viewController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc
+    func saveImageButtonTapped() {
+        
     }
 }

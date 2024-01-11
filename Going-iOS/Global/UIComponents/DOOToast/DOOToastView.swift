@@ -9,7 +9,7 @@ import UIKit
 
 final class DOOToastView: UIView {
     
-    private let messageLabel = UILabel()
+    private let messageLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .white000, numberOfLine: 2, alignment: .center)
     
     init(message: String) {
         super.init(frame: .zero)
@@ -34,7 +34,7 @@ private extension DOOToastView {
     func setLayout() {
         self.snp.makeConstraints {
             $0.width.equalTo(ScreenUtils.getWidth(230))
-            $0.height.equalTo(ScreenUtils.getHeight(40))
+            $0.height.equalTo(ScreenUtils.getHeight(48))
             
         }
         self.messageLabel.snp.makeConstraints { make in

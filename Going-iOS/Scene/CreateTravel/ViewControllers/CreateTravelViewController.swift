@@ -17,15 +17,19 @@ final class CreateTravelViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 생성하기"))
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("새로운 여행 만들기"))
     private let navigationUnderlineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
         return view
     }()
     
-    private let travelNameLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "여행 이름")
-    private let travelDateLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: "여행 날짜")
+    private let travelNameLabel = DOOLabel(font: .pretendard(.body2_bold),
+                                           color: .gray700,
+                                           text: StringLiterals.CreateTravel.nameTitle)
+    private let travelDateLabel = DOOLabel(font: .pretendard(.body2_bold),
+                                           color: .gray700,
+                                           text: StringLiterals.CreateTravel.dateTitle)
     
     private let travelNameTextField: UITextField = {
         let field = UITextField()
@@ -55,7 +59,7 @@ final class CreateTravelViewController: UIViewController {
         stack.spacing = 6
         return stack
     }()
-        
+    
     private let startDateLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "시작일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.layer.cornerRadius = 6
@@ -63,7 +67,7 @@ final class CreateTravelViewController: UIViewController {
         label.layer.borderColor = UIColor.gray200.cgColor
         return label
     }()
-  
+    
     private let endDateLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "종료일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.layer.cornerRadius = 6
@@ -71,11 +75,11 @@ final class CreateTravelViewController: UIViewController {
         label.layer.borderColor = UIColor.gray200.cgColor
         return label
     }()
-
+    
     private let dashLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700, text: "-")
     
     private lazy var createTravelButton: DOOButton = {
-        let btn = DOOButton(type: .unabled, title: "생성하기")
+        let btn = DOOButton(type: .unabled, title: "다음")
         btn.addTarget(self, action: #selector(pushToTravelTestVC), for: .touchUpInside)
         return btn
     }()
@@ -92,11 +96,14 @@ final class CreateTravelViewController: UIViewController {
         setLayout()
         setGestureRecognizer()
         setDelegate()
-        setNotification()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -255,7 +262,7 @@ private extension CreateTravelViewController {
             isEndDateNotPast = endDate >= today
         }
         
-        createTravelButton.currentType = (!isTravelNameTextFieldEmpty 
+        createTravelButton.currentType = (!isTravelNameTextFieldEmpty
                                           && isStartDateSet
                                           && isEndDateSet
                                           && isDateValid
@@ -326,6 +333,30 @@ private extension CreateTravelViewController {
 }
 
 extension CreateTravelViewController: BottomSheetDelegate {
+    func datePickerDidChanged(date: Date) {
+        let formattedDate = dateFormat(date: date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        if activeLabel == startDateLabel {
+            startDateLabel.text = formattedDate
+            // endDate가 설정되어 있고 startDate가 endDate보다 뒤에 있는지 확인
+            if let endDateText = endDateLabel.text,
+               let endDate = dateFormatter.date(from: endDateText),
+               date > endDate {
+                DOOToast.show(message: "여행 종료일보다 여행 시작일이 빨라요!", insetFromBottom: ScreenUtils.getHeight(374))
+            }
+        } else if activeLabel == endDateLabel {
+            endDateLabel.text = formattedDate
+            // startDate가 설정되어 있고 endDate가 startDate보다 앞에 있는지 확인
+            if let startDateText = startDateLabel.text,
+               let startDate = dateFormatter.date(from: startDateText),
+               date < startDate {
+                DOOToast.show(message: "여행 종료일보다 여행 시작일이 빨라요!", insetFromBottom: ScreenUtils.getHeight(374))
+            }
+        }
+    }
+    
     func didSelectDate(date: Date) {
         let formattedDate = dateFormat(date: date)
         activeLabel?.text = formattedDate

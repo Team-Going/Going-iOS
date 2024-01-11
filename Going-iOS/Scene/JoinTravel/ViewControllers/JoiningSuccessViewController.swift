@@ -22,19 +22,14 @@ final class JoiningSuccessViewController: UIViewController {
         label.font = .pretendard(.head2)
         label.textColor = .gray700
         label.text = StringLiterals.JoiningSuccess.title
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.textAlignment = .center
         return label
     }()
     
-    private let ticketImage: UIImageView = {
+    private let letterImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.CreateTravel.ticketImage
-        return img
-    }()
-    
-    private let characterImage: UIImageView = {
-        let img = UIImageView()
-        img.image = ImageLiterals.CreateTravel.larvaImage
+        img.image = ImageLiterals.JoinTravel.imgJoinMessage
         return img
     }()
     
@@ -55,7 +50,7 @@ final class JoiningSuccessViewController: UIViewController {
     
     private let travelTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .pretendard(.body1_bold)
+        label.font = .pretendard(.head3)
         label.textColor = .gray700
         label.text = "두릅과 스페인"
         return label
@@ -69,8 +64,12 @@ final class JoiningSuccessViewController: UIViewController {
         return label
     }()
 
-    private let entranceToTestButton = DOOButton(type: .enabled, title: "입장하기")
-    
+    private lazy var entranceButton: DOOButton = {
+        let btn =  DOOButton(type: .enabled, title: StringLiterals.JoiningSuccess.confirmButton)
+        btn.addTarget(self, action: #selector(pushToTravelTestVC), for: .touchUpInside)
+        return btn
+    }()
+   
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
@@ -94,10 +93,10 @@ private extension JoiningSuccessViewController {
     func setHierarchy() {
         view.addSubviews(navigationBar,
                          joinSuccessLabel,
-                         ticketImage,
-                         entranceToTestButton)
+                         letterImage,
+                         entranceButton)
         
-        ticketImage.addSubviews(characterImage, dDayLabelBackgroundView, travelTitleLabel, dateLabel)
+        letterImage.addSubviews(dDayLabelBackgroundView, travelTitleLabel, dateLabel)
         dDayLabelBackgroundView.addSubview(dDayLabel)
     }
     
@@ -109,28 +108,22 @@ private extension JoiningSuccessViewController {
         }
         
         joinSuccessLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(256)
-            $0.leading.equalToSuperview().inset(64)
-            $0.trailing.equalToSuperview().inset(65)
-        }
-        
-        ticketImage.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom).offset(86)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(joinSuccessLabel.snp.bottom).offset(24)
-            $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.height.equalTo(ScreenUtils.getHeight(125))
         }
         
-        characterImage.snp.makeConstraints {
-            $0.centerY.equalTo(ticketImage)
-            $0.leading.equalTo(ticketImage.snp.leading).offset(22)
+        letterImage.snp.makeConstraints {
+            $0.top.equalTo(joinSuccessLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(39)
+            $0.width.equalTo(ScreenUtils.getWidth(320))
+            $0.height.equalTo(ScreenUtils.getHeight(300))
         }
-        
+
         dDayLabelBackgroundView.snp.makeConstraints {
-            $0.leading.equalTo(ticketImage.snp.leading).offset(102)
-            $0.bottom.equalTo(travelTitleLabel.snp.top).offset(-4)
+            $0.top.equalToSuperview().inset(51)
+            $0.centerX.equalTo(joinSuccessLabel)
+            $0.width.equalTo(ScreenUtils.getWidth(50))
             $0.height.equalTo(ScreenUtils.getHeight(22))
-            $0.width.equalTo(ScreenUtils.getWidth(44))
         }
         
         dDayLabel.snp.makeConstraints {
@@ -138,20 +131,30 @@ private extension JoiningSuccessViewController {
         }
         
         travelTitleLabel.snp.makeConstraints {
-            $0.centerY.equalTo(characterImage)
-            $0.leading.equalTo(dDayLabelBackgroundView)
+            $0.top.equalTo(dDayLabelBackgroundView.snp.bottom).offset(8)
+            $0.centerX.equalTo(dDayLabelBackgroundView)
+            $0.height.equalTo(ScreenUtils.getHeight(30))
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(travelTitleLabel)
+            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(2)
+            $0.centerX.equalTo(dDayLabelBackgroundView)
+            $0.height.equalTo(ScreenUtils.getHeight(20))
         }
         
-        entranceToTestButton.snp.makeConstraints {
+        entranceButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
         }
+    }
+    
+    // MARK: - @objc Methods
+    
+    @objc
+    func pushToTravelTestVC() {
+        let vc = TravelTestViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

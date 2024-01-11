@@ -31,7 +31,6 @@ final class JoinTravelViewController: UIViewController {
         field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, forBorderColor: .gray200, forCornerRadius: 6)
         field.setPlaceholderColor(.gray200)
         field.textColor = .gray700
-        field.keyboardType = .numberPad
         return field
     }()
     
@@ -52,11 +51,14 @@ final class JoinTravelViewController: UIViewController {
         setHierarchy()
         setLayout()
         setDelegate()
-        setNotification()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
