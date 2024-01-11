@@ -23,7 +23,6 @@ final class DOONavigationBar: UIView {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonBack, for: .normal)
         btn.addTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
-        btn.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
         return btn
     }()
     
