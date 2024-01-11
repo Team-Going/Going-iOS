@@ -137,6 +137,7 @@ final class ToDoViewController: UIViewController {
     func presentToDatePicker(for button: UIButton) {
         print("presentToDatePicker")
         showDatePicker(for: button)
+        dropdownButton.setImage(ImageLiterals.ToDo.tappedDropdown, for: .normal)
     }
     
     // 담당자 버튼 탭 시 버튼 색상 변경 & 배열에 담아주는 메서드
@@ -156,6 +157,7 @@ final class ToDoViewController: UIViewController {
         let todo = todoTextfield.text ?? ""
         let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해주세요." ? "" : deadlineTextfieldLabel.text) ?? ""
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
+        print(deadline)
         if !todo.isEmpty && !deadline.isEmpty{
             self.saveToDoData = ToDoData(todo: todo, deadline: deadline, manager: manager, memo: memo)
             self.navigationController?.popViewController(animated: false)
@@ -457,7 +459,8 @@ extension ToDoViewController: UITextFieldDelegate {
             textField.layer.borderColor =  UIColor.gray700.cgColor
             countToDoCharacterLabel.textColor = .gray700
             countToDoCharacterLabel.text = "\(newLength)" + "/15"
-            singleButtonView.currentType = .enabled
+            let todo = deadlineTextfieldLabel.text
+            if todo != "날짜를 선택해주세요." {singleButtonView.currentType = .enabled}
         }
         return  !(newLength > 15)
     }
@@ -470,6 +473,7 @@ extension ToDoViewController: BottomSheetDelegate {
         deadlineTextfieldLabel.textColor = .gray700
         deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
+        if todoTextfield.text != "" {singleButtonView.currentType = .enabled}
     }
 }
 
