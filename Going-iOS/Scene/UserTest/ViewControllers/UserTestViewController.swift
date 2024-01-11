@@ -30,6 +30,13 @@ final class UserTestViewController: UIViewController {
         return progress
     }()
     
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.UserTest.background
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     private let testIndexLabel = DOOLabel(font: .pretendard(.head3), color: .gray300)
     private let questionLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
     
@@ -49,11 +56,10 @@ final class UserTestViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .gray200
+        button.backgroundColor = .gray50
         button.isEnabled = false
         button.titleLabel?.font = .pretendard(.body1_bold)
-        button.layer.cornerRadius = 6
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -82,7 +88,7 @@ private extension UserTestViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar, testProgressView, testIndexLabel, questionLabel, questionStackView, nextButton)
+        view.addSubviews(navigationBar, testProgressView, testIndexLabel, questionLabel, questionStackView, nextButton, backgroundImageView)
         self.questionStackView.addArrangedSubviews(firstButton, secondButton, thirdButton, fourthButton)
     }
     
@@ -120,9 +126,14 @@ private extension UserTestViewController {
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(68))
+        }
+        
+        backgroundImageView.snp.makeConstraints {
+            $0.bottom.equalTo(nextButton.snp.top)
+            $0.trailing.equalToSuperview()
         }
     }
     
@@ -173,6 +184,7 @@ private extension UserTestViewController {
     func handleLastQuestion() {
         print(buttonIndexList)
         let nextVC = UserTestResultViewController()
+        nextVC.testResultDummy = toUserTypeResult()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -197,6 +209,12 @@ private extension UserTestViewController {
             }
         }
     }
+    
+    func toUserTypeResult() -> UserTypeTestResultAppData {
+        var dummy = UserTypeTestResultAppData.dummy()
+        return dummy[1]
+    }
+
     
     @objc
     func buttonTapped(_ sender: UIButton) {

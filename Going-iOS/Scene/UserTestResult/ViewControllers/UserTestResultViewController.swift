@@ -12,7 +12,15 @@ import Photos
 
 final class UserTestResultViewController: UIViewController {
     
-    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("유형 검사 결과"))
+    var testResultDummy: UserTypeTestResultAppData? {
+        didSet {
+            guard let data = testResultDummy else { return }
+            self.resultImageView.image = data.typeImage
+            self.resultView.resultViewData = data
+        }
+    }
+    
+    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 캐릭터"))
     
     private let naviUnderLineView: UIView = {
         let view = UIView()
@@ -33,8 +41,8 @@ final class UserTestResultViewController: UIViewController {
     private let resultImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "pencil")
-        imageView.backgroundColor = .orange
+        imageView.image = ImageLiterals.UserTestTypeCharacter.aeiCharac
+        imageView.backgroundColor = .white000
         return imageView
     }()
     
@@ -45,7 +53,8 @@ final class UserTestResultViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .gray500
-        button.setTitle("완성된 프로필", for: .normal)
+        button.setTitle("doorip 시작하기", for: .normal)
+        button.setTitleColor(.white000, for: .normal)
         button.titleLabel?.font = .pretendard(.body1_bold)
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
@@ -54,15 +63,8 @@ final class UserTestResultViewController: UIViewController {
     
     private lazy var saveImageButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .white000
-        button.setTitle("이미지로 저장", for: .normal)
-        button.setTitleColor(.gray600, for: .normal)
-        button.titleLabel?.font = .pretendard(.body1_bold)
-        button.layer.cornerRadius = 6
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.gray300.cgColor
+        button.setImage(ImageLiterals.NavigationBar.buttonSave, for: .normal)
         button.addTarget(self, action: #selector(saveImageButtonTapped), for: .touchUpInside)
-        
         return button
     }()
     
@@ -72,7 +74,6 @@ final class UserTestResultViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,7 +94,8 @@ private extension UserTestResultViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar, naviUnderLineView, testResultScrollView, nextButton, saveImageButton, gradientView)
+        view.addSubviews(navigationBar, naviUnderLineView, testResultScrollView, nextButton, gradientView)
+        navigationBar.addSubview(saveImageButton)
         testResultScrollView.addSubviews(contentView)
         contentView.addSubviews(resultImageView, resultView)
     }
@@ -104,6 +106,12 @@ private extension UserTestResultViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        saveImageButton.snp.makeConstraints {
+            $0.width.height.equalTo(ScreenUtils.getWidth(48))
+            $0.trailing.equalToSuperview().inset(10)
+            $0.centerY.equalToSuperview()
         }
         
         naviUnderLineView.snp.makeConstraints {
@@ -118,18 +126,10 @@ private extension UserTestResultViewController {
             $0.leading.trailing.equalToSuperview()
         }
         
-        saveImageButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-            $0.leading.equalToSuperview().inset(24)
-            $0.height.equalTo(ScreenUtils.getHeight(50))
-            $0.width.equalTo(ScreenUtils.getWidth(160))
-        }
         nextButton.snp.makeConstraints {
-            $0.bottom.equalTo(saveImageButton.snp.bottom)
-            $0.leading.equalTo(saveImageButton.snp.trailing).offset(7)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(ScreenUtils.getHeight(50))
-            $0.width.equalTo(ScreenUtils.getWidth(160))
-            
         }
         
         gradientView.snp.makeConstraints {
@@ -163,14 +163,14 @@ private extension UserTestResultViewController {
     }
     
     func saveImage() {
-        UIImageWriteToSavedPhotosAlbum(UIImage(systemName: "pencil")!, self, nil, nil)
-        DOOToast.show(message: "이미지가 저장되었습니다.", insetFromBottom: 114)
+        UIImageWriteToSavedPhotosAlbum(resultImageView.image!, self, nil, nil)
+        DOOToast.show(message: "이미지가 저장되었습니다. \n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
     }
     
     @objc
     func nextButtonTapped() {
-//        let nextVC = CompleteProfileViewController()
-//        self.navigationController?.pushViewController(nextVC, animated: true)
+        let nextVC = DashBoardViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func showPermissionAlert() {
@@ -201,7 +201,6 @@ extension UserTestResultViewController: CheckPhotoAccessProtocol {
                 switch status {
                 case .authorized, .limited:
                     UserDefaults.standard.set(true, forKey: "photoPermissionKey")
-                    print("권한설정됐다는 토스트? 띄우면 좋을듯")
                 case .denied:
                     DispatchQueue.main.async {
                         self?.showPermissionAlert()

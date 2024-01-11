@@ -18,6 +18,7 @@ enum ImageLiterals {
     
     enum Splash {
         static var splashLogo: UIImage { .load(named: "splash_logo") }
+        static var userTestSplash: UIImage { .load(named: "img_testsplash") }
     }
     
     enum Login {
@@ -96,5 +97,18 @@ enum ImageLiterals {
         static var tabbarOurToDoSelected: UIImage { .load(named: "tabbar_ourtodo_selected") }
         static var tabbarOurToDoUnselected: UIImage { .load(named: "tabbar_ourtodo_unselected") }
         static var tabbarMyToDoSelected: UIImage { .load(named: "tabbar_mytodo_selected") }
+    enum UserTestTypeCharacter {
+        static var aeiCharac: UIImage { .load(named: "img_testresult_aei")}
+        static var aepCharac: UIImage { .load(named: "img_testresult_aep")}
+        static var ariCharac: UIImage { .load(named: "img_testresult_ari")}
+        static var arpCharac: UIImage { .load(named: "img_testresult_arp")}
+        static var seiCharac: UIImage { .load(named: "img_testresult_sei")}
+        static var sepCharac: UIImage { .load(named: "img_testresult_sep")}
+        static var sriCharac: UIImage { .load(named: "img_testresult_sri")}
+        static var srpCharac: UIImage { .load(named: "img_testresult_srp")}
+    }
+    
+    enum UserTest {
+        static var background: UIImage { .load(named: "img_test")}
     }
 }
