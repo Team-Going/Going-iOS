@@ -96,11 +96,14 @@ final class CreateTravelViewController: UIViewController {
         setLayout()
         setGestureRecognizer()
         setDelegate()
-        setNotification()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setNotification()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
