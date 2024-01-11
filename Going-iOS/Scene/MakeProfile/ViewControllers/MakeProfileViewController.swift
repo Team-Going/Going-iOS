@@ -354,7 +354,7 @@ extension MakeProfileViewController: UITextFieldDelegate {
         }
         
         //모든 예시는 NameTextField 기준으로 적음
-        var oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
+        let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
         let addedText = string // 입력한 text 입니다.
         let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합칩니다.
         let newTextLength = newText.count // 합쳐진 text의 길이 입니다.
@@ -391,7 +391,7 @@ extension MakeProfileViewController: UITextFieldDelegate {
     
     //TextField에 변경사항이 생기면, TextField에 작성된 후에 호출되는 메서드
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        var text = textField.text ?? ""
+        let text = textField.text ?? ""
         var maxLength = 0
         switch textField {
         case nameTextField:

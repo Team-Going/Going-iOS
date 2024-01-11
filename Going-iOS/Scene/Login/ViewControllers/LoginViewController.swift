@@ -218,7 +218,6 @@ extension LoginViewController: ViewControllerServiceable {
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }
-    
 }
 
 //애플로그인
