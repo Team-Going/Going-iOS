@@ -28,7 +28,7 @@ final class TripHeaderView: UIView {
         didSet {
             guard let data = tripData else {return}
             self.tripNameLabel.text = data[0]
-            self.tripDdayLabel.text = data[1]
+            self.tripDdayLabel.text = "여행일까지 \(data[1])일 남았어요!"
             self.tripDateLabel.text = data[2] + " - " + data[3]
             
             let text = tripDdayLabel.text ?? ""
@@ -51,14 +51,12 @@ final class TripHeaderView: UIView {
         didSet {
             guard let data = myToDoHeaderData else {return}
             self.tripNameLabel.text = data[0]
-            self.tripDdayLabel.text = data[1]
+            self.tripDdayLabel.text = "나에게 남은 할일 \(data[1])개"
             
             let text = tripDdayLabel.text ?? ""
-            let splitText = tripDdayLabel.text?.split(separator: " ") ?? []
             let firstString = NSMutableAttributedString(string: text)
-            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: String(splitText[0])))
-            firstString.addAttribute(.foregroundColor, value: UIColor.red400, range: (text as NSString).range(of: String(splitText[1])))
-            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: String(splitText[2])))
+            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: "나에게 남은 할일"))
+            firstString.addAttribute(.foregroundColor, value: UIColor.red400, range: (text as NSString).range(of: String("\(data[1])개")))
             tripDdayLabel.attributedText = firstString
         }
     }

@@ -54,8 +54,22 @@ final class TripMiddleView: UIView {
     
     // MARK: - Property
     
-    var friendProfile: [Friend] = []
+    var friendProfile: [Participant] = []
     weak var delegate: TripMiddleViewDelegate?
+    var progress: Int? {
+        didSet {
+            guard let progress else {return}
+            self.percentageLabel.text = String(progress) + "%"
+            self.tripProgressBar.progress = Float(progress) * 0.01
+        }
+    }
+    var participants: [Participant]? {
+        didSet {
+            guard let participants else {return}
+            self.friendProfile = participants
+            self.tripFriendsCollectionView.reloadData()
+        }
+    }
     
     // MARK: - Life Cycle
 
@@ -88,12 +102,12 @@ final class TripMiddleView: UIView {
         print("pushToFriendProfileView")
     }
     
-    func bindData(percentage: Int, friends: [Friend]) {
-        self.percentageLabel.text = String(percentage) + "%"
-        self.tripProgressBar.progress = Float(percentage) * 0.01
-        self.friendProfile = friends
-        self.tripFriendsCollectionView.reloadData()
-    }
+//    func bindData(percentage: Int, friends: [Friend]) {
+//        self.percentageLabel.text = String(percentage) + "%"
+//        self.tripProgressBar.progress = Float(percentage) * 0.01
+//        self.friendProfile = friends
+//        self.tripFriendsCollectionView.reloadData()
+//    }
 }
 
 // MARK: - Private Method

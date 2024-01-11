@@ -61,6 +61,18 @@ final class OurToDoViewController: UIViewController {
     
     // MARK: - Property
     
+    private var headerData: OurToDoHeaderAppData? {
+        didSet {
+            guard let data = headerData else { return }
+            let splitStartDate = data.startDate.split(separator: ".")
+            let newStartDate = "\(splitStartDate[1])월 \(splitStartDate[2])일"
+            let splitEndDate = data.endDate.split(separator: ".")
+            let newEndDate = "\(splitEndDate[1])월 \(splitEndDate[2])일"
+            self.tripHeaderView.tripData = [data.title, "\(data.day)", newStartDate, newEndDate]
+            self.tripMiddleView.progress = data.progress
+            self.tripMiddleView.participants = data.participants
+        }
+    }
     var ourToDoData: OurToDoData?
     var incompletedData: [OurToDo] = []
     var completedData: [OurToDo] = []
@@ -206,9 +218,7 @@ private extension OurToDoViewController {
         for i in ourToDoData?.ourToDo ?? [] {
             i.isComplete ? completedData.append(i) : incompletedData.append(i)
         }
-        
-        tripHeaderView.tripData = [ourToDoData?.tripTitle ?? "", ourToDoData?.tripDeadline ?? "", ourToDoData?.tripStartDate ?? "", ourToDoData?.tripEndDate ?? ""]
-        tripMiddleView.bindData(percentage: ourToDoData?.percentage ?? 0, friends: ourToDoData?.friends ?? [])
+        headerData = toAppData()
     }
     
     func setDelegate() {
@@ -277,6 +287,10 @@ private extension OurToDoViewController {
                 $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
             }
         }
+    }
+    
+    func toAppData() -> OurToDoHeaderAppData {
+        return OurToDoHeaderAppData.dummy()
     }
     
     // MARK: - objc method
