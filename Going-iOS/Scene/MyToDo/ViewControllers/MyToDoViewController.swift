@@ -39,14 +39,14 @@ final class MyToDoViewController: UIViewController {
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .red700
-        btn.setTitle(" 나의 할일", for: .normal)
+        btn.setTitle(StringLiterals.MyToDo.mytodo, for: .normal)
         btn.setTitleColor(.white000, for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
         btn.imageView?.tintColor = .white000
         btn.addTarget(self, action: #selector(pushToAddToDoView(_:)), for: .touchUpInside)
-        btn.semanticContentAttribute = .forceLeftToRight
+        btn.semanticContentAttribute = .forceRightToLeft
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
     }()
@@ -61,7 +61,12 @@ final class MyToDoViewController: UIViewController {
         imageView.tintColor = .gray100
         return imageView
     }()
-    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "할일을 추가해주세요.", alignment: .center)
+    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: StringLiterals.OurToDo.pleaseAddToDo, alignment: .center)
+    private let myToDoMainImageView: UIImageView = {
+        let imgView = UIImageView()
+        imgView.image = ImageLiterals.MyToDo.mainViewIcon
+        return imgView
+    }()
     
     // MARK: - Properties
     
@@ -100,7 +105,7 @@ private extension MyToDoViewController {
     func setHierachy() {
         self.view.addSubviews(navigationBarview, tabBarView, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyMyToDoHeaderView)
-        contentView.addSubviews(tripHeaderView, myToDoHeaderView, myToDoCollectionView, emptyView)
+        contentView.addSubviews(tripHeaderView, myToDoMainImageView, myToDoHeaderView, myToDoCollectionView, emptyView)
         emptyView.addSubviews(emptyViewIcon, emptyViewLabel)
     }
     
@@ -127,6 +132,12 @@ private extension MyToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview().offset(ScreenUtils.getHeight(8))
             $0.height.equalTo(ScreenUtils.getHeight(95))
+        }
+        myToDoMainImageView.snp.makeConstraints {
+            $0.top.equalTo(tripHeaderView)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.width.equalTo(ScreenUtils.getWidth(137))
+            $0.height.equalTo(ScreenUtils.getHeight(100))
         }
         myToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom)
@@ -233,8 +244,8 @@ private extension MyToDoViewController {
     }
     
     func setTapBarImage() {
-        self.tabBarView.ourToDoTab.imageView?.tintColor = .gray200
-        self.tabBarView.myToDoTab.imageView?.tintColor = .red500
+        self.tabBarView.ourToDoTab.setImage(ImageLiterals.TabBar.tabbarOurToDoUnselected, for: .normal)
+        self.tabBarView.myToDoTab.setImage(ImageLiterals.TabBar.tabbarMyToDoSelected, for: .normal)
     }
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
@@ -246,8 +257,8 @@ private extension MyToDoViewController {
                 $0.leading.trailing.equalToSuperview()
             }
             emptyViewIcon.snp.makeConstraints {
-                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(196))
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(144))
+                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(150))
+                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(114))
             }
             emptyViewLabel.snp.makeConstraints {
                 $0.top.equalTo(emptyViewIcon.snp.bottom).offset(ScreenUtils.getHeight(16))
@@ -270,7 +281,7 @@ private extension MyToDoViewController {
 
     @objc
     func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
-        setToDoView(naviBarTitle: "추가", isActivate: true)
+        setToDoView(naviBarTitle: StringLiterals.ToDo.add, isActivate: true)
     }
     
     @objc
@@ -289,7 +300,7 @@ private extension MyToDoViewController {
     
     @objc
     func pushToInquiryToDo() {
-        setToDoView(naviBarTitle: "조회", isActivate: false)
+        setToDoView(naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
     }
 }
 
@@ -322,7 +333,7 @@ extension MyToDoViewController: UIScrollViewDelegate {
 
 extension MyToDoViewController: MyToDoCollectionViewDelegate {
     func pushToToDo() {
-        setToDoView(naviBarTitle: "조회", isActivate: false)
+        setToDoView(naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
     }
     
     func getButtonIndex(index: Int, image: UIImage) {

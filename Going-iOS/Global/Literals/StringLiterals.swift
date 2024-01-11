@@ -49,4 +49,35 @@ enum StringLiterals {
         static let aboutService = "About doorip"
         static let logout = "로그아웃"
     }
+    
+    enum OurToDo {
+        static let ourProgress = "우리 여행 진행률"
+        static let friends = "함께 하는 친구들"
+        static let invite = "초대"
+        static let incomplete = "해야 해요"
+        static let complete = "완료했어요"
+        static let ourtodo = "같이 할일 "
+        static let pleaseAddToDo = "할일을 추가해 보세요"
+    }
+    
+    enum MyToDo {
+        static let mytodo = "혼자 할일 "
+    }
+    
+    enum ToDo {
+        static let add = "추가"
+        static let edit = "수정"
+        static let delete = "삭제"
+        static let inquiry = "조회"
+        static let save = "저장"
+        static let toSave = "저장하기"
+        static let toEdit = "수정하기"
+        static let toDelete = "삭제하기"
+        static let todo = "어떤 할일인가요?"
+        static let deadline = "언제까지 해야 하나요?"
+        static let allocation = "누가 하나요?"
+        static let memo = "메모"
+        static let addToDo = "할일 추가"
+        static let inquiryToDo = "할일 조회"
+    }
 }

@@ -24,7 +24,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             guard let myToDoData else {return}
             self.todoTitleLabel.text = myToDoData.todoTitle
             self.deadlineLabel.text = myToDoData.deadline + "까지"
-            self.manager = (myToDoData.manager[0] == "지민") && myToDoData.isPrivate ? ["나만보기"] : myToDoData.manager
+            self.manager = (myToDoData.manager[0] == "지민") && myToDoData.isPrivate ? ["혼자할일"] : myToDoData.manager
         }
     }
     var index: Int? {
@@ -223,7 +223,7 @@ extension MyToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
         layout.minimumLineSpacing = ScreenUtils.getWidth(4)
         
-        let stringLength = self.manager[indexPath.row] == "나만보기"
+        let stringLength = self.manager[indexPath.row] == "혼자할일"
         ? self.manager[indexPath.row].size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
         : self.manager[indexPath.row].size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
         return CGSize(width: stringLength + ScreenUtils.getWidth(12), height: ScreenUtils.getHeight(20))

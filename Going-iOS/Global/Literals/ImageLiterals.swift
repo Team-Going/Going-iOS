@@ -46,6 +46,8 @@ enum ImageLiterals {
         static var btnEnter: UIImage { .load(named: "btn_enter")}
         static var btnPlus: UIImage { .load(named: "btn_plus") }
         static var btnPlusOurToDo: UIImage { .load(named: "btn_plus_ourtodo") }
+        static var emptyViewIcon: UIImage { .load(named: "img_ourtodo_empty") }
+        static var mainViewIcon: UIImage { .load(named: "img_ourtodo_main") }
     }
     
     enum TravelTest {
@@ -55,6 +57,7 @@ enum ImageLiterals {
     enum ToDo {
         static var enabledDropdown: UIImage { .load(named: "enabled_ic_dropdown") }
         static var disabledDropdown: UIImage { .load(named: "disabled_ic_dropdown") }
+        static var tappedDropdown: UIImage { .load(named: "tap_ic_dropdown") }
     }
     
     enum MyToDo {
@@ -71,7 +74,10 @@ enum ImageLiterals {
             .load(named: "ic_lock_light")
         }
         static var emptyViewIcon: UIImage {
-            .load(named: "empty_view_icon")
+            .load(named: "img_mytodo_empty")
+        }
+        static var mainViewIcon: UIImage {
+            .load(named: "img_mytodo_main")
         }
     }
     enum DashBoard {
@@ -83,5 +89,12 @@ enum ImageLiterals {
     enum Settings {
         static var btnResign: UIImage { .load(named: "ic_unsubscribe") }
         static var btnEnterLarge: UIImage { .load(named: "btn_enter_large")}
+    }
+    
+    enum TabBar {
+        static var tabbarMyToDoUnselected: UIImage { .load(named: "tabbar_mytodo_unselected") }
+        static var tabbarOurToDoSelected: UIImage { .load(named: "tabbar_ourtodo_selected") }
+        static var tabbarOurToDoUnselected: UIImage { .load(named: "tabbar_ourtodo_unselected") }
+        static var tabbarMyToDoSelected: UIImage { .load(named: "tabbar_mytodo_selected") }
     }
 }

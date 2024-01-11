@@ -34,9 +34,8 @@ final class TabBarView: UIView {
     lazy var ourToDoTab: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .white000
-        btn.setImage(UIImage(systemName: "person.fill"), for: .normal)
-        btn.setImage(UIImage(systemName: "person.fill"), for: .highlighted)
-        btn.imageView?.tintColor = .red500
+        btn.setImage(ImageLiterals.TabBar.tabbarOurToDoSelected, for: .normal)
+        btn.setImage(ImageLiterals.TabBar.tabbarOurToDoSelected, for: .highlighted)
         btn.addTarget(self, action: #selector(tapOurToDoTabBar), for: .touchUpInside)
         btn.tag = 1
         return btn
@@ -44,9 +43,8 @@ final class TabBarView: UIView {
     lazy var myToDoTab: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .white000
-        btn.setImage(UIImage(systemName: "person.fill"), for: .normal)
-        btn.setImage(UIImage(systemName: "person.fill"), for: .highlighted)
-        btn.imageView?.tintColor = .gray200
+        btn.setImage(ImageLiterals.TabBar.tabbarMyToDoUnselected, for: .normal)
+        btn.setImage(ImageLiterals.TabBar.tabbarMyToDoUnselected, for: .highlighted)
         btn.addTarget(self, action: #selector(tapMyToDoTabBar), for: .touchUpInside)
         btn.tag = 2
         return btn
