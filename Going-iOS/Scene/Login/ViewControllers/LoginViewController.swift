@@ -13,18 +13,8 @@ import KakaoSDKUser
 import SnapKit
 
 
-final class LoginViewController: UIViewController, ViewControllerServiceable {
+final class LoginViewController: UIViewController {
     
-    func handleError(_ error: NetworkError) {
-        switch error {
-        case .clientError(let message):
-            DOOToast.show(message: "\(message)", insetFromBottom: 80)
-        default:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
-            
-        }
-    }
-
     private var kakaoAccessToken: String? {
         didSet {
             guard let token = kakaoAccessToken else { return }
@@ -43,6 +33,7 @@ final class LoginViewController: UIViewController, ViewControllerServiceable {
                     handleError(error)
                 }
             }
+            kakaoLoginButton.isEnabled = true
         }
     }
     
@@ -162,17 +153,22 @@ private extension LoginViewController {
             guard let oAuthToken = oAuthToken else { return }
             print(oAuthToken.accessToken)
             self.kakaoAccessToken = oAuthToken.accessToken
+            self.kakaoLoginButton.isEnabled = false
 
         }
     }
     
     private func loginKakaoWithWeb() {
         UserApi.shared.loginWithKakaoAccount { oAuthToken, error in
-            guard error == nil else { return }
+            guard error == nil else {
+                self.kakaoLoginButton.isEnabled = true
+                return }
             print("Login with KAKAO Web Success !!")
             guard let oAuthToken = oAuthToken else { return }
             print(oAuthToken.accessToken)
             self.kakaoAccessToken = oAuthToken.accessToken
+            self.kakaoLoginButton.isEnabled = false
+
         }
     }
     
@@ -181,13 +177,12 @@ private extension LoginViewController {
         
         //카카오톡앱이 있으면 카카오앱으로 연결, 없으면 웹을 띄워줌
         if UserApi.isKakaoTalkLoginAvailable() {
+            kakaoLoginButton.isEnabled = false
             loginKakaoWithApp()
         } else {
+            kakaoLoginButton.isEnabled = false
             loginKakaoWithWeb()
         }
-        //뷰연결 테스트용도
-//        let nextVC = MakeProfileViewController()
-//        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc
@@ -209,6 +204,20 @@ private extension LoginViewController {
         vc.modalPresentationStyle = .automatic
         self.present(vc, animated: true)
     }
+}
+
+extension LoginViewController: ViewControllerServiceable {
+    
+    //추후에 에러코드에 따른 토스트 메세지 구현해야됨
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .clientError(let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+    }
+
 }
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
