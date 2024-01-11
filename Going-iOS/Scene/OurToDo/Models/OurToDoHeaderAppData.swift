@@ -12,7 +12,12 @@ struct OurToDoHeaderAppData: AppData {
     let day: Int
     let startDate, endDate: String
     let progress: Int
-    let participants: [Participant]
+    let participants: [Participants]
+}
+
+struct Participants: AppData {
+    let participantID: Int
+    let name, result: String
 }
 
 extension OurToDoHeaderAppData {
