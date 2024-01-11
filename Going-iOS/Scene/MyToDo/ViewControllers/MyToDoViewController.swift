@@ -13,6 +13,13 @@ final class MyToDoViewController: UIViewController {
 
     // MARK: - UI Property
     
+    private var headerData: MyToDoHeaderAppData? {
+        didSet {
+            guard let data = headerData else { return }
+            self.tripHeaderView.tripData = [data.name, "\(data.count)"]
+        }
+    }
+    
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .myToDo, backgroundColor: .gray50)
     private let tripHeaderView = TripHeaderView()
@@ -83,6 +90,7 @@ final class MyToDoViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         setHierachy()
         setDelegate()
+//        getMyToDoHeaderData()
         setData()
         registerCell()
         setLayout()
@@ -171,7 +179,8 @@ private extension MyToDoViewController {
         for i in myToDoData?.myToDo ?? [] {
             i.isComplete ? completedData.append(i) : incompletedData.append(i)
         }
-        tripHeaderView.myToDoHeaderData = [myToDoData?.tripTitle ?? "", myToDoData?.toDoCountLabel ?? ""]
+        tripHeaderView.myToDoHeaderData = [headerData?.name ?? "", "\(headerData?.count)"]
+        print("trip\(tripHeaderView.myToDoHeaderData)")
     }
     
     func setDelegate() {
@@ -388,5 +397,31 @@ extension MyToDoViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         pushToInquiryToDo()
+    }
+}
+
+extension MyToDoViewController {
+    func handlingError(_ error: NetworkError) {
+        switch error {
+        case .clientError(let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 50)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 50)
+        }
+    }
+}
+
+extension MyToDoViewController {
+    func getMyToDoHeaderData() {
+        Task {
+            do {
+                let myToDoHeaderData = try await MyToDoService.shared.getMyToDoHeader(tripId: 1)
+                headerData = myToDoHeaderData
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handlingError(error)
+            }
+        }
     }
 }
