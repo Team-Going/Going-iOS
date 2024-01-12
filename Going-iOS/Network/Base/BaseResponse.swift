@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseResponse<T: Codable>: Codable, DTO {
+struct BaseResponse<T: Response>: Response, DTO {
     let status: Int
     let code: String
     let message: String
