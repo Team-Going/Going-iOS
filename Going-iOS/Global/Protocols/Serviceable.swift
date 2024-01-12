@@ -23,45 +23,28 @@ extension Serviceable {
         guard let model = try? JSONDecoder().decode(BaseResponse<T>.self, from: data) else {
             throw NetworkError.jsonDecodingError
         }
-
+        
         print("✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨")
        
         let code = model.code
         let message = model.message
+                
+        guard !NetworkErrorCode.clientErrorCode.contains(code) else {
+            throw NetworkError.clientError(code: code, message: message)
+        }
         
-        //4041일때는 프로필 생성뷰로
-        //4045일때는 성향테스트스플래시뷰로
-//        if code == "e4041" || code == "e4045"{
-//            throw NetworkError.userState(code: code, message: message)
-        
-        
-        
-        
-        
-//        if code == "e4041" || code == "e4045" {
-//            throw NetworkError.userState(code: code)
-//        }
-//        
-//        if code != "s2000" && code != "s2010"{
-//            throw NetworkError.userState(code: code)
-//        }
+        guard !NetworkErrorCode.userState.contains(code) else {
+            throw NetworkError.userState(code: code, message: message)
+        }
         
         guard !NetworkErrorCode.unAuthorized.contains(code) else {
-            throw NetworkError.clientError(code: code, message: message)
+            throw NetworkError.unAuthorizedError
         }
         
         guard !NetworkErrorCode.serverErrorCode.contains(code) else {
-            throw NetworkError.clientError(code: code, message: message)
+            throw NetworkError.serverError
         }
 
-//        let statusCode = model.code
-//        guard !NetworkErrorCode.clientErrorCode.contains(code) else {
-//            throw NetworkError.clientError(message: model.message)
-//        }
-////
-//        guard !NetworkErrorCode.serverErrorCode.contains(code) else {
-//            throw NetworkError.serverError
-//        }
         print("✅✅✅✅✅✅✅✅✅✅✅✅✅원래 API호출성공✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
         return model.data
     }

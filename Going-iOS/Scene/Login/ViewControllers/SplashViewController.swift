@@ -74,17 +74,24 @@ private extension SplashViewController {
 
 extension SplashViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
-        
-        //프로필생성뷰
-        if error.description == "e4041" {
-            let nextVC = MakeProfileViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
-            
-            //성향테스트스플래시뷰
-        } else if error.description == "e4045" {
-            let nextVC = UserTestSplashViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
-            
+        switch error {
+        case .clientError(_, let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+        case .serverError:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        case .unAuthorizedError:
+            //jwt재발급 통신하고, 받아온 토큰으로 다시 원래 API연결
+            DOOToast.show(message: "재발급통신하자", insetFromBottom: 80)
+        case .userState(let code, _):
+            if code == "4041" {
+                let nextVC = MakeProfileViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            } else if code == "e4045" {
+                let nextVC = UserTestSplashViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }
 }
