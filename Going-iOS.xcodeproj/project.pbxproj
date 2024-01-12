@@ -99,6 +99,7 @@
 		F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D98672B4EC71900341893 /* ViewControllerServiceable.swift */; };
 		F44D986C2B4ECACC00341893 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986B2B4ECACC00341893 /* Token.swift */; };
 		F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */; };
+		F45CA15C2B51868C00F3790C /* NetworkErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -260,6 +261,7 @@
 		F44D98672B4EC71900341893 /* ViewControllerServiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerServiceable.swift; sourceTree = "<group>"; };
 		F44D986B2B4ECACC00341893 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeProtocol.swift; sourceTree = "<group>"; };
+		F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorCode.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -1081,6 +1083,7 @@
 				F44D98652B4EB7F700341893 /* NetworkRequest.swift */,
 				F4FE6B912B50861A009C935E /* LoginType.swift */,
 				F4FE6B932B50863D009C935E /* SocialPlatform.swift */,
+				F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1188,15 +1191,6 @@
 				F4FE6B9D2B50AAE2009C935E /* SignUpRequestDTO.swift */,
 			);
 			path = Request;
-			sourceTree = "<group>";
-		};
-		F4FE6B952B508959009C935E /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				CA3EEE3C2B4FEF8700C23A41 /* MyToDoService.swift */,
-				CA3EEE402B50258700C23A41 /* OurToDoService.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		F4FE6BA12B50AEEF009C935E /* Models */ = {
@@ -1424,6 +1418,7 @@
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
+				F45CA15C2B51868C00F3790C /* NetworkErrorCode.swift in Sources */,
 				F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */,
 				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
 				9478E5432B4F283F0027606D /* ShowCreatedProfileViewController.swift in Sources */,

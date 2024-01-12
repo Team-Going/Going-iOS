@@ -11,7 +11,9 @@ import SnapKit
 
 final class MakeProfileViewController: UIViewController {
     
-    private var userProfileData: UserProfileAppData?
+    var socialToken: String?
+    
+    private var userProfileData = UserProfileAppData(name: "", intro: "", platform: "")
     
     private let nameLabel = DOOLabel(font: .pretendard(.body2_bold),
                                      color: .gray700,
@@ -212,11 +214,12 @@ private extension MakeProfileViewController {
         if nextButton.isEnabled {
             nextButton.backgroundColor = .gray500
             nextButton.titleLabel?.font = .pretendard(.body1_bold)
-            nextButton.titleLabel?.textColor = .white000
+            nextButton.setTitleColor(.white000, for: .normal)
         } else {
             nextButton.backgroundColor = .gray50
             nextButton.titleLabel?.font = .pretendard(.body1_bold)
-            nextButton.titleLabel?.textColor = .gray200
+            nextButton.setTitleColor(.white000, for: .normal)
+            
         }
     }
     
@@ -309,36 +312,39 @@ private extension MakeProfileViewController {
     func nextButtonTapped() {
                 
         if let nameText = nameTextField.text {
-            self.userProfileData?.name = nameText
+            self.userProfileData.name = nameText
         }
         
         if let descText = descTextField.text {
-            self.userProfileData?.intro = descText
+            self.userProfileData.intro = descText
         }
         
         if UserDefaults.standard.bool(forKey: IsAppleLogined.isAppleLogin.rawValue) {
-            self.userProfileData?.platform = SocialPlatform.apple.rawValue
+            self.userProfileData.platform = SocialPlatform.apple.rawValue
         } else {
-            self.userProfileData?.platform = SocialPlatform.kakao.rawValue
+            self.userProfileData.platform = SocialPlatform.kakao.rawValue
         }
         
         //회원가입API
-        guard let token = UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) else { return }
-        guard let signUpBody = self.userProfileData?.toDTOData() else { return }
+        guard let token = self.socialToken else { return }
+        let signUpBody = self.userProfileData.toDTOData()
         
         Task {
             do {
                 let data = try await AuthService.shared.signUp(token: token, signUpBody: signUpBody)
+                
+                let nextVC = UserTestSplashViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
                 handleError(error)
             }
+            print("1123123123123123123123123")
         }
-
-        let nextVC = UserTestSplashViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
-        
+        print("44141444444444444444444444")
+//        let nextVC = UserTestSplashViewController()
+//        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -346,6 +352,8 @@ extension MakeProfileViewController: ViewControllerServiceable {
     //추후에 에러코드에 따른 토스트 메세지 구현해야됨
     func handleError(_ error: NetworkError) {
         switch error {
+        case .serverError:
+            DOOToast.show(message: "서버에러", insetFromBottom: 80)
         case .clientError(let message):
             DOOToast.show(message: "\(message)", insetFromBottom: 80)
         default:
