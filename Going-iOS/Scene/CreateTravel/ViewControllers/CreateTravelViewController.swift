@@ -13,8 +13,12 @@ final class CreateTravelViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let vcName = "createTravel"
+    
     private weak var activeLabel: UILabel?
     
+    private var createTravelData = CreateTravelRequestAppData(travelTitle: "", startDate: "", endDate: "", a: 0, b: 0, c: 0, d: 0, e: 0)
+
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("새로운 여행 만들기"))
@@ -80,7 +84,7 @@ final class CreateTravelViewController: UIViewController {
     
     private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")
-        btn.addTarget(self, action: #selector(pushToTravelTestVC), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -90,6 +94,7 @@ final class CreateTravelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserDefaults.standard.set("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzA0ODk1NDE4LCJleHAiOjE3MDU1MDAyMTh9.FWPJhGl9amOs1Aog1snD2O1ayVm6lRYBJgHOndyWdMQ", forKey: UserDefaultToken.accessToken.rawValue)
         
         setStyle()
         setHierarchy()
@@ -326,9 +331,12 @@ private extension CreateTravelViewController {
     }
     
     @objc
-    func pushToTravelTestVC() {
-        let vc = TravelTestViewController()
-        navigationController?.pushViewController(vc, animated: true)
+    func createButtonTapped() {
+        toDTO()
+        
+        let nextVC = TravelTestViewController()
+        nextVC.createRequestData = createTravelData
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -409,5 +417,16 @@ extension CreateTravelViewController: UITextFieldDelegate {
         if let text = textField.text, text.isEmpty {
             textField.layer.borderColor = UIColor.gray200.cgColor
         }
+    }
+}
+
+extension CreateTravelViewController {
+    func toDTO() {
+        guard let name = travelNameTextField.text else { return }
+        guard let startDate = startDateLabel.text else { return }
+        guard let endDate = endDateLabel.text else { return }
+        createTravelData.travelTitle = name
+        createTravelData.startDate = startDate
+        createTravelData.endDate = endDate
     }
 }
