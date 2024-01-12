@@ -340,9 +340,7 @@ private extension MakeProfileViewController {
                 guard let error = error as? NetworkError else { return }
                 handleError(error)
             }
-            print("1123123123123123123123123")
         }
-        print("44141444444444444444444444")
 //        let nextVC = UserTestSplashViewController()
 //        self.navigationController?.pushViewController(nextVC, animated: true)
     }
