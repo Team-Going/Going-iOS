@@ -223,7 +223,9 @@ private extension OurToDoViewController {
     func setData() {
         self.ourToDoData = OurToDoData.ourToDoData
         headerData = toHeaderAppData()
+
         todoData = toToDoAppData()
+        self.tripMiddleView.friendProfile = headerData?.participants ?? []
     }
     
     func setDelegate() {

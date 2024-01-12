@@ -5,7 +5,7 @@ final class ToDoService: Serviceable {
     private init() {}
     
     func getToDoData(tripId: Int) async throws -> ToDoAppData {
-        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)/todos", httpMethod: .get).makeURLRequest()
+        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)/todos", httpMethod: .get).makeURLRequest(networkType: .withJWT)
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
