@@ -135,6 +135,10 @@
 		F4FE6B942B50863D009C935E /* SocialPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B932B50863D009C935E /* SocialPlatform.swift */; };
 		F4FE6B982B508B95009C935E /* OurToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B962B508B3F009C935E /* OurToDoService.swift */; };
 		F4FE6B9C2B508C2C009C935E /* MyToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B9A2B508BFB009C935E /* MyToDoService.swift */; };
+		F4FE6B9E2B50AAE2009C935E /* SignUpRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B9D2B50AAE2009C935E /* SignUpRequestDTO.swift */; };
+		F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */; };
+		F4FE6BA32B50AF26009C935E /* UserProfileAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BA22B50AF26009C935E /* UserProfileAppData.swift */; };
+		F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BA42B50B401009C935E /* IsAppleLogined.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -278,6 +282,10 @@
 		F4FE6B932B50863D009C935E /* SocialPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialPlatform.swift; sourceTree = "<group>"; };
 		F4FE6B962B508B3F009C935E /* OurToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurToDoService.swift; sourceTree = "<group>"; };
 		F4FE6B9A2B508BFB009C935E /* MyToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoService.swift; sourceTree = "<group>"; };
+		F4FE6B9D2B50AAE2009C935E /* SignUpRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDTO.swift; sourceTree = "<group>"; };
+		F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseDTO.swift; sourceTree = "<group>"; };
+		F4FE6BA22B50AF26009C935E /* UserProfileAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAppData.swift; sourceTree = "<group>"; };
+		F4FE6BA42B50B401009C935E /* IsAppleLogined.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsAppleLogined.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -753,6 +761,7 @@
 		F4BA26F32B45597600975CC2 /* MakeProfile */ = {
 			isa = PBXGroup;
 			children = (
+				F4FE6BA12B50AEEF009C935E /* Models */,
 				F485D4902B47DDBE007317F4 /* ViewControllers */,
 			);
 			path = MakeProfile;
@@ -853,6 +862,7 @@
 			isa = PBXGroup;
 			children = (
 				F4F5218B2B346373000E6E1E /* UserDefaultToken.swift */,
+				F4FE6BA42B50B401009C935E /* IsAppleLogined.swift */,
 			);
 			path = UserDefault;
 			sourceTree = "<group>";
@@ -1090,6 +1100,7 @@
 			isa = PBXGroup;
 			children = (
 				F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */,
+				F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1098,6 +1109,7 @@
 			isa = PBXGroup;
 			children = (
 				F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */,
+				F4FE6B9D2B50AAE2009C935E /* SignUpRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1109,6 +1121,14 @@
 				CA3EEE402B50258700C23A41 /* OurToDoService.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		F4FE6BA12B50AEEF009C935E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F4FE6BA22B50AF26009C935E /* UserProfileAppData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1211,6 +1231,7 @@
 				F4FE6B922B50861A009C935E /* LoginType.swift in Sources */,
 				CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */,
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
+				F4FE6B9E2B50AAE2009C935E /* SignUpRequestDTO.swift in Sources */,
 				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
 				F44D98602B4EB70500341893 /* HTTPHeaderField.swift in Sources */,
@@ -1289,6 +1310,7 @@
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,
 				F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */,
 				F44D98622B4EB72300341893 /* NetworkError.swift in Sources */,
+				F4FE6BA32B50AF26009C935E /* UserProfileAppData.swift in Sources */,
 				94C7DDBC2B4CA08800541567 /* DOONavigationBar.swift in Sources */,
 				CA3EEE442B50276500C23A41 /* GetOurToDoResponseDTO.swift in Sources */,
 				9478E53C2B4EFCB90027606D /* MyProfileViewController.swift in Sources */,
@@ -1306,7 +1328,9 @@
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
 				F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
+				F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */,
 				94747F592B4FE13400510226 /* OurTestResultView.swift in Sources */,
+				F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
 				94747F5B2B4FE15C00510226 /* TestProgressView.swift in Sources */,
 				F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */,
