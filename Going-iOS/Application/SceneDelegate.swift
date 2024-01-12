@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 2.
         self.window = UIWindow(windowScene: windowScene)
         // 3.
-        let navigationController = UINavigationController(rootViewController: UserTestViewController())
+        let navigationController = UINavigationController(rootViewController: JoinTravelViewController())
         self.window?.rootViewController = navigationController
         navigationController.isNavigationBarHidden = true
         // 4.
@@ -39,16 +39,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
+        
+        //자동로그인
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         appleIDProvider.getCredentialState(forUserID: "여기에 credential.user 넣기") { (credentialState, error) in
             switch credentialState {
             case .authorized:
                 print("authorized")
-                // The Apple ID credential is valid.
-                //                   DispatchQueue.main.async {
-                //                     //authorized된 상태이므로 바로 로그인 완료 화면으로 이동
-                //                     self.window?.rootViewController = ViewController()
-                //                   }
+                //The Apple ID credential is valid.
+                DispatchQueue.main.async {
+                //authorized된 상태이므로 바로 로그인 완료 화면으로 이동
+//                    self.window?.rootViewController = ViewController()
+                }
             case .revoked:
                 print("revoked")
             case .notFound:

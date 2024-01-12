@@ -13,16 +13,18 @@ struct NetworkRequest {
     let query: Request?
     let body: Data?
     let header: [String: String]?
+    let token: String?
 
-    init(path: String, httpMethod: HttpMethod, query: Request? = nil, body: Data? = nil, header: [String : String]? = nil) {
+    init(path: String, httpMethod: HttpMethod, query: Request? = nil, body: Data? = nil, header: [String : String]? = nil, token: String? = "") {
         self.path = path
         self.httpMethod = httpMethod
         self.query = query
         self.body = body
         self.header = header
+        self.token = token
     }
 
-    func makeURLRequest() throws -> URLRequest {
+    func makeURLRequest(networkType: LoginType) throws -> URLRequest {
         var urlComponents = URLComponents(string: Config.baseURL)
 
         //Service객체에서 바디나 쿼리가 필요하면 아래와 같이 사용
@@ -56,14 +58,21 @@ struct NetworkRequest {
         var urlRequest = URLRequest(url: urlRequestURL)
         urlRequest.httpMethod = self.httpMethod.rawValue
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
-
-//        if isLogined {
-//            guard let token = UserDefaultsManager.tokenKey?.accessToken else {
-//                throw NetworkError.clientError(code: "", message: "알 수 없는 에러: 회원가입까지 마쳤는데 JWT가 저장되있지 않는 상태")
-//            }
-//            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
-//        }
-
+        
+        switch networkType {
+        case .withJWT:
+            guard let token = UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) else {  throw NetworkError.clientError(message: "AccessToken 없음") }
+            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
+            
+        case .withRefresh:
+            guard let token = UserDefaults.standard.string(forKey: UserDefaultToken.refreshToken.rawValue) else {  throw NetworkError.clientError(message: "RefreshToken 없음") }
+            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
+            
+        case .withSocialToken:
+            guard let token = self.token else { throw NetworkError.clientError(message: "kakaoToken 없음") }
+            urlRequest.setValue("\(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
+        }
+    
         urlRequest.httpBody = self.body
 
         return urlRequest

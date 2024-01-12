@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct BaseResponse<T: Response>: Response {
-    let status: String
-    let message: String
+struct BaseResponse<T: Response>: Response, DTO {
+    let status: Int
     let code: String
+    let message: String
     let data: T?
 }

@@ -27,12 +27,9 @@ extension Serviceable {
         print("✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨")
         dump(model)
         
-        let statucCode = model.status
-        let code = model.code
+        print(model.message)
+        print(model.status)
         
-        if code == "e500" {
-            throw NetworkError.serverError
-        }
 
 //        let statusCode = model.code
 //        guard !NetworkErrorCode.clientErrorCode.contains(statusCode) else {
