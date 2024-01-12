@@ -74,15 +74,14 @@ private extension SplashViewController {
 
 extension SplashViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
+        
+        //프로필생성뷰
         if error.description == "e4041" {
-            
-            //프로필생성뷰
             let nextVC = MakeProfileViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
             
-        } else if error.description == "e4045" {
-            
             //성향테스트스플래시뷰
+        } else if error.description == "e4045" {
             let nextVC = UserTestSplashViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
             
