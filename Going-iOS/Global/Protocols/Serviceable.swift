@@ -29,19 +29,24 @@ extension Serviceable {
        
         let code = model.code
         let message = model.message
+       
+        print(code)
+        print(message)
         
         //4041일때는 프로필 생성뷰로
         //4045일때는 성향테스트스플래시뷰로
 //        if code == "e4041" || code == "e4045"{
 //            throw NetworkError.userState(code: code, message: message)
         
-        if code == "e4041" || code == "e4045" {
+        if code == "e4041" || code == "e4045" || code == "e4043" {
             throw NetworkError.userState(code: code)
         }
 
-        if code != "s2000" {
-            throw NetworkError.userState(code: code)
-        }
+//        if code != "s2000" || code != "s2010"{
+//            throw NetworkError.userState(code: code)
+//        }
+        
+        
 //        let statusCode = model.code
 //        guard !NetworkErrorCode.clientErrorCode.contains(statusCode) else {
 //            throw NetworkError.clientError(code: model.code, message: model.message)
