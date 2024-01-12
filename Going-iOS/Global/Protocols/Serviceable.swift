@@ -21,16 +21,27 @@ extension Serviceable {
     func dataDecodeAndhandleErrorCode<T: Response>(data: Data, decodeType: T.Type) throws -> T? {
 
         guard let model = try? JSONDecoder().decode(BaseResponse<T>.self, from: data) else {
+            print("dddddddddddddddddddddddd")
             throw NetworkError.jsonDecodingError
         }
 
         print("✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨")
-        dump(model)
+       
+        let code = model.code
+        let message = model.message
         
-        print(model.message)
-        print(model.status)
+        //4041일때는 프로필 생성뷰로
+        //4045일때는 성향테스트스플래시뷰로
+//        if code == "e4041" || code == "e4045"{
+//            throw NetworkError.userState(code: code, message: message)
         
+        if code == "e4041" || code == "e4045" {
+            throw NetworkError.userState(code: code)
+        }
 
+        if code != "s2000" {
+            throw NetworkError.userState(code: code)
+        }
 //        let statusCode = model.code
 //        guard !NetworkErrorCode.clientErrorCode.contains(statusCode) else {
 //            throw NetworkError.clientError(code: model.code, message: model.message)
@@ -40,7 +51,6 @@ extension Serviceable {
 //            throw NetworkError.serverError
 //        }
         print("✅✅✅✅✅✅✅✅✅✅✅✅✅원래 API호출성공✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
-        print(model.data)
         return model.data
     }
 }
