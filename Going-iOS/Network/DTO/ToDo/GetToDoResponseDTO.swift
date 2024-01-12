@@ -15,8 +15,10 @@ struct GetToDoResponseDTO: DTO, Response {
 }
 
 struct Allocators: DTO, Response {
-    let name: String
-    let isOwner: Bool
+    var name: String
+    var isOwner: Bool
+    
+    static let EmptyData = Allocators(name: "나만 볼 수 있는 할일이에요", isOwner: false)
 }
 
 extension GetToDoResponseDTO {

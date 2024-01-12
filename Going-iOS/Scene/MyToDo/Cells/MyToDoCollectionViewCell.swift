@@ -214,7 +214,8 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
         if isComplete == true {
             managerCell.changeLabelColor(color: .gray300)
         }else{
-            if self.manager[indexPath.row].isOwner {
+            // owner
+            if manager[indexPath.row].isOwner {
                 if self.myToDoData?.secret == true {
                     managerCell.changeLabelColor(color: .gray400)
                 }else {

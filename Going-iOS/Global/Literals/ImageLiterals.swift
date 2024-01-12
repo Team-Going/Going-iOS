@@ -58,6 +58,7 @@ enum ImageLiterals {
         static var enabledDropdown: UIImage { .load(named: "enabled_ic_dropdown") }
         static var disabledDropdown: UIImage { .load(named: "disabled_ic_dropdown") }
         static var tappedDropdown: UIImage { .load(named: "tap_ic_dropdown") }
+        static var orangeLock: UIImage { .load(named: "ic_lock") }
     }
     
     enum MyToDo {

@@ -71,20 +71,26 @@ final class ToDoViewController: UIViewController {
     
     // MARK: - Properties
     
+    lazy var beforeVC: String = ""
     lazy var navigationBarTitle: String = ""
-    lazy var manager: [Manager] = []
-    private var getToDoData: ToDoData?
+    lazy var manager: [Allocators] = []
+    private var getToDoData: DetailToDoAppData?
     private var memoTextviewPlaceholder: String = ""
     private var todoTextfieldPlaceholder: String = ""
-    private var saveToDoData: ToDoData?
-    var data: ToDoData? {
+    private var saveToDoData: DetailToDoAppData?
+    var data: DetailToDoAppData? {
         didSet {
             guard let data else {return}
             self.getToDoData = data
-            todoTextfield.text = self.getToDoData?.todo
-            deadlineTextfieldLabel.text = self.getToDoData?.deadline
-            manager = self.getToDoData?.manager ?? []
-            memoTextView.text = self.getToDoData?.memo
+            todoTextfield.text = data.title
+            deadlineTextfieldLabel.text = data.endDate
+            manager = data.allocators
+            if data.secret == true {
+                manager[0].name = "혼자할일"
+                manager.append(Allocators.EmptyData)
+            }
+            memoTextView.text = data.memo
+            print(manager)
         }
     }
     var setDefaultValue: [Any]? {
@@ -93,7 +99,7 @@ final class ToDoViewController: UIViewController {
             todoTextfieldPlaceholder = value[0] as! String
             todoTextfield.placeholder = todoTextfieldPlaceholder
             deadlineTextfieldLabel.text = value[1] as? String
-            manager = value[2] as! [Manager]
+            manager = value[2] as! [Allocators]
             memoTextviewPlaceholder = value[3] as! String
             memoTextView.text = memoTextviewPlaceholder
         }
@@ -147,7 +153,7 @@ final class ToDoViewController: UIViewController {
         if isActivateView {
             changeButtonConfig(isSelected: sender.isSelected, btn: sender)
             sender.isSelected = sender.isSelected ? false : true
-            manager[sender.tag].isManager = sender.isSelected ? true : false
+            manager[sender.tag].isOwner = sender.isSelected ? true : false
         }
     }
     
@@ -157,9 +163,9 @@ final class ToDoViewController: UIViewController {
         let todo = todoTextfield.text ?? ""
         let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해주세요." ? "" : deadlineTextfieldLabel.text) ?? ""
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
-        print(deadline)
+        let secret = beforeVC == "our" ? false : true
         if !todo.isEmpty && !deadline.isEmpty{
-            self.saveToDoData = ToDoData(todo: todo, deadline: deadline, manager: manager, memo: memo)
+            self.saveToDoData = DetailToDoAppData(title: todo, endDate: deadline, allocators: manager, memo: memo, secret: secret)
             self.navigationController?.popViewController(animated: false)
             DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
         }
@@ -284,7 +290,7 @@ private extension ToDoViewController {
             setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager , "메모를 입력해주세요."]
         case "조회": 
             navigationBarView.titleLabel.text = "할일 조회"
-            setDefaultValue = ["조회", "조회", self.manager , "조회"]
+            setDefaultValue = [data?.title, data?.endDate, self.manager , data?.memo]
             setInquiryStyle()
         case "수정":
             navigationBarView.titleLabel.text = "할일 수정"
@@ -297,6 +303,7 @@ private extension ToDoViewController {
     func setDelegate() {
         todoTextfield.delegate = self
         todoManagerCollectionView.dataSource = self
+        todoManagerCollectionView.delegate = self
         memoTextView.delegate = self
         bottomSheetVC.delegate = self
         doubleButtonView.delegate = self
@@ -389,14 +396,79 @@ extension ToDoViewController: UICollectionViewDataSource{
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoManagerCollectionViewCell.identifier, for: indexPath) as? ToDoManagerCollectionViewCell else {return UICollectionViewCell()}
         
         let name = manager[indexPath.row].name
+        print("name \(name)")
+        managerCell.managerButton.isEnabled = true
         managerCell.managerButton.setTitle(name, for: .normal)
         managerCell.managerButton.tag = indexPath.row
         managerCell.managerButton.addTarget(self, action: #selector(didTapToDoManagerButton(_:)), for: .touchUpInside)
-        if manager[indexPath.row].isManager {
-            managerCell.managerButton.isSelected = true
-            managerCell.managerButton.setTitleColor(.white000, for: .normal)
-            managerCell.managerButton.backgroundColor = .red500
-            managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+        //아워투두 -> 조회
+        //다 선택된 옵션
+        //마이투두 -> 조회
+        //혼자할일 + 라벨
+        //아워투두
+        if beforeVC == "our" {
+            //조회
+            if isActivateView == false {
+                managerCell.managerButton.isSelected = true
+                managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                if manager[indexPath.row].isOwner {
+                    managerCell.managerButton.backgroundColor = .red500
+                    managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+                } else {
+                    managerCell.managerButton.backgroundColor = .gray400
+                    managerCell.managerButton.layer.borderColor = UIColor.gray400.cgColor
+                }
+            } // 추가
+            else {
+                managerCell.managerButton.backgroundColor = .white000
+                managerCell.managerButton.setTitleColor(.gray300, for: .normal)
+                managerCell.managerButton.layer.borderColor = UIColor.gray300.cgColor
+            }
+        }// 마이투두
+        else {
+            // 조회
+            if isActivateView == false {
+                managerCell.managerButton.isSelected = true
+                // 혼자 할 일
+                if data?.secret == true {
+                    //설명라벨 세팅
+                    if manager[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
+                        managerCell.managerButton.isEnabled = false
+                        managerCell.managerButton.backgroundColor = .white000
+                        managerCell.managerButton.layer.borderColor = UIColor.white000.cgColor
+
+                        managerCell.managerButton.setTitleColor(.gray200, for: .normal)
+                    } else {
+                        managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
+                        managerCell.managerButton.setTitleColor(.red500, for: .normal)
+                        managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+                        managerCell.managerButton.backgroundColor = .white000
+                    }
+                } else{
+                    managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                    if manager[indexPath.row].isOwner { //owner
+                        managerCell.managerButton.backgroundColor = UIColor.red500
+                        managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+                    }else {
+                        managerCell.managerButton.backgroundColor = UIColor.gray400
+                        managerCell.managerButton.layer.borderColor = UIColor.gray400.cgColor
+                    }
+                }
+            }// 추가
+            else {
+                //설명라벨 세팅
+                if manager[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
+                    managerCell.managerButton.isEnabled = true
+                    managerCell.managerButton.backgroundColor = .white000
+                    managerCell.managerButton.layer.borderColor = UIColor.white000.cgColor
+                    managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                } else {
+                    managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
+                    managerCell.managerButton.setTitleColor(.red500, for: .normal)
+                    managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+                    managerCell.managerButton.backgroundColor = .white000
+                }
+            }
         }
         return managerCell
     }
@@ -493,4 +565,19 @@ extension ToDoViewController: DoubleButtonDelegate {
         DOOToast.show(message: "할일이 삭제되었어요.", insetFromBottom: ScreenUtils.getHeight(107))
     }
     
+}
+
+extension ToDoViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
+
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
+//        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
+        
+        let stringLength = data?.secret == true
+        ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
+        : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
+        return CGSize(width: stringLength + ScreenUtils.getWidth(12), height: ScreenUtils.getHeight(20))
+    }
 }

@@ -83,7 +83,8 @@ final class OurToDoViewController: UIViewController {
     var ourToDoData: OurToDoData?
     var incompletedData: [ToDoAppData] = []
     var completedData: [ToDoAppData] = []
-
+    var detailToDoData: DetailToDoAppData = DetailToDoAppData.EmptyData
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -241,16 +242,19 @@ private extension OurToDoViewController {
     }
     
     /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
-    func setToDoView(naviBarTitle: String, isActivate: Bool) {
-        var manager: [Manager] = []
-        for friendProfile in self.tripMiddleView.friendProfile {
-            manager.append(Manager(name: friendProfile.name, isManager: false))
-        }
-        
+    func setToDoView(before: String , naviBarTitle: String, isActivate: Bool) {
+//        var manager: [Allocators] = []
+//        for friendProfile in self.tripMiddleView.friendProfile {
+//            manager.append(Manager(name: friendProfile.name, isManager: false))
+//        }
+//        
+        detailToDoData = toDetailAppData()
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
-        todoVC.manager = manager
+        todoVC.data = detailToDoData
+        todoVC.manager = detailToDoData.allocators
         todoVC.isActivateView = isActivate
+        todoVC.beforeVC = before
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
@@ -301,6 +305,10 @@ private extension OurToDoViewController {
         return ToDoAppData.dummy()
     }
     
+    func toDetailAppData() -> DetailToDoAppData {
+        return DetailToDoAppData.dummy()
+    }
+    
     // MARK: - objc method
     
     @objc
@@ -311,12 +319,13 @@ private extension OurToDoViewController {
     // TODO: - 아이디 값으로 본인 확인 필요
     @objc
     func pushToAddToDoView() {
-        setToDoView(naviBarTitle: "추가", isActivate: true)
+        setToDoView(before: "our" , naviBarTitle: "추가", isActivate: true)
     }
 
     @objc
     func pushToInquiryToDoVC() {
-        setToDoView(naviBarTitle: "조회", isActivate: false)
+        
+        setToDoView(before: "our" , naviBarTitle: "조회", isActivate: false)
     }
 
     @objc
@@ -359,7 +368,7 @@ extension OurToDoViewController: UIScrollViewDelegate {
 
 extension OurToDoViewController: OurToDoCollectionViewDelegate {
     func pushToToDo() {
-        setToDoView(naviBarTitle: "조회", isActivate: false)
+        setToDoView(before: "our" , naviBarTitle: "조회", isActivate: false)
     }
 }
 

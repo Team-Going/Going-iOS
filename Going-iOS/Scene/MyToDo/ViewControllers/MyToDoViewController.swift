@@ -12,22 +12,7 @@ import SnapKit
 final class MyToDoViewController: UIViewController {
 
     // MARK: - UI Property
-    
-    private var headerData: MyToDoHeaderAppData? {
-        didSet {
-            guard let data = headerData else { return }
-            print("data \(data)")
-            self.tripHeaderView.myToDoHeaderData = [data.name, "\(data.count)"]
-        }
-    }
-    
-    private var todoData: [ToDoAppData]? {
-        didSet {
-            guard let data = todoData else { return }
-            incompletedData = data
-            completedData = data
-        }
-    }
+
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .myToDo, backgroundColor: .gray50)
     private let tripHeaderView = TripHeaderView()
@@ -89,7 +74,22 @@ final class MyToDoViewController: UIViewController {
     var myToDoData: MyToDoData?
     var incompletedData: [ToDoAppData] = []
     var completedData: [ToDoAppData] = []
-    
+    var detailToDoData: DetailToDoAppData = DetailToDoAppData.EmptyData
+    private var headerData: MyToDoHeaderAppData? {
+        didSet {
+            guard let data = headerData else { return }
+            print("data \(data)")
+            self.tripHeaderView.myToDoHeaderData = [data.name, "\(data.count)"]
+        }
+    }
+    private var todoData: [ToDoAppData]? {
+        didSet {
+            guard let data = todoData else { return }
+            incompletedData = data
+            completedData = data
+        }
+    }
+
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -99,7 +99,7 @@ final class MyToDoViewController: UIViewController {
         setHierachy()
         setDelegate()
 //        getMyToDoHeaderData()
-        toHeaderAppData()
+//        toHeaderAppData()
         setData()
         registerCell()
         setLayout()
@@ -228,17 +228,14 @@ private extension MyToDoViewController {
     }
     
     /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
-    func setToDoView(naviBarTitle: String, isActivate: Bool) {
-        var manager: [Manager] = []
-        let todoData = ToDoData.todoData
-        for friendProfile in todoData.manager {
-            manager.append(Manager(name: friendProfile.name, isManager: false))
-        }
-        
+    func setToDoView(before: String, naviBarTitle: String, isActivate: Bool) {
+        detailToDoData = toDetailAppData()
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
-        todoVC.manager = manager
         todoVC.isActivateView = isActivate
+        todoVC.data = detailToDoData
+//        todoVC.manager = detailToDoData.allocators
+        todoVC.beforeVC = before
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
@@ -298,13 +295,17 @@ private extension MyToDoViewController {
         return dummy
     }
     
+    func toDetailAppData() -> DetailToDoAppData {
+        return DetailToDoAppData.dummy()
+    }
+    
     // MARK: - objc Method
 
     //TODO: - 서버통신 데이터 수정 필요
 
     @objc
     func pushToAddToDoView(_ sender: UITapGestureRecognizer) {
-        setToDoView(naviBarTitle: StringLiterals.ToDo.add, isActivate: true)
+        setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.add, isActivate: true)
     }
     
     @objc
@@ -323,7 +324,7 @@ private extension MyToDoViewController {
     
     @objc
     func pushToInquiryToDo() {
-        setToDoView(naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
+        setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
     }
 }
 
@@ -356,7 +357,7 @@ extension MyToDoViewController: UIScrollViewDelegate {
 
 extension MyToDoViewController: MyToDoCollectionViewDelegate {
     func pushToToDo() {
-        setToDoView(naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
+        setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
     }
     
     func getButtonIndex(index: Int, image: UIImage) {

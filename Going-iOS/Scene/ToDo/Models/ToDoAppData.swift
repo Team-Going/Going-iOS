@@ -25,7 +25,7 @@ extension ToDoAppData {
                   allocators: [
                     .init(name: "희슬", isOwner: true),
                     .init(name: "희슬1", isOwner: false),
-                    .init(name: "희슬2", isOwner: false),
+                    .init(name: "희슬2", isOwner: true),
                     .init(name: "희슬3", isOwner: false),
                   ],
                   secret: false),

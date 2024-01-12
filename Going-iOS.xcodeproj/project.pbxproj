@@ -47,6 +47,8 @@
 		CA3EEE442B50276500C23A41 /* GetOurToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE432B50276500C23A41 /* GetOurToDoResponseDTO.swift */; };
 		CA3EEE502B5073D300C23A41 /* ToDoAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE4F2B5073D300C23A41 /* ToDoAppData.swift */; };
 		CA3EEE532B50740000C23A41 /* GetToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE522B50740000C23A41 /* GetToDoResponseDTO.swift */; };
+		CA3EEE552B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */; };
+		CA3EEE572B50B0B600C23A41 /* DetailToDoAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
 		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
@@ -188,6 +190,8 @@
 		CA3EEE432B50276500C23A41 /* GetOurToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOurToDoResponseDTO.swift; sourceTree = "<group>"; };
 		CA3EEE4F2B5073D300C23A41 /* ToDoAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoAppData.swift; sourceTree = "<group>"; };
 		CA3EEE522B50740000C23A41 /* GetToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetToDoResponseDTO.swift; sourceTree = "<group>"; };
+		CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDetailToDoResponseDTO.swift; sourceTree = "<group>"; };
+		CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailToDoAppData.swift; sourceTree = "<group>"; };
 		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -534,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				CA3EEE522B50740000C23A41 /* GetToDoResponseDTO.swift */,
+				CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 			children = (
 				CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */,
 				CA3EEE4F2B5073D300C23A41 /* ToDoAppData.swift */,
+				CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1211,6 +1217,7 @@
 				F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */,
 				F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */,
 				CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */,
+				CA3EEE552B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift in Sources */,
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
 				F44D98662B4EB7F700341893 /* NetworkRequest.swift in Sources */,
 				F44D985E2B4EB6E000341893 /* HTTPMethod.swift in Sources */,
@@ -1262,6 +1269,7 @@
 				9478E53C2B4EFCB90027606D /* MyProfileViewController.swift in Sources */,
 				CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */,
 				946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */,
+				CA3EEE572B50B0B600C23A41 /* DetailToDoAppData.swift in Sources */,
 				CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */,
 				9457F0552B485A68009ACF25 /* TravelTestCollectionViewCell.swift in Sources */,
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
