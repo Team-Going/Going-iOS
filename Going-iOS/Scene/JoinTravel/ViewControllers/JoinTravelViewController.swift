@@ -14,6 +14,10 @@ final class JoinTravelViewController: UIViewController {
     // TODO: - Dummy Data 생성
     
     // MARK: - UI Properties
+    
+    private var codeCheckRequestDTO = CodeRequestDTO(code: "")
+    
+    private var codeCheckData: JoiningSuccessAppData? = nil
 
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
     private let navigationUnderlineView: UIView = {
@@ -35,10 +39,15 @@ final class JoinTravelViewController: UIViewController {
     }()
     
     private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/6")
+    private let warningLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red500, text:"잘못된 초대코드예요")
+        label.isHidden = true
+        return label
+    }()
     
     private lazy var nextButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")
-        btn.addTarget(self, action: #selector(pushToJoiningSuccessVC), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -79,6 +88,7 @@ private extension JoinTravelViewController {
                          navigationUnderlineView,
                          codeTitleLabel,
                          codeTextField,
+                         warningLabel,
                          characterCountLabel,
                          nextButton)
     }
@@ -106,6 +116,11 @@ private extension JoinTravelViewController {
             $0.top.equalTo(codeTitleLabel.snp.bottom).offset(8)
             $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.height.equalTo(ScreenUtils.getHeight(48))
+        }
+        
+        warningLabel.snp.makeConstraints {
+            $0.top.equalTo(codeTextField.snp.bottom).offset(4)
+            $0.leading.equalTo(codeTextField.snp.leading).offset(4)
         }
         
         characterCountLabel.snp.makeConstraints {
@@ -171,9 +186,20 @@ private extension JoinTravelViewController {
     }
     
     @objc
-    func pushToJoiningSuccessVC() {
-        let vc = JoiningSuccessViewController()
-        navigationController?.pushViewController(vc, animated: true)
+    func nextButtonTapped() {
+        guard let text = codeTextField.text else { return }
+        codeCheckRequestDTO.code = text
+        checkCode()
+        
+        if codeCheckData == nil {
+            codeTextField.layer.borderColor = UIColor.red500.cgColor
+            warningLabel.isHidden = false
+            characterCountLabel.textColor = .red500
+        } else {
+            let vc = JoiningSuccessViewController()
+            vc.joinSuccessData = codeCheckData
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -188,17 +214,38 @@ extension JoinTravelViewController: UITextFieldDelegate {
             textField.layer.borderColor =  UIColor.gray200.cgColor
             characterCountLabel.textColor = .gray200
             characterCountLabel.text = "\(newLength)/" + "\(maxLength)"
+            warningLabel.isHidden = true
         } else if newLength < maxLength + 1 {
             textField.layer.borderColor =  UIColor.gray700.cgColor
             characterCountLabel.textColor = .gray700
             characterCountLabel.text = "\(newLength)/" + "\(maxLength)"
+            warningLabel.isHidden = true
         }
         return  !(newLength > maxLength)
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField == codeTextField {
-            updateNextButtonState()
+        updateNextButtonState()
+    }
+}
+
+extension JoinTravelViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
+        print(error)
+    }
+}
+
+extension JoinTravelViewController {
+    func checkCode() {
+        Task {
+            do {
+                let joiningSuccessData = try await TravelService.shared.postInviteCode(code: codeCheckRequestDTO)
+                self.codeCheckData = joiningSuccessData
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
         }
     }
 }

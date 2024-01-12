@@ -21,7 +21,7 @@ struct Participant: DTO, Response {
 }
 
 extension GetOurToDoResponseDTO {
-//    func toAppData() -> OurToDoHeaderAppData {
-//        return OurToDoHeaderAppData(title: self.title, day: self.day, startDate: self.startDate, endDate: self.endDate, progress: self.progress, participants: self.participants)
-//    }
+    func toAppData() -> OurToDoHeaderAppData {
+        return OurToDoHeaderAppData(title: self.title, day: self.day, startDate: self.startDate, endDate: self.endDate, progress: self.progress, participants: self.participants)
+    }
 }
