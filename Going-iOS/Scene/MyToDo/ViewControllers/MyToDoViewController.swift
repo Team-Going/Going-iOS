@@ -71,7 +71,7 @@ final class MyToDoViewController: UIViewController {
     // MARK: - Properties
     
     private var index: Int = 0
-    var myToDoData: MyToDoData?
+//    var myToDoData: [ToDoAppData]?
     var incompletedData: [ToDoAppData] = []
     var completedData: [ToDoAppData] = []
     var detailToDoData: DetailToDoAppData = DetailToDoAppData.EmptyData
@@ -98,9 +98,9 @@ final class MyToDoViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         setHierachy()
         setDelegate()
-//        getMyToDoHeaderData()
+        getMyToDoHeaderData()
+        getToDoData(progress: "incomplete")
 //        toHeaderAppData()
-        setData()
         registerCell()
         setLayout()
         setStyle()
@@ -182,12 +182,7 @@ private extension MyToDoViewController {
         tripHeaderView.isUserInteractionEnabled = true        
     }
     
-    func setData() {
-        self.myToDoData = MyToDoData.myToDoData
-        headerData = toHeaderAppData()
-        todoData = toToDoAppData()
-        tripHeaderView.myToDoHeaderData = [headerData?.name ?? "", String(headerData?.count ?? 0)]
-    }
+
     
     func setDelegate() {
         self.scrollView.delegate = self
@@ -217,6 +212,8 @@ private extension MyToDoViewController {
     }
     
     func loadData() {
+        let progress = self.myToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 ? "incomplete" : "complete"
+        getToDoData(progress: progress)
         // 데이터 로드 후에 호출되는 메서드 또는 클로저에서
         self.myToDoCollectionView.reloadData()
         myToDoCollectionView.layoutIfNeeded()
@@ -229,7 +226,8 @@ private extension MyToDoViewController {
     
     /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
     func setToDoView(before: String, naviBarTitle: String, isActivate: Bool) {
-        detailToDoData = toDetailAppData()
+//        detailToDoData = toDetailAppData()
+        getDetailToDoData()
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
         todoVC.isActivateView = isActivate
@@ -260,7 +258,7 @@ private extension MyToDoViewController {
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
     func setEmptyView() {
-        if self.myToDoData?.myToDo.isEmpty ?? true {
+        if self.todoData?.isEmpty ?? true {
             emptyView.snp.makeConstraints {
                 $0.top.equalTo(myToDoHeaderView.snp.bottom)
                 $0.bottom.equalTo(contentView)
@@ -285,19 +283,19 @@ private extension MyToDoViewController {
         }
     }
     
-    func toHeaderAppData() -> MyToDoHeaderAppData {
-        let dummy = MyToDoHeaderAppData.dummy()
-        return dummy
-    }
+//    func toHeaderAppData() -> MyToDoHeaderAppData {
+//        let dummy = MyToDoHeaderAppData.dummy()
+//        return dummy
+//    }
     
-    func toToDoAppData() -> [ToDoAppData] {
-        let dummy = ToDoAppData.dummy()
-        return dummy
-    }
+//    func toToDoAppData() -> [ToDoAppData] {
+//        let dummy = ToDoAppData.dummy()
+//        return dummy
+//    }
     
-    func toDetailAppData() -> DetailToDoAppData {
-        return DetailToDoAppData.dummy()
-    }
+//    func toDetailAppData() -> DetailToDoAppData {
+//        return DetailToDoAppData.dummy()
+//    }
     
     // MARK: - objc Method
 
@@ -438,6 +436,36 @@ extension MyToDoViewController {
             catch {
                 guard let error = error as? NetworkError else { return }
                 handlingError(error)
+                print("my header \(error)")
+            }
+        }
+    }
+    
+    func getToDoData(progress: String) {
+        Task {
+            do {
+                let myToDoData = try await ToDoService.shared.getToDoData(tripId: 1, category: "my", progress: progress)
+                todoData = myToDoData
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handlingError(error)
+                print("my todo \(error)")
+            }
+        }
+    }
+    
+    func getDetailToDoData() {
+        Task {
+            do {
+                let myDetailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: 1)
+                detailToDoData = myDetailToDoData
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handlingError(error)
+                print("my detail todo \(error)")
+
             }
         }
     }
