@@ -41,4 +41,27 @@ final class AuthService: Serviceable {
             return false
         }
     }
+    
+    func signUp(token: String, signUpBody: SignUpRequestDTO) async throws {
+        
+        let signUpDTO = signUpBody
+        let param = signUpDTO.toDictionary()
+        let body = try JSONSerialization.data(withJSONObject: param)
+        
+        let urlRequest = try NetworkRequest(path: "/api/users/signup", httpMethod: .post, body: body, token: token).makeURLRequest(networkType: .withSocialToken)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: SignUpResponseDTO.self) else { throw NetworkError.jsonDecodingError }
+        
+        let access = model.accessToken
+        let refresh = model.refreshToken
+        
+        //UserDefaults에 jwt토큰 저장
+        UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
+        UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
+        
+        print("회원가입성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                
+    }
 }

@@ -9,13 +9,9 @@ import UIKit
 
 import SnapKit
 
-//나중에 서버한테 넘겨줄 때
-struct UserProfileData {
-    var name: String
-    var description: String
-}
-
 final class MakeProfileViewController: UIViewController {
+    
+    private var userProfileData: UserProfileAppData?
     
     private let nameLabel = DOOLabel(font: .pretendard(.body2_bold),
                                      color: .gray700,
@@ -311,24 +307,50 @@ private extension MakeProfileViewController {
     
     @objc
     func nextButtonTapped() {
-        
-        //구조체에 넣어서 서버에 넘겨주기
-        var userData = UserProfileData(name: "", description: "")
-        
+                
         if let nameText = nameTextField.text {
-            userData.name = nameText
+            self.userProfileData?.name = nameText
         }
         
         if let descText = descTextField.text {
-            userData.description = descText
+            self.userProfileData?.intro = descText
         }
         
-        // userData를 출력 또는 다음 단계로 전달하는 등의 동작 수행
-        //        print(userData.name)
-        //        print(userData.description)
+        if UserDefaults.standard.bool(forKey: IsAppleLogined.isAppleLogin.rawValue) {
+            self.userProfileData?.platform = SocialPlatform.apple.rawValue
+        } else {
+            self.userProfileData?.platform = SocialPlatform.kakao.rawValue
+        }
+        
+        //회원가입API
+        guard let token = UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) else { return }
+        guard let signUpBody = self.userProfileData?.toDTOData() else { return }
+        
+        Task {
+            do {
+                let data = try await AuthService.shared.signUp(token: token, signUpBody: signUpBody)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+
         let nextVC = UserTestSplashViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
         
+    }
+}
+
+extension MakeProfileViewController: ViewControllerServiceable {
+    //추후에 에러코드에 따른 토스트 메세지 구현해야됨
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .clientError(let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
     }
 }
 

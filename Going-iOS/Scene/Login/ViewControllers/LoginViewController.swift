@@ -153,6 +153,7 @@ private extension LoginViewController {
             guard error == nil else { return }
             print("Login with KAKAO App Success !!")
             guard let oAuthToken = oAuthToken else { return }
+            UserDefaults.standard.set(false, forKey: IsAppleLogined.isAppleLogin.rawValue)
             self.socialType = .kakao
             self.socialToken = oAuthToken.accessToken
             
@@ -167,6 +168,7 @@ private extension LoginViewController {
                 return }
             print("Login with KAKAO Web Success !!")
             guard let oAuthToken = oAuthToken else { return }
+            UserDefaults.standard.set(false, forKey: IsAppleLogined.isAppleLogin.rawValue)
             self.socialType = .kakao
             self.socialToken = oAuthToken.accessToken
             
@@ -194,9 +196,6 @@ private extension LoginViewController {
         controller.presentationContextProvider = self
         controller.performRequests()
         
-        //뷰연결용
-        //        let nextVC = MakeProfileViewController()
-        //        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc
@@ -231,6 +230,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 DOOToast.show(message: "애플로그인에 실패하셨습니다.", insetFromBottom: 80)
                 return
             }
+            UserDefaults.standard.set(true, forKey: IsAppleLogined.isAppleLogin.rawValue)
             self.socialType = .apple
             self.socialToken = String(data: userIdentifier, encoding: .utf8)
             // .authorizationCode와 .identityToken은 Generate and valid tokens, revoke tokens에서 사용
