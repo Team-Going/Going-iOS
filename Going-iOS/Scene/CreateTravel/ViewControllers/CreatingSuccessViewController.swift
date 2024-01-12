@@ -28,6 +28,7 @@ final class CreatingSuccessViewController: UIViewController {
     private let ticketImage: UIImageView = {
         let img = UIImageView()
         img.image = ImageLiterals.CreateTravel.ticketLargeImage
+        img.isUserInteractionEnabled = true
         return img
     }()
     
@@ -165,7 +166,7 @@ private extension CreatingSuccessViewController {
         
         codeCopyButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(20)
-            $0.leading.equalToSuperview().inset(112)
+            $0.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(110))
             $0.height.equalTo(ScreenUtils.getHeight(20))
         }
