@@ -25,12 +25,15 @@ final class SplashViewController: UIViewController {
         setHierarchy()
         setLayout()
         
-        
-        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        checkUserStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         pushActionBasedOnPermission()
+
     }
 }
 
@@ -58,15 +61,54 @@ private extension SplashViewController {
             if UserDefaults.standard.bool(forKey: "photoPermissionKey") {
                 // 권한이 설정된 경우의 동작
                 print("설정 가능")
-                let nextVC = UserTestResultViewController()
-                self.navigationController?.pushViewController(nextVC, animated: true)
+
             } else {
                 // 권한이 거부된 경우의 동작
                 print("설정 불가능")
-                let nextVC = LoginViewController()
-                self.navigationController?.pushViewController(nextVC, animated: true)
+
             }
         }
        
+    }
+}
+
+extension SplashViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
+        if error.description == "e4041" {
+            
+            //프로필생성뷰
+            let nextVC = MakeProfileViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+        } else if error.description == "e4045" {
+            
+            //성향테스트스플래시뷰
+            let nextVC = UserTestSplashViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+        }
+    }
+}
+
+extension SplashViewController {
+    func checkUserStatus() {
+
+        guard UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) != nil else {
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            return
+        }
+        
+        Task {
+            do {
+                try await SplashService.shared.getSplashInfo()
+                let nextVC = DashBoardViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
     }
 }

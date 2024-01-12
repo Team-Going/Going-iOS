@@ -14,6 +14,7 @@ enum NetworkError: Error, CustomStringConvertible {
     case fetchImageError
     case clientError(message: String)
     case serverError
+    case userState(code: String)
     
     var description: String {
         switch self {
@@ -27,6 +28,8 @@ enum NetworkError: Error, CustomStringConvertible {
             return "📱클라이언트 에러 : \(message)"
         case .serverError:
             return "🖥️서버 에러"
+        case .userState(let code):
+            return "\(code)"
         }
     }
 }
