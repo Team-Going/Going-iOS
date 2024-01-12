@@ -8,6 +8,6 @@
 import Foundation
 
 struct CreateTravelRequestDTO: Request, DTO {
-    let title, startDate, endDate: String
-    let styleA, styleB, styleC, styleD, styleE: Int
+    var title, startDate, endDate: String
+    var styleA, styleB, styleC, styleD, styleE: Int
 }
