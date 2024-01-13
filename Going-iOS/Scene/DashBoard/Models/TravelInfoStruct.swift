@@ -38,12 +38,12 @@ extension TravelInfoStruct {
         ])
 }
 
-extension TravelDetailStruct {
+extension Trip {
     var travelStatus: String {
-        if dueDate == 0 {
+        if day == 0 {
             return "여행중"
-        } else if dueDate > 0 {
-            return "D-\(dueDate)"
+        } else if day > 0 {
+            return "D-\(day)"
         } else {
             return "여행종료"
         }
