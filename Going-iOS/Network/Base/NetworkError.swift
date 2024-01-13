@@ -16,6 +16,7 @@ enum NetworkError: Error, CustomStringConvertible {
     case serverError
     case unAuthorizedError
     case userState(code: String, message: String)
+    case reIssueJWT
     
     var description: String {
         switch self {
@@ -33,6 +34,8 @@ enum NetworkError: Error, CustomStringConvertible {
             return "code: \(code), userState: \(message)"
         case .unAuthorizedError:
             return "🚪 접근 권한이 없습니다 (토큰 만료)"
+        case .reIssueJWT:
+            return "JWT토큰을 재발급받으세요"
         }
     }
 }

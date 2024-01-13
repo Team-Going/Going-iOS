@@ -37,8 +37,14 @@ extension Serviceable {
             throw NetworkError.userState(code: code, message: message)
         }
         
+        //로그인으로
         guard !NetworkErrorCode.unAuthorized.contains(code) else {
             throw NetworkError.unAuthorizedError
+        }
+        
+        //그 뷰에서 JWT재발급
+        guard !NetworkErrorCode.reIssueJWT.contains(code) else {
+            throw NetworkError.reIssueJWT
         }
         
         guard !NetworkErrorCode.serverErrorCode.contains(code) else {
