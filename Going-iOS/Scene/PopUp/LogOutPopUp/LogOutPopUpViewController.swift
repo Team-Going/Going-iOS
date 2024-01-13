@@ -118,7 +118,6 @@ extension LogOutPopUpViewController {
             do {
                 try await AuthService.shared.patchLogout()
                 UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
-                print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 let nextVC = LoginViewController()
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
