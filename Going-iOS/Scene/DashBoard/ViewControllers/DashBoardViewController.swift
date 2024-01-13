@@ -11,8 +11,13 @@ class DashBoardViewController: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var travelListDummy = TravelInfoStruct.travelInfoDummy
-    private lazy var filteredTravelList: [TravelDetailStruct] = []
+    private var travelListDummy: DashBoardResponseSturct? {
+        didSet {
+            filterTravels()
+            setNaviTitle()
+        }
+    }
+    private lazy var filteredTravelList: [Trip] = []
     
     // MARK: - UI Properties
     
@@ -75,6 +80,10 @@ class DashBoardViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         setGradient()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getAllData()
+    }
 }
 
 // MARK: - Private Extension
@@ -120,11 +129,11 @@ private extension DashBoardViewController {
             $0.width.equalToSuperview()
         }
         
-//        dashBoardCollectionView.snp.makeConstraints {
-//            $0.top.equalTo(dashBoardHeaderView.snp.bottom)
-//            $0.leading.trailing.equalToSuperview()
-//            $0.bottom.equalTo(createTravelButton.snp.top)
-//        }
+        dashBoardCollectionView.snp.makeConstraints {
+            $0.top.equalTo(dashBoardHeaderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(createTravelButton.snp.top)
+        }
         
         createTravelButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -153,7 +162,8 @@ private extension DashBoardViewController {
     }
     
     func setNaviTitle() {
-        self.navigationTitle.text = travelListDummy.userName + "님의 여행"
+        guard let travelListDummy else { return }
+        self.navigationTitle.text = travelListDummy.name + "님의 여행"
     }
     
     func setCollectionView() {
@@ -172,7 +182,8 @@ private extension DashBoardViewController {
     }
     
     func setNoDataView() {
-        if travelListDummy.detailInfos.isEmpty {
+        guard let travelListDummy else { return }
+        if travelListDummy.trips.isEmpty {
             noDataview.snp.makeConstraints {
                 $0.top.equalTo(dashBoardHeaderView.snp.bottom)
                 $0.leading.trailing.equalToSuperview()
@@ -207,14 +218,16 @@ private extension DashBoardViewController {
 
     @objc
     func didChangeValue(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            // 진행 중인 여행 필터링
-            filteredTravelList = travelListDummy.detailInfos.filter { $0.dueDate >= 0}
-        } else {
-            // 완료된 여행 필터링
-            filteredTravelList = travelListDummy.detailInfos.filter { $0.dueDate < 0}
-        }
-        dashBoardCollectionView.reloadData()
+        getAllData()
+//        guard let travelListDummy else { return }
+//        if sender.selectedSegmentIndex == 0 {
+//            // 진행 중인 여행 필터링
+//            filteredTravelList = travelListDummy.trips.filter { $0.day >= 0}
+//        } else {
+//            // 완료된 여행 필터링
+//            filteredTravelList = travelListDummy.trips.filter { $0.day < 0}
+//        }
+//        dashBoardCollectionView.reloadData()
     }
     
     @objc
@@ -255,5 +268,27 @@ extension DashBoardViewController: UICollectionViewDelegateFlowLayout {
     /// content margin
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24)
+    }
+}
+
+private extension DashBoardViewController {
+    func getAllData() {
+        Task {
+            do {
+                self.travelListDummy = try await TravelService.shared.getAllTravel(status: dashBoardHeaderView.segmentedControl.selectedSegmentIndex == 0 ? "incomplete" : "complete")
+            }
+        }
+    }
+    
+    func filterTravels() {
+        guard let travelListDummy else { return }
+        if dashBoardHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            // 진행 중인 여행 필터링
+            filteredTravelList = travelListDummy.trips.filter { $0.day >= 0}
+        } else {
+            // 완료된 여행 필터링
+            filteredTravelList = travelListDummy.trips.filter { $0.day < 0}
+        }
+        dashBoardCollectionView.reloadData()
     }
 }
