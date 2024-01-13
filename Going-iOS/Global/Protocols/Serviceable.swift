@@ -21,35 +21,36 @@ extension Serviceable {
     func dataDecodeAndhandleErrorCode<T: Response>(data: Data, decodeType: T.Type) throws -> T? {
 
         guard let model = try? JSONDecoder().decode(BaseResponse<T>.self, from: data) else {
-            print("dddddddddddddddddddddddd")
             throw NetworkError.jsonDecodingError
         }
-
+        
         print("✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨")
        
         let code = model.code
         let message = model.message
+                
+        guard !NetworkErrorCode.clientErrorCode.contains(code) else {
+            throw NetworkError.clientError(code: code, message: message)
+        }
         
-        //4041일때는 프로필 생성뷰로
-        //4045일때는 성향테스트스플래시뷰로
-//        if code == "e4041" || code == "e4045"{
-//            throw NetworkError.userState(code: code, message: message)
+        guard !NetworkErrorCode.userState.contains(code) else {
+            throw NetworkError.userState(code: code, message: message)
+        }
         
-        if code == "e4041" || code == "e4045" {
-            throw NetworkError.userState(code: code)
+        //로그인으로
+        guard !NetworkErrorCode.unAuthorized.contains(code) else {
+            throw NetworkError.unAuthorizedError
+        }
+        
+        //그 뷰에서 JWT재발급
+        guard !NetworkErrorCode.reIssueJWT.contains(code) else {
+            throw NetworkError.reIssueJWT
+        }
+        
+        guard !NetworkErrorCode.serverErrorCode.contains(code) else {
+            throw NetworkError.serverError
         }
 
-        if code != "s2000" {
-            throw NetworkError.userState(code: code)
-        }
-//        let statusCode = model.code
-//        guard !NetworkErrorCode.clientErrorCode.contains(statusCode) else {
-//            throw NetworkError.clientError(code: model.code, message: model.message)
-//        }
-//
-//        guard !NetworkErrorCode.serverErrorCode.contains(statusCode) else {
-//            throw NetworkError.serverError
-//        }
         print("✅✅✅✅✅✅✅✅✅✅✅✅✅원래 API호출성공✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
         return model.data
     }
