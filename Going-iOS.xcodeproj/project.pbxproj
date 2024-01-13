@@ -100,6 +100,7 @@
 		F44D986C2B4ECACC00341893 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986B2B4ECACC00341893 /* Token.swift */; };
 		F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */; };
 		F45CA15C2B51868C00F3790C /* NetworkErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */; };
+		F45CA15E2B52E1DA00F3790C /* LogoutResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -262,6 +263,7 @@
 		F44D986B2B4ECACC00341893 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeProtocol.swift; sourceTree = "<group>"; };
 		F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorCode.swift; sourceTree = "<group>"; };
+		F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResponseDTO.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -1180,6 +1182,7 @@
 			children = (
 				F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */,
 				F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */,
+				F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1396,6 +1399,7 @@
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				CA3EEE3B2B4FED8300C23A41 /* MyToDoHeaderAppData.swift in Sources */,
 				F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */,
+				F45CA15E2B52E1DA00F3790C /* LogoutResponseDTO.swift in Sources */,
 				CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */,
 				F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */,
 				F44D986C2B4ECACC00341893 /* Token.swift in Sources */,

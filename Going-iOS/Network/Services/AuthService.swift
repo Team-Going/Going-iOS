@@ -48,7 +48,10 @@ final class AuthService: Serviceable {
         let param = signUpDTO.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
         
-        let urlRequest = try NetworkRequest(path: "/api/users/signup", httpMethod: .post, body: body, token: token).makeURLRequest(networkType: .withSocialToken)
+        let urlRequest = try NetworkRequest(path: "/api/users/signup", 
+                                            httpMethod: .post,
+                                            body: body,
+                                            token: token).makeURLRequest(networkType: .withSocialToken)
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
@@ -62,6 +65,17 @@ final class AuthService: Serviceable {
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
         
         print("회원가입성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    }
+    
+    func patchLogout() async throws {
+        
+        let urlRequest = try NetworkRequest(path: "/api/users/signout", httpMethod: .patch).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: LogoutResponseDTO.self) else { throw NetworkError.jsonDecodingError }
+
+
     }
     
     

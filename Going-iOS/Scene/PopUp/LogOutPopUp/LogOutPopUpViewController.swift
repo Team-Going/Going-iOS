@@ -88,10 +88,42 @@ private extension LogOutPopUpViewController {
     @objc
     func logOutButtonTapped() {
         print("로그아웃 서버 통신")
+        postLogout()
     }
     
     @objc
     func backButtonTapped() {
         self.dismiss(animated: false)
+    }
+}
+
+extension LogOutPopUpViewController: ViewControllerServiceable {
+    
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .reIssueJWT:
+            //JWT재발급API 후에 다시 통신
+            print("")
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+    }
+}
+
+extension LogOutPopUpViewController {
+    
+    func postLogout() {
+        Task {
+            do {
+                try await AuthService.shared.patchLogout()
+                UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
+                let nextVC = LoginViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
     }
 }
