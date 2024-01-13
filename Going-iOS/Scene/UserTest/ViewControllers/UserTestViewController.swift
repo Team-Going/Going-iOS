@@ -15,6 +15,8 @@ final class UserTestViewController: UIViewController {
     
     private var buttonIndexList: [Int] = []
     
+    private var travelTypeRequsetBody: TravelTypeTestRequestDTO?
+    
     private var index: Int = 0
     
     private var buttonIndex: Int = 0
@@ -160,7 +162,7 @@ private extension UserTestViewController {
         // 선택된 버튼이 있는지 확인하고 nextButton의 활성화 여부를 결정
         nextButton.isEnabled = selectedButton == nil ? false : true
         nextButton.backgroundColor = nextButton.isEnabled ? .gray500 : .gray50
-
+        
         if nextButton.isEnabled {
             nextButton.setTitleColor(.white000, for: .normal)
         } else {
@@ -181,23 +183,26 @@ private extension UserTestViewController {
         
     }
     
+    
     func handleLastQuestion() {
-        print(buttonIndexList)
-        let nextVC = UserTestResultViewController()
-        nextVC.testResultDummy = toUserTypeResult()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        //성향테스트api
+        
+        patchTravelTypeTestResult()
+        
+      
     }
     
     func setAnimation() {
         let questButton = [firstButton, secondButton,
-                              thirdButton, fourthButton]
-
+                           thirdButton, fourthButton]
+        
         UIView.animate(withDuration: 0.5, animations: {
             questButton.forEach {
                 $0.isEnabled = false
                 $0.titleLabel?.alpha = 0.0
             }
-//            views
+            //            views
         }) { [self] _ in
             // fade out 애니메이션 종료 후 실행될 코드
             updateLabel()
@@ -214,7 +219,7 @@ private extension UserTestViewController {
         var dummy = UserTypeTestResultAppData.dummy()
         return dummy[1]
     }
-
+    
     
     @objc
     func buttonTapped(_ sender: UIButton) {
@@ -241,7 +246,7 @@ private extension UserTestViewController {
         
         // nextButton 상태 갱신
         updateNextButtonState()
- 
+        
     }
     
     @objc
@@ -264,7 +269,9 @@ private extension UserTestViewController {
             // 질문이 마지막인 경우
             setAnimation()
             buttonIndexList.append(self.buttonIndex)
-            handleLastQuestion()
+//            handleLastQuestion()
+            patchTravelTypeTestResult()
+
             
         }
         if index == 8 {
@@ -273,3 +280,45 @@ private extension UserTestViewController {
         }
     }
 }
+
+extension UserTestViewController {
+    
+    func patchTravelTypeTestResult() {
+        guard var body = travelTypeRequsetBody else { return }
+        body.result = buttonIndexList
+        
+        Task {
+            do {
+                try await OnBoardingService.shared.travelTypeTest(requestDTO: body)
+                
+                let nextVC = UserTestResultViewController()
+                nextVC.testResultDummy = toUserTypeResult()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+}
+
+extension UserTestViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .reIssueJWT:
+            //재발급 후 다시 호출
+            print("")
+        case .unAuthorizedError:
+            //로그인화면으로 이동
+            print("")
+        default:
+            print(error.description)
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+    }
+    
+    
+}
+
+
