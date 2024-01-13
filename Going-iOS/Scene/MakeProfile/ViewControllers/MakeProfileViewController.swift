@@ -331,7 +331,7 @@ private extension MakeProfileViewController {
         
         Task {
             do {
-                let data = try await AuthService.shared.signUp(token: token, signUpBody: signUpBody)
+                let data = try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
                 
                 let nextVC = UserTestSplashViewController()
                 self.navigationController?.pushViewController(nextVC, animated: true)

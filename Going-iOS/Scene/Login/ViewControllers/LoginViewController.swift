@@ -26,7 +26,7 @@ final class LoginViewController: UIViewController {
             //로그인API
             Task {
                 do {
-                    let isPushToDashView = try await AuthService.shared.login(token: token, platform: platform)
+                    let isPushToDashView = try await AuthService.shared.postLogin(token: token, platform: platform)
                     
                     //true면 대시보드로 이동
                     if isPushToDashView {

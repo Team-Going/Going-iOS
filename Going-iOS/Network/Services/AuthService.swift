@@ -13,7 +13,7 @@ final class AuthService: Serviceable {
     
     private init() {}
     
-    func login(token: String, platform: SocialPlatform) async throws -> Bool {
+    func postLogin(token: String, platform: SocialPlatform) async throws -> Bool {
         
         let platformDTO = LoginRequestDTO(platform: platform.rawValue)
         let param = platformDTO.toDictionary()
@@ -42,7 +42,7 @@ final class AuthService: Serviceable {
         }
     }
     
-    func signUp(token: String, signUpBody: SignUpRequestDTO) async throws {
+    func postSignUp(token: String, signUpBody: SignUpRequestDTO) async throws {
         
         let signUpDTO = signUpBody
         let param = signUpDTO.toDictionary()
@@ -62,6 +62,7 @@ final class AuthService: Serviceable {
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
         
         print("회원가입성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                
     }
+    
+    
 }
