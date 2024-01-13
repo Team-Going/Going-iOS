@@ -21,11 +21,8 @@ extension Serviceable {
     func dataDecodeAndhandleErrorCode<T: Response>(data: Data, decodeType: T.Type) throws -> T? {
 
         guard let model = try? JSONDecoder().decode(BaseResponse<T>.self, from: data) else {
-            print("dddddddddddddddddddddddd")
             throw NetworkError.jsonDecodingError
         }
-
-        print("✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨")
        
         let code = model.code
         let message = model.message

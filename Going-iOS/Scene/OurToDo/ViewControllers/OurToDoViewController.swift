@@ -57,7 +57,10 @@ final class OurToDoViewController: UIViewController {
         imageView.isHidden = true
         return imageView
     }()
-    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: StringLiterals.OurToDo.pleaseAddToDo, alignment: .center)
+    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi),
+                                                   color: .gray200,
+                                                   text: StringLiterals.OurToDo.pleaseAddToDo,
+                                                   alignment: .center)
     
     private let ourToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
@@ -108,7 +111,7 @@ final class OurToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        UserDefaults.standard.set("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzA0ODk1NDE4LCJleHAiOjE3MDU1MDAyMTh9.FWPJhGl9amOs1Aog1snD2O1ayVm6lRYBJgHOndyWdMQ", forKey: UserDefaultToken.accessToken.rawValue)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -190,11 +193,17 @@ private extension OurToDoViewController {
     
     func loadData() {
         ourToDoCollectionView.reloadData()
-        ourToDoCollectionView.layoutIfNeeded()
+//        ourToDoCollectionView.layoutIfNeeded()
         
         // Update the constraint based on the new content size
-        ourToDoCollectionView.snp.updateConstraints {
-            $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
+        DispatchQueue.main.async {
+            self.ourToDoCollectionView.snp.remakeConstraints {
+                $0.top.equalTo(self.ourToDoHeaderView.snp.bottom)
+                $0.leading.trailing.equalToSuperview()
+                $0.bottom.equalTo(self.contentView)
+                $0.height.equalTo(self.ourToDoCollectionView.contentSize.height)
+             }
+            self.ourToDoCollectionView.layoutIfNeeded()
         }
     }
     
@@ -298,8 +307,8 @@ private extension OurToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(contentView)
             $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
-            //            }
-        }
+         }
+//        }
     }
     
     // MARK: - objc method
@@ -440,8 +449,8 @@ extension OurToDoViewController {
     func getOurToDoHeaderData() {
         Task(priority: .high) {
             do {
-                let myToDoHeaderData = try await OurToDoService.shared.getOurToDoHeader(tripId: 1)
-                headerData = myToDoHeaderData
+                self.headerData = try await OurToDoService.shared.getOurToDoHeader(tripId: 1)
+//                headerData = myToDoHeaderData
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -454,8 +463,8 @@ extension OurToDoViewController {
     func getToDoData(progress: String) {
         Task {
             do {
-                let ourToDoData = try await ToDoService.shared.getToDoData(tripId: 1, category: "our", progress: progress)
-                self.ourToDoData = ourToDoData
+                self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: 1, category: "our", progress: progress)
+//                self.ourToDoData = ourToDoData
                 print(self.ourToDoData)
             }
             catch {
