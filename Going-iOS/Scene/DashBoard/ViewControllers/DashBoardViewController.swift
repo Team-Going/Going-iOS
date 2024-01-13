@@ -60,7 +60,7 @@ class DashBoardViewController: UIViewController {
     }()
     
     private let gradientView =  UIView()
-
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -96,7 +96,7 @@ private extension DashBoardViewController {
     }
     
     func setHierarchy() {
-        self.view.addSubviews(dashBoardNavigationBar, 
+        self.view.addSubviews(dashBoardNavigationBar,
                               dashBoardHeaderView,
                               dashBoardCollectionView,
                               noDataview,
@@ -215,19 +215,10 @@ private extension DashBoardViewController {
         let vc = CreateTravelViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     @objc
     func didChangeValue(sender: UISegmentedControl) {
         getAllData()
-//        guard let travelListDummy else { return }
-//        if sender.selectedSegmentIndex == 0 {
-//            // 진행 중인 여행 필터링
-//            filteredTravelList = travelListDummy.trips.filter { $0.day >= 0}
-//        } else {
-//            // 완료된 여행 필터링
-//            filteredTravelList = travelListDummy.trips.filter { $0.day < 0}
-//        }
-//        dashBoardCollectionView.reloadData()
     }
     
     @objc
@@ -271,11 +262,21 @@ extension DashBoardViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - Network
+
 private extension DashBoardViewController {
+    func handleError(_ error: NetworkError) {
+        print(error)
+    }
+    
     func getAllData() {
         Task {
             do {
                 self.travelListDummy = try await TravelService.shared.getAllTravel(status: dashBoardHeaderView.segmentedControl.selectedSegmentIndex == 0 ? "incomplete" : "complete")
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
             }
         }
     }

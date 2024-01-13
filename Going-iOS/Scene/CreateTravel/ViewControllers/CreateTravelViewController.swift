@@ -13,8 +13,6 @@ final class CreateTravelViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let vcName = "createTravel"
-    
     private weak var activeLabel: UILabel?
     
     private var createTravelData = CreateTravelRequestAppData(travelTitle: "", startDate: "", endDate: "", a: 0, b: 0, c: 0, d: 0, e: 0)
