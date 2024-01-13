@@ -67,7 +67,7 @@ private extension LogOutPopUpViewController {
             $0.top.equalToSuperview().inset(28)
             $0.centerX.equalToSuperview()
         }
-
+        
         backButton.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(44))
@@ -106,6 +106,7 @@ extension LogOutPopUpViewController: ViewControllerServiceable {
             print("")
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)
+            print(error.description)
         }
     }
 }
@@ -117,6 +118,7 @@ extension LogOutPopUpViewController {
             do {
                 try await AuthService.shared.patchLogout()
                 UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
+                print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 let nextVC = LoginViewController()
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
