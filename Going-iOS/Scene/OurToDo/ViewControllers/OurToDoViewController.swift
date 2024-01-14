@@ -431,6 +431,10 @@ extension OurToDoViewController: TripMiddleViewDelegate {
         self.present(inviteFriendVC, animated: false)
     }
     
+    func pushToMemberVC() {
+        let vc = MemberViewController()
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
 }
 
 extension OurToDoViewController {

@@ -2,6 +2,7 @@ import UIKit
 
 protocol TripMiddleViewDelegate: AnyObject {
     func presentToInviteFriendVC()
+    func pushToMemberVC()
 }
 
 final class TripMiddleView: UIView {
@@ -52,7 +53,7 @@ final class TripMiddleView: UIView {
         stackView.backgroundColor = .white000
         return stackView
     }()
-    
+
     // MARK: - Property
     
     var friendProfile: [Participant] = []
@@ -76,7 +77,7 @@ final class TripMiddleView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         setHierarchy()
         registerCell()
         setLayout()
@@ -94,8 +95,8 @@ final class TripMiddleView: UIView {
     }
     
     @objc
-        func pushToInquiryFriendsView() {
-        print("pushToInquiryFriendsView")
+    func pushToInquiryFriendsView() {
+        self.delegate?.pushToMemberVC()
     }
     
     @objc
