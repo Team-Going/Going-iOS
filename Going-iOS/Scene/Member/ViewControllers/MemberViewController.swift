@@ -167,13 +167,37 @@ extension MemberViewController: UICollectionViewDataSource {
 
 extension MemberViewController {
     func handleError(_ error: NetworkError) {
-        print(error)
+        switch error {
+        case .reIssueJWT:
+            reIssueJWTToken()
+        case .serverError:
+            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
+        case .unAuthorizedError:
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
     }
     
     func getAllData() {
         Task {
             do {
                 self.memberData = try await MemberService.shared.getMemberInfo(tripId: tripId)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+}
+
+extension MemberViewController {
+    func reIssueJWTToken() {
+        Task {
+            do {
+                try await AuthService.shared.reIssueJWTToken()
             }
             catch {
                 guard let error = error as? NetworkError else { return }
