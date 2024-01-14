@@ -449,7 +449,7 @@ extension OurToDoViewController: TripMiddleViewDelegate {
 extension OurToDoViewController {
     func handlingError(_ error: NetworkError) {
         switch error {
-        case .clientError(let message):
+        case .clientError(_, let message):
             DOOToast.show(message: "\(message)", insetFromBottom: 50)
         default:
             DOOToast.show(message: error.description, insetFromBottom: 50)
@@ -468,7 +468,6 @@ extension OurToDoViewController {
             catch {
                 guard let error = error as? NetworkError else { return }
                 handlingError(error)
-                print("my header \(error)")
             }
         }
     }
@@ -481,7 +480,6 @@ extension OurToDoViewController {
             catch {
                 guard let error = error as? NetworkError else { return }
                 handlingError(error)
-                print("our todo \(error)")
             }
         }
     }
@@ -490,8 +488,6 @@ extension OurToDoViewController {
         Task {
             do {
                 self.detailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: todoId)
-                print("our detailtodo \(self.detailToDoData)")
-
             }
             catch {
                 guard let error = error as? NetworkError else { return }

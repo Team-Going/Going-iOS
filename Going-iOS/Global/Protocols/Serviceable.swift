@@ -52,7 +52,7 @@ extension Serviceable {
         }
 
         print("✅✅✅✅✅✅✅✅✅✅✅✅✅원래 API호출성공✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
-        print(model.data)
+//        print(model.data)
         return model.data
     }
 }

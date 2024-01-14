@@ -20,7 +20,7 @@ final class DOONavigationBar: UIView {
         case testResult(String)
     }
     
-    private lazy var backButton: UIButton = {
+    lazy var backButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonBack, for: .normal)
         btn.addTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)

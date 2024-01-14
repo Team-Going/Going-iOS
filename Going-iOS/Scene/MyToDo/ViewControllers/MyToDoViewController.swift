@@ -71,7 +71,8 @@ final class MyToDoViewController: UIViewController {
     // MARK: - Properties
     
     private var index: Int = 0
-    private var progress: String = "incomplete"
+    
+    
     var detailToDoData: GetDetailToDoResponseStuct = GetDetailToDoResponseStuct(title: "", endDate: "", allocators: [], memo: "", secret: false)
     private var headerData: MyToDoHeaderAppData? {
         didSet {
@@ -83,11 +84,11 @@ final class MyToDoViewController: UIViewController {
             let firstString = NSMutableAttributedString(string: text)
             firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: "나에게 남은 할일"))
             firstString.addAttribute(.foregroundColor, value: UIColor.red400, range: (text as NSString).range(of: String(" \(data.count)개")))
-            print("header \(data.count)개")
             self.tripHeaderView.tripDdayLabel.attributedText = firstString
         }
     }
     var initializeCode: Bool = false
+    
     private var myToDoData: [ToDoAppData]? {
         didSet {
             Task {
@@ -97,6 +98,13 @@ final class MyToDoViewController: UIViewController {
             }
         }
     }
+    
+    private var todoId: Int = 0
+    
+    var segmentIndex: Int = 0
+    
+    private var progress: String = "incomplete"
+    
 
     // MARK: - Life Cycle
     
@@ -107,7 +115,6 @@ final class MyToDoViewController: UIViewController {
         setHierachy()
         setDelegate()
         getMyToDoHeaderData()
-        getToDoData(progress: progress)
         registerCell()
         setLayout()
         setStyle()
@@ -121,6 +128,16 @@ final class MyToDoViewController: UIViewController {
         Task {
          await loadMyToDoData()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if self.segmentIndex == 0 {
+            getToDoData(progress: "incomplete")
+        } else {
+            getToDoData(progress: "complete")
+        }
+
     }
 }
 
@@ -258,8 +275,9 @@ private extension MyToDoViewController {
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
         todoVC.isActivateView = isActivate
-        todoVC.data = detailToDoData
-        todoVC.manager = detailToDoData.allocators
+//        todoVC.data = self.detailToDoData
+//        todoVC.manager = self.detailToDoData.allocators
+        todoVC.todoId = self.todoId
         todoVC.beforeVC = before
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
@@ -292,7 +310,7 @@ private extension MyToDoViewController {
             self.emptyViewIcon.isHidden = true
             self.emptyViewLabel.isHidden = true
             self.myToDoCollectionView.isHidden = false
-        }else {
+        } else {
             self.emptyView.isHidden = false
             self.emptyViewIcon.isHidden = false
             self.emptyViewLabel.isHidden = false
@@ -320,8 +338,11 @@ private extension MyToDoViewController {
 
             if stickyMyToDoHeaderView.isHidden {
                 stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex = myToDoHeaderView.segmentedControl.selectedSegmentIndex
+                segmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
             } else {
                 myToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
+                segmentIndex = myToDoHeaderView.segmentedControl.selectedSegmentIndex
+
             }
         }
     }
@@ -330,7 +351,6 @@ private extension MyToDoViewController {
     
     @objc
     func pushToInquiryToDo() {
-        setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
     }
 }
 
@@ -362,9 +382,10 @@ extension MyToDoViewController: UIScrollViewDelegate {
 }
 
 extension MyToDoViewController: MyToDoCollectionViewDelegate {
-    func pushToToDo() {
-        setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
-    }
+//    func pushToToDo() {
+//        
+//    }
+    
     
     func getButtonIndex(index: Int, image: UIImage) {
         checkButtonTapped(index: index, image: image)
@@ -414,7 +435,10 @@ extension MyToDoViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushToInquiryToDo()
+        self.todoId = self.myToDoData?[indexPath.row].todoId ?? 0
+        setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
+
+//        pushToInquiryToDo()
     }
 }
 
@@ -434,7 +458,6 @@ extension MyToDoViewController {
         Task {
             do {
                 self.headerData = try await MyToDoService.shared.getMyToDoHeader(tripId: 53)
-                print("my header \(self.headerData)")
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -446,21 +469,8 @@ extension MyToDoViewController {
     func getToDoData(progress: String) {
         Task {
             do {
+                                    
                 self.myToDoData = try await ToDoService.shared.getToDoData(tripId: 53, category: "my", progress: progress)
-                print("my todo \(self.myToDoData)")
-            }
-            catch {
-                guard let error = error as? NetworkError else { return }
-                handlingError(error)
-                print("my todo \(error)")
-            }
-        }
-    }
-    
-    func getDetailToDoData() {
-        Task {
-            do {
-                self.detailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: 1)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
