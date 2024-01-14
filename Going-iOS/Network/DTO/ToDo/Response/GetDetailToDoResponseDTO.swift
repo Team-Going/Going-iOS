@@ -13,9 +13,3 @@ struct GetDetailToDoResponseDTO: DTO, Response {
     let memo: String
     let secret: Bool
 }
-
-extension GetDetailToDoResponseDTO {
-    func toAppData() -> DetailToDoAppData {
-        return DetailToDoAppData(title: self.title, endDate: self.endDate, allocators: self.allocators, memo: self.memo, secret: self.secret)
-    }
-}

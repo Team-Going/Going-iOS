@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetDetailToDoStuct: Response {
+struct GetDetailToDoResponseStuct: Response {
     let title, endDate: String
     let allocators: [Allocators]
     let memo: String

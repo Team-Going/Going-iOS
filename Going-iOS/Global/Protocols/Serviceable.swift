@@ -20,7 +20,7 @@ extension Serviceable {
     @discardableResult
     func dataDecodeAndhandleErrorCode<T: Response>(data: Data, decodeType: T.Type) throws -> T? {
 
-        guard let model = try? JSONDecoder().decode(BaseResponse<T>.self, from: data) else {
+         guard let model = try? JSONDecoder().decode(BaseResponse<T>.self, from: data) else {
             throw NetworkError.jsonDecodingError
         }
         
@@ -52,6 +52,7 @@ extension Serviceable {
         }
 
         print("✅✅✅✅✅✅✅✅✅✅✅✅✅원래 API호출성공✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
+        print(model.data)
         return model.data
     }
 }

@@ -74,11 +74,11 @@ final class ToDoViewController: UIViewController {
     lazy var beforeVC: String = ""
     lazy var navigationBarTitle: String = ""
     lazy var manager: [Allocators] = []
-    private var getToDoData: DetailToDoAppData?
+    private var getToDoData: GetDetailToDoResponseStuct?
     private var memoTextviewPlaceholder: String = ""
     private var todoTextfieldPlaceholder: String = ""
-    private var saveToDoData: DetailToDoAppData?
-    var data: DetailToDoAppData? {
+    private var saveToDoData: GetDetailToDoResponseStuct?
+    var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
             self.getToDoData = data
@@ -165,7 +165,7 @@ final class ToDoViewController: UIViewController {
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         let secret = beforeVC == "our" ? false : true
         if !todo.isEmpty && !deadline.isEmpty{
-            self.saveToDoData = DetailToDoAppData(title: todo, endDate: deadline, allocators: manager, memo: memo, secret: secret)
+            self.saveToDoData = GetDetailToDoResponseStuct(title: todo, endDate: deadline, allocators: manager, memo: memo, secret: secret)
             self.navigationController?.popViewController(animated: false)
             DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
         }
