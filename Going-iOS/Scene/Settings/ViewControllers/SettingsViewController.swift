@@ -146,17 +146,20 @@ extension SettingsViewController: UICollectionViewDelegate {
         let item = settingsItem[indexPath.row]
         
         switch item.title {
-        case "내 프로필":
+        case "여행 프로필":
             let profileVC = MyProfileViewController()
             navigationController?.pushViewController(profileVC, animated: true)
         case "문의하기":
-            let inquiryVC = WebViewController(urlString: "https://www.naver.com/")
+            let inquiryVC = WebViewController(urlString: "https://www.notion.so/goinggoing/FAQ-920f6ad93fea46a983061f412e15cad1?pvs=4")
             self.present(inquiryVC, animated: true)
-        case "약관 및 정책":
-            let policyVC = WebViewController(urlString: "https://www.youtube.com/")
+        case "서비스이용약관":
+            let policyVC = WebViewController(urlString: "https://www.notion.so/goinggoing/c4d5513bba2c4c20aaf9e21522289304?pvs=4")
             self.present(policyVC, animated: true)
+        case "개인정보처리방침":
+            let privacyVC = WebViewController(urlString: "https://www.notion.so/goinggoing/doorip-75f5d981a5b842a6be74a9dc17ca67de?pvs=4")
+            self.present(privacyVC, animated: true)
         case "About doorip":
-            let aboutServiceVC = WebViewController(urlString: "https://music.youtube.com/")
+            let aboutServiceVC = WebViewController(urlString: "https://www.notion.so/goinggoing/About-doorip-758273e2bebb477aac0adb0195359f21?pvs=4")
             self.present(aboutServiceVC, animated: true)
         case "로그아웃":
             let logOutVC = LogOutPopUpViewController()

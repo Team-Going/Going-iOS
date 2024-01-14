@@ -12,6 +12,7 @@ final class TravelService: Serviceable {
     
     private init() {}
     
+    /// 초대코드 검증 API
     func postInviteCode(code: CodeRequestDTO) async throws -> JoiningSuccessAppData {
         let param = code.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
@@ -25,6 +26,7 @@ final class TravelService: Serviceable {
         return model.toAppData()
     }
     
+    /// 여행 생성 API
     func postCreateTravel(request: CreateTravelRequestDTO) async throws -> CreateTravelResponseAppData {
         let jsonEncoder = JSONEncoder()
         let body = try jsonEncoder.encode(request)
@@ -40,6 +42,7 @@ final class TravelService: Serviceable {
         return model.toAppData()
     }
     
+    /// 여행 전체 조회 API
     func getAllTravel(status: String) async throws -> DashBoardResponseSturct {
         let query = TravelQuery(progress: status)
         let urlRequest = try NetworkRequest(path: "/api/trips",
@@ -52,6 +55,7 @@ final class TravelService: Serviceable {
         return model
     }
     
+    /// 여행 입장 API
     func postJoinTravelTest(request: JoinTravelTestRequestStruct, tripId: Int) async throws -> JoinTravelTestResponseStruct {
         let jsonEncoder = JSONEncoder()
         let body = try jsonEncoder.encode(request)
@@ -64,7 +68,8 @@ final class TravelService: Serviceable {
         else { return JoinTravelTestResponseStruct(tripId: 0) }
         return model
     }
-    //프로필조회 API
+    
+    /// 프로필 조회 API
     func getProfileInfo() async throws -> GetProfileResponseDTO {
         
         let urlRequest = try NetworkRequest(path: "/api/users/profile", httpMethod: .get).makeURLRequest(networkType: .withJWT)
@@ -75,5 +80,4 @@ final class TravelService: Serviceable {
         
         return model
     }
-    
 }

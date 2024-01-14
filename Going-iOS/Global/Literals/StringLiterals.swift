@@ -47,10 +47,11 @@ enum StringLiterals {
     }
     
     enum Settings {
-        static let myProfile = "내 프로필"
+        static let myProfile = "여행 프로필"
         static let inquiry = "문의하기"
         static let serviceVersion = "서비스 버전"
-        static let policy = "약관 및 정책"
+        static let policy = "서비스이용약관"
+        static let privacy = "개인정보처리방침"
         static let aboutService = "About doorip"
         static let logout = "로그아웃"
     }

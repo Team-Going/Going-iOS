@@ -7,8 +7,6 @@ import SnapKit
 final class OurToDoViewController: UIViewController {
     
     // MARK: - UI Property
-
-    var tripId: Int = 0
     
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
@@ -69,6 +67,8 @@ final class OurToDoViewController: UIViewController {
     
     // MARK: - Property
     
+    var tripId: Int = 0
+    
     private var headerData: OurToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
@@ -94,6 +94,7 @@ final class OurToDoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         emptyViewLabel.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = false
@@ -435,6 +436,11 @@ extension OurToDoViewController: TripMiddleViewDelegate {
         self.present(inviteFriendVC, animated: false)
     }
     
+    func pushToMemberVC() {
+        let vc = MemberViewController()
+        vc.tripId = self.tripId
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
 }
 
 extension OurToDoViewController {
@@ -467,7 +473,7 @@ extension OurToDoViewController {
     func getToDoData(progress: String) {
         Task {
             do {
-                self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: 1, category: "our", progress: progress)
+                self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: tripId, category: "our", progress: progress)
             }
             catch {
                 guard let error = error as? NetworkError else { return }

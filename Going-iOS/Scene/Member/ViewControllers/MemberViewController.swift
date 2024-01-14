@@ -1,18 +1,41 @@
 //
-//  FriendsInfoViewController.swift
+//  MemberViewController.swift
 //  Going-iOS
 //
-//  Created by 윤영서 on 1/11/24.
+//  Created by 윤영서 on 1/14/24.
 //
 
 import UIKit
 
 import SnapKit
 
-class FriendsInfoViewController: UIViewController {
+class MemberViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: - Network
     
+    var tripId: Int = 0
+    
+    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
+                                          ImageLiterals.Profile.imgSnowmanSRI,
+                                          ImageLiterals.Profile.imgTriangleSEP,
+                                          ImageLiterals.Profile.imgSquareSEI,
+                                          ImageLiterals.Profile.imgCloverARP,
+                                          ImageLiterals.Profile.imgCloudARI,
+                                          ImageLiterals.Profile.imgHexagonAEP,
+                                          ImageLiterals.Profile.imgCircleAEI]
+    
+    private var userType: Int = 0
+    var memberData: MemberResponseStruct? {
+        didSet {
+            self.tripFriendsCollectionView.reloadData() 
+            self.ourTestResultView.progressView1.testResultData = memberData?.styles[0]
+            self.ourTestResultView.progressView2.testResultData = memberData?.styles[1]
+            self.ourTestResultView.progressView3.testResultData = memberData?.styles[2]
+            self.ourTestResultView.progressView4.testResultData = memberData?.styles[3]
+            self.ourTestResultView.progressView5.testResultData = memberData?.styles[4]
+        }
+    }
+
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 친구들"))
@@ -33,8 +56,9 @@ class FriendsInfoViewController: UIViewController {
     
     private let ourTasteTitleLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "우리의 이번 여행은!")
     
-    private let ourTestResultView = OurTestResultView()
+    private let ourTestResultView = MemberTestResultView()
     
+        
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -46,11 +70,15 @@ class FriendsInfoViewController: UIViewController {
         registerCell()
         setDelegate()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getAllData()
+    }
 }
 
 // MARK: - Private Extension
 
-private extension FriendsInfoViewController {
+private extension MemberViewController {
     func setStyle() {
         self.view.backgroundColor = .white000
     }
@@ -118,22 +146,39 @@ private extension FriendsInfoViewController {
     }
 }
 
-extension FriendsInfoViewController: UICollectionViewDelegateFlowLayout {
-    
-}
+extension MemberViewController: UICollectionViewDelegateFlowLayout { }
 
-extension FriendsInfoViewController: UICollectionViewDelegate {
-    
-}
+extension MemberViewController: UICollectionViewDelegate { }
 
-extension FriendsInfoViewController: UICollectionViewDataSource {
+extension MemberViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return memberData?.participants.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = tripFriendsCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell else { return UICollectionViewCell() }
-//        cell.bindData(data: Friend.friendData[indexPath.row])
+        
+        cell.friendNameLabel.text = memberData?.participants[indexPath.row].name
+        userType = memberData?.participants[indexPath.row].result ?? 0
+        cell.profileImageView.image = userProfileImageSet[userType]
         return cell
+    }
+}
+
+extension MemberViewController {
+    func handleError(_ error: NetworkError) {
+        print(error)
+    }
+    
+    func getAllData() {
+        Task {
+            do {
+                self.memberData = try await MemberService.shared.getMemberInfo(tripId: tripId)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
     }
 }

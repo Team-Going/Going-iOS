@@ -8,11 +8,7 @@
 import UIKit
 
 final class DashBoardHeaderView: UIView {
-    
-    // MARK: - Properties
-    
-    static let identifier = "DashBoardHeaderView"
-    
+        
     // MARK: - UI Properties
     
     let segmentedControl: UnderlineSegmentedControlView = {
@@ -62,7 +58,7 @@ private extension DashBoardHeaderView {
         segmentedControl.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(underlineView)
-            $0.width.equalTo(ScreenUtils.getWidth(147))
+            $0.width.equalTo(ScreenUtils.getWidth(187))
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
     }

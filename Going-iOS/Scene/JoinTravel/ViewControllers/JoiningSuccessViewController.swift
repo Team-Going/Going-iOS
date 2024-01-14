@@ -13,7 +13,7 @@ final class JoiningSuccessViewController: UIViewController {
         
     // MARK: - Network
 
-    var joinSuccessTravelId: Int = 0
+    var tripId: Int = 0
 
     var joinSuccessData: JoiningSuccessAppData? {
         didSet {
@@ -21,7 +21,7 @@ final class JoiningSuccessViewController: UIViewController {
             self.travelTitleLabel.text = data.travelName
             self.dateLabel.text = data.startDate + "-" + data.endDate
             self.dDayLabel.text = "D-" + "\(data.dueDate)"
-            self.joinSuccessTravelId = data.travelId
+            self.tripId = data.travelId
         }
     }
 
@@ -141,7 +141,7 @@ private extension JoiningSuccessViewController {
     @objc
     func entranceButtonTapped() {
         let vc = JoinTravelTestViewController()
-        vc.tripId = joinSuccessTravelId
+        vc.tripId = tripId
         navigationController?.pushViewController(vc, animated: true)
     }
 }

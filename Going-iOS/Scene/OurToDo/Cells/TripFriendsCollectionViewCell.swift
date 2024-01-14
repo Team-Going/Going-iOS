@@ -18,6 +18,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         stackView.isUserInteractionEnabled = true
         return stackView
     }()
+    
     // TODO: - 서버통신 시 이미지 수정
     var profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -25,7 +26,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         imageView.layer.masksToBounds = true
         return imageView
     }()
-    let friendNameLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray500, alignment: .center)
+    var friendNameLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray500, alignment: .center)
 
     // MARK: - Life Cycle
 
@@ -76,4 +77,3 @@ private extension TripFriendsCollectionViewCell {
         profileImageView.layer.cornerRadius = ScreenUtils.getHeight(23.5)
     }
 }
-

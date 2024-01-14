@@ -11,6 +11,8 @@ class DashBoardViewController: UIViewController {
     
     // MARK: - Properties
     
+    var tripId: Int = 0
+    
     private var travelListDummy: DashBoardResponseSturct? {
         didSet {
             filterTravels()
@@ -241,7 +243,14 @@ extension DashBoardViewController: UICollectionViewDataSource {
     }
 }
 
-extension DashBoardViewController: UICollectionViewDelegate { }
+extension DashBoardViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let vc = OurToDoViewController()
+        tripId = travelListDummy?.trips[indexPath.row].tripID ?? 0
+        vc.tripId = tripId
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 extension DashBoardViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing
