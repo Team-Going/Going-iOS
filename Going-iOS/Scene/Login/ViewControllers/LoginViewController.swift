@@ -236,6 +236,17 @@ extension LoginViewController: ViewControllerServiceable {
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
         
+        switch error {
+        case .userState(let code, _):
+            let nextVC = MakeProfileViewController()
+            nextVC.socialToken = self.socialToken
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+            print(error.description)
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+        
+        
         ableLoginButton()
 //        switch error {
 //        case .clientError(let message):

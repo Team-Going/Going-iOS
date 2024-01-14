@@ -12,13 +12,15 @@ import Photos
 
 final class UserTestResultViewController: UIViewController {
     
-    var testResultDummy: UserTypeTestResultAppData? {
+    private var testResultData: UserTypeTestResultAppData? {
         didSet {
-            guard let data = testResultDummy else { return }
+            guard let data = testResultData else { return }
             self.resultImageView.image = data.typeImage
             self.resultView.resultViewData = data
         }
     }
+    
+    private var testResultIndex: Int?
     
     private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 캐릭터"))
     
@@ -74,6 +76,11 @@ final class UserTestResultViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
+        setDelegate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getProfileInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,6 +89,10 @@ final class UserTestResultViewController: UIViewController {
 }
 
 private extension UserTestResultViewController {
+    
+    func setDelegate() {
+        resultView.delegate = self
+    }
     
     func setGradient() {
         gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .vertical)
@@ -216,6 +227,49 @@ extension UserTestResultViewController: CheckPhotoAccessProtocol {
         @unknown default:
             print("unKnown")
         }
+    }
+}
+
+extension UserTestResultViewController {
+    func getProfileInfo() {
+        Task {
+            do {
+                let profileData = try await TravelService.shared.getProfileInfo()
+                self.testResultIndex = profileData.result
+                guard let index = testResultIndex else { return }
+                self.testResultData = UserTypeTestResultAppData.dummy()[index]
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+}
+
+extension UserTestResultViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .reIssueJWT:
+            print("재발급")
+        case .serverError:
+            DOOToast.show(message: "서버오류", insetFromBottom: 80)
+        case .unAuthorizedError:
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case .userState(let code, let message):
+            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+    }
+}
+
+extension UserTestResultViewController: TestResultViewDelegate {
+    func backToTestButton() {
+        let nextVC = UserTestSplashViewController()
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
 }
 

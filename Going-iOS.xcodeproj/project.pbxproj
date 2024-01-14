@@ -108,6 +108,9 @@
 		F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */; };
 		F45CA15C2B51868C00F3790C /* NetworkErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */; };
 		F45CA15E2B52E1DA00F3790C /* LogoutResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */; };
+		F45CA1622B53043400F3790C /* OnBoardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA1612B53043400F3790C /* OnBoardingService.swift */; };
+		F45CA1652B53063600F3790C /* TravelTypeTestRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA1642B53063600F3790C /* TravelTypeTestRequestDTO.swift */; };
+		F45CA1672B5306D600F3790C /* SuccessResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA1662B5306D600F3790C /* SuccessResponseDTO.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -159,7 +162,6 @@
 		F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */; };
 		F4FE6BA32B50AF26009C935E /* UserProfileAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BA22B50AF26009C935E /* UserProfileAppData.swift */; };
 		F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BA42B50B401009C935E /* IsAppleLogined.swift */; };
-		F4FE6BA72B51382A009C935E /* SplashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BA62B51382A009C935E /* SplashService.swift */; };
 		F4FE6BAB2B513937009C935E /* SplashResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BAA2B513937009C935E /* SplashResponseDTO.swift */; };
 /* End PBXBuildFile section */
 
@@ -278,6 +280,9 @@
 		F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeProtocol.swift; sourceTree = "<group>"; };
 		F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorCode.swift; sourceTree = "<group>"; };
 		F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResponseDTO.swift; sourceTree = "<group>"; };
+		F45CA1612B53043400F3790C /* OnBoardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingService.swift; sourceTree = "<group>"; };
+		F45CA1642B53063600F3790C /* TravelTypeTestRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTypeTestRequestDTO.swift; sourceTree = "<group>"; };
+		F45CA1662B5306D600F3790C /* SuccessResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponseDTO.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -326,7 +331,6 @@
 		F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseDTO.swift; sourceTree = "<group>"; };
 		F4FE6BA22B50AF26009C935E /* UserProfileAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAppData.swift; sourceTree = "<group>"; };
 		F4FE6BA42B50B401009C935E /* IsAppleLogined.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsAppleLogined.swift; sourceTree = "<group>"; };
-		F4FE6BA62B51382A009C935E /* SplashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashService.swift; sourceTree = "<group>"; };
 		F4FE6BAA2B513937009C935E /* SplashResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashResponseDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -837,6 +841,14 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		F45CA1632B53061400F3790C /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				F45CA1642B53063600F3790C /* TravelTypeTestRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		F485D4872B47CB43007317F4 /* UserTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1107,7 +1119,7 @@
 				F41F5D782B4EF431000D0472 /* ToDoService.swift */,
 				F4FE6B862B504C8C009C935E /* AuthService.swift */,
 				941B1B882B5138B400D28EBA /* TravelService.swift */,
-				F4FE6BA62B51382A009C935E /* SplashService.swift */,
+				F45CA1612B53043400F3790C /* OnBoardingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1201,6 +1213,7 @@
 		F4FE6B7D2B4FCC83009C935E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F45CA1632B53061400F3790C /* Request */,
 				F4FE6B7E2B4FCC8B009C935E /* Response */,
 			);
 			path = Profile;
@@ -1220,6 +1233,7 @@
 				F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */,
 				F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */,
 				F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */,
+				F45CA1662B5306D600F3790C /* SuccessResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1382,6 +1396,7 @@
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
 				F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */,
+				F45CA1672B5306D600F3790C /* SuccessResponseDTO.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
@@ -1424,6 +1439,7 @@
 				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
 				945234432B52F6E3006ACC59 /* JoinTravelTestViewController.swift in Sources */,
 				941B1B892B5138B400D28EBA /* TravelService.swift in Sources */,
+				F45CA1622B53043400F3790C /* OnBoardingService.swift in Sources */,
 				94761A0A2B4E5F5200D7C589 /* CreateTravelStruct.swift in Sources */,
 				9478E5362B4EF4850027606D /* WebViewController.swift in Sources */,
 				94442EC82B4B18E500FDBB26 /* StartTravelSplashViewController.swift in Sources */,
@@ -1481,7 +1497,7 @@
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
 				94747F5B2B4FE15C00510226 /* TestProgressView.swift in Sources */,
 				F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */,
-				F4FE6BA72B51382A009C935E /* SplashService.swift in Sources */,
+				F45CA1652B53063600F3790C /* TravelTypeTestRequestDTO.swift in Sources */,
 				F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */,
 				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,
 				9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */,

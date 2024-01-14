@@ -64,4 +64,16 @@ final class TravelService: Serviceable {
         else { return JoinTravelTestResponseStruct(tripId: 0) }
         return model
     }
+    //프로필조회 API
+    func getProfileInfo() async throws -> GetProfileResponseDTO {
+        
+        let urlRequest = try NetworkRequest(path: "/api/users/profile", httpMethod: .get).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: GetProfileResponseDTO.self) else { return GetProfileResponseDTO(name: "", intro: "", result: 0)}
+        
+        return model
+    }
+    
 }

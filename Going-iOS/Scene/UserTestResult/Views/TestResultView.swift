@@ -9,7 +9,13 @@ import UIKit
 
 import SnapKit
 
+protocol TestResultViewDelegate: AnyObject {
+    func backToTestButton()
+}
+
 final class TestResultView: UIView {
+    
+    weak var delegate: TestResultViewDelegate?
     
     var resultViewData: UserTypeTestResultAppData? {
         didSet {
@@ -33,6 +39,7 @@ final class TestResultView: UIView {
             self.thirdTickeView.firstString = data.goodToDoPoint.firstPoint
             self.thirdTickeView.secondString = data.goodToDoPoint.secondPoint
             self.thirdTickeView.thirdString = data.goodToDoPoint.thirdPoint
+            
         }
     }
     
@@ -45,7 +52,6 @@ final class TestResultView: UIView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 8
-        stack.distribution = .fillEqually
         return stack
     }()
     
@@ -71,6 +77,7 @@ final class TestResultView: UIView {
         button.titleLabel?.font = .pretendard(.detail2_regular)
         button.setTitleColor(.gray300, for: .normal)
         button.setUnderline()
+        button.addTarget(self, action: #selector(backToTestButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -86,13 +93,18 @@ final class TestResultView: UIView {
         
     }
     
+    @objc
+    func backToTestButtonTapped() {
+        delegate?.backToTestButton()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
 }
 
-extension TestResultView {
+private extension TestResultView {
     
     func setTicketViewText() {
         self.firstTickeView.titleLabel.text = "이런 점이 \n좋아요"
@@ -101,7 +113,7 @@ extension TestResultView {
     }
     
     func makeLabel() -> DOOLabel {
-        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red300, alignment: .center)
+        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red300, alignment: .center, padding: UIEdgeInsets(top: 1, left: 8, bottom: 1, right: 8))
         label.layer.borderWidth = 0.5
         label.layer.borderColor = UIColor.red300.cgColor
         label.layer.cornerRadius = 10
@@ -143,28 +155,27 @@ extension TestResultView {
         }
         
         backToTestButton.snp.makeConstraints {
+            $0.top.equalTo(ticketStackView.snp.bottom).offset(12)
             $0.trailing.equalTo(ticketStackView.snp.trailing)
-            $0.width.equalTo(ScreenUtils.getWidth(66))
-            $0.height.equalTo(ScreenUtils.getHeight(18))
-            $0.bottom.equalTo(whiteView.snp.top)
+//            $0.width.equalTo(ScreenUtils.getWidth(66))
+//            $0.height.equalTo(ScreenUtils.getHeight(18))
+//            $0.bottom.equalTo(whiteView.snp.top)
         }
         
         whiteView.snp.makeConstraints {
-            $0.top.equalTo(backToTestButton.snp.bottom)
+            $0.top.equalTo(backToTestButton.snp.bottom).offset(5)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(30))
             $0.bottom.equalToSuperview()
             
         }
-        firstTagLabel.snp.makeConstraints {
-            $0.width.equalTo(ScreenUtils.getWidth(55))
-            $0.height.equalTo(ScreenUtils.getHeight(20))
-        }
-        
     }
     
     func setStyle() {
         self.backgroundColor = .white000
         whiteView.backgroundColor = .white000
     }
+    
+    
+
 }

@@ -14,26 +14,26 @@ final class TestResultTicketView: UIView {
     var firstString: String = "" {
         didSet {
             let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
-            imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
-            firstDescLabel.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: firstString))
+            imageAttachment.bounds = CGRect(x: 0, y: (UIFont.pretendard(.detail3_regular).capHeight - ImageLiterals.TestResult.dotImage.size.height).rounded() / 2, width: ImageLiterals.TestResult.dotImage.size.width, height: ImageLiterals.TestResult.dotImage.size.height)
+            firstDescLabel.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: " \(firstString)"))
         }
     }
     
     var secondString: String = "" {
         didSet {
             let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
-            imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
-            secondDescLabel.labelWithImg(composition: NSAttributedString(attachment: NSTextAttachment(image: ImageLiterals.TestResult.dotImage)), NSAttributedString(string: secondString))
-        }
-    }
-    var thirdString: String = "" {
-        didSet {
-            let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
-            imageAttachment.bounds = .init(x: 0, y: ScreenUtils.getHeight(2), width: ScreenUtils.getWidth(4), height: ScreenUtils.getHeight(4))
-            thirdDescLabel.labelWithImg(composition: NSAttributedString(attachment: NSTextAttachment(image: ImageLiterals.TestResult.dotImage)), NSAttributedString(string: thirdString))
+            imageAttachment.bounds = CGRect(x: 0, y: (UIFont.pretendard(.detail3_regular).capHeight - ImageLiterals.TestResult.dotImage.size.height).rounded() / 2, width: ImageLiterals.TestResult.dotImage.size.width, height: ImageLiterals.TestResult.dotImage.size.height)
+            secondDescLabel.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: " \(secondString)"))
         }
     }
     
+    var thirdString: String = "" {
+        didSet {
+            let imageAttachment = NSTextAttachment(image: ImageLiterals.TestResult.dotImage)
+            imageAttachment.bounds = CGRect(x: 0, y: (UIFont.pretendard(.detail3_regular).capHeight - ImageLiterals.TestResult.dotImage.size.height).rounded() / 2, width: ImageLiterals.TestResult.dotImage.size.width, height: ImageLiterals.TestResult.dotImage.size.height)
+            thirdDescLabel.labelWithImg(composition: NSAttributedString(attachment: imageAttachment), NSAttributedString(string: " \(thirdString)"))
+        }
+    }
     
     private let wholeStackView: UIStackView = {
         let stack = UIStackView()
@@ -57,7 +57,7 @@ final class TestResultTicketView: UIView {
         stack.axis = .vertical
         stack.spacing = 4
         stack.backgroundColor = .clear
-        stack.distribution = .equalSpacing
+        //        stack.distribution = .equalSpacing
         return stack
     }()
     
@@ -67,6 +67,7 @@ final class TestResultTicketView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setHierarchy()
         setLayout()
         setStyle()
@@ -75,6 +76,8 @@ final class TestResultTicketView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
 }
 
 private extension TestResultTicketView {
