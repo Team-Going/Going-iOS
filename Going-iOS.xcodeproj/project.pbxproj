@@ -30,6 +30,7 @@
 		9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */; };
 		9457F0552B485A68009ACF25 /* TravelTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0542B485A68009ACF25 /* TravelTestCollectionViewCell.swift */; };
 		9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */; };
+		945D1AD92B544E0D00C728E2 /* MemberTestStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D1AD82B544E0D00C728E2 /* MemberTestStruct.swift */; };
 		946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */; };
 		946190A82B47FAC100A38A42 /* JoinTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */; };
 		94761A072B4DD18B00D7C589 /* LogOutPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94761A062B4DD18B00D7C589 /* LogOutPopUpViewController.swift */; };
@@ -202,6 +203,7 @@
 		9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		9457F0542B485A68009ACF25 /* TravelTestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestCollectionViewCell.swift; sourceTree = "<group>"; };
 		9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestQuestionStruct.swift; sourceTree = "<group>"; };
+		945D1AD82B544E0D00C728E2 /* MemberTestStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTestStruct.swift; sourceTree = "<group>"; };
 		946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningSuccessViewController.swift; sourceTree = "<group>"; };
 		946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelViewController.swift; sourceTree = "<group>"; };
 		94761A062B4DD18B00D7C589 /* LogOutPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutPopUpViewController.swift; sourceTree = "<group>"; };
@@ -470,6 +472,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		945D1AD72B544DF900C728E2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				945D1AD82B544E0D00C728E2 /* MemberTestStruct.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		946190A32B47FA5100A38A42 /* JoinTravel */ = {
 			isa = PBXGroup;
 			children = (
@@ -536,6 +546,7 @@
 		948FBC9B2B53CEFE00D9C779 /* Member */ = {
 			isa = PBXGroup;
 			children = (
+				945D1AD72B544DF900C728E2 /* Models */,
 				948FBC9F2B53CFCE00D9C779 /* Views */,
 				948FBC9C2B53CF0700D9C779 /* ViewControllers */,
 			);
@@ -1510,6 +1521,7 @@
 				941B1B852B510F3C00D28EBA /* CreateTravelResponseDTO.swift in Sources */,
 				F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */,
 				945234492B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift in Sources */,
+				945D1AD92B544E0D00C728E2 /* MemberTestStruct.swift in Sources */,
 				F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
 				F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */,

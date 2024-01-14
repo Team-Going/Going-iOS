@@ -45,10 +45,11 @@ final class MemberProgressView: UIView {
     
     // MARK: - Life Cycle
 
-    init(frame: CGRect, travelData: TravelAnswerStruct) {
+    init(frame: CGRect, testData: MemberTestStruct) {
         super.init(frame: frame)
-        self.leftOption.text = travelData.leftOption
-        self.rightOption.text = travelData.rightOption
+        self.questionLabel.text = testData.questionContent
+        self.leftOption.text = testData.optionContent.leftOption
+        self.rightOption.text = testData.optionContent.rightOption
         
         setStyle()
         setHierarchy()
