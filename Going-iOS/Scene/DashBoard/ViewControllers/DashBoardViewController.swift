@@ -245,9 +245,6 @@ extension DashBoardViewController: UICollectionViewDataSource {
 
 extension DashBoardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
-        let selectedRowIndex = indexPath.row
-        let selectedTravel = filteredTravelList[selectedRowIndex]
         let vc = OurToDoViewController()
         tripId = travelListDummy?.trips[indexPath.row].tripID ?? 0
         vc.tripId = tripId
