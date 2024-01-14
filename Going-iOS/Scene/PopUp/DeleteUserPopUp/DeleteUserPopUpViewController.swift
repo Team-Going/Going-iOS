@@ -41,7 +41,7 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
         
         setHierarchy()
         setLayout()
-
+        
     }
 }
 
@@ -58,7 +58,7 @@ private extension DeleteUserPopUpViewController {
             $0.center.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(270))
             $0.height.equalTo(ScreenUtils.getHeight(140))
-
+            
         }
         
         deleteUserLabel.snp.makeConstraints {
@@ -88,7 +88,7 @@ private extension DeleteUserPopUpViewController {
     
     @objc
     func delteUserButtonTapped() {
-        print("회원탈퇴 네트워크 통신")
+        deleteUserInfo()
     }
     
     @objc
@@ -96,3 +96,42 @@ private extension DeleteUserPopUpViewController {
         self.dismiss(animated: false)
     }
 }
+
+extension DeleteUserPopUpViewController {
+    func deleteUserInfo() {
+        Task {
+            do {
+                try await AuthService.shared.deleteUserInfo()
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: {
+                        //루트뷰 설정
+                       
+                    } )
+                }
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+}
+
+extension DeleteUserPopUpViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .reIssueJWT:
+            print("재발급")
+        case .serverError:
+            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
+        case .userState(_, let message):
+            DOOToast.show(message: message, insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+        
+    }
+}
+
+
+

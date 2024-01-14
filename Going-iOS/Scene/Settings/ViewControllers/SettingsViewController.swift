@@ -30,7 +30,7 @@ final class SettingsViewController: UIViewController {
         btn.titleLabel?.font = .pretendard(.detail2_regular)
         btn.setTitleColor(.gray300, for: .normal)
         btn.setImage(ImageLiterals.Settings.btnResign, for: .normal)
-        btn.addTarget(self, action: #selector(resignButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(deleteUserButtonTapped), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
         return btn
     }()
@@ -118,7 +118,7 @@ private extension SettingsViewController {
     // MARK: - @objc Methods
     
     @objc
-    func resignButtonTapped() {
+    func deleteUserButtonTapped() {
         let nextVC = DeleteUserPopUpViewController()
         self.present(nextVC, animated: false)
     }

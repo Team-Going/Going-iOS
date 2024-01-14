@@ -74,8 +74,15 @@ final class AuthService: Serviceable {
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
         try dataDecodeAndhandleErrorCode(data: data, decodeType: LogoutResponseDTO.self)
-
-
+    }
+    
+    func deleteUserInfo() async throws {
+        
+        let urlRequest = try NetworkRequest(path: "/api/users/withdraw", httpMethod: .delete).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        try dataDecodeAndhandleErrorCode(data: data, decodeType: BasicResponseDTO.self)
     }
     
     
