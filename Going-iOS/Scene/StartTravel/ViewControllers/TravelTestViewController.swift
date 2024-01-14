@@ -43,7 +43,7 @@ final class TravelTestViewController: UIViewController {
     private lazy var travelTestCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private lazy var nextButton: DOOButton = {
-        let btn = DOOButton(type: .unabled, title: "저장하고 여행 시작하기")
+        let btn = DOOButton(type: .unabled, title: "여행 만들기")
         btn.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return btn
     }()
@@ -147,13 +147,10 @@ private extension TravelTestViewController {
     
     // MARK: - @objc Methods
     
-    // TODO: - 분기처리 필요
-    
     @objc
     func nextButtonTapped() {
         toDTO()
         createTravel()
-
     }
 }
 
