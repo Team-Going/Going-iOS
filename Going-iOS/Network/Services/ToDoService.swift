@@ -37,4 +37,12 @@ final class ToDoService: Serviceable {
         
         try dataDecodeAndhandleErrorCode(data: data, decodeType: GetCompleteToDoResponseDTO.self)
     }
+    
+    func getIncompleteToDoData(todoId: Int) async throws {
+        let urlRequest = try NetworkRequest(path: "/api/trips/todos/\(todoId)/incomplete", httpMethod: .get).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        try dataDecodeAndhandleErrorCode(data: data, decodeType: GetCompleteToDoResponseDTO.self)
+    }
 }
