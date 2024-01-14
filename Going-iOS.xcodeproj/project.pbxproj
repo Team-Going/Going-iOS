@@ -1696,6 +1696,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HV6BJXV65Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Going-iOS/Global/Settings/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = doorip;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라를 사용하겠습니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "앨범에 사진을 추가하겠습니다.";
@@ -1734,6 +1735,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HV6BJXV65Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Going-iOS/Global/Settings/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = doorip;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라를 사용하겠습니다.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "앨범에 사진을 추가하겠습니다.";
