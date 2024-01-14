@@ -46,14 +46,12 @@ final class OurToDoViewController: UIViewController {
     private let emptyView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
-        view.isHidden = true
         return view
     }()
     private let emptyViewIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.MyToDo.emptyViewIcon
         imageView.tintColor = .gray100
-        imageView.isHidden = true
         return imageView
     }()
     private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi),
@@ -90,7 +88,7 @@ final class OurToDoViewController: UIViewController {
         }
     }
     
-    var detailToDoData: DetailToDoAppData = DetailToDoAppData.EmptyData
+    var detailToDoData: DetailToDoAppData = DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
     
     // MARK: - Life Cycle
     
@@ -119,7 +117,6 @@ final class OurToDoViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         loadData()
         setGradient()
-        setEmptyView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -179,7 +176,25 @@ private extension OurToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
-        setEmptyView()
+        emptyView.snp.makeConstraints {
+            $0.top.equalTo(ourToDoHeaderView.snp.bottom)
+            $0.bottom.equalTo(contentView)
+            $0.leading.trailing.equalToSuperview()
+        }
+        emptyViewIconImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(40))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(100))
+        }
+        emptyViewLabel.snp.makeConstraints {
+            $0.top.equalTo(emptyViewIconImageView.snp.bottom).offset(ScreenUtils.getHeight(8))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
+        }
+        ourToDoCollectionView.snp.makeConstraints {
+            $0.top.equalTo(ourToDoHeaderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(contentView)
+            $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
+         }
         stickyOurToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.width.equalTo(scrollView)
@@ -195,8 +210,8 @@ private extension OurToDoViewController {
     
     func loadData() {
         ourToDoCollectionView.reloadData()
-//        ourToDoCollectionView.layoutIfNeeded()
-        
+        self.setEmptyView()
+
         // Update the constraint based on the new content size
         DispatchQueue.main.async {
             self.ourToDoCollectionView.snp.remakeConstraints {
@@ -216,6 +231,7 @@ private extension OurToDoViewController {
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         tripMiddleView.isUserInteractionEnabled = true
+        emptyView.backgroundColor = .white000
         ourToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         stickyOurToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
     }
@@ -288,29 +304,17 @@ private extension OurToDoViewController {
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
     func setEmptyView() {
-        //        if self.ourToDoData?.ourToDo.isEmpty ?? true {
-        //            emptyView.snp.makeConstraints {
-        //                $0.top.equalTo(ourToDoHeaderView.snp.bottom)
-        //                $0.bottom.equalTo(contentView)
-        //                $0.leading.trailing.equalToSuperview()
-        //            }
-        //            emptyViewIconImageView.snp.makeConstraints {
-        //                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(40))
-        //                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(100))
-        //            }
-        //            emptyViewLabel.snp.makeConstraints {
-        //                $0.top.equalTo(emptyViewIconImageView.snp.bottom).offset(ScreenUtils.getHeight(8))
-        //                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
-        //            }
-        //            emptyView.backgroundColor = .white000
-        //        }else {
-        ourToDoCollectionView.snp.makeConstraints {
-            $0.top.equalTo(ourToDoHeaderView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(contentView)
-            $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
-         }
-//        }
+        if self.ourToDoData?.count != 0 {
+            self.emptyView.isHidden = true
+            self.emptyViewIconImageView.isHidden = true
+            self.emptyViewLabel.isHidden = true
+            self.ourToDoCollectionView.isHidden = false
+        }else {
+            self.emptyView.isHidden = false
+            self.emptyViewIconImageView.isHidden = false
+            self.emptyViewLabel.isHidden = false
+            self.ourToDoCollectionView.isHidden = true
+        }
     }
     
     // MARK: - objc method
@@ -457,7 +461,6 @@ extension OurToDoViewController {
         Task(priority: .high) {
             do {
                 self.headerData = try await OurToDoService.shared.getOurToDoHeader(tripId: 1)
-//                headerData = myToDoHeaderData
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -471,8 +474,6 @@ extension OurToDoViewController {
         Task {
             do {
                 self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: tripId, category: "our", progress: progress)
-//                self.ourToDoData = ourToDoData
-                print(self.ourToDoData)
             }
             catch {
                 guard let error = error as? NetworkError else { return }

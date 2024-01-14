@@ -27,13 +27,9 @@ final class SplashViewController: UIViewController {
         
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        checkUserStatus()
-    }
     
     override func viewDidAppear(_ animated: Bool) {
-        pushActionBasedOnPermission()
-
+        checkUserStatus()
     }
 }
 
@@ -56,20 +52,6 @@ private extension SplashViewController {
         }
     }
     
-    func pushActionBasedOnPermission() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            if UserDefaults.standard.bool(forKey: "photoPermissionKey") {
-                // 권한이 설정된 경우의 동작
-                print("설정 가능")
-
-            } else {
-                // 권한이 거부된 경우의 동작
-                print("설정 불가능")
-
-            }
-        }
-       
-    }
 }
 
 extension SplashViewController: ViewControllerServiceable {
@@ -95,7 +77,7 @@ extension SplashViewController: ViewControllerServiceable {
         case .reIssueJWT:
             //카카오JWT재발급 API호출 후, 받아온 accescc토큰으로 다시 원래 API호출
             DOOToast.show(message: "재발급통신하자", insetFromBottom: 80)
-
+            
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }
@@ -104,7 +86,7 @@ extension SplashViewController: ViewControllerServiceable {
 
 extension SplashViewController {
     func checkUserStatus() {
-
+        
         guard UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) != nil else {
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
@@ -113,6 +95,7 @@ extension SplashViewController {
         
         Task {
             do {
+                //
                 try await OnBoardingService.shared.getSplashInfo()
                 let nextVC = DashBoardViewController()
                 self.navigationController?.pushViewController(nextVC, animated: true)

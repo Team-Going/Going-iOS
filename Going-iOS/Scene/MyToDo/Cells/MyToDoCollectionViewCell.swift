@@ -198,7 +198,7 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
-        let data = self.myToDoData ?? ToDoAppData.EmptyData
+        let data = self.myToDoData ?? ToDoAppData(todoId: 0, title: "", endDate: "", allocators: [], secret: false)
         
         if data.secret {
             managerCell.managerData = "혼자할일"

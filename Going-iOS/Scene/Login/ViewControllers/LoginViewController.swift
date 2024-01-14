@@ -33,7 +33,6 @@ final class LoginViewController: UIViewController {
                         let nextVC = DashBoardViewController()
                         self.navigationController?.pushViewController(nextVC, animated: true)
                     } else {
-                        
                         //성향테스트스플래시뷰로 이동
                         let nextVC = UserTestSplashViewController()
 //                        nextVC.socialToken = self.socialToken
@@ -46,7 +45,6 @@ final class LoginViewController: UIViewController {
                     handleError(error)
                 }
             }
-            
         }
     }
     

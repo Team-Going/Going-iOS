@@ -43,7 +43,6 @@ final class UserTestResultViewController: UIViewController {
     private let resultImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = ImageLiterals.UserTestTypeCharacter.aeiCharac
         imageView.backgroundColor = .white000
         return imageView
     }()
@@ -237,7 +236,7 @@ extension UserTestResultViewController {
                 let profileData = try await TravelService.shared.getProfileInfo()
                 self.testResultIndex = profileData.result
                 guard let index = testResultIndex else { return }
-                self.testResultData = UserTypeTestResultAppData.dummy()[index]
+                self.testResultData = UserTypeTestResultAppData.dummy()[profileData.result]
             }
             catch {
                 guard let error = error as? NetworkError else { return }

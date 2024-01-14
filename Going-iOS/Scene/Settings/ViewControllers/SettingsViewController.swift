@@ -30,7 +30,7 @@ final class SettingsViewController: UIViewController {
         btn.titleLabel?.font = .pretendard(.detail2_regular)
         btn.setTitleColor(.gray300, for: .normal)
         btn.setImage(ImageLiterals.Settings.btnResign, for: .normal)
-        btn.addTarget(self, action: #selector(resignButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(deleteUserButtonTapped), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
         return btn
     }()
@@ -118,9 +118,13 @@ private extension SettingsViewController {
     // MARK: - @objc Methods
     
     @objc
-    func resignButtonTapped() {
-        let nextVC = DeleteUserPopUpViewController()
-        self.present(nextVC, animated: false)
+    func deleteUserButtonTapped() {
+        let deleteVC = DeleteUserPopUpViewController()
+        deleteVC.deleteUserDismissCompletion = { [weak self] in
+            guard let self else {return}
+            self.navigationController?.popToRootViewController(animated: false)
+        }
+        self.navigationController?.present(deleteVC, animated: false)
     }
 }
 
@@ -159,7 +163,11 @@ extension SettingsViewController: UICollectionViewDelegate {
             self.present(aboutServiceVC, animated: true)
         case "로그아웃":
             let logOutVC = LogOutPopUpViewController()
-            self.present(logOutVC, animated: false)
+            logOutVC.logoutDismissCompletion = { [weak self] in
+                guard let self else {return}
+                self.navigationController?.popToRootViewController(animated: false)
+            }
+            self.navigationController?.present(logOutVC, animated: false)
         default:
             break
         }
