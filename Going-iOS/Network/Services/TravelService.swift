@@ -51,6 +51,17 @@ final class TravelService: Serviceable {
         else { return DashBoardResponseSturct(name: "", trips: []) }
         return model
     }
+    
+    func postJoinTravelTest(request: JoinTravelTestRequestStruct, tripId: Int) async throws -> JoinTravelTestResponseStruct {
+        let jsonEncoder = JSONEncoder()
+        let body = try jsonEncoder.encode(request)
+        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)/entry",
+                                            httpMethod: .post,
+                                            body: body).makeURLRequest(networkType: .withJWT)
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        guard let model = try dataDecodeAndhandleErrorCode(data: data, 
+                                                           decodeType: JoinTravelTestResponseStruct.self) 
+        else { return JoinTravelTestResponseStruct(tripId: 0) }
         return model
     }
 }
