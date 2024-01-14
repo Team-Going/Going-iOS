@@ -29,4 +29,12 @@ final class ToDoService: Serviceable {
         }
         return model.toAppData()
     }
+    
+    func getCompleteToDoData(todoId: Int) async throws {
+        let urlRequest = try NetworkRequest(path: "/api/trips/todos/\(todoId)/complete", httpMethod: .get).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        try dataDecodeAndhandleErrorCode(data: data, decodeType: GetCompleteToDoResponseDTO.self)
+    }
 }
