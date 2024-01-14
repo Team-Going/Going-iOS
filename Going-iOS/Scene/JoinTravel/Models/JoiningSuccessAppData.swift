@@ -14,7 +14,3 @@ struct JoiningSuccessAppData: AppData {
     let endDate: String
     let dueDate: Int
 }
-
-extension JoiningSuccessAppData {
-    static var EmptyData = JoiningSuccessAppData(travelId: 0, travelName: "", startDate: "", endDate: "", dueDate: 0)
-}
