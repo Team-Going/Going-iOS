@@ -11,15 +11,15 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
 
-    var travelDetailData: TravelDetailStruct? {
+    var travelDetailData: Trip? {
         didSet {
             guard let detailData = travelDetailData else { return }
             
-            self.travelTitleLabel.text = detailData.travelTitle
+            self.travelTitleLabel.text = detailData.title
             self.travelDateLabel.text = "\(detailData.startDate) - \(detailData.endDate)"
             self.travelStateLabel.text = detailData.travelStatus
             
-            if detailData.dueDate < 0 { // 완료된 여행
+            if detailData.day < 0 { // 완료된 여행
                 self.travelTitleLabel.textColor = .gray300
                 self.travelDateLabel.textColor = .gray200
                 self.calendarImageView.tintColor = .gray200

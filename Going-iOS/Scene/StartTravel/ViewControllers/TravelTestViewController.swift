@@ -13,10 +13,23 @@ final class TravelTestViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let travelTestDummy = TravelTestQuestionStruct.travelTestDummy
+    private let travelTestQuestionDummy = TravelTestQuestionStruct.travelTestDummy
     
+    var createRequestData: CreateTravelRequestAppData?
+    var responseData: CreateTravelResponseAppData? {
+        didSet {
+            DispatchQueue.main.async {
+                let vc = CreatingSuccessViewController()
+                vc.createTravelResponseData = self.responseData
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    private var testTravelRequestDTO = CreateTravelRequestDTO(title: "", startDate: "", endDate: "", styleA: 0, styleB: 0, styleC: 0, styleD: 0, styleE: 0)
+
     /// 선택된 답변을 저장할 배열
-    private lazy var selectedAnswers: [Int?] = Array(repeating: nil, count: travelTestDummy.count)
+    private lazy var selectedAnswers: [Int?] = Array(repeating: nil, count: travelTestQuestionDummy.count)
     
     // MARK: - UI Properties
     
@@ -41,7 +54,7 @@ final class TravelTestViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setStyle()
         setHierarchy()
         setLayout()
@@ -138,9 +151,9 @@ private extension TravelTestViewController {
     
     @objc
     func nextButtonTapped() {
-        let vc = OurToDoViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        print(selectedAnswers)
+        toDTO()
+        createTravel()
+
     }
 }
 
@@ -150,12 +163,12 @@ extension TravelTestViewController: UICollectionViewDelegate { }
 
 extension TravelTestViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return travelTestDummy.count
+        return travelTestQuestionDummy.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
-        cell.travelTestData = travelTestDummy[indexPath.row]
+        cell.travelTestData = travelTestQuestionDummy[indexPath.row]
         cell.delegate = self
         return cell
     }
@@ -186,6 +199,39 @@ extension TravelTestViewController: TravelTestCollectionViewCellDelegate {
         if let indexPath = travelTestCollectionView.indexPath(for: cell) {
             selectedAnswers[indexPath.row] = selectedAnswer
             checkIfAllAnswersCompleted()
+        }
+    }
+}
+
+// MARK: - Network
+
+extension TravelTestViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
+        print(error)
+    }
+}
+
+extension TravelTestViewController {
+    func createTravel() {
+        Task {
+            do {
+                self.responseData = try await TravelService.shared.postCreateTravel(request: testTravelRequestDTO)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+    
+    func toDTO() {
+        self.createRequestData?.a = max((selectedAnswers[0] ?? 0) - 1, 0)
+        self.createRequestData?.b = max((selectedAnswers[1] ?? 0) - 1, 0)
+        self.createRequestData?.c = max((selectedAnswers[2] ?? 0) - 1, 0)
+        self.createRequestData?.d = max((selectedAnswers[3] ?? 0) - 1, 0)
+        self.createRequestData?.e = max((selectedAnswers[4] ?? 0) - 1, 0)
+        if let data = self.createRequestData?.toDTOData() {
+            testTravelRequestDTO = data
         }
     }
 }
