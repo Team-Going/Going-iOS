@@ -71,7 +71,7 @@ final class MyToDoViewController: UIViewController {
     // MARK: - Properties
     
     private var index: Int = 0
-//    var myToDoData: [ToDoAppData]?
+    private var progress: String = "incomplete"
     var incompletedData: [ToDoAppData] = []
     var completedData: [ToDoAppData] = []
     var detailToDoData: DetailToDoAppData = DetailToDoAppData.EmptyData
@@ -82,11 +82,9 @@ final class MyToDoViewController: UIViewController {
             self.tripHeaderView.myToDoHeaderData = [data.name, "\(data.count)"]
         }
     }
-    private var todoData: [ToDoAppData]? {
+    private var myToDoData: [ToDoAppData]? {
         didSet {
-            guard let data = todoData else { return }
-            incompletedData = data
-            completedData = data
+            loadMyToDoData()
         }
     }
 
@@ -98,9 +96,8 @@ final class MyToDoViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         setHierachy()
         setDelegate()
+        getToDoData(progress: "complete")
         getMyToDoHeaderData()
-        getToDoData(progress: "incomplete")
-//        toHeaderAppData()
         registerCell()
         setLayout()
         setStyle()
@@ -110,7 +107,7 @@ final class MyToDoViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        loadData()
+        loadMyToDoData()
         setEmptyView()
     }
 }
@@ -211,44 +208,50 @@ private extension MyToDoViewController {
         self.myToDoCollectionView.register(MyToDoCollectionViewCell.self, forCellWithReuseIdentifier: MyToDoCollectionViewCell.identifier)
     }
     
-    func loadData() {
-        let progress = self.myToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 ? "incomplete" : "complete"
-        getToDoData(progress: progress)
-        // 데이터 로드 후에 호출되는 메서드 또는 클로저에서
-        self.myToDoCollectionView.reloadData()
-        myToDoCollectionView.layoutIfNeeded()
+    func loadMyToDoData() {
+        myToDoCollectionView.reloadData()
         
-        // Update the constraint based on the new content size
-        myToDoCollectionView.snp.updateConstraints {
-            $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
+        DispatchQueue.main.async {
+            self.myToDoCollectionView.snp.remakeConstraints {
+                $0.top.equalTo(self.myToDoHeaderView.snp.bottom)
+                $0.leading.trailing.equalToSuperview()
+                $0.bottom.equalTo(self.contentView)
+                $0.height.equalTo(self.myToDoCollectionView.contentSize.height)
+             }
+            self.myToDoCollectionView.layoutIfNeeded()
         }
     }
     
     /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
     func setToDoView(before: String, naviBarTitle: String, isActivate: Bool) {
 //        detailToDoData = toDetailAppData()
-        getDetailToDoData()
+//        getDetailToDoData()
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
         todoVC.isActivateView = isActivate
         todoVC.data = detailToDoData
-//        todoVC.manager = detailToDoData.allocators
+        todoVC.manager = detailToDoData.allocators
         todoVC.beforeVC = before
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
     func checkButtonTapped(index: Int, image: UIImage) {
-        var todo: ToDoAppData = ToDoAppData.EmptyData
+//        var todo: ToDoAppData = ToDoAppData.EmptyData
+        let todo = self.myToDoData?[index] ?? ToDoAppData(todoId: 0, title: "", endDate: "", allocators: [], secret: false)
         if image == ImageLiterals.MyToDo.btnCheckBoxComplete {
-            todo = completedData[index]
-            incompletedData.append(todo)
-            completedData.remove(at: index)
+            self.myToDoData?.remove(at: index)
+//            todo = self.myToDoData?[index]
+//            incompletedData.append(todo)
+//            completedData.remove(at: index)
+
         } else if image == ImageLiterals.MyToDo.btnCheckBoxIncomplete {
-            todo = incompletedData[index]
-            completedData.append(todo)
-            incompletedData.remove(at: index)
+            self.myToDoData?.remove(at: index)
+//            todo = self.myToDoData?[index]
+//            completedData.append(todo)
+//            incompletedData.remove(at: index)
+            getCompleteToDoData(todoId: todo.todoId)
         }
-        loadData()
+//        loadMyToDoData()
     }
     
     func setTapBarImage() {
@@ -258,44 +261,30 @@ private extension MyToDoViewController {
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
     func setEmptyView() {
-        if self.todoData?.isEmpty ?? true {
-            emptyView.snp.makeConstraints {
-                $0.top.equalTo(myToDoHeaderView.snp.bottom)
-                $0.bottom.equalTo(contentView)
-                $0.leading.trailing.equalToSuperview()
-            }
-            emptyViewIcon.snp.makeConstraints {
-                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(150))
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(114))
-            }
-            emptyViewLabel.snp.makeConstraints {
-                $0.top.equalTo(emptyViewIcon.snp.bottom).offset(ScreenUtils.getHeight(16))
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
-            }
-            emptyView.backgroundColor = .white000
-        }else {
+//        if self.myToDoData?.isEmpty ?? true {
+//            emptyView.snp.remakeConstraints {
+//                $0.top.equalTo(myToDoHeaderView.snp.bottom)
+//                $0.bottom.equalTo(contentView)
+//                $0.leading.trailing.equalToSuperview()
+//            }
+//            emptyViewIcon.snp.makeConstraints {
+//                $0.top.equalToSuperview().inset(ScreenUtils.getHeight(150))
+//                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(114))
+//            }
+//            emptyViewLabel.snp.makeConstraints {
+//                $0.top.equalTo(emptyViewIcon.snp.bottom).offset(ScreenUtils.getHeight(16))
+//                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
+//            }
+//            emptyView.backgroundColor = .white000
+//        }else {
             myToDoCollectionView.snp.makeConstraints {
                 $0.top.equalTo(myToDoHeaderView.snp.bottom)
                 $0.leading.trailing.equalToSuperview()
                 $0.bottom.equalTo(contentView)
                 $0.height.equalTo(myToDoCollectionView.contentSize.height).priority(.low)
-            }
+//            }
         }
     }
-    
-//    func toHeaderAppData() -> MyToDoHeaderAppData {
-//        let dummy = MyToDoHeaderAppData.dummy()
-//        return dummy
-//    }
-    
-//    func toToDoAppData() -> [ToDoAppData] {
-//        let dummy = ToDoAppData.dummy()
-//        return dummy
-//    }
-    
-//    func toDetailAppData() -> DetailToDoAppData {
-//        return DetailToDoAppData.dummy()
-//    }
     
     // MARK: - objc Method
 
@@ -314,8 +303,11 @@ private extension MyToDoViewController {
         } else {
             myToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex
         }
-        
-        loadData()
+        if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            getToDoData(progress: "incomplete")
+        } else {
+            getToDoData(progress: "complete")
+        }
     }
     
     //TODO: - 서버통신 데이터 수정 필요
@@ -381,12 +373,7 @@ extension MyToDoViewController: UICollectionViewDelegate {}
 extension MyToDoViewController: UICollectionViewDataSource{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
-            return self.incompletedData.count
-        } else {
-            return self.completedData.count
-        }
+        return myToDoData?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -395,13 +382,13 @@ extension MyToDoViewController: UICollectionViewDataSource{
         myToDoCell.delegate = self
         
         if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
-            myToDoCell.myToDoData = self.incompletedData[indexPath.row]
+            myToDoCell.myToDoData = self.myToDoData?[indexPath.row]
             myToDoCell.textColor = UIColor.gray400
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxIncomplete
             myToDoCell.index = indexPath.row
             myToDoCell.isComplete = false
         } else {
-            myToDoCell.myToDoData = self.completedData[indexPath.row]
+            myToDoCell.myToDoData = self.myToDoData?[indexPath.row]
             myToDoCell.textColor = UIColor.gray300
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxComplete
             myToDoCell.index = indexPath.row
@@ -444,8 +431,9 @@ extension MyToDoViewController {
     func getToDoData(progress: String) {
         Task {
             do {
-                let myToDoData = try await ToDoService.shared.getToDoData(tripId: 1, category: "my", progress: progress)
-                todoData = myToDoData
+                self.myToDoData = try await ToDoService.shared.getToDoData(tripId: 1, category: "my", progress: progress)
+                print(self.myToDoData)
+
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -458,14 +446,26 @@ extension MyToDoViewController {
     func getDetailToDoData() {
         Task {
             do {
-                let myDetailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: 1)
-                detailToDoData = myDetailToDoData
+                self.detailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: 1)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
                 handlingError(error)
                 print("my detail todo \(error)")
 
+            }
+        }
+    }
+    
+    func getCompleteToDoData(todoId: Int) {
+        Task {
+            do{
+                let status = try await ToDoService.shared.getCompleteToDoData(todoId: todoId)
+                print(status)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handlingError(error)
             }
         }
     }

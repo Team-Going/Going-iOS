@@ -465,7 +465,7 @@ extension OurToDoViewController {
             do {
                 self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: 1, category: "our", progress: progress)
 //                self.ourToDoData = ourToDoData
-                print(self.ourToDoData)
+//                print(self.ourToDoData)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
