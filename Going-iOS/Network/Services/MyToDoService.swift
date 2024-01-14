@@ -21,7 +21,7 @@ final class MyToDoService: Serviceable {
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         /// 3. 에러 핸들링
         guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: GetMyToDoResponseDTO.self) else {
-            return MyToDoHeaderAppData.EmptyData
+            return MyToDoHeaderAppData(name: "", count: 0)
         }
         
         return model.toAppData()

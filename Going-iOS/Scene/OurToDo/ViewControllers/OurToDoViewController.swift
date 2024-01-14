@@ -89,7 +89,7 @@ final class OurToDoViewController: UIViewController {
         }
     }
     
-    var detailToDoData: DetailToDoAppData = DetailToDoAppData.EmptyData
+    var detailToDoData: DetailToDoAppData = DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
     
     // MARK: - Life Cycle
     

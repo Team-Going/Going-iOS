@@ -25,7 +25,7 @@ final class ToDoService: Serviceable {
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
         guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: GetDetailToDoResponseDTO.self) else {
-            return DetailToDoAppData.EmptyData
+            return DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
         }
         return model.toAppData()
     }

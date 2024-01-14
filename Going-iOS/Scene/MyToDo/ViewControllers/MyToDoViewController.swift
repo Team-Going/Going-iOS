@@ -72,9 +72,7 @@ final class MyToDoViewController: UIViewController {
     
     private var index: Int = 0
     private var progress: String = "incomplete"
-    var incompletedData: [ToDoAppData] = []
-    var completedData: [ToDoAppData] = []
-    var detailToDoData: DetailToDoAppData = DetailToDoAppData.EmptyData
+    var detailToDoData: DetailToDoAppData = DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
     private var headerData: MyToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
