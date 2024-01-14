@@ -32,13 +32,13 @@
 		9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */; };
 		946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */; };
 		946190A82B47FAC100A38A42 /* JoinTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */; };
-		94747F592B4FE13400510226 /* OurTestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94747F582B4FE13400510226 /* OurTestResultView.swift */; };
-		94747F5B2B4FE15C00510226 /* TestProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94747F5A2B4FE15C00510226 /* TestProgressView.swift */; };
 		94761A072B4DD18B00D7C589 /* LogOutPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94761A062B4DD18B00D7C589 /* LogOutPopUpViewController.swift */; };
 		94761A0A2B4E5F5200D7C589 /* CreateTravelStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94761A092B4E5F5200D7C589 /* CreateTravelStruct.swift */; };
 		9478E5362B4EF4850027606D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9478E5352B4EF4850027606D /* WebViewController.swift */; };
 		9478E53C2B4EFCB90027606D /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9478E53B2B4EFCB90027606D /* MyProfileViewController.swift */; };
-		9486248F2B4F6A8600195BEE /* FriendsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9486248E2B4F6A8600195BEE /* FriendsInfoViewController.swift */; };
+		948FBC9E2B53CF1700D9C779 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBC9D2B53CF1700D9C779 /* MemberViewController.swift */; };
+		948FBCA32B53D05700D9C779 /* MemberProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA22B53D05700D9C779 /* MemberProgressView.swift */; };
+		948FBCA52B53D07900D9C779 /* MemberTestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */; };
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
 		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
 		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
@@ -202,13 +202,13 @@
 		9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestQuestionStruct.swift; sourceTree = "<group>"; };
 		946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningSuccessViewController.swift; sourceTree = "<group>"; };
 		946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelViewController.swift; sourceTree = "<group>"; };
-		94747F582B4FE13400510226 /* OurTestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurTestResultView.swift; sourceTree = "<group>"; };
-		94747F5A2B4FE15C00510226 /* TestProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestProgressView.swift; sourceTree = "<group>"; };
 		94761A062B4DD18B00D7C589 /* LogOutPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutPopUpViewController.swift; sourceTree = "<group>"; };
 		94761A092B4E5F5200D7C589 /* CreateTravelStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelStruct.swift; sourceTree = "<group>"; };
 		9478E5352B4EF4850027606D /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9478E53B2B4EFCB90027606D /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
-		9486248E2B4F6A8600195BEE /* FriendsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsInfoViewController.swift; sourceTree = "<group>"; };
+		948FBC9D2B53CF1700D9C779 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
+		948FBCA22B53D05700D9C779 /* MemberProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberProgressView.swift; sourceTree = "<group>"; };
+		948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTestResultView.swift; sourceTree = "<group>"; };
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
 		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -528,6 +528,32 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		948FBC9B2B53CEFE00D9C779 /* Member */ = {
+			isa = PBXGroup;
+			children = (
+				948FBC9F2B53CFCE00D9C779 /* Views */,
+				948FBC9C2B53CF0700D9C779 /* ViewControllers */,
+			);
+			path = Member;
+			sourceTree = "<group>";
+		};
+		948FBC9C2B53CF0700D9C779 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				948FBC9D2B53CF1700D9C779 /* MemberViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		948FBC9F2B53CFCE00D9C779 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				948FBCA22B53D05700D9C779 /* MemberProgressView.swift */,
+				948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		94C2C9A22B46FE3500B92CAC /* CreateTravel */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,8 +711,6 @@
 				CA8CD6822B46B72E00CFDFBF /* TripMiddleView.swift */,
 				CA8CD6842B46B7C100CFDFBF /* OurToDoHeaderView.swift */,
 				CA8CD6862B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift */,
-				94747F582B4FE13400510226 /* OurTestResultView.swift */,
-				94747F5A2B4FE15C00510226 /* TestProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -695,7 +719,6 @@
 			isa = PBXGroup;
 			children = (
 				CA8CD67E2B46B64000CFDFBF /* OurToDoViewController.swift */,
-				9486248E2B4F6A8600195BEE /* FriendsInfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1128,6 +1151,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				948FBC9B2B53CEFE00D9C779 /* Member */,
 				9478E5392B4EFC9E0027606D /* MyProfile */,
 				CA3EEE2E2B4D99F800C23A41 /* TabBar */,
 				F44461072B4D8E9000674D74 /* PopUp */,
@@ -1374,6 +1398,7 @@
 				941B1B782B50EB0C00D28EBA /* CodeResponseDTO.swift in Sources */,
 				F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */,
 				94C7DDBA2B4C77FF00541567 /* SettingsItem.swift in Sources */,
+				948FBC9E2B53CF1700D9C779 /* MemberViewController.swift in Sources */,
 				9457F04C2B4853AC009ACF25 /* TravelTestViewController.swift in Sources */,
 				CA8CD6912B46B9A100CFDFBF /* FriendProfileData.swift in Sources */,
 				F4BEB4CF2B4838B60074B1B2 /* TestResultTicketView.swift in Sources */,
@@ -1386,6 +1411,7 @@
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
+				948FBCA32B53D05700D9C779 /* MemberProgressView.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
 				94C7DDB52B4C756600541567 /* SettingsCollectionViewCell.swift in Sources */,
@@ -1402,7 +1428,6 @@
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
 				F44D98662B4EB7F700341893 /* NetworkRequest.swift in Sources */,
 				F44D985E2B4EB6E000341893 /* HTTPMethod.swift in Sources */,
-				9486248F2B4F6A8600195BEE /* FriendsInfoViewController.swift in Sources */,
 				945234472B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift in Sources */,
 				CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
@@ -1445,6 +1470,7 @@
 				F45CA15E2B52E1DA00F3790C /* LogoutResponseDTO.swift in Sources */,
 				CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */,
 				F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */,
+				948FBCA52B53D07900D9C779 /* MemberTestResultView.swift in Sources */,
 				F44D986C2B4ECACC00341893 /* Token.swift in Sources */,
 				CA3EEE502B5073D300C23A41 /* ToDoAppData.swift in Sources */,
 				941B1B872B510FB800D28EBA /* CreateTravelRequestAppData.swift in Sources */,
@@ -1475,11 +1501,9 @@
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				941B1B852B510F3C00D28EBA /* CreateTravelResponseDTO.swift in Sources */,
 				F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */,
-				94747F592B4FE13400510226 /* OurTestResultView.swift in Sources */,
 				945234492B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift in Sources */,
 				F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
-				94747F5B2B4FE15C00510226 /* TestProgressView.swift in Sources */,
 				F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */,
 				F45CA1652B53063600F3790C /* TravelTypeTestRequestDTO.swift in Sources */,
 				F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */,

@@ -1,15 +1,16 @@
 //
-//  TestProgressView.swift
+//  MemberProgressView.swift
 //  Going-iOS
 //
-//  Created by 윤영서 on 1/11/24.
+//  Created by 윤영서 on 1/14/24.
 //
+
 
 import UIKit
 
 import SnapKit
 
-final class TestProgressView: UIView {
+final class MemberProgressView: UIView {
     
     private let questionLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "여행 스타일")
     private let progressBarView: UIProgressView = {
@@ -39,7 +40,7 @@ final class TestProgressView: UIView {
     }
 }
 
-private extension TestProgressView {
+private extension MemberProgressView {
     func setStyle() {
         self.backgroundColor = .white000
     }

@@ -1,15 +1,15 @@
 //
-//  OurTestResultView.swift
+//  MemberTestResultView.swift
 //  Going-iOS
 //
-//  Created by 윤영서 on 1/11/24.
+//  Created by 윤영서 on 1/14/24.
 //
 
 import UIKit
 
 import SnapKit
 
-final class OurTestResultView: UIView {
+final class MemberTestResultView: UIView {
     
     private let resultStackView: UIStackView = {
         let stack = UIStackView()
@@ -18,11 +18,11 @@ final class OurTestResultView: UIView {
         stack.distribution = .equalSpacing
         return stack
     }()
-    private let progressView1 = TestProgressView()
-    private let progressView2 = TestProgressView()
-    private let progressView3 = TestProgressView()
-    private let progressView4 = TestProgressView()
-    private let progressView5 = TestProgressView()
+    private let progressView1 = MemberProgressView()
+    private let progressView2 = MemberProgressView()
+    private let progressView3 = MemberProgressView()
+    private let progressView4 = MemberProgressView()
+    private let progressView5 = MemberProgressView()
     
     private lazy var dividingLine1: UIImageView = { setLineImage() }()
     private lazy var dividingLine2: UIImageView = { setLineImage() }()
@@ -45,7 +45,7 @@ final class OurTestResultView: UIView {
     }
 }
 
-private extension OurTestResultView {
+private extension MemberTestResultView {
     func setStyle() {
         self.backgroundColor = .white000
         self.layer.cornerRadius = 6

@@ -1,15 +1,15 @@
 //
-//  FriendsInfoViewController.swift
+//  MemberViewController.swift
 //  Going-iOS
 //
-//  Created by 윤영서 on 1/11/24.
+//  Created by 윤영서 on 1/14/24.
 //
 
 import UIKit
 
 import SnapKit
 
-class FriendsInfoViewController: UIViewController {
+class MemberViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -33,7 +33,7 @@ class FriendsInfoViewController: UIViewController {
     
     private let ourTasteTitleLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "우리의 이번 여행은!")
     
-    private let ourTestResultView = OurTestResultView()
+    private let ourTestResultView = MemberTestResultView()
     
     // MARK: - Life Cycle
     
@@ -50,7 +50,7 @@ class FriendsInfoViewController: UIViewController {
 
 // MARK: - Private Extension
 
-private extension FriendsInfoViewController {
+private extension MemberViewController {
     func setStyle() {
         self.view.backgroundColor = .white000
     }
@@ -118,15 +118,11 @@ private extension FriendsInfoViewController {
     }
 }
 
-extension FriendsInfoViewController: UICollectionViewDelegateFlowLayout {
-    
-}
+extension MemberViewController: UICollectionViewDelegateFlowLayout { }
 
-extension FriendsInfoViewController: UICollectionViewDelegate {
-    
-}
+extension MemberViewController: UICollectionViewDelegate { }
 
-extension FriendsInfoViewController: UICollectionViewDataSource {
+extension MemberViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
