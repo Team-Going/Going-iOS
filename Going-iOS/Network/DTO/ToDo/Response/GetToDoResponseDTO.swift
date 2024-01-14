@@ -8,7 +8,7 @@
 import Foundation
 
 struct GetToDoResponseDTO: DTO, Response {
-    let todoID: Int
+    let todoId: Int
     let title, endDate: String
     let allocators: [Allocators]
     let secret: Bool
@@ -23,6 +23,6 @@ struct Allocators: DTO, Response {
 
 extension GetToDoResponseDTO {
     func toAppData() -> ToDoAppData {
-        return ToDoAppData(todoID: self.todoID, title: self.title, endDate: self.endDate, allocators: self.allocators, secret: self.secret)
+        return ToDoAppData(todoId: self.todoId, title: self.title, endDate: self.endDate, allocators: self.allocators, secret: self.secret)
     }
 }

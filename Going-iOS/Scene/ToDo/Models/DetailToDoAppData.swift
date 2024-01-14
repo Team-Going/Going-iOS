@@ -16,18 +16,4 @@ struct DetailToDoAppData: AppData {
 
 extension DetailToDoAppData {
     static var EmptyData = DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
-    
-    static func dummy() -> DetailToDoAppData {
-        return .init(
-            title: "할일1",
-            endDate: "2024.01.02",
-            allocators: [
-                .init(name: "희슬", isOwner: true),
-                .init(name: "희슬1", isOwner: false),
-                .init(name: "희슬2", isOwner: false),
-                .init(name: "희슬3", isOwner: false),
-            ],
-            memo: "매모지롱ㅋㅋ", 
-            secret: true)
-    }
 }

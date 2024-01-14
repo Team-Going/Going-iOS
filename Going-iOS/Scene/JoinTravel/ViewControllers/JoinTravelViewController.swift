@@ -11,13 +11,24 @@ import SnapKit
 
 final class JoinTravelViewController: UIViewController {
     
-    // TODO: - Dummy Data 생성
-    
-    // MARK: - UI Properties
+    // MARK: - Properties
     
     private var codeCheckRequestDTO = CodeRequestDTO(code: "")
+    private var codeCheckData: JoiningSuccessAppData? {
+        didSet {
+            if codeCheckData == nil {
+                codeTextField.layer.borderColor = UIColor.red500.cgColor
+                warningLabel.isHidden = false
+                characterCountLabel.textColor = .red500
+            } else {
+                let vc = JoiningSuccessViewController()
+                vc.joinSuccessData = codeCheckData
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
     
-    private var codeCheckData: JoiningSuccessAppData? = nil
+    // MARK: - UI Properties
 
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
     private let navigationUnderlineView: UIView = {
@@ -191,15 +202,7 @@ private extension JoinTravelViewController {
         codeCheckRequestDTO.code = text
         checkCode()
         
-        if codeCheckData == nil {
-            codeTextField.layer.borderColor = UIColor.red500.cgColor
-            warningLabel.isHidden = false
-            characterCountLabel.textColor = .red500
-        } else {
-            let vc = JoiningSuccessViewController()
-            vc.joinSuccessData = codeCheckData
-            navigationController?.pushViewController(vc, animated: true)
-        }
+
     }
 }
 
@@ -239,11 +242,11 @@ extension JoinTravelViewController {
     func checkCode() {
         Task {
             do {
-                let joiningSuccessData = try await TravelService.shared.postInviteCode(code: codeCheckRequestDTO)
-                self.codeCheckData = joiningSuccessData
+                self.codeCheckData = try await TravelService.shared.postInviteCode(code: codeCheckRequestDTO)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
+                codeCheckData = nil
                 handleError(error)
             }
         }
