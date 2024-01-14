@@ -12,16 +12,19 @@ struct GetOurToDoResponseDTO: DTO, Response {
     let day: Int
     let startDate, endDate: String
     let progress: Int
+    let code: String
+    let isComplete: Bool
     let participants: [Participant]
 }
 
 struct Participant: DTO, Response {
-    let participantID: Int
-    let name, result: String
+    let participantId: Int
+    let name: String
+    let result: Int
 }
 
 extension GetOurToDoResponseDTO {
     func toAppData() -> OurToDoHeaderAppData {
-        return OurToDoHeaderAppData(title: self.title, day: self.day, startDate: self.startDate, endDate: self.endDate, progress: self.progress, participants: self.participants)
+        return OurToDoHeaderAppData(title: self.title, day: self.day, startDate: self.startDate, endDate: self.endDate, progress: self.progress, code: self.code, isComplete: self.isComplete, participants: self.participants)
     }
 }

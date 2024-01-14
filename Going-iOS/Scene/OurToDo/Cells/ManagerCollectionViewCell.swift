@@ -5,7 +5,7 @@ class ManagerCollectionViewCell: UICollectionViewCell {
     // MARK: - Property
     
     static let identifier = "ManagerCollectionViewCell"
-    var manager: [String] = []
+    
     var managerData: String? {
         didSet {
             guard let managerData = managerData else {return}

@@ -74,17 +74,30 @@ private extension SplashViewController {
 
 extension SplashViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
-        
-        //프로필생성뷰
-        if error.description == "e4041" {
-            let nextVC = MakeProfileViewController()
+        switch error {
+        case .clientError(_, let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+        case .serverError:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        case .unAuthorizedError:
+            //로그인으로 보내기
+            DOOToast.show(message: "토큰이 만료되어서 다시 로그인해주세요", insetFromBottom: 80)
+            let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
-            
-            //성향테스트스플래시뷰
-        } else if error.description == "e4045" {
-            let nextVC = UserTestSplashViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
-            
+        case .userState(let code, _):
+            if code == "4041" {
+                let nextVC = MakeProfileViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            } else if code == "e4045" {
+                let nextVC = UserTestSplashViewController()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        case .reIssueJWT:
+            //카카오JWT재발급 API호출 후, 받아온 accescc토큰으로 다시 원래 API호출
+            DOOToast.show(message: "재발급통신하자", insetFromBottom: 80)
+
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }
 }

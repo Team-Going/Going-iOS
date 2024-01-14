@@ -15,6 +15,8 @@ import SnapKit
 
 final class LoginViewController: UIViewController {
     
+//회원가입으로 갈 때 필요함, 이거를 UserDefault에 가지고 있는게 좋은 지, 그냥 이런 식으로 다음 뷰컨으로 넘겨도 되는지?
+    
     var socialType: SocialPlatform?
     
     private var socialToken: String? {
@@ -24,18 +26,27 @@ final class LoginViewController: UIViewController {
             //로그인API
             Task {
                 do {
-                    let isPushToDashView = try await AuthService.shared.login(token: token, platform: platform)
-                    //true면 대시보드로 이동
-                    //false면 성향테스트스플래시뷰로 이동
-                    print(isPushToDashView)
+                    let isPushToDashView = try await AuthService.shared.postLogin(token: token, platform: platform)
                     
+                    //true면 대시보드로 이동
+                    if isPushToDashView {
+                        let nextVC = DashBoardViewController()
+                        self.navigationController?.pushViewController(nextVC, animated: true)
+                    } else {
+                        
+                        //성향테스트스플래시뷰로 이동
+                        let nextVC = UserTestSplashViewController()
+//                        nextVC.socialToken = self.socialToken
+
+                        self.navigationController?.pushViewController(nextVC, animated: true)
+                    }
                 }
                 catch {
                     guard let error = error as? NetworkError else { return }
                     handleError(error)
                 }
             }
-            kakaoLoginButton.isEnabled = true
+            
         }
     }
     
@@ -88,14 +99,22 @@ final class LoginViewController: UIViewController {
         setLayout()
         setStyle()
     }
-    
-    
 }
 
 private extension LoginViewController {
+    
+    func disableLoginButton() {
+        self.kakaoLoginButton.isEnabled = false
+        self.appleLoginButton.isEnabled = false
+    }
+    
+    func ableLoginButton() {
+        self.kakaoLoginButton.isEnabled = true
+        self.appleLoginButton.isEnabled = true
+    }
+    
     func hideNaviBar() {
         self.navigationController?.isNavigationBarHidden = true
-        
     }
     
     func setHierarchy() {
@@ -150,21 +169,21 @@ private extension LoginViewController {
     
     private func loginKakaoWithApp() {
         UserApi.shared.loginWithKakaoTalk { oAuthToken, error in
-            guard error == nil else { return }
+            guard error == nil else { 
+                self.disableLoginButton()
+                return }
             print("Login with KAKAO App Success !!")
             guard let oAuthToken = oAuthToken else { return }
             UserDefaults.standard.set(false, forKey: IsAppleLogined.isAppleLogin.rawValue)
             self.socialType = .kakao
             self.socialToken = oAuthToken.accessToken
-            
-            
         }
     }
     
     private func loginKakaoWithWeb() {
         UserApi.shared.loginWithKakaoAccount { oAuthToken, error in
             guard error == nil else {
-                self.kakaoLoginButton.isEnabled = true
+                self.disableLoginButton()
                 return }
             print("Login with KAKAO Web Success !!")
             guard let oAuthToken = oAuthToken else { return }
@@ -180,10 +199,10 @@ private extension LoginViewController {
         
         //카카오톡앱이 있으면 카카오앱으로 연결, 없으면 웹을 띄워줌
         if UserApi.isKakaoTalkLoginAvailable() {
-            kakaoLoginButton.isEnabled = false
+            disableLoginButton()
             loginKakaoWithApp()
         } else {
-            kakaoLoginButton.isEnabled = false
+            disableLoginButton()
             loginKakaoWithWeb()
         }
     }
@@ -210,15 +229,22 @@ extension LoginViewController: ViewControllerServiceable {
     
     //추후에 에러코드에 따른 토스트 메세지 구현해야됨
     func handleError(_ error: NetworkError) {
-        switch error {
-        case .clientError(let message):
-            DOOToast.show(message: "\(message)", insetFromBottom: 80)
-        default:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
+        
+        if error.description == "e4041" {
+            let nextVC = MakeProfileViewController()
+            nextVC.socialToken = self.socialToken
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }
+        
+        ableLoginButton()
+//        switch error {
+//        case .clientError(let message):
+//            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+//        default:
+//            DOOToast.show(message: error.description, insetFromBottom: 80)
+//        }
     }
 }
-
 //애플로그인
 extension LoginViewController: ASAuthorizationControllerDelegate {
     
@@ -227,9 +253,13 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let userIdentifier = credential.identityToken else {
+                //애플로그인 실패
                 DOOToast.show(message: "애플로그인에 실패하셨습니다.", insetFromBottom: 80)
                 return
             }
+            
+            //애플로그인 성공
+            //애플로그인유저임을 인식
             UserDefaults.standard.set(true, forKey: IsAppleLogined.isAppleLogin.rawValue)
             self.socialType = .apple
             self.socialToken = String(data: userIdentifier, encoding: .utf8)

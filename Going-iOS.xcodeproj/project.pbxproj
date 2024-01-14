@@ -60,6 +60,7 @@
 		CA3EEE532B50740000C23A41 /* GetToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE522B50740000C23A41 /* GetToDoResponseDTO.swift */; };
 		CA3EEE552B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */; };
 		CA3EEE572B50B0B600C23A41 /* DetailToDoAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */; };
+		CA3EEE5B2B51711700C23A41 /* GetToDoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE5A2B51711700C23A41 /* GetToDoRequestDTO.swift */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
 		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
@@ -105,6 +106,8 @@
 		F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D98672B4EC71900341893 /* ViewControllerServiceable.swift */; };
 		F44D986C2B4ECACC00341893 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986B2B4ECACC00341893 /* Token.swift */; };
 		F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */; };
+		F45CA15C2B51868C00F3790C /* NetworkErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */; };
+		F45CA15E2B52E1DA00F3790C /* LogoutResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -227,6 +230,7 @@
 		CA3EEE522B50740000C23A41 /* GetToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetToDoResponseDTO.swift; sourceTree = "<group>"; };
 		CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDetailToDoResponseDTO.swift; sourceTree = "<group>"; };
 		CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailToDoAppData.swift; sourceTree = "<group>"; };
+		CA3EEE5A2B51711700C23A41 /* GetToDoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetToDoRequestDTO.swift; sourceTree = "<group>"; };
 		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -272,6 +276,8 @@
 		F44D98672B4EC71900341893 /* ViewControllerServiceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerServiceable.swift; sourceTree = "<group>"; };
 		F44D986B2B4ECACC00341893 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		F44D986F2B4ECB2200341893 /* DataTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeProtocol.swift; sourceTree = "<group>"; };
+		F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorCode.swift; sourceTree = "<group>"; };
+		F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResponseDTO.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -628,10 +634,27 @@
 		CA3EEE512B5073EB00C23A41 /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				CA3EEE582B51710000C23A41 /* Response */,
+				CA3EEE592B51710500C23A41 /* Request */,
+			);
+			path = ToDo;
+			sourceTree = "<group>";
+		};
+		CA3EEE582B51710000C23A41 /* Response */ = {
+			isa = PBXGroup;
+			children = (
 				CA3EEE522B50740000C23A41 /* GetToDoResponseDTO.swift */,
 				CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */,
 			);
-			path = ToDo;
+			path = Response;
+			sourceTree = "<group>";
+		};
+		CA3EEE592B51710500C23A41 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				CA3EEE5A2B51711700C23A41 /* GetToDoRequestDTO.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		CA8CD6792B46B61000CFDFBF /* OurToDo */ = {
@@ -1099,6 +1122,7 @@
 				F44D98652B4EB7F700341893 /* NetworkRequest.swift */,
 				F4FE6B912B50861A009C935E /* LoginType.swift */,
 				F4FE6B932B50863D009C935E /* SocialPlatform.swift */,
+				F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1195,6 +1219,7 @@
 			children = (
 				F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */,
 				F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */,
+				F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1380,6 +1405,7 @@
 				945234472B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift in Sources */,
 				CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
+				CA3EEE5B2B51711700C23A41 /* GetToDoRequestDTO.swift in Sources */,
 				F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */,
 				CA3EEE532B50740000C23A41 /* GetToDoResponseDTO.swift in Sources */,
 				9457F04E2B48597B009ACF25 /* UICollectionViewCell+.swift in Sources */,
@@ -1415,6 +1441,7 @@
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
 				CA3EEE3B2B4FED8300C23A41 /* MyToDoHeaderAppData.swift in Sources */,
 				F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */,
+				F45CA15E2B52E1DA00F3790C /* LogoutResponseDTO.swift in Sources */,
 				CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */,
 				F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */,
 				F44D986C2B4ECACC00341893 /* Token.swift in Sources */,
@@ -1438,6 +1465,7 @@
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
+				F45CA15C2B51868C00F3790C /* NetworkErrorCode.swift in Sources */,
 				F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */,
 				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
 				9478E5432B4F283F0027606D /* ShowCreatedProfileViewController.swift in Sources */,
