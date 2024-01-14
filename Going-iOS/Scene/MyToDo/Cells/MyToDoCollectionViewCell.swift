@@ -9,7 +9,7 @@ import UIKit
 
 protocol MyToDoCollectionViewDelegate: AnyObject {
     func getButtonIndex(index: Int, image: UIImage)
-    func pushToToDo()
+//    func pushToToDo()
 }
 
 class MyToDoCollectionViewCell: UICollectionViewCell {
@@ -92,12 +92,14 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         let index = self.index ?? 0
         let image = self.checkButton.imageView?.image ?? UIImage()
         self.delegate?.getButtonIndex(index: index, image: image)
+//                self.delegate?.pushToToDo()
+
     }
     
-    @objc
-    func tapManagerCollectionView(_ sender: UITapGestureRecognizer) {
-        self.delegate?.pushToToDo()
-    }
+//    @objc
+//    func tapManagerCollectionView(_ sender: UITapGestureRecognizer) {
+//        self.delegate?.pushToToDo()
+//    }
 }
 
 // MARK: - Private Method
@@ -151,7 +153,7 @@ private extension MyToDoCollectionViewCell {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
-        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
+//        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
         return collectionView
     }
     

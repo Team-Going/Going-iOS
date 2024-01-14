@@ -71,26 +71,42 @@ final class ToDoViewController: UIViewController {
     
     // MARK: - Properties
     
+    var todoId: Int = 0
     lazy var beforeVC: String = ""
     lazy var navigationBarTitle: String = ""
     lazy var manager: [Allocators] = []
-    private var getToDoData: DetailToDoAppData?
+    
     private var memoTextviewPlaceholder: String = ""
     private var todoTextfieldPlaceholder: String = ""
-    private var saveToDoData: DetailToDoAppData?
-    var data: DetailToDoAppData? {
+    private var saveToDoData: GetDetailToDoResponseStuct?
+    
+
+    var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
-            self.getToDoData = data
             todoTextfield.text = data.title
             deadlineTextfieldLabel.text = data.endDate
             manager = data.allocators
             if data.secret == true {
-                manager[0].name = "혼자할일"
-                manager.append(Allocators.EmptyData)
+                self.manager[0].name = "혼자할일"
+                self.manager.append(Allocators.EmptyData)
             }
             memoTextView.text = data.memo
-            print(manager)
+            switch navigationBarTitle {
+            case "추가":
+                navigationBarView.titleLabel.text = "할일 추가"
+                setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager, "메모를 입력해주세요."]
+            case "조회":
+                navigationBarView.titleLabel.text = "할일 조회"
+                setDefaultValue = [data.title, data.endDate, self.manager , data.memo]
+                setInquiryStyle()
+            case "수정":
+                navigationBarView.titleLabel.text = "할일 수정"
+                setDefaultValue = ["수정", "수정", self.manager , "수정"]
+            default:
+                return
+            }
+            self.todoManagerCollectionView.reloadData()
         }
     }
     var setDefaultValue: [Any]? {
@@ -119,14 +135,20 @@ final class ToDoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         setHierachy()
         setLayout()
         registerCell()
         setDelegate()
         setStyle()
+
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        getDetailToDoData(todoId: self.todoId)
+
+    }
     override func viewDidAppear(_ animated: Bool) {
         if navigationBarTitle == StringLiterals.ToDo.inquiry {
             setInquiryStyle()
@@ -135,13 +157,14 @@ final class ToDoViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationBarView.backgroundColor = .gray50
         self.tabBarController?.tabBar.isHidden = false
+        
+
     }
     
     // MARK: - @objc Methods
     
     @objc
     func presentToDatePicker(for button: UIButton) {
-        print("presentToDatePicker")
         showDatePicker(for: button)
         dropdownButton.setImage(ImageLiterals.ToDo.tappedDropdown, for: .normal)
     }
@@ -165,7 +188,7 @@ final class ToDoViewController: UIViewController {
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         let secret = beforeVC == "our" ? false : true
         if !todo.isEmpty && !deadline.isEmpty{
-            self.saveToDoData = DetailToDoAppData(title: todo, endDate: deadline, allocators: manager, memo: memo, secret: secret)
+            self.saveToDoData = GetDetailToDoResponseStuct(title: todo, endDate: deadline, allocators: manager, memo: memo, secret: secret)
             self.navigationController?.popViewController(animated: false)
             DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
         }
@@ -269,7 +292,6 @@ private extension ToDoViewController {
         }
         buttonView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(40))
         }
@@ -284,20 +306,6 @@ private extension ToDoViewController {
         contentView.backgroundColor = .white000
         navigationBarView.backgroundColor = .white000
         dropdownContainer.backgroundColor = .white
-        switch navigationBarTitle {
-        case "추가": 
-            navigationBarView.titleLabel.text = "할일 추가"
-            setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager , "메모를 입력해주세요."]
-        case "조회": 
-            navigationBarView.titleLabel.text = "할일 조회"
-            setDefaultValue = [data?.title, data?.endDate, self.manager , data?.memo]
-            setInquiryStyle()
-        case "수정":
-            navigationBarView.titleLabel.text = "할일 수정"
-            setDefaultValue = ["수정", "수정", self.manager , "수정"]
-        default: 
-            return
-        }
     }
     
     func setDelegate() {
@@ -396,7 +404,6 @@ extension ToDoViewController: UICollectionViewDataSource{
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoManagerCollectionViewCell.identifier, for: indexPath) as? ToDoManagerCollectionViewCell else {return UICollectionViewCell()}
         
         let name = manager[indexPath.row].name
-        print("name \(name)")
         managerCell.managerButton.isEnabled = true
         managerCell.managerButton.setTitle(name, for: .normal)
         managerCell.managerButton.tag = indexPath.row
@@ -541,7 +548,6 @@ extension ToDoViewController: UITextFieldDelegate {
 
 extension ToDoViewController: BottomSheetDelegate {
     func datePickerDidChanged(date: Date) {
-        print("dddd")
         // 실시간 반영 구현 해야합니다 ㅠㅠ
     }
     
@@ -572,7 +578,7 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
 
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
+//        layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
 //        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
         
         let stringLength = data?.secret == true
@@ -585,23 +591,21 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
 extension ToDoViewController {
     func handlingError(_ error: NetworkError) {
         switch error {
-        case .clientError(let message):
+        case .clientError(_, let message):
             DOOToast.show(message: "\(message)", insetFromBottom: 50)
         default:
             DOOToast.show(message: error.description, insetFromBottom: 50)
         }
     }
     
-    func getDetailToDoData() {
+    func getDetailToDoData(todoId: Int) {
         Task {
             do {
-                let myDetailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: 9)
-                data = myDetailToDoData
+                self.data = try await ToDoService.shared.getDetailToDoData(todoId: todoId)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
                 handlingError(error)
-                print("todo detail \(error)")
             }
         }
     }

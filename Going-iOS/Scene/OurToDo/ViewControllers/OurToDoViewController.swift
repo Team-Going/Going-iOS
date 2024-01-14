@@ -7,7 +7,9 @@ import SnapKit
 final class OurToDoViewController: UIViewController {
     
     // MARK: - UI Property
-    
+
+    var tripId: Int = 0
+    var todoId: Int = 0
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
     private let tripHeaderView: TripHeaderView = TripHeaderView()
@@ -25,7 +27,9 @@ final class OurToDoViewController: UIViewController {
         headerView.backgroundColor = .white000
         return headerView
     }()
-    private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
+    private lazy var ourToDoCollectionView: UICollectionView = {
+        setCollectionView()
+    }()
     
     private let tabBarView: TabBarView = TabBarView()
     
@@ -67,8 +71,7 @@ final class OurToDoViewController: UIViewController {
     
     // MARK: - Property
     
-    var tripId: Int = 0
-    
+    private var progress: String = "incomplete"
     private var headerData: OurToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
@@ -82,13 +85,15 @@ final class OurToDoViewController: UIViewController {
         }
     }
     
+    var initializeCode: Bool = false
     var ourToDoData: [ToDoAppData]? {
         didSet {
+            ourToDoCollectionView.reloadData()
             loadData()
         }
     }
     
-    var detailToDoData: DetailToDoAppData = DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
+    var detailToDoData = GetDetailToDoResponseStuct(title: "", endDate: "", allocators: [], memo: "", secret: false)
     
     // MARK: - Life Cycle
     
@@ -103,15 +108,12 @@ final class OurToDoViewController: UIViewController {
         setDelegate()
         registerCell()
         setStyle()
-        getToDoData(progress: "incomplete")
         getOurToDoHeaderData()
+        getToDoData(progress: progress)
         setTapBarImage()
         self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
         self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        UserDefaults.standard.set("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzA0ODk1NDE4LCJleHAiOjE3MDU1MDAyMTh9.FWPJhGl9amOs1Aog1snD2O1ayVm6lRYBJgHOndyWdMQ", forKey: UserDefaultToken.accessToken.rawValue)
+        self.initializeCode = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,8 +154,8 @@ private extension OurToDoViewController {
             $0.bottom.equalTo(tabBarView.snp.top)
         }
         contentView.snp.makeConstraints{
-            $0.height.greaterThanOrEqualTo(ourToDoCollectionView.contentSize.height).priority(.low)
-            $0.edges.width.equalTo(scrollView)
+            $0.height.greaterThanOrEqualTo(ourToDoCollectionView.contentSize.height)
+            $0.edges.width.equalTo(scrollView.contentLayoutGuide)
         }
         tripHeaderView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
@@ -193,7 +195,7 @@ private extension OurToDoViewController {
             $0.top.equalTo(ourToDoHeaderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(contentView)
-            $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
+            $0.height.equalTo(ourToDoCollectionView.contentSize.height)
          }
         stickyOurToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
@@ -209,16 +211,15 @@ private extension OurToDoViewController {
     }
     
     func loadData() {
-        ourToDoCollectionView.reloadData()
         self.setEmptyView()
-
         // Update the constraint based on the new content size
         DispatchQueue.main.async {
+            let conetentHeight = CGFloat(self.ourToDoData?.count ?? 0) * ScreenUtils.getHeight(99)
             self.ourToDoCollectionView.snp.remakeConstraints {
                 $0.top.equalTo(self.ourToDoHeaderView.snp.bottom)
                 $0.leading.trailing.equalToSuperview()
                 $0.bottom.equalTo(self.contentView)
-                $0.height.equalTo(self.ourToDoCollectionView.contentSize.height)
+                $0.height.equalTo(conetentHeight)
              }
             self.ourToDoCollectionView.layoutIfNeeded()
         }
@@ -248,7 +249,7 @@ private extension OurToDoViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(331) , height: ScreenUtils.getHeight(81))
-        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(18), left: 1.0, bottom: 1.0, right: 1.0)
+        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(18), left: 0, bottom: 0, right: 0)
         return flowLayout
     }
     
@@ -287,6 +288,7 @@ private extension OurToDoViewController {
         todoVC.manager = detailToDoData.allocators
         todoVC.isActivateView = isActivate
         todoVC.beforeVC = before
+//        todoVC.setDefaultValue = []
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
@@ -332,22 +334,23 @@ private extension OurToDoViewController {
     
     @objc
     func pushToInquiryToDoVC() {
-        
-        setToDoView(before: "our" , naviBarTitle: "조회", isActivate: false)
+        getDetailToDoData(todoId: self.todoId)
     }
     
     @objc
     func didChangeValue(segment: UISegmentedControl) {
-        if stickyOurToDoHeaderView.isHidden {
-            stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex = ourToDoHeaderView.segmentedControl.selectedSegmentIndex
-        } else {
-            ourToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
-        }
-        
-        if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
-            getToDoData(progress: "incomplete")
-        } else {
-            getToDoData(progress: "complete")
+        if initializeCode {
+            if segment.selectedSegmentIndex == 0 {
+                getToDoData(progress: "incomplete")
+            } else {
+                getToDoData(progress: "complete")
+            }
+
+            if stickyOurToDoHeaderView.isHidden {
+                stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex = ourToDoHeaderView.segmentedControl.selectedSegmentIndex
+            } else {
+                ourToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
+            }
         }
     }
 }
@@ -361,11 +364,15 @@ extension OurToDoViewController: UIScrollViewDelegate {
         stickyOurToDoHeaderView.isHidden = !shouldShowSticky
         
         if !shouldShowSticky {
-            stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex = ourToDoHeaderView.segmentedControl.selectedSegmentIndex
+            if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex != ourToDoHeaderView.segmentedControl.selectedSegmentIndex {
+                stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex = ourToDoHeaderView.segmentedControl.selectedSegmentIndex
+            }
             self.view.backgroundColor = .gray50
             self.navigationBarview.backgroundColor = .gray50
         } else {
-            ourToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
+            if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex != ourToDoHeaderView.segmentedControl.selectedSegmentIndex {
+                ourToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
+            }
             self.view.backgroundColor = .white000
             self.navigationBarview.backgroundColor = .white000
         }
@@ -426,6 +433,8 @@ extension OurToDoViewController: UICollectionViewDataSource {
     // TODO: - '할일 조회' 뷰 연결
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.todoId = self.ourToDoData?[indexPath.row].todoId ?? 0
+        
         pushToInquiryToDoVC()
     }
 }
@@ -446,7 +455,7 @@ extension OurToDoViewController: TripMiddleViewDelegate {
 extension OurToDoViewController {
     func handlingError(_ error: NetworkError) {
         switch error {
-        case .clientError(let message):
+        case .clientError(_, let message):
             DOOToast.show(message: "\(message)", insetFromBottom: 50)
         default:
             DOOToast.show(message: error.description, insetFromBottom: 50)
@@ -460,12 +469,11 @@ extension OurToDoViewController {
     func getOurToDoHeaderData() {
         Task(priority: .high) {
             do {
-                self.headerData = try await OurToDoService.shared.getOurToDoHeader(tripId: 1)
+                self.headerData = try await OurToDoService.shared.getOurToDoHeader(tripId: 53)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
                 handlingError(error)
-                print("my header \(error)")
             }
         }
     }
@@ -473,12 +481,23 @@ extension OurToDoViewController {
     func getToDoData(progress: String) {
         Task {
             do {
-                self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: tripId, category: "our", progress: progress)
+                self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: 53, category: "our", progress: progress)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
                 handlingError(error)
-                print("our todo \(error)")
+            }
+        }
+    }
+    
+    func getDetailToDoData(todoId: Int) {
+        Task {
+            do {
+                self.detailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: todoId)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handlingError(error)
             }
         }
     }

@@ -2,21 +2,11 @@ import UIKit
 
 protocol TripMiddleViewDelegate: AnyObject {
     func presentToInviteFriendVC()
-    func pushToMemberVC()
 }
 
 final class TripMiddleView: UIView {
     
     // MARK: - UI Property
-    
-    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
-                                          ImageLiterals.Profile.imgSnowmanSRI,
-                                          ImageLiterals.Profile.imgTriangleSEP,
-                                          ImageLiterals.Profile.imgSquareSEI,
-                                          ImageLiterals.Profile.imgCloverARP,
-                                          ImageLiterals.Profile.imgCloudARI,
-                                          ImageLiterals.Profile.imgHexagonAEP,
-                                          ImageLiterals.Profile.imgCircleAEI]
     
     private let ticketBoxImgView: UIImageView = {
         let imgView = UIImageView()
@@ -62,10 +52,9 @@ final class TripMiddleView: UIView {
         stackView.backgroundColor = .white000
         return stackView
     }()
-
+    
     // MARK: - Property
     
-    private var userType: Int = 0
     var friendProfile: [Participant] = []
     weak var delegate: TripMiddleViewDelegate?
     var progress: Int? {
@@ -87,7 +76,7 @@ final class TripMiddleView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setHierarchy()
         registerCell()
         setLayout()
@@ -105,8 +94,8 @@ final class TripMiddleView: UIView {
     }
     
     @objc
-    func pushToInquiryFriendsView() {
-        self.delegate?.pushToMemberVC()
+        func pushToInquiryFriendsView() {
+        print("pushToInquiryFriendsView")
     }
     
     @objc
@@ -247,11 +236,8 @@ extension TripMiddleView: UICollectionViewDataSource {
         guard let friendsCell = collectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.identifier, for: indexPath) as? TripFriendsCollectionViewCell else {return UICollectionViewCell()}
         friendsCell.bindData(data: self.friendProfile[indexPath.row])
         
-        userType = participants?[indexPath.row].result ?? 0
-        friendsCell.profileImageView.image = userProfileImageSet[userType]
-
         // TODO: - 변수 만들어놓고 탭하면 담당자 id 세팅해주기
-
+        
         let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToFriendProfileView(_:)))
         friendsCell.profileStackView.addGestureRecognizer(gesture)
         return friendsCell
