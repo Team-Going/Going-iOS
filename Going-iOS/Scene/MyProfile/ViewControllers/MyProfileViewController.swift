@@ -54,7 +54,7 @@ final class MyProfileViewController: UIViewController {
         return view
     }()
     
-    private let myResultView = MyResultView()
+    private let myResultView = TestResultView()
     
     override func viewDidLoad() {
         super.viewDidLoad()

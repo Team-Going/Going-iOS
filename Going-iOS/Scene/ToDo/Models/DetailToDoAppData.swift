@@ -13,7 +13,3 @@ struct DetailToDoAppData: AppData {
     let memo: String
     let secret: Bool
 }
-
-extension DetailToDoAppData {
-    static var EmptyData = DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
-}
