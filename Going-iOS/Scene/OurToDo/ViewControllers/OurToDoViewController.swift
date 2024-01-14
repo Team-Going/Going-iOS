@@ -469,7 +469,7 @@ extension OurToDoViewController {
     func getOurToDoHeaderData() {
         Task(priority: .high) {
             do {
-                self.headerData = try await OurToDoService.shared.getOurToDoHeader(tripId: 53)
+                self.headerData = try await OurToDoService.shared.getOurToDoHeader(tripId: self.tripId)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -481,7 +481,7 @@ extension OurToDoViewController {
     func getToDoData(progress: String) {
         Task {
             do {
-                self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: 53, category: "our", progress: progress)
+                self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: self.tripId, category: "our", progress: progress)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
