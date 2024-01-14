@@ -155,7 +155,6 @@
 		F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */; };
 		F4FE6BA32B50AF26009C935E /* UserProfileAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BA22B50AF26009C935E /* UserProfileAppData.swift */; };
 		F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BA42B50B401009C935E /* IsAppleLogined.swift */; };
-		F4FE6BA72B51382A009C935E /* SplashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BA62B51382A009C935E /* SplashService.swift */; };
 		F4FE6BAB2B513937009C935E /* SplashResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6BAA2B513937009C935E /* SplashResponseDTO.swift */; };
 /* End PBXBuildFile section */
 
@@ -318,7 +317,6 @@
 		F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseDTO.swift; sourceTree = "<group>"; };
 		F4FE6BA22B50AF26009C935E /* UserProfileAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAppData.swift; sourceTree = "<group>"; };
 		F4FE6BA42B50B401009C935E /* IsAppleLogined.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsAppleLogined.swift; sourceTree = "<group>"; };
-		F4FE6BA62B51382A009C935E /* SplashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashService.swift; sourceTree = "<group>"; };
 		F4FE6BAA2B513937009C935E /* SplashResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashResponseDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1084,7 +1082,6 @@
 				F41F5D782B4EF431000D0472 /* ToDoService.swift */,
 				F4FE6B862B504C8C009C935E /* AuthService.swift */,
 				941B1B882B5138B400D28EBA /* TravelService.swift */,
-				F4FE6BA62B51382A009C935E /* SplashService.swift */,
 				F45CA1612B53043400F3790C /* OnBoardingService.swift */,
 			);
 			path = Services;
@@ -1457,7 +1454,6 @@
 				94747F5B2B4FE15C00510226 /* TestProgressView.swift in Sources */,
 				F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */,
 				F45CA1652B53063600F3790C /* TravelTypeTestRequestDTO.swift in Sources */,
-				F4FE6BA72B51382A009C935E /* SplashService.swift in Sources */,
 				F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */,
 				F49B35312B35EC760080A19F /* Codable+.swift in Sources */,
 				9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */,
