@@ -581,16 +581,25 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: stringLength + ScreenUtils.getWidth(12), height: ScreenUtils.getHeight(20))
     }
 }
-
-extension ToDoViewController {
-    func handlingError(_ error: NetworkError) {
+extension ToDoViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
         switch error {
-        case .clientError(let message):
-            DOOToast.show(message: "\(message)", insetFromBottom: 50)
+        case .serverError:
+            DOOToast.show(message: "서버오류", insetFromBottom: 80)
+        case .unAuthorizedError:
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case .userState(let code, let message):
+            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: 80)
         default:
-            DOOToast.show(message: error.description, insetFromBottom: 50)
+            DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }
+}
+
+extension ToDoViewController {
+    
     
     func getDetailToDoData() {
         Task {
@@ -600,7 +609,7 @@ extension ToDoViewController {
             }
             catch {
                 guard let error = error as? NetworkError else { return }
-                handlingError(error)
+                handleError(error)
                 print("todo detail \(error)")
             }
         }

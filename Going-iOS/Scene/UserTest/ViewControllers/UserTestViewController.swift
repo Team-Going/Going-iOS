@@ -294,14 +294,15 @@ extension UserTestViewController {
 extension UserTestViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
-        case .reIssueJWT:
-            //재발급 후 다시 호출
-            print("")
+        case .serverError:
+            DOOToast.show(message: "서버오류", insetFromBottom: 80)
         case .unAuthorizedError:
-            //로그인화면으로 이동
-            print("")
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case .userState(let code, let message):
+            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: 80)
         default:
-            print(error.description)
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }

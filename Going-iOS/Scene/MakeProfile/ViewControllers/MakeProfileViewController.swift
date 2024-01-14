@@ -351,9 +351,13 @@ extension MakeProfileViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .serverError:
-            DOOToast.show(message: "서버에러", insetFromBottom: 80)
-        case .clientError(_, let message):
-            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+            DOOToast.show(message: "서버오류", insetFromBottom: 80)
+        case .unAuthorizedError:
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case .userState(let code, let message):
+            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: 80)
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }

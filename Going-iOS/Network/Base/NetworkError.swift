@@ -12,7 +12,7 @@ enum NetworkError: Error, CustomStringConvertible {
     case urlEncodingError
     case jsonDecodingError
     case fetchImageError
-    case clientError(code: String, message: String)
+    case clientError(message: String)
     case serverError
     case unAuthorizedError
     case userState(code: String, message: String)
@@ -26,8 +26,8 @@ enum NetworkError: Error, CustomStringConvertible {
             return "🔐JSON Decoding 에러입니다"
         case .fetchImageError:
             return "🌄Image URL로부터 불러오기 실패"
-        case .clientError(let code, let message):
-            return "📱클라이언트 에러 code: \(code), message:\(message)"
+        case .clientError(let message):
+            return "📱클라이언트 에러, message:\(message)"
         case .serverError:
             return "🖥️서버 에러"
         case .userState(let code, let message):

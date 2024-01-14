@@ -410,9 +410,14 @@ extension MyToDoViewController {
     func handlingError(_ error: NetworkError) {
         switch error {
         case .clientError(let message):
-            DOOToast.show(message: "\(message)", insetFromBottom: 50)
+            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+        case .serverError:
+            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
+        case .unAuthorizedError:
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
         default:
-            DOOToast.show(message: error.description, insetFromBottom: 50)
+            DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }
 }
@@ -422,7 +427,6 @@ extension MyToDoViewController {
         Task {
             do {
                 self.headerData = try await MyToDoService.shared.getMyToDoHeader(tripId: 1)
-                print("my header \(self.headerData)")
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -435,19 +439,6 @@ extension MyToDoViewController {
         Task {
             do {
                 self.myToDoData = try await ToDoService.shared.getToDoData(tripId: 1, category: "my", progress: progress)
-            }
-            catch {
-                guard let error = error as? NetworkError else { return }
-                handlingError(error)
-                print("my todo \(error)")
-            }
-        }
-    }
-    
-    func getDetailToDoData() {
-        Task {
-            do {
-                self.detailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: 1)
             }
             catch {
                 guard let error = error as? NetworkError else { return }

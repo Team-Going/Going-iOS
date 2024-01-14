@@ -170,6 +170,7 @@ extension MemberViewController {
         switch error {
         case .reIssueJWT:
             reIssueJWTToken()
+            getAllData()
         case .serverError:
             DOOToast.show(message: "서버 오류", insetFromBottom: 80)
         case .unAuthorizedError:
