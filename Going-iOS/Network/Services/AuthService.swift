@@ -13,7 +13,7 @@ final class AuthService: Serviceable {
     
     private init() {}
     
-    func login(token: String, platform: SocialPlatform) async throws -> Bool {
+    func postLogin(token: String, platform: SocialPlatform) async throws -> Bool {
         
         let platformDTO = LoginRequestDTO(platform: platform.rawValue)
         let param = platformDTO.toDictionary()
@@ -42,13 +42,16 @@ final class AuthService: Serviceable {
         }
     }
     
-    func signUp(token: String, signUpBody: SignUpRequestDTO) async throws {
+    func postSignUp(token: String, signUpBody: SignUpRequestDTO) async throws {
         
         let signUpDTO = signUpBody
         let param = signUpDTO.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
         
-        let urlRequest = try NetworkRequest(path: "/api/users/signup", httpMethod: .post, body: body, token: token).makeURLRequest(networkType: .withSocialToken)
+        let urlRequest = try NetworkRequest(path: "/api/users/signup", 
+                                            httpMethod: .post,
+                                            body: body,
+                                            token: token).makeURLRequest(networkType: .withSocialToken)
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
@@ -62,6 +65,18 @@ final class AuthService: Serviceable {
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
         
         print("회원가입성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                
     }
+    
+    func patchLogout() async throws {
+        
+        let urlRequest = try NetworkRequest(path: "/api/users/signout", httpMethod: .patch).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        try dataDecodeAndhandleErrorCode(data: data, decodeType: LogoutResponseDTO.self)
+
+
+    }
+    
+    
 }

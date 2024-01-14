@@ -14,6 +14,18 @@ import KakaoSDKShare
 
 final class CreatingSuccessViewController: UIViewController {
     
+    // MARK: - Network
+
+    var createTravelResponseData: CreateTravelResponseAppData? {
+        didSet {
+            guard let data = createTravelResponseData else { return }
+            self.travelTitleLabel.text = data.title
+            self.dateLabel.text = data.startDate + "-" + data.endDate
+            self.dDayLabel.text = "D-" + "\(data.day)"
+            self.inviteCodeLabel.text = data.code
+        }
+    }
+    
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
@@ -80,7 +92,6 @@ final class CreatingSuccessViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
-        setData(data: CreateTravelStruct.createTravelDummy)
     }
 }
 
@@ -192,14 +203,7 @@ private extension CreatingSuccessViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
         }
     }
-    
-    func setData(data: CreateTravelStruct) {
-        self.dDayLabel.text = "D-" + "\(data.dueDate)"
-        self.travelTitleLabel.text = data.travelTitle
-        self.dateLabel.text = data.travelDate
-        self.inviteCodeLabel.text = data.inviteCode
-    }
-    
+
     func sendKakaoMessage() {
         let templateId = Constant.KaKaoMessageTemplate.id
         
