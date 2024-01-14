@@ -119,8 +119,12 @@ private extension SettingsViewController {
     
     @objc
     func deleteUserButtonTapped() {
-        let nextVC = DeleteUserPopUpViewController()
-        self.navigationController?.present(nextVC, animated: false)
+        let deleteVC = DeleteUserPopUpViewController()
+        deleteVC.deleteUserDismissCompletion = { [weak self] in
+            guard let self else {return}
+            self.navigationController?.popToRootViewController(animated: false)
+        }
+        self.navigationController?.present(deleteVC, animated: false)
     }
 }
 
@@ -156,9 +160,9 @@ extension SettingsViewController: UICollectionViewDelegate {
             self.present(aboutServiceVC, animated: true)
         case "로그아웃":
             let logOutVC = LogOutPopUpViewController()
-            logOutVC.dismissCompletion = { [weak self] in
+            logOutVC.logoutDismissCompletion = { [weak self] in
                 guard let self else {return}
-                self.navigationController?.popToRootViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: false)
             }
             self.navigationController?.present(logOutVC, animated: false)
         default:

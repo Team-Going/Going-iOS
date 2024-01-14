@@ -13,7 +13,7 @@ final class LogOutPopUpViewController: PopUpDimmedViewController {
     
     // MARK: - UI Components
     private let popUpView = DOOPopUpContainerView()
-    var dismissCompletion: (() -> Void)?
+    var logoutDismissCompletion: (() -> Void)?
     
     private let logOutLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "정말 로그아웃하시겠어요?")
     
@@ -118,9 +118,10 @@ extension LogOutPopUpViewController {
                 try await AuthService.shared.patchLogout()
                 UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
                 UserDefaults.standard.removeObject(forKey: UserDefaultToken.refreshToken.rawValue)
-                guard let dismissCompletion else {return}
-                self.dismiss(animated: true) {
-                    dismissCompletion()
+                
+                guard let logoutDismissCompletion else {return}
+                self.dismiss(animated: false) {
+                    logoutDismissCompletion()
                 }
             }
             catch {

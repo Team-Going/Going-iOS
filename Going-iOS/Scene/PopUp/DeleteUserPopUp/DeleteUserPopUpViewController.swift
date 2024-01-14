@@ -11,6 +11,8 @@ import SnapKit
 
 final class DeleteUserPopUpViewController: PopUpDimmedViewController {
     
+    var deleteUserDismissCompletion: (() -> Void)?
+    
     private let popUpView = DOOPopUpContainerView()
     
     private let deleteUserLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "정말 탈퇴하시겠어요?")
@@ -102,13 +104,14 @@ extension DeleteUserPopUpViewController {
         Task {
             do {
                 try await AuthService.shared.deleteUserInfo()
-                self.dismiss(animated: true, completion: {
-                    UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
-                    UserDefaults.standard.removeObject(forKey: UserDefaultToken.refreshToken.rawValue)
-                    
-                    //루트뷰 설정
-                    self.navigationController?.popToRootViewController(animated: true)
-                } )
+                UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
+                UserDefaults.standard.removeObject(forKey: UserDefaultToken.refreshToken.rawValue)
+                
+                //루트뷰 설정
+                guard let deleteUserDismissCompletion else {return}
+                self.dismiss(animated: true) {
+                    deleteUserDismissCompletion()
+                }
             }
             catch {
                 guard let error = error as? NetworkError else { return }

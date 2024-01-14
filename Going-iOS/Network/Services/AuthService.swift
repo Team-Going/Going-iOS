@@ -92,9 +92,9 @@ final class AuthService: Serviceable {
 
     }
     
-    func reIssueJWTToken(userId: Int) async throws {
-        
-        let param = ReIssueJWTRequsetDTO(userId: userId).toDictionary()
+    func reIssueJWTToken() async throws {
+        let userID = UserDefaults.standard.integer(forKey: UserIdDefaults.userID.rawValue)
+        let param = ReIssueJWTRequsetDTO(userId: userID).toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
         
         let urlRequest = try NetworkRequest(path: "/api/users/reissue", httpMethod: .post, body: body).makeURLRequest(networkType: .withRefresh)
