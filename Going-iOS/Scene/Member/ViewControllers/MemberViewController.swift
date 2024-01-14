@@ -11,7 +11,20 @@ import SnapKit
 
 class MemberViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: - Network
+    
+    private var tripId: Int = 1
+    
+    var memberData: MemberResponseStruct? {
+        didSet {
+            self.tripFriendsCollectionView.reloadData() 
+            self.ourTestResultView.progressView1.testResultData = memberData?.styles[0]
+            self.ourTestResultView.progressView2.testResultData = memberData?.styles[1]
+            self.ourTestResultView.progressView3.testResultData = memberData?.styles[2]
+            self.ourTestResultView.progressView4.testResultData = memberData?.styles[3]
+            self.ourTestResultView.progressView5.testResultData = memberData?.styles[4]
+        }
+    }
     
     // MARK: - UI Properties
     
@@ -35,6 +48,7 @@ class MemberViewController: UIViewController {
     
     private let ourTestResultView = MemberTestResultView()
     
+        
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -45,6 +59,10 @@ class MemberViewController: UIViewController {
         setLayout()
         registerCell()
         setDelegate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getAllData()
     }
 }
 
@@ -124,12 +142,30 @@ extension MemberViewController: UICollectionViewDelegate { }
 
 extension MemberViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return memberData?.participants.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = tripFriendsCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell else { return UICollectionViewCell() }
-//        cell.bindData(data: Friend.friendData[indexPath.row])
+        cell.friendNameLabel.text = memberData?.participants[indexPath.row].name
         return cell
+    }
+}
+
+extension MemberViewController {
+    func handleError(_ error: NetworkError) {
+        print(error)
+    }
+    
+    func getAllData() {
+        Task {
+            do {
+                self.memberData = try await MemberService.shared.getMemberInfo(tripId: tripId)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
     }
 }

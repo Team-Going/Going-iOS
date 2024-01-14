@@ -39,6 +39,8 @@
 		948FBC9E2B53CF1700D9C779 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBC9D2B53CF1700D9C779 /* MemberViewController.swift */; };
 		948FBCA32B53D05700D9C779 /* MemberProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA22B53D05700D9C779 /* MemberProgressView.swift */; };
 		948FBCA52B53D07900D9C779 /* MemberTestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */; };
+		948FBCA72B53D12600D9C779 /* MemberResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA62B53D12600D9C779 /* MemberResponseStruct.swift */; };
+		948FBCA92B53DE0F00D9C779 /* MemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA82B53DE0F00D9C779 /* MemberService.swift */; };
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
 		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
 		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
@@ -209,6 +211,8 @@
 		948FBC9D2B53CF1700D9C779 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
 		948FBCA22B53D05700D9C779 /* MemberProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberProgressView.swift; sourceTree = "<group>"; };
 		948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTestResultView.swift; sourceTree = "<group>"; };
+		948FBCA62B53D12600D9C779 /* MemberResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponseStruct.swift; sourceTree = "<group>"; };
+		948FBCA82B53DE0F00D9C779 /* MemberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberService.swift; sourceTree = "<group>"; };
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
 		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -364,6 +368,7 @@
 				941B1B842B510F3C00D28EBA /* CreateTravelResponseDTO.swift */,
 				945234382B51B61D006ACC59 /* DashBoardResponseSturct.swift */,
 				945234482B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift */,
+				948FBCA62B53D12600D9C779 /* MemberResponseStruct.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1129,6 +1134,7 @@
 				F4FE6B862B504C8C009C935E /* AuthService.swift */,
 				941B1B882B5138B400D28EBA /* TravelService.swift */,
 				F45CA1612B53043400F3790C /* OnBoardingService.swift */,
+				948FBCA82B53DE0F00D9C779 /* MemberService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1421,6 +1427,7 @@
 				F4F521B42B3484B4000E6E1E /* Config.swift in Sources */,
 				F44461102B4DD2BF00674D74 /* String+.swift in Sources */,
 				F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */,
+				948FBCA72B53D12600D9C779 /* MemberResponseStruct.swift in Sources */,
 				F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */,
 				CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */,
 				CA3EEE552B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift in Sources */,
@@ -1498,6 +1505,7 @@
 				CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */,
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
 				F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */,
+				948FBCA92B53DE0F00D9C779 /* MemberService.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				941B1B852B510F3C00D28EBA /* CreateTravelResponseDTO.swift in Sources */,
 				F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */,

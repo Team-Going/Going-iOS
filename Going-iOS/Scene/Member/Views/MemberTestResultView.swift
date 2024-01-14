@@ -18,11 +18,11 @@ final class MemberTestResultView: UIView {
         stack.distribution = .equalSpacing
         return stack
     }()
-    private let progressView1 = MemberProgressView()
-    private let progressView2 = MemberProgressView()
-    private let progressView3 = MemberProgressView()
-    private let progressView4 = MemberProgressView()
-    private let progressView5 = MemberProgressView()
+    var progressView1 = MemberProgressView(frame: .zero, travelData: TravelTestQuestionStruct.travelTestDummy[0].optionContent)
+    var progressView2 = MemberProgressView(frame: .zero, travelData: TravelTestQuestionStruct.travelTestDummy[1].optionContent)
+    var progressView3 = MemberProgressView(frame: .zero, travelData: TravelTestQuestionStruct.travelTestDummy[2].optionContent)
+    var progressView4 = MemberProgressView(frame: .zero, travelData: TravelTestQuestionStruct.travelTestDummy[3].optionContent)
+    var progressView5 = MemberProgressView(frame: .zero, travelData: TravelTestQuestionStruct.travelTestDummy[4].optionContent)
     
     private lazy var dividingLine1: UIImageView = { setLineImage() }()
     private lazy var dividingLine2: UIImageView = { setLineImage() }()

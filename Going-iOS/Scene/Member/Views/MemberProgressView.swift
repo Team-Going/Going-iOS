@@ -12,24 +12,44 @@ import SnapKit
 
 final class MemberProgressView: UIView {
     
+    // MARK: - Network
+    
+    private var tripId = 1
+    
+    var testResultData: Style? {
+        didSet {
+            guard let isLeft = testResultData?.isLeft else { return }
+            if isLeft {
+                self.progressBarView.trackTintColor = .gray50
+                self.progressBarView.progressTintColor = .gray400
+                self.progressBarView.progress = Float(testResultData?.rate ?? 0) * 0.01
+            } else {
+                let percentage = Float(testResultData?.rate ?? 0) * 0.01
+                self.progressBarView.trackTintColor = .gray400
+                self.progressBarView.progressTintColor = .gray50
+                self.progressBarView.setProgress(1 - percentage, animated: false)
+            }
+        }
+    }
+
     private let questionLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "여행 스타일")
     private let progressBarView: UIProgressView = {
         let view = UIProgressView()
-        view.progress = 0.4
-        view.trackTintColor = .gray50
-        view.progressTintColor = .gray400
         view.layer.cornerRadius = 4
         view.clipsToBounds = true
+        view.progressViewStyle = .bar
         return view
     }()
-    private let leftOption = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700, text: "휴식")
-    private let rightOption = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700, text: "관광")
+    private let leftOption = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700)
+    private let rightOption = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700)
     
     // MARK: - Life Cycle
 
-    override init(frame: CGRect) {
+    init(frame: CGRect, travelData: TravelAnswerStruct) {
         super.init(frame: frame)
-                
+        self.leftOption.text = travelData.leftOption
+        self.rightOption.text = travelData.rightOption
+        
         setStyle()
         setHierarchy()
         setLayout()
