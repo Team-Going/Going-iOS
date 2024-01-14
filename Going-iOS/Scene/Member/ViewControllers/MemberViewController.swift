@@ -13,8 +13,18 @@ class MemberViewController: UIViewController {
     
     // MARK: - Network
     
-    private var tripId: Int = 1
+    private var tripId: Int = 0
     
+    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
+                                          ImageLiterals.Profile.imgSnowmanSRI,
+                                          ImageLiterals.Profile.imgTriangleSEP,
+                                          ImageLiterals.Profile.imgSquareSEI,
+                                          ImageLiterals.Profile.imgCloverARP,
+                                          ImageLiterals.Profile.imgCloudARI,
+                                          ImageLiterals.Profile.imgHexagonAEP,
+                                          ImageLiterals.Profile.imgCircleAEI]
+    
+    private var userType: Int = 0
     var memberData: MemberResponseStruct? {
         didSet {
             self.tripFriendsCollectionView.reloadData() 
@@ -25,7 +35,7 @@ class MemberViewController: UIViewController {
             self.ourTestResultView.progressView5.testResultData = memberData?.styles[4]
         }
     }
-    
+
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 친구들"))
@@ -148,6 +158,8 @@ extension MemberViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = tripFriendsCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell else { return UICollectionViewCell() }
         cell.friendNameLabel.text = memberData?.participants[indexPath.row].name
+        userType = memberData?.participants[indexPath.row].result ?? 0
+        cell.profileImageView.image = userProfileImageSet[userType]
         return cell
     }
 }
