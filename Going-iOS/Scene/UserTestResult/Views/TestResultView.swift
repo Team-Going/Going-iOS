@@ -51,7 +51,6 @@ final class TestResultView: UIView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 8
-        stack.distribution = .fillEqually
         return stack
     }()
     
@@ -113,7 +112,7 @@ private extension TestResultView {
     }
     
     func makeLabel() -> DOOLabel {
-        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red300, alignment: .center)
+        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red300, alignment: .center, padding: UIEdgeInsets(top: 1, left: 8, bottom: 1, right: 8))
         label.layer.borderWidth = 0.5
         label.layer.borderColor = UIColor.red300.cgColor
         label.layer.cornerRadius = 10
@@ -167,10 +166,10 @@ private extension TestResultView {
             $0.height.equalTo(ScreenUtils.getHeight(30))
             
         }
-        firstTagLabel.snp.makeConstraints {
-            $0.width.equalTo(ScreenUtils.getWidth(55))
-            $0.height.equalTo(ScreenUtils.getHeight(20))
-        }
+//        firstTagLabel.snp.makeConstraints {
+//            $0.width.equalTo(ScreenUtils.getWidth(55))
+//            $0.height.equalTo(ScreenUtils.getHeight(20))
+//        }
         
     }
     
