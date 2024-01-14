@@ -13,15 +13,18 @@ final class JoiningSuccessViewController: UIViewController {
         
     // MARK: - Network
 
+    var joinSuccessTravelId: Int = 0
+
     var joinSuccessData: JoiningSuccessAppData? {
         didSet {
             guard let data = joinSuccessData else { return }
             self.travelTitleLabel.text = data.travelName
             self.dateLabel.text = data.startDate + "-" + data.endDate
             self.dDayLabel.text = "D-" + "\(data.dueDate)"
+            self.joinSuccessTravelId = data.travelId
         }
     }
-    
+
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
@@ -136,8 +139,9 @@ private extension JoiningSuccessViewController {
     // MARK: - @objc Methods
     
     @objc
-    func pushToTravelTestVC() {
-        let vc = TravelTestViewController()
+    func entranceButtonTapped() {
+        let vc = JoinTravelTestViewController()
+        vc.tripId = joinSuccessTravelId
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -8,6 +8,8 @@ final class OurToDoViewController: UIViewController {
 
     // MARK: - UI Property
 
+    var tripId: Int = 0
+    
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
     private let tripHeaderView: TripHeaderView = TripHeaderView()
