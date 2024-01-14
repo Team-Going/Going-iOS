@@ -99,6 +99,7 @@ final class OurToDoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         emptyViewLabel.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = false
@@ -444,6 +445,11 @@ extension OurToDoViewController: TripMiddleViewDelegate {
         self.present(inviteFriendVC, animated: false)
     }
     
+    func pushToMemberVC() {
+        let vc = MemberViewController()
+        vc.tripId = self.tripId
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
 }
 
 extension OurToDoViewController {
