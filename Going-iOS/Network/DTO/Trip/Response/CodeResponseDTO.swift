@@ -8,7 +8,7 @@
 import Foundation
 
 struct CodeResponseDTO : Response, DTO {
-    let tripId: Int64
+    let tripId: Int
     let title, startDate, endDate: String
     let day: Int
 }

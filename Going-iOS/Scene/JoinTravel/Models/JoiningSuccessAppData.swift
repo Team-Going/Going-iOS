@@ -8,7 +8,7 @@
 import Foundation
 
 struct JoiningSuccessAppData: AppData {
-    let travelId: Int64
+    let travelId: Int
     let travelName: String
     let startDate: String
     let endDate: String
