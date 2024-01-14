@@ -12,7 +12,3 @@ struct CreateTravelResponseAppData {
     let title, startDate, endDate, code: String
     let day: Int
 }
-
-extension CreateTravelResponseAppData {
-    static var emptyData = CreateTravelResponseAppData(tripId: 0, title: "", startDate: "", endDate: "", code: "", day: 0)
-}

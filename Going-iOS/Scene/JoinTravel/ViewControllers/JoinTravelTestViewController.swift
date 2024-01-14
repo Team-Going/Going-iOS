@@ -1,32 +1,33 @@
 //
-//  TravelTestViewController.swift
+//  JoinTravelTestViewController.swift
 //  Going-iOS
 //
-//  Created by 윤영서 on 1/6/24.
+//  Created by 윤영서 on 1/14/24.
 //
 
 import UIKit
 
 import SnapKit
 
-final class TravelTestViewController: UIViewController {
+final class JoinTravelTestViewController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: - Network
+    
+    var tripId: Int = 0
     
     private let travelTestQuestionDummy = TravelTestQuestionStruct.travelTestDummy
     
-    var createRequestData: CreateTravelRequestAppData?
-    var responseData: CreateTravelResponseAppData? {
+    var responseData: JoinTravelTestResponseStruct? {
         didSet {
-            DispatchQueue.main.async {
-                let vc = CreatingSuccessViewController()
-                vc.createTravelResponseData = self.responseData
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            let vc = OurToDoViewController()
+            if let tripId = self.responseData?.tripId {
+                vc.tripId = tripId
+            } else { return }
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
-    private var testTravelRequestDTO = CreateTravelRequestDTO(title: "", startDate: "", endDate: "", styleA: 0, styleB: 0, styleC: 0, styleD: 0, styleE: 0)
+    private var joinTravelTestRequestData = JoinTravelTestRequestStruct(styleA: 0, sytleB: 0, styleC: 0, styleD: 0, sylteE: 0)
 
     /// 선택된 답변을 저장할 배열
     private lazy var selectedAnswers: [Int?] = Array(repeating: nil, count: travelTestQuestionDummy.count)
@@ -43,7 +44,7 @@ final class TravelTestViewController: UIViewController {
     private lazy var travelTestCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private lazy var nextButton: DOOButton = {
-        let btn = DOOButton(type: .unabled, title: "여행 만들기")
+        let btn = DOOButton(type: .unabled, title: "저장하고 여행 시작하기")
         btn.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return btn
     }()
@@ -70,7 +71,7 @@ final class TravelTestViewController: UIViewController {
 
 // MARK: - Private Extension
 
-private extension TravelTestViewController {
+private extension JoinTravelTestViewController {
     func setStyle() {
         view.backgroundColor = .white000
         self.navigationController?.isNavigationBarHidden = true
@@ -147,18 +148,19 @@ private extension TravelTestViewController {
     
     // MARK: - @objc Methods
     
+    // TODO: - 분기처리 필요
+    
     @objc
     func nextButtonTapped() {
-        toDTO()
-        createTravel()
+        joinTravel()
     }
 }
 
-// MARK: - Extensions  
+// MARK: - Extensions
 
-extension TravelTestViewController: UICollectionViewDelegate { }
+extension JoinTravelTestViewController: UICollectionViewDelegate { }
 
-extension TravelTestViewController: UICollectionViewDataSource {
+extension JoinTravelTestViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return travelTestQuestionDummy.count
     }
@@ -171,7 +173,7 @@ extension TravelTestViewController: UICollectionViewDataSource {
     }
 }
 
-extension TravelTestViewController: UICollectionViewDelegateFlowLayout {
+extension JoinTravelTestViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 12
@@ -191,7 +193,7 @@ extension TravelTestViewController: UICollectionViewDelegateFlowLayout {
 }
 
 /// 선택된 답변 처리 메서드
-extension TravelTestViewController: TravelTestCollectionViewCellDelegate {
+extension JoinTravelTestViewController: TravelTestCollectionViewCellDelegate {
     func didSelectAnswer(in cell: TravelTestCollectionViewCell, selectedAnswer: Int) {
         if let indexPath = travelTestCollectionView.indexPath(for: cell) {
             selectedAnswers[indexPath.row] = selectedAnswer
@@ -202,33 +204,22 @@ extension TravelTestViewController: TravelTestCollectionViewCellDelegate {
 
 // MARK: - Network
 
-extension TravelTestViewController: ViewControllerServiceable {
+extension JoinTravelTestViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         print(error)
     }
 }
 
-extension TravelTestViewController {
-    func createTravel() {
+extension JoinTravelTestViewController {
+    func joinTravel() {
         Task {
             do {
-                self.responseData = try await TravelService.shared.postCreateTravel(request: testTravelRequestDTO)
+                self.responseData = try await TravelService.shared.postJoinTravelTest(request: joinTravelTestRequestData, tripId: tripId)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
                 handleError(error)
             }
-        }
-    }
-    
-    func toDTO() {
-        self.createRequestData?.a = max((selectedAnswers[0] ?? 0) - 1, 0)
-        self.createRequestData?.b = max((selectedAnswers[1] ?? 0) - 1, 0)
-        self.createRequestData?.c = max((selectedAnswers[2] ?? 0) - 1, 0)
-        self.createRequestData?.d = max((selectedAnswers[3] ?? 0) - 1, 0)
-        self.createRequestData?.e = max((selectedAnswers[4] ?? 0) - 1, 0)
-        if let data = self.createRequestData?.toDTOData() {
-            testTravelRequestDTO = data
         }
     }
 }

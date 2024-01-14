@@ -25,7 +25,3 @@ struct Trip: Response {
         case title, startDate, endDate, day
     }
 }
-
-extension DashBoardResponseSturct {
-    static var emptyData = DashBoardResponseSturct(name: "", trips: [])
-}

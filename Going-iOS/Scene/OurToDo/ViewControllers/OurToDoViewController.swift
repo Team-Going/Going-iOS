@@ -7,7 +7,8 @@ import SnapKit
 final class OurToDoViewController: UIViewController {
     
     // MARK: - UI Property
-    private var progress: String = "incomplete"
+
+    var tripId: Int = 0
     
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
