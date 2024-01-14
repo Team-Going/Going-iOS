@@ -26,15 +26,7 @@ final class JoiningSuccessViewController: UIViewController {
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
     
-    private let joinSuccessLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.head2)
-        label.textColor = .gray700
-        label.text = StringLiterals.JoiningSuccess.title
-        label.numberOfLines = 2
-        label.textAlignment = .center
-        return label
-    }()
+    private let joinSuccessLabel = DOOLabel(font: .pretendard(.head2), color: .gray700, text: StringLiterals.JoiningSuccess.title, numberOfLine: 2)
     
     private let letterImage: UIImageView = {
         let img = UIImageView()
@@ -49,34 +41,15 @@ final class JoiningSuccessViewController: UIViewController {
         return view
     }()
     
-    private let dDayLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.detail2_bold)
-        label.textColor = .red400
-//        label.text = "D-16"
-        return label
-    }()
-    
-    private let travelTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.head3)
-        label.textColor = .gray700
-//        label.text = "두릅과 스페인"
-        return label
-    }()
-    
-    
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .pretendard(.detail3_regular)
-        label.textColor = .gray300
-//        label.text = "12월 16일 - 12월 25일"
-        return label
-    }()
+    private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .red400)
+
+    private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
+
+    private let dateLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300)
     
     private lazy var entranceButton: DOOButton = {
         let btn =  DOOButton(type: .enabled, title: StringLiterals.JoiningSuccess.confirmButton)
-        btn.addTarget(self, action: #selector(pushToTravelTestVC), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(entranceButtonTapped), for: .touchUpInside)
         return btn
     }()
     

@@ -22,6 +22,9 @@
 		944711BB2B51870C00040B1E /* CreateTravelResponseAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944711BA2B51870C00040B1E /* CreateTravelResponseAppData.swift */; };
 		945234392B51B61D006ACC59 /* DashBoardResponseSturct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945234382B51B61D006ACC59 /* DashBoardResponseSturct.swift */; };
 		9452343D2B51C40D006ACC59 /* TravelQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452343C2B51C40D006ACC59 /* TravelQuery.swift */; };
+		945234432B52F6E3006ACC59 /* JoinTravelTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945234422B52F6E3006ACC59 /* JoinTravelTestViewController.swift */; };
+		945234472B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945234462B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift */; };
+		945234492B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945234482B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift */; };
 		9457F04C2B4853AC009ACF25 /* TravelTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */; };
 		9457F04E2B48597B009ACF25 /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */; };
 		9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */; };
@@ -186,6 +189,9 @@
 		944711BA2B51870C00040B1E /* CreateTravelResponseAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelResponseAppData.swift; sourceTree = "<group>"; };
 		945234382B51B61D006ACC59 /* DashBoardResponseSturct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardResponseSturct.swift; sourceTree = "<group>"; };
 		9452343C2B51C40D006ACC59 /* TravelQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelQuery.swift; sourceTree = "<group>"; };
+		945234422B52F6E3006ACC59 /* JoinTravelTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelTestViewController.swift; sourceTree = "<group>"; };
+		945234462B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelTestRequestStruct.swift; sourceTree = "<group>"; };
+		945234482B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelTestResponseStruct.swift; sourceTree = "<group>"; };
 		9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestViewController.swift; sourceTree = "<group>"; };
 		9457F04D2B48597B009ACF25 /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
@@ -351,6 +357,7 @@
 				941B1B772B50EB0C00D28EBA /* CodeResponseDTO.swift */,
 				941B1B842B510F3C00D28EBA /* CreateTravelResponseDTO.swift */,
 				945234382B51B61D006ACC59 /* DashBoardResponseSturct.swift */,
+				945234482B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -369,6 +376,7 @@
 				941B1B802B51089400D28EBA /* CodeRequestDTO.swift */,
 				941B1B822B510D9D00D28EBA /* CreateTravelRequestDTO.swift */,
 				9452343C2B51C40D006ACC59 /* TravelQuery.swift */,
+				945234462B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -465,6 +473,7 @@
 			children = (
 				946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */,
 				946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */,
+				945234422B52F6E3006ACC59 /* JoinTravelTestViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1368,6 +1377,7 @@
 				F44D98662B4EB7F700341893 /* NetworkRequest.swift in Sources */,
 				F44D985E2B4EB6E000341893 /* HTTPMethod.swift in Sources */,
 				9486248F2B4F6A8600195BEE /* FriendsInfoViewController.swift in Sources */,
+				945234472B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift in Sources */,
 				CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
 				F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */,
@@ -1386,6 +1396,7 @@
 				F44460FD2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift in Sources */,
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
+				945234432B52F6E3006ACC59 /* JoinTravelTestViewController.swift in Sources */,
 				941B1B892B5138B400D28EBA /* TravelService.swift in Sources */,
 				94761A0A2B4E5F5200D7C589 /* CreateTravelStruct.swift in Sources */,
 				9478E5362B4EF4850027606D /* WebViewController.swift in Sources */,
@@ -1437,6 +1448,7 @@
 				941B1B852B510F3C00D28EBA /* CreateTravelResponseDTO.swift in Sources */,
 				F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */,
 				94747F592B4FE13400510226 /* OurTestResultView.swift in Sources */,
+				945234492B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift in Sources */,
 				F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
 				94747F5B2B4FE15C00510226 /* TestProgressView.swift in Sources */,
