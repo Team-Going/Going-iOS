@@ -26,6 +26,7 @@ final class TripMiddleView: UIView {
         return progressBar
     }()
     private let tripFriendsContainer: UIView = UIView()
+    
     private lazy var tripFriendsLabel: UILabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray700, text: StringLiterals.OurToDo.friends, alignment: .left)
     private lazy var tripFriendsBtn: UIButton = {
         let btn = UIButton()

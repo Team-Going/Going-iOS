@@ -9,14 +9,14 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
     // MARK: - Property
     
     static let identifier = "OurToDoCollectionViewCell"
+    
     weak var delegate: OurToDoCollectionViewDelegate?
-    var manager: [Allocators] = []
+    
     var ourToDoData: ToDoAppData? {
         didSet {
             guard let ourToDoData else {return}
             self.todoTitleLabel.text = ourToDoData.title
             self.deadlineLabel.text = ourToDoData.endDate + "까지"
-            self.manager = ourToDoData.allocators
             self.managerCollectionView.reloadData()
         }
     }
@@ -27,12 +27,7 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
             self.managerCollectionView.reloadData()
         }
     }
-    var textColor: UIColor? {
-        didSet {
-            guard let textColor else {return}
-            self.todoTitleLabel.textColor = textColor
-        }
-    }
+
     var isComplete: Bool? {
         didSet {
             self.managerCollectionView.reloadData()
@@ -146,13 +141,15 @@ extension OurToDoCollectionViewCell: UICollectionViewDelegate {}
 extension OurToDoCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return self.manager.count
+        return ourToDoData?.allocators.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
-        managerCell.managerData = self.manager[indexPath.row].name
+        
+//        managerCell.managerData = self.manager[indexPath.row].name
+        managerCell.managerData = ourToDoData?.allocators[indexPath.row].name
 
         if isComplete == true {
             managerCell.changeLabelColor(color: .gray300)

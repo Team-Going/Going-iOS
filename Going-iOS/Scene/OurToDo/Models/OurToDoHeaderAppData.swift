@@ -12,25 +12,11 @@ struct OurToDoHeaderAppData: AppData {
     let day: Int
     let startDate, endDate: String
     let progress: Int
+    let code: String
+    let isComplete: Bool
     let participants: [Participant]
 }
 
 extension OurToDoHeaderAppData {
-    static var EmptyData = OurToDoHeaderAppData(title: "", day: 0, startDate: "", endDate: "", progress: 0, participants: [])
-    
-    static func dummy() -> OurToDoHeaderAppData {
-        return .init(
-            title: "희슬이랑 파리",
-            day: 15,
-            startDate: "2024.02.15",
-            endDate: "2024.02.29",
-            progress: 35,
-            participants: [
-                .init(participantID: 1, name: "희슬1", result: ""),
-                .init(participantID: 2, name: "희슬2", result: ""),
-                .init(participantID: 3, name: "희슬3", result: ""),
-                .init(participantID: 4, name: "희슬4", result: ""),
-                .init(participantID: 5, name: "희슬5", result: ""),
-            ])
-    }
+    static var EmptyData = OurToDoHeaderAppData(title: "", day: 0, startDate: "", endDate: "", progress: 0, code: "", isComplete: false, participants: [])
 }

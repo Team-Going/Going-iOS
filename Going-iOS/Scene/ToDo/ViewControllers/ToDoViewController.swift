@@ -581,3 +581,28 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: stringLength + ScreenUtils.getWidth(12), height: ScreenUtils.getHeight(20))
     }
 }
+
+extension ToDoViewController {
+    func handlingError(_ error: NetworkError) {
+        switch error {
+        case .clientError(let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 50)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 50)
+        }
+    }
+    
+    func getDetailToDoData() {
+        Task {
+            do {
+                let myDetailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: 9)
+                data = myDetailToDoData
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handlingError(error)
+                print("todo detail \(error)")
+            }
+        }
+    }
+}
