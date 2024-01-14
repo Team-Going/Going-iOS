@@ -79,6 +79,7 @@ https://www.notion.so/goinggoing/Git-Convention-7f1cf48d45024648a1199148026c63dc
 ├── 📁 Presentation
 │   ├── 🗂️ View1
 │   │   ├── 🗂️ ViewControllers
+
 │   │   ├── 🗂️ Views
 │   │   ├── 🗂️ Model
 │   │   ├── 🗂️ Cells
@@ -87,3 +88,4 @@ https://www.notion.so/goinggoing/Git-Convention-7f1cf48d45024648a1199148026c63dc
 
 ## 👨‍👧‍👧 굉굉 아요
 <img src = "https://github.com/Team-Going/Going-iOS/assets/105407130/06447609-3529-4648-b76b-56ca44738496" width = "300">
+<img src = "https://github.com/Team-Going/Going-iOS/assets/102219161/36c3b17a-32e4-4013-94ad-d5586af59249" width = "600">
