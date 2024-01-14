@@ -76,6 +76,7 @@ final class UserTestResultViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
+        setDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +89,10 @@ final class UserTestResultViewController: UIViewController {
 }
 
 private extension UserTestResultViewController {
+    
+    func setDelegate() {
+        resultView.delegate = self
+    }
     
     func setGradient() {
         gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .vertical)
@@ -264,10 +269,8 @@ extension UserTestResultViewController: ViewControllerServiceable {
 extension UserTestResultViewController: TestResultViewDelegate {
     func backToTestButton() {
         let nextVC = UserTestSplashViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
-    
-    
 }
 
 

@@ -39,6 +39,7 @@ final class TestResultView: UIView {
             self.thirdTickeView.firstString = data.goodToDoPoint.firstPoint
             self.thirdTickeView.secondString = data.goodToDoPoint.secondPoint
             self.thirdTickeView.thirdString = data.goodToDoPoint.thirdPoint
+            
         }
     }
     
@@ -154,23 +155,20 @@ private extension TestResultView {
         }
         
         backToTestButton.snp.makeConstraints {
+            $0.top.equalTo(ticketStackView.snp.bottom).offset(12)
             $0.trailing.equalTo(ticketStackView.snp.trailing)
-            $0.width.equalTo(ScreenUtils.getWidth(66))
-            $0.height.equalTo(ScreenUtils.getHeight(18))
-            $0.bottom.equalTo(whiteView.snp.top)
+//            $0.width.equalTo(ScreenUtils.getWidth(66))
+//            $0.height.equalTo(ScreenUtils.getHeight(18))
+//            $0.bottom.equalTo(whiteView.snp.top)
         }
         
         whiteView.snp.makeConstraints {
-            $0.top.equalTo(backToTestButton.snp.bottom)
+            $0.top.equalTo(backToTestButton.snp.bottom).offset(5)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(30))
+            $0.bottom.equalToSuperview()
             
         }
-//        firstTagLabel.snp.makeConstraints {
-//            $0.width.equalTo(ScreenUtils.getWidth(55))
-//            $0.height.equalTo(ScreenUtils.getHeight(20))
-//        }
-        
     }
     
     func setStyle() {
