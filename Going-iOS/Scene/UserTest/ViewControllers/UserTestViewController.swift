@@ -183,16 +183,6 @@ private extension UserTestViewController {
         
     }
     
-    
-//    func handleLastQuestion() {
-//        
-//        //성향테스트api
-//        
-//        patchTravelTypeTestResult()
-//        
-//        
-//    }
-    
     func setAnimation() {
         let questButton = [firstButton, secondButton,
                            thirdButton, fourthButton]
@@ -275,49 +265,37 @@ private extension UserTestViewController {
             //            handleLastQuestion()
             travelTypeRequsetBody.result = buttonIndexList
             
-            Task {
-                do {
-                    try await OnBoardingService.shared.travelTypeTest(requestDTO: travelTypeRequsetBody)
-                }
-                catch {
-                    guard let error = error as? NetworkError else { return }
-                    handleError(error)
-                }
-            }
-            let nextVC = UserTestResultViewController()
-            nextVC.testResultDummy = toUserTypeResult()
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            patchTravelTypeTestResult()
+//            let nextVC = UserTestResultViewController()
+//            nextVC.testResultDummy = toUserTypeResult()
+//            self.navigationController?.pushViewController(nextVC, animated: true)
         }
         
     }
-    //        if index == 8 {
-    //            nextButton.setTitle("결과보기", for: .normal)
-    //            updateNextButtonState()
-    //        }
+   
 }
 
 
-//extension UserTestViewController {
-//    
-//    func patchTravelTypeTestResult() {
-//        guard var body = travelTypeRequsetBody else { return }
-//        body.result = buttonIndexList
-//        
-//        Task {
-//            do {
-//                try await OnBoardingService.shared.travelTypeTest(requestDTO: body)
-//                
-//                let nextVC = UserTestResultViewController()
-//                nextVC.testResultDummy = toUserTypeResult()
-//                self.navigationController?.pushViewController(nextVC, animated: true)
-//            }
-//            catch {
-//                guard let error = error as? NetworkError else { return }
-//                handleError(error)
-//            }
-//        }
-//    }
-//}
+extension UserTestViewController {
+    
+    func patchTravelTypeTestResult() {
+        travelTypeRequsetBody.result = buttonIndexList
+        
+        Task {
+            do {
+                try await OnBoardingService.shared.travelTypeTest(requestDTO: travelTypeRequsetBody)
+                
+                let nextVC = UserTestResultViewController()
+                nextVC.testResultDummy = toUserTypeResult()
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+}
 
 extension UserTestViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
