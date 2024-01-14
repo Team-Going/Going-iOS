@@ -12,8 +12,8 @@ import SnapKit
 final class LogOutPopUpViewController: PopUpDimmedViewController {
     
     // MARK: - UI Components
-    
     private let popUpView = DOOPopUpContainerView()
+    var dismissCompletion: (() -> Void)?
     
     private let logOutLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "정말 로그아웃하시겠어요?")
     
@@ -87,8 +87,7 @@ private extension LogOutPopUpViewController {
     
     @objc
     func logOutButtonTapped() {
-        print("로그아웃 서버 통신")
-        postLogout()
+            postLogout()
     }
     
     @objc
@@ -118,8 +117,11 @@ extension LogOutPopUpViewController {
             do {
                 try await AuthService.shared.patchLogout()
                 UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
-                let nextVC = LoginViewController()
-                self.navigationController?.pushViewController(nextVC, animated: true)
+                UserDefaults.standard.removeObject(forKey: UserDefaultToken.refreshToken.rawValue)
+                guard let dismissCompletion else {return}
+                self.dismiss(animated: true) {
+                    dismissCompletion()
+                }
             }
             catch {
                 guard let error = error as? NetworkError else { return }

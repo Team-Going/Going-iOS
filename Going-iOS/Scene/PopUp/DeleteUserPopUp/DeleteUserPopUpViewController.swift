@@ -103,6 +103,9 @@ extension DeleteUserPopUpViewController {
             do {
                 try await AuthService.shared.deleteUserInfo()
                 self.dismiss(animated: true, completion: {
+                    UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
+                    UserDefaults.standard.removeObject(forKey: UserDefaultToken.refreshToken.rawValue)
+                    
                     //루트뷰 설정
                     self.navigationController?.popToRootViewController(animated: true)
                 } )
