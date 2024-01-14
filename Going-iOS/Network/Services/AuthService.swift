@@ -28,10 +28,12 @@ final class AuthService: Serviceable {
         let access = model.accessToken
         let refresh = model.refreshToken
         let isToDashBoardView = model.isResult
+        let userId = model.userId
         
         //UserDefaults에 jwt토큰 저장
         UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
+        UserDefaults.standard.set(userId, forKey: UserIdDefaults.userID.rawValue)
         
         // true면 LoginVC에서 대시보드뷰로 이동
         // false면 LoginVC에서 성향테스트스플래시뷰로 이동
@@ -59,11 +61,13 @@ final class AuthService: Serviceable {
         
         let access = model.accessToken
         let refresh = model.refreshToken
+        let userId = model.userId
         
-        //UserDefaults에 jwt토큰 저장
+        //UserDefaults에 jwt토큰 저장, userId 저장(refresh할 때 필요)
         UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
-        
+        UserDefaults.standard.set(userId, forKey: UserIdDefaults.userID.rawValue)
+
         print("회원가입성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
     
@@ -83,6 +87,9 @@ final class AuthService: Serviceable {
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
         try dataDecodeAndhandleErrorCode(data: data, decodeType: BasicResponseDTO.self)
+        
+        UserDefaults.standard.removeObject(forKey: UserIdDefaults.userID.rawValue)
+
     }
     
     func reIssueJWTToken(userId: Int) async throws {
