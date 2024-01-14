@@ -10,4 +10,5 @@ import Foundation
 struct SignUpResponseDTO: DTO, Response {
     let accessToken: String
     let refreshToken: String
+    let userId: Int
 }

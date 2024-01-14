@@ -34,7 +34,7 @@ final class OnBoardingService: Serviceable {
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
-        try dataDecodeAndhandleErrorCode(data: data, decodeType: SuccessResponseDTO.self)
+        try dataDecodeAndhandleErrorCode(data: data, decodeType: BasicResponseDTO.self)
     }
     
 }

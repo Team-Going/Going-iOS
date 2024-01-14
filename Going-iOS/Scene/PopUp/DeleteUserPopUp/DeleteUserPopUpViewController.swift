@@ -11,6 +11,8 @@ import SnapKit
 
 final class DeleteUserPopUpViewController: PopUpDimmedViewController {
     
+    var deleteUserDismissCompletion: (() -> Void)?
+    
     private let popUpView = DOOPopUpContainerView()
     
     private let deleteUserLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "정말 탈퇴하시겠어요?")
@@ -41,7 +43,7 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
         
         setHierarchy()
         setLayout()
-
+        
     }
 }
 
@@ -58,7 +60,7 @@ private extension DeleteUserPopUpViewController {
             $0.center.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(270))
             $0.height.equalTo(ScreenUtils.getHeight(140))
-
+            
         }
         
         deleteUserLabel.snp.makeConstraints {
@@ -88,7 +90,7 @@ private extension DeleteUserPopUpViewController {
     
     @objc
     func delteUserButtonTapped() {
-        print("회원탈퇴 네트워크 통신")
+        deleteUserInfo()
     }
     
     @objc
@@ -96,3 +98,44 @@ private extension DeleteUserPopUpViewController {
         self.dismiss(animated: false)
     }
 }
+
+extension DeleteUserPopUpViewController {
+    func deleteUserInfo() {
+        Task {
+            do {
+                try await AuthService.shared.deleteUserInfo()
+                UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
+                UserDefaults.standard.removeObject(forKey: UserDefaultToken.refreshToken.rawValue)
+                
+                //루트뷰 설정
+                guard let deleteUserDismissCompletion else {return}
+                self.dismiss(animated: true) {
+                    deleteUserDismissCompletion()
+                }
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+}
+
+extension DeleteUserPopUpViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .reIssueJWT:
+            print("재발급")
+        case .serverError:
+            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
+        case .userState(_, let message):
+            DOOToast.show(message: message, insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+        
+    }
+}
+
+
+

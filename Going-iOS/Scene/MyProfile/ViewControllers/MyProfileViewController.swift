@@ -12,6 +12,26 @@ import Photos
 
 final class MyProfileViewController: UIViewController {
     
+    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
+                                          ImageLiterals.Profile.imgSnowmanSRI,
+                                          ImageLiterals.Profile.imgTriangleSEP,
+                                          ImageLiterals.Profile.imgSquareSEI,
+                                          ImageLiterals.Profile.imgCloverARP,
+                                          ImageLiterals.Profile.imgCloudARI,
+                                          ImageLiterals.Profile.imgHexagonAEP,
+                                          ImageLiterals.Profile.imgCircleAEI]
+    
+    private var testResultData: UserTypeTestResultAppData? {
+        didSet {
+            guard let data = testResultData else { return }
+            guard let index = testResultIndex else { return }
+            self.profileImageView.image = userProfileImageSet[index]
+            self.myResultView.resultViewData = data
+        }
+    }
+    
+    private var testResultIndex: Int?
+    
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("내 여행 프로필"))
     private lazy var saveButton: UIButton = {
         let btn = UIButton()
@@ -37,7 +57,6 @@ final class MyProfileViewController: UIViewController {
     private let profileImageView: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFit
-        img.image = ImageLiterals.Profile.imgSnowmanSRI
         img.layer.cornerRadius = 55
         img.clipsToBounds = true
         img.layer.borderColor = UIColor.gray100.cgColor
@@ -62,10 +81,20 @@ final class MyProfileViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
+        setDelegate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getUserProfile()
     }
 }
 
 private extension MyProfileViewController {
+    
+    func setDelegate() {
+        myResultView.delegate = self
+    }
+    
     func setStyle() {
         contentView.backgroundColor = .white000
         view.backgroundColor = .white000
@@ -197,5 +226,47 @@ extension MyProfileViewController: CheckPhotoAccessProtocol {
         @unknown default:
             print("unKnown")
         }
+    }
+}
+
+extension MyProfileViewController {
+    func getUserProfile() {
+        Task{
+            do {
+                let profileData = try await TravelService.shared.getProfileInfo()
+                self.testResultIndex = profileData.result
+                guard let index = testResultIndex else { return }
+                self.testResultData = UserTypeTestResultAppData.dummy()[index]
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+}
+
+extension MyProfileViewController: ViewControllerServiceable {
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .reIssueJWT:
+            print("재발급")
+        case .unAuthorizedError:
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case .userState(_, let message):
+            DOOToast.show(message: message, insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+    }
+    
+    
+}
+
+extension MyProfileViewController: TestResultViewDelegate {
+    func backToTestButton() {
+        let nextVC = UserTestSplashViewController()
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
 }

@@ -85,7 +85,9 @@
 		CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */; };
 		CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02552B4ACC50001FCE89 /* MyToDoData.swift */; };
 		CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */; };
+		F4015E2B2B5424F0006709F4 /* UserIdDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4015E2A2B5424F0006709F4 /* UserIdDefault.swift */; };
 		F41F5D792B4EF431000D0472 /* ToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41F5D782B4EF431000D0472 /* ToDoService.swift */; };
+		F42F70412B53F1F400B27592 /* ReIssueJWTRequsetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F70402B53F1F300B27592 /* ReIssueJWTRequsetDTO.swift */; };
 		F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */; };
 		F44460FD2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */; };
 		F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461012B4D6D4800674D74 /* DOOToast.swift */; };
@@ -109,7 +111,7 @@
 		F45CA15E2B52E1DA00F3790C /* LogoutResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */; };
 		F45CA1622B53043400F3790C /* OnBoardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA1612B53043400F3790C /* OnBoardingService.swift */; };
 		F45CA1652B53063600F3790C /* TravelTypeTestRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA1642B53063600F3790C /* TravelTypeTestRequestDTO.swift */; };
-		F45CA1672B5306D600F3790C /* SuccessResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA1662B5306D600F3790C /* SuccessResponseDTO.swift */; };
+		F45CA1672B5306D600F3790C /* BasicResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45CA1662B5306D600F3790C /* BasicResponseDTO.swift */; };
 		F484A3852B3EBC2A00197E3C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F484A3842B3EBC2A00197E3C /* UIColor+.swift */; };
 		F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */; };
 		F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */; };
@@ -256,7 +258,9 @@
 		CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoViewController.swift; sourceTree = "<group>"; };
 		CADA02552B4ACC50001FCE89 /* MyToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoData.swift; sourceTree = "<group>"; };
 		CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoCollectionViewCell.swift; sourceTree = "<group>"; };
+		F4015E2A2B5424F0006709F4 /* UserIdDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdDefault.swift; sourceTree = "<group>"; };
 		F41F5D782B4EF431000D0472 /* ToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoService.swift; sourceTree = "<group>"; };
+		F42F70402B53F1F300B27592 /* ReIssueJWTRequsetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReIssueJWTRequsetDTO.swift; sourceTree = "<group>"; };
 		F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeTestResultAppData.swift; sourceTree = "<group>"; };
 		F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhotoAccessProtocol.swift; sourceTree = "<group>"; };
 		F44461012B4D6D4800674D74 /* DOOToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOToast.swift; sourceTree = "<group>"; };
@@ -280,7 +284,7 @@
 		F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResponseDTO.swift; sourceTree = "<group>"; };
 		F45CA1612B53043400F3790C /* OnBoardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingService.swift; sourceTree = "<group>"; };
 		F45CA1642B53063600F3790C /* TravelTypeTestRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTypeTestRequestDTO.swift; sourceTree = "<group>"; };
-		F45CA1662B5306D600F3790C /* SuccessResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponseDTO.swift; sourceTree = "<group>"; };
+		F45CA1662B5306D600F3790C /* BasicResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicResponseDTO.swift; sourceTree = "<group>"; };
 		F484A3842B3EBC2A00197E3C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		F485D4882B47CB8B007317F4 /* UserTestSplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestSplashViewController.swift; sourceTree = "<group>"; };
 		F485D48C2B47CF58007317F4 /* UserTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestQuestionStruct.swift; sourceTree = "<group>"; };
@@ -976,6 +980,7 @@
 			children = (
 				F4F5218B2B346373000E6E1E /* UserDefaultToken.swift */,
 				F4FE6BA42B50B401009C935E /* IsAppleLogined.swift */,
+				F4015E2A2B5424F0006709F4 /* UserIdDefault.swift */,
 			);
 			path = UserDefault;
 			sourceTree = "<group>";
@@ -1222,7 +1227,7 @@
 				F4FE6B8F2B5051E4009C935E /* LoginResponseDTO.swift */,
 				F4FE6B9F2B50AB46009C935E /* SignUpResponseDTO.swift */,
 				F45CA15D2B52E1D900F3790C /* LogoutResponseDTO.swift */,
-				F45CA1662B5306D600F3790C /* SuccessResponseDTO.swift */,
+				F45CA1662B5306D600F3790C /* BasicResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1232,6 +1237,7 @@
 			children = (
 				F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */,
 				F4FE6B9D2B50AAE2009C935E /* SignUpRequestDTO.swift */,
+				F42F70402B53F1F300B27592 /* ReIssueJWTRequsetDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1385,7 +1391,7 @@
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
 				F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */,
-				F45CA1672B5306D600F3790C /* SuccessResponseDTO.swift in Sources */,
+				F45CA1672B5306D600F3790C /* BasicResponseDTO.swift in Sources */,
 				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
@@ -1409,6 +1415,7 @@
 				945234472B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift in Sources */,
 				CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
+				F42F70412B53F1F400B27592 /* ReIssueJWTRequsetDTO.swift in Sources */,
 				CA3EEE5B2B51711700C23A41 /* GetToDoRequestDTO.swift in Sources */,
 				F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */,
 				CA3EEE532B50740000C23A41 /* GetToDoResponseDTO.swift in Sources */,
@@ -1468,6 +1475,7 @@
 				CA8CD68D2B46B90000CFDFBF /* TripFriendsCollectionViewCell.swift in Sources */,
 				9457F0552B485A68009ACF25 /* TravelTestCollectionViewCell.swift in Sources */,
 				CA8CD6852B46B7C100CFDFBF /* OurToDoHeaderView.swift in Sources */,
+				F4015E2B2B5424F0006709F4 /* UserIdDefault.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
 				F45CA15C2B51868C00F3790C /* NetworkErrorCode.swift in Sources */,

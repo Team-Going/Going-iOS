@@ -10,6 +10,8 @@ import Foundation
 //isResult가 true -> 대쉬보드
 //isResult가 false -> 성향테스트스플래시
 struct LoginResponseDTO: Codable, DTO {
-    let accessToken, refreshToken: String
+    let accessToken: String
+    let refreshToken: String
     let isResult: Bool
+    let userId: Int
 }
