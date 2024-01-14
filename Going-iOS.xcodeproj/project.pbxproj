@@ -85,6 +85,7 @@
 		CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02552B4ACC50001FCE89 /* MyToDoData.swift */; };
 		CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */; };
 		F41F5D792B4EF431000D0472 /* ToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41F5D782B4EF431000D0472 /* ToDoService.swift */; };
+		F42F70412B53F1F400B27592 /* ReIssueJWTRequsetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F70402B53F1F300B27592 /* ReIssueJWTRequsetDTO.swift */; };
 		F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */; };
 		F44460FD2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */; };
 		F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44461012B4D6D4800674D74 /* DOOToast.swift */; };
@@ -255,6 +256,7 @@
 		CADA02552B4ACC50001FCE89 /* MyToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoData.swift; sourceTree = "<group>"; };
 		CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F41F5D782B4EF431000D0472 /* ToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoService.swift; sourceTree = "<group>"; };
+		F42F70402B53F1F300B27592 /* ReIssueJWTRequsetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReIssueJWTRequsetDTO.swift; sourceTree = "<group>"; };
 		F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeTestResultAppData.swift; sourceTree = "<group>"; };
 		F44460FC2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPhotoAccessProtocol.swift; sourceTree = "<group>"; };
 		F44461012B4D6D4800674D74 /* DOOToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOToast.swift; sourceTree = "<group>"; };
@@ -1229,6 +1231,7 @@
 			children = (
 				F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */,
 				F4FE6B9D2B50AAE2009C935E /* SignUpRequestDTO.swift */,
+				F42F70402B53F1F300B27592 /* ReIssueJWTRequsetDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1406,6 +1409,7 @@
 				945234472B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift in Sources */,
 				CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
+				F42F70412B53F1F400B27592 /* ReIssueJWTRequsetDTO.swift in Sources */,
 				CA3EEE5B2B51711700C23A41 /* GetToDoRequestDTO.swift in Sources */,
 				F44461022B4D6D4800674D74 /* DOOToast.swift in Sources */,
 				CA3EEE532B50740000C23A41 /* GetToDoResponseDTO.swift in Sources */,
