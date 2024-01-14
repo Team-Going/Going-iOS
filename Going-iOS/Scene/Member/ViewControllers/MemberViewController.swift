@@ -13,7 +13,7 @@ class MemberViewController: UIViewController {
     
     // MARK: - Network
     
-    private var tripId: Int = 0
+    var tripId: Int = 0
     
     let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
                                           ImageLiterals.Profile.imgSnowmanSRI,
@@ -157,6 +157,7 @@ extension MemberViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = tripFriendsCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell else { return UICollectionViewCell() }
+        
         cell.friendNameLabel.text = memberData?.participants[indexPath.row].name
         userType = memberData?.participants[indexPath.row].result ?? 0
         cell.profileImageView.image = userProfileImageSet[userType]

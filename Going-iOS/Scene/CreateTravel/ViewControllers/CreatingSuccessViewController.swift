@@ -23,9 +23,13 @@ final class CreatingSuccessViewController: UIViewController {
             self.dateLabel.text = data.startDate + "-" + data.endDate
             self.dDayLabel.text = "D-" + "\(data.day)"
             self.inviteCodeLabel.text = data.code
+            let vc = OurToDoViewController()
+            if let tripId = self.createTravelResponseData?.tripId {
+                vc.tripId = tripId
+            } else { return }
         }
     }
-    
+
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
