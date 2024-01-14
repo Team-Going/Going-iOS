@@ -7,6 +7,6 @@
 
 import Foundation
 
-//struct ReIssueJWTRequsetDTO: Request, DTO {
-//    let userId: ing
-//}
+struct ReIssueJWTRequsetDTO: Request, DTO {
+    let userId: Int
+}

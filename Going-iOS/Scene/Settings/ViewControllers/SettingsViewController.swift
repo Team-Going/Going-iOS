@@ -120,7 +120,7 @@ private extension SettingsViewController {
     @objc
     func deleteUserButtonTapped() {
         let nextVC = DeleteUserPopUpViewController()
-        self.present(nextVC, animated: false)
+        self.navigationController?.present(nextVC, animated: false)
     }
 }
 

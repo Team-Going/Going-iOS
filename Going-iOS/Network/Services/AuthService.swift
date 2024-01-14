@@ -32,7 +32,7 @@ final class AuthService: Serviceable {
         //UserDefaults에 jwt토큰 저장
         UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
-    
+        
         // true면 LoginVC에서 대시보드뷰로 이동
         // false면 LoginVC에서 성향테스트스플래시뷰로 이동
         if isToDashBoardView {
@@ -48,7 +48,7 @@ final class AuthService: Serviceable {
         let param = signUpDTO.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
         
-        let urlRequest = try NetworkRequest(path: "/api/users/signup", 
+        let urlRequest = try NetworkRequest(path: "/api/users/signup",
                                             httpMethod: .post,
                                             body: body,
                                             token: token).makeURLRequest(networkType: .withSocialToken)
@@ -83,6 +83,28 @@ final class AuthService: Serviceable {
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
         try dataDecodeAndhandleErrorCode(data: data, decodeType: BasicResponseDTO.self)
+    }
+    
+    func reIssueJWTToken(userId: Int) async throws {
+        
+        let param = ReIssueJWTRequsetDTO(userId: userId).toDictionary()
+        let body = try JSONSerialization.data(withJSONObject: param)
+        
+        let urlRequest = try NetworkRequest(path: "/api/users/reissue", httpMethod: .post, body: body).makeURLRequest(networkType: .withRefresh)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: SignUpResponseDTO.self) else {
+            return
+        }
+        
+        let access = model.accessToken
+        let refresh = model.refreshToken
+        
+        //UserDefaults에 jwt토큰 저장
+        UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
+        UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
+        print("재발그그그극그그ㅡㄱㄱ그ㅡㅂ 성공~~~~~~~~~~")
     }
     
     

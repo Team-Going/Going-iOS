@@ -95,6 +95,7 @@ extension SplashViewController {
         
         Task {
             do {
+                //
                 try await OnBoardingService.shared.getSplashInfo()
                 let nextVC = DashBoardViewController()
                 self.navigationController?.pushViewController(nextVC, animated: true)

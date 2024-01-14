@@ -102,12 +102,10 @@ extension DeleteUserPopUpViewController {
         Task {
             do {
                 try await AuthService.shared.deleteUserInfo()
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: {
-                        //루트뷰 설정
-                       
-                    } )
-                }
+                self.dismiss(animated: true, completion: {
+                    //루트뷰 설정
+                    self.navigationController?.popToRootViewController(animated: true)
+                } )
             }
             catch {
                 guard let error = error as? NetworkError else { return }
