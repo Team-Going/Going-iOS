@@ -15,7 +15,7 @@ final class UserTestViewController: UIViewController {
     
     private var buttonIndexList: [Int] = []
     
-    private var travelTypeRequsetBody: TravelTypeTestRequestDTO?
+    private var travelTypeRequsetBody = TravelTypeTestRequestDTO(result: [])
     
     private var index: Int = 0
     
@@ -184,14 +184,14 @@ private extension UserTestViewController {
     }
     
     
-    func handleLastQuestion() {
-        
-        //성향테스트api
-        
-        patchTravelTypeTestResult()
-        
-      
-    }
+//    func handleLastQuestion() {
+//        
+//        //성향테스트api
+//        
+//        patchTravelTypeTestResult()
+//        
+//        
+//    }
     
     func setAnimation() {
         let questButton = [firstButton, secondButton,
@@ -255,6 +255,9 @@ private extension UserTestViewController {
         if index < userTestDataStruct.count - 1 {
             
             // 질문이 마지막이 아닌 경우
+            if index == 7 {
+                nextButton.setTitle("결과보기", for: .normal)
+            }
             testProgressView.setProgress(testProgressView.progress + 0.1111111, animated: true)
             index += 1
             setAnimation()
@@ -269,39 +272,52 @@ private extension UserTestViewController {
             // 질문이 마지막인 경우
             setAnimation()
             buttonIndexList.append(self.buttonIndex)
-//            handleLastQuestion()
-            patchTravelTypeTestResult()
-
+            //            handleLastQuestion()
+            travelTypeRequsetBody.result = buttonIndexList
             
+            Task {
+                do {
+                    try await OnBoardingService.shared.travelTypeTest(requestDTO: travelTypeRequsetBody)
+                }
+                catch {
+                    guard let error = error as? NetworkError else { return }
+                    handleError(error)
+                }
+            }
+            let nextVC = UserTestResultViewController()
+            nextVC.testResultDummy = toUserTypeResult()
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        if index == 8 {
-            nextButton.setTitle("결과보기", for: .normal)
-            updateNextButtonState()
-        }
+        
     }
+    //        if index == 8 {
+    //            nextButton.setTitle("결과보기", for: .normal)
+    //            updateNextButtonState()
+    //        }
 }
 
-extension UserTestViewController {
-    
-    func patchTravelTypeTestResult() {
-        guard var body = travelTypeRequsetBody else { return }
-        body.result = buttonIndexList
-        
-        Task {
-            do {
-                try await OnBoardingService.shared.travelTypeTest(requestDTO: body)
-                
-                let nextVC = UserTestResultViewController()
-                nextVC.testResultDummy = toUserTypeResult()
-                self.navigationController?.pushViewController(nextVC, animated: true)
-            }
-            catch {
-                guard let error = error as? NetworkError else { return }
-                handleError(error)
-            }
-        }
-    }
-}
+
+//extension UserTestViewController {
+//    
+//    func patchTravelTypeTestResult() {
+//        guard var body = travelTypeRequsetBody else { return }
+//        body.result = buttonIndexList
+//        
+//        Task {
+//            do {
+//                try await OnBoardingService.shared.travelTypeTest(requestDTO: body)
+//                
+//                let nextVC = UserTestResultViewController()
+//                nextVC.testResultDummy = toUserTypeResult()
+//                self.navigationController?.pushViewController(nextVC, animated: true)
+//            }
+//            catch {
+//                guard let error = error as? NetworkError else { return }
+//                handleError(error)
+//            }
+//        }
+//    }
+//}
 
 extension UserTestViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
@@ -317,8 +333,6 @@ extension UserTestViewController: ViewControllerServiceable {
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }
-    
-    
 }
 
 
