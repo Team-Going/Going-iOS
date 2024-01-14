@@ -204,12 +204,7 @@ private extension UserTestViewController {
             }
         }
     }
-    
-    func toUserTypeResult() -> UserTypeTestResultAppData {
-        var dummy = UserTypeTestResultAppData.dummy()
-        return dummy[1]
-    }
-    
+
     
     @objc
     func buttonTapped(_ sender: UIButton) {
@@ -286,7 +281,6 @@ extension UserTestViewController {
                 try await OnBoardingService.shared.travelTypeTest(requestDTO: travelTypeRequsetBody)
                 
                 let nextVC = UserTestResultViewController()
-                nextVC.testResultDummy = toUserTypeResult()
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             catch {

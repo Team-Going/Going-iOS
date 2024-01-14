@@ -8,15 +8,8 @@
 import Foundation
 
 // MARK: - DataClass
-struct GetProfileDTO: DTO, Response {
-    let name, intro: String
+struct GetProfileResponseDTO: DTO, Response {
+    let name: String
+    let intro: String
     let result: Int
-}
-
-extension GetProfileDTO {
-    func toUserTypeResult() -> UserTypeTestResultAppData {
-        var dummy = UserTypeTestResultAppData.dummy()
-        dummy[self.result].userName = self.name
-        return dummy[self.result]
-    }
 }

@@ -9,7 +9,13 @@ import UIKit
 
 import SnapKit
 
+protocol TestResultViewDelegate: AnyObject {
+    func backToTestButton()
+}
+
 final class TestResultView: UIView {
+    
+    weak var delegate: TestResultViewDelegate?
     
     var resultViewData: UserTypeTestResultAppData? {
         didSet {
@@ -71,6 +77,7 @@ final class TestResultView: UIView {
         button.titleLabel?.font = .pretendard(.detail2_regular)
         button.setTitleColor(.gray300, for: .normal)
         button.setUnderline()
+        button.addTarget(self, action: #selector(backToTestButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -86,13 +93,18 @@ final class TestResultView: UIView {
         
     }
     
+    @objc
+    func backToTestButtonTapped() {
+        delegate?.backToTestButton()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
 }
 
-extension TestResultView {
+private extension TestResultView {
     
     func setTicketViewText() {
         self.firstTickeView.titleLabel.text = "이런 점이 \n좋아요"
@@ -153,7 +165,6 @@ extension TestResultView {
             $0.top.equalTo(backToTestButton.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(30))
-            $0.bottom.equalToSuperview()
             
         }
         firstTagLabel.snp.makeConstraints {
@@ -167,4 +178,7 @@ extension TestResultView {
         self.backgroundColor = .white000
         whiteView.backgroundColor = .white000
     }
+    
+    
+
 }

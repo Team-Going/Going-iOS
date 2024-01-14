@@ -352,7 +352,7 @@ extension MakeProfileViewController: ViewControllerServiceable {
         switch error {
         case .serverError:
             DOOToast.show(message: "서버에러", insetFromBottom: 80)
-        case .clientError(let message):
+        case .clientError(_, let message):
             DOOToast.show(message: "\(message)", insetFromBottom: 80)
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)
