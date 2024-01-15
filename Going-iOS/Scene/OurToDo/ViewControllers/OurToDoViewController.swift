@@ -72,11 +72,8 @@ final class OurToDoViewController: UIViewController {
     private var headerData: OurToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
-            let splitStartDate = data.startDate.split(separator: ".")
-            let newStartDate = "\(splitStartDate[1])월 \(splitStartDate[2])일"
-            let splitEndDate = data.endDate.split(separator: ".")
-            let newEndDate = "\(splitEndDate[1])월 \(splitEndDate[2])일"
-            self.tripHeaderView.tripData = [data.title, "\(data.day)", newStartDate, newEndDate]
+            
+            self.tripHeaderView.tripData = data
             tripMiddleView.participants = data.participants
             self.tripMiddleView.progress = data.progress
         }

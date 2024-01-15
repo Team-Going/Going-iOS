@@ -251,6 +251,7 @@ private extension CreatingSuccessViewController {
     @objc
     func pushToOurToDoVC() {
         let vc = OurToDoViewController()
+        vc.tripId = self.createTravelResponseData?.tripId ?? 0
         navigationController?.pushViewController(vc, animated: true)
     }
 }
