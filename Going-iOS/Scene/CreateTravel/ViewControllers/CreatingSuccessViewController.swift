@@ -215,12 +215,14 @@ private extension CreatingSuccessViewController {
     func sendKakaoMessage() {
         let templateId = Constant.KaKaoMessageTemplate.id
         guard let filteredString = self.inviteCodeLabel.text else { return }
+        guard let filteredTitle = self.travelTitleLabel.text else { return }
         let inviteCode =  String(filteredString)
-
+        let travelTitle = String(filteredTitle)
+        
         // 카카오톡 설치여부 확인
         if ShareApi.isKakaoTalkSharingAvailable() {
             // 카카오톡으로 카카오톡 공유 가능
-            ShareApi.shared.shareCustom(templateId: Int64(templateId) , templateArgs:["KEY":"\(inviteCode)"]) {(sharingResult, error) in
+            ShareApi.shared.shareCustom(templateId: Int64(templateId) , templateArgs:["KEY":"\(inviteCode)", "NAME":"\(travelTitle)"]) {(sharingResult, error) in
                 if let error = error {
                     print(error)
                 }
