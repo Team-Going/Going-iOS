@@ -445,7 +445,7 @@ private extension ToDoViewController {
         todoManagerCollectionView.snp.makeConstraints{
             $0.top.equalTo(managerLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(48))
+            $0.height.equalTo(ScreenUtils.getHeight(20))
         }
         memoLabel.snp.makeConstraints{
             $0.top.equalTo(todoManagerCollectionView.snp.bottom).offset(ScreenUtils.getHeight(28))
@@ -615,7 +615,11 @@ extension ToDoViewController: UICollectionViewDataSource{
         
         var name = ""
         if beforeVC == "our" {
-            name = fromOurTodoParticipants[indexPath.row].name
+            if navigationBarTitle == "추가" {
+                name = fromOurTodoParticipants[indexPath.row].name
+            } else {
+                name = manager[indexPath.row].name
+            }
         } else {
             name = manager[indexPath.row].name
         }

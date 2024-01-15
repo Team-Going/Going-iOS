@@ -151,7 +151,7 @@ private extension OurToDoViewController {
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(90))
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(105))
         }
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(ourToDoCollectionView.contentSize.height).priority(.low)
@@ -269,11 +269,11 @@ private extension OurToDoViewController {
     }
     
     /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
-    func setCellStyle(cell: OurToDoCollectionViewCell, data: ToDoAppData, textColor: UIColor, isUserInteractionEnabled: Bool) {
-        cell.ourToDoData = data
-        cell.todoTitleLabel.textColor = textColor
-        cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
-    }
+//    func setCellStyle(cell: OurToDoCollectionViewCell, data: ToDoAppData, textColor: UIColor, isUserInteractionEnabled: Bool) {
+//        cell.ourToDoData = data
+//        cell.todoTitleLabel.textColor = textColor
+//        cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
+//    }
     
     /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
     func setToDoView(before: String , naviBarTitle: String, isActivate: Bool) {
