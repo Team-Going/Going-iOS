@@ -245,9 +245,15 @@ extension DashBoardViewController: UICollectionViewDataSource {
 
 extension DashBoardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = OurToDoViewController()
+//        let vc = OurToDoViewController()
+        let vc = DOOTabbarViewController()
         tripId = travelListDummy?.trips[indexPath.row].tripID ?? 0
-        vc.tripId = self.tripId
+        
+        if let ourtodoVC = vc.ourTODoVC.viewControllers[0] as? OurToDoViewController,
+           let myToDoVC = vc.myToDoVC.viewControllers[0] as? MyToDoViewController {
+            ourtodoVC.tripId = self.tripId
+            myToDoVC.tripId = self.tripId
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

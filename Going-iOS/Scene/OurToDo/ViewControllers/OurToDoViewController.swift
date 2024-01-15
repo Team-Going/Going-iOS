@@ -6,6 +6,7 @@ import SnapKit
 
 final class OurToDoViewController: UIViewController {
     
+    
     // MARK: - UI Property
     
     private lazy var contentView: UIView = UIView()
@@ -508,5 +509,4 @@ extension OurToDoViewController {
             }
         }
     }
-    
 }

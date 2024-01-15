@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class MyToDoViewController: UIViewController {
-
+    
     // MARK: - UI Property
     var myId: Int = 0
     
@@ -117,7 +117,7 @@ final class MyToDoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    
         self.navigationController?.isNavigationBarHidden = true
         setHierachy()
         setDelegate()
