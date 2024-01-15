@@ -8,6 +8,7 @@
 import Foundation
 
 struct MyToDoHeaderAppData: AppData {
-    let name: String
+    let participantId: Int
+    let title: String
     let count: Int
 }
