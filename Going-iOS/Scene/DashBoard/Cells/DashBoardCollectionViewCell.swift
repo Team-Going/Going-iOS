@@ -10,6 +10,8 @@ import UIKit
 final class DashBoardCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
+    
+    var tripStatus: String = ""
 
     var travelDetailData: Trip? {
         didSet {
@@ -19,13 +21,20 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
             self.travelDateLabel.text = "\(detailData.startDate) - \(detailData.endDate)"
             self.travelStateLabel.text = detailData.travelStatus
             
-            if detailData.day < 0 { // 완료된 여행
+            
+            if self.tripStatus == "complete" {
                 self.travelTitleLabel.textColor = .gray300
                 self.travelDateLabel.textColor = .gray200
                 self.calendarImageView.tintColor = .gray200
                 self.travelStateBackgroundView.backgroundColor = .gray100
                 self.travelStateLabel.textColor = .gray200
             } else {
+                
+                if detailData.day < 0 {
+                    self.travelStateLabel.text = "여행 중"
+                } else {
+                    self.travelStateLabel.text = "D-\(detailData.day)"
+                }
                 self.travelTitleLabel.textColor = .gray700
                 self.travelDateLabel.textColor = .gray300
                 self.calendarImageView.tintColor = .gray300

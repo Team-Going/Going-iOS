@@ -234,7 +234,7 @@ final class ToDoViewController: UIViewController {
         }
         if memoTextView.isFirstResponder {
             // memoTextView가 FirstResponder인 경우 contentInset을 조절
-            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(40), right: 0)
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(60), right: 0)
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
 

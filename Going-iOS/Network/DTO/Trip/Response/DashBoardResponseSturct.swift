@@ -8,7 +8,7 @@
 
 // MARK: - DashBoard
 
-struct DashBoardResponseSturct: Response {
+struct DashBoardResponseSturct: Response, DTO {
     let name: String
     let trips: [Trip]
 }
