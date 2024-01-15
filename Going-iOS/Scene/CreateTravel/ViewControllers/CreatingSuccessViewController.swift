@@ -210,11 +210,13 @@ private extension CreatingSuccessViewController {
 
     func sendKakaoMessage() {
         let templateId = Constant.KaKaoMessageTemplate.id
-        
+        guard let filteredString = self.inviteCodeLabel.text else { return }
+        let inviteCode =  String(filteredString)
+
         // 카카오톡 설치여부 확인
         if ShareApi.isKakaoTalkSharingAvailable() {
             // 카카오톡으로 카카오톡 공유 가능
-            ShareApi.shared.shareCustom(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {(sharingResult, error) in
+            ShareApi.shared.shareCustom(templateId: Int64(templateId) , templateArgs:["KEY":"\(inviteCode)"]) {(sharingResult, error) in
                 if let error = error {
                     print(error)
                 }
