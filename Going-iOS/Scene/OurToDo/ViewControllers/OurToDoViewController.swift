@@ -184,8 +184,9 @@ private extension OurToDoViewController {
             $0.leading.trailing.equalToSuperview()
         }
         emptyViewIconImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(40))
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(100))
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(30))
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(108))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(95))
         }
         emptyViewLabel.snp.makeConstraints {
             $0.top.equalTo(emptyViewIconImageView.snp.bottom).offset(ScreenUtils.getHeight(8))
