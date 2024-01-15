@@ -3,9 +3,21 @@ import UIKit
 import SnapKit
 
 final class ToDoViewController: UIViewController {
-
+    
+    // MARK: - Network
+    
+    var tripId: Int = 0
+    
+    var myId: Int = 0
+    
+    private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
+    
     // MARK: - UI Components
-
+    
+    var idSet: [Int] = []
+    
+    var fromOurTodoParticipants: [Participant] = []
+    
     private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo), backgroundColor: .white000)
     private let underlineView: UIView = {
         let view = UIView()
@@ -71,26 +83,48 @@ final class ToDoViewController: UIViewController {
     
     // MARK: - Properties
     
-    lazy var beforeVC: String = ""
+    var peopleCount: Int = 0
+    
+    var buttonIndex: [Int] = []
+    
+    
+    var todoId: Int = 0
+    
+    lazy var beforeVC: String = "" {
+        didSet {
+            if navigationBarTitle == "추가" && beforeVC == "my" {
+                self.manager = [.init(name: "혼자할일", isOwner: true)]
+                peopleCount = 1
+            } else if navigationBarTitle == "추가" && beforeVC == "our" {
+                self.fromOurTodoParticipants
+            }
+        }
+    }
+    
     lazy var navigationBarTitle: String = ""
-    lazy var manager: [Allocators] = []
-    private var getToDoData: DetailToDoAppData?
+    var manager: [Allocators] = []
     private var memoTextviewPlaceholder: String = ""
     private var todoTextfieldPlaceholder: String = ""
-    private var saveToDoData: DetailToDoAppData?
-    var data: DetailToDoAppData? {
+    private var saveToDoData: CreateToDoRequestStruct = .init(title: "", endDate: "", allocators: [], memo: "", secret: false)
+    
+    var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
-            self.getToDoData = data
             todoTextfield.text = data.title
             deadlineTextfieldLabel.text = data.endDate
             manager = data.allocators
             if data.secret == true {
-                manager[0].name = "혼자할일"
-                manager.append(Allocators.EmptyData)
+                self.manager[0].name = "혼자할일"
+                self.manager.append(Allocators.EmptyData)
+            }
+            if navigationBarTitle == "조회" {
+                navigationBarView.titleLabel.text = "할일 조회"
+                setDefaultValue = [data.title, data.endDate, self.manager , data.memo]
+                setInquiryStyle()
             }
             memoTextView.text = data.memo
-            print(manager)
+            
+            self.todoManagerCollectionView.reloadData()
         }
     }
     var setDefaultValue: [Any]? {
@@ -116,32 +150,76 @@ final class ToDoViewController: UIViewController {
     }
     
     // MARK: - Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         setHierachy()
         setLayout()
-        registerCell()
         setDelegate()
         setStyle()
-    }
+        registerCell()
 
-    override func viewDidAppear(_ animated: Bool) {
-        if navigationBarTitle == StringLiterals.ToDo.inquiry {
-            setInquiryStyle()
+        if navigationBarTitle == "추가" {
+            navigationBarView.titleLabel.text = "할일 추가"
+            setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager, "메모를 입력해주세요."]
         }
     }
+    
+    //    override func viewWillAppear(_ animated: Bool) {
+    //
+    //        if navigationBarTitle == "조회" {
+    //            getDetailToDoData(todoId: self.todoId)
+    //        }
+    
+    //    }
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        if navigationBarTitle == StringLiterals.ToDo.inquiry {
+    //            setInquiryStyle()
+    //        }
+    //        if navigationBarTitle == "조회" {
+    //            getDetailToDoData(todoId: self.todoId)
+    //        }
+    //    }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationBarView.backgroundColor = .gray50
         self.tabBarController?.tabBar.isHidden = false
+        
+        
     }
+    override func viewWillAppear(_ animated: Bool) {
+        if navigationBarTitle == StringLiterals.ToDo.inquiry {
+            setInquiryStyle()
+        }
+        if navigationBarTitle == "조회" {
+                self.getDetailToDoData(todoId: self.todoId)
+            
+        }
+    }
+    
+    
+    func setNaviTitle() {
+        switch navigationBarTitle {
+            
+        case "수정":
+            navigationBarView.titleLabel.text = "할일 수정"
+            setDefaultValue = ["수정", "수정", self.manager , "수정"]
+        default:
+            return
+        }
+    }
+    
+    //키보드내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
+    
     
     // MARK: - @objc Methods
     
     @objc
     func presentToDatePicker(for button: UIButton) {
-        print("presentToDatePicker")
         showDatePicker(for: button)
         dropdownButton.setImage(ImageLiterals.ToDo.tappedDropdown, for: .normal)
     }
@@ -151,9 +229,21 @@ final class ToDoViewController: UIViewController {
     func didTapToDoManagerButton(_ sender: UIButton) {
         guard let isActivateView = self.isActivateView else {return}
         if isActivateView {
+            
             changeButtonConfig(isSelected: sender.isSelected, btn: sender)
-            sender.isSelected = sender.isSelected ? false : true
-            manager[sender.tag].isOwner = sender.isSelected ? true : false
+            
+            sender.isSelected = !sender.isSelected
+            
+            if sender.isSelected {
+                // 버튼이 선택된 경우, 배열에 추가
+                buttonIndex.append(sender.tag)
+            } else {
+                // 버튼 선택이 해제된 경우, 배열에서 제거
+                buttonIndex.removeAll(where: { $0 == sender.tag })
+            }
+            //            sender.isSelected = sender.isSelected ? false : true
+            //            manager[sender.tag].isOwner = sender.isSelected ? true : false
+            
         }
     }
     
@@ -164,10 +254,24 @@ final class ToDoViewController: UIViewController {
         let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해주세요." ? "" : deadlineTextfieldLabel.text) ?? ""
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         let secret = beforeVC == "our" ? false : true
-        if !todo.isEmpty && !deadline.isEmpty{
-            self.saveToDoData = DetailToDoAppData(title: todo, endDate: deadline, allocators: manager, memo: memo, secret: secret)
-            self.navigationController?.popViewController(animated: false)
-            DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
+        if !todo.isEmpty && !deadline.isEmpty {
+            if !buttonIndex.isEmpty {
+                for i in buttonIndex {
+                    idSet.append(fromOurTodoParticipants[i].participantId)
+                }
+            }
+            if beforeVC == "my" {
+                idSet = [myId]
+            } else {
+                
+            }
+            
+            
+            self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: secret)
+            postToDoData()
+            //통신
+            
+            
         }
     }
     
@@ -193,7 +297,7 @@ private extension ToDoViewController {
             buttonView
         )
         deadlineTextfieldLabel.addSubview(dropdownButton)
-
+        
     }
     
     func setLayout() {
@@ -269,7 +373,6 @@ private extension ToDoViewController {
         }
         buttonView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(40))
         }
@@ -284,20 +387,6 @@ private extension ToDoViewController {
         contentView.backgroundColor = .white000
         navigationBarView.backgroundColor = .white000
         dropdownContainer.backgroundColor = .white
-        switch navigationBarTitle {
-        case "추가": 
-            navigationBarView.titleLabel.text = "할일 추가"
-            setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager , "메모를 입력해주세요."]
-        case "조회": 
-            navigationBarView.titleLabel.text = "할일 조회"
-            setDefaultValue = [data?.title, data?.endDate, self.manager , data?.memo]
-            setInquiryStyle()
-        case "수정":
-            navigationBarView.titleLabel.text = "할일 수정"
-            setDefaultValue = ["수정", "수정", self.manager , "수정"]
-        default: 
-            return
-        }
     }
     
     func setDelegate() {
@@ -316,6 +405,7 @@ private extension ToDoViewController {
         collectionView.isScrollEnabled = false
         return collectionView
     }
+    
     
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
@@ -381,22 +471,42 @@ private extension ToDoViewController {
         bottomSheetVC.modalPresentationStyle = .overFullScreen
         self.present(bottomSheetVC, animated: false, completion: nil)
     }
-
+    
 }
 
 // MARK: - Extension
 
 extension ToDoViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.manager.count
+        // 마이투두 - 할일추가 - 1로 픽스
+        
+        if beforeVC == "our" {
+            return self.fromOurTodoParticipants.count
+        }
+        else {
+            return self.manager.count
+        }
+        // 조회할때 - isprivate이면 -> 나만보기
+        // 조회할때 - isprivate이 false -> 그냥 받은거 뿌려주고 왼쪽 주황색
+        
+        // 아워투두 - 내가 없음(isowner)
+        
+        // 아워투두 - 할일추가 - 전체인원나오기
+        
+        //        return self.manager.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoManagerCollectionViewCell.identifier, for: indexPath) as? ToDoManagerCollectionViewCell else {return UICollectionViewCell()}
         
-        let name = manager[indexPath.row].name
-        print("name \(name)")
+        var name = ""
+        if beforeVC == "our" {
+            name = fromOurTodoParticipants[indexPath.row].name
+        } else {
+            name = manager[indexPath.row].name
+        }
+        
         managerCell.managerButton.isEnabled = true
         managerCell.managerButton.setTitle(name, for: .normal)
         managerCell.managerButton.tag = indexPath.row
@@ -436,7 +546,7 @@ extension ToDoViewController: UICollectionViewDataSource{
                         managerCell.managerButton.isEnabled = false
                         managerCell.managerButton.backgroundColor = .white000
                         managerCell.managerButton.layer.borderColor = UIColor.white000.cgColor
-
+                        
                         managerCell.managerButton.setTitleColor(.gray200, for: .normal)
                     } else {
                         managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
@@ -472,14 +582,18 @@ extension ToDoViewController: UICollectionViewDataSource{
         }
         return managerCell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
 }
 
 extension ToDoViewController: UITextViewDelegate {
-
+    
     func textViewDidBeginEditing (_ textView: UITextView) {
         todoTextfield.resignFirstResponder()
         textView.becomeFirstResponder()
-
+        
         if textView.text == memoTextviewPlaceholder {
             textView.text = ""
             textView.textColor = .gray700
@@ -520,9 +634,9 @@ extension ToDoViewController: UITextFieldDelegate {
     }
     func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
         guard  let text = textField.text else { return  false }
-
-         let newLength = text.count + string.count - range.length
-
+        
+        let newLength = text.count + string.count - range.length
+        
         if newLength == 0 {
             textField.layer.borderColor =  UIColor.gray200.cgColor
             countToDoCharacterLabel.textColor = .gray200
@@ -541,7 +655,6 @@ extension ToDoViewController: UITextFieldDelegate {
 
 extension ToDoViewController: BottomSheetDelegate {
     func datePickerDidChanged(date: Date) {
-        print("dddd")
         // 실시간 반영 구현 해야합니다 ㅠㅠ
     }
     
@@ -561,8 +674,7 @@ extension ToDoViewController: DoubleButtonDelegate {
     }
     
     func tapDeleteButton() {
-        self.navigationController?.popViewController(animated: false)
-        DOOToast.show(message: "할일이 삭제되었어요.", insetFromBottom: ScreenUtils.getHeight(107))
+        deleteTodo()
     }
     
 }
@@ -570,15 +682,22 @@ extension ToDoViewController: DoubleButtonDelegate {
 extension ToDoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
-
+        
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-//        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
+        //        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
         
-        let stringLength = data?.secret == true
-        ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
-        : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
-        return CGSize(width: stringLength + ScreenUtils.getWidth(12), height: ScreenUtils.getHeight(20))
+        
+        if beforeVC == "my" {
+            let stringLength = data?.secret == true
+            ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
+            : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
+            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
+            
+        } else {
+            
+            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+        }
     }
 }
 extension ToDoViewController: ViewControllerServiceable {
@@ -601,17 +720,36 @@ extension ToDoViewController: ViewControllerServiceable {
 extension ToDoViewController {
     
     
-    func getDetailToDoData() {
+    func getDetailToDoData(todoId: Int) {
         Task {
             do {
-                let myDetailToDoData = try await ToDoService.shared.getDetailToDoData(todoId: 9)
-                data = myDetailToDoData
+                self.data = try await ToDoService.shared.getDetailToDoData(todoId: todoId)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
                 handleError(error)
-                print("todo detail \(error)")
             }
         }
+    }
+    
+    func postToDoData() {
+        Task {
+            do {
+                try await ToDoService.shared.postCreateToDo(tripId: tripId, requestBody: saveToDoData)
+                self.navigationController?.popViewController(animated: true)
+            }
+            DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
+        }
+    }
+    
+    func deleteTodo() {
+        Task {
+            do {
+                try await ToDoService.shared.deleteTodo(todoId: self.todoId)
+                self.navigationController?.popViewController(animated: true)
+            }
+            DOOToast.show(message: "할 일이 삭제되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
+        }
+        
     }
 }

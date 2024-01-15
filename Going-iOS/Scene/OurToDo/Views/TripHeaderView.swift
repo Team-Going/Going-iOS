@@ -20,24 +20,59 @@ final class TripHeaderView: UIView {
     lazy var tripDdayLabel: UILabel = DOOLabel(font: .pretendard(.head2), color: .gray700, alignment: .left)
     lazy var tripDateLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray300, alignment: .left)
     let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: ImageLiterals.OurToDo.icCalendar)
-
+    private var dDay: Int = 0
+    
     // MARK: - Property
     
     //ourtodo header data
-    var tripData: [String]? {
+    var tripData: OurToDoHeaderAppData? {
         didSet {
             guard let data = tripData else {return}
-            self.tripNameLabel.text = data[0]
-            self.tripDdayLabel.text = "여행일까지 \(data[1])일 남았어요!"
-            self.tripDateLabel.text = data[2] + " - " + data[3]
+            self.tripNameLabel.text = data.title
             
-            let text = tripDdayLabel.text ?? ""
-            let splitText = tripDdayLabel.text?.split(separator: " ") ?? []
-            let firstString = NSMutableAttributedString(string: text)
-            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: String(splitText[0])))
-            firstString.addAttribute(.foregroundColor, value: UIColor.red400, range: (text as NSString).range(of: String(splitText[1])))
-            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: String(splitText[2])))
-            tripDdayLabel.attributedText = firstString
+            
+            if data.day < 0 {
+                let minusText = "여행이 완료되었어요!"
+                
+                let attributedString = NSMutableAttributedString(string: minusText)
+                
+                let range = NSRange(location: 4, length: 2)
+                
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red500, range: range)
+                
+                self.tripDdayLabel.attributedText = attributedString
+                
+            } else if data.day == 0 {
+                let dDayText = "여행 중이에요!"
+                
+                let attributedString = NSMutableAttributedString(string: dDayText)
+                
+                let range = NSRange(location: 0, length: 4)
+                
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red500, range: range)
+                self.tripDdayLabel.attributedText = attributedString
+
+            } else {
+                
+                let numText = "\(data.day)"
+
+                let plusTest = "여행일까지 \(numText)일 남았어요!"
+
+                let attributedString = NSMutableAttributedString(string: plusTest)
+                
+                let range = NSRange(location: 6, length: numText.count + 1)
+                
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red500, range: range)
+                self.tripDdayLabel.attributedText = attributedString
+
+            }
+            let splitStartDate = data.startDate.split(separator: ".")
+            let newStartDate = "\(splitStartDate[1])월 \(splitStartDate[2])일"
+            let splitEndDate = data.endDate.split(separator: ".")
+            let newEndDate = "\(splitEndDate[1])월 \(splitEndDate[2])일"
+            
+            self.tripDateLabel.text = newStartDate + " - " + newEndDate
+            
             
             let string = self.tripDateLabel.text ?? ""
             let date = NSAttributedString(string: " \(string)" )

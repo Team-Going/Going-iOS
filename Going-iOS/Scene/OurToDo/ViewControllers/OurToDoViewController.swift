@@ -72,21 +72,23 @@ final class OurToDoViewController: UIViewController {
     private var headerData: OurToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
-            let splitStartDate = data.startDate.split(separator: ".")
-            let newStartDate = "\(splitStartDate[1])월 \(splitStartDate[2])일"
-            let splitEndDate = data.endDate.split(separator: ".")
-            let newEndDate = "\(splitEndDate[1])월 \(splitEndDate[2])일"
-            self.tripHeaderView.tripData = [data.title, "\(data.day)", newStartDate, newEndDate]
+            
+            self.tripHeaderView.tripData = data
             tripMiddleView.participants = data.participants
             self.tripMiddleView.progress = data.progress
         }
     }
     
+    var todoId: Int = 0
+    
     var ourToDoData: [ToDoAppData]? {
         didSet {
             loadData()
+            
         }
     }
+    
+    var allocator: [Allocators] = []
     
     var detailToDoData: DetailToDoAppData = DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
     
@@ -103,20 +105,20 @@ final class OurToDoViewController: UIViewController {
         setDelegate()
         registerCell()
         setStyle()
-        getToDoData(progress: "incomplete")
         getOurToDoHeaderData()
         setTapBarImage()
         self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
         self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        UserDefaults.standard.set("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiaWF0IjoxNzA0ODk1NDE4LCJleHAiOjE3MDU1MDAyMTh9.FWPJhGl9amOs1Aog1snD2O1ayVm6lRYBJgHOndyWdMQ", forKey: UserDefaultToken.accessToken.rawValue)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         loadData()
         setGradient()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getToDoData(progress: "incomplete")
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -283,10 +285,13 @@ private extension OurToDoViewController {
 //        detailToDoData = toDetailAppData()
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
-        todoVC.data = detailToDoData
-        todoVC.manager = detailToDoData.allocators
-        todoVC.isActivateView = isActivate
+        guard let header = headerData else { return }
+        todoVC.tripId = self.tripId
         todoVC.beforeVC = before
+        todoVC.fromOurTodoParticipants = header.participants
+        todoVC.manager = self.allocator
+        todoVC.isActivateView = isActivate
+        todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
@@ -327,6 +332,7 @@ private extension OurToDoViewController {
     // TODO: - 아이디 값으로 본인 확인 필요
     @objc
     func pushToAddToDoView() {
+        
         setToDoView(before: "our" , naviBarTitle: "추가", isActivate: true)
     }
     
@@ -380,18 +386,21 @@ extension OurToDoViewController: UIScrollViewDelegate {
 
 extension OurToDoViewController: OurToDoCollectionViewDelegate {
     func pushToToDo() {
-        setToDoView(before: "our" , naviBarTitle: "조회", isActivate: false)
+//        setToDoView(before: "our" , naviBarTitle: "조회", isActivate: false)
     }
 }
 
+//탭바누를때
 extension OurToDoViewController: TabBarDelegate {
     func tapOurToDo() {
         let ourToDoVC = OurToDoViewController()
+        ourToDoVC.tripId = self.tripId
         self.navigationController?.pushViewController(ourToDoVC, animated: false)
     }
     
     func tapMyToDo() {
         let myToDoVC = MyToDoViewController()
+        myToDoVC.tripId = self.tripId
         self.navigationController?.pushViewController(myToDoVC, animated: false)
     }
 }
@@ -403,6 +412,7 @@ extension OurToDoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ourToDoData?.count ?? 0
     }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let ourToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: OurToDoCollectionViewCell.identifier, for: indexPath) as? OurToDoCollectionViewCell else {return UICollectionViewCell()}
@@ -423,10 +433,15 @@ extension OurToDoViewController: UICollectionViewDataSource {
         return ourToDoCell
     }
     
+    
+    
     // TODO: - '할일 조회' 뷰 연결
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushToInquiryToDoVC()
+        
+        self.todoId = self.ourToDoData?[indexPath.row].todoId ?? 0
+        self.allocator =  self.ourToDoData?[indexPath.row].allocators ?? []
+        setToDoView(before: "our", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
     }
 }
 
@@ -466,7 +481,7 @@ extension OurToDoViewController {
     func getOurToDoHeaderData() {
         Task(priority: .high) {
             do {
-                self.headerData = try await OurToDoService.shared.getOurToDoHeader(tripId: 1)
+                self.headerData = try await OurToDoService.shared.getOurToDoHeader(tripId: self.tripId)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
