@@ -8,12 +8,13 @@
 import Foundation
 
 struct GetMyToDoResponseDTO: DTO, Response {
-    let name: String
+    let participantId: Int
+    let title: String
     let count: Int
 }
 
 extension GetMyToDoResponseDTO {
     func toAppData() -> MyToDoHeaderAppData {
-        return MyToDoHeaderAppData(name: self.name, count: self.count)
+        return MyToDoHeaderAppData(participantId: self.participantId, title: self.title, count: self.count)
     }
 }
