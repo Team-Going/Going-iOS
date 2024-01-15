@@ -125,7 +125,9 @@ final class OurToDoViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        loadData()
+        Task {
+            await loadData()
+        }
         setGradient()
     }
     
@@ -221,7 +223,7 @@ private extension OurToDoViewController {
         }
     }
     
-    func loadData() {
+    func loadData() async {
         self.setEmptyView()
 
         ourToDoCollectionView.reloadData()
