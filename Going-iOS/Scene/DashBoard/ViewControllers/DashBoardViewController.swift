@@ -20,6 +20,7 @@ class DashBoardViewController: UIViewController {
     private var travelListDummy: DashBoardResponseSturct? {
         didSet {
 //            filterTravels()
+            setNoDataView()
             setNaviTitle()
             dashBoardCollectionView.reloadData()
         }
@@ -120,6 +121,30 @@ private extension DashBoardViewController {
             $0.width.equalToSuperview()
         }
         
+        noDataview.snp.makeConstraints {
+            $0.top.equalTo(dashBoardHeaderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(createTravelButton.snp.top)
+        }
+        noDataLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(107)
+            $0.leading.equalToSuperview().inset(109)
+        }
+        
+        characterImage.snp.makeConstraints {
+            $0.trailing.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.getWidth(236))
+            $0.height.equalTo(ScreenUtils.getHeight(364))
+            $0.top.equalTo(noDataLabel.snp.top).offset(40)
+        }
+        
+        dashBoardCollectionView.snp.makeConstraints {
+            $0.top.equalTo(dashBoardHeaderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(createTravelButton.snp.top)
+        }
+
+        
         navigationTitle.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(24)
             $0.leading.equalToSuperview().inset(24)
@@ -155,7 +180,6 @@ private extension DashBoardViewController {
             $0.height.equalTo(ScreenUtils.getHeight(40))
         }
         
-        setNoDataView()
     }
     
     func setDelegate() {
@@ -191,30 +215,14 @@ private extension DashBoardViewController {
     func setNoDataView() {
         guard let travelListDummy else { return }
         if travelListDummy.trips.isEmpty {
-            noDataview.snp.makeConstraints {
-                $0.top.equalTo(dashBoardHeaderView.snp.bottom)
-                $0.leading.trailing.equalToSuperview()
-                $0.bottom.equalTo(createTravelButton.snp.top)
-            }
-            noDataLabel.snp.makeConstraints {
-                $0.top.equalToSuperview().inset(107)
-                $0.leading.equalToSuperview().inset(109)
-            }
-            
-            characterImage.snp.makeConstraints {
-                $0.trailing.equalToSuperview()
-                $0.width.equalTo(ScreenUtils.getWidth(236))
-                $0.height.equalTo(ScreenUtils.getHeight(364))
-                $0.top.equalTo(noDataLabel.snp.top).offset(40)
-            }
+            noDataview.isHidden = false
+            dashBoardCollectionView.isHidden = true
         } else {
-            dashBoardCollectionView.snp.makeConstraints {
-                $0.top.equalTo(dashBoardHeaderView.snp.bottom)
-                $0.leading.trailing.equalToSuperview()
-                $0.bottom.equalTo(createTravelButton.snp.top)
-            }
+            noDataview.isHidden = true
+            dashBoardCollectionView.isHidden = false
         }
     }
+    
     
     // MARK: - @objc Methods
     
