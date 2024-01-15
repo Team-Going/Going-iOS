@@ -214,7 +214,7 @@ private extension DashBoardViewController {
     
     @objc
     func pushToCreateTravelVC() {
-        let vc = CreateTravelViewController()
+        let vc = StartTravelSplashViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
