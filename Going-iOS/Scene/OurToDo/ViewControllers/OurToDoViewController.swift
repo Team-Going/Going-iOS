@@ -17,6 +17,7 @@ final class OurToDoViewController: UIViewController {
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white000
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.isScrollEnabled = true
         return scrollView
     }()
@@ -27,9 +28,7 @@ final class OurToDoViewController: UIViewController {
         return headerView
     }()
     private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
-    
-    private let tabBarView: TabBarView = TabBarView()
-    
+        
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .red700
@@ -111,7 +110,6 @@ final class OurToDoViewController: UIViewController {
         registerCell()
         setStyle()
         getOurToDoHeaderData()
-        setTapBarImage()
         self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
         self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
     }
@@ -137,7 +135,7 @@ final class OurToDoViewController: UIViewController {
 private extension OurToDoViewController {
     
     func setHierarchy() {
-        self.view.addSubviews(navigationBarview, tabBarView, scrollView, addToDoButton)
+        self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoMainImageView, ourToDoHeaderView, ourToDoCollectionView, emptyView)
         emptyView.addSubviews(emptyViewIconImageView, emptyViewLabel)
@@ -149,14 +147,11 @@ private extension OurToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(60))
         }
-        tabBarView.snp.makeConstraints{
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(90))
-        }
+        
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(tabBarView.snp.top)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(90))
         }
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(ourToDoCollectionView.contentSize.height).priority(.low)
@@ -247,6 +242,7 @@ private extension OurToDoViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
         collectionView.backgroundColor = .white000
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.isScrollEnabled = false
         return collectionView
     }
@@ -269,7 +265,6 @@ private extension OurToDoViewController {
         self.scrollView.delegate = self
         self.ourToDoCollectionView.dataSource = self
         self.ourToDoCollectionView.delegate = self
-        self.tabBarView.delegate = self
         self.tripMiddleView.delegate = self
     }
     
@@ -305,11 +300,6 @@ private extension OurToDoViewController {
             firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
             secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
             axis: .horizontal)
-    }
-    
-    func setTapBarImage() {
-        self.tabBarView.ourToDoTab.setImage(ImageLiterals.TabBar.tabbarOurToDoSelected, for: .normal)
-        self.tabBarView.myToDoTab.setImage(ImageLiterals.TabBar.tabbarMyToDoUnselected, for: .normal)
     }
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
