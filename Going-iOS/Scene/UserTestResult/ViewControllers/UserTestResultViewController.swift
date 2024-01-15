@@ -173,7 +173,12 @@ private extension UserTestResultViewController {
     }
     
     func saveImage() {
-        UIImageWriteToSavedPhotosAlbum(resultImageView.image!, self, nil, nil)
+        
+        guard let saveImage = testResultData?.phoneSaveImage else {
+            DOOToast.show(message: "이미지 저장 오류", insetFromBottom: 80)
+            return
+        }
+        UIImageWriteToSavedPhotosAlbum(saveImage, self, nil, nil)
         DOOToast.show(message: "이미지가 저장되었습니다. \n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
     }
     

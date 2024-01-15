@@ -21,9 +21,13 @@ final class CreatingSuccessViewController: UIViewController {
             guard let data = createTravelResponseData else { return }
             self.travelTitleLabel.text = data.title
             self.dateLabel.text = data.startDate + "-" + data.endDate
-            self.dDayLabel.text = "D-" + "\(data.day)"
             self.inviteCodeLabel.text = data.code
             let vc = OurToDoViewController()
+            if data.day == 0 {
+                self.dDayLabel.text = "여행 중"
+            } else {
+                self.dDayLabel.text = "D-" + "\(data.day)"
+            }
             if let tripId = self.createTravelResponseData?.tripId {
                 vc.tripId = tripId
             } else { return }
@@ -210,11 +214,15 @@ private extension CreatingSuccessViewController {
 
     func sendKakaoMessage() {
         let templateId = Constant.KaKaoMessageTemplate.id
+        guard let filteredString = self.inviteCodeLabel.text else { return }
+        guard let filteredTitle = self.travelTitleLabel.text else { return }
+        let inviteCode =  String(filteredString)
+        let travelTitle = String(filteredTitle)
         
         // 카카오톡 설치여부 확인
         if ShareApi.isKakaoTalkSharingAvailable() {
             // 카카오톡으로 카카오톡 공유 가능
-            ShareApi.shared.shareCustom(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) {(sharingResult, error) in
+            ShareApi.shared.shareCustom(templateId: Int64(templateId) , templateArgs:["KEY":"\(inviteCode)", "NAME":"\(travelTitle)"]) {(sharingResult, error) in
                 if let error = error {
                     print(error)
                 }

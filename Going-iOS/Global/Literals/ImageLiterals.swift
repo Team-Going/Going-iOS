@@ -113,15 +113,26 @@ enum ImageLiterals {
         static var imgHeartSRP: UIImage { .load(named: "img_profile_srp") }
     }
     
+    enum SaveAtPhone {
+        static var AEI: UIImage { .load(named: "AEI") }
+        static var AEP: UIImage { .load(named: "AEP") }
+        static var ARI: UIImage { .load(named: "ARI") }
+        static var ARP: UIImage { .load(named: "ARP") }
+        static var SEI: UIImage { .load(named: "SEI") }
+        static var SEP: UIImage { .load(named: "SEP") }
+        static var SRI: UIImage { .load(named: "SRI") }
+        static var SRP: UIImage { .load(named: "SRP") }
+    }
+    
     enum TripFriends {
         static var ticketLine: UIImage { .load(named: "line_ticket_large")}
     }
   
     enum TabBar {
-        static var tabbarMyToDoUnselected: UIImage { .load(named: "tabbar_mytodo_unselected") }
+        static var tabbarMyToDoUnselected: UIImage { .load(named: "mytodo_unselected") }
         static var tabbarOurToDoSelected: UIImage { .load(named: "tabbar_ourtodo_selected") }
         static var tabbarOurToDoUnselected: UIImage { .load(named: "tabbar_ourtodo_unselected") }
-        static var tabbarMyToDoSelected: UIImage { .load(named: "tabbar_mytodo_selected") }
+        static var tabbarMyToDoSelected: UIImage { .load(named: "mytodo") }
     }
   
     enum UserTestTypeCharacter {

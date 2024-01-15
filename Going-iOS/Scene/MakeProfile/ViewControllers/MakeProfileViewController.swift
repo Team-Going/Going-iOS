@@ -452,16 +452,22 @@ extension MakeProfileViewController: UITextFieldDelegate {
         default:
             return
         }
-        
-        func textFieldDidEndEditing(_ textField: UITextField) {
-            switch textField {
-            case nameTextField:
-                nameTextFieldBlankCheck()
-            case descTextField:
-                descTextFieldBlankCheck()
-            default:
-                return
-            }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case nameTextField:
+            nameTextFieldBlankCheck()
+        case descTextField:
+            descTextFieldBlankCheck()
+        default:
+            return
         }
+    }
+    
+    /// 엔터키 누르면 키보드 내리는 메서드
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

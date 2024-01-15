@@ -20,8 +20,12 @@ final class JoiningSuccessViewController: UIViewController {
             guard let data = joinSuccessData else { return }
             self.travelTitleLabel.text = data.travelName
             self.dateLabel.text = data.startDate + "-" + data.endDate
-            self.dDayLabel.text = "D-" + "\(data.dueDate)"
             self.tripId = data.travelId
+            if data.dueDate == 0 {
+                self.dDayLabel.text = "여행 중"
+            } else {
+                self.dDayLabel.text = "D-" + "\(data.dueDate)"
+            }
         }
     }
 

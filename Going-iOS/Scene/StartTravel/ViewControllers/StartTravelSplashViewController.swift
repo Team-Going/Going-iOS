@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StartTravelSplashViewController: UIViewController {
+final class StartTravelSplashViewController: UIViewController {
 
     // MARK: - Properties
     

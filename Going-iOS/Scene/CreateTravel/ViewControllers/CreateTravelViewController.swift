@@ -33,7 +33,9 @@ final class CreateTravelViewController: UIViewController {
                                            color: .gray700,
                                            text: StringLiterals.CreateTravel.dateTitle)
     
-    private let travelNameTextField: UITextField = {
+    private var travelNameTextFieldCount: Int = 0
+
+    private lazy var travelNameTextField: UITextField = {
         let field = UITextField()
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
@@ -41,6 +43,7 @@ final class CreateTravelViewController: UIViewController {
         field.setPlaceholderColor(.gray200)
         field.layer.cornerRadius = 6
         field.textColor = .gray700
+        field.addTarget(self, action: #selector(travelNameTextFieldDidChange), for: .editingChanged)
         return field
     }()
     
@@ -335,6 +338,15 @@ private extension CreateTravelViewController {
         nextVC.createRequestData = createTravelData
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    @objc
+    func travelNameTextFieldDidChange() {
+        guard let text = travelNameTextField.text else { return }
+        travelNameTextFieldCount = text.count
+        characterCountLabel.text = "\(travelNameTextFieldCount) / 15"
+        travelNameTextFieldBlankCheck()
+        updateCreateButtonState()
+    }
 }
 
 extension CreateTravelViewController: BottomSheetDelegate {
@@ -374,34 +386,60 @@ extension CreateTravelViewController: BottomSheetDelegate {
 }
 
 extension CreateTravelViewController: UITextFieldDelegate {
+    //TextField에 변경사항이 생기면, 화면의 TextField에 실제로 작성되기 전에 호출되는 함수
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == travelNameTextField {
-            /// 현재 텍스트 필드의 텍스트와 입력된 문자를 합쳐서 길이를 계산
-            let currentText = textField.text ?? ""
-            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-            let maxLength = 15
-            
-            if newText.count > maxLength {
-                textField.layer.borderColor = UIColor.red400.cgColor
-            } else if newText.count >= 1 {
-                textField.layer.borderColor = UIColor.gray700.cgColor
-                warningLabel.isHidden = true
-                characterCountLabel.textColor = .gray400
-            } else {
-                textField.layer.borderColor = UIColor.gray200.cgColor
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
             }
-            
-            characterCountLabel.text = "\(newText.count)/\(maxLength)"
-            
-            // 최대 길이를 초과하면 입력을 막음
-            return newText.count < maxLength
         }
-        return true
+        
+        let maxLength = 15
+        let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text
+        let addedText = string // 입력한 text
+        let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합침
+        let newTextLength = newText.count // 합쳐진 text의 길이
+        
+        if newTextLength <= maxLength {
+            return true
+        }
+        
+        //여기는 "곽성ㅈ" 처럼 3번째에 하나라도 뭔가 있으면 위의 If문을 무시하고 넘어온다.
+        let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)]) // 입력하기 전 text의 마지막 글자 입니다.
+        let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) } // 입력하기 전 text의 마지막 글자를 자음과 모음으로 분리해줍니다.
+        let separatedCharactersCount = separatedCharacters.count // 분리된 자음, 모음의 개수입니다.
+        
+        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 1개이고, 새로 입력되는 글자가 자음이 아닐 경우 입력이 됨
+        // ex)"곽성ㅈ" 에서 입력할 때!
+        if separatedCharactersCount == 1 && !addedText.isConsonant {
+            return true
+        }
+        
+        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 2개이고, 새로 입력되는 글자가 자음 혹은 모음일 경우 입력이 되도록 함
+        // ex) "곽성주" 에서 입력할 때!
+        if separatedCharactersCount == 2 {
+            return true
+        }
+        
+        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 3개이고, 새로 입력되는 글자가 자음일 경우 입력이 되도록 함, 예를 들어 받침에 자음이 두개 들어가는 경우 밑에서 처리해줘야 됨
+        // ex) "곽성준" 에서 입력할 때!
+        if separatedCharactersCount == 3 && addedText.isConsonant {
+            return true
+        }
+        return false
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField == travelNameTextField {
-            updateCreateButtonState()
+        let text = textField.text ?? ""
+        let maxLength = 15
+        
+        if text.count > maxLength {
+            let startIndex = text.startIndex
+            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
+            let fixedText = String(text[startIndex...endIndex])
+            textField.text = fixedText
+            return
         }
     }
     
@@ -414,6 +452,12 @@ extension CreateTravelViewController: UITextFieldDelegate {
         if let text = textField.text, text.isEmpty {
             textField.layer.borderColor = UIColor.gray200.cgColor
         }
+    }
+    
+    /// 엔터키 누르면 키보드 내리는 메서드
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
