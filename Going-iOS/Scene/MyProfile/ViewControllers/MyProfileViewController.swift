@@ -12,20 +12,12 @@ import Photos
 
 final class MyProfileViewController: UIViewController {
     
-    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
-                                          ImageLiterals.Profile.imgSnowmanSRI,
-                                          ImageLiterals.Profile.imgTriangleSEP,
-                                          ImageLiterals.Profile.imgSquareSEI,
-                                          ImageLiterals.Profile.imgCloverARP,
-                                          ImageLiterals.Profile.imgCloudARI,
-                                          ImageLiterals.Profile.imgHexagonAEP,
-                                          ImageLiterals.Profile.imgCircleAEI]
+
     
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
-            guard let index = testResultIndex else { return }
-            self.profileImageView.image = userProfileImageSet[index]
+            self.profileImageView.image = data.profileImage
             self.myResultView.resultViewData = data
         }
     }
@@ -172,9 +164,14 @@ private extension MyProfileViewController {
     }
     
     func saveImage() {
-        UIImageWriteToSavedPhotosAlbum(UIImage(systemName: "pencil")!, self, nil, nil)
-        // TODO: - height 다시 잡기
-        DOOToast.show(message: "이미지로 저장되었어요\n친구에게 내 캐릭터를 공유해 보세요", insetFromBottom: 70)
+        
+        guard let saveImage = testResultData?.phoneSaveImage else {
+            DOOToast.show(message: "이미지 저장 오류", insetFromBottom: 80)
+            return
+        }
+        
+        UIImageWriteToSavedPhotosAlbum(saveImage, self, nil, nil)
+        DOOToast.show(message: "이미지가 저장되었습니다. \n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
     }
     
     func showPermissionAlert() {

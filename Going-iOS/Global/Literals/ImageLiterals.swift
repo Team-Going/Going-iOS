@@ -113,6 +113,17 @@ enum ImageLiterals {
         static var imgHeartSRP: UIImage { .load(named: "img_profile_srp") }
     }
     
+    enum SaveAtPhone {
+        static var AEI: UIImage { .load(named: "AEI") }
+        static var AEP: UIImage { .load(named: "AEP") }
+        static var ARI: UIImage { .load(named: "ARI") }
+        static var ARP: UIImage { .load(named: "ARP") }
+        static var SEI: UIImage { .load(named: "SEI") }
+        static var SEP: UIImage { .load(named: "SEP") }
+        static var SRI: UIImage { .load(named: "SRI") }
+        static var SRP: UIImage { .load(named: "SRP") }
+    }
+    
     enum TripFriends {
         static var ticketLine: UIImage { .load(named: "line_ticket_large")}
     }
