@@ -632,10 +632,17 @@ extension ToDoViewController: UITextFieldDelegate {
         textField.becomeFirstResponder()
         memoTextView.resignFirstResponder()
     }
+    
     func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
         guard  let text = textField.text else { return  false }
         
         let newLength = text.count + string.count - range.length
+        
+        if textField == todoTextfield {
+            DispatchQueue.main.async {
+                self.updateSingleButtonState()
+            }
+        }
         
         if newLength == 0 {
             textField.layer.borderColor =  UIColor.gray200.cgColor
@@ -653,9 +660,38 @@ extension ToDoViewController: UITextFieldDelegate {
     }
 }
 
+extension ToDoViewController {
+    func updateSingleButtonState() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        let todoText = todoTextfield.text ?? ""
+        let deadlineText = deadlineTextfieldLabel.text ?? ""
+        let today = Date()
+        
+        if let deadlineDate = dateFormatter.date(from: deadlineText), deadlineDate >= today, !todoText.isEmpty {
+            singleButtonView.currentType = .enabled
+        } else {
+            singleButtonView.currentType = .unabled
+        }
+    }
+}
+
 extension ToDoViewController: BottomSheetDelegate {
     func datePickerDidChanged(date: Date) {
-        // 실시간 반영 구현 해야합니다 ㅠㅠ
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        let formattedDate = dateFormatter.string(from: date)
+        deadlineTextfieldLabel.text = formattedDate
+        
+        let today = Date()
+        
+        if let deadlineDate = dateFormatter.date(from: formattedDate), deadlineDate < today {
+            // deadlineDate가 오늘 날짜보다 이전일 경우
+            DOOToast.show(message: "앞으로 할 일을 등록해주세요!", insetFromBottom: ScreenUtils.getHeight(374))
+        }
+        updateSingleButtonState()
     }
     
     func didSelectDate(date: Date) {
