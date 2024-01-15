@@ -289,7 +289,9 @@ private extension OurToDoViewController {
         todoVC.tripId = self.tripId
         todoVC.beforeVC = before
         todoVC.fromOurTodoParticipants = header.participants
+        
         todoVC.manager = self.allocator
+        
         todoVC.isActivateView = isActivate
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)

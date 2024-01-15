@@ -108,9 +108,11 @@ final class ToDoViewController: UIViewController {
             if navigationBarTitle == "추가" && beforeVC == "my" {
                 self.manager = [.init(name: "혼자할일", isOwner: true)]
                 peopleCount = 1
-            } else if navigationBarTitle == "추가" && beforeVC == "our" {
-                self.fromOurTodoParticipants
-            }
+            } 
+//            else if navigationBarTitle == "추가" && beforeVC == "our" {
+////                self.fromOurTodoParticipants
+//                self.manager =
+//            }
         }
     }
     
@@ -463,7 +465,7 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-            $0.width.equalTo(ScreenUtils.getWidth(327))
+//            $0.width.equalTo(ScreenUtils.getWidth(327))
         }
     }
     
@@ -588,7 +590,11 @@ extension ToDoViewController: UICollectionViewDataSource{
         // 마이투두 - 할일추가 - 1로 픽스
         
         if beforeVC == "our" {
-            return self.fromOurTodoParticipants.count
+            if navigationBarTitle == "추가" {
+                return self.fromOurTodoParticipants.count
+            } else {
+                return self.manager.count
+            }
         }
         else {
             return self.manager.count
