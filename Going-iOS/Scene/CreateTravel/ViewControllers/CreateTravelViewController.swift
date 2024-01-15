@@ -396,11 +396,10 @@ extension CreateTravelViewController: UITextFieldDelegate {
         }
         
         let maxLength = 15
-        //모든 예시는 NameTextField 기준으로 적음
-        let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
-        let addedText = string // 입력한 text 입니다.
-        let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합칩니다.
-        let newTextLength = newText.count // 합쳐진 text의 길이 입니다.
+        let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text
+        let addedText = string // 입력한 text
+        let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합침
+        let newTextLength = newText.count // 합쳐진 text의 길이
         
         if newTextLength <= maxLength {
             return true
