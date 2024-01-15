@@ -129,10 +129,10 @@ enum ImageLiterals {
     }
   
     enum TabBar {
-        static var tabbarMyToDoUnselected: UIImage { .load(named: "tabbar_mytodo_unselected") }
+        static var tabbarMyToDoUnselected: UIImage { .load(named: "mytodo_unselected") }
         static var tabbarOurToDoSelected: UIImage { .load(named: "tabbar_ourtodo_selected") }
         static var tabbarOurToDoUnselected: UIImage { .load(named: "tabbar_ourtodo_unselected") }
-        static var tabbarMyToDoSelected: UIImage { .load(named: "tabbar_mytodo_selected") }
+        static var tabbarMyToDoSelected: UIImage { .load(named: "mytodo") }
     }
   
     enum UserTestTypeCharacter {

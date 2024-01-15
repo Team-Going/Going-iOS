@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "btn_mytodo_disabled_navi.png",
+      "filename" : "mytodo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "btn_mytodo_disabled_navi@2x.png",
+      "filename" : "mytodo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "btn_mytodo_disabled_navi@3x.png",
+      "filename" : "mytodo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -72,7 +72,7 @@ final class MyProfileViewController: UIViewController {
         setHierarchy()
         setLayout()
         setDelegate()
-    }
+            }
     
     override func viewWillAppear(_ animated: Bool) {
         getUserProfile()
