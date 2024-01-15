@@ -477,20 +477,21 @@ private extension ToDoViewController {
     }
     
     func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
         return collectionView
     }
     
     
-    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(45) , height: ScreenUtils.getHeight(24))
-        return flowLayout
-    }
+//    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
+//        let flowLayout = UICollectionViewFlowLayout()
+//        flowLayout.scrollDirection = .horizontal
+//        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(45) , height: ScreenUtils.getHeight(24))
+//        return flowLayout
+//    }
     
     func registerCell() {
         self.todoManagerCollectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
@@ -764,7 +765,7 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-        //        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
+                layout.minimumLineSpacing = ScreenUtils.getWidth(4)
         
         
         if beforeVC == "my" {
@@ -774,7 +775,6 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
             
         } else {
-            
             return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
         }
     }
