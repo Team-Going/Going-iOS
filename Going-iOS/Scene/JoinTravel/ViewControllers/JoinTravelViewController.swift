@@ -234,7 +234,18 @@ extension JoinTravelViewController: UITextFieldDelegate {
 
 extension JoinTravelViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
-        print(error)
+        switch error {
+        case .serverError:
+            DOOToast.show(message: "서버오류", insetFromBottom: 80)
+        case .unAuthorizedError:
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case .userState(let code, let message):
+            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: 80)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
     }
 }
 

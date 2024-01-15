@@ -460,8 +460,8 @@
 		9457F04A2B485330009ACF25 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */,
 				94442EC72B4B18E500FDBB26 /* StartTravelSplashViewController.swift */,
+				9457F04B2B4853AC009ACF25 /* TravelTestViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

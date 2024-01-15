@@ -249,8 +249,6 @@ extension UserTestResultViewController {
 extension UserTestResultViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
-        case .reIssueJWT:
-            print("재발급")
         case .serverError:
             DOOToast.show(message: "서버오류", insetFromBottom: 80)
         case .unAuthorizedError:

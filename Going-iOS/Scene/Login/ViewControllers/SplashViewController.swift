@@ -57,7 +57,7 @@ private extension SplashViewController {
 extension SplashViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
-        case .clientError(_, let message):
+        case .clientError(let message):
             DOOToast.show(message: "\(message)", insetFromBottom: 80)
         case .serverError:
             DOOToast.show(message: error.description, insetFromBottom: 80)

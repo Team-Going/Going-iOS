@@ -250,7 +250,7 @@ extension MyProfileViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .reIssueJWT:
-            print("재발급")
+            reIssueJWTToken()
         case .unAuthorizedError:
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
@@ -260,10 +260,21 @@ extension MyProfileViewController: ViewControllerServiceable {
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }
     }
-    
-    
 }
 
+extension MyProfileViewController {
+    func reIssueJWTToken() {
+        Task {
+            do {
+                try await AuthService.shared.reIssueJWTToken()
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+}
 extension MyProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let nextVC = UserTestSplashViewController()

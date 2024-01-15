@@ -273,10 +273,23 @@ extension DashBoardViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Network
 
-private extension DashBoardViewController {
+extension DashBoardViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
-        print(error)
+        switch error {
+        case .clientError(let message):
+            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+        case .serverError:
+            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
+        case .unAuthorizedError:
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
     }
+}
+
+private extension DashBoardViewController {
     
     func getAllData() {
         Task {

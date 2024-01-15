@@ -101,8 +101,11 @@ extension LogOutPopUpViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .reIssueJWT:
-            //JWT재발급API 후에 다시 통신
-            print("")
+            reIssueJWTToken()
+            postLogout()
+        case .unAuthorizedError:
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)
             print(error.description)
@@ -123,6 +126,18 @@ extension LogOutPopUpViewController {
                 self.dismiss(animated: false) {
                     logoutDismissCompletion()
                 }
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+    
+    func reIssueJWTToken() {
+        Task {
+            do {
+                try await AuthService.shared.reIssueJWTToken()
             }
             catch {
                 guard let error = error as? NetworkError else { return }
