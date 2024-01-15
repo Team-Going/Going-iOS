@@ -263,8 +263,11 @@ private extension CreateTravelViewController {
            let startDate = dateFormatter.date(from: startDateText),
            let endDate = dateFormatter.date(from: endDateText) {
             isDateValid = startDate <= endDate
+            let calendar = Calendar.current
             let today = Date()
-            isEndDateNotPast = endDate >= today
+            if let deletedToday = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: today) {
+                isEndDateNotPast = endDate >= deletedToday
+            }
         }
         
         createTravelButton.currentType = (!isTravelNameTextFieldEmpty
