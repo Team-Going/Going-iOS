@@ -24,7 +24,16 @@ final class ToDoViewController: UIViewController {
         view.backgroundColor = .gray100
         return view
     }()
-    private let contentView: UIView = UIView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .white000
+        return scrollView
+    }()
+    private let contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white000
+        return view
+    }()
     private let todoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.todo)
     private let todoTextfield: UITextField = {
         let tf = UITextField()
@@ -166,28 +175,13 @@ final class ToDoViewController: UIViewController {
             setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager, "메모를 입력해주세요."]
         }
     }
-    
-    //    override func viewWillAppear(_ animated: Bool) {
-    //
-    //        if navigationBarTitle == "조회" {
-    //            getDetailToDoData(todoId: self.todoId)
-    //        }
-    
-    //    }
-    //    override func viewDidAppear(_ animated: Bool) {
-    //        if navigationBarTitle == StringLiterals.ToDo.inquiry {
-    //            setInquiryStyle()
-    //        }
-    //        if navigationBarTitle == "조회" {
-    //            getDetailToDoData(todoId: self.todoId)
-    //        }
-    //    }
+
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationBarView.backgroundColor = .gray50
         self.tabBarController?.tabBar.isHidden = false
-        
-        
+        self.removeNotification()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         if navigationBarTitle == StringLiterals.ToDo.inquiry {
             setInquiryStyle()
@@ -196,6 +190,7 @@ final class ToDoViewController: UIViewController {
                 self.getDetailToDoData(todoId: self.todoId)
             
         }
+        addNotification()
     }
     
     
@@ -210,13 +205,82 @@ final class ToDoViewController: UIViewController {
         }
     }
     
-    //키보드내리기
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-        self.view.endEditing(true)
+    // 키보드 관련 알림 등록
+    func addNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // 키보드 관련 알림 등록
+    func removeNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
     // MARK: - @objc Methods
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        if memoTextView.isFirstResponder {
+            // memoTextView가 FirstResponder인 경우 contentInset을 조절
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(40), right: 0)
+            scrollView.contentInset = contentInset
+            scrollView.scrollIndicatorInsets = contentInset
+
+            // 버튼 뷰의 위치 조절
+            buttonView.snp.remakeConstraints {
+                $0.top.equalTo(countMemoCharacterLabel.snp.bottom).offset(10)
+                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
+                $0.height.equalTo(ScreenUtils.getHeight(50))
+            }
+            
+            // memoTextView가 가려지지 않도록 자동으로 스크롤
+            let rect = buttonView.convert(buttonView.bounds, to: scrollView)
+            scrollView.scrollRectToVisible(rect, animated: true)
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        } else if todoTextfield.isFirstResponder {
+            let height = keyboardFrame.size.height
+            
+            //scrollView의 contentInset 초기화
+            scrollView.contentInset = UIEdgeInsets.zero
+            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+            
+            // 컴포넌트의 Auto Layout 조절
+            // 버튼 뷰의 위치 조절
+            buttonView.snp.remakeConstraints {
+                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
+                $0.bottom.equalTo(contentView.snp.bottom).offset(-height)
+                $0.height.equalTo(ScreenUtils.getHeight(50))
+            }
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+
+        @objc func keyboardWillHide(_ notification: Notification) {
+            // 컴포넌트의 Auto Layout 초기 상태로 복원
+            
+            // 키보드가 사라질 때 scrollView의 contentInset 초기화
+            scrollView.contentInset = UIEdgeInsets.zero
+            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+
+            // 버튼 뷰의 위치를 원래대로 조절.
+            buttonView.snp.remakeConstraints {
+                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
+                $0.bottom.equalTo(contentView.snp.bottom).inset(ScreenUtils.getHeight(40))
+                $0.height.equalTo(ScreenUtils.getHeight(50))
+            }
+
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
     
     @objc
     func presentToDatePicker(for button: UIButton) {
@@ -241,10 +305,13 @@ final class ToDoViewController: UIViewController {
                 // 버튼 선택이 해제된 경우, 배열에서 제거
                 buttonIndex.removeAll(where: { $0 == sender.tag })
             }
-            //            sender.isSelected = sender.isSelected ? false : true
-            //            manager[sender.tag].isOwner = sender.isSelected ? true : false
-            
         }
+    }
+    
+    
+    @objc func viewTapped(sender: UITapGestureRecognizer) {
+        // 화면을 탭하면 키보드가 닫히도록 함
+        view.endEditing(true)
     }
     
     // 저장 버튼 탭 시 데이터를 배열에 담아주고 아워투두 뷰로 돌아가는 메서드
@@ -268,10 +335,10 @@ final class ToDoViewController: UIViewController {
             
             
             self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: secret)
+            print(self.saveToDoData)
             postToDoData()
             //통신
-            
-            
+    
         }
     }
     
@@ -282,7 +349,8 @@ final class ToDoViewController: UIViewController {
 private extension ToDoViewController {
     
     func setHierachy() {
-        self.view.addSubviews(navigationBarView, underlineView, contentView)
+        self.view.addSubviews(navigationBarView, underlineView, scrollView)
+        scrollView.addSubview(contentView)
         contentView.addSubviews(
             todoLabel,
             todoTextfield,
@@ -311,35 +379,42 @@ private extension ToDoViewController {
             $0.height.equalTo(1)
             $0.leading.trailing.equalToSuperview()
         }
-        contentView.snp.makeConstraints{
-            $0.top.equalTo(underlineView.snp.bottom).offset(ScreenUtils.getHeight(40))
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
+        scrollView.snp.makeConstraints{
+            $0.top.equalTo(underlineView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
+        }
+        contentView.snp.makeConstraints{
+            $0.top.equalTo(scrollView)
+            $0.width.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(scrollView.snp.height).priority(.low)
         }
         guard let isActivateView else {return}
         isActivateView ? setButtonView(button: singleButtonView) : setButtonView(button: doubleButtonView)
         todoLabel.snp.makeConstraints{
-            $0.top.equalTo(navigationBarView.snp.bottom).offset(ScreenUtils.getHeight(40))
-            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(contentView).inset(ScreenUtils.getHeight(40))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(19))
         }
         todoTextfield.snp.makeConstraints{
             $0.top.equalTo(todoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         countToDoCharacterLabel.snp.makeConstraints{
             $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
-            $0.trailing.equalTo(todoTextfield.snp.trailing).inset(4)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(22))
         }
         deadlineLabel.snp.makeConstraints{
             $0.top.equalTo(todoTextfield.snp.bottom).offset(ScreenUtils.getHeight(28))
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(19))
         }
         deadlineTextfieldLabel.snp.makeConstraints{
             $0.top.equalTo(deadlineLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         dropdownButton.snp.makeConstraints{
@@ -349,30 +424,30 @@ private extension ToDoViewController {
         }
         managerLabel.snp.makeConstraints{
             $0.top.equalTo(deadlineTextfieldLabel.snp.bottom).offset(ScreenUtils.getHeight(28))
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(19))
         }
         todoManagerCollectionView.snp.makeConstraints{
             $0.top.equalTo(managerLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         memoLabel.snp.makeConstraints{
             $0.top.equalTo(todoManagerCollectionView.snp.bottom).offset(ScreenUtils.getHeight(28))
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(19))
         }
         memoTextView.snp.makeConstraints{
             $0.top.equalTo(memoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(143))
         }
         countMemoCharacterLabel.snp.makeConstraints{
             $0.top.equalTo(memoTextView.snp.bottom).offset(4)
-            $0.trailing.equalTo(memoTextView.snp.trailing).inset(4)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(22))
         }
         buttonView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(40))
         }
@@ -384,7 +459,10 @@ private extension ToDoViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = .white000
-        contentView.backgroundColor = .white000
+        
+        // 탭 제스처 등록
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        view.addGestureRecognizer(tapGesture)
         navigationBarView.backgroundColor = .white000
         dropdownContainer.backgroundColor = .white
     }
@@ -436,7 +514,8 @@ private extension ToDoViewController {
         isActivateView = navigationBarTitle != "조회" ? true : false
         buttonView.addSubview(button)
         button.snp.makeConstraints{
-            $0.edges.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
     }
     
@@ -628,9 +707,9 @@ extension ToDoViewController: UITextViewDelegate {
 extension ToDoViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing (_ textField: UITextField) {
+        memoTextView.resignFirstResponder()
         textField.placeholder = ""
         textField.becomeFirstResponder()
-        memoTextView.resignFirstResponder()
     }
     func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
         guard  let text = textField.text else { return  false }

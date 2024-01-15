@@ -30,7 +30,7 @@ extension Serviceable {
         let message = model.message
                 
         guard !NetworkErrorCode.clientErrorCode.contains(code) else {
-            throw NetworkError.clientError(code: code, message: message)
+            throw NetworkError.clientError(message: message)
         }
         
         guard !NetworkErrorCode.userState.contains(code) else {

@@ -61,15 +61,15 @@ struct NetworkRequest {
         
         switch networkType {
         case .withJWT:
-            guard let token = UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) else {  throw NetworkError.clientError(code: "", message: "AccessToken 없음") }
+            guard let token = UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) else {  throw NetworkError.clientError(message: "AccessToken 없음") }
             urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
             
         case .withRefresh:
-            guard let token = UserDefaults.standard.string(forKey: UserDefaultToken.refreshToken.rawValue) else {  throw NetworkError.clientError(code: "", message: "RefreshToken 없음") }
+            guard let token = UserDefaults.standard.string(forKey: UserDefaultToken.refreshToken.rawValue) else {  throw NetworkError.clientError(message: "RefreshToken 없음") }
             urlRequest.setValue("\(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
             
         case .withSocialToken:
-            guard let token = self.token else { throw NetworkError.clientError(code: "", message: "socialToken 없음") }
+            guard let token = self.token else { throw NetworkError.clientError(message: "socialToken 없음") }
             urlRequest.setValue("\(token)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
         }
     
