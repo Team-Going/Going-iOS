@@ -47,13 +47,15 @@ final class ToDoViewController: UIViewController {
     }()
     private let countToDoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/15")
     private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.deadline)
-    private let deadlineTextfieldLabel: DOOLabel = {
+    private lazy var deadlineTextfieldLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, alignment: .left, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(presentToDatePicker) )
         label.backgroundColor = .white000
         label.layer.borderColor = UIColor.gray200.cgColor
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
         label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(gesture)
         return label
     }()
     private let bottomSheetVC = DatePickerBottomSheetViewController()
@@ -484,14 +486,6 @@ private extension ToDoViewController {
         collectionView.isScrollEnabled = false
         return collectionView
     }
-    
-    
-//    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-//        let flowLayout = UICollectionViewFlowLayout()
-//        flowLayout.scrollDirection = .horizontal
-//        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(45) , height: ScreenUtils.getHeight(24))
-//        return flowLayout
-//    }
     
     func registerCell() {
         self.todoManagerCollectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
