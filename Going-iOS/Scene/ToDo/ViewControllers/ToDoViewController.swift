@@ -603,6 +603,11 @@ extension ToDoViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard  let string = textView.text else { return  false }
         
+        if text == "\n" { // 엔터 키 감지
+            textView.resignFirstResponder()
+            return false
+        }
+        
         // newLength: 텍스트 필드의 현재 문자열 길이 + 사용자가 입력하는 문자열 길이 - 꺼질 길이
         let newLength = string.count + text.count - range.length
         if newLength == 0 {
@@ -657,6 +662,12 @@ extension ToDoViewController: UITextFieldDelegate {
             if todo != "날짜를 선택해주세요." {singleButtonView.currentType = .enabled}
         }
         return  !(newLength > 15)
+    }
+    
+    /// 엔터 키 누르면 키보드 내리는 메서드
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

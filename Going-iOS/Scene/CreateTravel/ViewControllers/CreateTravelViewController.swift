@@ -454,6 +454,12 @@ extension CreateTravelViewController: UITextFieldDelegate {
             textField.layer.borderColor = UIColor.gray200.cgColor
         }
     }
+    
+    /// 엔터키 누르면 키보드 내리는 메서드
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 extension CreateTravelViewController {
