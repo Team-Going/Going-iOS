@@ -21,9 +21,13 @@ final class CreatingSuccessViewController: UIViewController {
             guard let data = createTravelResponseData else { return }
             self.travelTitleLabel.text = data.title
             self.dateLabel.text = data.startDate + "-" + data.endDate
-            self.dDayLabel.text = "D-" + "\(data.day)"
             self.inviteCodeLabel.text = data.code
             let vc = OurToDoViewController()
+            if data.day == 0 {
+                self.dDayLabel.text = "여행 중"
+            } else {
+                self.dDayLabel.text = "D-" + "\(data.day)"
+            }
             if let tripId = self.createTravelResponseData?.tripId {
                 vc.tripId = tripId
             } else { return }

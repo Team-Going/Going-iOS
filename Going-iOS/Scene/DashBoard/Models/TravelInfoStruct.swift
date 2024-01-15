@@ -41,7 +41,7 @@ extension TravelInfoStruct {
 extension Trip {
     var travelStatus: String {
         if day == 0 {
-            return "여행중"
+            return "여행 중"
         } else if day > 0 {
             return "D-\(day)"
         } else {
