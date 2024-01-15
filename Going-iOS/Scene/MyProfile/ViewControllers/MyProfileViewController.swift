@@ -12,8 +12,6 @@ import Photos
 
 final class MyProfileViewController: UIViewController {
     
-
-    
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
@@ -57,7 +55,7 @@ final class MyProfileViewController: UIViewController {
     }()
     
     private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: .red500, text: "두릅티비")
-    private let descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500, text: "나는 두릅이 좋다.")
+    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500, text: "나는 두릅이 좋다.")
     
     private let dividingBarView: UIView = {
         let view = UIView()
@@ -232,6 +230,9 @@ extension MyProfileViewController {
             do {
                 let profileData = try await TravelService.shared.getProfileInfo()
                 self.testResultIndex = profileData.result
+                self.descriptionLabel.text = profileData.intro
+                self.nickNameLabel.text = profileData.name
+                
                 guard let index = testResultIndex else { return }
                 self.testResultData = UserTypeTestResultAppData.dummy()[index]
             }

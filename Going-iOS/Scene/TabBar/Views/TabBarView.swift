@@ -23,6 +23,7 @@ final class TabBarView: UIView {
         view.backgroundColor = .gray200
         return view
     }()
+    
     private let tabBarStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.backgroundColor = .white000
