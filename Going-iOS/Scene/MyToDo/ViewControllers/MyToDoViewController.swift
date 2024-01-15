@@ -167,7 +167,7 @@ private extension MyToDoViewController {
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(90))
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(105))
         }
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(myToDoCollectionView.contentSize.height)
