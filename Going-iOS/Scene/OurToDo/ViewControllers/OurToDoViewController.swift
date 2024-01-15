@@ -109,6 +109,7 @@ final class OurToDoViewController: UIViewController {
         setDelegate()
         registerCell()
         setStyle()
+        showLoading()
         getOurToDoHeaderData()
         self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
         self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
@@ -120,6 +121,7 @@ final class OurToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        showLoading()
         getToDoData(progress: "incomplete")
 
     }
@@ -346,8 +348,10 @@ private extension OurToDoViewController {
         }
         
         if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
+            showLoading()
             getToDoData(progress: "incomplete")
         } else {
+            showLoading()
             getToDoData(progress: "complete")
         }
     }
@@ -484,6 +488,7 @@ extension OurToDoViewController {
                 handleError(error)
                 print("my header \(error)")
             }
+            hideLoading()
         }
     }
     
@@ -497,6 +502,7 @@ extension OurToDoViewController {
                 handleError(error)
                 print("our todo \(error)")
             }
+            hideLoading()
         }
     }
 }

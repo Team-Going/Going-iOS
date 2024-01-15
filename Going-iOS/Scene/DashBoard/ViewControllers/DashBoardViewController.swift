@@ -84,6 +84,7 @@ class DashBoardViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        showLoading()
         getAllData()
     }
 }
@@ -306,6 +307,7 @@ private extension DashBoardViewController {
                 guard let error = error as? NetworkError else { return }
                 handleError(error)
             }
+            hideLoading()
         }
     }
     
