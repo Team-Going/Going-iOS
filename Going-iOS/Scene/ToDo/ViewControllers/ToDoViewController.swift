@@ -372,9 +372,10 @@ private extension ToDoViewController {
             $0.trailing.equalTo(memoTextView.snp.trailing).inset(4)
         }
         buttonView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview()
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
-            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(40))
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.width.equalTo(ScreenUtils.getWidth(327))
         }
     }
     
@@ -471,7 +472,6 @@ private extension ToDoViewController {
         bottomSheetVC.modalPresentationStyle = .overFullScreen
         self.present(bottomSheetVC, animated: false, completion: nil)
     }
-    
 }
 
 // MARK: - Extension
