@@ -12,20 +12,10 @@ import Photos
 
 final class MyProfileViewController: UIViewController {
     
-    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
-                                          ImageLiterals.Profile.imgSnowmanSRI,
-                                          ImageLiterals.Profile.imgTriangleSEP,
-                                          ImageLiterals.Profile.imgSquareSEI,
-                                          ImageLiterals.Profile.imgCloverARP,
-                                          ImageLiterals.Profile.imgCloudARI,
-                                          ImageLiterals.Profile.imgHexagonAEP,
-                                          ImageLiterals.Profile.imgCircleAEI]
-    
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
-            guard let index = testResultIndex else { return }
-            self.profileImageView.image = userProfileImageSet[index]
+            self.profileImageView.image = data.profileImage
             self.myResultView.resultViewData = data
         }
     }
@@ -65,7 +55,7 @@ final class MyProfileViewController: UIViewController {
     }()
     
     private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: .red500, text: "두릅티비")
-    private let descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500, text: "나는 두릅이 좋다.")
+    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500, text: "나는 두릅이 좋다.")
     
     private let dividingBarView: UIView = {
         let view = UIView()
@@ -172,9 +162,14 @@ private extension MyProfileViewController {
     }
     
     func saveImage() {
-        UIImageWriteToSavedPhotosAlbum(UIImage(systemName: "pencil")!, self, nil, nil)
-        // TODO: - height 다시 잡기
-        DOOToast.show(message: "이미지로 저장되었어요\n친구에게 내 캐릭터를 공유해 보세요", insetFromBottom: 70)
+        
+        guard let saveImage = testResultData?.phoneSaveImage else {
+            DOOToast.show(message: "이미지 저장 오류", insetFromBottom: 80)
+            return
+        }
+        
+        UIImageWriteToSavedPhotosAlbum(saveImage, self, nil, nil)
+        DOOToast.show(message: "이미지가 저장되었습니다. \n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
     }
     
     func showPermissionAlert() {
@@ -235,6 +230,9 @@ extension MyProfileViewController {
             do {
                 let profileData = try await TravelService.shared.getProfileInfo()
                 self.testResultIndex = profileData.result
+                self.descriptionLabel.text = profileData.intro
+                self.nickNameLabel.text = profileData.name
+                
                 guard let index = testResultIndex else { return }
                 self.testResultData = UserTypeTestResultAppData.dummy()[index]
             }

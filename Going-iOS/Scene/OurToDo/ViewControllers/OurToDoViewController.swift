@@ -72,6 +72,7 @@ final class OurToDoViewController: UIViewController {
     private var headerData: OurToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
+            self.inviteCode = data.code
             
             self.tripHeaderView.tripData = data
             tripMiddleView.participants = data.participants
@@ -79,11 +80,14 @@ final class OurToDoViewController: UIViewController {
         }
     }
     
+    private var inviteCode: String?
+    
     var todoId: Int = 0
     
     var ourToDoData: [ToDoAppData]? {
         didSet {
             loadData()
+            getOurToDoHeaderData()
             
         }
     }
@@ -448,6 +452,7 @@ extension OurToDoViewController: UICollectionViewDataSource {
 extension OurToDoViewController: TripMiddleViewDelegate {
     func presentToInviteFriendVC() {
         let inviteFriendVC = InviteFriendPopUpViewController()
+        inviteFriendVC.codeLabel.text = self.inviteCode
         self.present(inviteFriendVC, animated: false)
     }
     
