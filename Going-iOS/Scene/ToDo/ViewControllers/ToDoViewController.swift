@@ -50,6 +50,19 @@ final class ToDoViewController: UIViewController {
         tf.addTarget(self, action: #selector(todoTextFieldDidChange), for: .editingChanged)
         return tf
     }()
+    private let warningLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
+        label.isHidden = true
+        return label
+    }()
+    
+    private let memoWarningLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
+        label.isHidden = true
+        return label
+    }()
+    
+    
     private var todoTextFieldCount: Int = 0
     private let countToDoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/15")
     private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.deadline)
@@ -91,7 +104,9 @@ final class ToDoViewController: UIViewController {
         return tv
     }()
     private let countMemoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/1000")
+    
     private let buttonView: UIView = UIView()
+    
     private lazy var singleButtonView: DOOButton = {
         let singleBtn = DOOButton(type: .unabled, title: StringLiterals.ToDo.toSave)
         singleBtn.addTarget(self, action: #selector(saveToDo), for: .touchUpInside)
@@ -101,6 +116,8 @@ final class ToDoViewController: UIViewController {
     
     // MARK: - Properties
     
+    private var isTodoTextFieldGood: Bool = false
+
     var peopleCount: Int = 0
     
     var buttonIndex: [Int] = []
@@ -370,7 +387,7 @@ final class ToDoViewController: UIViewController {
         guard let text = todoTextfield.text else { return }
         todoTextFieldCount = text.count
         countToDoCharacterLabel.text = "\(todoTextFieldCount) / 15"
-        todoTextFieldBlankCheck()
+        todoTextFieldCheck()
         updateSingleButtonState()
     }
 }
@@ -385,6 +402,7 @@ private extension ToDoViewController {
         contentView.addSubviews(
             todoLabel,
             todoTextfield,
+            warningLabel,
             countToDoCharacterLabel,
             deadlineLabel,
             deadlineTextfieldLabel,
@@ -392,11 +410,11 @@ private extension ToDoViewController {
             todoManagerCollectionView,
             memoLabel,
             memoTextView,
+            memoWarningLabel,
             countMemoCharacterLabel,
             buttonView
         )
         deadlineTextfieldLabel.addSubview(dropdownButton)
-        
     }
     
     func setLayout() {
@@ -433,6 +451,15 @@ private extension ToDoViewController {
             $0.top.equalTo(todoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(48))
+        }
+        warningLabel.snp.makeConstraints {
+            $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
+            $0.leading.equalTo(todoTextfield.snp.leading).offset(4)
+        }
+        
+        memoWarningLabel.snp.makeConstraints {
+            $0.top.equalTo(memoTextView.snp.bottom).offset(4)
+            $0.leading.equalTo(memoTextView.snp.leading).offset(4)
         }
         countToDoCharacterLabel.snp.makeConstraints{
             $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
@@ -575,17 +602,6 @@ private extension ToDoViewController {
         self.present(bottomSheetVC, animated: false, completion: nil)
     }
     
-    func todoTextFieldBlankCheck() {
-        guard let textEmpty = todoTextfield.text?.isEmpty else { return }
-        if textEmpty {
-            todoTextfield.layer.borderColor = UIColor.gray200.cgColor
-            self.countToDoCharacterLabel.textColor = .gray200
-        } else {
-            todoTextfield.layer.borderColor = UIColor.gray700.cgColor
-            self.countToDoCharacterLabel.textColor = .gray400
-        }
-    }
-    
     func memoTextViewBlankCheck() {
         guard let textEmpty = memoTextView.text?.isEmpty else { return }
         if textEmpty {
@@ -625,6 +641,40 @@ private extension ToDoViewController {
             return true
         }
     }
+    
+    func todoTextFieldCheck() {
+        guard let text = todoTextfield.text else { return }
+        
+        if text.count > 15 {
+            todoTextfield.layer.borderColor = UIColor.red500.cgColor
+            countToDoCharacterLabel.textColor = .red500
+            warningLabel.text = "내용은 15자 이하여야 합니다"
+            warningLabel.isHidden = false
+            self.isTodoTextFieldGood = false
+
+        } else if text.count == 0 {
+            todoTextfield.layer.borderColor = UIColor.gray200.cgColor
+            countToDoCharacterLabel.textColor = .gray200
+            warningLabel.isHidden = true
+            self.isTodoTextFieldGood = false
+
+        } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            self.isTodoTextFieldGood = false
+
+            todoTextfield.layer.borderColor = UIColor.red500.cgColor
+            countToDoCharacterLabel.textColor = .red500
+            warningLabel.text = "내용에는 공백만 입력할 수 없어요"
+            warningLabel.isHidden = false
+        }  else {
+            todoTextfield.layer.borderColor = UIColor.gray700.cgColor
+            countToDoCharacterLabel.textColor = .gray700
+            warningLabel.isHidden = true
+            self.isTodoTextFieldGood = true
+        }
+    
+    countToDoCharacterLabel.text = "\(text.count) / 15"
+        updateSingleButtonState()
+    }
 }
 
 // MARK: - Extension
@@ -652,6 +702,21 @@ extension ToDoViewController: UICollectionViewDataSource{
         
         //        return self.manager.count
     }
+    
+    func textViewCountCheck() {
+        
+        guard let text = memoTextView.text else { return }
+        
+        if text.count > 1000 {
+            memoTextView.layer.borderColor = UIColor.red500.cgColor
+            warningLabel.text = "메모는 1000자를 초과할 수 없습니다."
+            memoWarningLabel.isHidden = false
+        } else {
+            memoWarningLabel.isHidden = true
+
+        }
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -760,6 +825,7 @@ extension ToDoViewController: UITextViewDelegate {
             textView.text = ""
             textView.textColor = .gray700
         }
+        textViewCountCheck()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -774,47 +840,17 @@ extension ToDoViewController: UITextViewDelegate {
             textView.resignFirstResponder()
             return false
         }
-        
-        let maxLength = 1000
-        let oldText = textView.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
-        let addedText = text // 입력한 text 입니다.
-        let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합칩니다.
-        let newTextLength = newText.count // 합쳐진 text의 길이 입니다.
-        
-        if newTextLength <= maxLength {
-            return true
-        }
-        
-        //여기는 "곽성ㅈ" 처럼 3번째에 하나라도 뭔가 있으면 위의 If문을 무시하고 넘어온다.
-        let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)]) // 입력하기 전 text의 마지막 글자 입니다.
-        let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) } // 입력하기 전 text의 마지막 글자를 자음과 모음으로 분리해줍니다.
-        let separatedCharactersCount = separatedCharacters.count // 분리된 자음, 모음의 개수입니다.
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 1개이고, 새로 입력되는 글자가 자음이 아닐 경우 입력이 됨
-        // ex)"곽성ㅈ" 에서 입력할 때!
-        if separatedCharactersCount == 1 && !addedText.isConsonant {
-            return true
-        }
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 2개이고, 새로 입력되는 글자가 자음 혹은 모음일 경우 입력이 되도록 함
-        // ex) "곽성주" 에서 입력할 때!
-        if separatedCharactersCount == 2 {
-            return true
-        }
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 3개이고, 새로 입력되는 글자가 자음일 경우 입력이 되도록 함, 예를 들어 받침에 자음이 두개 들어가는 경우 밑에서 처리해줘야 됨
-        // ex) "곽성준" 에서 입력할 때!
-        if separatedCharactersCount == 3 && addedText.isConsonant {
-            return true
-        }
-        return false
+       return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = memoTextviewPlaceholder
             textView.textColor = .gray200
+            textViewCountCheck()
         }
+        
+        
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -822,33 +858,23 @@ extension ToDoViewController: UITextViewDelegate {
             let memoTextViewCount = textView.text.count
             countMemoCharacterLabel.text = "\(memoTextViewCount) / 1000"
             memoTextViewBlankCheck()
+            textViewCountCheck()
             updateSingleButtonState()
-        }
-    }
-    
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        let text = textView.text ?? ""
-        let maxLength = 15
-        
-        if text.count > maxLength {
-            let startIndex = text.startIndex
-            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
-            let fixedText = String(text[startIndex...endIndex])
-            textView.text = fixedText
-            return
         }
     }
 }
 
 extension ToDoViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing (_ textField: UITextField) {
-        memoTextView.resignFirstResponder()
-        textField.placeholder = ""
-        textField.becomeFirstResponder()
         updateSingleButtonState()
+        todoTextFieldCheck()
     }
     
-    /// 상단의 textView Delegate와 같은 로직
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        todoTextFieldCheck()
+        
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -856,42 +882,7 @@ extension ToDoViewController: UITextFieldDelegate {
                 return true
             }
         }
-        
-        let maxLength = 15
-        let oldText = textField.text ?? ""
-        let addedText = string
-        let newText = oldText + addedText
-        let newTextLength = newText.count
-        if newTextLength <= maxLength {
-            return true
-        }
-        
-        let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)])
-        let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) }
-        let separatedCharactersCount = separatedCharacters.count //
-        if separatedCharactersCount == 1 && !addedText.isConsonant {
-            return true
-        }
-        if separatedCharactersCount == 2 {
-            return true
-        }
-        if separatedCharactersCount == 3 && addedText.isConsonant {
-            return true
-        }
-        return false
-    }
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let text = textField.text ?? ""
-        let maxLength = 15
-        
-        if text.count > maxLength {
-            let startIndex = text.startIndex
-            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
-            let fixedText = String(text[startIndex...endIndex])
-            textField.text = fixedText
-            return
-        }
+        return true
     }
     
     /// 엔터 키 누르면 키보드 내리는 메서드
@@ -918,7 +909,8 @@ extension ToDoViewController {
         singleButtonView.currentType = ( !isTodoTextFieldEmpty
                                          && isDateSet
                                          && isEndDateNotPast
-                                         && isAllocatorFilled) ? .enabled : .unabled
+                                         && isAllocatorFilled
+                                         && memoTextView.text.count <= 1000) ? .enabled : .unabled
         
 
     }

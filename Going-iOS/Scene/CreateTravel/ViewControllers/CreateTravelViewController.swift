@@ -16,6 +16,8 @@ final class CreateTravelViewController: UIViewController {
     private weak var activeLabel: UILabel?
     
     private var createTravelData = CreateTravelRequestAppData(travelTitle: "", startDate: "", endDate: "", a: 0, b: 0, c: 0, d: 0, e: 0)
+    
+    private var isTravelNameTextFieldGood: Bool = false
 
     // MARK: - UI Properties
     
@@ -52,7 +54,7 @@ final class CreateTravelViewController: UIViewController {
                                                text: "0/15")
     
     private let warningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400, text: StringLiterals.CreateTravel.warning)
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
         label.isHidden = true
         return label
     }()
@@ -277,22 +279,36 @@ private extension CreateTravelViewController {
                                           && isEndDateNotPast) ? .enabled : .unabled
     }
     
-    func travelNameTextFieldBlankCheck() {
-        guard let textEmpty = travelNameTextField.text?.isEmpty else { return }
-        if textEmpty {
-            travelNameTextField.layer.borderColor = UIColor.gray700.cgColor
-            self.characterCountLabel.textColor = .gray400
-            warningLabel.isHidden = true
-        } else if travelNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false {
-            travelNameTextField.layer.borderColor = UIColor.red400.cgColor
-            self.characterCountLabel.textColor = .red400
+    func travelNameTextFieldCheck() {
+        guard let text = travelNameTextField.text else { return }
+        characterCountLabel.text = "\(text.count) / 15"
+        
+        if text.count >  15 {
+            travelNameTextField.textColor = .red500
             warningLabel.isHidden = false
+            warningLabel.text = "이름은 15자 이하여야 합니다"
+            isTravelNameTextFieldGood = false
+        } else if text.count == 0 {
+            travelNameTextField.layer.borderColor =
+            UIColor.gray200.cgColor
+            characterCountLabel.textColor = .gray200
+            warningLabel.isHidden = true
+            isTravelNameTextFieldGood = false
+        } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            self.isTravelNameTextFieldGood = false
+            travelNameTextField.layer.borderColor = UIColor.red500.cgColor
+            characterCountLabel.textColor = .red500
+            warningLabel.isHidden = false
+            warningLabel.text = "이름에는 공백만 입력할 수 없어요."
         } else {
+            self.isTravelNameTextFieldGood = true
             travelNameTextField.layer.borderColor = UIColor.gray700.cgColor
-            self.characterCountLabel.textColor = .gray400
+            characterCountLabel.textColor = .gray400
             warningLabel.isHidden = true
         }
+        updateCreateButtonState()
     }
+
     
     // MARK: - @objc Methods
     
@@ -344,10 +360,7 @@ private extension CreateTravelViewController {
     
     @objc
     func travelNameTextFieldDidChange() {
-        guard let text = travelNameTextField.text else { return }
-        travelNameTextFieldCount = text.count
-        characterCountLabel.text = "\(travelNameTextFieldCount) / 15"
-        travelNameTextFieldBlankCheck()
+        travelNameTextFieldCheck()
         updateCreateButtonState()
     }
 }
@@ -389,7 +402,7 @@ extension CreateTravelViewController: BottomSheetDelegate {
 }
 
 extension CreateTravelViewController: UITextFieldDelegate {
-    //TextField에 변경사항이 생기면, 화면의 TextField에 실제로 작성되기 전에 호출되는 함수
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -397,40 +410,7 @@ extension CreateTravelViewController: UITextFieldDelegate {
                 return true
             }
         }
-        
-        let maxLength = 15
-        let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text
-        let addedText = string // 입력한 text
-        let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합침
-        let newTextLength = newText.count // 합쳐진 text의 길이
-        
-        if newTextLength <= maxLength {
-            return true
-        }
-        
-        //여기는 "곽성ㅈ" 처럼 3번째에 하나라도 뭔가 있으면 위의 If문을 무시하고 넘어온다.
-        let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)]) // 입력하기 전 text의 마지막 글자 입니다.
-        let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) } // 입력하기 전 text의 마지막 글자를 자음과 모음으로 분리해줍니다.
-        let separatedCharactersCount = separatedCharacters.count // 분리된 자음, 모음의 개수입니다.
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 1개이고, 새로 입력되는 글자가 자음이 아닐 경우 입력이 됨
-        // ex)"곽성ㅈ" 에서 입력할 때!
-        if separatedCharactersCount == 1 && !addedText.isConsonant {
-            return true
-        }
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 2개이고, 새로 입력되는 글자가 자음 혹은 모음일 경우 입력이 되도록 함
-        // ex) "곽성주" 에서 입력할 때!
-        if separatedCharactersCount == 2 {
-            return true
-        }
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 3개이고, 새로 입력되는 글자가 자음일 경우 입력이 되도록 함, 예를 들어 받침에 자음이 두개 들어가는 경우 밑에서 처리해줘야 됨
-        // ex) "곽성준" 에서 입력할 때!
-        if separatedCharactersCount == 3 && addedText.isConsonant {
-            return true
-        }
-        return false
+        return true
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -447,11 +427,11 @@ extension CreateTravelViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        travelNameTextFieldBlankCheck()
+        travelNameTextFieldCheck()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        travelNameTextFieldBlankCheck()
+        travelNameTextFieldCheck()
         if let text = textField.text, text.isEmpty {
             textField.layer.borderColor = UIColor.gray200.cgColor
         }
