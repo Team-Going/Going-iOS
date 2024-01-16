@@ -112,7 +112,6 @@ final class OurToDoViewController: UIViewController {
         
         emptyViewLabel.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = false
         setHierarchy()
         setLayout()
         setDelegate()
@@ -128,9 +127,11 @@ final class OurToDoViewController: UIViewController {
             await loadData()
         }
         setGradient()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.tabBarController?.tabBar.isHidden = false
         getOurToDoHeaderData()
         getToDoData(progress: "incomplete")
 
@@ -433,9 +434,7 @@ extension OurToDoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let ourToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: OurToDoCollectionViewCell.identifier, for: indexPath) as? OurToDoCollectionViewCell else {return UICollectionViewCell()}
-        
-//        ourToDoCell.delegate = self
-        
+                
         if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             ourToDoCell.ourToDoData = self.ourToDoData?[indexPath.row]
             ourToDoCell.todoTitleLabel.textColor = UIColor.gray400

@@ -26,7 +26,6 @@ final class JoinTravelTestViewController: UIViewController {
                 myToDoVC.tripId = self.tripId 
             }
             navigationController?.pushViewController(vc, animated: true)
-            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

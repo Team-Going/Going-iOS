@@ -148,13 +148,14 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource {
 
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
         
-//        managerCell.managerData = self.manager[indexPath.row].name
         managerCell.managerData = ourToDoData?.allocators[indexPath.row].name
 
         if isComplete == true {
             managerCell.changeLabelColor(color: .gray300)
-        }else{
-            if indexPath.row == 0 {
+        } else {
+            
+            
+            if ourToDoData?.allocators[indexPath.row].isOwner == true {
                 managerCell.changeLabelColor(color: .red400)
             }else {
                 managerCell.changeLabelColor(color: .gray400)
