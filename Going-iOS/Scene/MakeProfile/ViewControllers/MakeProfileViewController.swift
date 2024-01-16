@@ -30,7 +30,7 @@ final class MakeProfileViewController: UIViewController {
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
-        textField.setPlaceholder(placeholder: "당신을 한줄로 표현해보세요.", fontColor: .gray200, font: .pretendard(.body3_medi))
+        textField.setPlaceholder(placeholder: "당신을 한줄로 표현해 보세요", fontColor: .gray200, font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
         textField.textColor = .gray700
@@ -69,7 +69,7 @@ final class MakeProfileViewController: UIViewController {
     private lazy var descTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
-        textField.setPlaceholder(placeholder: "당신을 한줄로 표현해보세요.", fontColor: .gray200, font: .pretendard(.body3_medi))
+        textField.setPlaceholder(placeholder: "당신을 한줄로 표현해 보세요", fontColor: .gray200, font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
         textField.textColor = .gray700
@@ -233,7 +233,7 @@ private extension MakeProfileViewController {
         } else if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false {
             nameTextField.layer.borderColor = UIColor.red400.cgColor
             self.nameTextFieldCountLabel.textColor = .red400
-            nameWarningLabel.text = "이름에는 공백만 입력할 수 없어요."
+            nameWarningLabel.text = "이름에는 공백만 입력할 수 없어요"
             nameWarningLabel.isHidden = false
         } else {
             nameTextField.layer.borderColor = UIColor.gray700.cgColor
