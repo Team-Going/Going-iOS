@@ -50,8 +50,8 @@ final class LHLoadingView: UIActivityIndicatorView {
     init() {
         super.init(frame: .zero)
         self.style = .medium
-        self.color = .white000
-        self.backgroundColor = .white000
+        self.color = .clear
+        self.backgroundColor = .clear
         self.frame = .init(x: 0, y: 0, width: Constant.Screen.width, height: Constant.Screen.height)
     }
     
