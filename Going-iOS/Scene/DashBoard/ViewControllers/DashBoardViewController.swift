@@ -55,6 +55,7 @@ class DashBoardViewController: UIViewController {
         return view
     }()
     private let noDataLabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "새로운 여행을 시작해 보세요")
+    
     private let characterImage:  UIImageView = {
         let img = UIImageView()
         img.image = ImageLiterals.DashBoard.imgDashBoard
