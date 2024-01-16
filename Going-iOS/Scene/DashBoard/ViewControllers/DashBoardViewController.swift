@@ -11,6 +11,8 @@ class DashBoardViewController: UIViewController {
     
     // MARK: - Properties
     
+    var segmentIndex: Int = 0
+    
     private var initialCode: Int = 0
     
     private var tripStatus: String = "incomplete"
@@ -91,7 +93,7 @@ class DashBoardViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getAllData()
+        getAllData(sta: self.tripStatus)
     }
 }
 
@@ -235,8 +237,18 @@ private extension DashBoardViewController {
     
     @objc
     func didChangeValue(sender: UISegmentedControl) {
-        self.tripStatus = dashBoardHeaderView.segmentedControl.selectedSegmentIndex == 0 ? "incomplete" : "complete"
-        getAllData()
+        
+        if sender.selectedSegmentIndex == 0 {
+            self.segmentIndex = 0
+            getAllData(sta: "incomplete")
+        } else {
+            self.segmentIndex = 1
+
+            getAllData(sta: "complete")
+        }
+        
+        self.tripStatus = self.segmentIndex == 0 ? "incomplete" : "complete"
+
     }
     
     @objc
@@ -313,10 +325,10 @@ extension DashBoardViewController: ViewControllerServiceable {
 
 private extension DashBoardViewController {
     
-    func getAllData() {
+    func getAllData(sta: String) {
         Task {
             do {
-                self.travelListDummy = try await TravelService.shared.getAllTravel(status: tripStatus)
+                self.travelListDummy = try await TravelService.shared.getAllTravel(status: sta)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
