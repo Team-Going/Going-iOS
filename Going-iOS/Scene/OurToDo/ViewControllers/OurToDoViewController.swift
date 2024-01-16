@@ -9,6 +9,8 @@ final class OurToDoViewController: UIViewController {
     
     // MARK: - UI Property
     
+    private var isSetDashBoardRoot: Bool = false
+    
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
     private let tripHeaderView: TripHeaderView = TripHeaderView()
@@ -127,6 +129,8 @@ final class OurToDoViewController: UIViewController {
             await loadData()
         }
         setGradient()
+        
+        self.navigationBarview.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
 
     }
     
@@ -223,6 +227,19 @@ private extension OurToDoViewController {
             $0.bottom.equalTo(scrollView).inset(ScreenUtils.getHeight(24))
         }
     }
+    
+    @objc
+    func backButtonTapped() {
+        if isSetDashBoardRoot == false {
+            isSetDashBoardRoot = true
+            view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
+            view.window?.makeKeyAndVisible()
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+      
+    }
+    
     
     func loadData() async {
         self.setEmptyView()
