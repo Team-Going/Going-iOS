@@ -13,9 +13,12 @@ final class TravelService: Serviceable {
     private init() {}
     
     /// 초대코드 검증 API
-    func postInviteCode(code: CodeRequestDTO) async throws -> JoiningSuccessAppData {
-        let param = code.toDictionary()
+    func postInviteCode(code: String) async throws -> JoiningSuccessAppData {
+        
+        let bodyDTO = CodeRequestDTO(code: code)
+        let param = bodyDTO.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
+        
         let urlRequest = try NetworkRequest(path: "/api/trips/verify", httpMethod: .post, body: body).makeURLRequest(networkType: .withJWT)
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)

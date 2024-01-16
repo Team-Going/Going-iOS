@@ -186,7 +186,7 @@ final class ToDoViewController: UIViewController {
         
         if navigationBarTitle == "추가" {
             navigationBarView.titleLabel.text = "할일 추가"
-            setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager, "메모를 입력해주세요."]
+            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.manager, "메모를 입력해 주세요"]
         }
     }
     
@@ -317,7 +317,7 @@ final class ToDoViewController: UIViewController {
     @objc
     func saveToDo() {
         let todo = todoTextfield.text ?? ""
-        let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해주세요." ? "" : deadlineTextfieldLabel.text) ?? ""
+        let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해 주세요" ? "" : deadlineTextfieldLabel.text) ?? ""
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         let secret = beforeVC == "our" ? false : true
         if !todo.isEmpty && !deadline.isEmpty {
@@ -529,8 +529,8 @@ private extension ToDoViewController {
         deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
         deadlineTextfieldLabel.textColor = .gray700
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
-        memoTextView.layer.borderColor = memoTextView.text == "메모를 입력해주세요." ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
-        memoTextView.textColor = memoTextView.text == "메모를 입력해주세요." ? UIColor.gray200 : UIColor.gray700
+        memoTextView.layer.borderColor = memoTextView.text == "메모를 입력해 주세요" ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
+        memoTextView.textColor = memoTextView.text == "메모를 입력해 주세요" ? UIColor.gray200 : UIColor.gray700
         countMemoCharacterLabel.text = "\(memotext)/1000"
         countMemoCharacterLabel.textColor = .gray700
     }
@@ -585,7 +585,6 @@ private extension ToDoViewController {
         
         //유저의 위치 날짜
         let today = Date()
-        let timezone = TimeZone.autoupdatingCurrent
         
         // 정확한 비교를 위해 시-분-초 절삭한 시간대
         let calendar = Calendar.current
@@ -802,7 +801,7 @@ extension ToDoViewController: UITextViewDelegate {
     
     func textViewDidChangeSelection(_ textView: UITextView) {
         let text = textView.text ?? ""
-        let maxLength = 15
+        let maxLength = 1000
         
         if text.count > maxLength {
             let startIndex = text.startIndex
@@ -877,41 +876,20 @@ extension ToDoViewController: UITextFieldDelegate {
 
 extension ToDoViewController {
     func updateSingleButtonState() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        
         let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
         let isTodoTextFieldEmpty = todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해주세요."
-
-        var isEndDateNotPast = true
-
-        guard let date = self.selectedDate else { return }
-        isEndDateNotPast = compareDate(userDate: date)
+        let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
 
         singleButtonView.currentType = ( !isTodoTextFieldEmpty
                                          && isDateSet
-                                         && isEndDateNotPast
                                          && isAllocatorFilled) ? .enabled : .unabled
-        
-
     }
 }
 
 
 extension ToDoViewController: BottomSheetDelegate {
     
-    func datePickerDidChanged(date: Date) {
-        self.selectedDate = date
-        // 두 날짜 비교
-        if compareDate(userDate: date) {
-            updateSingleButtonState()
-        } else {
-            DOOToast.show(message: "앞으로 할 일을 등록해주세요!", insetFromBottom: ScreenUtils.getHeight(374))
-            singleButtonView.currentType = .unabled
-            deadlineTextfieldLabel.layer.borderColor = UIColor.gray200.cgColor
-        }
-    }
+    func datePickerDidChanged(date: Date) { return }
     
     func didSelectDate(date: Date) {
         self.selectedDate = date
@@ -994,7 +972,7 @@ extension ToDoViewController {
                 try await ToDoService.shared.postCreateToDo(tripId: tripId, requestBody: saveToDoData)
                 self.navigationController?.popViewController(animated: true)
             }
-            DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
+            DOOToast.show(message: "할 일이 추가되었어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
     
@@ -1004,7 +982,7 @@ extension ToDoViewController {
                 try await ToDoService.shared.deleteTodo(todoId: self.todoId)
                 self.navigationController?.popViewController(animated: true)
             }
-            DOOToast.show(message: "할 일이 삭제되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
+            DOOToast.show(message: "할 일이 삭제되었어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
 }
