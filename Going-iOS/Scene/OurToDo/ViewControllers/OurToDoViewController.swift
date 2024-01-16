@@ -131,7 +131,6 @@ final class OurToDoViewController: UIViewController {
         Task {
             await loadData()
         }
-        setGradient()
         
         self.navigationBarview.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
 
@@ -141,12 +140,17 @@ final class OurToDoViewController: UIViewController {
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         getOurToDoHeaderData()
         getToDoData(progress: self.progress)
-
+        tripMiddleView.gradientView.setGradient(
+            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
+            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+            axis: .horizontal)
     }
     
     override func viewDidLayoutSubviews() {
-        setGradient()
-        
+        tripMiddleView.gradientView.setGradient(
+            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
+            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+            axis: .horizontal)
     }
 }
 
@@ -330,13 +334,6 @@ private extension OurToDoViewController {
         todoVC.isActivateView = isActivate
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
-    }
-    
-    func setGradient() {
-        tripMiddleView.gradientView.setGradient(
-            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
-            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
-            axis: .horizontal)
     }
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
