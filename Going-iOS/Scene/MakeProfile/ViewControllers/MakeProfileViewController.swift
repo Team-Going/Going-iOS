@@ -13,6 +13,9 @@ final class MakeProfileViewController: UIViewController {
     
     var socialToken: String?
     
+    private var isNameTextFieldGood: Bool = false
+    private var isDescTextFieldGood: Bool = false
+    
     private var userProfileData = UserProfileAppData(name: "", intro: "", platform: "")
     
     private let nameLabel = DOOLabel(font: .pretendard(.body2_bold),
@@ -30,7 +33,7 @@ final class MakeProfileViewController: UIViewController {
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
-        textField.setPlaceholder(placeholder: "당신을 한줄로 표현해 보세요", fontColor: .gray200, font: .pretendard(.body3_medi))
+        textField.setPlaceholder(placeholder: "3글자 이내로 작성해 주세요", fontColor: .gray200, font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
         textField.textColor = .gray700
@@ -69,7 +72,7 @@ final class MakeProfileViewController: UIViewController {
     private lazy var descTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
-        textField.setPlaceholder(placeholder: "당신을 한줄로 표현해 보세요", fontColor: .gray200, font: .pretendard(.body3_medi))
+        textField.setPlaceholder(placeholder: "여행을 떠나기 전 설레는 마음을 적어볼까요?", fontColor: .gray200, font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
         textField.textColor = .gray700
@@ -86,6 +89,14 @@ final class MakeProfileViewController: UIViewController {
         label.text = "0 / 15"
         label.font = .pretendard(.detail2_regular)
         label.textColor = .gray200
+        return label
+    }()
+    
+    private let descWarningLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red400
+        label.font = .pretendard(.detail2_regular)
+        label.isHidden = true
         return label
     }()
     
@@ -134,6 +145,7 @@ private extension MakeProfileViewController {
                               descLabel,
                               descTextField,
                               descTextFieldCountLabel,
+                              descWarningLabel,
                               nextButton)
     }
     
@@ -188,6 +200,11 @@ private extension MakeProfileViewController {
             $0.trailing.equalTo(descTextField.snp.trailing).offset(-4)
         }
         
+        descWarningLabel.snp.makeConstraints {
+            $0.top.equalTo(descTextFieldCountLabel.snp.top)
+            $0.leading.equalTo(descTextField.snp.leading).offset(4)
+        }
+        
         nextButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
             $0.leading.trailing.equalToSuperview().inset(24)
@@ -205,53 +222,6 @@ private extension MakeProfileViewController {
         descTextField.delegate = self
     }
     
-    func updateNextButtonState() {
-        // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
-        let isNameTextFieldEmpty = nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
-        let isDescTextFieldEmpty = descTextField.text!.isEmpty
-        
-        nextButton.isEnabled = !isNameTextFieldEmpty && !isDescTextFieldEmpty
-        if nextButton.isEnabled {
-            nextButton.backgroundColor = .gray500
-            nextButton.titleLabel?.font = .pretendard(.body1_bold)
-            nextButton.setTitleColor(.white000, for: .normal)
-        } else {
-            nextButton.backgroundColor = .gray50
-            nextButton.titleLabel?.font = .pretendard(.body1_bold)
-            nextButton.setTitleColor(.white000, for: .normal)
-            
-        }
-    }
-    
-    
-    func nameTextFieldBlankCheck() {
-        guard let textEmpty = nameTextField.text?.isEmpty else { return }
-        if textEmpty {
-            nameTextField.layer.borderColor = UIColor.gray200.cgColor
-            self.nameTextFieldCountLabel.textColor = .gray200
-            nameWarningLabel.isHidden = true
-        } else if nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? false {
-            nameTextField.layer.borderColor = UIColor.red400.cgColor
-            self.nameTextFieldCountLabel.textColor = .red400
-            nameWarningLabel.text = "이름에는 공백만 입력할 수 없어요"
-            nameWarningLabel.isHidden = false
-        } else {
-            nameTextField.layer.borderColor = UIColor.gray700.cgColor
-            self.nameTextFieldCountLabel.textColor = .gray400
-            nameWarningLabel.isHidden = true
-        }
-    }
-    
-    func descTextFieldBlankCheck() {
-        guard let textEmpty = descTextField.text?.isEmpty else { return }
-        if textEmpty {
-            descTextField.layer.borderColor = UIColor.gray200.cgColor
-            self.descTextFieldCountLabel.textColor = .gray200
-        } else {
-            descTextField.layer.borderColor = UIColor.gray700.cgColor
-            self.descTextFieldCountLabel.textColor = .gray400
-        }
-    }
     
     func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -282,14 +252,7 @@ private extension MakeProfileViewController {
         }
     }
     
-    @objc
-    func nameTextFieldDidChange() {
-        guard let text = nameTextField.text else { return }
-        nameTextFieldCount = text.count
-        nameTextFieldCountLabel.text = "\(nameTextFieldCount) / 3"
-        nameTextFieldBlankCheck()
-        updateNextButtonState()
-    }
+    
     
     func removeKeyboardNotifications(){
         // 키보드가 나타날 때 앱에게 알리는 메서드 제거
@@ -298,14 +261,93 @@ private extension MakeProfileViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    func nameTextFieldCheck() {
+        guard let text = nameTextField.text else { return }
+
+            if text.count > 3 {
+                nameTextField.layer.borderColor = UIColor.red500.cgColor
+                nameTextFieldCountLabel.textColor = .red500
+                nameWarningLabel.text = "이름은 3자 이하여야 합니다"
+                nameWarningLabel.isHidden = false
+                self.isNameTextFieldGood = false
+
+            } else if text.count == 0 {
+                nameTextField.layer.borderColor = UIColor.gray200.cgColor
+                nameTextFieldCountLabel.textColor = .gray200
+                nameWarningLabel.isHidden = true
+                self.isNameTextFieldGood = false
+
+            } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                self.isNameTextFieldGood = false
+
+                nameTextField.layer.borderColor = UIColor.red500.cgColor
+                nameTextFieldCountLabel.textColor = .red500
+                nameWarningLabel.text = "이름에는 공백만 입력할 수 없어요."
+                nameWarningLabel.isHidden = false
+            }  else {
+                nameTextField.layer.borderColor = UIColor.gray700.cgColor
+                nameTextFieldCountLabel.textColor = .gray700
+                nameWarningLabel.isHidden = true
+                self.isNameTextFieldGood = true
+            }
+        
+        nameTextFieldCountLabel.text = "\(text.count) / 3"
+            updateNextButtonState()
+    }
+    
+    @objc
+    func nameTextFieldDidChange() {
+        nameTextFieldCheck()
+    }
+    
     @objc
     func descTextFieldDidChange() {
+        descTextFieldCheck()
+    }
+    
+    func descTextFieldCheck() {
         guard let text = descTextField.text else { return }
-        descTextFieldCount = text.count
-        descTextFieldCountLabel.text = "\(descTextFieldCount) / 15"
-        descTextFieldBlankCheck()
-        updateNextButtonState()
+      
+        descTextFieldCountLabel.text = "\(text.count) / 15"
+     
+        if text.count > 15 {
+            descTextField.layer.borderColor = UIColor.red500.cgColor
+            descTextFieldCountLabel.textColor = .red500
+            descWarningLabel.text = "소개는 15자를 초과할 수 없습니다."
+            descWarningLabel.isHidden = false
+            isDescTextFieldGood = false
+        } else if text.count == 0 {
+            descTextField.layer.borderColor = UIColor.gray200.cgColor
+            descTextFieldCountLabel.textColor = .gray200
+            descWarningLabel.isHidden = true
+            isDescTextFieldGood = false
+        } else {
+            self.isDescTextFieldGood = true
+            descTextField.layer.borderColor = UIColor.gray700.cgColor
+            descTextFieldCountLabel.textColor = .gray400
+            descWarningLabel.isHidden = true
+        }
         
+        updateNextButtonState()
+    }
+
+    
+    func updateNextButtonState() {
+        // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
+        let isNameTextFieldEmpty = nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
+        let isDescTextFieldEmpty = descTextField.text!.isEmpty
+        
+        if isNameTextFieldGood == true && isDescTextFieldGood == true/* && !isNameTextFieldEmpty &&  !isDescTextFieldEmpty && nameTextField.text!.count < 3*/ {
+            nextButton.isEnabled = true
+            nextButton.backgroundColor = .gray500
+            nextButton.titleLabel?.font = .pretendard(.body1_bold)
+            nextButton.setTitleColor(.white000, for: .normal)
+        } else {
+            nextButton.isEnabled = false
+            nextButton.backgroundColor = .gray50
+            nextButton.titleLabel?.font = .pretendard(.body1_bold)
+            nextButton.setTitleColor(.white000, for: .normal)
+        }
     }
     
     @objc
@@ -341,8 +383,6 @@ private extension MakeProfileViewController {
                 handleError(error)
             }
         }
-//        let nextVC = UserTestSplashViewController()
-//        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -374,95 +414,17 @@ extension MakeProfileViewController: UITextFieldDelegate {
                 return true
             }
         }
-        
-        var maxLength = 0
-        switch textField {
-        case nameTextField:
-            maxLength = 3
-        case descTextField:
-            maxLength = 15
-        default:
-            return false
-        }
-        
-        //모든 예시는 NameTextField 기준으로 적음
-        let oldText = textField.text ?? "" // 입력하기 전 textField에 표시되어있던 text 입니다.
-        let addedText = string // 입력한 text 입니다.
-        let newText = oldText + addedText // 입력하기 전 text와 입력한 후 text를 합칩니다.
-        let newTextLength = newText.count // 합쳐진 text의 길이 입니다.
-        
-        if newTextLength <= maxLength {
-            return true
-        }
-        
-        
-        //여기는 "곽성ㅈ" 처럼 3번째에 하나라도 뭔가 있으면 위의 If문을 무시하고 넘어온다.
-        let lastWordOfOldText = String(oldText[oldText.index(before: oldText.endIndex)]) // 입력하기 전 text의 마지막 글자 입니다.
-        let separatedCharacters = lastWordOfOldText.decomposedStringWithCanonicalMapping.unicodeScalars.map{ String($0) } // 입력하기 전 text의 마지막 글자를 자음과 모음으로 분리해줍니다.
-        let separatedCharactersCount = separatedCharacters.count // 분리된 자음, 모음의 개수입니다.
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 1개이고, 새로 입력되는 글자가 자음이 아닐 경우 입력이 됨
-        // ex)"곽성ㅈ" 에서 입력할 때!
-        if separatedCharactersCount == 1 && !addedText.isConsonant {
-            return true
-        }
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 2개이고, 새로 입력되는 글자가 자음 혹은 모음일 경우 입력이 되도록 함
-        // ex) "곽성주" 에서 입력할 때!
-        if separatedCharactersCount == 2 {
-            return true
-        }
-        
-        //입력되어 있는 마지막 글자의 자음 + 모음 개수가 3개이고, 새로 입력되는 글자가 자음일 경우 입력이 되도록 함, 예를 들어 받침에 자음이 두개 들어가는 경우 밑에서 처리해줘야 됨
-        // ex) "곽성준" 에서 입력할 때!
-        if separatedCharactersCount == 3 && addedText.isConsonant {
-            return true
-        }
-        return false
-    }
-    
-    //TextField에 변경사항이 생기면, TextField에 작성된 후에 호출되는 메서드
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let text = textField.text ?? ""
-        var maxLength = 0
-        switch textField {
-        case nameTextField:
-            maxLength = 3
-        case descTextField:
-            maxLength = 15
-        default:
-            return
-        }
-        
-        if text.count > maxLength {
-            let startIndex = text.startIndex
-            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
-            let fixedText = String(text[startIndex...endIndex])
-            textField.text = fixedText
-            return
-        }
+        return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        switch textField {
-        case nameTextField:
-            nameTextFieldBlankCheck()
-        case descTextField:
-            descTextFieldBlankCheck()
-        default:
-            return
-        }
+        nameTextFieldCheck()
+        descTextFieldCheck()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        switch textField {
-        case nameTextField:
-            nameTextFieldBlankCheck()
-        case descTextField:
-            descTextFieldBlankCheck()
-        default:
-            return
-        }
+        nameTextFieldCheck()
+        descTextFieldCheck()
     }
     
     /// 엔터키 누르면 키보드 내리는 메서드
