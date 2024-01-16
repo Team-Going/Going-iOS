@@ -108,9 +108,11 @@ final class ToDoViewController: UIViewController {
             if navigationBarTitle == "추가" && beforeVC == "my" {
                 self.manager = [.init(name: "혼자할일", isOwner: true)]
                 peopleCount = 1
-            } else if navigationBarTitle == "추가" && beforeVC == "our" {
-                self.fromOurTodoParticipants
-            }
+            } 
+//            else if navigationBarTitle == "추가" && beforeVC == "our" {
+////                self.fromOurTodoParticipants
+//                self.manager =
+//            }
         }
     }
     
@@ -232,7 +234,7 @@ final class ToDoViewController: UIViewController {
         }
         if memoTextView.isFirstResponder {
             // memoTextView가 FirstResponder인 경우 contentInset을 조절
-            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(40), right: 0)
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(60), right: 0)
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
             
@@ -443,7 +445,7 @@ private extension ToDoViewController {
         todoManagerCollectionView.snp.makeConstraints{
             $0.top.equalTo(managerLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(48))
+            $0.height.equalTo(ScreenUtils.getHeight(20))
         }
         memoLabel.snp.makeConstraints{
             $0.top.equalTo(todoManagerCollectionView.snp.bottom).offset(ScreenUtils.getHeight(28))
@@ -463,7 +465,7 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-            $0.width.equalTo(ScreenUtils.getWidth(327))
+//            $0.width.equalTo(ScreenUtils.getWidth(327))
         }
     }
     
@@ -588,7 +590,11 @@ extension ToDoViewController: UICollectionViewDataSource{
         // 마이투두 - 할일추가 - 1로 픽스
         
         if beforeVC == "our" {
-            return self.fromOurTodoParticipants.count
+            if navigationBarTitle == "추가" {
+                return self.fromOurTodoParticipants.count
+            } else {
+                return self.manager.count
+            }
         }
         else {
             return self.manager.count
@@ -609,7 +615,11 @@ extension ToDoViewController: UICollectionViewDataSource{
         
         var name = ""
         if beforeVC == "our" {
-            name = fromOurTodoParticipants[indexPath.row].name
+            if navigationBarTitle == "추가" {
+                name = fromOurTodoParticipants[indexPath.row].name
+            } else {
+                name = manager[indexPath.row].name
+            }
         } else {
             name = manager[indexPath.row].name
         }
@@ -684,6 +694,7 @@ extension ToDoViewController: UICollectionViewDataSource{
                     managerCell.managerButton.setTitleColor(.red500, for: .normal)
                     managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
                     managerCell.managerButton.backgroundColor = .white000
+                    managerCell.managerButton.isUserInteractionEnabled = false
                 }
             }
         }

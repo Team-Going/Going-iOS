@@ -109,10 +109,10 @@ final class TripMiddleView: UIView {
         self.delegate?.pushToMemberVC()
     }
     
-    @objc
-    func pushToFriendProfileView(_ sender: UITapGestureRecognizer) {
-        print("pushToFriendProfileView")
-    }
+//    @objc
+//    func pushToFriendProfileView(_ sender: UITapGestureRecognizer) {
+//        print("pushToFriendProfileView")
+//    }
     
 //    func bindData(percentage: Int, friends: [Friend]) {
 //        self.percentageLabel.text = String(percentage) + "%"
@@ -252,8 +252,8 @@ extension TripMiddleView: UICollectionViewDataSource {
 
         // TODO: - 변수 만들어놓고 탭하면 담당자 id 세팅해주기
 
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToFriendProfileView(_:)))
-        friendsCell.profileStackView.addGestureRecognizer(gesture)
+//        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToFriendProfileView(_:)))
+//        friendsCell.profileStackView.addGestureRecognizer(gesture)
         return friendsCell
     }
 }

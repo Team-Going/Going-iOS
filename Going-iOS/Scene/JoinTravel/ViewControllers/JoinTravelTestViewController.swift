@@ -19,10 +19,13 @@ final class JoinTravelTestViewController: UIViewController {
     
     var responseData: JoinTravelTestResponseStruct? {
         didSet {
-            let vc = OurToDoViewController()
-            if let tripId = self.responseData?.tripId {
-                vc.tripId = tripId
-            } else { return }
+            let vc = DOOTabbarViewController()
+            if let ourtodoVC = vc.ourTODoVC.viewControllers[0] as? OurToDoViewController,
+               let myToDoVC = vc.myToDoVC.viewControllers[0] as? MyToDoViewController {
+                ourtodoVC.tripId = self.tripId 
+                myToDoVC.tripId = self.tripId 
+            }
+            navigationController?.pushViewController(vc, animated: true)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

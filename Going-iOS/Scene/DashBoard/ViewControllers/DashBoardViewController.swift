@@ -11,12 +11,18 @@ class DashBoardViewController: UIViewController {
     
     // MARK: - Properties
     
+    private var initialCode: Int = 0
+    
+    private var tripStatus: String = "incomplete"
+    
     var tripId: Int = 0
     
     private var travelListDummy: DashBoardResponseSturct? {
         didSet {
-            filterTravels()
+//            filterTravels()
+            setNoDataView()
             setNaviTitle()
+            dashBoardCollectionView.reloadData()
         }
     }
     private lazy var filteredTravelList: [Trip] = []
@@ -115,6 +121,30 @@ private extension DashBoardViewController {
             $0.width.equalToSuperview()
         }
         
+        noDataview.snp.makeConstraints {
+            $0.top.equalTo(dashBoardHeaderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(createTravelButton.snp.top)
+        }
+        noDataLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(107)
+            $0.leading.equalToSuperview().inset(109)
+        }
+        
+        characterImage.snp.makeConstraints {
+            $0.trailing.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.getWidth(236))
+            $0.height.equalTo(ScreenUtils.getHeight(364))
+            $0.top.equalTo(noDataLabel.snp.top).offset(40)
+        }
+        
+        dashBoardCollectionView.snp.makeConstraints {
+            $0.top.equalTo(dashBoardHeaderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(createTravelButton.snp.top)
+        }
+
+        
         navigationTitle.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(24)
             $0.leading.equalToSuperview().inset(24)
@@ -150,7 +180,6 @@ private extension DashBoardViewController {
             $0.height.equalTo(ScreenUtils.getHeight(40))
         }
         
-        setNoDataView()
     }
     
     func setDelegate() {
@@ -186,29 +215,14 @@ private extension DashBoardViewController {
     func setNoDataView() {
         guard let travelListDummy else { return }
         if travelListDummy.trips.isEmpty {
-            noDataview.snp.makeConstraints {
-                $0.top.equalTo(dashBoardHeaderView.snp.bottom)
-                $0.leading.trailing.equalToSuperview()
-                $0.bottom.equalTo(createTravelButton.snp.top)
-            }
-            noDataLabel.snp.makeConstraints {
-                $0.top.equalToSuperview().inset(107)
-                $0.leading.equalToSuperview().inset(109)
-            }
-            characterImage.snp.makeConstraints {
-                $0.trailing.equalToSuperview()
-                $0.width.equalTo(ScreenUtils.getWidth(236))
-                $0.height.equalTo(ScreenUtils.getHeight(364))
-                $0.top.equalTo(noDataLabel.snp.top).offset(40)
-            }
+            noDataview.isHidden = false
+            dashBoardCollectionView.isHidden = true
         } else {
-            dashBoardCollectionView.snp.makeConstraints {
-                $0.top.equalTo(dashBoardHeaderView.snp.bottom)
-                $0.leading.trailing.equalToSuperview()
-                $0.bottom.equalTo(createTravelButton.snp.top)
-            }
+            noDataview.isHidden = true
+            dashBoardCollectionView.isHidden = false
         }
     }
+    
     
     // MARK: - @objc Methods
     
@@ -220,6 +234,7 @@ private extension DashBoardViewController {
     
     @objc
     func didChangeValue(sender: UISegmentedControl) {
+        self.tripStatus = dashBoardHeaderView.segmentedControl.selectedSegmentIndex == 0 ? "incomplete" : "complete"
         getAllData()
     }
     
@@ -232,13 +247,14 @@ private extension DashBoardViewController {
 
 extension DashBoardViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredTravelList.count
+        return travelListDummy?.trips.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = dashBoardCollectionView.dequeueReusableCell(withReuseIdentifier: DashBoardCollectionViewCell.cellIdentifier, for: indexPath) as? DashBoardCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.travelDetailData = filteredTravelList[indexPath.row]
+        cell.travelDetailData = travelListDummy?.trips[indexPath.row]
+        cell.tripStatus = self.tripStatus
         return cell
     }
 }
@@ -300,7 +316,7 @@ private extension DashBoardViewController {
     func getAllData() {
         Task {
             do {
-                self.travelListDummy = try await TravelService.shared.getAllTravel(status: dashBoardHeaderView.segmentedControl.selectedSegmentIndex == 0 ? "incomplete" : "complete")
+                self.travelListDummy = try await TravelService.shared.getAllTravel(status: tripStatus)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -309,15 +325,15 @@ private extension DashBoardViewController {
         }
     }
     
-    func filterTravels() {
-        guard let travelListDummy else { return }
-        if dashBoardHeaderView.segmentedControl.selectedSegmentIndex == 0 {
-            // 진행 중인 여행 필터링
-            filteredTravelList = travelListDummy.trips.filter { $0.day >= 0}
-        } else {
-            // 완료된 여행 필터링
-            filteredTravelList = travelListDummy.trips.filter { $0.day < 0}
-        }
-        dashBoardCollectionView.reloadData()
-    }
+//    func filterTravels() {
+//        
+//        guard let travelListDummy else { return }
+//       // 진행 중인 여행 필터링
+//        if filteredTravelList == travelListDummy.trips.filter { $0.day >= 0} {
+//        }
+//        // 완료된 여행 필터링
+//        if filteredTravelList == travelListDummy.trips.filter { $0.day < 0} {
+//        }
+//        dashBoardCollectionView.reloadData()
+//    }
 }
