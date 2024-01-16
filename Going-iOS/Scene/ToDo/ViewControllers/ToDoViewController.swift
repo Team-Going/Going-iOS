@@ -828,7 +828,7 @@ extension ToDoViewController: UITextViewDelegate {
     
     func textViewDidChangeSelection(_ textView: UITextView) {
         let text = textView.text ?? ""
-        let maxLength = 15
+        let maxLength = 1000
         
         if text.count > maxLength {
             let startIndex = text.startIndex
