@@ -258,7 +258,7 @@ extension JoinTravelViewController {
             }
             catch {
                 guard let error = error as? NetworkError else { return }
-                codeCheckData = nil
+//                codeCheckData = nil
                 handleError(error)
             }
         }

@@ -253,9 +253,8 @@ extension DashBoardViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = dashBoardCollectionView.dequeueReusableCell(withReuseIdentifier: DashBoardCollectionViewCell.cellIdentifier, for: indexPath) as? DashBoardCollectionViewCell else { return UICollectionViewCell() }
-        
-        cell.travelDetailData = travelListDummy?.trips[indexPath.row]
         cell.tripStatus = self.tripStatus
+        cell.travelDetailData = travelListDummy?.trips[indexPath.row]
         return cell
     }
 }
