@@ -241,37 +241,6 @@ final class ToDoViewController: UIViewController {
             let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(60), right: 0)
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
-            
-            // 버튼 뷰의 위치 조절
-            buttonView.snp.remakeConstraints {
-                $0.top.equalTo(countMemoCharacterLabel.snp.bottom).offset(10)
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-                $0.height.equalTo(ScreenUtils.getHeight(50))
-            }
-            
-            // memoTextView가 가려지지 않도록 자동으로 스크롤
-            let rect = buttonView.convert(buttonView.bounds, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
-        } else if todoTextfield.isFirstResponder {
-            let height = keyboardFrame.size.height
-            
-            //scrollView의 contentInset 초기화
-            scrollView.contentInset = UIEdgeInsets.zero
-            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
-            
-            // 컴포넌트의 Auto Layout 조절
-            // 버튼 뷰의 위치 조절
-            buttonView.snp.remakeConstraints {
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-                $0.bottom.equalTo(contentView.snp.bottom).offset(-height)
-                $0.height.equalTo(ScreenUtils.getHeight(50))
-            }
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
         }
     }
     
