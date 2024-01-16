@@ -946,12 +946,13 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
         //
         collectionView.collectionViewLayout.invalidateLayout()
-
-        if beforeVC == "my" && data?.secret == true {
-                let stringLength =
-                manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
-                return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
-        } else {
+        
+        if beforeVC == "my" {
+            let stringLength = data?.secret == true
+            ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
+            : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
+            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
+        }else {
             return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
         }
     }
