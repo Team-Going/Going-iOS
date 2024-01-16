@@ -407,19 +407,19 @@ extension MyToDoViewController: MyToDoCollectionViewDelegate {
 
 }
 
-extension MyToDoViewController: TabBarDelegate {
-    func tapOurToDo() {
-        let ourToDoVC = OurToDoViewController()
-        ourToDoVC.tripId = self.tripId
-        self.navigationController?.pushViewController(ourToDoVC, animated: false)
-    }
-    
-    func tapMyToDo() {
-        let myToDoVC = MyToDoViewController()
-        myToDoVC.tripId = self.tripId
-        self.navigationController?.pushViewController(myToDoVC, animated: false)
-    }
-}
+//extension MyToDoViewController: TabBarDelegate {
+//    func tapOurToDo() {
+//        let ourToDoVC = OurToDoViewController()
+//        ourToDoVC.tripId = self.tripId
+//        self.navigationController?.pushViewController(ourToDoVC, animated: false)
+//    }
+//    
+//    func tapMyToDo() {
+//        let myToDoVC = MyToDoViewController()
+//        myToDoVC.tripId = self.tripId
+//        self.navigationController?.pushViewController(myToDoVC, animated: false)
+//    }
+//}
 
 extension MyToDoViewController: UICollectionViewDelegate {}
 

@@ -67,6 +67,8 @@ final class OurToDoViewController: UIViewController {
         return imgView
     }()
     
+    var progress: String = "incomplete"
+    
     // MARK: - Property
     
     var initializeCode: Bool = false
@@ -137,7 +139,7 @@ final class OurToDoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         getOurToDoHeaderData()
-        getToDoData(progress: "incomplete")
+        getToDoData(progress: self.progress)
 
     }
     
@@ -376,9 +378,12 @@ private extension OurToDoViewController {
     func didChangeValue(segment: UISegmentedControl) {
         if initializeCode {
             if segment.selectedSegmentIndex == 0 {
-                getToDoData(progress: "incomplete")
+                self.progress = "incomplete"
+                getToDoData(progress: self.progress)
+                
             } else {
-                getToDoData(progress: "complete")
+                self.progress = "complete"
+                getToDoData(progress: self.progress)
             }
         }
         
