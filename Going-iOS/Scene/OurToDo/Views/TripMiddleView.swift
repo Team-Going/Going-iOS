@@ -35,9 +35,20 @@ final class TripMiddleView: UIView {
         progressBar.layer.cornerRadius = 6
         return progressBar
     }()
-    private let tripFriendsContainer: UIView = UIView()
     
-    private lazy var tripFriendsLabel: UILabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray700, text: StringLiterals.OurToDo.friends, alignment: .left)
+    
+    private lazy var tripFriendsContainer: UIView = {
+        let view = UIView()
+        let friendsLabelTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
+        view.addGestureRecognizer(friendsLabelTapGestureRecognizer)
+        return view
+        
+    }()
+    
+    
+    private let tripFriendsLabel: DOOLabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray700, text: StringLiterals.OurToDo.friends, alignment: .left)
+    
+    
     private lazy var tripFriendsBtn: UIButton = {
         let btn = UIButton()
         btn.addTarget(self, action: #selector(pushToInquiryFriendsView), for: .touchUpInside)
@@ -62,7 +73,7 @@ final class TripMiddleView: UIView {
         stackView.backgroundColor = .white000
         return stackView
     }()
-
+    
     // MARK: - Property
     
     private var userType: Int = 0
@@ -84,9 +95,11 @@ final class TripMiddleView: UIView {
     }
     
     // MARK: - Life Cycle
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
         
         setHierarchy()
         registerCell()
@@ -94,7 +107,7 @@ final class TripMiddleView: UIView {
         setStyle()
         setDelegate()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -109,30 +122,36 @@ final class TripMiddleView: UIView {
         self.delegate?.pushToMemberVC()
     }
     
-//    @objc
-//    func pushToFriendProfileView(_ sender: UITapGestureRecognizer) {
-//        print("pushToFriendProfileView")
-//    }
+    //친구라벨 눌렀을 때
+    @objc 
+    func didTapView(_ sender: UITapGestureRecognizer) {
+        self.delegate?.pushToMemberVC()
+    }
     
-//    func bindData(percentage: Int, friends: [Friend]) {
-//        self.percentageLabel.text = String(percentage) + "%"
-//        self.tripProgressBar.progress = Float(percentage) * 0.01
-//        self.friendProfile = friends
-//        self.tripFriendsCollectionView.reloadData()
-//    }
+    //    @objc
+    //    func pushToFriendProfileView(_ sender: UITapGestureRecognizer) {
+    //        print("pushToFriendProfileView")
+    //    }
+    
+    //    func bindData(percentage: Int, friends: [Friend]) {
+    //        self.percentageLabel.text = String(percentage) + "%"
+    //        self.tripProgressBar.progress = Float(percentage) * 0.01
+    //        self.friendProfile = friends
+    //        self.tripFriendsCollectionView.reloadData()
+    //    }
 }
 
 // MARK: - Private Method
 
 private extension TripMiddleView {
-
+    
     func setHierarchy() {
         self.addSubview(ticketBoxImgView)
         ticketBoxImgView.addSubviews(tripProgressLabel, percentageLabel, tripProgressBar, tripFriendsContainer, tripFriendsCollectionView, gradientView, addStackView)
         tripFriendsContainer.addSubviews(tripFriendsLabel, tripFriendsBtn)
         addStackView.addArrangedSubviews(addButton, addLabel)
     }
-
+    
     func setLayout() {
         ticketBoxImgView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(25))
@@ -192,7 +211,7 @@ private extension TripMiddleView {
             $0.size.equalTo(ScreenUtils.getHeight(48))
         }
     }
-
+    
     func setStyle() {
         self.backgroundColor = UIColor.gray50
         tripFriendsContainer.backgroundColor = UIColor.white000
@@ -249,11 +268,11 @@ extension TripMiddleView: UICollectionViewDataSource {
         
         userType = participants?[indexPath.row].result ?? 0
         friendsCell.profileImageView.image = userProfileImageSet[userType]
-
+        
         // TODO: - 변수 만들어놓고 탭하면 담당자 id 세팅해주기
-
-//        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToFriendProfileView(_:)))
-//        friendsCell.profileStackView.addGestureRecognizer(gesture)
+        
+        //        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToFriendProfileView(_:)))
+        //        friendsCell.profileStackView.addGestureRecognizer(gesture)
         return friendsCell
     }
 }

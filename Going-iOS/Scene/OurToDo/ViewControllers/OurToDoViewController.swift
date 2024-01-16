@@ -9,6 +9,8 @@ final class OurToDoViewController: UIViewController {
     
     // MARK: - UI Property
     
+    private var isSetDashBoardRoot: Bool = false
+    
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
     private let tripHeaderView: TripHeaderView = TripHeaderView()
@@ -64,6 +66,8 @@ final class OurToDoViewController: UIViewController {
         imgView.image = ImageLiterals.OurToDo.mainViewIcon
         return imgView
     }()
+    
+    var progress: String = "incomplete"
     
     // MARK: - Property
     
@@ -127,13 +131,15 @@ final class OurToDoViewController: UIViewController {
             await loadData()
         }
         setGradient()
+        
+        self.navigationBarview.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         getOurToDoHeaderData()
-        getToDoData(progress: "incomplete")
+        getToDoData(progress: self.progress)
 
     }
     
@@ -223,6 +229,19 @@ private extension OurToDoViewController {
             $0.bottom.equalTo(scrollView).inset(ScreenUtils.getHeight(24))
         }
     }
+    
+    @objc
+    func backButtonTapped() {
+        if isSetDashBoardRoot == false {
+            isSetDashBoardRoot = true
+            view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
+            view.window?.makeKeyAndVisible()
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+      
+    }
+    
     
     func loadData() async {
         self.setEmptyView()
@@ -359,9 +378,12 @@ private extension OurToDoViewController {
     func didChangeValue(segment: UISegmentedControl) {
         if initializeCode {
             if segment.selectedSegmentIndex == 0 {
-                getToDoData(progress: "incomplete")
+                self.progress = "incomplete"
+                getToDoData(progress: self.progress)
+                
             } else {
-                getToDoData(progress: "complete")
+                self.progress = "complete"
+                getToDoData(progress: self.progress)
             }
         }
         

@@ -11,6 +11,8 @@ class DashBoardViewController: UIViewController {
     
     // MARK: - Properties
     
+    var segmentIndex: Int = 0
+    
     private var initialCode: Int = 0
     
     private var tripStatus: String = "incomplete"
@@ -55,6 +57,7 @@ class DashBoardViewController: UIViewController {
         return view
     }()
     private let noDataLabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "새로운 여행을 시작해 보세요")
+    
     private let characterImage:  UIImageView = {
         let img = UIImageView()
         img.image = ImageLiterals.DashBoard.imgDashBoard
@@ -90,7 +93,7 @@ class DashBoardViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getAllData()
+        getAllData(sta: self.tripStatus)
     }
 }
 
@@ -234,8 +237,18 @@ private extension DashBoardViewController {
     
     @objc
     func didChangeValue(sender: UISegmentedControl) {
-        self.tripStatus = dashBoardHeaderView.segmentedControl.selectedSegmentIndex == 0 ? "incomplete" : "complete"
-        getAllData()
+        
+        if sender.selectedSegmentIndex == 0 {
+            self.segmentIndex = 0
+            getAllData(sta: "incomplete")
+        } else {
+            self.segmentIndex = 1
+
+            getAllData(sta: "complete")
+        }
+        
+        self.tripStatus = self.segmentIndex == 0 ? "incomplete" : "complete"
+
     }
     
     @objc
@@ -252,9 +265,8 @@ extension DashBoardViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = dashBoardCollectionView.dequeueReusableCell(withReuseIdentifier: DashBoardCollectionViewCell.cellIdentifier, for: indexPath) as? DashBoardCollectionViewCell else { return UICollectionViewCell() }
-        
-        cell.travelDetailData = travelListDummy?.trips[indexPath.row]
         cell.tripStatus = self.tripStatus
+        cell.travelDetailData = travelListDummy?.trips[indexPath.row]
         return cell
     }
 }
@@ -313,10 +325,10 @@ extension DashBoardViewController: ViewControllerServiceable {
 
 private extension DashBoardViewController {
     
-    func getAllData() {
+    func getAllData(sta: String) {
         Task {
             do {
-                self.travelListDummy = try await TravelService.shared.getAllTravel(status: tripStatus)
+                self.travelListDummy = try await TravelService.shared.getAllTravel(status: sta)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
