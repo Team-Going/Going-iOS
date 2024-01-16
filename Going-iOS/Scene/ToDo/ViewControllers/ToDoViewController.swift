@@ -903,41 +903,20 @@ extension ToDoViewController: UITextFieldDelegate {
 
 extension ToDoViewController {
     func updateSingleButtonState() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        
         let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
         let isTodoTextFieldEmpty = todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해주세요."
-
-        var isEndDateNotPast = true
-
-        guard let date = self.selectedDate else { return }
-        isEndDateNotPast = compareDate(userDate: date)
+        let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
 
         singleButtonView.currentType = ( !isTodoTextFieldEmpty
                                          && isDateSet
-                                         && isEndDateNotPast
                                          && isAllocatorFilled) ? .enabled : .unabled
-        
-
     }
 }
 
 
 extension ToDoViewController: BottomSheetDelegate {
     
-    func datePickerDidChanged(date: Date) {
-        self.selectedDate = date
-        // 두 날짜 비교
-        if compareDate(userDate: date) {
-            updateSingleButtonState()
-        } else {
-            DOOToast.show(message: "앞으로 할 일을 등록해주세요!", insetFromBottom: ScreenUtils.getHeight(374))
-            singleButtonView.currentType = .unabled
-            deadlineTextfieldLabel.layer.borderColor = UIColor.gray200.cgColor
-        }
-    }
+    func datePickerDidChanged(date: Date) { return }
     
     func didSelectDate(date: Date) {
         self.selectedDate = date
