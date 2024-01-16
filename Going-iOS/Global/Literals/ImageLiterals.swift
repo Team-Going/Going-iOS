@@ -127,10 +127,10 @@ enum ImageLiterals {
     enum TripFriends {
         static var ticketLine: UIImage { .load(named: "line_ticket_large")}
     }
-  
     enum TabBar {
         static var tabbarMyToDoUnselected: UIImage { .load(named: "mytodo_unselected") }
-        static var tabbarOurToDoSelected: UIImage { .load(named: "tabbar_ourtodo_selected") }
+        //    tabbar_ourtodo_selected
+        static var tabbarOurToDoSelected: UIImage { .load(named: "yesbtn_ourtodo_navi") }
         static var tabbarOurToDoUnselected: UIImage { .load(named: "tabbar_ourtodo_unselected") }
         static var tabbarMyToDoSelected: UIImage { .load(named: "mytodo") }
     }

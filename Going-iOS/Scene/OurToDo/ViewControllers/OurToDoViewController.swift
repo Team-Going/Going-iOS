@@ -52,7 +52,7 @@ final class OurToDoViewController: UIViewController {
     }()
     private let emptyViewIconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.MyToDo.emptyViewIcon
+        imageView.image = ImageLiterals.OurToDo.emptyViewIcon
         imageView.tintColor = .gray100
         return imageView
     }()
