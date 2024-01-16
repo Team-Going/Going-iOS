@@ -4,12 +4,16 @@ import SnapKit
 
 final class ToDoViewController: UIViewController {
     
+    // MARK: - 데이트피커에서 받은 데이트
+    
+    var selectedDate: Date?
+    
     // MARK: - Network
     
     var tripId: Int = 0
     
     var myId: Int = 0
-    
+
     private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
     
     // MARK: - UI Components
@@ -341,7 +345,6 @@ final class ToDoViewController: UIViewController {
                 
             }
             
-            
             self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: secret)
             print(self.saveToDoData)
             postToDoData()
@@ -465,7 +468,6 @@ private extension ToDoViewController {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-//            $0.width.equalTo(ScreenUtils.getWidth(327))
         }
     }
     
@@ -579,6 +581,36 @@ private extension ToDoViewController {
         } else {
             memoTextView.layer.borderColor = UIColor.gray700.cgColor
             self.countMemoCharacterLabel.textColor = .gray400
+        }
+    }
+    
+    func compareDate(userDate: Date) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 32400)
+        
+        //유저가 입력한 날짜를 스트링으로 바꿈
+        let formattedDateString = dateFormatter.string(from: userDate)
+        deadlineTextfieldLabel.text = formattedDateString
+        
+        //유저가 선택한 날짜
+        let userPickedDate = userDate
+        
+        //유저의 위치 날짜
+        let today = Date()
+        let timezone = TimeZone.autoupdatingCurrent
+        let secondsFromGMT = timezone.secondsFromGMT(for: today)
+        
+        // 정확한 비교를 위해 시-분-초 절삭한 시간대
+        let calendar = Calendar.current
+        let deletedUser = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: userPickedDate)
+        let deletedToday = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: today)
+        
+        // 두 날짜 비교
+        if let deletedUser = deletedUser, let deletedToday = deletedToday, deletedUser < deletedToday {
+            return false
+        } else {
+            return true
         }
     }
 }
@@ -801,6 +833,7 @@ extension ToDoViewController: UITextFieldDelegate {
         memoTextView.resignFirstResponder()
         textField.placeholder = ""
         textField.becomeFirstResponder()
+        updateSingleButtonState()
     }
     
     /// 상단의 textView Delegate와 같은 로직
@@ -860,50 +893,35 @@ extension ToDoViewController {
     func updateSingleButtonState() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
-        let todoText = todoTextfield.text ?? ""
-        let deadlineText = deadlineTextfieldLabel.text ?? ""
-        let today = Date()
-        if let deadlineDate = dateFormatter.date(from: deadlineText), deadlineDate >= today, !todoText.isEmpty {
-            singleButtonView.currentType = .enabled
-        } else {
-            singleButtonView.currentType = .unabled
-        }
+        
+        let isAllocatorFilled = (beforeVC == "our") && (buttonIndex.isEmpty == false) || (beforeVC == "my")
+        let isTodoTextFieldEmpty = todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해주세요."
+
+        var isEndDateNotPast = true
+
+        guard let selectedDate else { return }
+        isEndDateNotPast = compareDate(userDate: selectedDate)
+        singleButtonView.currentType = ( !isTodoTextFieldEmpty
+                                         && isDateSet
+                                         && isEndDateNotPast
+                                         && isAllocatorFilled) ? .enabled : .unabled
     }
 }
+
 
 extension ToDoViewController: BottomSheetDelegate {
     
     func datePickerDidChanged(date: Date) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 32400)
-        
-        //유저가 입력한 날짜를 스트링으로 바꿈
-        let formattedDateString = dateFormatter.string(from: date)
-        deadlineTextfieldLabel.text = formattedDateString
-        
-        //유저가 선택한 날짜
-        let userPickedDate = date
-        let localizedUserPickedDate = userPickedDate.convertToTimeZone(initTimeZone: TimeZone(secondsFromGMT: 32400)!, timeZone: TimeZone(secondsFromGMT: 0)!)
-        
-        //유저의 위치 날짜
-        let today = Date()
-        let timezone = TimeZone.autoupdatingCurrent
-        let secondsFromGMT = timezone.secondsFromGMT(for: today)
-        let localizedToday = today.addingTimeInterval(TimeInterval(secondsFromGMT))
-        
-        let calendar = Calendar.current
-        let deletedUser = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: localizedUserPickedDate)
-        let deletedToday = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: localizedToday)
-        
+        self.selectedDate = date
         // 두 날짜 비교
-        if let deletedUser = deletedUser, let deletedToday = deletedToday, deletedUser < deletedToday {
+        if compareDate(userDate: date) {
+            updateSingleButtonState()
+        } else {
             DOOToast.show(message: "앞으로 할 일을 등록해주세요!", insetFromBottom: ScreenUtils.getHeight(374))
             singleButtonView.currentType = .unabled
-        } else {
-            deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
+            deadlineTextfieldLabel.layer.borderColor = UIColor.gray200.cgColor
         }
-        updateSingleButtonState()
     }
     
     func didSelectDate(date: Date) {
@@ -912,7 +930,8 @@ extension ToDoViewController: BottomSheetDelegate {
         deadlineTextfieldLabel.textColor = .gray700
         deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
-        if todoTextfield.text != "" {singleButtonView.currentType = .enabled}
+        
+        updateSingleButtonState()
     }
 }
 
@@ -964,7 +983,6 @@ extension ToDoViewController: ViewControllerServiceable {
 }
 
 extension ToDoViewController {
-    
     func getDetailToDoData(todoId: Int) {
         Task {
             do {
