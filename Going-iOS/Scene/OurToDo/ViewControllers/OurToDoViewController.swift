@@ -20,6 +20,7 @@ final class OurToDoViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white000
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.isScrollEnabled = true
         return scrollView
     }()
@@ -264,7 +265,6 @@ private extension OurToDoViewController {
     func setStyle() {
         self.view.backgroundColor = .gray50
         self.navigationController?.navigationBar.barTintColor = .white000
-        scrollView.backgroundColor = .white000
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         tripMiddleView.isUserInteractionEnabled = true
