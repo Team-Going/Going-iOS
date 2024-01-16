@@ -307,16 +307,29 @@ final class ToDoViewController: UIViewController {
         if isActivateView {
             
             changeButtonConfig(isSelected: sender.isSelected, btn: sender)
+                    
             
+            // 아워투두의 할일 추가의 경우
+            
+            if beforeVC == "our" {
+                if sender.isSelected {
+                    // 이미 선택된 셀을 또 선택한 경우
+                    print("이미 선택된 셀을 또 선택했습니다.")
+                    buttonIndex.removeAll(where: { $0 == sender.tag })
+                    
+                    // 여기에서 필요한 작업을 수행할 수 있습니다.
+                } else {
+                    // 새로운 셀을 선택한 경우
+                    print("셀이 탭되었습니다.")
+                    
+                    // 여기에서 필요한 작업을 수행할 수 있습니다.
+                    buttonIndex.append(sender.tag)
+
+                }
+            }
+            updateSingleButtonState()
             sender.isSelected = !sender.isSelected
             
-            if sender.isSelected {
-                // 버튼이 선택된 경우, 배열에 추가
-                buttonIndex.append(sender.tag)
-            } else {
-                // 버튼 선택이 해제된 경우, 배열에서 제거
-                buttonIndex.removeAll(where: { $0 == sender.tag })
-            }
         }
     }
     
@@ -599,7 +612,6 @@ private extension ToDoViewController {
         //유저의 위치 날짜
         let today = Date()
         let timezone = TimeZone.autoupdatingCurrent
-        let secondsFromGMT = timezone.secondsFromGMT(for: today)
         
         // 정확한 비교를 위해 시-분-초 절삭한 시간대
         let calendar = Calendar.current
@@ -894,18 +906,21 @@ extension ToDoViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
-        let isAllocatorFilled = (beforeVC == "our") && (buttonIndex.isEmpty == false) || (beforeVC == "my")
+        let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
         let isTodoTextFieldEmpty = todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해주세요."
 
         var isEndDateNotPast = true
 
-        guard let selectedDate else { return }
-        isEndDateNotPast = compareDate(userDate: selectedDate)
+        guard let date = self.selectedDate else { return }
+        isEndDateNotPast = compareDate(userDate: date)
+
         singleButtonView.currentType = ( !isTodoTextFieldEmpty
                                          && isDateSet
                                          && isEndDateNotPast
                                          && isAllocatorFilled) ? .enabled : .unabled
+        
+
     }
 }
 
@@ -925,13 +940,17 @@ extension ToDoViewController: BottomSheetDelegate {
     }
     
     func didSelectDate(date: Date) {
+        self.selectedDate = date
+
         let formattedDate = dateFormat(date: date)
         deadlineTextfieldLabel.text = formattedDate
         deadlineTextfieldLabel.textColor = .gray700
         deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
         
-        updateSingleButtonState()
+        if compareDate(userDate: date) {
+            updateSingleButtonState()
+        }
     }
 }
 
