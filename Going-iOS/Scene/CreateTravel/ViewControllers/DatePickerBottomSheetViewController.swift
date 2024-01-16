@@ -49,6 +49,8 @@ final class DatePickerBottomSheetViewController: UIViewController {
         picker.datePickerMode = .date
         picker.isUserInteractionEnabled = true
         picker.locale = Locale(identifier: "ko-KR")
+        picker.timeZone = TimeZone(identifier: "Asia/Seoul")
+        
         picker.tintColor = .gray700
         if #available(iOS 13.4, *) {
             picker.preferredDatePickerStyle = .wheels

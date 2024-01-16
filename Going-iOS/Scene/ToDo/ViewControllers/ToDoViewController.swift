@@ -172,13 +172,13 @@ final class ToDoViewController: UIViewController {
         setDelegate()
         setStyle()
         registerCell()
-
+        
         if navigationBarTitle == "추가" {
             navigationBarView.titleLabel.text = "할일 추가"
             setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager, "메모를 입력해주세요."]
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationBarView.backgroundColor = .gray50
         self.tabBarController?.tabBar.isHidden = false
@@ -190,7 +190,7 @@ final class ToDoViewController: UIViewController {
             setInquiryStyle()
         }
         if navigationBarTitle == "조회" {
-                self.getDetailToDoData(todoId: self.todoId)
+            self.getDetailToDoData(todoId: self.todoId)
         }
         addNotification()
     }
@@ -235,7 +235,7 @@ final class ToDoViewController: UIViewController {
             let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(40), right: 0)
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
-
+            
             // 버튼 뷰의 위치 조절
             buttonView.snp.remakeConstraints {
                 $0.top.equalTo(countMemoCharacterLabel.snp.bottom).offset(10)
@@ -268,25 +268,25 @@ final class ToDoViewController: UIViewController {
             }
         }
     }
-
-        @objc func keyboardWillHide(_ notification: Notification) {
-            // 컴포넌트의 Auto Layout 초기 상태로 복원
-            
-            // 키보드가 사라질 때 scrollView의 contentInset 초기화
-            scrollView.contentInset = UIEdgeInsets.zero
-            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
-
-            // 버튼 뷰의 위치를 원래대로 조절.
-            buttonView.snp.remakeConstraints {
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-                $0.bottom.equalTo(contentView.snp.bottom).inset(ScreenUtils.getHeight(40))
-                $0.height.equalTo(ScreenUtils.getHeight(50))
-            }
-
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        // 컴포넌트의 Auto Layout 초기 상태로 복원
+        
+        // 키보드가 사라질 때 scrollView의 contentInset 초기화
+        scrollView.contentInset = UIEdgeInsets.zero
+        scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+        
+        // 버튼 뷰의 위치를 원래대로 조절.
+        buttonView.snp.remakeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
+            $0.bottom.equalTo(contentView.snp.bottom).inset(ScreenUtils.getHeight(40))
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
     
     @objc
     func presentToDatePicker(for button: UIButton) {
@@ -849,11 +849,9 @@ extension ToDoViewController {
     func updateSingleButtonState() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
-        
         let todoText = todoTextfield.text ?? ""
         let deadlineText = deadlineTextfieldLabel.text ?? ""
         let today = Date()
-        
         if let deadlineDate = dateFormatter.date(from: deadlineText), deadlineDate >= today, !todoText.isEmpty {
             singleButtonView.currentType = .enabled
         } else {
@@ -863,18 +861,36 @@ extension ToDoViewController {
 }
 
 extension ToDoViewController: BottomSheetDelegate {
+    
     func datePickerDidChanged(date: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 32400)
         
-        let formattedDate = dateFormatter.string(from: date)
-        deadlineTextfieldLabel.text = formattedDate
+        //유저가 입력한 날짜를 스트링으로 바꿈
+        let formattedDateString = dateFormatter.string(from: date)
+        deadlineTextfieldLabel.text = formattedDateString
         
+        //유저가 선택한 날짜
+        let userPickedDate = date
+        let localizedUserPickedDate = userPickedDate.convertToTimeZone(initTimeZone: TimeZone(secondsFromGMT: 32400)!, timeZone: TimeZone(secondsFromGMT: 0)!)
+        
+        //유저의 위치 날짜
         let today = Date()
+        let timezone = TimeZone.autoupdatingCurrent
+        let secondsFromGMT = timezone.secondsFromGMT(for: today)
+        let localizedToday = today.addingTimeInterval(TimeInterval(secondsFromGMT))
         
-        if let deadlineDate = dateFormatter.date(from: formattedDate), deadlineDate < today {
-            // deadlineDate가 오늘 날짜보다 이전일 경우
+        let calendar = Calendar.current
+        let deletedUser = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: localizedUserPickedDate)
+        let deletedToday = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: localizedToday)
+        
+        // 두 날짜 비교
+        if let deletedUser = deletedUser, let deletedToday = deletedToday, deletedUser < deletedToday {
             DOOToast.show(message: "앞으로 할 일을 등록해주세요!", insetFromBottom: ScreenUtils.getHeight(374))
+            singleButtonView.currentType = .unabled
+        } else {
+            deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
         }
         updateSingleButtonState()
     }
@@ -905,7 +921,7 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-                layout.minimumLineSpacing = ScreenUtils.getWidth(4)
+        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
         
         if beforeVC == "my" {
             let stringLength = data?.secret == true
@@ -918,6 +934,7 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         }
     }
 }
+
 extension ToDoViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
@@ -936,7 +953,6 @@ extension ToDoViewController: ViewControllerServiceable {
 }
 
 extension ToDoViewController {
-    
     
     func getDetailToDoData(todoId: Int) {
         Task {
@@ -968,5 +984,12 @@ extension ToDoViewController {
             }
             DOOToast.show(message: "할 일이 삭제되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
         }
+    }
+}
+
+extension Date {
+    func convertToTimeZone(initTimeZone: TimeZone, timeZone: TimeZone) -> Date {
+        let delta = TimeInterval(initTimeZone.secondsFromGMT(for: self) - timeZone.secondsFromGMT(for: self))
+        return addingTimeInterval(delta)
     }
 }
