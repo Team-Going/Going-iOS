@@ -149,4 +149,8 @@ enum ImageLiterals {
     enum UserTest {
         static var background: UIImage { .load(named: "img_test")}
     }
+    
+    enum UserTestResult {
+        static var ticketWithLine: UIImage { .load(named: "box_description_ios")}
+    }
 }
