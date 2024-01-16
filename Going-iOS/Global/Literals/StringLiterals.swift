@@ -67,7 +67,7 @@ enum StringLiterals {
     }
     
     enum MyToDo {
-        static let mytodo = "혼자 할일 "
+        static let mytodo = "혼자 할일  "
     }
     
     enum ToDo {

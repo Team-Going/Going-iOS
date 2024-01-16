@@ -294,12 +294,12 @@ private extension MyToDoViewController {
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
         todoVC.isActivateView = isActivate
+        todoVC.beforeVC = before
         todoVC.myId = self.myId
 //        todoVC.data = self.detailToDoData
 //        todoVC.manager = self.detailToDoData.allocators
         todoVC.todoId = self.todoId
         todoVC.tripId = self.tripId
-        todoVC.beforeVC = before
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
     

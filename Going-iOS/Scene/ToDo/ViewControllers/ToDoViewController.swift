@@ -75,7 +75,12 @@ final class ToDoViewController: UIViewController {
     }()
     private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.allocation)
     private lazy var todoManagerCollectionView: UICollectionView = {
-        setCollectionView()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        return collectionView
     }()
     private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.memo)
     private var memoTextViewCount: Int = 0
@@ -475,15 +480,15 @@ private extension ToDoViewController {
         bottomSheetVC.delegate = self
         doubleButtonView.delegate = self
     }
-    
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        return collectionView
-    }
+//    
+//    func setCollectionView() -> UICollectionView {
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+//        collectionView.backgroundColor = .clear
+//        collectionView.showsHorizontalScrollIndicator = false
+//        collectionView.showsVerticalScrollIndicator = false
+//        collectionView.isScrollEnabled = false
+//        return collectionView
+//    }
     
     func registerCell() {
         self.todoManagerCollectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
@@ -938,14 +943,16 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
         
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
         layout.minimumLineSpacing = ScreenUtils.getWidth(4)
-        
-        if beforeVC == "my" {
-            let stringLength = data?.secret == true
-            ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
-            : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
-            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
+
+        if beforeVC == "my"  && data?.secret == true{
+                let stringLength =
+                manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
+                return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
+
+            
+//            : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
+//            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
             
         } else {
             return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))

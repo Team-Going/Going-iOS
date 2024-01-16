@@ -23,7 +23,7 @@ final class CreatingSuccessViewController: UIViewController {
             self.dateLabel.text = data.startDate + "-" + data.endDate
             self.inviteCodeLabel.text = data.code
             let vc = OurToDoViewController()
-            if data.day == 0 {
+            if data.day <= 0 {
                 self.dDayLabel.text = "여행 중"
             } else {
                 self.dDayLabel.text = "D-" + "\(data.day)"
