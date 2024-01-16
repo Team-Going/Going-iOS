@@ -20,6 +20,7 @@ final class OurToDoViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white000
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.isScrollEnabled = true
         return scrollView
     }()
@@ -130,7 +131,6 @@ final class OurToDoViewController: UIViewController {
         Task {
             await loadData()
         }
-        setGradient()
         
         self.navigationBarview.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
 
@@ -140,12 +140,17 @@ final class OurToDoViewController: UIViewController {
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         getOurToDoHeaderData()
         getToDoData(progress: self.progress)
-
+        tripMiddleView.gradientView.setGradient(
+            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
+            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+            axis: .horizontal)
     }
     
     override func viewDidLayoutSubviews() {
-        setGradient()
-        
+        tripMiddleView.gradientView.setGradient(
+            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
+            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+            axis: .horizontal)
     }
 }
 
@@ -264,7 +269,6 @@ private extension OurToDoViewController {
     func setStyle() {
         self.view.backgroundColor = .gray50
         self.navigationController?.navigationBar.barTintColor = .white000
-        scrollView.backgroundColor = .white000
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         tripMiddleView.isUserInteractionEnabled = true
@@ -330,13 +334,6 @@ private extension OurToDoViewController {
         todoVC.isActivateView = isActivate
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
-    }
-    
-    func setGradient() {
-        tripMiddleView.gradientView.setGradient(
-            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
-            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
-            axis: .horizontal)
     }
     
     /// 투두 없는 경우 empty view 띄워주는 메소드

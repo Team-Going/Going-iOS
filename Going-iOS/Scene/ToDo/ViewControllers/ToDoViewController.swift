@@ -75,7 +75,12 @@ final class ToDoViewController: UIViewController {
     }()
     private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.allocation)
     private lazy var todoManagerCollectionView: UICollectionView = {
-        setCollectionView()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        return collectionView
     }()
     private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.memo)
     private var memoTextViewCount: Int = 0
@@ -241,37 +246,6 @@ final class ToDoViewController: UIViewController {
             let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(60), right: 0)
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
-            
-            // 버튼 뷰의 위치 조절
-            buttonView.snp.remakeConstraints {
-                $0.top.equalTo(countMemoCharacterLabel.snp.bottom).offset(10)
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-                $0.height.equalTo(ScreenUtils.getHeight(50))
-            }
-            
-            // memoTextView가 가려지지 않도록 자동으로 스크롤
-            let rect = buttonView.convert(buttonView.bounds, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
-        } else if todoTextfield.isFirstResponder {
-            let height = keyboardFrame.size.height
-            
-            //scrollView의 contentInset 초기화
-            scrollView.contentInset = UIEdgeInsets.zero
-            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
-            
-            // 컴포넌트의 Auto Layout 조절
-            // 버튼 뷰의 위치 조절
-            buttonView.snp.remakeConstraints {
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-                $0.bottom.equalTo(contentView.snp.bottom).offset(-height)
-                $0.height.equalTo(ScreenUtils.getHeight(50))
-            }
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
         }
     }
     
@@ -506,15 +480,15 @@ private extension ToDoViewController {
         bottomSheetVC.delegate = self
         doubleButtonView.delegate = self
     }
-    
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        return collectionView
-    }
+//    
+//    func setCollectionView() -> UICollectionView {
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+//        collectionView.backgroundColor = .clear
+//        collectionView.showsHorizontalScrollIndicator = false
+//        collectionView.showsVerticalScrollIndicator = false
+//        collectionView.isScrollEnabled = false
+//        return collectionView
+//    }
     
     func registerCell() {
         self.todoManagerCollectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
@@ -970,15 +944,15 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
+        //
+        collectionView.collectionViewLayout.invalidateLayout()
         
         if beforeVC == "my" {
             let stringLength = data?.secret == true
             ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
             : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
             return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
-            
-        } else {
+        }else {
             return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
         }
     }
