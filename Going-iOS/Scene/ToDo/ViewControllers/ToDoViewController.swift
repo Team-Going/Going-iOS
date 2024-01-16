@@ -809,10 +809,6 @@ extension ToDoViewController: UITextViewDelegate {
             }
         }
         
-        if text == "\n" { // 엔터 키 감지
-            textView.resignFirstResponder()
-            return false
-        }
        return true
     }
     
@@ -845,7 +841,7 @@ extension ToDoViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         todoTextFieldCheck()
-        
+        updateSingleButtonState()
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -872,8 +868,8 @@ extension ToDoViewController {
         let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
 
         singleButtonView.currentType = ( !isTodoTextFieldEmpty
+                                         && todoTextfield.text?.count ?? 0 <= 15
                                          && isDateSet
-                                         && isEndDateNotPast
                                          && isAllocatorFilled
                                          && memoTextView.text.count <= 1000) ? .enabled : .unabled
     }
