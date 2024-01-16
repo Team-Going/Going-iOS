@@ -694,6 +694,7 @@ extension ToDoViewController: UICollectionViewDataSource{
                     managerCell.managerButton.setTitleColor(.red500, for: .normal)
                     managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
                     managerCell.managerButton.backgroundColor = .white000
+                    managerCell.managerButton.isUserInteractionEnabled = false
                 }
             }
         }

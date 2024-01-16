@@ -30,7 +30,7 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
                 self.travelStateLabel.textColor = .gray200
             } else {
                 
-                if detailData.day < 0 {
+                if detailData.day <= 0 {
                     self.travelStateLabel.text = "여행 중"
                 } else {
                     self.travelStateLabel.text = "D-\(detailData.day)"

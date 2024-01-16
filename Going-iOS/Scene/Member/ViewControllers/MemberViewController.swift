@@ -35,6 +35,16 @@ class MemberViewController: UIViewController {
             self.ourTestResultView.progressView5.testResultData = memberData?.styles[4]
         }
     }
+    
+    private let memberScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isScrollEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
+    
+    private let contentView = UIView()
 
     // MARK: - UI Properties
     
@@ -46,6 +56,7 @@ class MemberViewController: UIViewController {
     }()
     
     private let memeberTitleLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "멤버")
+    
     private lazy var tripFriendsCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
         view.backgroundColor = UIColor.white000
@@ -72,6 +83,7 @@ class MemberViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
         getAllData()
     }
 }
@@ -84,9 +96,9 @@ private extension MemberViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar,
-                         navigationUnderLineView,
-                         memeberTitleLabel,
+        view.addSubviews(navigationBar, navigationUnderLineView, memberScrollView)
+        memberScrollView.addSubview(contentView)
+        contentView.addSubviews( memeberTitleLabel,
                          tripFriendsCollectionView,
                          ourTasteTitleLabel,
                          ourTestResultView)
@@ -105,8 +117,20 @@ private extension MemberViewController {
             $0.height.equalTo(1)
         }
         
+        memberScrollView.snp.makeConstraints {
+            $0.top.equalTo(navigationUnderLineView.snp.bottom)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalTo(memberScrollView.frameLayoutGuide)
+            $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
+        }
+        
         memeberTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom).offset(24)
+            $0.top.equalToSuperview().inset(24)
             $0.leading.equalToSuperview().inset(24)
         }
         
@@ -124,7 +148,7 @@ private extension MemberViewController {
         ourTestResultView.snp.makeConstraints {
             $0.top.equalTo(ourTasteTitleLabel.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview().inset(23)
-            $0.height.equalTo(ScreenUtils.getHeight(505))
+//            $0.height.equalTo(ScreenUtils.getHeight(505))
         }
     }
     

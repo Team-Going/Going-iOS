@@ -10,25 +10,30 @@ import UIKit
 import SnapKit
 
 final class JoiningSuccessViewController: UIViewController {
-        
+    
     // MARK: - Network
-
+    
     var tripId: Int = 0
-
+    
     var joinSuccessData: JoiningSuccessAppData? {
         didSet {
             guard let data = joinSuccessData else { return }
             self.travelTitleLabel.text = data.travelName
             self.dateLabel.text = data.startDate + "-" + data.endDate
             self.tripId = data.travelId
-            if data.dueDate == 0 {
+            
+            if data.dueDate <= 0 {
                 self.dDayLabel.text = "여행 중"
             } else {
-                self.dDayLabel.text = "D-" + "\(data.dueDate)"
+                self.dDayLabel.text = "D-\(data.dueDate)"
             }
+            
+            self.dDayLabel.backgroundColor = .red100
+            self.dDayLabel.textColor = .red500
         }
     }
-
+    
+    
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
@@ -49,9 +54,9 @@ final class JoiningSuccessViewController: UIViewController {
     }()
     
     private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .red400)
-
+    
     private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
-
+    
     private let dateLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300)
     
     private lazy var entranceButton: DOOButton = {
