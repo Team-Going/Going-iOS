@@ -118,7 +118,6 @@ final class OurToDoViewController: UIViewController {
         setDelegate()
         registerCell()
         setStyle()
-        getOurToDoHeaderData()
         self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
         self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
         self.initializeCode = true
@@ -132,6 +131,7 @@ final class OurToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        getOurToDoHeaderData()
         getToDoData(progress: "incomplete")
 
     }
