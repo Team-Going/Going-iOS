@@ -88,7 +88,12 @@ final class ToDoViewController: UIViewController {
     }()
     private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.allocation)
     private lazy var todoManagerCollectionView: UICollectionView = {
-        setCollectionView()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        return collectionView
     }()
     private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.memo)
     private var memoTextViewCount: Int = 0
@@ -198,7 +203,7 @@ final class ToDoViewController: UIViewController {
         
         if navigationBarTitle == "추가" {
             navigationBarView.titleLabel.text = "할일 추가"
-            setDefaultValue = ["할일을 입력해주세요.", "날짜를 선택해주세요.", self.manager, "메모를 입력해주세요."]
+            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.manager, "메모를 입력해 주세요"]
         }
     }
     
@@ -258,37 +263,6 @@ final class ToDoViewController: UIViewController {
             let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(60), right: 0)
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
-            
-            // 버튼 뷰의 위치 조절
-            buttonView.snp.remakeConstraints {
-                $0.top.equalTo(countMemoCharacterLabel.snp.bottom).offset(10)
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-                $0.height.equalTo(ScreenUtils.getHeight(50))
-            }
-            
-            // memoTextView가 가려지지 않도록 자동으로 스크롤
-            let rect = buttonView.convert(buttonView.bounds, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
-        } else if todoTextfield.isFirstResponder {
-            let height = keyboardFrame.size.height
-            
-            //scrollView의 contentInset 초기화
-            scrollView.contentInset = UIEdgeInsets.zero
-            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
-            
-            // 컴포넌트의 Auto Layout 조절
-            // 버튼 뷰의 위치 조절
-            buttonView.snp.remakeConstraints {
-                $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-                $0.bottom.equalTo(contentView.snp.bottom).offset(-height)
-                $0.height.equalTo(ScreenUtils.getHeight(50))
-            }
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
         }
     }
     
@@ -360,7 +334,7 @@ final class ToDoViewController: UIViewController {
     @objc
     func saveToDo() {
         let todo = todoTextfield.text ?? ""
-        let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해주세요." ? "" : deadlineTextfieldLabel.text) ?? ""
+        let deadline = (deadlineTextfieldLabel.text == "날짜를 선택해 주세요" ? "" : deadlineTextfieldLabel.text) ?? ""
         let memo = (memoTextView.text == memoTextviewPlaceholder ? "" : memoTextView.text) ?? ""
         let secret = beforeVC == "our" ? false : true
         if !todo.isEmpty && !deadline.isEmpty {
@@ -533,15 +507,15 @@ private extension ToDoViewController {
         bottomSheetVC.delegate = self
         doubleButtonView.delegate = self
     }
-    
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        return collectionView
-    }
+//    
+//    func setCollectionView() -> UICollectionView {
+//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+//        collectionView.backgroundColor = .clear
+//        collectionView.showsHorizontalScrollIndicator = false
+//        collectionView.showsVerticalScrollIndicator = false
+//        collectionView.isScrollEnabled = false
+//        return collectionView
+//    }
     
     func registerCell() {
         self.todoManagerCollectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
@@ -582,8 +556,8 @@ private extension ToDoViewController {
         deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
         deadlineTextfieldLabel.textColor = .gray700
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
-        memoTextView.layer.borderColor = memoTextView.text == "메모를 입력해주세요." ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
-        memoTextView.textColor = memoTextView.text == "메모를 입력해주세요." ? UIColor.gray200 : UIColor.gray700
+        memoTextView.layer.borderColor = memoTextView.text == "메모를 입력해 주세요" ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
+        memoTextView.textColor = memoTextView.text == "메모를 입력해 주세요" ? UIColor.gray200 : UIColor.gray700
         countMemoCharacterLabel.text = "\(memotext)/1000"
         countMemoCharacterLabel.textColor = .gray700
     }
@@ -627,7 +601,6 @@ private extension ToDoViewController {
         
         //유저의 위치 날짜
         let today = Date()
-        let timezone = TimeZone.autoupdatingCurrent
         
         // 정확한 비교를 위해 시-분-초 절삭한 시간대
         let calendar = Calendar.current
@@ -894,42 +867,22 @@ extension ToDoViewController: UITextFieldDelegate {
 
 extension ToDoViewController {
     func updateSingleButtonState() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        
         let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
         let isTodoTextFieldEmpty = todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해주세요."
-
-        var isEndDateNotPast = true
-
-        guard let date = self.selectedDate else { return }
-        isEndDateNotPast = compareDate(userDate: date)
+        let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
 
         singleButtonView.currentType = ( !isTodoTextFieldEmpty
                                          && isDateSet
                                          && isEndDateNotPast
                                          && isAllocatorFilled
                                          && memoTextView.text.count <= 1000) ? .enabled : .unabled
-        
-
     }
 }
 
 
 extension ToDoViewController: BottomSheetDelegate {
     
-    func datePickerDidChanged(date: Date) {
-        self.selectedDate = date
-        // 두 날짜 비교
-        if compareDate(userDate: date) {
-            updateSingleButtonState()
-        } else {
-            DOOToast.show(message: "앞으로 할 일을 등록해주세요!", insetFromBottom: ScreenUtils.getHeight(374))
-            singleButtonView.currentType = .unabled
-            deadlineTextfieldLabel.layer.borderColor = UIColor.gray200.cgColor
-        }
-    }
+    func datePickerDidChanged(date: Date) { return }
     
     func didSelectDate(date: Date) {
         self.selectedDate = date
@@ -962,15 +915,15 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
+        //
+        collectionView.collectionViewLayout.invalidateLayout()
         
         if beforeVC == "my" {
             let stringLength = data?.secret == true
             ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
             : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
             return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
-            
-        } else {
+        }else {
             return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
         }
     }
@@ -1012,7 +965,7 @@ extension ToDoViewController {
                 try await ToDoService.shared.postCreateToDo(tripId: tripId, requestBody: saveToDoData)
                 self.navigationController?.popViewController(animated: true)
             }
-            DOOToast.show(message: "할 일이 추가되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
+            DOOToast.show(message: "할 일이 추가되었어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
     
@@ -1022,7 +975,7 @@ extension ToDoViewController {
                 try await ToDoService.shared.deleteTodo(todoId: self.todoId)
                 self.navigationController?.popViewController(animated: true)
             }
-            DOOToast.show(message: "할 일이 삭제되었어요.", insetFromBottom: ScreenUtils.getHeight(106))
+            DOOToast.show(message: "할 일이 삭제되었어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
 }

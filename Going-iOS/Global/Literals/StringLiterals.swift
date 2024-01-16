@@ -32,12 +32,12 @@ enum StringLiterals {
     
     enum JoinTravel {
         static let inviteCodeTitle = "초대코드"
-        static let placeHolder = "초대코드를 입력해주세요."
+        static let placeHolder = "친구에게 받은 초대 코드 6자리를 입력해 주세요"
     }
     
     enum CreateTravel {
         static let namePlaceHolder = "이번 여행의 이름을 지어주세요"
-        static let warning = "여행 이름을 입력해주세요."
+        static let warning = "여행 이름을 입력해 주세요"
         static let nameTitle = "새로운 여행 만들기"
         static let dateTitle = "여행 일정을 알려주세요"
     }
@@ -62,12 +62,12 @@ enum StringLiterals {
         static let invite = "초대"
         static let incomplete = "해야 해요"
         static let complete = "완료했어요"
-        static let ourtodo = "같이 할일 "
+        static let ourtodo = "같이 할일  "
         static let pleaseAddToDo = "할일을 추가해 보세요"
     }
     
     enum MyToDo {
-        static let mytodo = "혼자 할일 "
+        static let mytodo = "혼자 할일  "
     }
     
     enum ToDo {

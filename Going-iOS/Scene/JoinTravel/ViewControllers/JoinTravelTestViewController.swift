@@ -216,7 +216,15 @@ extension JoinTravelTestViewController: ViewControllerServiceable {
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(let code, let message):
-            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: 80)
+            if code == "e4092" {
+                DOOToast.show(message: "자신이 만든 초대코드를 통해 입장할 수 없습니다. \n유효한 초대코드를 사용해주세요.", duration: 2, insetFromBottom: ScreenUtils.getHeight(100), completion: {
+                    self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
+                    self.view.window?.makeKeyAndVisible()
+                })
+//
+            } else{
+                DOOToast.show(message: message, insetFromBottom: 80)
+            }
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }

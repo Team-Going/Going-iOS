@@ -35,29 +35,27 @@ final class TestResultTicketView: UIView {
         }
     }
     
+    private let ticketBackgroundImage: UIImageView = {
+        let img = UIImageView()
+        img.image = ImageLiterals.UserTestResult.ticketWithLine
+        return img
+    }()
+    
     private let wholeStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.spacing = 16
+        stack.spacing = 32
         stack.alignment = .center
         return stack
     }()
     
     let titleLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .gray700, numberOfLine: 2, alignment: .center)
     
-    private let vertiLineImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = ImageLiterals.TestResult.verticalLine
-        return imageView
-    }()
-    
     private let descStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 4
         stack.backgroundColor = .clear
-        //        stack.distribution = .equalSpacing
         return stack
     }()
     
@@ -76,43 +74,41 @@ final class TestResultTicketView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
 
 private extension TestResultTicketView {
     
     func setHierarchy() {
-        self.addSubviews(wholeStackView)
-        wholeStackView.addArrangedSubviews(titleLabel, vertiLineImageView, descStackView)
+        self.addSubviews(ticketBackgroundImage)
+        ticketBackgroundImage.addSubview(wholeStackView)
+        wholeStackView.addArrangedSubviews(titleLabel, descStackView)
         descStackView.addArrangedSubviews(firstDescLabel, secondDescLabel, thirdDescLabel)
     }
     
     func setLayout() {
+        ticketBackgroundImage.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         wholeStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(14)
             $0.top.bottom.equalToSuperview().inset(16)
             $0.height.equalTo(ScreenUtils.getHeight(110))
         }
-        
-        vertiLineImageView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.width.equalTo(1)
-        }
-        
+
         titleLabel.snp.makeConstraints {
             $0.width.equalTo(ScreenUtils.getWidth(52))
             $0.height.equalTo(ScreenUtils.getHeight(36))
         }
         
         descStackView.snp.makeConstraints {
-            $0.centerY.equalTo(vertiLineImageView)
+            $0.centerY.equalTo(ticketBackgroundImage)
             $0.width.equalTo(ScreenUtils.getWidth(213))
         }
     }
     
     func setStyle() {
-        self.backgroundColor = .white
+        self.backgroundColor = .red100
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 6
         self.layer.borderColor = UIColor.gray100.cgColor

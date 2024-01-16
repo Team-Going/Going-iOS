@@ -27,6 +27,8 @@ extension UIView {
     }
     
     func setGradient(firstColor: UIColor, secondColor: UIColor, axis: GradientAxis) {
+        layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
+
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [firstColor.cgColor, secondColor.cgColor]
         if axis == .horizontal {
@@ -39,7 +41,8 @@ extension UIView {
             gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         }
         gradient.frame = bounds
-        layer.addSublayer(gradient)
+        layer.insertSublayer(gradient, at: 0) // Use insertSublayer to add it at the bottom
+
     }
     
     //imageView를 이미지로 바꿔줌

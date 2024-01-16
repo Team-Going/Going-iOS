@@ -12,7 +12,7 @@ import WebKit
 final class PersonalInfoWebViewController: UIViewController {
     
     private var webView: WKWebView?
-    private let urlString = "https://useworld.github.io/iOS/webview/"
+    private let urlString = "https://www.notion.so/goinggoing/doorip-75f5d981a5b842a6be74a9dc17ca67de?pvs=4"
     
     override func loadView() {
         super.loadView()

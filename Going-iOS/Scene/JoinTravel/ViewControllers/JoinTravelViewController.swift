@@ -13,7 +13,9 @@ final class JoinTravelViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var codeCheckRequestDTO = CodeRequestDTO(code: "")
+
+    private var code: String = ""
+    
     private var codeCheckData: JoiningSuccessAppData? {
         didSet {
             if codeCheckData == nil {
@@ -29,7 +31,7 @@ final class JoinTravelViewController: UIViewController {
     }
     
     // MARK: - UI Properties
-
+    
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
     private let navigationUnderlineView: UIView = {
         let view = UIView()
@@ -200,17 +202,15 @@ private extension JoinTravelViewController {
     @objc
     func nextButtonTapped() {
         guard let text = codeTextField.text else { return }
-        codeCheckRequestDTO.code = text
+        self.code = text
         checkCode()
-        
-
     }
 }
 
 extension JoinTravelViewController: UITextFieldDelegate {
     func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
         guard let text = textField.text else { return  false }
-
+        
         let newLength = text.count + string.count - range.length
         let maxLength = 6
         
@@ -243,7 +243,21 @@ extension JoinTravelViewController: ViewControllerServiceable {
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(let code, let message):
-            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: 80)
+            if code == "e4006" {
+                warningLabel.isHidden = false
+                warningLabel.text = "\(message)"
+                codeTextField.layer.borderColor = UIColor.red500.cgColor
+                characterCountLabel.textColor = .red500
+            } else if code == "e4043" {
+                warningLabel.isHidden = false
+                codeTextField.layer.borderColor = UIColor.red500.cgColor
+                characterCountLabel.textColor = .red500
+                
+            } else {
+                DOOToast.show(message: message, insetFromBottom: 80)
+            }
+            
+            DOOToast.show(message: message, insetFromBottom: 80)
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }
@@ -254,11 +268,10 @@ extension JoinTravelViewController {
     func checkCode() {
         Task {
             do {
-                self.codeCheckData = try await TravelService.shared.postInviteCode(code: codeCheckRequestDTO)
+                self.codeCheckData = try await TravelService.shared.postInviteCode(code: self.code)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
-//                codeCheckData = nil
                 handleError(error)
             }
         }
