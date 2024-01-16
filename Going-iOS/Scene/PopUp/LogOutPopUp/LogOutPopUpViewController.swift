@@ -100,10 +100,9 @@ extension LogOutPopUpViewController: ViewControllerServiceable {
     
     func handleError(_ error: NetworkError) {
         switch error {
-        case .reIssueJWT:
-            reIssueJWTToken()
-            postLogout()
-        case .unAuthorizedError:
+          
+        case .unAuthorizedError, .reIssueJWT:
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:

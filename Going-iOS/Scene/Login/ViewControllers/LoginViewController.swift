@@ -227,18 +227,16 @@ extension LoginViewController: ViewControllerServiceable {
     
     //추후에 에러코드에 따른 토스트 메세지 구현해야됨
     func handleError(_ error: NetworkError) {
-        
-        if error.description == "e4041" {
-            let nextVC = MakeProfileViewController()
-            nextVC.socialToken = self.socialToken
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        }
-        
+            
         switch error {
         case .userState(let code, _):
-            let nextVC = MakeProfileViewController()
-            nextVC.socialToken = self.socialToken
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            if code == "e4041" {
+                let nextVC = MakeProfileViewController()
+                nextVC.socialToken = self.socialToken
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        case .serverError:
+            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
         default:
             print(error.description)
             DOOToast.show(message: error.description, insetFromBottom: 80)

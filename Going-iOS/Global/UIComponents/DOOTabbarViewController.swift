@@ -26,10 +26,10 @@ final class DOOTabbarViewController: UITabBarController {
             }
                 
         ourTODoVC.tabBarItem = UITabBarItem(title: nil, image: ImageLiterals.TabBar.tabbarOurToDoUnselected.withRenderingMode(.alwaysTemplate), selectedImage: ImageLiterals.TabBar.tabbarOurToDoSelected.withRenderingMode(.alwaysTemplate))
-        ourTODoVC.tabBarItem.imageInsets = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
+        ourTODoVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -22, right: -15)
         
         myToDoVC.tabBarItem = UITabBarItem(title: nil, image: ImageLiterals.TabBar.tabbarMyToDoUnselected.withRenderingMode(.alwaysTemplate), selectedImage: ImageLiterals.TabBar.tabbarMyToDoSelected.withRenderingMode(.alwaysTemplate))
-        myToDoVC.tabBarItem.imageInsets = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
+        myToDoVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: -15, bottom: -22, right: 0)
 
 
         self.viewControllers = [ourTODoVC, myToDoVC]

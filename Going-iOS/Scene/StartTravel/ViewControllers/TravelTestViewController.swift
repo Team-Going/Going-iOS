@@ -207,7 +207,7 @@ extension TravelTestViewController: ViewControllerServiceable {
         switch error {
         case .serverError:
             DOOToast.show(message: "서버오류", insetFromBottom: 80)
-        case .unAuthorizedError:
+        case .unAuthorizedError, .reIssueJWT:
             DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)

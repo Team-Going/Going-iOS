@@ -61,7 +61,7 @@ extension SplashViewController: ViewControllerServiceable {
             DOOToast.show(message: "\(message)", insetFromBottom: 80)
         case .serverError:
             DOOToast.show(message: error.description, insetFromBottom: 80)
-        case .unAuthorizedError:
+        case .unAuthorizedError, .reIssueJWT:
             //로그인으로 보내기
             DOOToast.show(message: "토큰이 만료되어서 다시 로그인해주세요", insetFromBottom: 80)
             let nextVC = LoginViewController()
@@ -74,9 +74,6 @@ extension SplashViewController: ViewControllerServiceable {
                 let nextVC = UserTestSplashViewController()
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
-        case .reIssueJWT:
-            //카카오JWT재발급 API호출 후, 받아온 accescc토큰으로 다시 원래 API호출
-            DOOToast.show(message: "재발급통신하자", insetFromBottom: 80)
             
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)

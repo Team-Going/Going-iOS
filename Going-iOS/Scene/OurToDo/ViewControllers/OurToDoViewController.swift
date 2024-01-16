@@ -52,7 +52,7 @@ final class OurToDoViewController: UIViewController {
     }()
     private let emptyViewIconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.MyToDo.emptyViewIcon
+        imageView.image = ImageLiterals.OurToDo.emptyViewIcon
         imageView.tintColor = .gray100
         return imageView
     }()
@@ -502,7 +502,7 @@ extension OurToDoViewController: ViewControllerServiceable {
         switch error {
         case .serverError:
             DOOToast.show(message: "서버오류", insetFromBottom: 80)
-        case .unAuthorizedError:
+        case .unAuthorizedError, .reIssueJWT:
             DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)

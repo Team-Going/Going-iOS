@@ -96,7 +96,6 @@ final class CreatingSuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setStyle()
         setHierarchy()
         setLayout()
@@ -109,6 +108,7 @@ private extension CreatingSuccessViewController {
     func setStyle() {
         view.backgroundColor = .gray50
         self.navigationController?.isNavigationBarHidden = true
+        navigationBar.isHidden = true
     }
     
     func setHierarchy() {
