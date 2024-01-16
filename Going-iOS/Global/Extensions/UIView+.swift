@@ -20,4 +20,39 @@ extension UIView {
         layer.cornerRadius = cornerRadius
         layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
     }
+    
+    enum GradientAxis {
+        case vertical
+        case horizontal
+    }
+    
+    func setGradient(firstColor: UIColor, secondColor: UIColor, axis: GradientAxis) {
+        layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
+
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.colors = [firstColor.cgColor, secondColor.cgColor]
+        if axis == .horizontal {
+            gradient.locations = [0.0 , 1.0]
+            gradient.startPoint = CGPoint(x: 0.05, y: 1.0)
+            gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        } else if axis == .vertical {
+            gradient.locations = [0.0 , 1.0]
+            gradient.startPoint = CGPoint(x: 0.0, y: 0.05)
+            gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+        }
+        gradient.frame = bounds
+        layer.insertSublayer(gradient, at: 0) // Use insertSublayer to add it at the bottom
+
+    }
+    
+    //imageView를 이미지로 바꿔줌
+    func convertUIImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+    
+    
+    
 }

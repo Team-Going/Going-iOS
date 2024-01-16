@@ -1,0 +1,58 @@
+//
+//  DOOTabbarViewController.swift
+//  Going-iOS
+//
+//  Created by 곽성준 on 1/15/24.
+//
+
+import UIKit
+
+import SnapKit
+
+final class DOOTabbarViewController: UITabBarController {
+    
+    let ourTODoVC = UINavigationController(rootViewController: OurToDoViewController())
+    let myToDoVC = UINavigationController(rootViewController: MyToDoViewController())
+    
+    private let divideLineView = UIView()
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.tabBar.addSubview(divideLineView)
+        self.tabBar.tintColor = .red500
+        divideLineView.snp.makeConstraints {
+            $0.top.trailing.leading.equalToSuperview()
+            $0.height.equalTo(1)
+            }
+                
+        ourTODoVC.tabBarItem = UITabBarItem(title: nil, image: ImageLiterals.TabBar.tabbarOurToDoUnselected.withRenderingMode(.alwaysTemplate), selectedImage: ImageLiterals.TabBar.tabbarOurToDoSelected.withRenderingMode(.alwaysTemplate))
+        ourTODoVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -22, right: -15)
+        
+        myToDoVC.tabBarItem = UITabBarItem(title: nil, image: ImageLiterals.TabBar.tabbarMyToDoUnselected.withRenderingMode(.alwaysTemplate), selectedImage: ImageLiterals.TabBar.tabbarMyToDoSelected.withRenderingMode(.alwaysTemplate))
+        myToDoVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: -15, bottom: -22, right: 0)
+
+
+        self.viewControllers = [ourTODoVC, myToDoVC]
+        
+        self.selectedIndex = 0
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.backgroundColor = .white000
+        tabBarAppearance.stackedItemSpacing = 110
+        let tabBarItemAppearance = UITabBarItemAppearance()
+        tabBarAppearance.inlineLayoutAppearance = tabBarItemAppearance
+        tabBarAppearance.stackedLayoutAppearance = tabBarItemAppearance
+        tabBarAppearance.compactInlineLayoutAppearance = tabBarItemAppearance
+        
+        self.tabBar.standardAppearance = tabBarAppearance
+        self.tabBar.scrollEdgeAppearance = tabBarAppearance
+        
+    }
+    
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tabBar.frame.size.height = ScreenUtils.getHeight(110)
+        tabBar.frame.origin.y = view.frame.height - 110
+    }
+}

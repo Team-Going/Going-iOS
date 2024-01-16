@@ -40,7 +40,28 @@ extension UITextField {
                                                         attributes: [.foregroundColor: fontColor!,
                                                                      .font: font])
     }
- }
-
     
-
+    func setTextField(forPlaceholder: String, forBorderColor: UIColor, forCornerRadius: CGFloat? = nil) {
+        self.placeholder = forPlaceholder
+        self.clipsToBounds = true
+        self.layer.borderColor = forBorderColor.cgColor
+        self.layer.borderWidth = 1
+        self.backgroundColor = .white
+        
+        if let cornerRadius = forCornerRadius {
+            self.layer.cornerRadius = cornerRadius
+        }  else {
+            self.layer.cornerRadius = 0
+        }
+    }
+    
+    func setPlaceholderColor(_ placeholderColor: UIColor) {
+        attributedPlaceholder = NSAttributedString(
+            string: placeholder ?? "",
+            attributes: [
+                .foregroundColor: placeholderColor,
+                .font: font
+            ].compactMapValues { $0 }
+        )
+    }
+ }
