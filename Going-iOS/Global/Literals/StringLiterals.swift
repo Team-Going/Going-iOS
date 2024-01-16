@@ -62,7 +62,7 @@ enum StringLiterals {
         static let invite = "초대"
         static let incomplete = "해야 해요"
         static let complete = "완료했어요"
-        static let ourtodo = "같이 할일 "
+        static let ourtodo = "같이 할일  "
         static let pleaseAddToDo = "할일을 추가해 보세요"
     }
     
