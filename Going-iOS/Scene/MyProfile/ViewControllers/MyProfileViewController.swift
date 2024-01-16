@@ -247,9 +247,8 @@ extension MyProfileViewController {
 extension MyProfileViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
-        case .reIssueJWT:
-            reIssueJWTToken()
-        case .unAuthorizedError:
+        case .unAuthorizedError, .reIssueJWT:
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(_, let message):
