@@ -165,7 +165,8 @@ extension SettingsViewController: UICollectionViewDelegate {
             let logOutVC = LogOutPopUpViewController()
             logOutVC.logoutDismissCompletion = { [weak self] in
                 guard let self else {return}
-                self.navigationController?.popToRootViewController(animated: false)
+                self.navigationController?.pushViewController(LoginViewController(), animated: false)
+                
             }
             self.navigationController?.present(logOutVC, animated: false)
         default:
