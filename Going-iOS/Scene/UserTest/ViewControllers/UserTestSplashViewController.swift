@@ -48,6 +48,10 @@ final class UserTestSplashViewController: UIViewController {
         setLayout()
         setStyle()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
+    }
 }
 
 private extension UserTestSplashViewController {
