@@ -238,7 +238,6 @@ extension LoginViewController: ViewControllerServiceable {
         case .serverError:
             DOOToast.show(message: "서버 오류", insetFromBottom: 80)
         default:
-            print(error.description)
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }
         

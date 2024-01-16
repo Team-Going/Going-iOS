@@ -12,4 +12,4 @@
 KAKAO_NATIVE_APP_KEY = e3061837289ad2e10006ec957af4a1b3
 
 // URL
-BASE_URL = http:/$()/52.78.68.21
+BASE_URL = https:/$()/api.doorip.p-e.kr
