@@ -37,13 +37,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
         view.roundCorners(cornerRadius: 6, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
         return view
     }()
-//    
-//    private lazy var datePickerView: DatePickerView = {
-//        let picker = DatePickerView()
-//        picker.datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
-//        return picker
-//    }()
-//    
+
     private lazy var datePickerView: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
@@ -91,6 +85,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
 
     /// UITapGestureRecognizer 연결 메서드
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
+        delegate?.didSelectDate(date: datePickerView.date)
         hideBottomSheetAndGoBack()
     }
     
@@ -112,7 +107,6 @@ final class DatePickerBottomSheetViewController: UIViewController {
     
     @objc private func confirmButtonTapped(_ sender: UIButton) {
         delegate?.didSelectDate(date: datePickerView.date)
-//        delegate?.didSelectDate(date: onDate)
         hideBottomSheetAndGoBack()
     }
 }
