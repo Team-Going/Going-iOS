@@ -205,7 +205,6 @@ extension MyProfileViewController: CheckPhotoAccessProtocol {
                 switch status {
                 case .authorized, .limited:
                     UserDefaults.standard.set(true, forKey: "photoPermissionKey")
-                    print("권한설정됐다는 토스트? 띄우면 좋을듯")
                 case .denied:
                     DispatchQueue.main.async {
                         self?.showPermissionAlert()

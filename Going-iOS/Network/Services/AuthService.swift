@@ -67,8 +67,6 @@ final class AuthService: Serviceable {
         UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
         UserDefaults.standard.set(userId, forKey: UserIdDefaults.userID.rawValue)
-
-        print("회원가입성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
     
     func patchLogout() async throws {
@@ -111,8 +109,5 @@ final class AuthService: Serviceable {
         //UserDefaults에 jwt토큰 저장
         UserDefaults.standard.set(access, forKey: UserDefaultToken.accessToken.rawValue)
         UserDefaults.standard.set(refresh, forKey: UserDefaultToken.refreshToken.rawValue)
-        print("재발그그그극그그ㅡㄱㄱ그ㅡㅂ 성공~~~~~~~~~~")
     }
-    
-    
 }
