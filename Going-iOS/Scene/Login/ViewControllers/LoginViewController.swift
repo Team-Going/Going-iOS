@@ -65,8 +65,28 @@ final class LoginViewController: UIViewController {
     }()
     
     private lazy var kakaoLoginButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(ImageLiterals.Login.kakaoLoginButton, for: .normal)
+        var config = UIButton.Configuration.filled()
+        config.title = "카카오 로그인"
+        config.titleAlignment = .center
+        config.image = ImageLiterals.Login.kakaoLoginButton
+        
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 92)
+        
+        config.imagePadding = 81
+
+        config.baseBackgroundColor = .yellow100
+        config.baseForegroundColor = .black000.withAlphaComponent(0.85)
+        
+        let button = UIButton(configuration: config)
+        
+        
+//        button.setImage(ImageLiterals.Login.kakaoLoginButton, for: .normal)
+//        button.backgroundColor = .yellow100
+//        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+//        button.layer.cornerRadius = 8
+//        button.setTitle("카카오 로그인", for: .normal)
+//        button.setTitleColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.85), for: .normal)
+//
         button.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -137,13 +157,16 @@ private extension LoginViewController {
         }
         
         appleLoginButton.snp.makeConstraints {
-            $0.bottom.equalTo(kakaoLoginButton.snp.top).offset(ScreenUtils.getHeight(-12))
-            $0.trailing.leading.equalToSuperview().inset(ScreenUtils.getWidth(38))
+            $0.height.equalTo(ScreenUtils.getHeight(44))
+            $0.bottom.equalTo(kakaoLoginButton.snp.top).offset(-12)
+            $0.trailing.leading.equalToSuperview().inset(38)
         }
         
         kakaoLoginButton.snp.makeConstraints {
-            $0.bottom.equalTo(personalInformationButton.snp.top).offset(ScreenUtils.getHeight(-8))
-            $0.trailing.leading.equalToSuperview().inset(ScreenUtils.getWidth(38))
+            $0.leading.equalTo(appleLoginButton.snp.leading)
+            $0.trailing.equalTo(appleLoginButton.snp.trailing)
+            $0.height.equalTo(appleLoginButton.snp.height)
+            $0.bottom.equalTo(personalInformationButton.snp.top).offset(-8)
         }
         
         personalInformationButton.snp.makeConstraints {

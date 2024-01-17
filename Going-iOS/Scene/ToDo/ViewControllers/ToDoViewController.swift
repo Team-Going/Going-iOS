@@ -39,6 +39,7 @@ final class ToDoViewController: UIViewController {
         return view
     }()
     private let todoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.todo)
+    
     private lazy var todoTextfield: UITextField = {
         let tf = UITextField()
         tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
@@ -160,7 +161,8 @@ final class ToDoViewController: UIViewController {
             }
             if navigationBarTitle == "조회" {
                 navigationBarView.titleLabel.text = "할일 조회"
-                setDefaultValue = [data.title, data.endDate, self.manager , data.memo]
+                guard let memo = data.memo else { return }
+                setDefaultValue = [data.title, data.endDate, self.manager , memo]
                 setInquiryStyle()
             }
             memoTextView.text = data.memo
@@ -174,7 +176,7 @@ final class ToDoViewController: UIViewController {
             todoTextfieldPlaceholder = value[0] as! String
             todoTextfield.placeholder = todoTextfieldPlaceholder
             deadlineTextfieldLabel.text = value[1] as? String
-            manager = value[2] as! [Allocators]
+            manager = value[2] as? [Allocators] ?? []
             memoTextviewPlaceholder = value[3] as! String
             memoTextView.text = memoTextviewPlaceholder
         }
@@ -218,7 +220,7 @@ final class ToDoViewController: UIViewController {
             setInquiryStyle()
         }
         if navigationBarTitle == "조회" {
-            self.getDetailToDoData(todoId: self.todoId)
+          self.getDetailToDoDatas(todoId: self.todoId)
         }
         addNotification()
     }
@@ -228,7 +230,6 @@ final class ToDoViewController: UIViewController {
             
         case "수정":
             navigationBarView.titleLabel.text = "할일 수정"
-            setDefaultValue = ["수정", "수정", self.manager , "수정"]
         default:
             return
         }
@@ -682,6 +683,7 @@ extension ToDoViewController: UICollectionViewDataSource{
         
         if text.count > 1000 {
             memoTextView.layer.borderColor = UIColor.red500.cgColor
+            countMemoCharacterLabel.textColor = .red500
             warningLabel.text = "메모는 1000자를 초과할 수 없습니다."
             memoWarningLabel.isHidden = false
         } else {
@@ -943,7 +945,7 @@ extension ToDoViewController: ViewControllerServiceable {
 }
 
 extension ToDoViewController {
-    func getDetailToDoData(todoId: Int) {
+    func getDetailToDoDatas(todoId: Int) {
         Task {
             do {
                 self.data = try await ToDoService.shared.getDetailToDoData(todoId: todoId)

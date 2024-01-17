@@ -139,7 +139,7 @@ private extension TestResultView {
         }
         
         typeDescLabel.snp.makeConstraints {
-            $0.top.equalTo(userTypeLabel.snp.bottom).offset(1)
+            $0.top.equalTo(userTypeLabel.snp.bottom).offset(-1)
             $0.centerX.equalToSuperview()
         }
         
