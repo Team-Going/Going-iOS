@@ -140,7 +140,7 @@ final class MyToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.tabBarController?.tabBar.isHidden = false
         if self.segmentIndex == 0 {
             getToDoData(progress: "incomplete")
         } else {
