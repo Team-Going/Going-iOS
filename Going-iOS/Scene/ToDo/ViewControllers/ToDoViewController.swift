@@ -161,8 +161,7 @@ final class ToDoViewController: UIViewController {
             }
             if navigationBarTitle == "조회" {
                 navigationBarView.titleLabel.text = "할일 조회"
-                guard let memo = data.memo else { return }
-                setDefaultValue = [data.title, data.endDate, self.manager , memo]
+                setDefaultValue = [data.title, data.endDate, self.manager , data.memo ?? ""]
                 setInquiryStyle()
             }
             memoTextView.text = data.memo
