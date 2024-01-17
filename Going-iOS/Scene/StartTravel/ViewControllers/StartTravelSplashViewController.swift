@@ -72,7 +72,7 @@ private extension StartTravelSplashViewController {
         
         characterImage.snp.makeConstraints {
             $0.width.equalTo(ScreenUtils.getWidth(230))
-            $0.height.equalTo(ScreenUtils.getHeight(142))
+//            $0.height.equalTo(ScreenUtils.getHeight(145))
             $0.top.equalTo(navigationBar.snp.bottom).offset(ScreenUtils.getHeight(152))
             $0.centerX.equalToSuperview()
         }

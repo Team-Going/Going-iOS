@@ -118,7 +118,7 @@ private extension UserTestViewController {
         }
         
         questionLabel.snp.makeConstraints {
-            $0.top.equalTo(testIndexLabel.snp.bottom)
+            $0.top.equalTo(testIndexLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.equalTo(testIndexLabel.snp.leading)
         }
         
