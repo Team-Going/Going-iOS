@@ -20,7 +20,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let nameLabel = DOOLabel(font: .pretendard(.body2_bold),
                                      color: .gray700,
-                                     text: "이름")
+                                     text: "닉네임")
     
     private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("프로필 생성"))
     
@@ -267,7 +267,7 @@ private extension MakeProfileViewController {
             if text.count > 3 {
                 nameTextField.layer.borderColor = UIColor.red500.cgColor
                 nameTextFieldCountLabel.textColor = .red500
-                nameWarningLabel.text = "이름은 3자 이하여야 합니다"
+                nameWarningLabel.text = "닉네임은 3자 이하여야 합니다"
                 nameWarningLabel.isHidden = false
                 self.isNameTextFieldGood = false
 
@@ -282,7 +282,7 @@ private extension MakeProfileViewController {
 
                 nameTextField.layer.borderColor = UIColor.red500.cgColor
                 nameTextFieldCountLabel.textColor = .red500
-                nameWarningLabel.text = "이름에는 공백만 입력할 수 없어요."
+                nameWarningLabel.text = "닉네임에는 공백만 입력할 수 없어요."
                 nameWarningLabel.isHidden = false
             }  else {
                 nameTextField.layer.borderColor = UIColor.gray700.cgColor
