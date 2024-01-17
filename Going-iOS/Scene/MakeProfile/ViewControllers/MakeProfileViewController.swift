@@ -63,7 +63,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let descLabel: UILabel = {
         let label = UILabel()
-        label.text = "한 줄 소개"
+        label.text = "한줄 소개"
         label.font = .pretendard(.body2_bold)
         label.textColor = .gray700
         return label
@@ -282,7 +282,7 @@ private extension MakeProfileViewController {
 
                 nameTextField.layer.borderColor = UIColor.red500.cgColor
                 nameTextFieldCountLabel.textColor = .red500
-                nameWarningLabel.text = "닉네임에는 공백만 입력할 수 없어요."
+                nameWarningLabel.text = "닉네임에는 공백만 입력할 수 없어요"
                 nameWarningLabel.isHidden = false
             }  else {
                 nameTextField.layer.borderColor = UIColor.gray700.cgColor
@@ -313,7 +313,7 @@ private extension MakeProfileViewController {
         if text.count > 15 {
             descTextField.layer.borderColor = UIColor.red500.cgColor
             descTextFieldCountLabel.textColor = .red500
-            descWarningLabel.text = "소개는 15자를 초과할 수 없습니다."
+            descWarningLabel.text = "소개는 15자를 초과할 수 없어요"
             descWarningLabel.isHidden = false
             isDescTextFieldGood = false
         } else if text.count == 0 {

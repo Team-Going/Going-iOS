@@ -99,6 +99,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
             switch recognizer.direction {
             case .down:
                 hideBottomSheetAndGoBack()
+                delegate?.didSelectDate(date: datePickerView.date)
             default:
                 break
             }
@@ -144,27 +145,27 @@ private extension DatePickerBottomSheetViewController {
         }
         
         bottomSheetView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(492)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(492))
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
         dismissIndicatorView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(12))
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(5)
-            $0.width.equalTo(35)
+            $0.height.equalTo(ScreenUtils.getHeight(5))
+            $0.width.equalTo(ScreenUtils.getWidth(35))
         }
         
         datePickerView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(47)
-            $0.leading.trailing.equalToSuperview().inset(8)
-            $0.bottom.equalTo(confirmButton.snp.top).offset(-24)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(47))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(8))
+            $0.bottom.equalTo(confirmButton.snp.top).offset(ScreenUtils.getHeight(-24))
         }
         
         confirmButton.snp.makeConstraints {
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(ScreenUtils.getHeight(6))
             $0.centerX.equalToSuperview()
         }
     }

@@ -10,7 +10,7 @@ final class TripHeaderView: UIView {
         let stackView = UIStackView()
         stackView.backgroundColor = UIColor.gray50
         stackView.axis = .vertical
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         stackView.alignment = .top
         stackView.isUserInteractionEnabled = true
         stackView.spacing = 8
@@ -128,7 +128,7 @@ private extension TripHeaderView {
 
     func setLayout() {
         tripHeaderStackView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(25))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
             $0.top.equalToSuperview()
             $0.height.equalToSuperview()
         }

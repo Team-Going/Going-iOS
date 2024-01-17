@@ -104,19 +104,19 @@ private extension JoiningSuccessViewController {
         }
         
         joinSuccessLabel.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom).offset(86)
+            $0.top.equalTo(navigationBar.snp.bottom).offset(ScreenUtils.getHeight(86))
             $0.centerX.equalToSuperview()
         }
         
         letterImage.snp.makeConstraints {
-            $0.top.equalTo(joinSuccessLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().inset(39)
+            $0.top.equalTo(joinSuccessLabel.snp.bottom).offset(ScreenUtils.getHeight(20))
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(39))
             $0.width.equalTo(ScreenUtils.getWidth(320))
             $0.height.equalTo(ScreenUtils.getHeight(300))
         }
         
         dDayLabelBackgroundView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(51)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(51))
             $0.centerX.equalTo(joinSuccessLabel)
             $0.width.equalTo(ScreenUtils.getWidth(50))
             $0.height.equalTo(ScreenUtils.getHeight(22))
@@ -127,13 +127,13 @@ private extension JoiningSuccessViewController {
         }
         
         travelTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(dDayLabelBackgroundView.snp.bottom).offset(8)
+            $0.top.equalTo(dDayLabelBackgroundView.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.centerX.equalTo(dDayLabelBackgroundView)
             $0.height.equalTo(ScreenUtils.getHeight(30))
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(2)
+            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(ScreenUtils.getHeight(2))
             $0.centerX.equalTo(dDayLabelBackgroundView)
             $0.height.equalTo(ScreenUtils.getHeight(20))
         }
@@ -142,7 +142,7 @@ private extension JoiningSuccessViewController {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(ScreenUtils.getHeight(6))
         }
     }
     
