@@ -154,8 +154,8 @@ private extension LoginViewController {
         
         underLineView.snp.makeConstraints {
             $0.top.equalTo(personalInformationButton.snp.bottom)
-            $0.leading.equalTo(personalInformationButton.snp.leading)
-            $0.trailing.equalTo(personalInformationButton.snp.trailing)
+            $0.width.equalTo(ScreenUtils.getWidth(97))
+            $0.centerX.equalTo(kakaoLoginButton)
             $0.height.equalTo(1)
         }
     }
