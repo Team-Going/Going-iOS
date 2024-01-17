@@ -10,9 +10,7 @@ import UIKit
 import SnapKit
 
 final class UserTestViewController: UIViewController {
-    
-    var nickName: String = ""
-    
+        
     private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 캐릭터는?"))
     
     private var buttonIndexList: [Int] = []
@@ -298,7 +296,6 @@ extension UserTestViewController {
                 
                 try await OnBoardingService.shared.travelTypeTest(requestDTO: travelTypeRequsetBody)
                 let nextVC = UserTestResultViewController()
-                nextVC.nickName = self.nickName
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             catch {
