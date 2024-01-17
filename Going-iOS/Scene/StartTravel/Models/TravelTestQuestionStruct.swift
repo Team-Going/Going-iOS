@@ -22,10 +22,10 @@ struct TravelAnswerStruct {
 extension TravelTestQuestionStruct {
     static let travelTestDummy: [TravelTestQuestionStruct] = [
         TravelTestQuestionStruct(questionIndex: 1,
-                                 questionContent: "계획은 어느정도로 짤까요?",
+                                 questionContent: "계획은 어느 정도로 짤까요?",
                                  optionContent: TravelAnswerStruct(leftOption: "철저하게", rightOption: "즉흥으로")),
         TravelTestQuestionStruct(questionIndex: 2,
-                                 questionContent: "장소선택의 기준은 뭔가요?",
+                                 questionContent: "장소 선택의 기준은 뭔가요?",
                                  optionContent: TravelAnswerStruct(leftOption: "관광지", rightOption: "로컬장소")),
         TravelTestQuestionStruct(questionIndex: 3,
                                  questionContent: "어떤 식당을 갈까요?",

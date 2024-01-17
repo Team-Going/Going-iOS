@@ -7,7 +7,7 @@ final class InviteFriendPopUpViewController: PopUpDimmedViewController {
     private let popUpView = DOOPopUpContainerView()
     
     private let inviteTitleLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "초대하기")
-    private let inviteSubLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray300, text: "초대 코드를 보내 여행 친구를 추가해 보세요")
+    private let inviteSubLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray300, text: "초대코드를 보내 여행 친구를 추가해 보세요")
     private let codeBackgroundView = {
         let view = UIView()
         view.backgroundColor = .gray50

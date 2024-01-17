@@ -10,7 +10,7 @@ final class TripHeaderView: UIView {
         let stackView = UIStackView()
         stackView.backgroundColor = UIColor.gray50
         stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.alignment = .top
         stackView.isUserInteractionEnabled = true
         stackView.spacing = 8
