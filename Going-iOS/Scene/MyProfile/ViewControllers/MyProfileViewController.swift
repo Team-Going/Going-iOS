@@ -169,7 +169,7 @@ private extension MyProfileViewController {
         }
         
         UIImageWriteToSavedPhotosAlbum(saveImage, self, nil, nil)
-        DOOToast.show(message: "이미지가 저장되었습니다. \n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
+        DOOToast.show(message: "이미지로 저장되었어요\n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
     }
     
     func showPermissionAlert() {
@@ -185,7 +185,6 @@ private extension MyProfileViewController {
             alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
             
             self.present(alert, animated: true)
-            
         }
     }
     

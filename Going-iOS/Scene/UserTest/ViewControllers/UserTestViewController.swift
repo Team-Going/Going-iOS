@@ -11,7 +11,7 @@ import SnapKit
 
 final class UserTestViewController: UIViewController {
     
-    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 성향은?"))
+    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 캐릭터는?"))
     
     private var buttonIndexList: [Int] = []
     

@@ -43,7 +43,6 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
         
         setHierarchy()
         setLayout()
-        
     }
 }
 
@@ -60,11 +59,11 @@ private extension DeleteUserPopUpViewController {
             $0.center.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(270))
             $0.height.equalTo(ScreenUtils.getHeight(140))
-            
         }
         
         deleteUserLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(28)
+            $0.height.equalTo(ScreenUtils.getHeight(22))
             $0.centerX.equalToSuperview()
         }
         
