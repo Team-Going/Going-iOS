@@ -62,6 +62,9 @@ extension UIColor {
     static var white000: UIColor {
         return UIColor(hex: "FFFFFF")
     }
+    static var yellow100: UIColor {
+        return UIColor(hex: "#FEE500")
+    }
 }
 
 extension UIColor {
