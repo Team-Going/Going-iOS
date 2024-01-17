@@ -169,13 +169,13 @@ private extension OurToDoViewController {
         navigationBarview.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(44))
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(60))
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(105))
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(90))
         }
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(ourToDoCollectionView.contentSize.height).priority(.low)
@@ -184,7 +184,7 @@ private extension OurToDoViewController {
         tripHeaderView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(95))
+            $0.height.equalTo(ScreenUtils.getHeight(103))
         }
         tripMiddleView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom).offset(ScreenUtils.getHeight(20))
@@ -192,7 +192,7 @@ private extension OurToDoViewController {
             $0.height.equalTo(ScreenUtils.getHeight(235))
         }
         ourToDoMainImageView.snp.makeConstraints {
-            $0.top.equalTo(tripHeaderView)
+            $0.top.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(112))
             $0.height.equalTo(ScreenUtils.getHeight(135))

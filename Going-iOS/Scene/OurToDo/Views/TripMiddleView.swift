@@ -154,7 +154,7 @@ private extension TripMiddleView {
     
     func setLayout() {
         ticketBoxImgView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(25))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
             $0.top.bottom.equalToSuperview()
         }
         tripProgressLabel.snp.makeConstraints{
