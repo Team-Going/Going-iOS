@@ -419,7 +419,7 @@ private extension ToDoViewController {
         todoLabel.snp.makeConstraints{
             $0.top.equalTo(contentView).inset(ScreenUtils.getHeight(40))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(19))
+            $0.height.equalTo(ScreenUtils.getHeight(23))
         }
         todoTextfield.snp.makeConstraints{
             $0.top.equalTo(todoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
@@ -440,9 +440,9 @@ private extension ToDoViewController {
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(22))
         }
         deadlineLabel.snp.makeConstraints{
-            $0.top.equalTo(todoTextfield.snp.bottom).offset(ScreenUtils.getHeight(28))
+            $0.top.equalTo(countToDoCharacterLabel.snp.bottom).offset(ScreenUtils.getHeight(16))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(19))
+            $0.height.equalTo(ScreenUtils.getHeight(23))
         }
         deadlineTextfieldLabel.snp.makeConstraints{
             $0.top.equalTo(deadlineLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
@@ -455,24 +455,24 @@ private extension ToDoViewController {
             $0.size.equalTo(ScreenUtils.getHeight(22))
         }
         managerLabel.snp.makeConstraints{
-            $0.top.equalTo(deadlineTextfieldLabel.snp.bottom).offset(ScreenUtils.getHeight(28))
+            $0.top.equalTo(deadlineTextfieldLabel.snp.bottom).offset(ScreenUtils.getHeight(38))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(19))
+            $0.height.equalTo(ScreenUtils.getHeight(23))
         }
         todoManagerCollectionView.snp.makeConstraints{
             $0.top.equalTo(managerLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(20))
+            $0.height.equalTo(ScreenUtils.getHeight(24))
         }
         memoLabel.snp.makeConstraints{
-            $0.top.equalTo(todoManagerCollectionView.snp.bottom).offset(ScreenUtils.getHeight(28))
+            $0.top.equalTo(todoManagerCollectionView.snp.bottom).offset(ScreenUtils.getHeight(38))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(19))
+            $0.height.equalTo(ScreenUtils.getHeight(24))
         }
         memoTextView.snp.makeConstraints{
             $0.top.equalTo(memoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
-            $0.height.equalTo(ScreenUtils.getHeight(143))
+            $0.height.equalTo(ScreenUtils.getHeight(140))
         }
         countMemoCharacterLabel.snp.makeConstraints{
             $0.top.equalTo(memoTextView.snp.bottom).offset(4)
@@ -481,7 +481,7 @@ private extension ToDoViewController {
         buttonView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(18))
             $0.height.equalTo(ScreenUtils.getHeight(50))
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalToSuperview().inset(40)
         }
     }
     
@@ -556,10 +556,10 @@ private extension ToDoViewController {
         deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
         deadlineTextfieldLabel.textColor = .gray700
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
-        memoTextView.layer.borderColor = memoTextView.text == "메모를 입력해 주세요" ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
-        memoTextView.textColor = memoTextView.text == "메모를 입력해 주세요" ? UIColor.gray200 : UIColor.gray700
+        memoTextView.layer.borderColor = memoTextView.text == "" ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
+        memoTextView.textColor = memoTextView.text == "" ? UIColor.gray200 : UIColor.gray700
         countMemoCharacterLabel.text = "\(memotext)/1000"
-        countMemoCharacterLabel.textColor = .gray700
+        countMemoCharacterLabel.textColor = memoTextView.text == "" ? UIColor.gray200 : .gray700
     }
     
     /// 텍스트 필드에 들어갈 텍스트를 DateFormatter로  변환하는 메서드
@@ -918,9 +918,9 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
             let stringLength = data?.secret == true
             ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
             : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
-            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(20))
+            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(24))
         }else {
-            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(24))
         }
     }
 }
@@ -929,15 +929,15 @@ extension ToDoViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .serverError:
-            DOOToast.show(message: "서버오류", insetFromBottom: 80)
+            DOOToast.show(message: "서버오류", insetFromBottom: ScreenUtils.getHeight(80))
         case .unAuthorizedError, .reIssueJWT:
-            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: ScreenUtils.getHeight(80))
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(let code, let message):
-            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: 80)
+            DOOToast.show(message: "\(code) : \(message)", insetFromBottom: ScreenUtils.getHeight(80))
         default:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
+            DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         }
     }
 }

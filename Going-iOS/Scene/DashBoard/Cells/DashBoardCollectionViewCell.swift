@@ -98,24 +98,24 @@ private extension DashBoardCollectionViewCell {
     
     func setLayout() {
         travelTitleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(37)
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(16))
         }
         
         calendarImageView.snp.makeConstraints {
             $0.size.equalTo(ScreenUtils.getWidth(12))
-            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(7)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(16))
             $0.leading.equalTo(travelTitleLabel)
         }
         
         travelDateLabel.snp.makeConstraints {
             $0.centerY.equalTo(calendarImageView)
-            $0.leading.equalTo(calendarImageView.snp.trailing).offset(4)
+            $0.leading.equalTo(calendarImageView.snp.trailing).offset(ScreenUtils.getWidth(4))
         }
         
         travelStateBackgroundView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(16)
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.width.equalTo(ScreenUtils.getWidth(58))
             $0.height.equalTo(ScreenUtils.getHeight(20))
         }

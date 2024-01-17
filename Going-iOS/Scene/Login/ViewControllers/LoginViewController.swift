@@ -127,35 +127,35 @@ private extension LoginViewController {
     func setLayout() {
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(282)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(ScreenUtils.getHeight(282))
             $0.centerX.equalToSuperview()
         }
         
         logoImageView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(17)
-            $0.leading.trailing.equalToSuperview().inset(91)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(ScreenUtils.getHeight(17))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(91))
         }
         
         appleLoginButton.snp.makeConstraints {
-            $0.bottom.equalTo(kakaoLoginButton.snp.top).offset(-12)
-            $0.trailing.leading.equalToSuperview().inset(38)
+            $0.bottom.equalTo(kakaoLoginButton.snp.top).offset(ScreenUtils.getHeight(-12))
+            $0.trailing.leading.equalToSuperview().inset(ScreenUtils.getWidth(38))
         }
         
         kakaoLoginButton.snp.makeConstraints {
-            $0.bottom.equalTo(personalInformationButton.snp.top).offset(-8)
-            $0.trailing.leading.equalToSuperview().inset(38)
+            $0.bottom.equalTo(personalInformationButton.snp.top).offset(ScreenUtils.getHeight(-8))
+            $0.trailing.leading.equalToSuperview().inset(ScreenUtils.getWidth(38))
         }
         
         personalInformationButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(ScreenUtils.getHeight(6))
             $0.width.equalTo(ScreenUtils.getWidth(99))
             $0.centerX.equalTo(kakaoLoginButton)
         }
         
         underLineView.snp.makeConstraints {
             $0.top.equalTo(personalInformationButton.snp.bottom)
-            $0.leading.equalTo(personalInformationButton.snp.leading)
-            $0.trailing.equalTo(personalInformationButton.snp.trailing)
+            $0.width.equalTo(ScreenUtils.getWidth(97))
+            $0.centerX.equalTo(kakaoLoginButton)
             $0.height.equalTo(1)
         }
     }
@@ -236,9 +236,9 @@ extension LoginViewController: ViewControllerServiceable {
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         case .serverError:
-            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
+            DOOToast.show(message: "서버 오류", insetFromBottom: ScreenUtils.getHeight(80))
         default:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
+            DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         }
         
         
@@ -260,7 +260,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let userIdentifier = credential.identityToken else {
                 //애플로그인 실패
-                DOOToast.show(message: "애플로그인에 실패하셨습니다.", insetFromBottom: 80)
+                DOOToast.show(message: "애플로그인에 실패하셨습니다.", insetFromBottom: ScreenUtils.getHeight(80))
                 return
             }
             

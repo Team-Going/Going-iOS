@@ -165,12 +165,12 @@ private extension MyToDoViewController {
         navigationBarview.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(44))
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(60))
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(105))
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(90))
         }
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(myToDoCollectionView.contentSize.height)
@@ -178,8 +178,8 @@ private extension MyToDoViewController {
         }
         tripHeaderView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(ScreenUtils.getHeight(8))
-            $0.height.equalTo(ScreenUtils.getHeight(95))
+            $0.top.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(102))
         }
         myToDoMainImageView.snp.makeConstraints {
             $0.top.equalTo(tripHeaderView)
@@ -250,8 +250,8 @@ private extension MyToDoViewController {
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(331) , height: ScreenUtils.getHeight(81))
-        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(18), left: 1.0, bottom: 1.0, right: 1.0)
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(327) , height: ScreenUtils.getHeight(81))
+        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(12), left: 1.0, bottom: 1.0, right: 1.0)
         return flowLayout
     }
     
