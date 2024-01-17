@@ -82,10 +82,11 @@ final class UserTestResultViewController: UIViewController {
         setHierarchy()
         setLayout()
         setDelegate()
+        getProfileInfo()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getProfileInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
