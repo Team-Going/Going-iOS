@@ -27,11 +27,11 @@ enum NetworkError: Error, CustomStringConvertible {
         case .fetchImageError:
             return "🌄Image URL로부터 불러오기 실패"
         case .clientError(let message):
-            return "📱클라이언트 에러, message:\(message)"
+            return message
         case .serverError:
             return "🖥️서버 에러"
         case .userState(let code, let message):
-            return "code: \(code), userState: \(message)"
+            return message
         case .unAuthorizedError:
             return "🚪 접근 권한이 없습니다 (토큰 만료)"
         case .reIssueJWT:

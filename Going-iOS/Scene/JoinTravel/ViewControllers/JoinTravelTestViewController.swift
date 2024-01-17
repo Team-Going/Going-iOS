@@ -22,15 +22,15 @@ final class JoinTravelTestViewController: UIViewController {
             let vc = DOOTabbarViewController()
             if let ourtodoVC = vc.ourTODoVC.viewControllers[0] as? OurToDoViewController,
                let myToDoVC = vc.myToDoVC.viewControllers[0] as? MyToDoViewController {
-                ourtodoVC.tripId = self.tripId 
-                myToDoVC.tripId = self.tripId 
+                ourtodoVC.tripId = self.tripId
+                myToDoVC.tripId = self.tripId
             }
             navigationController?.pushViewController(vc, animated: true)
         }
     }
     
     private var joinTravelTestRequestData = JoinTravelTestRequestStruct(styleA: 0, sytleB: 0, styleC: 0, styleD: 0, sylteE: 0)
-
+    
     /// 선택된 답변을 저장할 배열
     private lazy var selectedAnswers: [Int?] = Array(repeating: nil, count: travelTestQuestionDummy.count)
     
@@ -57,7 +57,7 @@ final class JoinTravelTestViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setStyle()
         setHierarchy()
         setLayout()
@@ -217,12 +217,16 @@ extension JoinTravelTestViewController: ViewControllerServiceable {
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(let code, let message):
             if code == "e4092" {
-                DOOToast.show(message: "자신이 만든 초대코드를 통해 입장할 수 없습니다. \n유효한 초대코드를 사용해주세요.", duration: 2, insetFromBottom: ScreenUtils.getHeight(100), completion: {
+                DOOToast.show(message: message, duration: 2, insetFromBottom: ScreenUtils.getHeight(100), completion: {
                     self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
                     self.view.window?.makeKeyAndVisible()
-                })
-//
-            } else{
+                } )
+            } else if code == "e4006" {
+                DOOToast.show(message: message, duration: 2, insetFromBottom: ScreenUtils.getHeight(100), completion: {
+                    self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
+                    self.view.window?.makeKeyAndVisible()
+                } )
+            } else {
                 DOOToast.show(message: message, insetFromBottom: 80)
             }
         default:
