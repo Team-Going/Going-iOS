@@ -173,23 +173,8 @@ private extension UserTestViewController {
         } else {
             nextButton.setTitleColor(.gray200, for: .normal)
         }
-//        nextButton.backgroundColor = .gray50
-//        nextButton.setTitleColor(.gray200, for: .normal)
-//        nextButton.isEnabled = true
+
         }
-    
-    func resetButtons() {
-        // 다른 버튼들의 색상을 클릭하지 않은 상태로 초기화
-//        for case let button as UIButton in questionStackView.arrangedSubviews {
-//            button.backgroundColor = .gray50
-//            button.setTitleColor(UIColor.gray500, for: .normal)
-//            button.layer.borderWidth = 0
-//        }
-        
-        // 선택된 버튼 초기화
-//        selectedButton = nil
-        
-    }
     
     func setAnimation() {
         
@@ -288,14 +273,11 @@ private extension UserTestViewController {
 
 //            setAnimation()
             buttonIndexList.append(self.buttonIndex)
-            //            handleLastQuestion()
             travelTypeRequsetBody.result = buttonIndexList
             
             index += 1
             patchTravelTypeTestResult()
-//            let nextVC = UserTestResultViewController()
-//            nextVC.testResultDummy = toUserTypeResult()
-//            self.navigationController?.pushViewController(nextVC, animated: true)
+
         }
         firstButton.isEnabled = true
         secondButton.isEnabled = true
