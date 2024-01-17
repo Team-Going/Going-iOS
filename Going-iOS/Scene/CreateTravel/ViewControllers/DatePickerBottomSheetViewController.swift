@@ -99,6 +99,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
             switch recognizer.direction {
             case .down:
                 hideBottomSheetAndGoBack()
+                delegate?.didSelectDate(date: datePickerView.date)
             default:
                 break
             }
