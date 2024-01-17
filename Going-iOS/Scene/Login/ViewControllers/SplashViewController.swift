@@ -47,7 +47,7 @@ private extension SplashViewController {
         
         splashLogoImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.leading.equalToSuperview().inset(90)
+            $0.trailing.leading.equalToSuperview().inset(ScreenUtils.getWidth(90))
             $0.height.equalTo(ScreenUtils.getHeight(66))
         }
     }
@@ -58,15 +58,15 @@ extension SplashViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .clientError(let message):
-            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+            DOOToast.show(message: "\(message)", insetFromBottom: ScreenUtils.getHeight(80))
         case .serverError:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
+            DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         case .unAuthorizedError:
             //로그인으로 보내기
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .reIssueJWT:
-            DOOToast.show(message: "토큰이 만료되어서 다시 로그인해 주세요", insetFromBottom: 80)
+            DOOToast.show(message: "토큰이 만료되어서 다시 로그인해 주세요", insetFromBottom: ScreenUtils.getHeight(80))
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(let code, _):
@@ -79,7 +79,7 @@ extension SplashViewController: ViewControllerServiceable {
             }
             
         default:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
+            DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         }
     }
 }
