@@ -70,9 +70,9 @@ final class LoginViewController: UIViewController {
         config.titleAlignment = .center
         config.image = ImageLiterals.Login.kakaoLoginButton
         
-        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 92)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: ScreenUtils.getWidth(92))
         
-        config.imagePadding = 81
+        config.imagePadding = ScreenUtils.getWidth(70)
 
         config.baseBackgroundColor = .yellow100
         config.baseForegroundColor = .black000.withAlphaComponent(0.85)

@@ -65,6 +65,7 @@
 		CA3EEE552B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */; };
 		CA3EEE572B50B0B600C23A41 /* DetailToDoAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */; };
 		CA3EEE5B2B51711700C23A41 /* GetToDoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE5A2B51711700C23A41 /* GetToDoRequestDTO.swift */; };
+		CA51E0762B584EA100A85A35 /* dooripsplash2.json in Resources */ = {isa = PBXBuildFile; fileRef = CA51E0752B584EA100A85A35 /* dooripsplash2.json */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
 		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
@@ -245,6 +246,7 @@
 		CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDetailToDoResponseDTO.swift; sourceTree = "<group>"; };
 		CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailToDoAppData.swift; sourceTree = "<group>"; };
 		CA3EEE5A2B51711700C23A41 /* GetToDoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetToDoRequestDTO.swift; sourceTree = "<group>"; };
+		CA51E0752B584EA100A85A35 /* dooripsplash2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dooripsplash2.json; sourceTree = "<group>"; };
 		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -704,6 +706,14 @@
 				945D1ADC2B5479EE00C728E2 /* CreateToDoRequestStruct.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		CA51E0722B584D4600A85A35 /* SplashLottie */ = {
+			isa = PBXGroup;
+			children = (
+				CA51E0752B584EA100A85A35 /* dooripsplash2.json */,
+			);
+			path = SplashLottie;
 			sourceTree = "<group>";
 		};
 		CA8CD6792B46B61000CFDFBF /* OurToDo */ = {
@@ -1210,6 +1220,7 @@
 		F4F5219B2B346843000E6E1E /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				CA51E0722B584D4600A85A35 /* SplashLottie */,
 				F4F5219F2B346875000E6E1E /* Cells */,
 				F4F5219E2B346870000E6E1E /* Models */,
 				F4F5219D2B346867000E6E1E /* Views */,
@@ -1401,6 +1412,7 @@
 				CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */,
 				CA8CD6762B46B48F00CFDFBF /* Pretendard-Regular.otf in Resources */,
 				CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */,
+				CA51E0762B584EA100A85A35 /* dooripsplash2.json in Resources */,
 				CA8CD6782B46B49800CFDFBF /* Pretendard-SemiBold.otf in Resources */,
 				F4F5217E2B3440DA000E6E1E /* Assets.xcassets in Resources */,
 			);

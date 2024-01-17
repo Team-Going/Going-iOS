@@ -54,16 +54,24 @@ final class MyProfileViewController: UIViewController {
         return img
     }()
     
-    private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: .red500, text: "두릅티비")
-    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500, text: "나는 두릅이 좋다.")
+    private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: .red500)
+    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500)
     
     private let dividingBarView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray50
         return view
     }()
-    
-    private let myResultView = TestResultView()
+        
+    private let myResultView: TestResultView = {
+        let view = TestResultView()
+        view.nameLabel.isHidden = true
+        view.userTypeLabel.font = .pretendard(.body1_bold)
+        view.userTypeLabel.textColor = .gray700
+        view.typeDescLabel.font = .pretendard(.detail3_regular)
+        view.typeDescLabel.textColor = .gray300
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
