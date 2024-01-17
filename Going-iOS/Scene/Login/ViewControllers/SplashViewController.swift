@@ -8,14 +8,15 @@
 import UIKit
 
 import SnapKit
+import Lottie
 
 final class SplashViewController: UIViewController {
     
-    private let splashLogoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.Splash.splashLogo
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+    private let lottieView: LottieAnimationView = {
+       let lottieView = LottieAnimationView(name: "dooripsplash2")
+        lottieView.contentMode = .scaleAspectFill
+        lottieView.loopMode = .playOnce
+        return lottieView
     }()
     
     override func viewDidLoad() {
@@ -24,12 +25,14 @@ final class SplashViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
-        
     }
-
     
     override func viewDidAppear(_ animated: Bool) {
-        checkUserStatus()
+        lottieView.play(completion: {completed in
+            if completed {
+                self.checkUserStatus()
+            }
+        })
     }
 }
 
@@ -39,16 +42,14 @@ private extension SplashViewController {
     }
     
     func setHierarchy() {
-        view.addSubview(splashLogoImageView)
+        view.addSubview(lottieView)
         
     }
     
     func setLayout() {
         
-        splashLogoImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.leading.equalToSuperview().inset(ScreenUtils.getWidth(90))
-            $0.height.equalTo(ScreenUtils.getHeight(66))
+        lottieView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     
