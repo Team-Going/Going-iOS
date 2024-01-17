@@ -26,10 +26,10 @@ final class DOOTabbarViewController: UITabBarController {
             }
                 
         ourTODoVC.tabBarItem = UITabBarItem(title: nil, image: ImageLiterals.TabBar.tabbarOurToDoUnselected.withRenderingMode(.alwaysTemplate), selectedImage: ImageLiterals.TabBar.tabbarOurToDoSelected.withRenderingMode(.alwaysTemplate))
-        ourTODoVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -22, right: -15)
+        ourTODoVC.tabBarItem.imageInsets = UIEdgeInsets(top: ScreenUtils.getHeight(12), left: 0, bottom: ScreenUtils.getHeight(-12), right: ScreenUtils.getWidth(-15))
         
         myToDoVC.tabBarItem = UITabBarItem(title: nil, image: ImageLiterals.TabBar.tabbarMyToDoUnselected.withRenderingMode(.alwaysTemplate), selectedImage: ImageLiterals.TabBar.tabbarMyToDoSelected.withRenderingMode(.alwaysTemplate))
-        myToDoVC.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: -15, bottom: -22, right: 0)
+        myToDoVC.tabBarItem.imageInsets = UIEdgeInsets(top: ScreenUtils.getHeight(12), left: ScreenUtils.getWidth(-15), bottom: ScreenUtils.getHeight(-12), right: 0)
 
 
         self.viewControllers = [ourTODoVC, myToDoVC]
@@ -52,7 +52,7 @@ final class DOOTabbarViewController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tabBar.frame.size.height = ScreenUtils.getHeight(110)
-        tabBar.frame.origin.y = view.frame.height - 110
+        tabBar.frame.size.height = ScreenUtils.getHeight(90)
+        tabBar.frame.origin.y = view.frame.height - ScreenUtils.getHeight(90)
     }
 }
