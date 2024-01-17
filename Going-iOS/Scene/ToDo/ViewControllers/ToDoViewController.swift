@@ -39,6 +39,7 @@ final class ToDoViewController: UIViewController {
         return view
     }()
     private let todoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.todo)
+    
     private lazy var todoTextfield: UITextField = {
         let tf = UITextField()
         tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
@@ -682,6 +683,7 @@ extension ToDoViewController: UICollectionViewDataSource{
         
         if text.count > 1000 {
             memoTextView.layer.borderColor = UIColor.red500.cgColor
+            countMemoCharacterLabel.textColor = .red500
             warningLabel.text = "메모는 1000자를 초과할 수 없습니다."
             memoWarningLabel.isHidden = false
         } else {
