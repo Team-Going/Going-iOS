@@ -11,6 +11,7 @@ import SnapKit
 
 final class UserTestSplashViewController: UIViewController {
 
+    var nickName: String = ""
     
     private let userTestSplashImageView: UIImageView = {
         let imageView = UIImageView()
@@ -90,6 +91,7 @@ private extension UserTestSplashViewController {
     
     @objc func nextButtonTapped() {
         let nextVC = UserTestViewController()
+        nextVC.nickName = self.nickName
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

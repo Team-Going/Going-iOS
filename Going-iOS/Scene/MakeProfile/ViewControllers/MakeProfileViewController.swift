@@ -13,6 +13,8 @@ final class MakeProfileViewController: UIViewController {
     
     var socialToken: String?
     
+    private var userName: String?
+    
     private var isNameTextFieldGood: Bool = false
     private var isDescTextFieldGood: Bool = false
     
@@ -222,7 +224,6 @@ private extension MakeProfileViewController {
         descTextField.delegate = self
     }
     
-    
     func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -251,8 +252,6 @@ private extension MakeProfileViewController {
             self.nextButton.transform = .identity
         }
     }
-    
-    
     
     func removeKeyboardNotifications(){
         // 키보드가 나타날 때 앱에게 알리는 메서드 제거
@@ -357,6 +356,7 @@ private extension MakeProfileViewController {
             self.userProfileData.name = nameText
         }
         
+                
         if let descText = descTextField.text {
             self.userProfileData.intro = descText
         }
@@ -370,12 +370,14 @@ private extension MakeProfileViewController {
         //회원가입API
         guard let token = self.socialToken else { return }
         let signUpBody = self.userProfileData.toDTOData()
+        self.userName = nameTextField.text
+        
         
         Task {
             do {
                 let data = try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
-                
                 let nextVC = UserTestSplashViewController()
+                nextVC.nickName = userName ?? ""
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             catch {

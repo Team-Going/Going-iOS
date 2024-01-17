@@ -11,7 +11,9 @@ import SnapKit
 import Photos
 
 final class UserTestResultViewController: UIViewController {
-    
+        
+    var nickName: String = ""
+
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
@@ -47,7 +49,11 @@ final class UserTestResultViewController: UIViewController {
         return imageView
     }()
     
-    private let resultView = TestResultView()
+    private lazy var resultView: TestResultView = {
+        let view = TestResultView()
+        view.nameLabel.text = self.nickName + "님의 여행 캐릭터는"
+        return view
+    }()
     
     private let gradientView =  UIView()
     
