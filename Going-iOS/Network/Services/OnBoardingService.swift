@@ -24,10 +24,10 @@ final class OnBoardingService: Serviceable {
     
     
     func travelTypeTest(requestDTO: TravelTypeTestRequestDTO) async throws {
-        
+        print(requestDTO)
         let param = requestDTO.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
-        
+
         let urlRequest = try NetworkRequest(path: "/api/users/test",
                                             httpMethod: .patch,
                                             body: body).makeURLRequest(networkType: .withJWT)

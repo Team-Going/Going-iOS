@@ -13,6 +13,8 @@ final class MakeProfileViewController: UIViewController {
     
     var socialToken: String?
     
+    private var userName: String?
+    
     private var isNameTextFieldGood: Bool = false
     private var isDescTextFieldGood: Bool = false
     
@@ -63,7 +65,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let descLabel: UILabel = {
         let label = UILabel()
-        label.text = "한 줄 소개"
+        label.text = "한줄 소개"
         label.font = .pretendard(.body2_bold)
         label.textColor = .gray700
         return label
@@ -222,7 +224,6 @@ private extension MakeProfileViewController {
         descTextField.delegate = self
     }
     
-    
     func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -252,8 +253,6 @@ private extension MakeProfileViewController {
         }
     }
     
-    
-    
     func removeKeyboardNotifications(){
         // 키보드가 나타날 때 앱에게 알리는 메서드 제거
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
@@ -282,7 +281,7 @@ private extension MakeProfileViewController {
 
                 nameTextField.layer.borderColor = UIColor.red500.cgColor
                 nameTextFieldCountLabel.textColor = .red500
-                nameWarningLabel.text = "닉네임에는 공백만 입력할 수 없어요."
+                nameWarningLabel.text = "닉네임에는 공백만 입력할 수 없어요"
                 nameWarningLabel.isHidden = false
             }  else {
                 nameTextField.layer.borderColor = UIColor.gray700.cgColor
@@ -313,7 +312,7 @@ private extension MakeProfileViewController {
         if text.count > 15 {
             descTextField.layer.borderColor = UIColor.red500.cgColor
             descTextFieldCountLabel.textColor = .red500
-            descWarningLabel.text = "소개는 15자를 초과할 수 없습니다."
+            descWarningLabel.text = "소개는 15자를 초과할 수 없어요"
             descWarningLabel.isHidden = false
             isDescTextFieldGood = false
         } else if text.count == 0 {
@@ -334,9 +333,7 @@ private extension MakeProfileViewController {
     
     func updateNextButtonState() {
         // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
-        let isNameTextFieldEmpty = nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
-        let isDescTextFieldEmpty = descTextField.text!.isEmpty
-        
+ 
         if isNameTextFieldGood == true && isDescTextFieldGood == true/* && !isNameTextFieldEmpty &&  !isDescTextFieldEmpty && nameTextField.text!.count < 3*/ {
             nextButton.isEnabled = true
             nextButton.backgroundColor = .gray500
@@ -357,6 +354,7 @@ private extension MakeProfileViewController {
             self.userProfileData.name = nameText
         }
         
+                
         if let descText = descTextField.text {
             self.userProfileData.intro = descText
         }
@@ -370,12 +368,14 @@ private extension MakeProfileViewController {
         //회원가입API
         guard let token = self.socialToken else { return }
         let signUpBody = self.userProfileData.toDTOData()
+        self.userName = nameTextField.text
+        
         
         Task {
             do {
-                let data = try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
-                
+                try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
                 let nextVC = UserTestSplashViewController()
+                nextVC.nickName = userName ?? ""
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             catch {

@@ -16,7 +16,7 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
     private let popUpView = DOOPopUpContainerView()
     
     private let deleteUserLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "정말 탈퇴하시겠어요?")
-    private let deleteUserDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray300, text: "탈퇴시, 정보가 모두 없어져요")
+    private let deleteUserDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray300, text: "탈퇴 시, 정보가 모두 없어져요")
     
     private lazy var deleteUserButton: UIButton = {
         let button = UIButton()
@@ -43,7 +43,6 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
         
         setHierarchy()
         setLayout()
-        
     }
 }
 
@@ -60,11 +59,11 @@ private extension DeleteUserPopUpViewController {
             $0.center.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(270))
             $0.height.equalTo(ScreenUtils.getHeight(140))
-            
         }
         
         deleteUserLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(28)
+            $0.height.equalTo(ScreenUtils.getHeight(22))
             $0.centerX.equalToSuperview()
         }
         

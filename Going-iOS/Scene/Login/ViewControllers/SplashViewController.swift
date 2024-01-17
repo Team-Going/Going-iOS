@@ -8,14 +8,15 @@
 import UIKit
 
 import SnapKit
+import Lottie
 
 final class SplashViewController: UIViewController {
     
-    private let splashLogoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.Splash.splashLogo
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+    private let lottieView: LottieAnimationView = {
+       let lottieView = LottieAnimationView(name: "dooripsplash2")
+        lottieView.contentMode = .scaleAspectFill
+        lottieView.loopMode = .playOnce
+        return lottieView
     }()
     
     override func viewDidLoad() {
@@ -24,12 +25,14 @@ final class SplashViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
-        
     }
-
     
     override func viewDidAppear(_ animated: Bool) {
-        checkUserStatus()
+        lottieView.play(completion: {completed in
+            if completed {
+                self.checkUserStatus()
+            }
+        })
     }
 }
 
@@ -39,16 +42,14 @@ private extension SplashViewController {
     }
     
     func setHierarchy() {
-        view.addSubview(splashLogoImageView)
+        view.addSubview(lottieView)
         
     }
     
     func setLayout() {
         
-        splashLogoImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.leading.equalToSuperview().inset(90)
-            $0.height.equalTo(ScreenUtils.getHeight(66))
+        lottieView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -58,15 +59,15 @@ extension SplashViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .clientError(let message):
-            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+            DOOToast.show(message: "\(message)", insetFromBottom: ScreenUtils.getHeight(80))
         case .serverError:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
+            DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         case .unAuthorizedError:
             //로그인으로 보내기
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .reIssueJWT:
-            DOOToast.show(message: "토큰이 만료되어서 다시 로그인해 주세요", insetFromBottom: 80)
+            DOOToast.show(message: "토큰이 만료되어서 다시 로그인해 주세요", insetFromBottom: ScreenUtils.getHeight(80))
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(let code, _):
@@ -79,7 +80,7 @@ extension SplashViewController: ViewControllerServiceable {
             }
             
         default:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
+            DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         }
     }
 }

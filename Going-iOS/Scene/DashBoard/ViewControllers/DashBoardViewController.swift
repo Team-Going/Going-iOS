@@ -130,15 +130,15 @@ private extension DashBoardViewController {
             $0.bottom.equalTo(createTravelButton.snp.top)
         }
         noDataLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(107)
-            $0.leading.equalToSuperview().inset(109)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(107))
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(109))
         }
         
         characterImage.snp.makeConstraints {
             $0.trailing.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(236))
             $0.height.equalTo(ScreenUtils.getHeight(364))
-            $0.top.equalTo(noDataLabel.snp.top).offset(40)
+            $0.top.equalTo(noDataLabel.snp.bottom).offset(ScreenUtils.getHeight(40))
         }
         
         dashBoardCollectionView.snp.makeConstraints {
@@ -149,13 +149,13 @@ private extension DashBoardViewController {
 
         
         navigationTitle.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(24)
-            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(ScreenUtils.getHeight(24))
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(24))
         }
         
         settingsButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
-            $0.trailing.equalToSuperview().inset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(ScreenUtils.getHeight(16))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(10))
         }
         
         dashBoardHeaderView.snp.makeConstraints {
@@ -301,7 +301,7 @@ extension DashBoardViewController: UICollectionViewDelegateFlowLayout {
     
     /// content margin
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24)
+        return UIEdgeInsets(top: ScreenUtils.getHeight(20), left: ScreenUtils.getWidth(24), bottom: ScreenUtils.getHeight(20), right: ScreenUtils.getWidth(24))
     }
 }
 
@@ -311,15 +311,15 @@ extension DashBoardViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .clientError(let message):
-            DOOToast.show(message: "\(message)", insetFromBottom: 80)
+            DOOToast.show(message: "\(message)", insetFromBottom: ScreenUtils.getHeight(80))
         case .serverError:
-            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
+            DOOToast.show(message: "서버 오류", insetFromBottom: ScreenUtils.getHeight(80))
         case .unAuthorizedError, .reIssueJWT:
-            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: ScreenUtils.getHeight(80))
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
-            DOOToast.show(message: error.description, insetFromBottom: 80)
+            DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         }
     }
 }

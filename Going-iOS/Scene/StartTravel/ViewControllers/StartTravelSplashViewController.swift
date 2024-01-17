@@ -27,13 +27,13 @@ final class StartTravelSplashViewController: UIViewController {
                                                  alignment: .center)
     
     private lazy var createTravelButton: DOOButton = {
-        let btn = DOOButton(type: .white, title: "새로운 여행 시작하기")
+        let btn = DOOButton(type: .white, title: "새로운 여행 만들기")
         btn.addTarget(self, action: #selector(createTravelButtonTapped), for: .touchUpInside)
         return btn
     }()
     
     private lazy var joinTravelButton: DOOButton = {
-        let btn = DOOButton(type: .enabled, title: "여행 입장하기")
+        let btn = DOOButton(type: .enabled, title: "초대받은 여행 입장하기")
         btn.addTarget(self, action: #selector(joinTravelButtonTapped), for: .touchUpInside)
         return btn
     }()
@@ -72,13 +72,13 @@ private extension StartTravelSplashViewController {
         
         characterImage.snp.makeConstraints {
             $0.width.equalTo(ScreenUtils.getWidth(230))
-            $0.height.equalTo(ScreenUtils.getHeight(140))
-            $0.top.equalTo(navigationBar.snp.bottom).offset(152)
+//            $0.height.equalTo(ScreenUtils.getHeight(145))
+            $0.top.equalTo(navigationBar.snp.bottom).offset(ScreenUtils.getHeight(152))
             $0.centerX.equalToSuperview()
         }
         
         startTravelTitleLabel.snp.makeConstraints {
-            $0.bottom.equalTo(createTravelButton.snp.top).offset(-194)
+            $0.top.equalTo(characterImage.snp.bottom).offset(ScreenUtils.getHeight(18))
             $0.centerX.equalToSuperview()
         }
         
@@ -86,14 +86,14 @@ private extension StartTravelSplashViewController {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.bottom.equalTo(joinTravelButton.snp.top).offset(-12)
+            $0.bottom.equalTo(joinTravelButton.snp.top).offset(ScreenUtils.getHeight(-12))
         }
         
         joinTravelButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-6)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(ScreenUtils.getHeight(-6))
         }
     }
     

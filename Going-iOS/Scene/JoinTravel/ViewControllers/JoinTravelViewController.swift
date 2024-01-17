@@ -13,7 +13,7 @@ final class JoinTravelViewController: UIViewController {
     
     // MARK: - Properties
     
-
+    
     private var code: String = ""
     
     private var codeCheckData: JoiningSuccessAppData? {
@@ -243,12 +243,7 @@ extension JoinTravelViewController: ViewControllerServiceable {
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(let code, let message):
-            if code == "e4006" {
-                warningLabel.isHidden = false
-                warningLabel.text = "\(message)"
-                codeTextField.layer.borderColor = UIColor.red500.cgColor
-                characterCountLabel.textColor = .red500
-            } else if code == "e4043" {
+            if code == "e4043" {
                 warningLabel.isHidden = false
                 codeTextField.layer.borderColor = UIColor.red500.cgColor
                 characterCountLabel.textColor = .red500
@@ -256,8 +251,6 @@ extension JoinTravelViewController: ViewControllerServiceable {
             } else {
                 DOOToast.show(message: message, insetFromBottom: 80)
             }
-            
-            DOOToast.show(message: message, insetFromBottom: 80)
         default:
             DOOToast.show(message: error.description, insetFromBottom: 80)
         }

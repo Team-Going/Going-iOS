@@ -54,16 +54,24 @@ final class MyProfileViewController: UIViewController {
         return img
     }()
     
-    private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: .red500, text: "두릅티비")
-    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500, text: "나는 두릅이 좋다.")
+    private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: .red500)
+    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500)
     
     private let dividingBarView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray50
         return view
     }()
-    
-    private let myResultView = TestResultView()
+        
+    private let myResultView: TestResultView = {
+        let view = TestResultView()
+        view.nameLabel.isHidden = true
+        view.userTypeLabel.font = .pretendard(.body1_bold)
+        view.userTypeLabel.textColor = .gray700
+        view.typeDescLabel.font = .pretendard(.detail3_regular)
+        view.typeDescLabel.textColor = .gray300
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +83,7 @@ final class MyProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
         getUserProfile()
     }
 }
@@ -169,7 +178,7 @@ private extension MyProfileViewController {
         }
         
         UIImageWriteToSavedPhotosAlbum(saveImage, self, nil, nil)
-        DOOToast.show(message: "이미지가 저장되었습니다. \n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
+        DOOToast.show(message: "이미지로 저장되었어요\n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
     }
     
     func showPermissionAlert() {
@@ -185,7 +194,6 @@ private extension MyProfileViewController {
             alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
             
             self.present(alert, animated: true)
-            
         }
     }
     

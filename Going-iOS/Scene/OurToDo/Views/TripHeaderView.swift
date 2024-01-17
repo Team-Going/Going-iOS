@@ -128,7 +128,7 @@ private extension TripHeaderView {
 
     func setLayout() {
         tripHeaderStackView.snp.makeConstraints{
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(25))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
             $0.top.equalToSuperview()
             $0.height.equalToSuperview()
         }

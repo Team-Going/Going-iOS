@@ -24,7 +24,7 @@ enum ImageLiterals {
     enum Login {
         static var loginLogo: UIImage { .load(named: "login_logo") }
         static var warningImage: UIImage { .load(named: "ic_warning_mini") }
-        static var kakaoLoginButton: UIImage { .load(named: "kakao_login_large_wide") }
+        static var kakaoLoginButton: UIImage { .load(named: "kakaologo") }
         static var appleLoginButton: UIImage { .load(named: "btn_applelogin") }
     }
     

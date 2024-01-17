@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct GetDetailToDoResponseStuct: Response {
+struct GetDetailToDoResponseStuct: DTO,  Response {
     let title, endDate: String
     let allocators: [Allocators]
-    let memo: String
+    let memo: String?
     let secret: Bool
 }
