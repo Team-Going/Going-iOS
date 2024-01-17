@@ -116,7 +116,7 @@ private extension MyToDoCollectionViewCell {
             $0.size.equalTo(ScreenUtils.getHeight(20))
         }
         todoTitleLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.top.equalToSuperview().inset(ScreenUtils.getWidth(12))
             $0.leading.equalTo(checkButton.snp.trailing).offset(ScreenUtils.getWidth(12))
         }
         managerCollectionView.snp.makeConstraints{
@@ -126,7 +126,7 @@ private extension MyToDoCollectionViewCell {
             $0.height.equalTo(ScreenUtils.getHeight(20))
         }
         deadlineLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(18))
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(16))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
         }
     }
@@ -143,7 +143,7 @@ private extension MyToDoCollectionViewCell {
         label.layer.cornerRadius = 5
     }
     func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout(width: 42))
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
@@ -151,14 +151,6 @@ private extension MyToDoCollectionViewCell {
         return collectionView
     }
     
-    func setCollectionViewLayout(width: CGFloat) -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-        flowLayout.minimumLineSpacing = ScreenUtils.getWidth(4)
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(width), height: ScreenUtils.getHeight(20))
-        return flowLayout
-    }
 
     func setDelegate() {
         self.managerCollectionView.dataSource = self

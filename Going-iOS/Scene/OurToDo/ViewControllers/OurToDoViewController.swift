@@ -184,7 +184,7 @@ private extension OurToDoViewController {
         tripHeaderView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(103))
+            $0.height.equalTo(ScreenUtils.getHeight(102))
         }
         tripMiddleView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom).offset(ScreenUtils.getHeight(20))

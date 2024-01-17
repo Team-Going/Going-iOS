@@ -63,7 +63,7 @@ final class CreatingSuccessViewController: UIViewController {
     private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
     private let dateLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray300)
     
-    private let inviteCodeLabel = DOOLabel(font: .pretendard(.head4), color: .gray700)
+    private let inviteCodeLabel = DOOLabel(font: .pretendard(.body1_medi), color: .gray700)
 
     private lazy var codeCopyButton: UIButton = {
         let button = UIButton()
