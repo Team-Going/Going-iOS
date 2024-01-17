@@ -48,7 +48,7 @@ class MemberViewController: UIViewController {
 
     // MARK: - UI Properties
     
-    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 친구들"))
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("함께 하는 친구들"))
     private let navigationUnderLineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -132,10 +132,11 @@ private extension MemberViewController {
         memeberTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(24)
             $0.leading.equalToSuperview().inset(24)
+            $0.height.equalTo(ScreenUtils.getHeight(23))
         }
         
         tripFriendsCollectionView.snp.makeConstraints {
-            $0.top.equalTo(memeberTitleLabel.snp.bottom).offset(7)
+            $0.top.equalTo(memeberTitleLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(ScreenUtils.getHeight(67))
         }
@@ -148,7 +149,6 @@ private extension MemberViewController {
         ourTestResultView.snp.makeConstraints {
             $0.top.equalTo(ourTasteTitleLabel.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview().inset(23)
-//            $0.height.equalTo(ScreenUtils.getHeight(505))
         }
     }
     

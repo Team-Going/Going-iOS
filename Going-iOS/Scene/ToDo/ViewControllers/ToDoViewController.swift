@@ -971,7 +971,7 @@ extension ToDoViewController {
                 try await ToDoService.shared.deleteTodo(todoId: self.todoId)
                 self.navigationController?.popViewController(animated: true)
             }
-            DOOToast.show(message: "할 일이 삭제되었어요", insetFromBottom: ScreenUtils.getHeight(106))
+            DOOToast.show(message: "할일을 삭제했어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
 }

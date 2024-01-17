@@ -27,13 +27,13 @@ final class StartTravelSplashViewController: UIViewController {
                                                  alignment: .center)
     
     private lazy var createTravelButton: DOOButton = {
-        let btn = DOOButton(type: .white, title: "새로운 여행 시작하기")
+        let btn = DOOButton(type: .white, title: "새로운 여행 만들기")
         btn.addTarget(self, action: #selector(createTravelButtonTapped), for: .touchUpInside)
         return btn
     }()
     
     private lazy var joinTravelButton: DOOButton = {
-        let btn = DOOButton(type: .enabled, title: "여행 입장하기")
+        let btn = DOOButton(type: .enabled, title: "초대받은 여행 입장하기")
         btn.addTarget(self, action: #selector(joinTravelButtonTapped), for: .touchUpInside)
         return btn
     }()

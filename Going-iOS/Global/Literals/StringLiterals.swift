@@ -38,7 +38,7 @@ enum StringLiterals {
     enum CreateTravel {
         static let namePlaceHolder = "이번 여행의 이름을 지어주세요"
         static let warning = "여행 이름을 입력해 주세요"
-        static let nameTitle = "새로운 여행 만들기"
+        static let nameTitle = "어떤 여행인가요?"
         static let dateTitle = "여행 일정을 알려주세요"
     }
     
