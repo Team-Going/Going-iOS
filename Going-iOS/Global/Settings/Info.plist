@@ -2,22 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
-	<key>CFBundleDisplayName</key>
-	<string>$(INFOPLIST_KEY_CFBundleDisplayName)</string>
 	<key>BASE_URL</key>
 	<string>$(BASE_URL)</string>
-	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
-	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>앨범에 접근하시겠습니까?</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>앨범에 사진을 추가하도록 허용하시겠습니까?</string>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict/>
-	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
