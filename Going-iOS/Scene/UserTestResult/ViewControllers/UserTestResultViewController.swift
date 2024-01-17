@@ -240,7 +240,6 @@ extension UserTestResultViewController {
             do {
                 let profileData = try await TravelService.shared.getProfileInfo()
                 self.testResultIndex = profileData.result
-                guard let index = testResultIndex else { return }
                 self.testResultData = UserTypeTestResultAppData.dummy()[profileData.result]
             }
             catch {

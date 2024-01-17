@@ -334,9 +334,7 @@ private extension MakeProfileViewController {
     
     func updateNextButtonState() {
         // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
-        let isNameTextFieldEmpty = nameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
-        let isDescTextFieldEmpty = descTextField.text!.isEmpty
-        
+ 
         if isNameTextFieldGood == true && isDescTextFieldGood == true/* && !isNameTextFieldEmpty &&  !isDescTextFieldEmpty && nameTextField.text!.count < 3*/ {
             nextButton.isEnabled = true
             nextButton.backgroundColor = .gray500
@@ -373,7 +371,7 @@ private extension MakeProfileViewController {
         
         Task {
             do {
-                let data = try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
+                try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
                 
                 let nextVC = UserTestSplashViewController()
                 self.navigationController?.pushViewController(nextVC, animated: true)
