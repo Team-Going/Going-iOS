@@ -1366,10 +1366,10 @@
 			};
 			buildConfigurationList = F4F5216C2B3440D7000E6E1E /* Build configuration list for PBXProject "Going-iOS" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				ko,
 				Base,
 			);
 			mainGroup = F4F521682B3440D7000E6E1E;
