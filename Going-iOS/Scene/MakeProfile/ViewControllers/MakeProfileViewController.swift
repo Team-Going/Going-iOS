@@ -252,8 +252,6 @@ private extension MakeProfileViewController {
         }
     }
     
-    
-    
     func removeKeyboardNotifications(){
         // 키보드가 나타날 때 앱에게 알리는 메서드 제거
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)

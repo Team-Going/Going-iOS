@@ -79,6 +79,7 @@ final class UserTestViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.tabBarController?.tabBar.isHidden = true
     }
+
     
 }
 
@@ -86,11 +87,11 @@ private extension UserTestViewController {
     
     func makeButton() -> UIButton {
         let button = UIButton()
-        button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         button.backgroundColor = .gray50
         button.layer.cornerRadius = 12
         button.titleLabel?.font = .pretendard(.body3_medi)
         button.setTitleColor(UIColor.gray500, for: .normal)
+        button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         return button
     }
     
@@ -167,44 +168,47 @@ private extension UserTestViewController {
         // 선택된 버튼이 있는지 확인하고 nextButton의 활성화 여부를 결정
         nextButton.isEnabled = selectedButton == nil ? false : true
         nextButton.backgroundColor = nextButton.isEnabled ? .gray500 : .gray50
-        
         if nextButton.isEnabled {
             nextButton.setTitleColor(.white000, for: .normal)
         } else {
             nextButton.setTitleColor(.gray200, for: .normal)
         }
-    }
+//        nextButton.backgroundColor = .gray50
+//        nextButton.setTitleColor(.gray200, for: .normal)
+//        nextButton.isEnabled = true
+        }
     
     func resetButtons() {
         // 다른 버튼들의 색상을 클릭하지 않은 상태로 초기화
-        for case let button as UIButton in questionStackView.arrangedSubviews {
-            button.backgroundColor = .gray50
-            button.setTitleColor(UIColor.gray500, for: .normal)
-            button.layer.borderWidth = 0
-        }
+//        for case let button as UIButton in questionStackView.arrangedSubviews {
+//            button.backgroundColor = .gray50
+//            button.setTitleColor(UIColor.gray500, for: .normal)
+//            button.layer.borderWidth = 0
+//        }
         
         // 선택된 버튼 초기화
-        selectedButton = nil
+//        selectedButton = nil
         
     }
     
     func setAnimation() {
+        
         let questButton = [firstButton, secondButton,
                            thirdButton, fourthButton]
-        
+        questButton.forEach {
+            $0.isEnabled = false
+        }
         UIView.animate(withDuration: 0.5, animations: {
             questButton.forEach {
-                $0.isEnabled = false
                 $0.titleLabel?.alpha = 0.0
             }
-            //            views
+
         }) { [self] _ in
             // fade out 애니메이션 종료 후 실행될 코드
-            updateLabel()
+//            updateLabel()
             UIView.animate(withDuration: 0.5) {
                 questButton.forEach {
                     $0.titleLabel?.alpha = 1.0
-                    $0.isEnabled = true
                 }
             }
         }
@@ -213,7 +217,6 @@ private extension UserTestViewController {
     
     @objc
     func buttonTapped(_ sender: UIButton) {
-        
         guard let buttonIndex = questionStackView.arrangedSubviews.firstIndex(of: sender) else {
             return
         }
@@ -235,42 +238,70 @@ private extension UserTestViewController {
         selectedButton = sender
         
         // nextButton 상태 갱신
-        updateNextButtonState()
-        
+        if selectedButton == nil {
+            nextButton.isEnabled = false
+            nextButton.backgroundColor = .gray50
+            nextButton.setTitleColor(.gray200, for: .normal)
+
+        } else {
+            nextButton.isEnabled = true
+            nextButton.backgroundColor = .gray500
+            nextButton.setTitleColor(.white000, for: .normal)
+        }
     }
+    
     
     @objc
     func nextButtonTapped() {
-        resetButtons()
+        nextButton.isEnabled = false
+        firstButton.isEnabled = false
+        secondButton.isEnabled = false
+        thirdButton.isEnabled = false
+        fourthButton.isEnabled = false
+
+        selectedButton?.backgroundColor = .gray50
+        selectedButton?.setTitleColor(UIColor.gray500, for: .normal)
+        selectedButton?.layer.borderWidth = 0
+        selectedButton = nil
+
+//        resetButtons()
         if index < userTestDataStruct.count - 1 {
-            
+            buttonIndexList.append(self.buttonIndex)
             // 질문이 마지막이 아닌 경우
             if index == 7 {
                 nextButton.setTitle("결과보기", for: .normal)
             }
             testProgressView.setProgress(testProgressView.progress + 0.1111111, animated: true)
             index += 1
-            setAnimation()
-            buttonIndexList.append(self.buttonIndex)
-            
+//            setAnimation()
+                        updateLabel()
+
             // nextButton 상태 초기화
-            nextButton.backgroundColor = .gray50
-            nextButton.setTitleColor(.gray200, for: .normal)
-            updateNextButtonState()
-            
-        } else {
-            // 질문이 마지막인 경우
-            setAnimation()
+            if selectedButton == nil {
+                nextButton.isEnabled = false
+                nextButton.backgroundColor = .gray50
+                nextButton.setTitleColor(.gray200, for: .normal)
+            }
+        } else if index == 8 {
+            // 질문이 마지막인 경우 index = 8
+                        updateLabel()
+
+//            setAnimation()
             buttonIndexList.append(self.buttonIndex)
             //            handleLastQuestion()
             travelTypeRequsetBody.result = buttonIndexList
             
+            index += 1
             patchTravelTypeTestResult()
 //            let nextVC = UserTestResultViewController()
 //            nextVC.testResultDummy = toUserTypeResult()
 //            self.navigationController?.pushViewController(nextVC, animated: true)
         }
-        
+        firstButton.isEnabled = true
+        secondButton.isEnabled = true
+        thirdButton.isEnabled = true
+        fourthButton.isEnabled = true
+
     }
    
 }
@@ -283,6 +314,7 @@ extension UserTestViewController {
         
         Task {
             do {
+                
                 try await OnBoardingService.shared.travelTypeTest(requestDTO: travelTypeRequsetBody)
                 
                 let nextVC = UserTestResultViewController()
