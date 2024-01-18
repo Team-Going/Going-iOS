@@ -13,7 +13,7 @@ import Lottie
 final class SplashViewController: UIViewController {
     
     private let lottieView: LottieAnimationView = {
-       let lottieView = LottieAnimationView(name: "dooripsplash2")
+       let lottieView = LottieAnimationView(name: "dooripsplash3")
         lottieView.contentMode = .scaleAspectFill
         lottieView.loopMode = .playOnce
         return lottieView
