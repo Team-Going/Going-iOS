@@ -154,7 +154,6 @@ private extension UserTestViewController {
 private extension UserTestViewController {
     
     func updateLabel() {
-        
         testIndexLabel.text = "\(userTestDataStruct[index].testIndex) / 9"
         questionLabel.text = "\(userTestDataStruct[index].testTitle)"
         
@@ -189,11 +188,17 @@ private extension UserTestViewController {
             }
 
         }) { [self] _ in
+            
             // fade out 애니메이션 종료 후 실행될 코드
-//            updateLabel()
+            if index < 9 {
+                updateLabel()
+            }
             UIView.animate(withDuration: 0.5) {
                 questButton.forEach {
                     $0.titleLabel?.alpha = 1.0
+                }
+                questButton.forEach {
+                    $0.isEnabled = true
                 }
             }
         }
@@ -238,12 +243,7 @@ private extension UserTestViewController {
     
     @objc
     func nextButtonTapped() {
-        nextButton.isEnabled = false
-        firstButton.isEnabled = false
-        secondButton.isEnabled = false
-        thirdButton.isEnabled = false
-        fourthButton.isEnabled = false
-
+        
         selectedButton?.backgroundColor = .gray50
         selectedButton?.setTitleColor(UIColor.gray500, for: .normal)
         selectedButton?.layer.borderWidth = 0
@@ -257,9 +257,9 @@ private extension UserTestViewController {
                 nextButton.setTitle("결과보기", for: .normal)
             }
             testProgressView.setProgress(testProgressView.progress + 0.1111111, animated: true)
+            
+            setAnimation()
             index += 1
-//            setAnimation()
-                        updateLabel()
 
             // nextButton 상태 초기화
             if selectedButton == nil {
@@ -268,21 +268,13 @@ private extension UserTestViewController {
                 nextButton.setTitleColor(.gray200, for: .normal)
             }
         } else if index == 8 {
-            // 질문이 마지막인 경우 index = 8
-                        updateLabel()
-
-//            setAnimation()
             buttonIndexList.append(self.buttonIndex)
             travelTypeRequsetBody.result = buttonIndexList
-            
-            index += 1
             patchTravelTypeTestResult()
+            index += 1
 
         }
-        firstButton.isEnabled = true
-        secondButton.isEnabled = true
-        thirdButton.isEnabled = true
-        fourthButton.isEnabled = true
+
     }
 }
 
