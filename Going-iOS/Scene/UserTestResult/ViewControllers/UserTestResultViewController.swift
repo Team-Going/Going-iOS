@@ -180,7 +180,7 @@ private extension UserTestResultViewController {
             return
         }
         UIImageWriteToSavedPhotosAlbum(saveImage, self, nil, nil)
-        DOOToast.show(message: "이미지가 저장되었습니다. \n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
+        DOOToast.show(message: "이미지가 저장되었어요 \n친구에게 내 캐릭터를 공유해보세요", insetFromBottom: 114)
     }
     
     @objc
