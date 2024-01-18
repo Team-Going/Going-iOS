@@ -14,7 +14,6 @@ final class SplashViewController: UIViewController {
     
     private let lottieView = LottieAnimationView()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
