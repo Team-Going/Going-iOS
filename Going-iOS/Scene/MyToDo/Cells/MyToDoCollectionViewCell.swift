@@ -63,7 +63,21 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     }()
     lazy var todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)
     private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)
-    lazy var managerCollectionView: UICollectionView = {setCollectionView()}()
+    
+    
+    private let  managerCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        return collectionView
+    }()
+    
+    
+    
     lazy var checkButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.MyToDo.btnCheckBoxIncomplete, for: .normal)
@@ -116,7 +130,7 @@ private extension MyToDoCollectionViewCell {
             $0.size.equalTo(ScreenUtils.getHeight(20))
         }
         todoTitleLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(ScreenUtils.getWidth(12))
+            $0.top.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.leading.equalTo(checkButton.snp.trailing).offset(ScreenUtils.getWidth(12))
         }
         managerCollectionView.snp.makeConstraints{
@@ -218,17 +232,24 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
 }
 
 extension MyToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return ScreenUtils.getWidth(4)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return ScreenUtils.getWidth(4)
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
-
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-        layout.minimumLineSpacing = ScreenUtils.getWidth(4)
         
-        let alone = "혼자할일"
-        let stringLength = self.myToDoData?.secret == true
-        ? alone.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
-        : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
-        return CGSize(width: stringLength + ScreenUtils.getWidth(12), height: ScreenUtils.getHeight(20))
+        
+        //자물쇠
+        if myToDoData?.secret == true {
+            return CGSize(width: ScreenUtils.getWidth(66), height: ScreenUtils.getHeight(20))
+        } else {
+            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+        }
     }
 }

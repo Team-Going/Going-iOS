@@ -12,8 +12,6 @@ import Photos
 
 final class UserTestResultViewController: UIViewController {
         
-    var nickName: String = ""
-
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
@@ -21,7 +19,7 @@ final class UserTestResultViewController: UIViewController {
             self.resultView.resultViewData = data
         }
     }
-    
+
     private var testResultIndex: Int?
     
     private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 캐릭터"))
@@ -49,11 +47,7 @@ final class UserTestResultViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var resultView: TestResultView = {
-        let view = TestResultView()
-        view.nameLabel.text = self.nickName + "님의 여행 캐릭터는"
-        return view
-    }()
+    private let resultView = TestResultView()
     
     private let gradientView =  UIView()
     
@@ -248,6 +242,7 @@ extension UserTestResultViewController {
                 let profileData = try await TravelService.shared.getProfileInfo()
                 self.testResultIndex = profileData.result
                 self.testResultData = UserTypeTestResultAppData.dummy()[profileData.result]
+                self.resultView.nameLabel.text = profileData.name + "님의 여행 캐릭터는"
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -280,6 +275,3 @@ extension UserTestResultViewController: TestResultViewDelegate {
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
 }
-
-
-

@@ -13,7 +13,7 @@ final class ToDoViewController: UIViewController {
     var tripId: Int = 0
     
     var myId: Int = 0
-
+    
     private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
     
     // MARK: - UI Components
@@ -88,14 +88,22 @@ final class ToDoViewController: UIViewController {
         return btn
     }()
     private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.allocation)
-    private lazy var todoManagerCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    
+    private let todoManagerCollectionView: UICollectionView = {
+        
+        let layout = UICollectionViewFlowLayout()
+        
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
         return collectionView
     }()
+    
+    
     private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.memo)
     private var memoTextViewCount: Int = 0
     private let memoTextView: UITextView = {
@@ -123,7 +131,7 @@ final class ToDoViewController: UIViewController {
     // MARK: - Properties
     
     private var isTodoTextFieldGood: Bool = false
-
+    
     var peopleCount: Int = 0
     
     var buttonIndex: [Int] = []
@@ -135,11 +143,11 @@ final class ToDoViewController: UIViewController {
             if navigationBarTitle == "추가" && beforeVC == "my" {
                 self.manager = [.init(name: "혼자할일", isOwner: true)]
                 peopleCount = 1
-            } 
-//            else if navigationBarTitle == "추가" && beforeVC == "our" {
-////                self.fromOurTodoParticipants
-//                self.manager =
-//            }
+            }
+            //            else if navigationBarTitle == "추가" && beforeVC == "our" {
+            ////                self.fromOurTodoParticipants
+            //                self.manager =
+            //            }
         }
     }
     
@@ -161,8 +169,7 @@ final class ToDoViewController: UIViewController {
             }
             if navigationBarTitle == "조회" {
                 navigationBarView.titleLabel.text = "할일 조회"
-                guard let memo = data.memo else { return }
-                setDefaultValue = [data.title, data.endDate, self.manager , memo]
+                setDefaultValue = [data.title, data.endDate, self.manager , data.memo ?? ""]
                 setInquiryStyle()
             }
             memoTextView.text = data.memo
@@ -173,11 +180,11 @@ final class ToDoViewController: UIViewController {
     var setDefaultValue: [Any]? {
         didSet {
             guard let value = setDefaultValue else {return}
-            todoTextfieldPlaceholder = value[0] as! String
+            todoTextfieldPlaceholder = value[0] as? String ?? ""
             todoTextfield.placeholder = todoTextfieldPlaceholder
             deadlineTextfieldLabel.text = value[1] as? String
             manager = value[2] as? [Allocators] ?? []
-            memoTextviewPlaceholder = value[3] as! String
+            memoTextviewPlaceholder = value[3] as? String ?? ""
             memoTextView.text = memoTextviewPlaceholder
         }
     }
@@ -220,7 +227,7 @@ final class ToDoViewController: UIViewController {
             setInquiryStyle()
         }
         if navigationBarTitle == "조회" {
-          self.getDetailToDoDatas(todoId: self.todoId)
+            self.getDetailToDoDatas(todoId: self.todoId)
         }
         addNotification()
     }
@@ -299,7 +306,7 @@ final class ToDoViewController: UIViewController {
         if isActivateView {
             
             changeButtonConfig(isSelected: sender.isSelected, btn: sender)
-                    
+            
             
             // 아워투두의 할일 추가의 경우
             
@@ -316,7 +323,7 @@ final class ToDoViewController: UIViewController {
                     
                     // 여기에서 필요한 작업을 수행할 수 있습니다.
                     buttonIndex.append(sender.tag)
-
+                    
                 }
             }
             updateSingleButtonState()
@@ -508,15 +515,15 @@ private extension ToDoViewController {
         bottomSheetVC.delegate = self
         doubleButtonView.delegate = self
     }
-//    
-//    func setCollectionView() -> UICollectionView {
-//        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-//        collectionView.backgroundColor = .clear
-//        collectionView.showsHorizontalScrollIndicator = false
-//        collectionView.showsVerticalScrollIndicator = false
-//        collectionView.isScrollEnabled = false
-//        return collectionView
-//    }
+    //
+    //    func setCollectionView() -> UICollectionView {
+    //        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    //        collectionView.backgroundColor = .clear
+    //        collectionView.showsHorizontalScrollIndicator = false
+    //        collectionView.showsVerticalScrollIndicator = false
+    //        collectionView.isScrollEnabled = false
+    //        return collectionView
+    //    }
     
     func registerCell() {
         self.todoManagerCollectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
@@ -625,16 +632,16 @@ private extension ToDoViewController {
             warningLabel.text = "내용은 15자 이하여야 합니다"
             warningLabel.isHidden = false
             self.isTodoTextFieldGood = false
-
+            
         } else if text.count == 0 {
             todoTextfield.layer.borderColor = UIColor.gray200.cgColor
             countToDoCharacterLabel.textColor = .gray200
             warningLabel.isHidden = true
             self.isTodoTextFieldGood = false
-
+            
         } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.isTodoTextFieldGood = false
-
+            
             todoTextfield.layer.borderColor = UIColor.red500.cgColor
             countToDoCharacterLabel.textColor = .red500
             warningLabel.text = "내용에는 공백만 입력할 수 없어요"
@@ -645,8 +652,8 @@ private extension ToDoViewController {
             warningLabel.isHidden = true
             self.isTodoTextFieldGood = true
         }
-    
-    countToDoCharacterLabel.text = "\(text.count) / 15"
+        
+        countToDoCharacterLabel.text = "\(text.count) / 15"
         updateSingleButtonState()
     }
 }
@@ -688,7 +695,7 @@ extension ToDoViewController: UICollectionViewDataSource{
             memoWarningLabel.isHidden = false
         } else {
             memoWarningLabel.isHidden = true
-
+            
         }
     }
     
@@ -811,7 +818,7 @@ extension ToDoViewController: UITextViewDelegate {
             }
         }
         
-       return true
+        return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -868,7 +875,7 @@ extension ToDoViewController {
         let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
         let isTodoTextFieldEmpty = todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let isDateSet = deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
-
+        
         singleButtonView.currentType = ( !isTodoTextFieldEmpty
                                          && todoTextfield.text?.count ?? 0 <= 15
                                          && isDateSet
@@ -884,7 +891,7 @@ extension ToDoViewController: BottomSheetDelegate {
     
     func didSelectDate(date: Date) {
         self.selectedDate = date
-
+        
         let formattedDate = dateFormat(date: date)
         deadlineTextfieldLabel.text = formattedDate
         deadlineTextfieldLabel.textColor = .gray700
@@ -908,24 +915,64 @@ extension ToDoViewController: DoubleButtonDelegate {
 }
 
 extension ToDoViewController: UICollectionViewDelegateFlowLayout {
+    
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    //        return ScreenUtils.getWidth(4)
+    //    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return ScreenUtils.getWidth(3)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return ScreenUtils.getWidth(3)
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {return CGSize()}
         
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-        //
-        collectionView.collectionViewLayout.invalidateLayout()
+        //        collectionView.collectionViewLayout.invalidateLayout()
         
         if beforeVC == "my" {
-            let stringLength = data?.secret == true
-            ? manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
-            : self.manager[indexPath.row].name.size(withAttributes: [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
-            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(24))
-        }else {
-            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(24))
+            if navigationBarTitle == "추가" {
+               return CGSize(width: ScreenUtils.getWidth(66), height: ScreenUtils.getHeight(20))
+                
+            //조회
+            } else {
+                if data?.secret == true {
+                    if indexPath.row == 0 {
+                        return CGSize(width: ScreenUtils.getWidth(66), height: ScreenUtils.getHeight(20))
+                    } else {
+                        return CGSize(width: ScreenUtils.getWidth(140), height: ScreenUtils.getHeight(18))
+                    }
+                } else {
+                    return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+                    
+                }
+            }
         }
+        return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
     }
 }
+//            if data?.secret == true {
+//                let stringLength = manager[indexPath.row].name.size(withAttributes:
+//                                                                        [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
+//            }
+//            else {
+//                self.manager[indexPath.row].name.size(withAttributes:
+//                                                        [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
+//            }
+//
+//            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(24))
+//        }
+//        else {
+//            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(24))
+//        }
+
+
+
+
+
 
 extension ToDoViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
