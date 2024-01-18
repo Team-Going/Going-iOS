@@ -65,7 +65,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let descLabel: UILabel = {
         let label = UILabel()
-        label.text = "한줄 소개"
+        label.text = "한 줄 소개"
         label.font = .pretendard(.body2_bold)
         label.textColor = .gray700
         return label

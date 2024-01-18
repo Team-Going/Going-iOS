@@ -81,7 +81,6 @@ final class JoiningSuccessViewController: UIViewController {
 private extension JoiningSuccessViewController {
     
     func setStyle() {
-        navigationBar.isHidden = true
         view.backgroundColor = .gray50
         self.navigationController?.isNavigationBarHidden = true
     }

@@ -12,31 +12,41 @@ import Lottie
 
 final class SplashViewController: UIViewController {
     
-    private let lottieView: LottieAnimationView = {
-       let lottieView = LottieAnimationView(name: "dooripsplash3")
-        lottieView.contentMode = .scaleAspectFill
-        lottieView.loopMode = .playOnce
-        return lottieView
-    }()
+    private let lottieView = LottieAnimationView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         setStyle()
         setHierarchy()
         setLayout()
+        setAnimation()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if !NetworkCheck.shared.isConnected {
+            DOOToast.show(message: "네트워크 상태를 확인해주세요", duration: 3 ,insetFromBottom: 100, completion: {
+                exit(0)
+            })
+        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+}
+
+private extension SplashViewController {
+    
+    func setAnimation() {
+        lottieView.animation = .named("dooripsplash3")
+        lottieView.loopMode = .playOnce
         lottieView.play(completion: {completed in
             if completed {
                 self.checkUserStatus()
             }
         })
     }
-}
-
-private extension SplashViewController {
     func setStyle() {
         self.view.backgroundColor = .red400
     }
@@ -88,10 +98,9 @@ extension SplashViewController: ViewControllerServiceable {
 extension SplashViewController {
     func checkUserStatus() {
         
-        guard UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) != nil else {
+        if UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) == nil {
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
-            return
         }
         
         Task {
