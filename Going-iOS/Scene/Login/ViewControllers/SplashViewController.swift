@@ -70,7 +70,6 @@ extension SplashViewController: ViewControllerServiceable {
         switch error {
         case .clientError(let message):
             print(message)
-//            DOOToast.show(message: "\(message)", insetFromBottom: ScreenUtils.getHeight(80))
         case .serverError:
             DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         case .unAuthorizedError:

@@ -141,7 +141,6 @@ private extension DOONavigationBar {
     @objc
     func popToRootVC() {
         viewController?.tabBarController?.navigationController?.popViewController(animated: true)
-//        viewController?.navigationController?.popToRootViewController(animated: false)
     }
     
     @objc

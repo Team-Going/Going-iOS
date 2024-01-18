@@ -14,9 +14,7 @@ import SnapKit
 
 
 final class LoginViewController: UIViewController {
-    
-//회원가입으로 갈 때 필요함, 이거를 UserDefault에 가지고 있는게 좋은 지, 그냥 이런 식으로 다음 뷰컨으로 넘겨도 되는지?
-    
+        
     var socialType: SocialPlatform?
     
     private var socialToken: String? {
@@ -35,8 +33,6 @@ final class LoginViewController: UIViewController {
                     } else {
                         //성향테스트스플래시뷰로 이동
                         let nextVC = UserTestSplashViewController()
-//                        nextVC.socialToken = self.socialToken
-
                         self.navigationController?.pushViewController(nextVC, animated: true)
                     }
                 }
@@ -79,14 +75,6 @@ final class LoginViewController: UIViewController {
         
         let button = UIButton(configuration: config)
         
-        
-//        button.setImage(ImageLiterals.Login.kakaoLoginButton, for: .normal)
-//        button.backgroundColor = .yellow100
-//        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-//        button.layer.cornerRadius = 8
-//        button.setTitle("카카오 로그인", for: .normal)
-//        button.setTitleColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.85), for: .normal)
-//
         button.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -266,12 +254,7 @@ extension LoginViewController: ViewControllerServiceable {
         
         
         ableLoginButton()
-//        switch error {
-//        case .clientError(let message):
-//            DOOToast.show(message: "\(message)", insetFromBottom: 80)
-//        default:
-//            DOOToast.show(message: error.description, insetFromBottom: 80)
-//        }
+
     }
 }
 //애플로그인

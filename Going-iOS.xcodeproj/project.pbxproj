@@ -1221,9 +1221,6 @@
 			isa = PBXGroup;
 			children = (
 				CA51E0722B584D4600A85A35 /* SplashLottie */,
-				F4F5219F2B346875000E6E1E /* Cells */,
-				F4F5219E2B346870000E6E1E /* Models */,
-				F4F5219D2B346867000E6E1E /* Views */,
 				F4F5219C2B34685F000E6E1E /* ViewControllers */,
 			);
 			path = Login;
@@ -1237,27 +1234,6 @@
 				F4BA26F12B42D07000975CC2 /* PersonalInfoWebViewController.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		F4F5219D2B346867000E6E1E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		F4F5219E2B346870000E6E1E /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		F4F5219F2B346875000E6E1E /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		F4F521BB2B349FDE000E6E1E /* Frameworks */ = {
