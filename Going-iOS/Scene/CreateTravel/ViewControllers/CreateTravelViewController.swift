@@ -275,6 +275,7 @@ private extension CreateTravelViewController {
         createTravelButton.currentType = (!isTravelNameTextFieldEmpty
                                           && isStartDateSet
                                           && isEndDateSet
+                                          && isTravelNameTextFieldGood
                                           && isDateValid
                                           && isEndDateNotPast) ? .enabled : .unabled
     }
@@ -304,6 +305,7 @@ private extension CreateTravelViewController {
             self.isTravelNameTextFieldGood = true
             travelNameTextField.layer.borderColor = UIColor.gray700.cgColor
             characterCountLabel.textColor = .gray400
+            travelNameTextField.textColor = .gray400
             warningLabel.isHidden = true
         }
         updateCreateButtonState()
@@ -361,7 +363,7 @@ private extension CreateTravelViewController {
     @objc
     func travelNameTextFieldDidChange() {
         travelNameTextFieldCheck()
-        updateCreateButtonState()
+//        updateCreateButtonState()
     }
 }
 
@@ -413,18 +415,18 @@ extension CreateTravelViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let text = textField.text ?? ""
-        let maxLength = 15
-        
-        if text.count > maxLength {
-            let startIndex = text.startIndex
-            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
-            let fixedText = String(text[startIndex...endIndex])
-            textField.text = fixedText
-            return
-        }
-    }
+//    func textFieldDidChangeSelection(_ textField: UITextField) {
+//        let text = textField.text ?? ""
+//        let maxLength = 15
+//        
+//        if text.count > maxLength {
+//            let startIndex = text.startIndex
+//            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
+//            let fixedText = String(text[startIndex...endIndex])
+//            textField.text = fixedText
+//            return
+//        }
+//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         travelNameTextFieldCheck()

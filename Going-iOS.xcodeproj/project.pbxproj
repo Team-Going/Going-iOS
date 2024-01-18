@@ -65,7 +65,6 @@
 		CA3EEE552B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */; };
 		CA3EEE572B50B0B600C23A41 /* DetailToDoAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */; };
 		CA3EEE5B2B51711700C23A41 /* GetToDoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE5A2B51711700C23A41 /* GetToDoRequestDTO.swift */; };
-		CA51E0762B584EA100A85A35 /* dooripsplash2.json in Resources */ = {isa = PBXBuildFile; fileRef = CA51E0752B584EA100A85A35 /* dooripsplash2.json */; };
 		CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */; };
 		CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */; };
 		CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */; };
@@ -88,6 +87,7 @@
 		CA8CD6A22B4803B200CFDFBF /* ToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */; };
 		CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */; };
 		CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */; };
+		CAC39E272B59285100B5D4A5 /* dooripsplash3.json in Resources */ = {isa = PBXBuildFile; fileRef = CAC39E262B59285100B5D4A5 /* dooripsplash3.json */; };
 		CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */; };
 		CADA02562B4ACC50001FCE89 /* MyToDoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02552B4ACC50001FCE89 /* MyToDoData.swift */; };
 		CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */; };
@@ -145,6 +145,7 @@
 		F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E7832B42A6830008735F /* UILabel+.swift */; };
 		F4C5E7862B42A9C80008735F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E7852B42A9C80008735F /* LoginViewController.swift */; };
 		F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5E7872B42AC010008735F /* StringLiterals.swift */; };
+		F4E9E9CF2B593AB000B0EAAC /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9E9CE2B593AAF00B0EAAC /* NetworkCheck.swift */; };
 		F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521742B3440D7000E6E1E /* AppDelegate.swift */; };
 		F4F521772B3440D7000E6E1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521762B3440D7000E6E1E /* SceneDelegate.swift */; };
 		F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521782B3440D7000E6E1E /* ViewController.swift */; };
@@ -246,7 +247,6 @@
 		CA3EEE542B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDetailToDoResponseDTO.swift; sourceTree = "<group>"; };
 		CA3EEE562B50B0B600C23A41 /* DetailToDoAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailToDoAppData.swift; sourceTree = "<group>"; };
 		CA3EEE5A2B51711700C23A41 /* GetToDoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetToDoRequestDTO.swift; sourceTree = "<group>"; };
-		CA51E0752B584EA100A85A35 /* dooripsplash2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dooripsplash2.json; sourceTree = "<group>"; };
 		CA8CD6692B46B45200CFDFBF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		CA8CD66B2B46B45D00CFDFBF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		CA8CD66D2B46B46600CFDFBF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -269,6 +269,7 @@
 		CA8CD6A12B4803B200CFDFBF /* ToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoData.swift; sourceTree = "<group>"; };
 		CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonView.swift; sourceTree = "<group>"; };
+		CAC39E262B59285100B5D4A5 /* dooripsplash3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dooripsplash3.json; sourceTree = "<group>"; };
 		CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoViewController.swift; sourceTree = "<group>"; };
 		CADA02552B4ACC50001FCE89 /* MyToDoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoData.swift; sourceTree = "<group>"; };
 		CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -326,6 +327,7 @@
 		F4C5E7852B42A9C80008735F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F4C5E7872B42AC010008735F /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
 		F4D0416E2B415EDB00B94FEE /* Going-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Going-iOS.entitlements"; sourceTree = "<group>"; };
+		F4E9E9CE2B593AAF00B0EAAC /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
 		F4F521712B3440D7000E6E1E /* Going-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Going-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F521742B3440D7000E6E1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F521762B3440D7000E6E1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -711,7 +713,7 @@
 		CA51E0722B584D4600A85A35 /* SplashLottie */ = {
 			isa = PBXGroup;
 			children = (
-				CA51E0752B584EA100A85A35 /* dooripsplash2.json */,
+				CAC39E262B59285100B5D4A5 /* dooripsplash3.json */,
 			);
 			path = SplashLottie;
 			sourceTree = "<group>";
@@ -1190,6 +1192,7 @@
 				F4FE6B912B50861A009C935E /* LoginType.swift */,
 				F4FE6B932B50863D009C935E /* SocialPlatform.swift */,
 				F45CA15B2B51868C00F3790C /* NetworkErrorCode.swift */,
+				F4E9E9CE2B593AAF00B0EAAC /* NetworkCheck.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1405,6 +1408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA8CD6702B46B47600CFDFBF /* Pretendard-ExtraLight.otf in Resources */,
+				CAC39E272B59285100B5D4A5 /* dooripsplash3.json in Resources */,
 				F4F521812B3440DA000E6E1E /* LaunchScreen.storyboard in Resources */,
 				CA8CD66C2B46B45D00CFDFBF /* Pretendard-Bold.otf in Resources */,
 				CA8CD6742B46B48700CFDFBF /* Pretendard-Medium.otf in Resources */,
@@ -1412,7 +1416,6 @@
 				CA8CD66A2B46B45200CFDFBF /* Pretendard-Black.otf in Resources */,
 				CA8CD6762B46B48F00CFDFBF /* Pretendard-Regular.otf in Resources */,
 				CA8CD66E2B46B46600CFDFBF /* Pretendard-ExtraBold.otf in Resources */,
-				CA51E0762B584EA100A85A35 /* dooripsplash2.json in Resources */,
 				CA8CD6782B46B49800CFDFBF /* Pretendard-SemiBold.otf in Resources */,
 				F4F5217E2B3440DA000E6E1E /* Assets.xcassets in Resources */,
 			);
@@ -1559,6 +1562,7 @@
 				942419402B54870C00B765C0 /* GetDetailToDoStruct.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				941B1B852B510F3C00D28EBA /* CreateTravelResponseDTO.swift in Sources */,
+				F4E9E9CF2B593AB000B0EAAC /* NetworkCheck.swift in Sources */,
 				F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */,
 				945234492B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift in Sources */,
 				945D1AD92B544E0D00C728E2 /* MemberTestStruct.swift in Sources */,
@@ -1719,7 +1723,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HV6BJXV65Q;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1737,7 +1741,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Going.Going-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1761,7 +1765,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Going-iOS/Going-iOS.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HV6BJXV65Q;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1779,7 +1783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Going.Going-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -57,7 +57,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let nameTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0 / 3"
+        label.text = "0/3"
         label.font = .pretendard(.detail2_regular)
         label.textColor = .gray200
         return label
@@ -65,7 +65,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let descLabel: UILabel = {
         let label = UILabel()
-        label.text = "한줄 소개"
+        label.text = "한 줄 소개"
         label.font = .pretendard(.body2_bold)
         label.textColor = .gray700
         return label
@@ -88,7 +88,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let descTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0 / 15"
+        label.text = "0/20"
         label.font = .pretendard(.detail2_regular)
         label.textColor = .gray200
         return label
@@ -307,12 +307,12 @@ private extension MakeProfileViewController {
     func descTextFieldCheck() {
         guard let text = descTextField.text else { return }
       
-        descTextFieldCountLabel.text = "\(text.count) / 15"
+        descTextFieldCountLabel.text = "\(text.count) / 20"
      
-        if text.count > 15 {
+        if text.count > 20 {
             descTextField.layer.borderColor = UIColor.red500.cgColor
             descTextFieldCountLabel.textColor = .red500
-            descWarningLabel.text = "소개는 15자를 초과할 수 없어요"
+            descWarningLabel.text = "소개는 20자를 초과할 수 없어요"
             descWarningLabel.isHidden = false
             isDescTextFieldGood = false
         } else if text.count == 0 {

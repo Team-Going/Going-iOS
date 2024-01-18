@@ -61,7 +61,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
         return view
     }()
     
-    private let confirmButton = DOOButton(type: .enabled, title: "확인")
+    private let confirmButton = DOOButton(type: .enabled, title: "선택하기")
     
     // MARK: - Life Cycles
     

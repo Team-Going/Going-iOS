@@ -368,7 +368,7 @@ final class ToDoViewController: UIViewController {
     func todoTextFieldDidChange() {
         guard let text = todoTextfield.text else { return }
         todoTextFieldCount = text.count
-        countToDoCharacterLabel.text = "\(todoTextFieldCount) / 15"
+        countToDoCharacterLabel.text = "\(todoTextFieldCount)/15"
         todoTextFieldCheck()
         updateSingleButtonState()
     }
@@ -653,7 +653,7 @@ private extension ToDoViewController {
             self.isTodoTextFieldGood = true
         }
         
-        countToDoCharacterLabel.text = "\(text.count) / 15"
+        countToDoCharacterLabel.text = "\(text.count)/15"
         updateSingleButtonState()
     }
 }
@@ -834,7 +834,7 @@ extension ToDoViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if textView == memoTextView {
             let memoTextViewCount = textView.text.count
-            countMemoCharacterLabel.text = "\(memoTextViewCount) / 1000"
+            countMemoCharacterLabel.text = "\(memoTextViewCount)/1000"
             memoTextViewBlankCheck()
             textViewCountCheck()
             updateSingleButtonState()
@@ -1010,7 +1010,7 @@ extension ToDoViewController {
                 try await ToDoService.shared.postCreateToDo(tripId: tripId, requestBody: saveToDoData)
                 self.navigationController?.popViewController(animated: true)
             }
-            DOOToast.show(message: "할 일이 추가되었어요", insetFromBottom: ScreenUtils.getHeight(106))
+            DOOToast.show(message: "할일을 추가했어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
     
