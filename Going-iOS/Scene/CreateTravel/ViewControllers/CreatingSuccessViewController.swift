@@ -136,12 +136,12 @@ private extension CreatingSuccessViewController {
         }
         
         createSuccessLabel.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom).offset(76)
+            $0.top.equalTo(navigationBar.snp.bottom).offset(ScreenUtils.getHeight(76))
             $0.centerX.equalToSuperview()
         }
         
         characterImage.snp.makeConstraints {
-            $0.top.equalTo(createSuccessLabel.snp.bottom).offset(12)
+            $0.top.equalTo(createSuccessLabel.snp.bottom).offset(ScreenUtils.getHeight(12))
             $0.width.equalTo(ScreenUtils.getWidth(218))
             $0.height.equalTo(ScreenUtils.getHeight(132))
             $0.centerX.equalToSuperview()
@@ -149,13 +149,13 @@ private extension CreatingSuccessViewController {
         
         ticketImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(createSuccessLabel.snp.bottom).offset(118)
+            $0.top.equalTo(createSuccessLabel.snp.bottom).offset(ScreenUtils.getHeight(118))
             $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.height.equalTo(ScreenUtils.getHeight(235))
         }
 
         dDayLabelBackgroundView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(38)
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(38))
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(20))
             $0.width.equalTo(ScreenUtils.getWidth(44))
@@ -167,24 +167,24 @@ private extension CreatingSuccessViewController {
         
         travelTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(dDayLabelBackgroundView.snp.bottom).offset(8)
+            $0.top.equalTo(dDayLabelBackgroundView.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.height.equalTo(ScreenUtils.getHeight(30))
         }
         
         dateLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(2)
+            $0.top.equalTo(travelTitleLabel.snp.bottom).offset(ScreenUtils.getHeight(2))
             $0.height.equalTo(ScreenUtils.getHeight(20))
         }
 
         inviteCodeLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(42)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(42))
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(27))
         }
         
         codeCopyButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(20))
             $0.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(110))
             $0.height.equalTo(ScreenUtils.getHeight(20))
@@ -201,14 +201,14 @@ private extension CreatingSuccessViewController {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.bottom.equalTo(entranceToMainButton.snp.top).offset(-12)
+            $0.bottom.equalTo(entranceToMainButton.snp.top).offset(ScreenUtils.getHeight(-12))
         }
         
         entranceToMainButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(ScreenUtils.getHeight(6))
         }
     }
 

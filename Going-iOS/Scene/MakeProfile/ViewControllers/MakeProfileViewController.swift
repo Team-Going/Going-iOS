@@ -57,7 +57,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let nameTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0 / 3"
+        label.text = "0/3"
         label.font = .pretendard(.detail2_regular)
         label.textColor = .gray200
         return label
@@ -88,7 +88,7 @@ final class MakeProfileViewController: UIViewController {
     
     private let descTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0 / 20"
+        label.text = "0/20"
         label.font = .pretendard(.detail2_regular)
         label.textColor = .gray200
         return label

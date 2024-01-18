@@ -28,7 +28,7 @@ extension MemberTestStruct {
                                  optionContent: MemberAnswerStruct(leftOption: "관광지", rightOption: "로컬장소")),
         MemberTestStruct(questionIndex: 3,
                                  questionContent: "식당",
-                                 optionContent: MemberAnswerStruct(leftOption: "맛집", rightOption: "아무식당")),
+                                 optionContent: MemberAnswerStruct(leftOption: "유명 맛집", rightOption: "가까운 곳")),
         MemberTestStruct(questionIndex: 4,
                                  questionContent: "사진",
                                  optionContent: MemberAnswerStruct(leftOption: "사진필수", rightOption: "눈에 담기")),

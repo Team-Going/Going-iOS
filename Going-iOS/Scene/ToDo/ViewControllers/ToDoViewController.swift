@@ -1010,7 +1010,7 @@ extension ToDoViewController {
                 try await ToDoService.shared.postCreateToDo(tripId: tripId, requestBody: saveToDoData)
                 self.navigationController?.popViewController(animated: true)
             }
-            DOOToast.show(message: "할 일이 추가되었어요", insetFromBottom: ScreenUtils.getHeight(106))
+            DOOToast.show(message: "할일을 추가했어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
     
