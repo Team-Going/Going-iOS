@@ -90,7 +90,7 @@ final class ToDoViewController: UIViewController {
     private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.allocation)
     
     
-    private lazy var todoManagerCollectionView: UICollectionView = {
+    private let todoManagerCollectionView: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()
         
@@ -921,7 +921,11 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
     //    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        ScreenUtils.getWidth(4)
+        return ScreenUtils.getWidth(3)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return ScreenUtils.getWidth(3)
     }
     
     
@@ -942,12 +946,12 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
                         return CGSize(width: ScreenUtils.getWidth(140), height: ScreenUtils.getHeight(18))
                     }
                 } else {
-                    return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(24))
+                    return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
                     
                 }
             }
         }
-        return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(24))
+        return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
     }
 }
 //            if data?.secret == true {
