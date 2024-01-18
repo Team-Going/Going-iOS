@@ -51,7 +51,7 @@ final class CreateTravelViewController: UIViewController {
     
     private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular),
                                                color: .gray200,
-                                               text: "0/20")
+                                               text: "0/15")
     
     private let warningLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
@@ -282,12 +282,12 @@ private extension CreateTravelViewController {
     
     func travelNameTextFieldCheck() {
         guard let text = travelNameTextField.text else { return }
-        characterCountLabel.text = "\(text.count) / 20"
+        characterCountLabel.text = "\(text.count) / 15"
         
-        if text.count >  20 {
+        if text.count >  15 {
             travelNameTextField.textColor = .red500
             warningLabel.isHidden = false
-            warningLabel.text = "이름은 20자 이하여야 합니다"
+            warningLabel.text = "이름은 15자 이하여야 합니다"
             isTravelNameTextFieldGood = false
         } else if text.count == 0 {
             travelNameTextField.layer.borderColor =
