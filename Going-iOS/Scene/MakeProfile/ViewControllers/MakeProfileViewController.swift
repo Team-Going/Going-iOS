@@ -375,7 +375,6 @@ private extension MakeProfileViewController {
             do {
                 try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
                 let nextVC = UserTestSplashViewController()
-                nextVC.nickName = userName ?? ""
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             catch {
