@@ -84,7 +84,7 @@ private extension TravelTestCollectionViewCell {
     func setStyle() {
         backgroundColor = .white000
         layer.cornerRadius = 6
-        layer.borderColor = UIColor.gray200.cgColor
+        layer.borderColor = UIColor.gray100.cgColor
         layer.borderWidth = 1
     }
     
