@@ -148,7 +148,6 @@
 		F4E9E9CF2B593AB000B0EAAC /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9E9CE2B593AAF00B0EAAC /* NetworkCheck.swift */; };
 		F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521742B3440D7000E6E1E /* AppDelegate.swift */; };
 		F4F521772B3440D7000E6E1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521762B3440D7000E6E1E /* SceneDelegate.swift */; };
-		F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521782B3440D7000E6E1E /* ViewController.swift */; };
 		F4F5217E2B3440DA000E6E1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4F5217D2B3440DA000E6E1E /* Assets.xcassets */; };
 		F4F521812B3440DA000E6E1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F5217F2B3440DA000E6E1E /* LaunchScreen.storyboard */; };
 		F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F5218B2B346373000E6E1E /* UserDefaultToken.swift */; };
@@ -331,7 +330,6 @@
 		F4F521712B3440D7000E6E1E /* Going-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Going-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F521742B3440D7000E6E1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F521762B3440D7000E6E1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F4F521782B3440D7000E6E1E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F4F5217D2B3440DA000E6E1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4F521802B3440DA000E6E1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4F521822B3440DA000E6E1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1006,7 +1004,6 @@
 				F4F521962B346760000E6E1E /* Network */,
 				F4F521882B344ED1000E6E1E /* Application */,
 				F4F521892B3462FC000E6E1E /* Global */,
-				F4F521782B3440D7000E6E1E /* ViewController.swift */,
 			);
 			path = "Going-iOS";
 			sourceTree = "<group>";
@@ -1462,7 +1459,6 @@
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
 				F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */,
 				F45CA1672B5306D600F3790C /* BasicResponseDTO.swift in Sources */,
-				F4F521792B3440D7000E6E1E /* ViewController.swift in Sources */,
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
 				948FBCA32B53D05700D9C779 /* MemberProgressView.swift in Sources */,
@@ -1723,7 +1719,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HV6BJXV65Q;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1741,7 +1737,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Going.Going-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1765,7 +1761,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Going-iOS/Going-iOS.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HV6BJXV65Q;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1783,7 +1779,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Going.Going-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

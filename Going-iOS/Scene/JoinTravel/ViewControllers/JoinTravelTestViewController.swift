@@ -29,7 +29,7 @@ final class JoinTravelTestViewController: UIViewController {
         }
     }
     
-    private var joinTravelTestRequestData = JoinTravelTestRequestStruct(styleA: 0, sytleB: 0, styleC: 0, styleD: 0, sylteE: 0)
+    private var joinTravelTestRequestData = JoinTravelTestRequestStruct(styleA: 0, styleB: 0, styleC: 0, styleD: 0, styleE: 0)
     
     /// 선택된 답변을 저장할 배열
     private lazy var selectedAnswers: [Int?] = Array(repeating: nil, count: travelTestQuestionDummy.count)
@@ -154,6 +154,7 @@ private extension JoinTravelTestViewController {
     
     @objc
     func nextButtonTapped() {
+        toDTO()
         joinTravel()
     }
 }
@@ -246,5 +247,18 @@ extension JoinTravelTestViewController {
                 handleError(error)
             }
         }
+    }
+    
+    func toDTO() {
+        self.joinTravelTestRequestData.styleA = max((selectedAnswers[0] ?? 0) - 1, 0)
+        self.joinTravelTestRequestData.styleB = max((selectedAnswers[1] ?? 0) - 1, 0)
+        self.joinTravelTestRequestData.styleC = max((selectedAnswers[2] ?? 0) - 1, 0)
+        self.joinTravelTestRequestData.styleD = max((selectedAnswers[3] ?? 0) - 1, 0)
+        self.joinTravelTestRequestData.styleE = max((selectedAnswers[4] ?? 0) - 1, 0)
+//        if let data = self.joinTravelTestRequestData.toDTOData() {
+//            joinTravelTestRequestData = data
+//        }
+        
+        
     }
 }

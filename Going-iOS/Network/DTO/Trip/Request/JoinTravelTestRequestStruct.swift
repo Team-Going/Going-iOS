@@ -10,9 +10,15 @@ import Foundation
 // MARK: - JoinTravelTest
 
 struct JoinTravelTestRequestStruct: Request {
-    let styleA: Int
-    let sytleB: Int
-    let styleC: Int
-    let styleD: Int
-    let sylteE: Int
+    var styleA: Int
+    var styleB: Int
+    var styleC: Int
+    var styleD: Int
+    var styleE: Int
+}
+
+extension JoinTravelTestRequestStruct {
+    func toDTOData() -> JoinTravelTestRequestStruct {
+        return JoinTravelTestRequestStruct(styleA: self.styleA, styleB: self.styleB, styleC: self.styleC, styleD: self.styleD, styleE: self.styleE)
+    }
 }
