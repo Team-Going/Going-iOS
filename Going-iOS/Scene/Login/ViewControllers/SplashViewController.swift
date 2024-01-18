@@ -13,20 +13,28 @@ import Lottie
 final class SplashViewController: UIViewController {
     
     private let lottieView = LottieAnimationView()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         setStyle()
         setHierarchy()
         setLayout()
         setAnimation()
-
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if !NetworkCheck.shared.isConnected {
+            DOOToast.show(message: "네트워크 상태를 확인해주세요", duration: 3 ,insetFromBottom: 100, completion: {
+                exit(0)
+            })
+        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-    }
 }
 
 private extension SplashViewController {

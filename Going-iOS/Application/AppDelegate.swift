@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CheckPhotoAccessProtocol 
         let kakaoNativeAppKey = Config.kakaoNativeAppKey
         KakaoSDK.initSDK(appKey: kakaoNativeAppKey)
         
+        NetworkCheck.shared.startMonitoring()
+        
         return true
     }
     
