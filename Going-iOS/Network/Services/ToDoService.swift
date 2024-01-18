@@ -47,7 +47,7 @@ final class ToDoService: Serviceable {
     }
     
     func postCreateToDo(tripId: Int, requestBody: CreateToDoRequestStruct) async throws {
-
+        
         let param = requestBody.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)
         
