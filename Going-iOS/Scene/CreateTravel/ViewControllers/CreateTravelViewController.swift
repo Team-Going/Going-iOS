@@ -51,7 +51,7 @@ final class CreateTravelViewController: UIViewController {
     
     private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular),
                                                color: .gray200,
-                                               text: "0/15")
+                                               text: "0/20")
     
     private let warningLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
@@ -275,18 +275,19 @@ private extension CreateTravelViewController {
         createTravelButton.currentType = (!isTravelNameTextFieldEmpty
                                           && isStartDateSet
                                           && isEndDateSet
+                                          && isTravelNameTextFieldGood
                                           && isDateValid
                                           && isEndDateNotPast) ? .enabled : .unabled
     }
     
     func travelNameTextFieldCheck() {
         guard let text = travelNameTextField.text else { return }
-        characterCountLabel.text = "\(text.count) / 15"
+        characterCountLabel.text = "\(text.count) / 20"
         
-        if text.count >  15 {
+        if text.count >  20 {
             travelNameTextField.textColor = .red500
             warningLabel.isHidden = false
-            warningLabel.text = "이름은 15자 이하여야 합니다"
+            warningLabel.text = "이름은 20자 이하여야 합니다"
             isTravelNameTextFieldGood = false
         } else if text.count == 0 {
             travelNameTextField.layer.borderColor =
@@ -304,6 +305,7 @@ private extension CreateTravelViewController {
             self.isTravelNameTextFieldGood = true
             travelNameTextField.layer.borderColor = UIColor.gray700.cgColor
             characterCountLabel.textColor = .gray400
+            travelNameTextField.textColor = .gray400
             warningLabel.isHidden = true
         }
         updateCreateButtonState()
@@ -361,7 +363,7 @@ private extension CreateTravelViewController {
     @objc
     func travelNameTextFieldDidChange() {
         travelNameTextFieldCheck()
-        updateCreateButtonState()
+//        updateCreateButtonState()
     }
 }
 
@@ -413,18 +415,18 @@ extension CreateTravelViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let text = textField.text ?? ""
-        let maxLength = 15
-        
-        if text.count > maxLength {
-            let startIndex = text.startIndex
-            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
-            let fixedText = String(text[startIndex...endIndex])
-            textField.text = fixedText
-            return
-        }
-    }
+//    func textFieldDidChangeSelection(_ textField: UITextField) {
+//        let text = textField.text ?? ""
+//        let maxLength = 15
+//        
+//        if text.count > maxLength {
+//            let startIndex = text.startIndex
+//            let endIndex = text.index(startIndex, offsetBy: maxLength - 1)
+//            let fixedText = String(text[startIndex...endIndex])
+//            textField.text = fixedText
+//            return
+//        }
+//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         travelNameTextFieldCheck()
