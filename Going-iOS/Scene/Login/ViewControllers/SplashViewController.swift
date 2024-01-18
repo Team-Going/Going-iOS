@@ -12,12 +12,8 @@ import Lottie
 
 final class SplashViewController: UIViewController {
     
-    private let lottieView: LottieAnimationView = {
-       let lottieView = LottieAnimationView(name: "dooripsplash2")
-        lottieView.contentMode = .scaleAspectFill
-        lottieView.loopMode = .playOnce
-        return lottieView
-    }()
+    private let lottieView = LottieAnimationView()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +21,25 @@ final class SplashViewController: UIViewController {
         setStyle()
         setHierarchy()
         setLayout()
+        setAnimation()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
+    }
+}
+
+private extension SplashViewController {
+    
+    func setAnimation() {
+        lottieView.animation = .named("dooripsplash2")
+        lottieView.loopMode = .playOnce
         lottieView.play(completion: {completed in
             if completed {
                 self.checkUserStatus()
             }
         })
     }
-}
-
-private extension SplashViewController {
     func setStyle() {
         self.view.backgroundColor = .red400
     }
@@ -88,10 +91,9 @@ extension SplashViewController: ViewControllerServiceable {
 extension SplashViewController {
     func checkUserStatus() {
         
-        guard UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) != nil else {
+        if UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) == nil {
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
-            return
         }
         
         Task {
