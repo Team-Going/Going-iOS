@@ -21,7 +21,6 @@ class DashBoardViewController: UIViewController {
     
     private var travelListDummy: DashBoardResponseSturct? {
         didSet {
-//            filterTravels()
             setNoDataView()
             setNaviTitle()
             dashBoardCollectionView.reloadData()
@@ -147,7 +146,6 @@ private extension DashBoardViewController {
             $0.bottom.equalTo(createTravelButton.snp.top)
         }
 
-        
         navigationTitle.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(ScreenUtils.getHeight(24))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(24))
@@ -182,7 +180,6 @@ private extension DashBoardViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(40))
         }
-        
     }
     
     func setDelegate() {
@@ -273,7 +270,6 @@ extension DashBoardViewController: UICollectionViewDataSource {
 
 extension DashBoardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let vc = OurToDoViewController()
         let vc = DOOTabbarViewController()
         tripId = travelListDummy?.trips[indexPath.row].tripID ?? 0
         

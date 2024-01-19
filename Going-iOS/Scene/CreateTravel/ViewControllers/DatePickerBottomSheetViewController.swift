@@ -22,7 +22,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
     
     // MARK: - UI Properties
     
-    // 기존 화면을 흐려지게 만들기 위한 뷰
+    /// 기존 화면을 흐려지게 만들기 위한 뷰
     let dimmedBackView: UIView = {
         let view = UIView()
         view.alpha = 0.1
@@ -30,7 +30,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
         return view
     }()
     
-    // 바텀 시트 뷰
+    /// 바텀 시트 뷰
     private let bottomSheetView: UIView = {
         let view = UIView()
         view.backgroundColor = .white000
@@ -53,7 +53,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
         return picker
     }()
     
-    // dismiss Indicator View UI 구성 부분
+    /// dismiss Indicator View
     private let dismissIndicatorView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray200
@@ -79,36 +79,6 @@ final class DatePickerBottomSheetViewController: UIViewController {
         super.viewDidAppear(animated)
         
         showBottomSheet()
-    }
-    
-    // MARK: - @objc Methods
-
-    /// UITapGestureRecognizer 연결 메서드
-    @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
-        delegate?.didSelectDate(date: datePickerView.date)
-        hideBottomSheetAndGoBack()
-    }
-    
-    @objc private func confirmButtonTapped() {
-        hideBottomSheetAndGoBack()
-    }
-    
-    /// UISwipeGestureRecognizer 연결 메서드
-    @objc private func panGesture(_ recognizer: UISwipeGestureRecognizer) {
-        if recognizer.state == .ended {
-            switch recognizer.direction {
-            case .down:
-                hideBottomSheetAndGoBack()
-                delegate?.didSelectDate(date: datePickerView.date)
-            default:
-                break
-            }
-        }
-    }
-    
-    @objc private func confirmButtonTapped(_ sender: UIButton) {
-        delegate?.didSelectDate(date: datePickerView.date)
-        hideBottomSheetAndGoBack()
     }
 }
 
@@ -137,7 +107,6 @@ private extension DatePickerBottomSheetViewController {
         view.addGestureRecognizer(swipeGesture)
     }
     
-    // 레이아웃 세팅
     func setLayout() {
         dimmedBackView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -207,5 +176,33 @@ private extension DatePickerBottomSheetViewController {
     @objc func datePickerChanged() {
         let selectedDate = datePickerView.date
         delegate?.datePickerDidChanged(date: selectedDate)
+    }
+
+    /// UITapGestureRecognizer 연결 메서드
+    @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
+        delegate?.didSelectDate(date: datePickerView.date)
+        hideBottomSheetAndGoBack()
+    }
+    
+    @objc private func confirmButtonTapped() {
+        hideBottomSheetAndGoBack()
+    }
+    
+    /// UISwipeGestureRecognizer 연결 메서드
+    @objc private func panGesture(_ recognizer: UISwipeGestureRecognizer) {
+        if recognizer.state == .ended {
+            switch recognizer.direction {
+            case .down:
+                hideBottomSheetAndGoBack()
+                delegate?.didSelectDate(date: datePickerView.date)
+            default:
+                break
+            }
+        }
+    }
+    
+    @objc private func confirmButtonTapped(_ sender: UIButton) {
+        delegate?.didSelectDate(date: datePickerView.date)
+        hideBottomSheetAndGoBack()
     }
 }

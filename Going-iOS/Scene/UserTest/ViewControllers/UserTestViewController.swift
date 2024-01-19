@@ -249,7 +249,6 @@ private extension UserTestViewController {
         selectedButton?.layer.borderWidth = 0
         selectedButton = nil
 
-//        resetButtons()
         if index < userTestDataStruct.count - 1 {
             buttonIndexList.append(self.buttonIndex)
             // 질문이 마지막이 아닌 경우
