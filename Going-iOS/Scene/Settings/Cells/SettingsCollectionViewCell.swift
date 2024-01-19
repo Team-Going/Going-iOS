@@ -49,7 +49,7 @@ final class SettingsCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .pretendard(.detail1_regular)
         label.textColor = .gray300
-        label.text = "v1.0"
+        label.text = "v1.1.0"
         label.isHidden = true
         return label
     }()

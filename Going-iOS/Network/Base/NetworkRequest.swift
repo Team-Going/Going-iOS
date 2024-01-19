@@ -47,8 +47,6 @@ struct NetworkRequest {
         /// 2. Body에 필요한 정보 DATA로 encode
           /// let params = token.toDictionary()
            ///let body = try JSONSerialization.data(withJSONObject: params, options: [])
-        ///
-        ///
        
 
         guard let urlRequestURL = urlComponents?.url?.appendingPathComponent(self.path) else {

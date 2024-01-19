@@ -39,6 +39,7 @@ final class SplashViewController: UIViewController {
 private extension SplashViewController {
     
     func setAnimation() {
+        lottieView.contentMode = .scaleAspectFill
         lottieView.animation = .named("dooripsplash3")
         lottieView.loopMode = .playOnce
         lottieView.play(completion: {completed in
@@ -70,7 +71,6 @@ extension SplashViewController: ViewControllerServiceable {
         switch error {
         case .clientError(let message):
             print(message)
-//            DOOToast.show(message: "\(message)", insetFromBottom: ScreenUtils.getHeight(80))
         case .serverError:
             DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         case .unAuthorizedError:

@@ -141,4 +141,9 @@ private extension DOONavigationBar {
     func popToRootVC() {
         viewController?.tabBarController?.navigationController?.popViewController(animated: true)
     }
+    
+    @objc
+    func saveImageButtonTapped() {
+        
+    }
 }
