@@ -1,10 +1,3 @@
-//
-//  MyToDoViewController.swift
-//  Going-iOS
-//
-//  Created by 윤희슬 on 1/7/24.
-//
-
 import UIKit
 
 import SnapKit
@@ -12,11 +5,6 @@ import SnapKit
 final class MyToDoViewController: UIViewController {
     
     // MARK: - UI Property
-    var myId: Int = 0
-    
-    var tripId: Int = 0
-    
-    private var isSetDashBoardRoot: Bool = false
 
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .myToDo, backgroundColor: .gray50)
@@ -77,10 +65,13 @@ final class MyToDoViewController: UIViewController {
     
     private var index: Int = 0
     
+    var myId: Int = 0
+    
+    var tripId: Int = 0
+    
+    private var isSetDashBoardRoot: Bool = false
     
     var detailToDoData: GetDetailToDoResponseStuct = GetDetailToDoResponseStuct(title: "", endDate: "", allocators: [], memo: "", secret: false)
-    
-    
     
     private var headerData: MyToDoHeaderAppData? {
         didSet {
@@ -288,7 +279,6 @@ private extension MyToDoViewController {
     }
     
     
-    
     /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
     func setToDoView(before: String, naviBarTitle: String, isActivate: Bool) {
         let todoVC = ToDoViewController()
@@ -296,8 +286,6 @@ private extension MyToDoViewController {
         todoVC.isActivateView = isActivate
         todoVC.beforeVC = before
         todoVC.myId = self.myId
-//        todoVC.data = self.detailToDoData
-//        todoVC.manager = self.detailToDoData.allocators
         todoVC.todoId = self.todoId
         todoVC.tripId = self.tripId
         self.navigationController?.pushViewController(todoVC, animated: false)
@@ -337,7 +325,6 @@ private extension MyToDoViewController {
     // MARK: - objc Method
 
     //TODO: - 서버통신 데이터 수정 필요
-
     
     //추가버튼눌렀을때
     @objc
@@ -406,20 +393,6 @@ extension MyToDoViewController: MyToDoCollectionViewDelegate {
     }
 
 }
-
-//extension MyToDoViewController: TabBarDelegate {
-//    func tapOurToDo() {
-//        let ourToDoVC = OurToDoViewController()
-//        ourToDoVC.tripId = self.tripId
-//        self.navigationController?.pushViewController(ourToDoVC, animated: false)
-//    }
-//    
-//    func tapMyToDo() {
-//        let myToDoVC = MyToDoViewController()
-//        myToDoVC.tripId = self.tripId
-//        self.navigationController?.pushViewController(myToDoVC, animated: false)
-//    }
-//}
 
 extension MyToDoViewController: UICollectionViewDelegate {}
 

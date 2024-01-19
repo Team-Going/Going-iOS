@@ -2,14 +2,9 @@ import UIKit
 
 import SnapKit
 
-// TODO: - 네비바 & 탭바 추후 변경
-
 final class OurToDoViewController: UIViewController {
     
-    
     // MARK: - UI Property
-    
-    private var isSetDashBoardRoot: Bool = false
     
     private lazy var contentView: UIView = UIView()
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
@@ -31,7 +26,6 @@ final class OurToDoViewController: UIViewController {
         return headerView
     }()
     private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
-        
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .red700
@@ -46,6 +40,7 @@ final class OurToDoViewController: UIViewController {
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
     }()
+    
     private let emptyView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -57,10 +52,12 @@ final class OurToDoViewController: UIViewController {
         imageView.tintColor = .gray100
         return imageView
     }()
-    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi),
-                                                   color: .gray200,
-                                                   text: StringLiterals.OurToDo.pleaseAddToDo,
-                                                   alignment: .center)
+    private let emptyViewLabel: UILabel = DOOLabel(
+        font: .pretendard(.body3_medi),
+        color: .gray200,
+        text: StringLiterals.OurToDo.pleaseAddToDo,
+        alignment: .center
+    )
     
     private let ourToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
@@ -68,16 +65,19 @@ final class OurToDoViewController: UIViewController {
         return imgView
     }()
     
-    var progress: String = "incomplete"
     
     // MARK: - Property
+    
+    private var isSetDashBoardRoot: Bool = false
     
     var initializeCode: Bool = false
 
     var tripId: Int = 0
     
     var segmentIndex: Int = 0
-
+    
+    var progress: String = "incomplete"
+    
     private var headerData: OurToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
@@ -100,9 +100,7 @@ final class OurToDoViewController: UIViewController {
                 await loadData()
 
             }
-//            await loadData()
             getOurToDoHeaderData()
-            
         }
     }
     
@@ -247,13 +245,11 @@ private extension OurToDoViewController {
       
     }
     
-    
     func loadData() async {
         self.setEmptyView()
 
         ourToDoCollectionView.reloadData()
 
-        // Update the constraint based on the new content size
         DispatchQueue.main.async {
             let conetentHeight = CGFloat(self.ourToDoData?.count ?? 0) * ScreenUtils.getHeight(99)
             self.ourToDoCollectionView.snp.remakeConstraints {
@@ -298,8 +294,6 @@ private extension OurToDoViewController {
         self.ourToDoCollectionView.register(OurToDoCollectionViewCell.self, forCellWithReuseIdentifier: OurToDoCollectionViewCell.identifier)
     }
     
-   
-    
     func setDelegate() {
         self.scrollView.delegate = self
         self.ourToDoCollectionView.dataSource = self
@@ -307,21 +301,8 @@ private extension OurToDoViewController {
         self.tripMiddleView.delegate = self
     }
     
-    /// 미완료/완료에 따라 todo cell style 설정해주는 메소드
-//    func setCellStyle(cell: OurToDoCollectionViewCell, data: ToDoAppData, textColor: UIColor, isUserInteractionEnabled: Bool) {
-//        cell.ourToDoData = data
-//        cell.todoTitleLabel.textColor = textColor
-//        cell.managerCollectionView.isUserInteractionEnabled = isUserInteractionEnabled
-//    }
-    
     /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
     func setToDoView(before: String , naviBarTitle: String, isActivate: Bool) {
-        //        var manager: [Allocators] = []
-        //        for friendProfile in self.tripMiddleView.friendProfile {
-        //            manager.append(Manager(name: friendProfile.name, isManager: false))
-        //        }
-        //
-//        detailToDoData = toDetailAppData()
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
         guard let header = headerData else { return }
@@ -358,18 +339,11 @@ private extension OurToDoViewController {
         print("popToDashBoardView")
     }
     
-    // TODO: - 아이디 값으로 본인 확인 필요
     @objc
     func pushToAddToDoView() {
         
         setToDoView(before: "our" , naviBarTitle: "추가", isActivate: true)
     }
-    
-//    @objc
-//    func pushToInquiryToDoVC() {
-//        
-//        setToDoView(before: "our" , naviBarTitle: "조회", isActivate: false)
-//    }
     
     @objc
     func didChangeValue(segment: UISegmentedControl) {
@@ -397,7 +371,6 @@ private extension OurToDoViewController {
 
 extension OurToDoViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // contentOffset.y: 손가락을 위로 올리면 + 값, 손가락을 아래로 내리면 - 값
         let topPadding = scrollView.safeAreaInsets.top
         
         let shouldShowSticky = topPadding + scrollView.contentOffset.y > ourToDoHeaderView.frame.minY
@@ -420,14 +393,7 @@ extension OurToDoViewController: UIScrollViewDelegate {
         }
     }
 }
-//
-//extension OurToDoViewController: OurToDoCollectionViewDelegate {
-//    func pushToToDo() {
-////        setToDoView(before: "our" , naviBarTitle: "조회", isActivate: false)
-//    }
-//}
 
-//탭바누를때
 extension OurToDoViewController: TabBarDelegate {
     func tapOurToDo() {
         let ourToDoVC = OurToDoViewController()
@@ -449,7 +415,6 @@ extension OurToDoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ourToDoData?.count ?? 0
     }
-
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let ourToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: OurToDoCollectionViewCell.identifier, for: indexPath) as? OurToDoCollectionViewCell else {return UICollectionViewCell()}
@@ -467,10 +432,6 @@ extension OurToDoViewController: UICollectionViewDataSource {
         }
         return ourToDoCell
     }
-    
-    
-    
-    // TODO: - '할일 조회' 뷰 연결
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

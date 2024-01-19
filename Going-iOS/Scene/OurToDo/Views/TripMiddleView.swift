@@ -24,8 +24,17 @@ final class TripMiddleView: UIView {
         imgView.isUserInteractionEnabled = true
         return imgView
     }()
-    private lazy var tripProgressLabel: UILabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray700, text: StringLiterals.OurToDo.ourProgress, alignment: .left)
-    private lazy var percentageLabel: UILabel = DOOLabel(font: .pretendard(.body2_medi), color: .red400, alignment: .right)
+    private lazy var tripProgressLabel: UILabel = DOOLabel(
+        font: .pretendard(.body2_medi),
+        color: .gray700,
+        text: StringLiterals.OurToDo.ourProgress,
+        alignment: .left
+    )
+    private lazy var percentageLabel: UILabel = DOOLabel(
+        font: .pretendard(.body2_medi),
+        color: .red400,
+        alignment: .right
+    )
     private var tripProgressBar: UIProgressView = {
         let progressBar = UIProgressView()
         progressBar.trackTintColor = UIColor.gray100
@@ -35,26 +44,26 @@ final class TripMiddleView: UIView {
         progressBar.layer.cornerRadius = 6
         return progressBar
     }()
-    
-    
+
     private lazy var tripFriendsContainer: UIView = {
         let view = UIView()
         let friendsLabelTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
         view.addGestureRecognizer(friendsLabelTapGestureRecognizer)
         return view
-        
     }()
-    
-    
-    private let tripFriendsLabel: DOOLabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray700, text: StringLiterals.OurToDo.friends, alignment: .left)
-    
-    
+    private let tripFriendsLabel: DOOLabel = DOOLabel(
+        font: .pretendard(.body2_medi),
+        color: .gray700,
+        text: StringLiterals.OurToDo.friends,
+        alignment: .left
+    )
     private lazy var tripFriendsBtn: UIButton = {
         let btn = UIButton()
         btn.addTarget(self, action: #selector(pushToInquiryFriendsView), for: .touchUpInside)
         return btn
     }()
     private lazy var tripFriendsCollectionView: UICollectionView = {setCollectionView()}()
+    
     private lazy var addButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .gray50
@@ -64,7 +73,12 @@ final class TripMiddleView: UIView {
         btn.addTarget(self, action: #selector(pushToAddFriendsView), for: .touchUpInside)
         return btn
     }()
-    private lazy var addLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray500, text: StringLiterals.OurToDo.invite, alignment: .center)
+    private lazy var addLabel: UILabel = DOOLabel(
+        font: .pretendard(.detail3_regular),
+        color: .gray500,
+        text: StringLiterals.OurToDo.invite,
+        alignment: .center
+    )
     var gradientView: UIView = UIView()
     var addStackView: UIStackView = {
         let stackView = UIStackView()
@@ -73,6 +87,7 @@ final class TripMiddleView: UIView {
         stackView.backgroundColor = .white000
         return stackView
     }()
+    
     
     // MARK: - Property
     
@@ -98,9 +113,7 @@ final class TripMiddleView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
-        
+
         setHierarchy()
         registerCell()
         setLayout()
@@ -127,18 +140,6 @@ final class TripMiddleView: UIView {
     func didTapView(_ sender: UITapGestureRecognizer) {
         self.delegate?.pushToMemberVC()
     }
-    
-    //    @objc
-    //    func pushToFriendProfileView(_ sender: UITapGestureRecognizer) {
-    //        print("pushToFriendProfileView")
-    //    }
-    
-    //    func bindData(percentage: Int, friends: [Friend]) {
-    //        self.percentageLabel.text = String(percentage) + "%"
-    //        self.tripProgressBar.progress = Float(percentage) * 0.01
-    //        self.friendProfile = friends
-    //        self.tripFriendsCollectionView.reloadData()
-    //    }
 }
 
 // MARK: - Private Method
@@ -253,6 +254,7 @@ private extension TripMiddleView {
     }
 }
 
+
 // MARK: - Extension
 
 extension TripMiddleView: UICollectionViewDelegate {}
@@ -268,11 +270,7 @@ extension TripMiddleView: UICollectionViewDataSource {
         
         userType = participants?[indexPath.row].result ?? 0
         friendsCell.profileImageView.image = userProfileImageSet[userType]
-        
-        // TODO: - 변수 만들어놓고 탭하면 담당자 id 세팅해주기
-        
-        //        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToFriendProfileView(_:)))
-        //        friendsCell.profileStackView.addGestureRecognizer(gesture)
+
         return friendsCell
     }
 }
