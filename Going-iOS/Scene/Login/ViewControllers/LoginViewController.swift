@@ -236,7 +236,6 @@ private extension LoginViewController {
 
 extension LoginViewController: ViewControllerServiceable {
     
-    //추후에 에러코드에 따른 토스트 메세지 구현해야됨
     func handleError(_ error: NetworkError) {
             
         switch error {
@@ -251,10 +250,7 @@ extension LoginViewController: ViewControllerServiceable {
         default:
             DOOToast.show(message: error.description, insetFromBottom: ScreenUtils.getHeight(80))
         }
-        
-        
         ableLoginButton()
-
     }
 }
 //애플로그인
