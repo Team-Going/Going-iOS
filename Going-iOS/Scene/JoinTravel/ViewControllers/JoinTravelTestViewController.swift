@@ -149,9 +149,7 @@ private extension JoinTravelTestViewController {
     }
     
     // MARK: - @objc Methods
-    
-    // TODO: - 분기처리 필요
-    
+        
     @objc
     func nextButtonTapped() {
         toDTO()
@@ -255,10 +253,5 @@ extension JoinTravelTestViewController {
         self.joinTravelTestRequestData.styleC = max((selectedAnswers[2] ?? 0) - 1, 0)
         self.joinTravelTestRequestData.styleD = max((selectedAnswers[3] ?? 0) - 1, 0)
         self.joinTravelTestRequestData.styleE = max((selectedAnswers[4] ?? 0) - 1, 0)
-//        if let data = self.joinTravelTestRequestData.toDTOData() {
-//            joinTravelTestRequestData = data
-//        }
-        
-        
     }
 }

@@ -23,11 +23,13 @@ final class CreatingSuccessViewController: UIViewController {
             self.dateLabel.text = data.startDate + "-" + data.endDate
             self.inviteCodeLabel.text = data.code
             let vc = OurToDoViewController()
+            
             if data.day <= 0 {
                 self.dDayLabel.text = "여행 중"
             } else {
                 self.dDayLabel.text = "D-" + "\(data.day)"
             }
+            
             if let tripId = self.createTravelResponseData?.tripId {
                 vc.tripId = tripId
             } else { return }
@@ -96,6 +98,7 @@ final class CreatingSuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setStyle()
         setHierarchy()
         setLayout()
@@ -219,9 +222,9 @@ private extension CreatingSuccessViewController {
         let inviteCode =  String(filteredString)
         let travelTitle = String(filteredTitle)
         
-        // 카카오톡 설치여부 확인
+        /// 카카오톡 설치여부 확인
         if ShareApi.isKakaoTalkSharingAvailable() {
-            // 카카오톡으로 카카오톡 공유 가능
+            /// 카카오톡으로 카카오톡 공유 가능
             ShareApi.shared.shareCustom(templateId: Int64(templateId) , templateArgs:["KEY":"\(inviteCode)", "NAME":"\(travelTitle)"]) {(sharingResult, error) in
                 if let error = error {
                     print(error)
@@ -235,7 +238,7 @@ private extension CreatingSuccessViewController {
             }
         }
         else {
-            // 카카오톡 미설치 시, 웹 뷰
+            /// 카카오톡 미설치 시, 웹 뷰
             if ShareApi.shared.makeCustomUrl(templateId: Int64(templateId), templateArgs:["title":"제목입니다.", "description":"설명입니다."]) != nil {
                 let kakaoVC = WebViewController(urlString: "https://accounts.kakao.com")
                 self.present(kakaoVC, animated: true)
