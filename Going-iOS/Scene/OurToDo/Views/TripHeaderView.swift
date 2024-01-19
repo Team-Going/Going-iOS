@@ -16,15 +16,26 @@ final class TripHeaderView: UIView {
         stackView.spacing = 8
         return stackView
     }()
-    lazy var tripNameLabel: UILabel = DOOLabel(font: .pretendard(.head2), color: .gray700, alignment: .left)
-    lazy var tripDdayLabel: UILabel = DOOLabel(font: .pretendard(.head2), color: .gray700, alignment: .left)
-    lazy var tripDateLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray300, alignment: .left)
+    lazy var tripNameLabel: UILabel = DOOLabel(
+        font: .pretendard(.head2),
+        color: .gray700,
+        alignment: .left
+    )
+    lazy var tripDdayLabel: UILabel = DOOLabel(
+        font: .pretendard(.head2),
+        color: .gray700,
+        alignment: .left
+    )
+    lazy var tripDateLabel: UILabel = DOOLabel(
+        font: .pretendard(.body3_medi),
+        color: .gray300,
+        alignment: .left
+    )
     let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: ImageLiterals.OurToDo.icCalendar)
     private var dDay: Int = 0
     
     // MARK: - Property
     
-    //ourtodo header data
     var tripData: OurToDoHeaderAppData? {
         didSet {
             guard let data = tripData else {return}
@@ -81,7 +92,6 @@ final class TripHeaderView: UIView {
         }
     }
     
-    //mytodo header data
     var myToDoHeaderData: [String]? {
         didSet {
             guard let data = myToDoHeaderData else {return}
@@ -141,5 +151,3 @@ private extension TripHeaderView {
         self.backgroundColor = UIColor.gray50
     }
 }
-
-

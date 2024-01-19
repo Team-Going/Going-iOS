@@ -19,14 +19,17 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    // TODO: - 서버통신 시 이미지 수정
     var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.OurToDo.icCalendar
         imageView.layer.masksToBounds = true
         return imageView
     }()
-    var friendNameLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray500, alignment: .center)
+    var friendNameLabel: UILabel = DOOLabel(
+        font: .pretendard(.detail3_regular),
+        color: .gray500,
+        alignment: .center
+    )
 
     // MARK: - Life Cycle
 
@@ -41,9 +44,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //TODO: - 서버통신 할 때 이미지 세팅 수정 필요
-    
+        
     func bindData(data: Participant) {
         self.profileImageView.image = ImageLiterals.OurToDo.mainViewIcon
         self.friendNameLabel.text = data.name

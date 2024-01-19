@@ -3,25 +3,7 @@ import UIKit
 import SnapKit
 
 final class ToDoViewController: UIViewController {
-    
-    // MARK: - 데이트피커에서 받은 데이트
-    
-    var selectedDate: Date?
-    
-    // MARK: - Network
-    
-    var tripId: Int = 0
-    
-    var myId: Int = 0
-    
-    private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
-    
-    // MARK: - UI Components
-    
-    var idSet: [Int] = []
-    
-    var fromOurTodoParticipants: [Participant] = []
-    
+
     private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo), backgroundColor: .white000)
     private let underlineView: UIView = {
         let view = UIView()
@@ -62,8 +44,7 @@ final class ToDoViewController: UIViewController {
         label.isHidden = true
         return label
     }()
-    
-    
+        
     private var todoTextFieldCount: Int = 0
     private let countToDoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/15")
     private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.deadline)
@@ -78,6 +59,7 @@ final class ToDoViewController: UIViewController {
         label.addGestureRecognizer(gesture)
         return label
     }()
+    
     private let bottomSheetVC = DatePickerBottomSheetViewController()
     private let dropdownContainer: UIView = UIView()
     private lazy var dropdownButton: UIButton = {
@@ -89,11 +71,8 @@ final class ToDoViewController: UIViewController {
     }()
     private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.allocation)
     
-    
     private let todoManagerCollectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
-        
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
@@ -102,7 +81,6 @@ final class ToDoViewController: UIViewController {
         collectionView.isScrollEnabled = false
         return collectionView
     }()
-    
     
     private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.memo)
     private var memoTextViewCount: Int = 0
@@ -118,9 +96,7 @@ final class ToDoViewController: UIViewController {
         return tv
     }()
     private let countMemoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/1000")
-    
     private let buttonView: UIView = UIView()
-    
     private lazy var singleButtonView: DOOButton = {
         let singleBtn = DOOButton(type: .unabled, title: StringLiterals.ToDo.toSave)
         singleBtn.addTarget(self, action: #selector(saveToDo), for: .touchUpInside)
@@ -129,6 +105,23 @@ final class ToDoViewController: UIViewController {
     private lazy var doubleButtonView = DoubleButtonView()
     
     // MARK: - Properties
+    
+    //데이트피커에서 받은 데이트
+    var selectedDate: Date?
+    
+    // MARK: - Network
+    
+    var tripId: Int = 0
+    
+    var myId: Int = 0
+    
+    private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
+    
+    // MARK: - UI Components
+    
+    var idSet: [Int] = []
+    
+    var fromOurTodoParticipants: [Participant] = []
     
     private var isTodoTextFieldGood: Bool = false
     
@@ -144,10 +137,6 @@ final class ToDoViewController: UIViewController {
                 self.manager = [.init(name: "혼자할일", isOwner: true)]
                 peopleCount = 1
             }
-            //            else if navigationBarTitle == "추가" && beforeVC == "our" {
-            ////                self.fromOurTodoParticipants
-            //                self.manager =
-            //            }
         }
     }
     
@@ -234,7 +223,6 @@ final class ToDoViewController: UIViewController {
     
     func setNaviTitle() {
         switch navigationBarTitle {
-            
         case "수정":
             navigationBarView.titleLabel.text = "할일 수정"
         default:
@@ -276,7 +264,6 @@ final class ToDoViewController: UIViewController {
     
     @objc func keyboardWillHide(_ notification: Notification) {
         // 컴포넌트의 Auto Layout 초기 상태로 복원
-        
         // 키보드가 사라질 때 scrollView의 contentInset 초기화
         scrollView.contentInset = UIEdgeInsets.zero
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
@@ -307,28 +294,18 @@ final class ToDoViewController: UIViewController {
             
             changeButtonConfig(isSelected: sender.isSelected, btn: sender)
             
-            
             // 아워투두의 할일 추가의 경우
             
             if beforeVC == "our" {
                 if sender.isSelected {
-                    // 이미 선택된 셀을 또 선택한 경우
-                    print("이미 선택된 셀을 또 선택했습니다.")
                     buttonIndex.removeAll(where: { $0 == sender.tag })
-                    
-                    // 여기에서 필요한 작업을 수행할 수 있습니다.
                 } else {
-                    // 새로운 셀을 선택한 경우
-                    print("셀이 탭되었습니다.")
-                    
                     // 여기에서 필요한 작업을 수행할 수 있습니다.
                     buttonIndex.append(sender.tag)
-                    
                 }
             }
             updateSingleButtonState()
             sender.isSelected = !sender.isSelected
-            
         }
     }
     
@@ -360,7 +337,6 @@ final class ToDoViewController: UIViewController {
             self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: secret)
             print(self.saveToDoData)
             postToDoData()
-            //통신
         }
     }
     
@@ -492,15 +468,12 @@ private extension ToDoViewController {
             $0.bottom.equalToSuperview().inset(40)
         }
     }
-    
-    // TODO: - 할일 조회 일 경우 placeholder 값이 이전에 세팅된 값이어야 함
-    
+        
     func setStyle() {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = .white000
         
-        // 탭 제스처 등록
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         view.addGestureRecognizer(tapGesture)
         navigationBarView.backgroundColor = .white000
@@ -515,15 +488,6 @@ private extension ToDoViewController {
         bottomSheetVC.delegate = self
         doubleButtonView.delegate = self
     }
-    //
-    //    func setCollectionView() -> UICollectionView {
-    //        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    //        collectionView.backgroundColor = .clear
-    //        collectionView.showsHorizontalScrollIndicator = false
-    //        collectionView.showsVerticalScrollIndicator = false
-    //        collectionView.isScrollEnabled = false
-    //        return collectionView
-    //    }
     
     func registerCell() {
         self.todoManagerCollectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
@@ -553,7 +517,6 @@ private extension ToDoViewController {
     }
     
     // 조회 뷰 스타일 세팅 메서드
-    // TODO: - 서버 통신 할 때 버튼 색상 변경 로직 추가 + placeholder랑 비교해서 빈값인지 확인
     func setInquiryStyle() {
         guard let todotext = todoTextfield.placeholder?.count else {return}
         guard let memotext = memoTextView.text?.count else {return}
@@ -674,14 +637,6 @@ extension ToDoViewController: UICollectionViewDataSource{
         else {
             return self.manager.count
         }
-        // 조회할때 - isprivate이면 -> 나만보기
-        // 조회할때 - isprivate이 false -> 그냥 받은거 뿌려주고 왼쪽 주황색
-        
-        // 아워투두 - 내가 없음(isowner)
-        
-        // 아워투두 - 할일추가 - 전체인원나오기
-        
-        //        return self.manager.count
     }
     
     func textViewCountCheck() {
@@ -916,10 +871,6 @@ extension ToDoViewController: DoubleButtonDelegate {
 
 extension ToDoViewController: UICollectionViewDelegateFlowLayout {
     
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    //        return ScreenUtils.getWidth(4)
-    //    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return ScreenUtils.getWidth(3)
     }
@@ -930,9 +881,7 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        //        collectionView.collectionViewLayout.invalidateLayout()
-        
+                
         if beforeVC == "my" {
             if navigationBarTitle == "추가" {
                return CGSize(width: ScreenUtils.getWidth(66), height: ScreenUtils.getHeight(20))
@@ -954,25 +903,6 @@ extension ToDoViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
     }
 }
-//            if data?.secret == true {
-//                let stringLength = manager[indexPath.row].name.size(withAttributes:
-//                                                                        [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width + ScreenUtils.getWidth(12)
-//            }
-//            else {
-//                self.manager[indexPath.row].name.size(withAttributes:
-//                                                        [NSAttributedString.Key.font : UIFont.pretendard(.detail2_regular)]).width
-//            }
-//
-//            return CGSize(width: stringLength + ScreenUtils.getWidth(24), height: ScreenUtils.getHeight(24))
-//        }
-//        else {
-//            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(24))
-//        }
-
-
-
-
-
 
 extension ToDoViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {

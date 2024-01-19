@@ -1,24 +1,16 @@
-//
-//  MyToDoCollectionViewCell.swift
-//  Going-iOS
-//
-//  Created by 윤희슬 on 1/7/24.
-//
-
 import UIKit
 
 protocol MyToDoCollectionViewDelegate: AnyObject {
     func getButtonIndex(index: Int, image: UIImage)
-//    func pushToToDo()
 }
 
 class MyToDoCollectionViewCell: UICollectionViewCell {
+    
     // MARK: - Properties
     
     static let identifier = "MyToDoCollectionViewCell"
     weak var delegate: MyToDoCollectionViewDelegate?
     var manager: [Allocators] = []
-    // TODO: - 사용자 id 값 비교해서 담당자가 본인인지 확인
     var myToDoData: ToDoAppData? {
         didSet {
             guard let myToDoData else {return}
@@ -63,8 +55,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     }()
     lazy var todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)
     private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)
-    
-    
+
     private let  managerCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -75,8 +66,6 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         collectionView.isScrollEnabled = false
         return collectionView
     }()
-    
-    
     
     lazy var checkButton: UIButton = {
         let btn = UIButton()
@@ -161,7 +150,6 @@ private extension MyToDoCollectionViewCell {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
-//        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
         return collectionView
     }
     
@@ -212,7 +200,6 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
         }
         
         // 미완료 / 완료 / 나만보기 태그 색상 세팅
-        // TODO: - id 값으로 본인 확인하고 색상 세팅
         if isComplete == true {
             managerCell.changeLabelColor(color: .gray300)
         }else{
@@ -243,8 +230,7 @@ extension MyToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
+
         //자물쇠
         if myToDoData?.secret == true {
             return CGSize(width: ScreenUtils.getWidth(66), height: ScreenUtils.getHeight(20))
