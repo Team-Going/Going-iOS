@@ -83,13 +83,17 @@ final class MyProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarController?.tabBar.isHidden = true
+        hideTabbar()
         getUserProfile()
     }
 }
 
 private extension MyProfileViewController {
     
+    func hideTabbar() {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
+
+    }
     func setDelegate() {
         myResultView.delegate = self
     }
@@ -270,7 +274,7 @@ extension MyProfileViewController {
     func reIssueJWTToken() {
         Task {
             do {
-                try await AuthService.shared.reIssueJWTToken()
+                try await AuthService.shared.postReIssueJWTToken()
             }
             catch {
                 guard let error = error as? NetworkError else { return }

@@ -75,8 +75,8 @@ class DashBoardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.didChangeValue(sender: self.dashBoardHeaderView.segmentedControl)
         
+        setSegmentDidChange()
         setStyle()
         setHierarchy()
         setLayout()
@@ -99,7 +99,10 @@ class DashBoardViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension DashBoardViewController {
-    
+    func setSegmentDidChange() {
+        self.didChangeValue(sender: self.dashBoardHeaderView.segmentedControl)
+
+    }
     func setStyle() {
         self.view.backgroundColor = .white000
         self.navigationController?.isNavigationBarHidden = true

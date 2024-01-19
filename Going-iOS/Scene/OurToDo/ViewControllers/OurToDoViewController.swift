@@ -113,16 +113,14 @@ final class OurToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emptyViewLabel.isHidden = true
-        self.navigationController?.isNavigationBarHidden = true
+        
         setHierarchy()
         setLayout()
         setDelegate()
         registerCell()
         setStyle()
-        self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
-        self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
-        self.initializeCode = true
+        setSegmentDidChange()
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,26 +133,38 @@ final class OurToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarController?.tabBar.isHidden = false
+        hideTabbar()
         getOurToDoHeaderData()
         getToDoData(progress: self.progress)
-        tripMiddleView.gradientView.setGradient(
-            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
-            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
-            axis: .horizontal)
+        setGradient()
+        
+     
     }
     
     override func viewDidLayoutSubviews() {
-        tripMiddleView.gradientView.setGradient(
-            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
-            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
-            axis: .horizontal)
+        setGradient()
     }
 }
 
 // MARK: - Private method
 
 private extension OurToDoViewController {
+    func setGradient() {
+        tripMiddleView.gradientView.setGradient(
+            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
+            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+            axis: .horizontal)
+    }
+    func hideTabbar() {
+        self.navigationController?.tabBarController?.tabBar.isHidden = false
+
+    }
+    
+    func setSegmentDidChange() {
+        self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
+        self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
+        self.initializeCode = true
+    }
     
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
@@ -263,6 +273,8 @@ private extension OurToDoViewController {
     }
     
     func setStyle() {
+        emptyViewLabel.isHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = .gray50
         self.navigationController?.navigationBar.barTintColor = .white000
         contentView.backgroundColor = .gray50

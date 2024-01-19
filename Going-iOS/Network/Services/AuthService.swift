@@ -90,7 +90,7 @@ final class AuthService: Serviceable {
 
     }
     
-    func reIssueJWTToken() async throws {
+    func postReIssueJWTToken() async throws {
         let userID = UserDefaults.standard.integer(forKey: UserIdDefaults.userID.rawValue)
         let param = ReIssueJWTRequsetDTO(userId: userID).toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)

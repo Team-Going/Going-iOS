@@ -111,16 +111,15 @@ final class MyToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        self.navigationController?.isNavigationBarHidden = true
+        hideNavi()
         setHierachy()
         setDelegate()
         getMyToDoHeaderData()
         registerCell()
         setLayout()
+        setSegmentDidChange()
         setStyle()
-        self.didChangeValue(sender: self.myToDoHeaderView.segmentedControl)
-        self.didChangeValue(sender: self.stickyMyToDoHeaderView.segmentedControl)
-        self.initializeCode = true
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -131,12 +130,8 @@ final class MyToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-        if self.segmentIndex == 0 {
-            getToDoData(progress: "incomplete")
-        } else {
-            getToDoData(progress: "complete")
-        }
+        hideTabbar()
+        setTsegmentIndex()
 
     }
 }
@@ -144,6 +139,26 @@ final class MyToDoViewController: UIViewController {
 // MARK: - Private method
 
 private extension MyToDoViewController {
+    func setTsegmentIndex() {
+        if self.segmentIndex == 0 {
+            getToDoData(progress: "incomplete")
+        } else {
+            getToDoData(progress: "complete")
+        }
+    }
+    func hideTabbar() {
+        self.tabBarController?.tabBar.isHidden = false
+
+    }
+    func hideNavi() {
+        self.navigationController?.isNavigationBarHidden = true
+
+    }
+    
+    func setSegmentDidChange() {
+        self.didChangeValue(sender: self.myToDoHeaderView.segmentedControl)
+        self.didChangeValue(sender: self.stickyMyToDoHeaderView.segmentedControl)
+    }
     
     func setHierachy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
@@ -221,6 +236,7 @@ private extension MyToDoViewController {
         contentView.backgroundColor = .gray50
         tripHeaderView.isUserInteractionEnabled = true
         emptyView.backgroundColor = .white000
+        self.initializeCode = true
     }
     
     func setDelegate() {

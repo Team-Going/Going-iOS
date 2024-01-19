@@ -49,12 +49,15 @@ final class UserTestSplashViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarController?.tabBar.isHidden = true
+        hideTabbar()
     }
 }
 
 private extension UserTestSplashViewController {
-    
+    func hideTabbar() {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
+
+    }
     func setHierarchy() {
         view.addSubviews(userTestSplashImageView, titleLabel, subTitleLabel ,nextButton)
     }

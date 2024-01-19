@@ -83,7 +83,7 @@ class MemberViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarController?.tabBar.isHidden = true
+        hideTabbar()
         getAllData()
     }
 }
@@ -93,6 +93,11 @@ class MemberViewController: UIViewController {
 private extension MemberViewController {
     func setStyle() {
         self.view.backgroundColor = .white000
+    }
+    
+    func hideTabbar() {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
+
     }
     
     func setHierarchy() {
@@ -220,7 +225,7 @@ extension MemberViewController {
     func reIssueJWTToken() {
         Task {
             do {
-                try await AuthService.shared.reIssueJWTToken()
+                try await AuthService.shared.postReIssueJWTToken()
             }
             catch {
                 guard let error = error as? NetworkError else { return }

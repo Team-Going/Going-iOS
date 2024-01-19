@@ -26,18 +26,20 @@ final class SplashViewController: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        
-        if !NetworkCheck.shared.isConnected {
-            DOOToast.show(message: "네트워크 상태를 확인해주세요", duration: 3 ,insetFromBottom: 100, completion: {
-                exit(0)
-            })
-        }
+        networkCheck()
     }
     
 }
 
 private extension SplashViewController {
-    
+    func networkCheck() {
+        if !NetworkCheck.shared.isConnected {
+            DOOToast.show(message: "네트워크 상태를 확인해주세요", duration: 3 ,insetFromBottom: 100, completion: {
+                exit(0)
+            })
+        }
+
+    }
     func setAnimation() {
         lottieView.contentMode = .scaleAspectFill
         lottieView.animation = .named("dooripsplash3")

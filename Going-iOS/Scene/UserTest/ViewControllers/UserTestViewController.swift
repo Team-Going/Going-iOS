@@ -77,14 +77,17 @@ final class UserTestViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarController?.tabBar.isHidden = true
+        hideTabbar()
     }
 
     
 }
 
 private extension UserTestViewController {
-    
+    func hideTabbar() {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
+
+    }
     func makeButton() -> UIButton {
         let button = UIButton()
         button.backgroundColor = .gray50
@@ -285,7 +288,7 @@ extension UserTestViewController {
         Task {
             do {
                 
-                try await OnBoardingService.shared.travelTypeTest(requestDTO: travelTypeRequsetBody)
+                try await OnBoardingService.shared.patchTravelTypeTest(requestDTO: travelTypeRequsetBody)
                 let nextVC = UserTestResultViewController()
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }

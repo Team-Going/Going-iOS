@@ -198,11 +198,7 @@ final class ToDoViewController: UIViewController {
         setDelegate()
         setStyle()
         registerCell()
-        
-        if navigationBarTitle == "추가" {
-            navigationBarView.titleLabel.text = "할일 추가"
-            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.manager, "메모를 입력해 주세요"]
-        }
+        setInfo()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -212,13 +208,25 @@ final class ToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setNaviTitle()
+        addNotification()
+    }
+    
+    func setNaviTitle() {
         if navigationBarTitle == StringLiterals.ToDo.inquiry {
             setInquiryStyle()
         }
         if navigationBarTitle == "조회" {
             self.getDetailToDoDatas(todoId: self.todoId)
         }
-        addNotification()
+    }
+    
+    func setInfo() {
+        if navigationBarTitle == "추가" {
+            navigationBarView.titleLabel.text = "할일 추가"
+            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.manager, "메모를 입력해 주세요"]
+        }
+
     }
     
     func setNaviTitle() {

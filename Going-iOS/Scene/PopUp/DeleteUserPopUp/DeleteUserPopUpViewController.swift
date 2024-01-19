@@ -139,7 +139,7 @@ extension DeleteUserPopUpViewController: ViewControllerServiceable {
     func reIssueJWTToken() {
         Task {
             do {
-                try await AuthService.shared.reIssueJWTToken()
+                try await AuthService.shared.postReIssueJWTToken()
             }
             catch {
                 guard let error = error as? NetworkError else { return }
