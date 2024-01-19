@@ -86,4 +86,3 @@ private extension MemberTestResultView {
         return view
     }
 }
-

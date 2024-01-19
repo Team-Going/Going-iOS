@@ -30,7 +30,6 @@ final class DOONavigationBar: UIView {
     lazy var saveImageButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.NavigationBar.buttonSave, for: .normal)
-        btn.addTarget(self, action: #selector(saveImageButtonTapped), for: .touchUpInside)
         return btn
     }()
     

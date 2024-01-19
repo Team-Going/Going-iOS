@@ -12,8 +12,7 @@ import SnapKit
 final class JoinTravelViewController: UIViewController {
     
     // MARK: - Properties
-    
-    
+
     private var code: String = ""
     
     private var codeCheckData: JoiningSuccessAppData? {
