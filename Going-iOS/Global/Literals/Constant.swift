@@ -17,5 +17,3 @@ enum Constant {
         public static let id = 102829
     }
 }
-
-

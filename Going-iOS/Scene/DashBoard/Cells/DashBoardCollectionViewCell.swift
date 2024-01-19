@@ -21,15 +21,14 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
             self.travelDateLabel.text = "\(detailData.startDate) - \(detailData.endDate)"
             self.travelStateLabel.text = detailData.travelStatus
             
-            
             if self.tripStatus == "complete" {
                 self.travelTitleLabel.textColor = .gray300
                 self.travelDateLabel.textColor = .gray200
                 self.calendarImageView.tintColor = .gray200
                 self.travelStateBackgroundView.backgroundColor = .gray100
                 self.travelStateLabel.textColor = .gray200
-            } else {
                 
+            } else {
                 if detailData.day <= 0 {
                     self.travelStateLabel.text = "여행 중"
                 } else {
