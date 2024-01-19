@@ -39,6 +39,7 @@ final class SplashViewController: UIViewController {
 private extension SplashViewController {
     
     func setAnimation() {
+        lottieView.contentMode = .scaleAspectFill
         lottieView.animation = .named("dooripsplash3")
         lottieView.loopMode = .playOnce
         lottieView.play(completion: {completed in
