@@ -53,14 +53,22 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor.gray50
         return view
     }()
-    lazy var todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)
-    private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)
+    private let todoTitleLabel = DOOLabel(
+        font: .pretendard(.body3_medi),
+        color: .gray700,
+        alignment: .left
+    )
+    private let deadlineLabel = DOOLabel(
+        font: .pretendard(.detail3_regular),
+        color: .gray300,
+        alignment: .center
+    )
 
     private let  managerCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .gray50
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
@@ -82,7 +90,6 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         setHierachy()
         registerCell()
         setLayout()
-        setStyle()
         setDelegate()
     }
     
@@ -95,7 +102,6 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         let index = self.index ?? 0
         let image = self.checkButton.imageView?.image ?? UIImage()
         self.delegate?.getButtonIndex(index: index, image: image)
-
     }
 }
 
@@ -105,7 +111,12 @@ private extension MyToDoCollectionViewCell {
     
     func setHierachy() {
         contentView.addSubview(todoBackgroundView)
-        todoBackgroundView.addSubviews(checkButton, todoTitleLabel, managerCollectionView, deadlineLabel)
+        todoBackgroundView.addSubviews(
+            checkButton,
+            todoTitleLabel,
+            managerCollectionView,
+            deadlineLabel
+        )
     }
     
     func setLayout() {
@@ -133,26 +144,6 @@ private extension MyToDoCollectionViewCell {
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
         }
     }
-    
-    func setStyle() {
-        managerCollectionView.backgroundColor = .gray50
-    }
-    
-    func setManagerLabel(label: UILabel, text: String) {
-        label.text = text
-        label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
-        label.textColor = .white
-        label.backgroundColor = .black
-        label.layer.cornerRadius = 5
-    }
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .clear
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        return collectionView
-    }
-    
 
     func setDelegate() {
         self.managerCollectionView.dataSource = self

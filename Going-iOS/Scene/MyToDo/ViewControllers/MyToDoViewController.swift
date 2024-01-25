@@ -16,7 +16,18 @@ final class MyToDoViewController: UIViewController {
         scrollView.isScrollEnabled = true
         return scrollView
     }()
-    private lazy var myToDoCollectionView: UICollectionView = {setCollectionView()}()
+    private lazy var myToDoCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(327) , height: ScreenUtils.getHeight(81))
+        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(12), left: 1.0, bottom: 1.0, right: 1.0)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .white000
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        return collectionView
+    }()
     private lazy var myToDoHeaderView: OurToDoHeaderView = {
         let header = OurToDoHeaderView()
         header.segmentedControl.addTarget(self, action: #selector(didChangeValue(sender: )), for: .valueChanged)
@@ -43,18 +54,19 @@ final class MyToDoViewController: UIViewController {
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
     }()
-    private let emptyView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black
-        return view
-    }()
+    private let emptyView: UIView = UIView()
     private let emptyViewIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.MyToDo.emptyViewIcon
         imageView.tintColor = .gray100
         return imageView
     }()
-    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: StringLiterals.OurToDo.pleaseAddToDo, alignment: .center)
+    private let emptyViewLabel: UILabel = DOOLabel(
+        font: .pretendard(.body3_medi),
+        color: .gray200,
+        text: StringLiterals.OurToDo.pleaseAddToDo,
+        alignment: .center
+    )
     private let myToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.image = ImageLiterals.MyToDo.mainViewIcon
@@ -63,16 +75,14 @@ final class MyToDoViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var index: Int = 0
-    
     var myId: Int = 0
-    
     var tripId: Int = 0
-    
+    var segmentIndex: Int = 0
+    var initializeCode: Bool = false
+    private var index: Int = 0
+    private var todoId: Int = 0
+    private var progress: String = "incomplete"
     private var isSetDashBoardRoot: Bool = false
-    
-    var detailToDoData: GetDetailToDoResponseStuct = GetDetailToDoResponseStuct(title: "", endDate: "", allocators: [], memo: "", secret: false)
-    
     private var headerData: MyToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
@@ -87,8 +97,6 @@ final class MyToDoViewController: UIViewController {
             self.tripHeaderView.tripDdayLabel.attributedText = firstString
         }
     }
-    var initializeCode: Bool = false
-    
     private var myToDoData: [ToDoAppData]? {
         didSet {
             Task {
@@ -98,12 +106,6 @@ final class MyToDoViewController: UIViewController {
             }
         }
     }
-    
-    private var todoId: Int = 0
-    
-    var segmentIndex: Int = 0
-    
-    private var progress: String = "incomplete"
     
 
     // MARK: - Life Cycle
@@ -148,7 +150,13 @@ private extension MyToDoViewController {
     func setHierachy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyMyToDoHeaderView)
-        contentView.addSubviews(tripHeaderView, myToDoMainImageView, myToDoHeaderView, myToDoCollectionView, emptyView)
+        contentView.addSubviews(
+            tripHeaderView,
+            myToDoMainImageView,
+            myToDoHeaderView,
+            myToDoCollectionView,
+            emptyView
+        )
         emptyView.addSubviews(emptyViewIcon, emptyViewLabel)
     }
     
@@ -229,23 +237,6 @@ private extension MyToDoViewController {
         self.myToDoCollectionView.dataSource = self
     }
     
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
-        collectionView.backgroundColor = .white000
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        return collectionView
-    }
-    
-    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(327) , height: ScreenUtils.getHeight(81))
-        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(12), left: 1.0, bottom: 1.0, right: 1.0)
-        return flowLayout
-    }
-    
     func registerCell() {
         self.myToDoCollectionView.register(MyToDoCollectionViewCell.self, forCellWithReuseIdentifier: MyToDoCollectionViewCell.identifier)
     }
@@ -323,8 +314,6 @@ private extension MyToDoViewController {
     }
     
     // MARK: - objc Method
-
-    //TODO: - 서버통신 데이터 수정 필요
     
     //추가버튼눌렀을때
     @objc
@@ -350,12 +339,6 @@ private extension MyToDoViewController {
 
             }
         }
-    }
-    
-    //TODO: - 서버통신 데이터 수정 필요
-    
-    @objc
-    func pushToInquiryToDo() {
     }
 }
 
@@ -426,7 +409,6 @@ extension MyToDoViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.todoId = self.myToDoData?[indexPath.row].todoId ?? 0
         setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
-
     }
 }
 
@@ -464,7 +446,6 @@ extension MyToDoViewController {
     func getToDoData(progress: String) {
         Task {
             do {
-                                    
                 self.myToDoData = try await ToDoService.shared.getToDoData(tripId: self.tripId, category: "my", progress: progress)
             }
             catch {
