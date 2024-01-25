@@ -4,11 +4,9 @@ import SnapKit
 
 final class ToDoViewController: UIViewController {
 
-    private lazy var navigationBarView = DOONavigationBar(
-        self,
-        type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo),
-        backgroundColor: .white000
-    )
+    private lazy var navigationBarView = DOONavigationBar(self,
+                                                          type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo),
+                                                          backgroundColor: .white000)
     private let underlineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -43,20 +41,19 @@ final class ToDoViewController: UIViewController {
     //데이트피커에서 받은 데이트
     var selectedDate: Date?
     
-    
     // MARK: - Network
     
     var tripId: Int = 0
     var myId: Int = 0
     private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
+    private var saveToDoData: CreateToDoRequestStruct = .init(title: "", endDate: "", allocators: [], memo: "", secret: false)
 
     
     // MARK: - UI Components
     
+    var todoId: Int = 0
     var idSet: [Int] = []
     var buttonIndex: [Int] = []
-    var todoId: Int = 0
-    
     lazy var beforeVC: String = "" {
         didSet {
             self.todoManagerView.beforeVC = beforeVC
@@ -65,27 +62,21 @@ final class ToDoViewController: UIViewController {
             }
         }
     }
-    
     lazy var navigationBarTitle: String = "" {
         didSet {
             self.todoManagerView.navigationBarTitle = navigationBarTitle
         }
     }
-    
     lazy var fromOurTodoParticipants: [Participant] = [] {
         didSet {
             self.todoManagerView.fromOurTodoParticipants = fromOurTodoParticipants
         }
     }
-    
     lazy var manager: [Allocators] = [] {
         didSet {
             self.todoManagerView.allocators = manager
         }
     }
-
-    private var saveToDoData: CreateToDoRequestStruct = .init(title: "", endDate: "", allocators: [], memo: "", secret: false)
-    
     var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
@@ -107,7 +98,6 @@ final class ToDoViewController: UIViewController {
             self.todoManagerView.todoManagerCollectionView.reloadData()
         }
     }
-    
     var setDefaultValue: [Any]? {
         didSet {
             guard let value = setDefaultValue else {return}
@@ -119,7 +109,6 @@ final class ToDoViewController: UIViewController {
             self.memoTextView.memoTextView.text = value[3] as? String ?? ""
         }
     }
-    
     var isActivateView: Bool? = false {
         didSet {
             guard let isActivateView else {return}
@@ -174,8 +163,14 @@ final class ToDoViewController: UIViewController {
     
     // 키보드 관련 알림 등록
     func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, 
+                                               selector: #selector(keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, 
+                                               selector: #selector(keyboardWillHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     // 키보드 관련 알림 등록
@@ -193,9 +188,7 @@ final class ToDoViewController: UIViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
-        }
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         
         if self.memoTextView.memoTextView.isFirstResponder {
             // memoTextView가 FirstResponder인 경우 contentInset을 조절
@@ -375,22 +368,9 @@ private extension ToDoViewController {
     
     // 조회 뷰 스타일 세팅 메서드
     func setInquiryStyle() {
-//        guard let todotext = todoTextfield.placeholder?.count else {return}
-//        guard let memotext = self.memoTextView.memoTextView.text?.count else {return}
         self.todoTextFieldView.setInquiryTextFieldStyle()
         self.endDateView.setInquiryEndDateStyle()
-//        todoTextfield.layer.borderColor = UIColor.gray700.cgColor
-//        todoTextfield.setPlaceholderColor(.gray700)
-//        countToDoCharacterLabel.textColor = .gray700
-//        countToDoCharacterLabel.text = "\(todotext)/15"
-//        deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
-//        deadlineTextfieldLabel.textColor = .gray700
-//        dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
         self.memoTextView.setInquiryMemoStyle()
-//        memoTextView.layer.borderColor = memoTextView.text == "" ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
-//        memoTextView.textColor = memoTextView.text == "" ? UIColor.gray200 : UIColor.gray700
-//        countMemoCharacterLabel.text = "\(memotext)/1000"
-//        countMemoCharacterLabel.textColor = memoTextView.text == "" ? UIColor.gray200 : .gray700
     }
     
     /// 텍스트 필드에 들어갈 텍스트를 DateFormatter로  변환하는 메서드
@@ -406,17 +386,6 @@ private extension ToDoViewController {
         bottomSheetVC.modalPresentationStyle = .overFullScreen
         self.present(bottomSheetVC, animated: false, completion: nil)
     }
-    
-//    func memoTextViewBlankCheck() {
-//        guard let textEmpty = memoTextView.text?.isEmpty else { return }
-//        if textEmpty {
-//            memoTextView.layer.borderColor = UIColor.gray200.cgColor
-//            self.countMemoCharacterLabel.textColor = .gray200
-//        } else {
-//            memoTextView.layer.borderColor = UIColor.gray700.cgColor
-//            self.countMemoCharacterLabel.textColor = .gray400
-//        }
-//    }
     
     func compareDate(userDate: Date) -> Bool {
         let dateFormatter = DateFormatter()
