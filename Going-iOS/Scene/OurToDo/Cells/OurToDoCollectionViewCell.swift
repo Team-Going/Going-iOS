@@ -53,7 +53,17 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         alignment: .center
     )
     lazy var managerCollectionView: UICollectionView = {
-        setCollectionView()
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
+        flowLayout.minimumLineSpacing = ScreenUtils.getWidth(4)
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(42) , height: ScreenUtils.getHeight(20))
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
+        return collectionView
     }()
 
     
@@ -117,24 +127,6 @@ private extension OurToDoCollectionViewCell {
         label.textColor = textColor
         label.textAlignment = alignment
         return label
-    }
-    
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
-        collectionView.backgroundColor = .clear
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
-        return collectionView
-    }
-    
-    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-        flowLayout.minimumLineSpacing = ScreenUtils.getWidth(4)
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(42) , height: ScreenUtils.getHeight(20))
-        return flowLayout
     }
     
     func setDelegate() {

@@ -84,7 +84,6 @@ final class TripHeaderView: UIView {
             
             self.tripDateLabel.text = newStartDate + " - " + newEndDate
             
-            
             let string = self.tripDateLabel.text ?? ""
             let date = NSAttributedString(string: " \(string)" )
             let attachImg = NSAttributedString(attachment: tripDateLabelAttachImg)

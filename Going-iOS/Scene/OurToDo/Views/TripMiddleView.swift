@@ -62,8 +62,16 @@ final class TripMiddleView: UIView {
         btn.addTarget(self, action: #selector(pushToInquiryFriendsView), for: .touchUpInside)
         return btn
     }()
-    private lazy var tripFriendsCollectionView: UICollectionView = {setCollectionView()}()
-    
+    private lazy var tripFriendsCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getHeight(48) , height: ScreenUtils.getHeight(67))
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = UIColor.white000
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = true
+        return collectionView
+    }()
     private lazy var addButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .gray50
@@ -148,7 +156,13 @@ private extension TripMiddleView {
     
     func setHierarchy() {
         self.addSubview(ticketBoxImgView)
-        ticketBoxImgView.addSubviews(tripProgressLabel, percentageLabel, tripProgressBar, tripFriendsContainer, tripFriendsCollectionView, gradientView, addStackView)
+        ticketBoxImgView.addSubviews(tripProgressLabel,
+                                     percentageLabel,
+                                     tripProgressBar,
+                                     tripFriendsContainer,
+                                     tripFriendsCollectionView,
+                                     gradientView,
+                                     addStackView)
         tripFriendsContainer.addSubviews(tripFriendsLabel, tripFriendsBtn)
         addStackView.addArrangedSubviews(addButton, addLabel)
     }
@@ -220,33 +234,9 @@ private extension TripMiddleView {
         addButton.layer.cornerRadius = ScreenUtils.getHeight(23.5)
     }
     
-    func setLabel(text: String? = "", font: UIFont? = UIFont.pretendard(.body2_medi), textColor: UIColor? = UIColor.gray700, textAlignment: NSTextAlignment) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = font
-        label.textColor = textColor
-        label.textAlignment = textAlignment
-        return label
-    }
-    
     func setDelegate() {
         self.tripFriendsCollectionView.dataSource = self
         self.tripFriendsCollectionView.delegate = self
-    }
-    
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
-        collectionView.backgroundColor = UIColor.white000
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isScrollEnabled = true
-        return collectionView
-    }
-    
-    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getHeight(48) , height: ScreenUtils.getHeight(67))
-        return flowLayout
     }
     
     func registerCell() {
