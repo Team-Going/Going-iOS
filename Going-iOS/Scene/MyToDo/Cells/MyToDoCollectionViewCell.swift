@@ -9,8 +9,11 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     static let identifier = "MyToDoCollectionViewCell"
+    
     weak var delegate: MyToDoCollectionViewDelegate?
+    
     var manager: [Allocators] = []
+    
     var myToDoData: ToDoAppData? {
         didSet {
             guard let myToDoData else {return}
@@ -19,6 +22,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             self.manager = myToDoData.allocators
         }
     }
+    
     var index: Int? {
         didSet {
             guard let index else {return}
@@ -26,12 +30,14 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             self.managerCollectionView.reloadData()
         }
     }
+    
     var textColor: UIColor? {
         didSet {
             guard let textColor else {return}
             self.todoTitleLabel.textColor = textColor
         }
     }
+    
     var buttonImg: UIImage? {
         didSet {
             guard let buttonImg else {return}
@@ -39,11 +45,13 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             self.managerCollectionView.reloadData()
         }
     }
+    
     var isComplete: Bool? {
         didSet {
             self.managerCollectionView.reloadData()
         }
     }
+    
     
     // MARK: - UI Components
     
@@ -53,11 +61,13 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor.gray50
         return view
     }()
+    
     private let todoTitleLabel = DOOLabel(
         font: .pretendard(.body3_medi),
         color: .gray700,
         alignment: .left
     )
+    
     private let deadlineLabel = DOOLabel(
         font: .pretendard(.detail3_regular),
         color: .gray300,
@@ -105,6 +115,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     }
 }
 
+
 // MARK: - Private Method
 
 private extension MyToDoCollectionViewCell {
@@ -124,21 +135,25 @@ private extension MyToDoCollectionViewCell {
             $0.leading.trailing.equalToSuperview()
             $0.top.bottom.equalToSuperview()
         }
+        
         checkButton.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(16))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(12))
             $0.size.equalTo(ScreenUtils.getHeight(20))
         }
+        
         todoTitleLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.leading.equalTo(checkButton.snp.trailing).offset(ScreenUtils.getWidth(12))
         }
+        
         managerCollectionView.snp.makeConstraints{
             $0.leading.equalTo(checkButton.snp.trailing).offset(ScreenUtils.getWidth(12))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(15))
             $0.height.equalTo(ScreenUtils.getHeight(20))
         }
+        
         deadlineLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(16))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
@@ -177,8 +192,8 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
+        
         let data = self.myToDoData ?? ToDoAppData(todoId: 0, title: "", endDate: "", allocators: [], secret: false)
         
         if data.secret {

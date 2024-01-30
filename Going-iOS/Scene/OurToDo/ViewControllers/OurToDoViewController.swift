@@ -7,10 +7,15 @@ final class OurToDoViewController: UIViewController {
     // MARK: - UI Property
     
     private lazy var contentView: UIView = UIView()
+   
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
+    
     private let tripHeaderView: TripHeaderView = TripHeaderView()
+    
     private let tripMiddleView: TripMiddleView = TripMiddleView()
+    
     private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white000
@@ -19,12 +24,14 @@ final class OurToDoViewController: UIViewController {
         scrollView.isScrollEnabled = true
         return scrollView
     }()
+    
     private let stickyOurToDoHeaderView: OurToDoHeaderView = {
         let headerView = OurToDoHeaderView()
         headerView.isHidden = true
         headerView.backgroundColor = .white000
         return headerView
     }()
+    
     private lazy var ourToDoCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -37,6 +44,7 @@ final class OurToDoViewController: UIViewController {
         collectionView.isScrollEnabled = false
         return collectionView
     }()
+    
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .red700
@@ -51,19 +59,23 @@ final class OurToDoViewController: UIViewController {
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
         return btn
     }()
+    
     private let emptyView: UIView = UIView()
+    
     private let emptyViewIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.OurToDo.emptyViewIcon
         imageView.tintColor = .gray100
         return imageView
     }()
+    
     private let emptyViewLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
         color: .gray200,
         text: StringLiterals.OurToDo.pleaseAddToDo,
         alignment: .center
     )
+    
     private let ourToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.image = ImageLiterals.OurToDo.mainViewIcon
@@ -74,13 +86,21 @@ final class OurToDoViewController: UIViewController {
     // MARK: - Property
         
     var tripId: Int = 0
+    
     var todoId: Int = 0
+    
     var segmentIndex: Int = 0
+    
     var allocator: [Allocators] = []
+    
     var initializeCode: Bool = false
+    
     var progress: String = "incomplete"
+    
     private var inviteCode: String?
+    
     private var isSetDashBoardRoot: Bool = false
+    
     private var headerData: OurToDoHeaderAppData? {
         didSet {
             guard let data = headerData else { return }
@@ -91,6 +111,7 @@ final class OurToDoViewController: UIViewController {
             self.tripMiddleView.progress = data.progress
         }
     }
+    
     private var ourToDoData: [ToDoAppData]? {
         didSet {
             Task {
@@ -151,7 +172,12 @@ private extension OurToDoViewController {
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
-        contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoMainImageView, ourToDoHeaderView, ourToDoCollectionView, emptyView)
+        contentView.addSubviews(tripHeaderView, 
+                                tripMiddleView,
+                                ourToDoMainImageView,
+                                ourToDoHeaderView,
+                                ourToDoCollectionView,
+                                emptyView)
         emptyView.addSubviews(emptyViewIconImageView, emptyViewLabel)
     }
     
@@ -161,61 +187,73 @@ private extension OurToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
+        
         scrollView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(90))
         }
+        
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(ourToDoCollectionView.contentSize.height).priority(.low)
             $0.edges.width.equalTo(scrollView)
         }
+        
         tripHeaderView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(102))
         }
+        
         tripMiddleView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom).offset(ScreenUtils.getHeight(20))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(235))
         }
+        
         ourToDoMainImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(112))
             $0.height.equalTo(ScreenUtils.getHeight(135))
         }
+        
         ourToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(28))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
+        
         emptyView.snp.makeConstraints {
             $0.top.equalTo(ourToDoHeaderView.snp.bottom)
             $0.bottom.equalTo(contentView)
             $0.leading.trailing.equalToSuperview()
         }
+        
         emptyViewIconImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(30))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(108))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(95))
         }
+        
         emptyViewLabel.snp.makeConstraints {
             $0.top.equalTo(emptyViewIconImageView.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
         }
+        
         ourToDoCollectionView.snp.makeConstraints {
             $0.top.equalTo(ourToDoHeaderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(contentView)
             $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
          }
+        
         stickyOurToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.width.equalTo(scrollView)
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
+        
         addToDoButton.snp.makeConstraints{
             $0.width.equalTo(ScreenUtils.getWidth(117))
             $0.height.equalTo(ScreenUtils.getHeight(50))
@@ -306,13 +344,7 @@ private extension OurToDoViewController {
     // MARK: - objc method
     
     @objc
-    func popToDashBoardView(_ sender: UITapGestureRecognizer) {
-        print("popToDashBoardView")
-    }
-    
-    @objc
     func pushToAddToDoView() {
-        
         setToDoView(before: "our" , naviBarTitle: "추가", isActivate: true)
     }
     

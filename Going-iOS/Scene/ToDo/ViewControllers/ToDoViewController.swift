@@ -7,32 +7,43 @@ final class ToDoViewController: UIViewController {
     private lazy var navigationBarView = DOONavigationBar(self,
                                                           type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo),
                                                           backgroundColor: .white000)
+    
     private let underlineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
         return view
     }()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white000
         return scrollView
     }()
+    
     private let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white000
         return view
     }()
+    
     private let todoTextFieldView = ToDoTextFieldView()
+    
     private let endDateView = EndDateView()
+    
     private let bottomSheetVC = DatePickerBottomSheetViewController()
+    
     private let todoManagerView = ToDoManagerView()
+    
     private let memoTextView = MemoTextView()
+    
     private let buttonView: UIView = UIView()
+    
     private lazy var singleButtonView: DOOButton = {
         let singleBtn = DOOButton(type: .unabled, title: StringLiterals.ToDo.toSave)
         singleBtn.addTarget(self, action: #selector(saveToDo), for: .touchUpInside)
         return singleBtn
     }()
+    
     private lazy var doubleButtonView = DoubleButtonView()
     
     
@@ -44,16 +55,22 @@ final class ToDoViewController: UIViewController {
     // MARK: - Network
     
     var tripId: Int = 0
+    
     var myId: Int = 0
+    
     private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
+    
     private var saveToDoData: CreateToDoRequestStruct = .init(title: "", endDate: "", allocators: [], memo: "", secret: false)
 
     
     // MARK: - UI Components
     
     var todoId: Int = 0
+    
     var idSet: [Int] = []
+    
     var buttonIndex: [Int] = []
+    
     lazy var beforeVC: String = "" {
         didSet {
             self.todoManagerView.beforeVC = beforeVC
@@ -62,21 +79,25 @@ final class ToDoViewController: UIViewController {
             }
         }
     }
+    
     lazy var navigationBarTitle: String = "" {
         didSet {
             self.todoManagerView.navigationBarTitle = navigationBarTitle
         }
     }
+    
     lazy var fromOurTodoParticipants: [Participant] = [] {
         didSet {
             self.todoManagerView.fromOurTodoParticipants = fromOurTodoParticipants
         }
     }
+    
     lazy var manager: [Allocators] = [] {
         didSet {
             self.todoManagerView.allocators = manager
         }
     }
+    
     var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
@@ -98,6 +119,7 @@ final class ToDoViewController: UIViewController {
             self.todoManagerView.todoManagerCollectionView.reloadData()
         }
     }
+    
     var setDefaultValue: [Any]? {
         didSet {
             guard let value = setDefaultValue else {return}
@@ -109,6 +131,7 @@ final class ToDoViewController: UIViewController {
             self.memoTextView.memoTextView.text = value[3] as? String ?? ""
         }
     }
+    
     var isActivateView: Bool? = false {
         didSet {
             guard let isActivateView else {return}
@@ -119,6 +142,7 @@ final class ToDoViewController: UIViewController {
             self.memoTextView.isUserInteractionEnabled = isActivateView ? true : false
         }
     }
+    
     
     // MARK: - Life Cycle
     
@@ -266,13 +290,11 @@ private extension ToDoViewController {
     func setHierachy() {
         self.view.addSubviews(navigationBarView, underlineView, scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubviews(
-            todoTextFieldView,
-            endDateView,
-            todoManagerView,
-            memoTextView,
-            buttonView
-        )
+        contentView.addSubviews(todoTextFieldView,
+                                endDateView,
+                                todoManagerView,
+                                memoTextView,
+                                buttonView)
     }
     
     func setLayout() {

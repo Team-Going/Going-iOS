@@ -18,6 +18,7 @@ class MemoTextView: UIView {
         color: .gray700,
         text: StringLiterals.ToDo.memo
     )
+    
     let memoTextView: UITextView = {
         let tv = UITextView()
         tv.backgroundColor = .white000
@@ -34,11 +35,13 @@ class MemoTextView: UIView {
         tv.layer.borderWidth = 1
         return tv
     }()
+   
     private let countMemoCharacterLabel = DOOLabel(
         font: .pretendard(.detail2_regular),
         color: .gray200,
         text: "0/1000"
     )
+    
     private let memoWarningLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
         label.isHidden = true
@@ -47,7 +50,9 @@ class MemoTextView: UIView {
     
     
     var memoTextViewCount: Int = 0
+    
     var memoTextviewPlaceholder: String = ""
+    
     weak var delegate: MemoTextViewDelegate?
 
     override init(frame: CGRect) {
@@ -87,15 +92,18 @@ private extension MemoTextView {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(24))
         }
+       
         memoTextView.snp.makeConstraints{
             $0.top.equalTo(memoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(140))
         }
+        
         countMemoCharacterLabel.snp.makeConstraints{
             $0.top.equalTo(memoTextView.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(4))
         }
+        
         memoWarningLabel.snp.makeConstraints {
             $0.top.equalTo(memoTextView.snp.bottom).offset(4)
             $0.leading.equalTo(memoTextView.snp.leading).offset(4)

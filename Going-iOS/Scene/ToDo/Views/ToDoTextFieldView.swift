@@ -21,6 +21,7 @@ class ToDoTextFieldView: UIView {
         color: .gray700,
         text: StringLiterals.ToDo.todo
     )
+    
     lazy var todoTextfield: UITextField = {
         let tf = UITextField()
         tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
@@ -32,11 +33,13 @@ class ToDoTextFieldView: UIView {
         tf.addTarget(self, action: #selector(todoTextFieldChange), for: .editingChanged)
         return tf
     }()
+    
     private let warningLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
         label.isHidden = true
         return label
     }()
+    
     lazy var countToDoCharacterLabel = DOOLabel(
         font: .pretendard(.detail2_regular),
         color: .gray200,
@@ -45,8 +48,11 @@ class ToDoTextFieldView: UIView {
     
     
     weak var delegate: ToDoTextFieldDelegate?
+    
     var todoTextFieldCount: Int = 0
+    
     private var isTodoTextFieldGood: Bool = false
+    
     var todoTextfieldPlaceholder: String = ""
 
     
@@ -114,7 +120,10 @@ class ToDoTextFieldView: UIView {
 private extension ToDoTextFieldView {
     
     func setHierarchy() {
-        self.addSubviews(todoLabel, todoTextfield, warningLabel ,countToDoCharacterLabel)
+        self.addSubviews(todoLabel, 
+                         todoTextfield,
+                         warningLabel ,
+                         countToDoCharacterLabel)
     }
     
     func setLayout() {
@@ -123,15 +132,18 @@ private extension ToDoTextFieldView {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(23))
         }
+        
         todoTextfield.snp.makeConstraints{
             $0.top.equalTo(todoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
+        
         warningLabel.snp.makeConstraints {
             $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
             $0.leading.equalTo(todoTextfield.snp.leading).offset(4)
         }
+        
         countToDoCharacterLabel.snp.makeConstraints{
             $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(4))

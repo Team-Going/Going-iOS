@@ -18,6 +18,7 @@ class EndDateView: UIView {
         color: .gray700,
         text: StringLiterals.ToDo.deadline
     )
+    
     lazy var deadlineTextfieldLabel: DOOLabel = {
         let label = DOOLabel(
             font: .pretendard(.body3_medi),
@@ -34,6 +35,7 @@ class EndDateView: UIView {
         label.addGestureRecognizer(gesture)
         return label
     }()
+    
     lazy var dropdownButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.ToDo.disabledDropdown, for: .normal)
@@ -82,11 +84,13 @@ private extension EndDateView {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(23))
         }
+        
         deadlineTextfieldLabel.snp.makeConstraints{
             $0.top.equalTo(deadlineLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
+        
         dropdownButton.snp.makeConstraints{
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(12))
             $0.centerY.equalToSuperview()

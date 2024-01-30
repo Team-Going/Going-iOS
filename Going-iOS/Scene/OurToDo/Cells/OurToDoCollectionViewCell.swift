@@ -20,6 +20,7 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
             self.managerCollectionView.reloadData()
         }
     }
+   
     var index: Int? {
         didSet {
             guard let index else {return}
@@ -42,16 +43,19 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor.gray50
         return view
     }()
+    
     let todoTitleLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
         color: .gray700,
         alignment: .left
     )
+   
     private lazy var deadlineLabel: UILabel = DOOLabel(
         font: .pretendard(.detail3_regular),
         color: .gray300,
         alignment: .center
     )
+    
     lazy var managerCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal

@@ -32,12 +32,19 @@ class ToDoManagerView: UIView {
     }()
 
     var fromOurTodoParticipants: [Participant] = []
+    
     var allocators: [Allocators] = []
+    
     var beforeVC: String = ""
+    
     var navigationBarTitle: String = ""
+    
     var isActivateView: Bool = true
+    
     var isSecret: Bool = false
+    
     weak var delegate: ToDoManagerViewDelegate?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,6 +89,7 @@ private extension ToDoManagerView {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(23))
         }
+        
         todoManagerCollectionView.snp.makeConstraints{
             $0.top.equalTo(managerLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview()
