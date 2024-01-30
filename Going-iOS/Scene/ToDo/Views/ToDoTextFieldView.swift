@@ -55,7 +55,6 @@ class ToDoTextFieldView: UIView {
         
         setHierarchy()
         setLayout()
-        setDelegate()
     }
     
     required init?(coder: NSCoder) {
@@ -137,10 +136,6 @@ private extension ToDoTextFieldView {
             $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(4))
         }
-    }
-    
-    func setDelegate() {
-        
     }
 }
 

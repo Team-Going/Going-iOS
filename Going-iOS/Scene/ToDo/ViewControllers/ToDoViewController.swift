@@ -551,10 +551,3 @@ extension ToDoViewController {
         }
     }
 }
-
-extension Date {
-    func convertToTimeZone(initTimeZone: TimeZone, timeZone: TimeZone) -> Date {
-        let delta = TimeInterval(initTimeZone.secondsFromGMT(for: self) - timeZone.secondsFromGMT(for: self))
-        return addingTimeInterval(delta)
-    }
-}

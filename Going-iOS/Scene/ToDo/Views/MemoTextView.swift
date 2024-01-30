@@ -128,7 +128,6 @@ private extension MemoTextView {
             memoWarningLabel.isHidden = false
         } else {
             memoWarningLabel.isHidden = true
-            
         }
     }
 }
@@ -152,7 +151,6 @@ extension MemoTextView: UITextViewDelegate {
                 return true
             }
         }
-        
         return true
     }
     
@@ -162,8 +160,6 @@ extension MemoTextView: UITextViewDelegate {
             textView.textColor = .gray200
             textViewCountCheck()
         }
-        
-        
     }
     
     func textViewDidChange(_ textView: UITextView) {

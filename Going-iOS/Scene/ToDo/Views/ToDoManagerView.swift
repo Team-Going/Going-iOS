@@ -207,10 +207,6 @@ extension ToDoManagerView: UICollectionViewDataSource{
         }
         return managerCell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
 }
 
 extension ToDoManagerView: UICollectionViewDelegateFlowLayout {
