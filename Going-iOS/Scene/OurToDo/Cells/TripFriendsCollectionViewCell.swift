@@ -25,6 +25,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         imageView.layer.masksToBounds = true
         return imageView
     }()
+    
     var friendNameLabel: UILabel = DOOLabel(
         font: .pretendard(.detail3_regular),
         color: .gray500,

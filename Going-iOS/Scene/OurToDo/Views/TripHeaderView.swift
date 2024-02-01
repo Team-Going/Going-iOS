@@ -16,26 +16,32 @@ final class TripHeaderView: UIView {
         stackView.spacing = 8
         return stackView
     }()
+    
     lazy var tripNameLabel: UILabel = DOOLabel(
         font: .pretendard(.head2),
         color: .gray700,
         alignment: .left
     )
+    
     lazy var tripDdayLabel: UILabel = DOOLabel(
         font: .pretendard(.head2),
         color: .gray700,
         alignment: .left
     )
+    
     lazy var tripDateLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
         color: .gray300,
         alignment: .left
     )
+    
     let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: ImageLiterals.OurToDo.icCalendar)
-    private var dDay: Int = 0
+    
     
     // MARK: - Property
     
+    private var dDay: Int = 0
+
     var tripData: OurToDoHeaderAppData? {
         didSet {
             guard let data = tripData else {return}
@@ -83,7 +89,6 @@ final class TripHeaderView: UIView {
             let newEndDate = "\(splitEndDate[1])월 \(splitEndDate[2])일"
             
             self.tripDateLabel.text = newStartDate + " - " + newEndDate
-            
             
             let string = self.tripDateLabel.text ?? ""
             let date = NSAttributedString(string: " \(string)" )
@@ -142,6 +147,7 @@ private extension TripHeaderView {
             $0.top.equalToSuperview()
             $0.height.equalToSuperview()
         }
+        
         tripDateLabel.snp.makeConstraints{
             $0.height.equalTo(ScreenUtils.getHeight(21))
         }
