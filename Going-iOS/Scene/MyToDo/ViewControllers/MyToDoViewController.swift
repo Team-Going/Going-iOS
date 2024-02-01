@@ -21,11 +21,7 @@ final class MyToDoViewController: UIViewController {
     }()
     
     private lazy var myToDoCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(327) , height: ScreenUtils.getHeight(81))
-        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(12), left: 1.0, bottom: 1.0, right: 1.0)
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = .white000
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -439,6 +435,17 @@ extension MyToDoViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.todoId = self.myToDoData?[indexPath.row].todoId ?? 0
         setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
+    }
+}
+
+extension MyToDoViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return  UIEdgeInsets(top: ScreenUtils.getHeight(18), left: 1.0, bottom: 1.0, right: 1.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: ScreenUtils.getWidth(331) , height: ScreenUtils.getHeight(81))
     }
 }
 
