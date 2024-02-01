@@ -108,14 +108,6 @@ final class CreateTravelViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        setNotification()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        removeKeyboardNotifications()
-    }
 }
 
 // MARK: - Private Extension
@@ -125,6 +117,8 @@ private extension CreateTravelViewController {
     func setStyle() {
         self.view.backgroundColor = .white000
         self.navigationController?.isNavigationBarHidden = true
+        self.view.keyboardLayoutGuide.topAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.view.keyboardLayoutGuide.followsUndockedKeyboard = true
     }
     
     func setHierarchy() {
@@ -199,7 +193,8 @@ private extension CreateTravelViewController {
         createTravelButton.snp.makeConstraints {
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+//            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalTo(self.view.keyboardLayoutGuide.snp.top)
             $0.centerX.equalToSuperview()
         }
     }
@@ -231,17 +226,6 @@ private extension CreateTravelViewController {
     func showDatePicker(for label: UILabel) {
         bottomSheetVC.modalPresentationStyle = .overFullScreen
         self.present(bottomSheetVC, animated: false, completion: nil)
-    }
-    
-    func setNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    /// 노티피케이션을 제거하는 메서드
-    func removeKeyboardNotifications(){
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - Validation Methods
@@ -323,27 +307,6 @@ private extension CreateTravelViewController {
         showDatePicker(for: endDateLabel)
     }
     
-    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
-    @objc
-    func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            let keyboardHeight = keyboardFrame.height
-            let safeAreaBottomInset = view.safeAreaInsets.bottom
-            
-            UIView.animate(withDuration: 0.3) {
-                self.createTravelButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
-            }
-        }
-    }
-    
-    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
-    @objc
-    func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.createTravelButton.transform = .identity
-        }
-    }
-    
     @objc
     func createButtonTapped() {
         toDTO()
@@ -396,7 +359,6 @@ extension CreateTravelViewController: BottomSheetDelegate {
 }
 
 extension CreateTravelViewController: UITextFieldDelegate {
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
