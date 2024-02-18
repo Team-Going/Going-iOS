@@ -17,14 +17,12 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         setStyle()
         setHierarchy()
         setLayout()
         setAnimation()
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         networkCheck()
     }
@@ -38,8 +36,8 @@ private extension SplashViewController {
                 exit(0)
             })
         }
-
     }
+    
     func setAnimation() {
         lottieView.contentMode = .scaleAspectFill
         lottieView.animation = .named("dooripsplash3")
@@ -50,6 +48,7 @@ private extension SplashViewController {
             }
         })
     }
+    
     func setStyle() {
         self.view.backgroundColor = .red400
     }
