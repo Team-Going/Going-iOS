@@ -8,7 +8,7 @@ final class TripHeaderView: UIView {
     
     private var tripHeaderStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = UIColor.gray50
+        stackView.backgroundColor = UIColor(resource: .gray50)
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .top
@@ -18,17 +18,17 @@ final class TripHeaderView: UIView {
     }()
     lazy var tripNameLabel: UILabel = DOOLabel(
         font: .pretendard(.head2),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         alignment: .left
     )
     lazy var tripDdayLabel: UILabel = DOOLabel(
         font: .pretendard(.head2),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         alignment: .left
     )
     lazy var tripDateLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
-        color: .gray300,
+        color: UIColor(resource: .gray300),
         alignment: .left
     )
     let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: ImageLiterals.OurToDo.icCalendar)
@@ -48,7 +48,7 @@ final class TripHeaderView: UIView {
                 
                 let range = NSRange(location: 4, length: 2)
                 
-                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red500, range: range)
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(resource: .red500), range: range)
                 
                 self.tripDdayLabel.attributedText = attributedString
             }
@@ -60,7 +60,7 @@ final class TripHeaderView: UIView {
                     
                     let range = NSRange(location: 0, length: 4)
                     
-                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red500, range: range)
+                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(resource: .red500), range: range)
                     self.tripDdayLabel.attributedText = attributedString
                     
                 } else {
@@ -73,7 +73,7 @@ final class TripHeaderView: UIView {
                     
                     let range = NSRange(location: 6, length: numText.count + 1)
                     
-                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red500, range: range)
+                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(resource: .red500), range: range)
                     self.tripDdayLabel.attributedText = attributedString
                 }
             }
@@ -100,8 +100,8 @@ final class TripHeaderView: UIView {
             
             let text = tripDdayLabel.text ?? ""
             let firstString = NSMutableAttributedString(string: text)
-            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: "나에게 남은 할일"))
-            firstString.addAttribute(.foregroundColor, value: UIColor.red400, range: (text as NSString).range(of: String("\(data[1])개")))
+            firstString.addAttribute(.foregroundColor, value: UIColor(resource: .gray700), range: (text as NSString).range(of: "나에게 남은 할일"))
+            firstString.addAttribute(.foregroundColor, value: UIColor(resource: .red500), range: (text as NSString).range(of: String("\(data[1])개")))
             tripDdayLabel.attributedText = firstString
         }
     }
@@ -148,6 +148,6 @@ private extension TripHeaderView {
     }
         
     func setStyle() {
-        self.backgroundColor = UIColor.gray50
+        self.backgroundColor = UIColor(resource: .gray50)
     }
 }

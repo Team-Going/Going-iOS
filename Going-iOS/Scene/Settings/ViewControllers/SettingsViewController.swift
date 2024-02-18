@@ -20,7 +20,7 @@ final class SettingsViewController: UIViewController {
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("설정"))
     private let navigationUnderlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
@@ -28,7 +28,7 @@ final class SettingsViewController: UIViewController {
         let btn = UIButton()
         btn.setTitle("회원탈퇴", for: .normal)
         btn.titleLabel?.font = .pretendard(.detail2_regular)
-        btn.setTitleColor(.gray300, for: .normal)
+        btn.setTitleColor(UIColor(resource: .gray300), for: .normal)
         btn.setImage(ImageLiterals.Settings.btnResign, for: .normal)
         btn.addTarget(self, action: #selector(deleteUserButtonTapped), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
@@ -36,13 +36,13 @@ final class SettingsViewController: UIViewController {
     }()
     private let deleteButtonUnderLine: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray300
+        view.backgroundColor = UIColor(resource: .gray300)
         return view
     }()
     
     private let settingsCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        view.backgroundColor = .gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         view.isScrollEnabled = false
         return view
     }()
@@ -62,7 +62,7 @@ final class SettingsViewController: UIViewController {
 
 private extension SettingsViewController {
     func setStyle() {
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
     }
     

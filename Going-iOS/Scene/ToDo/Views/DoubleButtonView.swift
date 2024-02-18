@@ -14,7 +14,8 @@ final class DoubleButtonView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 8
-        stackView.backgroundColor = .white000
+        stackView.backgroundColor = UIColor(resource: .white000)
+        
         return stackView
     }()
     private lazy var button1: DOOButton = {

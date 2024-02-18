@@ -49,7 +49,7 @@ final class TestResultTicketView: UIView {
         return stack
     }()
     
-    let titleLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .gray700, numberOfLine: 2, alignment: .center)
+    let titleLabel = DOOLabel(font: .pretendard(.detail2_bold), color: UIColor(resource: .gray700), numberOfLine: 2, alignment: .center)
     
     private let descStackView: UIStackView = {
         let stack = UIStackView()
@@ -59,9 +59,9 @@ final class TestResultTicketView: UIView {
         return stack
     }()
     
-    lazy var firstDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700, numberOfLine: 2)
-    lazy var secondDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700, numberOfLine: 2)
-    lazy var thirdDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray700, numberOfLine: 2)
+    lazy var firstDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
+    lazy var secondDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
+    lazy var thirdDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -108,9 +108,9 @@ private extension TestResultTicketView {
     }
     
     func setStyle() {
-        self.backgroundColor = .red100
+        self.backgroundColor = UIColor(resource: .red100)
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 6
-        self.layer.borderColor = UIColor.gray100.cgColor
+        self.layer.borderColor = UIColor(resource: .gray100).cgColor
     }
 }

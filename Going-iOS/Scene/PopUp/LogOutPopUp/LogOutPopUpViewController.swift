@@ -15,14 +15,14 @@ final class LogOutPopUpViewController: PopUpDimmedViewController {
     private let popUpView = DOOPopUpContainerView()
     var logoutDismissCompletion: (() -> Void)?
     
-    private let logOutLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "정말 로그아웃하시겠어요?")
+    private let logOutLabel = DOOLabel(font: .pretendard(.body1_bold), color: UIColor(resource: .gray600), text: "정말 로그아웃하시겠어요?")
     
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setTitle("취소", for: .normal)
-        button.setTitleColor(.gray300, for: .normal)
+        button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_bold)
-        button.backgroundColor = .gray50
+        button.backgroundColor = UIColor(resource: .gray50)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -30,9 +30,9 @@ final class LogOutPopUpViewController: PopUpDimmedViewController {
     private lazy var logOutButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그아웃", for: .normal)
-        button.setTitleColor(.white000, for: .normal)
+        button.setTitleColor(UIColor(resource: .white000), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_bold)
-        button.backgroundColor = .gray500
+        button.backgroundColor = UIColor(resource: .gray500)
         button.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
         return button
     }()

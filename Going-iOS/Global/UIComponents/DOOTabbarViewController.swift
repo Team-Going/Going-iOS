@@ -39,7 +39,7 @@ final class DOOTabbarViewController: UITabBarController {
     }
     
     func setStyle() {
-        self.tabBar.tintColor = .red500
+        self.tabBar.tintColor = UIColor(resource: .red500)
         ourTODoVC.tabBarItem = UITabBarItem(title: nil, image: ImageLiterals.TabBar.tabbarOurToDoUnselected.withRenderingMode(.alwaysTemplate), selectedImage: ImageLiterals.TabBar.tabbarOurToDoSelected.withRenderingMode(.alwaysTemplate))
         ourTODoVC.tabBarItem.imageInsets = UIEdgeInsets(top: ScreenUtils.getHeight(12), left: 0, bottom: ScreenUtils.getHeight(-12), right: ScreenUtils.getWidth(-15))
         
@@ -51,7 +51,7 @@ final class DOOTabbarViewController: UITabBarController {
         
         self.selectedIndex = 0
         let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundColor = .white000
+        tabBarAppearance.backgroundColor = UIColor(resource: .white000)
         tabBarAppearance.stackedItemSpacing = 110
         let tabBarItemAppearance = UITabBarItemAppearance()
         tabBarAppearance.inlineLayoutAppearance = tabBarItemAppearance

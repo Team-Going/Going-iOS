@@ -27,7 +27,7 @@ final class UserTestViewController: UIViewController {
     
     private let testProgressView: UIProgressView = {
         let progress = UIProgressView()
-        progress.progressTintColor = .red500
+        progress.progressTintColor = UIColor(resource: .red500)
         progress.setProgress(0.1111111, animated: true)
         return progress
     }()
@@ -39,8 +39,8 @@ final class UserTestViewController: UIViewController {
         return imageView
     }()
     
-    private let testIndexLabel = DOOLabel(font: .pretendard(.head3), color: .gray300)
-    private let questionLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
+    private let testIndexLabel = DOOLabel(font: .pretendard(.head3), color: UIColor(resource: .gray300))
+    private let questionLabel = DOOLabel(font: .pretendard(.head3), color: UIColor(resource: .gray700))
     
     private let questionStackView: UIStackView = {
         let stackView = UIStackView()
@@ -58,7 +58,7 @@ final class UserTestViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.backgroundColor = .gray50
+        button.backgroundColor = UIColor(resource: .gray50)
         button.isEnabled = false
         button.titleLabel?.font = .pretendard(.body1_bold)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
@@ -90,10 +90,10 @@ private extension UserTestViewController {
     }
     func makeButton() -> UIButton {
         let button = UIButton()
-        button.backgroundColor = .gray50
+        button.backgroundColor = UIColor(resource: .gray50)
         button.layer.cornerRadius = 12
         button.titleLabel?.font = .pretendard(.body3_medi)
-        button.setTitleColor(UIColor.gray500, for: .normal)
+        button.setTitleColor(UIColor(resource: .gray500), for: .normal)
         button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         return button
     }
@@ -149,7 +149,7 @@ private extension UserTestViewController {
     }
     
     func setStyle() {
-        view.backgroundColor = .white000
+        view.backgroundColor = UIColor(resource: .white000)
     }
     
 }
@@ -169,11 +169,11 @@ private extension UserTestViewController {
     func updateNextButtonState() {
         // 선택된 버튼이 있는지 확인하고 nextButton의 활성화 여부를 결정
         nextButton.isEnabled = selectedButton == nil ? false : true
-        nextButton.backgroundColor = nextButton.isEnabled ? .gray500 : .gray50
+        nextButton.backgroundColor = nextButton.isEnabled ? UIColor(resource: .gray500) : UIColor(resource: .gray50)
         if nextButton.isEnabled {
-            nextButton.setTitleColor(.white000, for: .normal)
+            nextButton.setTitleColor(UIColor(resource: .white000), for: .normal)
         } else {
-            nextButton.setTitleColor(.gray200, for: .normal)
+            nextButton.setTitleColor(UIColor(resource: .gray200), for: .normal)
         }
 
         }
@@ -218,28 +218,28 @@ private extension UserTestViewController {
         
         // 클릭안된 다른 버튼들의 색상 변경
         for case let button as UIButton in questionStackView.arrangedSubviews {
-            button.backgroundColor = .gray50
+            button.backgroundColor = UIColor(resource: .gray50)
             button.layer.borderWidth = 0
         }
         
         // 클릭된 버튼의 색상 변경
-        sender.backgroundColor = .white000
-        sender.layer.borderColor = UIColor.red500.cgColor
+        sender.backgroundColor = UIColor(resource: .white000)
+        sender.layer.borderColor = UIColor(resource: .red500).cgColor
         sender.layer.borderWidth = 1
-        sender.titleLabel?.textColor = .gray700
+        sender.titleLabel?.textColor = UIColor(resource: .gray700)
         
         selectedButton = sender
         
         // nextButton 상태 갱신
         if selectedButton == nil {
             nextButton.isEnabled = false
-            nextButton.backgroundColor = .gray50
-            nextButton.setTitleColor(.gray200, for: .normal)
+            nextButton.backgroundColor = UIColor(resource: .gray50)
+            nextButton.setTitleColor(UIColor(resource: .gray200), for: .normal)
 
         } else {
             nextButton.isEnabled = true
-            nextButton.backgroundColor = .gray500
-            nextButton.setTitleColor(.white000, for: .normal)
+            nextButton.backgroundColor = UIColor(resource: .gray500)
+            nextButton.setTitleColor(UIColor(resource: .white000), for: .normal)
         }
     }
     
@@ -247,8 +247,8 @@ private extension UserTestViewController {
     @objc
     func nextButtonTapped() {
         
-        selectedButton?.backgroundColor = .gray50
-        selectedButton?.setTitleColor(UIColor.gray500, for: .normal)
+        selectedButton?.backgroundColor = UIColor(resource: .gray50)
+        selectedButton?.setTitleColor(UIColor(resource: .gray500), for: .normal)
         selectedButton?.layer.borderWidth = 0
         selectedButton = nil
 
@@ -266,8 +266,8 @@ private extension UserTestViewController {
             // nextButton 상태 초기화
             if selectedButton == nil {
                 nextButton.isEnabled = false
-                nextButton.backgroundColor = .gray50
-                nextButton.setTitleColor(.gray200, for: .normal)
+                nextButton.backgroundColor = UIColor(resource: .gray50)
+                nextButton.setTitleColor(UIColor(resource: .gray200), for: .normal)
             }
         } else if index == 8 {
             buttonIndexList.append(self.buttonIndex)

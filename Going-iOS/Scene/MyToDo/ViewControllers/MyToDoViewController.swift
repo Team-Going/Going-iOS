@@ -7,11 +7,11 @@ final class MyToDoViewController: UIViewController {
     // MARK: - UI Property
 
     private lazy var contentView: UIView = UIView()
-    private lazy var navigationBarview = DOONavigationBar(self, type: .myToDo, backgroundColor: .gray50)
+    private lazy var navigationBarview = DOONavigationBar(self, type: .myToDo, backgroundColor: UIColor(resource: .gray50))
     private let tripHeaderView = TripHeaderView()
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .white000
+        scrollView.backgroundColor = UIColor(resource: .white000)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.isScrollEnabled = true
         return scrollView
@@ -25,19 +25,19 @@ final class MyToDoViewController: UIViewController {
     private lazy var stickyMyToDoHeaderView: OurToDoHeaderView = {
         let headerView = OurToDoHeaderView()
         headerView.isHidden = true
-        headerView.backgroundColor = .white000
+        headerView.backgroundColor = UIColor(resource: .white000)
         headerView.segmentedControl.addTarget(self, action: #selector(didChangeValue(sender: )), for: .valueChanged)
         return headerView
     }()
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .red700
+        btn.backgroundColor = UIColor(resource: .red600)
         btn.setTitle(StringLiterals.MyToDo.mytodo, for: .normal)
-        btn.setTitleColor(.white000, for: .normal)
+        btn.setTitleColor(UIColor(resource: .white000), for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
-        btn.imageView?.tintColor = .white000
+        btn.imageView?.tintColor = UIColor(resource: .white000)
         btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
@@ -45,16 +45,16 @@ final class MyToDoViewController: UIViewController {
     }()
     private let emptyView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(resource: .black000)
         return view
     }()
     private let emptyViewIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.MyToDo.emptyViewIcon
-        imageView.tintColor = .gray100
+        imageView.tintColor = UIColor(resource: .gray100)
         return imageView
     }()
-    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: StringLiterals.OurToDo.pleaseAddToDo, alignment: .center)
+    private let emptyViewLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray200), text: StringLiterals.OurToDo.pleaseAddToDo, alignment: .center)
     private let myToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.image = ImageLiterals.MyToDo.mainViewIcon
@@ -82,8 +82,8 @@ final class MyToDoViewController: UIViewController {
             
             let text = self.tripHeaderView.tripDdayLabel.text ?? ""
             let firstString = NSMutableAttributedString(string: text)
-            firstString.addAttribute(.foregroundColor, value: UIColor.gray700, range: (text as NSString).range(of: "나에게 남은 할일"))
-            firstString.addAttribute(.foregroundColor, value: UIColor.red400, range: (text as NSString).range(of: String(" \(data.count)개")))
+            firstString.addAttribute(.foregroundColor, value: UIColor(resource: .gray700), range: (text as NSString).range(of: "나에게 남은 할일"))
+            firstString.addAttribute(.foregroundColor, value: UIColor(resource: .red500), range: (text as NSString).range(of: String(" \(data.count)개")))
             self.tripHeaderView.tripDdayLabel.attributedText = firstString
         }
     }
@@ -231,11 +231,11 @@ private extension MyToDoViewController {
     }
     
     func setStyle() {
-        self.view.backgroundColor = .gray50
-        self.navigationController?.navigationBar.barTintColor = .white000
-        contentView.backgroundColor = .gray50
+        self.view.backgroundColor = UIColor(resource: .gray50)
+        self.navigationController?.navigationBar.barTintColor = UIColor(resource: .white000)
+        contentView.backgroundColor = UIColor(resource: .gray50)
         tripHeaderView.isUserInteractionEnabled = true
-        emptyView.backgroundColor = .white000
+        emptyView.backgroundColor = UIColor(resource: .white000)
         self.initializeCode = true
     }
     
@@ -247,7 +247,7 @@ private extension MyToDoViewController {
     
     func setCollectionView() -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
-        collectionView.backgroundColor = .white000
+        collectionView.backgroundColor = UIColor(resource: .white000)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isScrollEnabled = false
@@ -386,17 +386,17 @@ extension MyToDoViewController: UIScrollViewDelegate {
         stickyMyToDoHeaderView.isHidden = !shouldShowSticky
         
         if !shouldShowSticky {
-            self.view.backgroundColor = .gray50
-            self.navigationBarview.backgroundColor = .gray50
+            self.view.backgroundColor = UIColor(resource: .gray50)
+            self.navigationBarview.backgroundColor = UIColor(resource: .gray50)
         } else {
-            self.view.backgroundColor = .white000
-            self.navigationBarview.backgroundColor = .white000
+            self.view.backgroundColor = UIColor(resource: .white000)
+            self.navigationBarview.backgroundColor = UIColor(resource: .white000)
         }
         
         if topPadding + scrollView.contentOffset.y < 0 {
-            scrollView.backgroundColor = .gray50
+            scrollView.backgroundColor = UIColor(resource: .gray50)
         }else {
-            scrollView.backgroundColor = .white000
+            scrollView.backgroundColor = UIColor(resource: .white000)
         }
     }
 
@@ -425,13 +425,13 @@ extension MyToDoViewController: UICollectionViewDataSource{
         
         if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             myToDoCell.myToDoData = self.myToDoData?[indexPath.row]
-            myToDoCell.textColor = UIColor.gray400
+            myToDoCell.textColor = UIColor(resource: .gray400)
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxIncomplete
             myToDoCell.index = indexPath.row
             myToDoCell.isComplete = false
         } else {
             myToDoCell.myToDoData = self.myToDoData?[indexPath.row]
-            myToDoCell.textColor = UIColor.gray300
+            myToDoCell.textColor = UIColor(resource: .gray300)
             myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxComplete
             myToDoCell.index = indexPath.row
             myToDoCell.isComplete = true

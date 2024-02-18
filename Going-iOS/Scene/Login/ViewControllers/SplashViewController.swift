@@ -50,7 +50,7 @@ private extension SplashViewController {
     }
     
     func setStyle() {
-        self.view.backgroundColor = .red400
+        self.view.backgroundColor = UIColor(resource: .gray400)
     }
     
     func setHierarchy() {

@@ -4,55 +4,55 @@ import SnapKit
 
 final class ToDoViewController: UIViewController {
 
-    private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo), backgroundColor: .white000)
+    private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo), backgroundColor: UIColor(resource: .white000))
     private let underlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .white000
+        scrollView.backgroundColor = UIColor(resource: .white000)
         return scrollView
     }()
     private let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white000
+        view.backgroundColor = UIColor(resource: .white000)
         return view
     }()
-    private let todoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.todo)
+    private let todoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: UIColor(resource: .gray700), text: StringLiterals.ToDo.todo)
     
     private lazy var todoTextfield: UITextField = {
         let tf = UITextField()
-        tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
+        tf.setTextField(forPlaceholder: "", forBorderColor: UIColor(resource: .gray200), forCornerRadius: 6)
         tf.font = .pretendard(.body3_medi)
-        tf.setPlaceholderColor(.gray700)
-        tf.textColor = .gray700
-        tf.backgroundColor = .white000
+        tf.setPlaceholderColor(UIColor(resource: .gray700))
+        tf.textColor = UIColor(resource: .gray700)
+        tf.backgroundColor = UIColor(resource: .white000)
         tf.setLeftPadding(amount: 12)
         tf.addTarget(self, action: #selector(todoTextFieldDidChange), for: .editingChanged)
         return tf
     }()
     private let warningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .red500))
         label.isHidden = true
         return label
     }()
     
     private let memoWarningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .red500))
         label.isHidden = true
         return label
     }()
         
     private var todoTextFieldCount: Int = 0
-    private let countToDoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/15")
-    private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.deadline)
+    private let countToDoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray200), text: "0/15")
+    private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: UIColor(resource: .gray700), text: StringLiterals.ToDo.deadline)
     private lazy var deadlineTextfieldLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, alignment: .left, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray200), alignment: .left, padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         let gesture = UITapGestureRecognizer(target: self, action: #selector(presentToDatePicker) )
-        label.backgroundColor = .white000
-        label.layer.borderColor = UIColor.gray200.cgColor
+        label.backgroundColor = UIColor(resource: .white000)
+        label.layer.borderColor = UIColor(resource: .gray200).cgColor
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
         label.isUserInteractionEnabled = true
@@ -65,11 +65,11 @@ final class ToDoViewController: UIViewController {
     private lazy var dropdownButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.ToDo.disabledDropdown, for: .normal)
-        btn.backgroundColor = .white000
+        btn.backgroundColor = UIColor(resource: .white000)
         btn.addTarget(self, action: #selector(presentToDatePicker), for: .touchUpInside)
         return btn
     }()
-    private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.allocation)
+    private let managerLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: UIColor(resource: .gray700), text: StringLiterals.ToDo.allocation)
     
     private let todoManagerCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -82,20 +82,20 @@ final class ToDoViewController: UIViewController {
         return collectionView
     }()
     
-    private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.ToDo.memo)
+    private let memoLabel: UILabel = DOOLabel(font: .pretendard(.body2_bold), color: UIColor(resource: .gray700), text: StringLiterals.ToDo.memo)
     private var memoTextViewCount: Int = 0
     private let memoTextView: UITextView = {
         let tv = UITextView()
-        tv.backgroundColor = .white000
+        tv.backgroundColor = UIColor(resource: .white000)
         tv.textContainerInset = UIEdgeInsets(top: ScreenUtils.getHeight(12), left: ScreenUtils.getWidth(12), bottom: ScreenUtils.getHeight(12), right: ScreenUtils.getWidth(12))
         tv.font = .pretendard(.body3_medi)
-        tv.textColor = .gray200
-        tv.layer.borderColor = UIColor.gray200.cgColor
+        tv.textColor = UIColor(resource: .gray200)
+        tv.layer.borderColor = UIColor(resource: .gray200).cgColor
         tv.layer.cornerRadius = 6
         tv.layer.borderWidth = 1
         return tv
     }()
-    private let countMemoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/1000")
+    private let countMemoCharacterLabel: UILabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray200), text: "0/1000")
     private let buttonView: UIView = UIView()
     private lazy var singleButtonView: DOOButton = {
         let singleBtn = DOOButton(type: .unabled, title: StringLiterals.ToDo.toSave)
@@ -202,7 +202,7 @@ final class ToDoViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationBarView.backgroundColor = .gray50
+        self.navigationBarView.backgroundColor = UIColor(resource: .gray50)
         self.tabBarController?.tabBar.isHidden = false
         self.removeNotification()
     }
@@ -212,14 +212,14 @@ final class ToDoViewController: UIViewController {
         addNotification()
     }
     
-    func setNaviTitle() {
-        if navigationBarTitle == StringLiterals.ToDo.inquiry {
-            setInquiryStyle()
-        }
-        if navigationBarTitle == "조회" {
-            self.getDetailToDoDatas(todoId: self.todoId)
-        }
-    }
+//    func setNaviTitle() {
+//        if navigationBarTitle == StringLiterals.ToDo.inquiry {
+//            setInquiryStyle()
+//        }
+//        if navigationBarTitle == "조회" {
+//            self.getDetailToDoDatas(todoId: self.todoId)
+//        }
+//    }
     
     func setInfo() {
         if navigationBarTitle == "추가" {
@@ -480,12 +480,12 @@ private extension ToDoViewController {
     func setStyle() {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         view.addGestureRecognizer(tapGesture)
-        navigationBarView.backgroundColor = .white000
-        dropdownContainer.backgroundColor = .white
+        navigationBarView.backgroundColor = UIColor(resource: .white000)
+        dropdownContainer.backgroundColor = UIColor(resource: .white000)
     }
     
     func setDelegate() {
@@ -504,13 +504,13 @@ private extension ToDoViewController {
     /// 담당자 버튼 클릭 시 버튼 스타일 변경해주는 메소드
     func changeButtonConfig(isSelected: Bool, btn: UIButton) {
         if !isSelected {
-            btn.setTitleColor(.white000, for: .normal)
-            btn.backgroundColor = btn.tag == 0 ? UIColor.red500 : UIColor.gray400
-            btn.layer.borderColor = btn.tag == 0 ? UIColor.red500.cgColor : UIColor.gray400.cgColor
+            btn.setTitleColor(UIColor(resource: .white000), for: .normal)
+            btn.backgroundColor = btn.tag == 0 ? UIColor(resource: .red500) : UIColor(resource: .gray400)
+            btn.layer.borderColor = btn.tag == 0 ? UIColor(resource: .red500).cgColor : UIColor(resource: .gray400).cgColor
         }else {
-            btn.setTitleColor(.gray300, for: .normal)
-            btn.backgroundColor = .white000
-            btn.layer.borderColor = UIColor.gray300.cgColor
+            btn.setTitleColor(UIColor(resource: .gray300), for: .normal)
+            btn.backgroundColor = UIColor(resource: .white000)
+            btn.layer.borderColor = UIColor(resource: .gray300).cgColor
         }
     }
     
@@ -528,17 +528,17 @@ private extension ToDoViewController {
     func setInquiryStyle() {
         guard let todotext = todoTextfield.placeholder?.count else {return}
         guard let memotext = memoTextView.text?.count else {return}
-        todoTextfield.layer.borderColor = UIColor.gray700.cgColor
-        todoTextfield.setPlaceholderColor(.gray700)
-        countToDoCharacterLabel.textColor = .gray700
+        todoTextfield.layer.borderColor = UIColor(resource: .gray700).cgColor
+        todoTextfield.setPlaceholderColor(UIColor(resource: .gray700))
+        countToDoCharacterLabel.textColor = UIColor(resource: .gray700)
         countToDoCharacterLabel.text = "\(todotext)/15"
-        deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
-        deadlineTextfieldLabel.textColor = .gray700
+        deadlineTextfieldLabel.layer.borderColor = UIColor(resource: .gray700).cgColor
+        deadlineTextfieldLabel.textColor = UIColor(resource: .gray700)
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
-        memoTextView.layer.borderColor = memoTextView.text == "" ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
-        memoTextView.textColor = memoTextView.text == "" ? UIColor.gray200 : UIColor.gray700
+        memoTextView.layer.borderColor = memoTextView.text == "" ? UIColor.gray200.cgColor : UIColor(resource: .gray700).cgColor
+        memoTextView.textColor = memoTextView.text == "" ? UIColor(resource: .gray200) : UIColor(resource: .gray700)
         countMemoCharacterLabel.text = "\(memotext)/1000"
-        countMemoCharacterLabel.textColor = memoTextView.text == "" ? UIColor.gray200 : .gray700
+        countMemoCharacterLabel.textColor = memoTextView.text == "" ? UIColor(resource: .gray200) : UIColor(resource: .gray700)
     }
     
     /// 텍스트 필드에 들어갈 텍스트를 DateFormatter로  변환하는 메서드
@@ -558,11 +558,11 @@ private extension ToDoViewController {
     func memoTextViewBlankCheck() {
         guard let textEmpty = memoTextView.text?.isEmpty else { return }
         if textEmpty {
-            memoTextView.layer.borderColor = UIColor.gray200.cgColor
-            self.countMemoCharacterLabel.textColor = .gray200
+            memoTextView.layer.borderColor = UIColor(resource: .gray200).cgColor
+            self.countMemoCharacterLabel.textColor = UIColor(resource: .gray200)
         } else {
-            memoTextView.layer.borderColor = UIColor.gray700.cgColor
-            self.countMemoCharacterLabel.textColor = .gray400
+            memoTextView.layer.borderColor = UIColor(resource: .gray700).cgColor
+            self.countMemoCharacterLabel.textColor = UIColor(resource: .gray400)
         }
     }
     
@@ -598,28 +598,28 @@ private extension ToDoViewController {
         guard let text = todoTextfield.text else { return }
         
         if text.count > 15 {
-            todoTextfield.layer.borderColor = UIColor.red500.cgColor
-            countToDoCharacterLabel.textColor = .red500
+            todoTextfield.layer.borderColor = UIColor(resource: .red500).cgColor
+            countToDoCharacterLabel.textColor = UIColor(resource: .red500)
             warningLabel.text = "내용은 15자 이하여야 합니다"
             warningLabel.isHidden = false
             self.isTodoTextFieldGood = false
             
         } else if text.count == 0 {
-            todoTextfield.layer.borderColor = UIColor.gray200.cgColor
-            countToDoCharacterLabel.textColor = .gray200
+            todoTextfield.layer.borderColor = UIColor(resource: .gray200).cgColor
+            countToDoCharacterLabel.textColor = UIColor(resource: .gray200)
             warningLabel.isHidden = true
             self.isTodoTextFieldGood = false
             
         } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.isTodoTextFieldGood = false
             
-            todoTextfield.layer.borderColor = UIColor.red500.cgColor
-            countToDoCharacterLabel.textColor = .red500
+            todoTextfield.layer.borderColor = UIColor(resource: .red500).cgColor
+            countToDoCharacterLabel.textColor = UIColor(resource: .red500)
             warningLabel.text = "내용에는 공백만 입력할 수 없어요"
             warningLabel.isHidden = false
         }  else {
-            todoTextfield.layer.borderColor = UIColor.gray700.cgColor
-            countToDoCharacterLabel.textColor = .gray700
+            todoTextfield.layer.borderColor = UIColor(resource: .gray700).cgColor
+            countToDoCharacterLabel.textColor = UIColor(resource: .gray700)
             warningLabel.isHidden = true
             self.isTodoTextFieldGood = true
         }
@@ -652,8 +652,8 @@ extension ToDoViewController: UICollectionViewDataSource{
         guard let text = memoTextView.text else { return }
         
         if text.count > 1000 {
-            memoTextView.layer.borderColor = UIColor.red500.cgColor
-            countMemoCharacterLabel.textColor = .red500
+            memoTextView.layer.borderColor = UIColor(resource: .red500).cgColor
+            countMemoCharacterLabel.textColor = UIColor(resource: .red500)
             warningLabel.text = "메모는 1000자를 초과할 수 없습니다."
             memoWarningLabel.isHidden = false
         } else {
@@ -691,19 +691,19 @@ extension ToDoViewController: UICollectionViewDataSource{
             //조회
             if isActivateView == false {
                 managerCell.managerButton.isSelected = true
-                managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                 if manager[indexPath.row].isOwner {
-                    managerCell.managerButton.backgroundColor = .red500
-                    managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
                 } else {
-                    managerCell.managerButton.backgroundColor = .gray400
-                    managerCell.managerButton.layer.borderColor = UIColor.gray400.cgColor
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
                 }
             } // 추가
             else {
-                managerCell.managerButton.backgroundColor = .white000
-                managerCell.managerButton.setTitleColor(.gray300, for: .normal)
-                managerCell.managerButton.layer.borderColor = UIColor.gray300.cgColor
+                managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
+                managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
             }
         }// 마이투두
         else {
@@ -715,24 +715,24 @@ extension ToDoViewController: UICollectionViewDataSource{
                     //설명라벨 세팅
                     if manager[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
                         managerCell.managerButton.isEnabled = false
-                        managerCell.managerButton.backgroundColor = .white000
-                        managerCell.managerButton.layer.borderColor = UIColor.white000.cgColor
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .white000).cgColor
                         
-                        managerCell.managerButton.setTitleColor(.gray200, for: .normal)
+                        managerCell.managerButton.setTitleColor(UIColor(resource: .gray200), for: .normal)
                     } else {
                         managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
-                        managerCell.managerButton.setTitleColor(.red500, for: .normal)
-                        managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
-                        managerCell.managerButton.backgroundColor = .white000
+                        managerCell.managerButton.setTitleColor(UIColor(resource: .red500), for: .normal)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                     }
                 } else{
-                    managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                    managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                     if manager[indexPath.row].isOwner { //owner
-                        managerCell.managerButton.backgroundColor = UIColor.red500
-                        managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
                     }else {
-                        managerCell.managerButton.backgroundColor = UIColor.gray400
-                        managerCell.managerButton.layer.borderColor = UIColor.gray400.cgColor
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
                     }
                 }
             }// 추가
@@ -740,14 +740,14 @@ extension ToDoViewController: UICollectionViewDataSource{
                 //설명라벨 세팅
                 if manager[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
                     managerCell.managerButton.isEnabled = true
-                    managerCell.managerButton.backgroundColor = .white000
-                    managerCell.managerButton.layer.borderColor = UIColor.white000.cgColor
-                    managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .white000).cgColor
+                    managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                 } else {
                     managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
-                    managerCell.managerButton.setTitleColor(.red500, for: .normal)
-                    managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
-                    managerCell.managerButton.backgroundColor = .white000
+                    managerCell.managerButton.setTitleColor(UIColor(resource: .red500), for: .normal)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                     managerCell.managerButton.isUserInteractionEnabled = false
                 }
             }
@@ -768,7 +768,7 @@ extension ToDoViewController: UITextViewDelegate {
         
         if textView.text == memoTextviewPlaceholder {
             textView.text = ""
-            textView.textColor = .gray700
+            textView.textColor = UIColor(resource: .gray700)
         }
         textViewCountCheck()
     }
@@ -787,7 +787,7 @@ extension ToDoViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = memoTextviewPlaceholder
-            textView.textColor = .gray200
+            textView.textColor = UIColor(resource: .gray200)
             textViewCountCheck()
         }
         
@@ -857,8 +857,8 @@ extension ToDoViewController: BottomSheetDelegate {
         
         let formattedDate = dateFormat(date: date)
         deadlineTextfieldLabel.text = formattedDate
-        deadlineTextfieldLabel.textColor = .gray700
-        deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
+        deadlineTextfieldLabel.textColor = UIColor(resource: .gray700)
+        deadlineTextfieldLabel.layer.borderColor = UIColor(resource: .gray700).cgColor
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
         
         if compareDate(userDate: date) {

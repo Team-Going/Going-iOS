@@ -50,11 +50,11 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     private let todoBackgroundView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 5
-        view.backgroundColor = UIColor.gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         return view
     }()
-    lazy var todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray700, alignment: .left)
-    private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300, alignment: .center)
+    lazy var todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray700), alignment: .left)
+    private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray300), alignment: .center)
 
     private let  managerCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -135,14 +135,14 @@ private extension MyToDoCollectionViewCell {
     }
     
     func setStyle() {
-        managerCollectionView.backgroundColor = .gray50
+        managerCollectionView.backgroundColor = UIColor(resource: .gray50)
     }
     
     func setManagerLabel(label: UILabel, text: String) {
         label.text = text
         label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
-        label.textColor = .white
-        label.backgroundColor = .black
+        label.textColor = UIColor(resource: .white000)
+        label.backgroundColor = UIColor(resource: .black000)
         label.layer.cornerRadius = 5
     }
     func setCollectionView() -> UICollectionView {
@@ -201,17 +201,17 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
         
         // 미완료 / 완료 / 나만보기 태그 색상 세팅
         if isComplete == true {
-            managerCell.changeLabelColor(color: .gray300)
+            managerCell.changeLabelColor(color: UIColor(resource: .gray300))
         }else{
             // owner
             if manager[indexPath.row].isOwner {
                 if self.myToDoData?.secret == true {
-                    managerCell.changeLabelColor(color: .gray400)
+                    managerCell.changeLabelColor(color: UIColor(resource: .gray400))
                 }else {
-                    managerCell.changeLabelColor(color: .red400)
+                    managerCell.changeLabelColor(color: UIColor(resource: .red500))
                 }
             }else {
-                managerCell.changeLabelColor(color: .gray400)
+                managerCell.changeLabelColor(color: UIColor(resource: .gray400))
             }
         }
         return managerCell

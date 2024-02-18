@@ -22,11 +22,11 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
             self.travelStateLabel.text = detailData.travelStatus
             
             if self.tripStatus == "complete" {
-                self.travelTitleLabel.textColor = .gray300
-                self.travelDateLabel.textColor = .gray200
-                self.calendarImageView.tintColor = .gray200
-                self.travelStateBackgroundView.backgroundColor = .gray100
-                self.travelStateLabel.textColor = .gray200
+                self.travelTitleLabel.textColor = UIColor(resource: .gray300)
+                self.travelDateLabel.textColor = UIColor(resource: .gray200)
+                self.calendarImageView.tintColor = UIColor(resource: .gray200)
+                self.travelStateBackgroundView.backgroundColor = UIColor(resource: .gray100)
+                self.travelStateLabel.textColor = UIColor(resource: .gray200)
                 
             } else {
                 if detailData.day <= 0 {
@@ -34,18 +34,18 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
                 } else {
                     self.travelStateLabel.text = "D-\(detailData.day)"
                 }
-                self.travelTitleLabel.textColor = .gray700
-                self.travelDateLabel.textColor = .gray300
-                self.calendarImageView.tintColor = .gray300
-                self.travelStateBackgroundView.backgroundColor = .red100
-                self.travelStateLabel.textColor = .red500
+                self.travelTitleLabel.textColor = UIColor(resource: .gray700)
+                self.travelDateLabel.textColor = UIColor(resource: .gray300)
+                self.calendarImageView.tintColor = UIColor(resource: .gray300)
+                self.travelStateBackgroundView.backgroundColor = UIColor(resource: .red100)
+                self.travelStateLabel.textColor = UIColor(resource: .red500)
             }
         }
     }
 
     // MARK: - UI Components
 
-    private let travelTitleLabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray700)
+    private let travelTitleLabel = DOOLabel(font: .pretendard(.body2_medi), color: UIColor(resource: .gray700))
 
     private let calendarImageView: UIImageView = {
         let img = UIImageView()
@@ -53,16 +53,16 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
         return img
     }()
     
-    private let travelDateLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300)
+    private let travelDateLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray300))
     
     private let travelStateBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red100
+        view.backgroundColor = UIColor(resource: .red100)
         view.layer.cornerRadius = 4
         return view
     }()
     
-    private let travelStateLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .red500)
+    private let travelStateLabel = DOOLabel(font: .pretendard(.detail2_bold), color: UIColor(resource: .red500))
 
     // MARK: - Life Cycle
     
@@ -81,9 +81,9 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
 
 private extension DashBoardCollectionViewCell {
     func setStyle() {
-        self.backgroundColor = .white000
+        self.backgroundColor = UIColor(resource: .white000)
         self.layer.cornerRadius = 6
-        self.layer.borderColor = UIColor.gray100.cgColor
+        self.layer.borderColor = UIColor(resource: .gray100).cgColor
         self.layer.borderWidth = 1
     }
     

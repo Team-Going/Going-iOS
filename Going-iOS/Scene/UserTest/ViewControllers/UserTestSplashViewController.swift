@@ -19,13 +19,13 @@ final class UserTestSplashViewController: UIViewController {
     }()
     
     private let titleLabel = DOOLabel(font: .pretendard(.head3),
-                                      color: .gray700,
+                                      color: UIColor(resource: .gray700),
                                       text: StringLiterals.UserTest.userTestSplashTitle,
                                       alignment: .center
                                       )
     
     private let subTitleLabel = DOOLabel(font: .pretendard(.body3_medi),
-                                      color: .gray300,
+                                      color: UIColor(resource: .gray300),
                                       text: StringLiterals.UserTest.userTestSplashSubTitle,
                                       numberOfLine: 2,
                                       alignment: .center
@@ -34,9 +34,9 @@ final class UserTestSplashViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("테스트 시작하기", for: .normal)
-        button.titleLabel?.textColor = .white000
+        button.titleLabel?.textColor = UIColor(resource: .white000)
         button.titleLabel?.font = .pretendard(.body1_bold)
-        button.backgroundColor = .gray500
+        button.backgroundColor = UIColor(resource: .gray500)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -87,7 +87,7 @@ private extension UserTestSplashViewController {
     }
     
     func setStyle() {
-        view.backgroundColor = .white000
+        view.backgroundColor = UIColor(resource: .white000)
     }
     
     @objc func nextButtonTapped() {

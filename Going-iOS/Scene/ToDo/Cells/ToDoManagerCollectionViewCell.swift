@@ -14,10 +14,10 @@ final class ToDoManagerCollectionViewCell: UICollectionViewCell {
         let btn = UIButton()
         btn.isSelected = false
         btn.titleLabel?.font = .pretendard(.detail1_regular)
-        btn.setTitleColor(.gray300, for: .normal)
-        btn.backgroundColor = .white000
+        btn.setTitleColor(UIColor(resource: .gray300), for: .normal)
+        btn.backgroundColor = UIColor(resource: .white000)
         btn.layer.borderWidth = 0.5
-        btn.layer.borderColor = UIColor.gray300.cgColor
+        btn.layer.borderColor = UIColor(resource: .gray300).cgColor
         btn.layer.cornerRadius = 4
         return btn
     }()
