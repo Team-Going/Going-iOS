@@ -44,7 +44,6 @@ final class DatePickerView: UIView {
 // MARK: - Private Methods
 
 private extension DatePickerView {
-    
     func setStyle() {
         self.backgroundColor = .white000
     }

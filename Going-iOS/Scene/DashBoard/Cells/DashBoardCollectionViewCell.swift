@@ -27,7 +27,6 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
                 self.calendarImageView.tintColor = .gray200
                 self.travelStateBackgroundView.backgroundColor = .gray100
                 self.travelStateLabel.textColor = .gray200
-                
             } else {
                 if detailData.day <= 0 {
                     self.travelStateLabel.text = "여행 중"

@@ -11,6 +11,8 @@ import SnapKit
 
 final class MemberTestResultView: UIView {
     
+    // MARK: - UI Properties
+    
     private let resultStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -18,15 +20,23 @@ final class MemberTestResultView: UIView {
         stack.distribution = .equalSpacing
         return stack
     }()
+    
     var progressView1 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[0])
+    
     var progressView2 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[1])
+    
     var progressView3 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[2])
+    
     var progressView4 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[3])
+    
     var progressView5 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[4])
     
     private lazy var dividingLine1: UIImageView = { setLineImage() }()
+    
     private lazy var dividingLine2: UIImageView = { setLineImage() }()
+    
     private lazy var dividingLine3: UIImageView = { setLineImage() }()
+    
     private lazy var dividingLine4: UIImageView = { setLineImage() }()
     
     

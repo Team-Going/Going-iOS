@@ -37,6 +37,7 @@ final class JoinTravelTestViewController: UIViewController {
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("이번 여행은!"))
+    
     private let navigationUnderlineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -176,19 +177,25 @@ extension JoinTravelTestViewController: UICollectionViewDataSource {
 
 extension JoinTravelTestViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 12
     }
     
     /// cell size
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = ScreenUtils.getWidth(327)
         let height = ScreenUtils.getHeight(133)
         return CGSize(width: width, height: height)
     }
     
     /// content margin
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24)
     }
 }

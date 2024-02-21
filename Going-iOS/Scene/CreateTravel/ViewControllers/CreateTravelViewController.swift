@@ -22,6 +22,7 @@ final class CreateTravelViewController: UIViewController {
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("새로운 여행 만들기"))
+    
     private let navigationUnderlineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -31,6 +32,7 @@ final class CreateTravelViewController: UIViewController {
     private let travelNameLabel = DOOLabel(font: .pretendard(.body2_bold),
                                            color: .gray700,
                                            text: StringLiterals.CreateTravel.nameTitle)
+    
     private let travelDateLabel = DOOLabel(font: .pretendard(.body2_bold),
                                            color: .gray700,
                                            text: StringLiterals.CreateTravel.dateTitle)
@@ -113,7 +115,6 @@ final class CreateTravelViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension CreateTravelViewController {
-    
     func setStyle() {
         self.view.backgroundColor = .white000
         self.navigationController?.isNavigationBarHidden = true

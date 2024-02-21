@@ -32,6 +32,7 @@ final class JoinTravelViewController: UIViewController {
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
+    
     private let navigationUnderlineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -52,6 +53,7 @@ final class JoinTravelViewController: UIViewController {
     }()
     
     private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/6")
+    
     private let warningLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red500, text:"잘못된 초대코드예요")
         label.isHidden = true

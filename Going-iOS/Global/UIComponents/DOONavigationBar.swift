@@ -118,6 +118,7 @@ private extension DOONavigationBar {
             titleLabel.snp.makeConstraints {
                 $0.center.equalToSuperview()
             }
+            
         case .testResult:
             saveImageButton.snp.makeConstraints {
                 $0.width.height.equalTo(ScreenUtils.getHeight(48))

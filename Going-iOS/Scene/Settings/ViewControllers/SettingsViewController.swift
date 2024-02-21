@@ -18,6 +18,7 @@ final class SettingsViewController: UIViewController {
     // MARK: - UI Properties
 
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("설정"))
+    
     private let navigationUnderlineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -34,6 +35,7 @@ final class SettingsViewController: UIViewController {
         btn.semanticContentAttribute = .forceRightToLeft
         return btn
     }()
+    
     private let deleteButtonUnderLine: UIView = {
         let view = UIView()
         view.backgroundColor = .gray300
@@ -103,7 +105,8 @@ private extension SettingsViewController {
             $0.width.equalTo(ScreenUtils.getWidth(60))
             $0.height.equalTo(ScreenUtils.getHeight(0.5))
             $0.top.equalTo(deleteUserButton.snp.bottom)
-            $0.trailing.equalToSuperview().inset(24)        }
+            $0.trailing.equalToSuperview().inset(24)
+        }
     }
     
     func setDelegate() {
@@ -112,7 +115,8 @@ private extension SettingsViewController {
     }
     
     func registerCell() {
-        settingsCollectionView.register(SettingsCollectionViewCell.self, forCellWithReuseIdentifier: SettingsCollectionViewCell.cellIdentifier)
+        settingsCollectionView.register(SettingsCollectionViewCell.self, 
+                                        forCellWithReuseIdentifier: SettingsCollectionViewCell.cellIdentifier)
     }
     
     // MARK: - @objc Methods
@@ -176,19 +180,25 @@ extension SettingsViewController: UICollectionViewDelegate {
 
 extension SettingsViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 8
     }
     
     /// cell size
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = ScreenUtils.getWidth(327)
         let height = ScreenUtils.getHeight(50)
         return CGSize(width: width, height: height)
     }
     
     /// content margin
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 40, left: 24, bottom: 338, right: 24)
     }
 }

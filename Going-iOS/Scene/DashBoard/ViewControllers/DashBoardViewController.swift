@@ -26,6 +26,7 @@ class DashBoardViewController: UIViewController {
             dashBoardCollectionView.reloadData()
         }
     }
+    
     private lazy var filteredTravelList: [Trip] = []
     
     // MARK: - UI Properties
@@ -54,6 +55,7 @@ class DashBoardViewController: UIViewController {
         view.backgroundColor = .gray50
         return view
     }()
+    
     private let noDataLabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "새로운 여행을 시작해 보세요")
     
     private let characterImage:  UIImageView = {
@@ -91,7 +93,7 @@ class DashBoardViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getAllData(sta: self.tripStatus)
+        getAllTravelData(sta: self.tripStatus)
     }
 }
 
@@ -127,6 +129,7 @@ private extension DashBoardViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(createTravelButton.snp.top)
         }
+        
         noDataLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(107))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(109))
@@ -208,7 +211,9 @@ private extension DashBoardViewController {
     }
     
     func setGradient() {
-        gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .vertical)
+        gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), 
+                                 secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+                                 axis: .vertical)
     }
     
     func setNoDataView() {
@@ -222,7 +227,6 @@ private extension DashBoardViewController {
         }
     }
     
-    
     // MARK: - @objc Methods
     
     @objc
@@ -233,18 +237,16 @@ private extension DashBoardViewController {
     
     @objc
     func didChangeValue(sender: UISegmentedControl) {
-        
         if sender.selectedSegmentIndex == 0 {
             self.segmentIndex = 0
-            getAllData(sta: "incomplete")
+            getAllTravelData(sta: "incomplete")
         } else {
             self.segmentIndex = 1
 
-            getAllData(sta: "complete")
+            getAllTravelData(sta: "complete")
         }
         
         self.tripStatus = self.segmentIndex == 0 ? "incomplete" : "complete"
-
     }
     
     @objc
@@ -283,20 +285,29 @@ extension DashBoardViewController: UICollectionViewDelegate {
 
 extension DashBoardViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 12
     }
     
     /// cell size
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = ScreenUtils.getWidth(327)
         let height = ScreenUtils.getHeight(76)
         return CGSize(width: width, height: height)
     }
     
     /// content margin
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: ScreenUtils.getHeight(20), left: ScreenUtils.getWidth(24), bottom: ScreenUtils.getHeight(20), right: ScreenUtils.getWidth(24))
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: ScreenUtils.getHeight(20), 
+                            left: ScreenUtils.getWidth(24),
+                            bottom: ScreenUtils.getHeight(20),
+                            right: ScreenUtils.getWidth(24))
     }
 }
 
@@ -320,8 +331,7 @@ extension DashBoardViewController: ViewControllerServiceable {
 }
 
 private extension DashBoardViewController {
-    
-    func getAllData(sta: String) {
+    func getAllTravelData(sta: String) {
         Task {
             do {
                 self.travelListDummy = try await TravelService.shared.getAllTravel(status: sta)

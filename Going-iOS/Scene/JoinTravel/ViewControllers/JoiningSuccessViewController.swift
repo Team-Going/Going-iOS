@@ -33,7 +33,6 @@ final class JoiningSuccessViewController: UIViewController {
         }
     }
     
-    
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
@@ -79,7 +78,6 @@ final class JoiningSuccessViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension JoiningSuccessViewController {
-    
     func setStyle() {
         view.backgroundColor = .gray50
         self.navigationController?.isNavigationBarHidden = true

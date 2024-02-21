@@ -12,6 +12,7 @@ import WebKit
 final class WebViewController: UIViewController {
     
     private var webView: WKWebView?
+    
     private var urlString: String
     
     // URL String을 매개변수로 받는 initializer

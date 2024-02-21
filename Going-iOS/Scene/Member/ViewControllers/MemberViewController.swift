@@ -36,6 +36,8 @@ class MemberViewController: UIViewController {
         }
     }
     
+    // MARK: - UI Properties
+
     private let memberScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
@@ -46,9 +48,8 @@ class MemberViewController: UIViewController {
     
     private let contentView = UIView()
 
-    // MARK: - UI Properties
-    
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("함께 하는 친구들"))
+    
     private let navigationUnderLineView: UIView = {
         let view = UIView()
         view.backgroundColor = .gray100
@@ -69,7 +70,6 @@ class MemberViewController: UIViewController {
     
     private let ourTestResultView = MemberTestResultView()
     
-        
     // MARK: - Life Cycle
     
     override func viewDidLoad() {

@@ -41,6 +41,7 @@ final class CreatingSuccessViewController: UIViewController {
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
     
     private let createSuccessLabel = DOOLabel(font: .pretendard(.head2), color: .gray700, text: StringLiterals.CreatingSuccess.title)
+    
     private let characterImage: UIImageView = {
         let img = UIImageView()
         img.image = ImageLiterals.StartTravelSplash.imgTripSplash
@@ -62,7 +63,9 @@ final class CreatingSuccessViewController: UIViewController {
     }()
     
     private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .red400)
+    
     private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
+    
     private let dateLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray300)
     
     private let inviteCodeLabel = DOOLabel(font: .pretendard(.body1_medi), color: .gray700)
@@ -76,6 +79,7 @@ final class CreatingSuccessViewController: UIViewController {
         button.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
         return button
     }()
+    
     private let codeUnderLineView: UIView = {
         let line = UIView()
         line.backgroundColor = .gray300
