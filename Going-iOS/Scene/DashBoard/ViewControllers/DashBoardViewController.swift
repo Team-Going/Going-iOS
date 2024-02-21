@@ -38,11 +38,10 @@ class DashBoardViewController: UIViewController {
     
     private var navigationTitle = DOOLabel(font: .pretendard(.head1), color: .gray700)
     
-    // TODO: - 뷰 연결
     private lazy var settingsButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.DashBoard.btnSetting, for: .normal)
-        btn.addTarget(self, action: #selector(pushToSettingsVC), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -249,7 +248,7 @@ private extension DashBoardViewController {
     }
     
     @objc
-    func pushToSettingsVC() {
+    func settingsButtonTapped() {
         let vc = SettingsViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

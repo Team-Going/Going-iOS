@@ -90,7 +90,7 @@ final class CreatingSuccessViewController: UIViewController {
     
     private lazy var entranceToMainButton: DOOButton = {
         let btn = DOOButton(type: .enabled, title: StringLiterals.CreatingSuccess.entranceBtn)
-        btn.addTarget(self, action: #selector(pushToOurToDoVC), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(mainButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -260,7 +260,7 @@ private extension CreatingSuccessViewController {
     }
     
     @objc
-    func pushToOurToDoVC() {
+    func mainButtonTapped() {
         let vc = DOOTabbarViewController()
         if let ourtodoVC = vc.ourTODoVC.viewControllers[0] as? OurToDoViewController,
            let myToDoVC = vc.myToDoVC.viewControllers[0] as? MyToDoViewController {
