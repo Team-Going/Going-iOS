@@ -18,6 +18,8 @@ final class CreateTravelViewController: UIViewController {
     private var createTravelData = CreateTravelRequestAppData(travelTitle: "", startDate: "", endDate: "", a: 0, b: 0, c: 0, d: 0, e: 0)
     
     private var isTravelNameTextFieldGood: Bool = false
+    
+    private lazy var keyboardLayoutGuide = view.keyboardLayoutGuide
 
     // MARK: - UI Properties
     
@@ -191,12 +193,11 @@ private extension CreateTravelViewController {
             $0.width.equalTo(ScreenUtils.getWidth(154))
         }
         
-        createTravelButton.snp.makeConstraints {
+        createTravelButton.snp.remakeConstraints {
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-            $0.bottom.equalTo(self.view.keyboardLayoutGuide.snp.top)
-            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(keyboardLayoutGuide.snp.top).offset(-6)
         }
     }
     

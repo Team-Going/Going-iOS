@@ -29,6 +29,8 @@ final class JoinTravelViewController: UIViewController {
         }
     }
     
+    private lazy var keyboardLayoutGuide = view.keyboardLayoutGuide
+
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 입장하기"))
@@ -79,14 +81,6 @@ final class JoinTravelViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        setNotification()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        removeKeyboardNotifications()
     }
 }
 
@@ -143,29 +137,16 @@ private extension JoinTravelViewController {
             $0.trailing.equalTo(codeTextField.snp.trailing).offset(-4)
         }
         
-        nextButton.snp.makeConstraints {
+        nextButton.snp.remakeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalTo(keyboardLayoutGuide.snp.top).offset(-6)
         }
     }
     
     func setDelegate() {
         codeTextField.delegate = self
-    }
-    
-    func setNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    // 노티피케이션을 제거하는 메서드
-    func removeKeyboardNotifications(){
-        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
-        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func updateNextButtonState() {
@@ -174,32 +155,7 @@ private extension JoinTravelViewController {
     }
     
     // MARK: - @objc Methods
-    
-    /// 키보드에 따라 버튼 위로 움직이게 하는 메서드
-    @objc
-    func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            // 키보드 높이
-            let keyboardHeight = keyboardFrame.height
-            
-            // Bottom Safe Area 높이
-            let safeAreaBottomInset = view.safeAreaInsets.bottom
-            
-            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
-            UIView.animate(withDuration: 0.3) {
-                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
-            }
-        }
-    }
-    
-    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
-    @objc
-    func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.nextButton.transform = .identity
-        }
-    }
-    
+ 
     @objc
     func nextButtonTapped() {
         guard let text = codeTextField.text else { return }
