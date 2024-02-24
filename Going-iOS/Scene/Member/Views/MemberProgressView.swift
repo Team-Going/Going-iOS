@@ -32,7 +32,9 @@ final class MemberProgressView: UIView {
         }
     }
 
-    private let questionLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "여행 스타일")
+    private let questionLabel = DOOLabel(font: .pretendard(.body3_bold), 
+                                         color: .gray700,
+                                         text: "여행 스타일")
     
     private let progressBarView: UIProgressView = {
         let view = UIProgressView()

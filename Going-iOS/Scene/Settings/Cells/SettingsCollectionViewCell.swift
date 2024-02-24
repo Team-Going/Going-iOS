@@ -78,7 +78,9 @@ private extension SettingsCollectionViewCell {
     }
     
     func setHierarchy() {
-        self.addSubviews(titleLabel, settingsIcon, versionInfoLabel)
+        self.addSubviews(titleLabel, 
+                         settingsIcon, 
+                         versionInfoLabel)
     }
     
     func setLayout() {

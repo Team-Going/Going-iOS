@@ -40,7 +40,9 @@ final class CreatingSuccessViewController: UIViewController {
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
     
-    private let createSuccessLabel = DOOLabel(font: .pretendard(.head2), color: .gray700, text: StringLiterals.CreatingSuccess.title)
+    private let createSuccessLabel = DOOLabel(font: .pretendard(.head2), 
+                                              color: .gray700,
+                                              text: StringLiterals.CreatingSuccess.title)
     
     private let characterImage: UIImageView = {
         let img = UIImageView()
@@ -132,6 +134,7 @@ private extension CreatingSuccessViewController {
                                 inviteCodeLabel,
                                 codeUnderLineView,
                                 codeCopyButton)
+        
         dDayLabelBackgroundView.addSubview(dDayLabel)
     }
     

@@ -56,7 +56,9 @@ class DashBoardViewController: UIViewController {
         return view
     }()
     
-    private let noDataLabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "새로운 여행을 시작해 보세요")
+    private let noDataLabel = DOOLabel(font: .pretendard(.body3_medi), 
+                                       color: .gray200,
+                                       text: "새로운 여행을 시작해 보세요")
     
     private let characterImage:  UIImageView = {
         let img = UIImageView()
@@ -70,7 +72,7 @@ class DashBoardViewController: UIViewController {
         return btn
     }()
     
-    private let gradientView =  UIView()
+    private let gradientView = UIView()
     
     // MARK: - Life Cycle
     
@@ -100,7 +102,6 @@ class DashBoardViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension DashBoardViewController {
-    
     func setStyle() {
         self.view.backgroundColor = .white000
         self.navigationController?.isNavigationBarHidden = true
@@ -262,7 +263,8 @@ extension DashBoardViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = dashBoardCollectionView.dequeueReusableCell(withReuseIdentifier: DashBoardCollectionViewCell.cellIdentifier, for: indexPath) as? DashBoardCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = dashBoardCollectionView.dequeueReusableCell(withReuseIdentifier: DashBoardCollectionViewCell.cellIdentifier, for: indexPath) as? DashBoardCollectionViewCell 
+        else { return UICollectionViewCell() }
         cell.tripStatus = self.tripStatus
         cell.travelDetailData = travelListDummy?.trips[indexPath.row]
         return cell

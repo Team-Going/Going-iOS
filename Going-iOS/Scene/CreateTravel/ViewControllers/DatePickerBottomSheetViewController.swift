@@ -92,7 +92,9 @@ private extension DatePickerBottomSheetViewController {
     
     func setHierarchy() {
         view.addSubviews(dimmedBackView, bottomSheetView)
-        bottomSheetView.addSubviews(datePickerView, dismissIndicatorView, confirmButton)
+        bottomSheetView.addSubviews(datePickerView, 
+                                    dismissIndicatorView,
+                                    confirmButton)
     }
     
     func setGestureRecognizer() {
@@ -145,7 +147,10 @@ private extension DatePickerBottomSheetViewController {
     
     /// 바텀 시트 표출 애니메이션 메서드
     func showBottomSheet() {
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.25, 
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: {
             self.dimmedBackView.alpha = 0.5
             self.view.layoutIfNeeded()
         }, completion: nil)
@@ -153,7 +158,10 @@ private extension DatePickerBottomSheetViewController {
     
     /// 바텀 시트 사라지는 애니메이션 메서드
     func hideBottomSheetAndGoBack() {
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.25, 
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: {
             self.dimmedBackView.alpha = 0.0
             self.view.layoutIfNeeded()
         }) { _ in

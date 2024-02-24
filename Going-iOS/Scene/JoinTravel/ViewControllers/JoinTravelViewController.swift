@@ -41,23 +41,31 @@ final class JoinTravelViewController: UIViewController {
         return view
     }()
     
-    private let codeTitleLabel = DOOLabel(font: .pretendard(.body2_bold), color: .gray700, text: StringLiterals.JoinTravel.inviteCodeTitle)
+    private let codeTitleLabel = DOOLabel(font: .pretendard(.body2_bold), 
+                                          color: .gray700,
+                                          text: StringLiterals.JoinTravel.inviteCodeTitle)
     
     private let codeTextField: UITextField = {
         let field = UITextField()
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
-        field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, forBorderColor: .gray200, forCornerRadius: 6)
+        field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, 
+                           forBorderColor: .gray200,
+                           forCornerRadius: 6)
         field.setPlaceholderColor(.gray200)
         field.textColor = .gray700
         field.autocapitalizationType = .none
         return field
     }()
     
-    private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray200, text: "0/6")
+    private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular), 
+                                               color: .gray200,
+                                               text: "0/6")
     
     private let warningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red500, text:"잘못된 초대코드예요")
+        let label = DOOLabel(font: .pretendard(.detail2_regular), 
+                             color: .red500,
+                             text:"잘못된 초대코드예요")
         label.isHidden = true
         return label
     }()
@@ -165,8 +173,10 @@ private extension JoinTravelViewController {
 }
 
 extension JoinTravelViewController: UITextFieldDelegate {
-    func  textField ( _  textField : UITextField, shouldChangeCharactersIn  range : NSRange , replacementString  string : String ) -> Bool {
-        guard let text = textField.text else { return  false }
+    func  textField ( _  textField : UITextField, 
+                      shouldChangeCharactersIn range : NSRange , 
+                      replacementString string : String ) -> Bool {
+        guard let text = textField.text else { return false }
         
         let newLength = text.count + string.count - range.length
         let maxLength = 6

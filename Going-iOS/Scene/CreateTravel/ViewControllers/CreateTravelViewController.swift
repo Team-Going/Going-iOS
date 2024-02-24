@@ -15,7 +15,8 @@ final class CreateTravelViewController: UIViewController {
     
     private weak var activeLabel: UILabel?
     
-    private var createTravelData = CreateTravelRequestAppData(travelTitle: "", startDate: "", endDate: "", a: 0, b: 0, c: 0, d: 0, e: 0)
+    private var createTravelData = CreateTravelRequestAppData(travelTitle: "", startDate: "", endDate: "", 
+                                                              a: 0, b: 0, c: 0, d: 0, e: 0)
     
     private var isTravelNameTextFieldGood: Bool = false
     
@@ -72,7 +73,9 @@ final class CreateTravelViewController: UIViewController {
     }()
     
     private let startDateLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "시작일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+        let label = DOOLabel(font: .pretendard(.body3_medi), 
+                             color: .gray200, text: "시작일",
+                             padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
         label.layer.borderColor = UIColor.gray200.cgColor
@@ -80,14 +83,19 @@ final class CreateTravelViewController: UIViewController {
     }()
     
     private let endDateLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "종료일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+        let label = DOOLabel(font: .pretendard(.body3_medi), 
+                             color: .gray200,
+                             text: "종료일",
+                             padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
         label.layer.borderColor = UIColor.gray200.cgColor
         return label
     }()
     
-    private let dashLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700, text: "-")
+    private let dashLabel = DOOLabel(font: .pretendard(.detail2_regular), 
+                                     color: .gray700,
+                                     text: "-")
     
     private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")
@@ -96,7 +104,7 @@ final class CreateTravelViewController: UIViewController {
     }()
     
     private let bottomSheetVC = DatePickerBottomSheetViewController()
-    
+        
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
@@ -120,8 +128,6 @@ private extension CreateTravelViewController {
     func setStyle() {
         self.view.backgroundColor = .white000
         self.navigationController?.isNavigationBarHidden = true
-        self.view.keyboardLayoutGuide.topAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        self.view.keyboardLayoutGuide.followsUndockedKeyboard = true
     }
     
     func setHierarchy() {
@@ -135,7 +141,9 @@ private extension CreateTravelViewController {
                          dateHorizontalStackView,
                          createTravelButton)
         
-        dateHorizontalStackView.addArrangedSubviews(startDateLabel, dashLabel, endDateLabel)
+        dateHorizontalStackView.addArrangedSubviews(startDateLabel,
+                                                    dashLabel,
+                                                    endDateLabel)
     }
     
     func setLayout() {
@@ -269,13 +277,12 @@ private extension CreateTravelViewController {
         characterCountLabel.text = "\(text.count) / 15"
         
         if text.count >  15 {
-            travelNameTextField.textColor = .red500
+            travelNameTextField.layer.borderColor = UIColor.red500.cgColor
             warningLabel.isHidden = false
             warningLabel.text = "이름은 15자 이하여야 합니다"
             isTravelNameTextFieldGood = false
         } else if text.count == 0 {
-            travelNameTextField.layer.borderColor =
-            UIColor.gray200.cgColor
+            travelNameTextField.layer.borderColor = UIColor.gray200.cgColor
             characterCountLabel.textColor = .gray200
             warningLabel.isHidden = true
             isTravelNameTextFieldGood = false
