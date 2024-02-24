@@ -18,12 +18,14 @@ final class DoubleButtonView: UIView {
         
         return stackView
     }()
+    
     private lazy var button1: DOOButton = {
         let btn = DOOButton(type: .white, title: "삭제하기")
         btn.addTarget(self, action: #selector(tapDeleteButton), for: .touchUpInside)
         btn.tag = 1
         return btn
     }()
+    
     private lazy var button2: DOOButton = {
         let btn = DOOButton(type: .enabled, title: "수정하기")
         btn.addTarget(self, action: #selector(tapEditButton), for: .touchUpInside)

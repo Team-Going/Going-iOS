@@ -21,6 +21,7 @@ final class OurToDoHeaderView: UIView {
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
+    
     private let underlineView: UIView = UIView()
 
     
@@ -52,6 +53,7 @@ private extension OurToDoHeaderView {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(1)
         }
+        
         segmentedControl.snp.makeConstraints{
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()

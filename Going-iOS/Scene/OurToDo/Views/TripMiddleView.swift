@@ -24,17 +24,20 @@ final class TripMiddleView: UIView {
         imgView.isUserInteractionEnabled = true
         return imgView
     }()
+    
     private lazy var tripProgressLabel: UILabel = DOOLabel(
         font: .pretendard(.body2_medi),
         color: UIColor(resource: .gray700),
         text: StringLiterals.OurToDo.ourProgress,
         alignment: .left
     )
+    
     private lazy var percentageLabel: UILabel = DOOLabel(
         font: .pretendard(.body2_medi),
         color: UIColor(resource: .red500),
         alignment: .right
     )
+    
     private var tripProgressBar: UIProgressView = {
         let progressBar = UIProgressView()
         progressBar.trackTintColor = UIColor(resource: .gray100)
@@ -51,19 +54,31 @@ final class TripMiddleView: UIView {
         view.addGestureRecognizer(friendsLabelTapGestureRecognizer)
         return view
     }()
+    
     private let tripFriendsLabel: DOOLabel = DOOLabel(
         font: .pretendard(.body2_medi),
         color: UIColor(resource: .gray700),
         text: StringLiterals.OurToDo.friends,
         alignment: .left
     )
+   
     private lazy var tripFriendsBtn: UIButton = {
         let btn = UIButton()
         btn.addTarget(self, action: #selector(pushToInquiryFriendsView), for: .touchUpInside)
         return btn
     }()
-    private lazy var tripFriendsCollectionView: UICollectionView = {setCollectionView()}()
-    
+   
+    private lazy var tripFriendsCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getHeight(48) , height: ScreenUtils.getHeight(67))
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = UIColor.white000
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = true
+        return collectionView
+    }()
+   
     private lazy var addButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = UIColor(resource: .gray50)
@@ -73,13 +88,16 @@ final class TripMiddleView: UIView {
         btn.addTarget(self, action: #selector(pushToAddFriendsView), for: .touchUpInside)
         return btn
     }()
+    
     private lazy var addLabel: UILabel = DOOLabel(
         font: .pretendard(.detail3_regular),
         color: UIColor(resource: .gray500),
         text: StringLiterals.OurToDo.invite,
         alignment: .center
     )
+   
     var gradientView: UIView = UIView()
+    
     var addStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -92,8 +110,11 @@ final class TripMiddleView: UIView {
     // MARK: - Property
     
     private var userType: Int = 0
+    
     var friendProfile: [Participant] = []
+    
     weak var delegate: TripMiddleViewDelegate?
+    
     var progress: Int? {
         didSet {
             guard let progress else {return}
@@ -101,6 +122,7 @@ final class TripMiddleView: UIView {
             self.tripProgressBar.progress = Float(progress) * 0.01
         }
     }
+    
     var participants: [Participant]? {
         didSet {
             guard let participants else {return}
@@ -108,6 +130,7 @@ final class TripMiddleView: UIView {
             self.tripFriendsCollectionView.reloadData()
         }
     }
+  
     
     // MARK: - Life Cycle
     
@@ -148,7 +171,13 @@ private extension TripMiddleView {
     
     func setHierarchy() {
         self.addSubview(ticketBoxImgView)
-        ticketBoxImgView.addSubviews(tripProgressLabel, percentageLabel, tripProgressBar, tripFriendsContainer, tripFriendsCollectionView, gradientView, addStackView)
+        ticketBoxImgView.addSubviews(tripProgressLabel,
+                                     percentageLabel,
+                                     tripProgressBar,
+                                     tripFriendsContainer,
+                                     tripFriendsCollectionView,
+                                     gradientView,
+                                     addStackView)
         tripFriendsContainer.addSubviews(tripFriendsLabel, tripFriendsBtn)
         addStackView.addArrangedSubviews(addButton, addLabel)
     }
@@ -158,30 +187,36 @@ private extension TripMiddleView {
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
             $0.top.bottom.equalToSuperview()
         }
+        
         tripProgressLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(20))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.width.equalTo(ScreenUtils.getWidth(100))
         }
+        
         percentageLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(20))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
         }
+        
         tripProgressBar.snp.makeConstraints{
             $0.top.equalTo(tripProgressLabel.snp.bottom).offset(ScreenUtils.getHeight(12))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.height.equalTo(ScreenUtils.getHeight(10))
         }
+        
         tripFriendsContainer.snp.makeConstraints{
             $0.top.equalTo(tripProgressBar.snp.bottom).offset(ScreenUtils.getHeight(52))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.height.equalTo(ScreenUtils.getHeight(23))
         }
+        
         tripFriendsLabel.snp.makeConstraints{
             $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(100))
         }
+        
         tripFriendsBtn.snp.makeConstraints{
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(tripFriendsLabel.snp.trailing)
@@ -219,34 +254,10 @@ private extension TripMiddleView {
         tripFriendsBtn.setImage(ImageLiterals.OurToDo.btnEnter, for: .normal)
         addButton.layer.cornerRadius = ScreenUtils.getHeight(23.5)
     }
-    
-    func setLabel(text: String? = "", font: UIFont? = UIFont.pretendard(.body2_medi), textColor: UIColor? = UIColor(resource: .gray700), textAlignment: NSTextAlignment) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = font
-        label.textColor = textColor
-        label.textAlignment = textAlignment
-        return label
-    }
-    
+
     func setDelegate() {
         self.tripFriendsCollectionView.dataSource = self
         self.tripFriendsCollectionView.delegate = self
-    }
-    
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
-        collectionView.backgroundColor = UIColor(resource: .white000)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isScrollEnabled = true
-        return collectionView
-    }
-    
-    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getHeight(48) , height: ScreenUtils.getHeight(67))
-        return flowLayout
     }
     
     func registerCell() {

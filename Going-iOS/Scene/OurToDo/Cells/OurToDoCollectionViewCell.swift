@@ -20,6 +20,7 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
             self.managerCollectionView.reloadData()
         }
     }
+   
     var index: Int? {
         didSet {
             guard let index else {return}
@@ -42,18 +43,28 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor(resource: .gray50)
         return view
     }()
+    
     let todoTitleLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
         color: UIColor(resource: .gray700),
         alignment: .left
     )
+   
     private lazy var deadlineLabel: UILabel = DOOLabel(
         font: .pretendard(.detail3_regular),
         color: UIColor(resource: .gray300),
         alignment: .center
     )
+    
     lazy var managerCollectionView: UICollectionView = {
-        setCollectionView()
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
+        return collectionView
     }()
 
     
@@ -119,24 +130,6 @@ private extension OurToDoCollectionViewCell {
         return label
     }
     
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
-        collectionView.backgroundColor = .clear
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
-        return collectionView
-    }
-    
-    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = ScreenUtils.getWidth(4)
-        flowLayout.minimumLineSpacing = ScreenUtils.getWidth(4)
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(42) , height: ScreenUtils.getHeight(20))
-        return flowLayout
-    }
-    
     func setDelegate() {
         self.managerCollectionView.dataSource = self
         self.managerCollectionView.delegate = self
@@ -174,5 +167,20 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource {
             }
         }
         return managerCell
+    }
+}
+
+extension OurToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return ScreenUtils.getWidth(4)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return ScreenUtils.getWidth(4)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: ScreenUtils.getWidth(42) , height: ScreenUtils.getHeight(20))
     }
 }

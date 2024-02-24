@@ -7,10 +7,15 @@ final class OurToDoViewController: UIViewController {
     // MARK: - UI Property
     
     private lazy var contentView: UIView = UIView()
+
     private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: UIColor(resource: .gray50))
+
     private let tripHeaderView: TripHeaderView = TripHeaderView()
+    
     private let tripMiddleView: TripMiddleView = TripMiddleView()
+    
     private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = UIColor(resource: .white000)
@@ -19,13 +24,23 @@ final class OurToDoViewController: UIViewController {
         scrollView.isScrollEnabled = true
         return scrollView
     }()
+    
     private let stickyOurToDoHeaderView: OurToDoHeaderView = {
         let headerView = OurToDoHeaderView()
         headerView.isHidden = true
         headerView.backgroundColor = UIColor(resource: .white000)
         return headerView
     }()
-    private lazy var ourToDoCollectionView: UICollectionView = {setCollectionView()}()
+    
+    private lazy var ourToDoCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .white000
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        return collectionView
+    }()
+    
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = UIColor(resource: .red600)
@@ -41,17 +56,15 @@ final class OurToDoViewController: UIViewController {
         return btn
     }()
     
-    private let emptyView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(resource: .black000)
-        return view
-    }()
+    private let emptyView: UIView = UIView()
+    
     private let emptyViewIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.OurToDo.emptyViewIcon
         imageView.tintColor = UIColor(resource: .gray100)
         return imageView
     }()
+    
     private let emptyViewLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
         color: UIColor(resource: .gray200),
@@ -67,16 +80,22 @@ final class OurToDoViewController: UIViewController {
     
     
     // MARK: - Property
-    
-    private var isSetDashBoardRoot: Bool = false
-    
-    var initializeCode: Bool = false
-
+        
     var tripId: Int = 0
+    
+    var todoId: Int = 0
     
     var segmentIndex: Int = 0
     
+    var allocator: [Allocators] = []
+    
+    var initializeCode: Bool = false
+    
     var progress: String = "incomplete"
+    
+    private var inviteCode: String?
+    
+    private var isSetDashBoardRoot: Bool = false
     
     private var headerData: OurToDoHeaderAppData? {
         didSet {
@@ -89,24 +108,16 @@ final class OurToDoViewController: UIViewController {
         }
     }
     
-    private var inviteCode: String?
-    
-    var todoId: Int = 0
-    
-    var ourToDoData: [ToDoAppData]? {
+    private var ourToDoData: [ToDoAppData]? {
         didSet {
             Task {
                 ourToDoCollectionView.reloadData()
                 await loadData()
-
             }
             getOurToDoHeaderData()
         }
     }
-    
-    var allocator: [Allocators] = []
-    
-    var detailToDoData: DetailToDoAppData = DetailToDoAppData(title: "", endDate: "", allocators: [], memo: "", secret: false)
+        
     
     // MARK: - Life Cycle
     
@@ -127,9 +138,7 @@ final class OurToDoViewController: UIViewController {
         Task {
             await loadData()
         }
-        
         self.navigationBarview.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,7 +178,12 @@ private extension OurToDoViewController {
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
-        contentView.addSubviews(tripHeaderView, tripMiddleView, ourToDoMainImageView, ourToDoHeaderView, ourToDoCollectionView, emptyView)
+        contentView.addSubviews(tripHeaderView, 
+                                tripMiddleView,
+                                ourToDoMainImageView,
+                                ourToDoHeaderView,
+                                ourToDoCollectionView,
+                                emptyView)
         emptyView.addSubviews(emptyViewIconImageView, emptyViewLabel)
     }
     
@@ -185,56 +199,67 @@ private extension OurToDoViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(90))
         }
+        
         contentView.snp.makeConstraints{
             $0.height.greaterThanOrEqualTo(ourToDoCollectionView.contentSize.height).priority(.low)
             $0.edges.width.equalTo(scrollView)
         }
+        
         tripHeaderView.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(102))
         }
+        
         tripMiddleView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom).offset(ScreenUtils.getHeight(20))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(235))
         }
+        
         ourToDoMainImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(112))
             $0.height.equalTo(ScreenUtils.getHeight(135))
         }
+        
         ourToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(28))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
+        
         emptyView.snp.makeConstraints {
             $0.top.equalTo(ourToDoHeaderView.snp.bottom)
             $0.bottom.equalTo(contentView)
             $0.leading.trailing.equalToSuperview()
         }
+        
         emptyViewIconImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(30))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(108))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(95))
         }
+        
         emptyViewLabel.snp.makeConstraints {
             $0.top.equalTo(emptyViewIconImageView.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(129))
         }
+        
         ourToDoCollectionView.snp.makeConstraints {
             $0.top.equalTo(ourToDoHeaderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(contentView)
             $0.height.equalTo(ourToDoCollectionView.contentSize.height).priority(.low)
          }
+        
         stickyOurToDoHeaderView.snp.makeConstraints{
             $0.top.equalTo(navigationBarview.snp.bottom)
             $0.leading.trailing.width.equalTo(scrollView)
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
+        
         addToDoButton.snp.makeConstraints{
             $0.width.equalTo(ScreenUtils.getWidth(117))
             $0.height.equalTo(ScreenUtils.getHeight(50))
@@ -252,7 +277,6 @@ private extension OurToDoViewController {
         } else {
             self.navigationController?.popViewController(animated: true)
         }
-      
     }
     
     func loadData() async {
@@ -284,24 +308,7 @@ private extension OurToDoViewController {
         ourToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         stickyOurToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
     }
-    
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
-        collectionView.backgroundColor = UIColor(resource: .white000)
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        return collectionView
-    }
-    
-    func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(331) , height: ScreenUtils.getHeight(81))
-        flowLayout.sectionInset = UIEdgeInsets(top: ScreenUtils.getHeight(18), left: 1.0, bottom: 1.0, right: 1.0)
-        return flowLayout
-    }
-    
+
     func registerCell() {
         self.ourToDoCollectionView.register(OurToDoCollectionViewCell.self, forCellWithReuseIdentifier: OurToDoCollectionViewCell.identifier)
     }
@@ -321,9 +328,7 @@ private extension OurToDoViewController {
         todoVC.tripId = self.tripId
         todoVC.beforeVC = before
         todoVC.fromOurTodoParticipants = header.participants
-        
         todoVC.manager = self.allocator
-        
         todoVC.isActivateView = isActivate
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
@@ -347,13 +352,7 @@ private extension OurToDoViewController {
     // MARK: - objc method
     
     @objc
-    func popToDashBoardView(_ sender: UITapGestureRecognizer) {
-        print("popToDashBoardView")
-    }
-    
-    @objc
     func pushToAddToDoView() {
-        
         setToDoView(before: "our" , naviBarTitle: "추가", isActivate: true)
     }
     
@@ -450,6 +449,17 @@ extension OurToDoViewController: UICollectionViewDataSource {
         self.todoId = self.ourToDoData?[indexPath.row].todoId ?? 0
         self.allocator =  self.ourToDoData?[indexPath.row].allocators ?? []
         setToDoView(before: "our", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
+    }
+}
+
+extension OurToDoViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return  UIEdgeInsets(top: ScreenUtils.getHeight(18), left: 1.0, bottom: 1.0, right: 1.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: ScreenUtils.getWidth(331) , height: ScreenUtils.getHeight(81))
     }
 }
 

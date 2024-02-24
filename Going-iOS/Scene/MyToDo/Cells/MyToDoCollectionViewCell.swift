@@ -9,8 +9,11 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     static let identifier = "MyToDoCollectionViewCell"
+    
     weak var delegate: MyToDoCollectionViewDelegate?
+    
     var manager: [Allocators] = []
+    
     var myToDoData: ToDoAppData? {
         didSet {
             guard let myToDoData else {return}
@@ -19,6 +22,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             self.manager = myToDoData.allocators
         }
     }
+    
     var index: Int? {
         didSet {
             guard let index else {return}
@@ -26,12 +30,14 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             self.managerCollectionView.reloadData()
         }
     }
+    
     var textColor: UIColor? {
         didSet {
             guard let textColor else {return}
             self.todoTitleLabel.textColor = textColor
         }
     }
+    
     var buttonImg: UIImage? {
         didSet {
             guard let buttonImg else {return}
@@ -39,11 +45,13 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
             self.managerCollectionView.reloadData()
         }
     }
+    
     var isComplete: Bool? {
         didSet {
             self.managerCollectionView.reloadData()
         }
     }
+    
     
     // MARK: - UI Components
     
@@ -53,14 +61,24 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         view.backgroundColor = UIColor(resource: .gray50)
         return view
     }()
-    lazy var todoTitleLabel: UILabel = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray700), alignment: .left)
-    private let deadlineLabel: UILabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray300), alignment: .center)
+    
+    private let todoTitleLabel = DOOLabel(
+        font: .pretendard(.body3_medi),
+        color: .gray700,
+        alignment: .left
+    )
+    
+    private let deadlineLabel = DOOLabel(
+        font: .pretendard(.detail3_regular),
+        color: .gray300,
+        alignment: .center
+    )
 
     private let  managerCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .gray50
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
@@ -82,7 +100,6 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         setHierachy()
         registerCell()
         setLayout()
-        setStyle()
         setDelegate()
     }
     
@@ -95,9 +112,9 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         let index = self.index ?? 0
         let image = self.checkButton.imageView?.image ?? UIImage()
         self.delegate?.getButtonIndex(index: index, image: image)
-
     }
 }
+
 
 // MARK: - Private Method
 
@@ -105,7 +122,12 @@ private extension MyToDoCollectionViewCell {
     
     func setHierachy() {
         contentView.addSubview(todoBackgroundView)
-        todoBackgroundView.addSubviews(checkButton, todoTitleLabel, managerCollectionView, deadlineLabel)
+        todoBackgroundView.addSubviews(
+            checkButton,
+            todoTitleLabel,
+            managerCollectionView,
+            deadlineLabel
+        )
     }
     
     func setLayout() {
@@ -113,46 +135,30 @@ private extension MyToDoCollectionViewCell {
             $0.leading.trailing.equalToSuperview()
             $0.top.bottom.equalToSuperview()
         }
+        
         checkButton.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(16))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(12))
             $0.size.equalTo(ScreenUtils.getHeight(20))
         }
+        
         todoTitleLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.leading.equalTo(checkButton.snp.trailing).offset(ScreenUtils.getWidth(12))
         }
+        
         managerCollectionView.snp.makeConstraints{
             $0.leading.equalTo(checkButton.snp.trailing).offset(ScreenUtils.getWidth(12))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.bottom.equalToSuperview().inset(ScreenUtils.getHeight(15))
             $0.height.equalTo(ScreenUtils.getHeight(20))
         }
+        
         deadlineLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(16))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
         }
     }
-    
-    func setStyle() {
-        managerCollectionView.backgroundColor = UIColor(resource: .gray50)
-    }
-    
-    func setManagerLabel(label: UILabel, text: String) {
-        label.text = text
-        label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
-        label.textColor = UIColor(resource: .white000)
-        label.backgroundColor = UIColor(resource: .black000)
-        label.layer.cornerRadius = 5
-    }
-    func setCollectionView() -> UICollectionView {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .clear
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.isScrollEnabled = false
-        return collectionView
-    }
-    
 
     func setDelegate() {
         self.managerCollectionView.dataSource = self
@@ -186,8 +192,8 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
+        
         let data = self.myToDoData ?? ToDoAppData(todoId: 0, title: "", endDate: "", allocators: [], secret: false)
         
         if data.secret {

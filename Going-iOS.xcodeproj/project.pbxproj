@@ -84,6 +84,10 @@
 		CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */; };
 		CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */; };
 		CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */; };
+		CAB9A1592B60EDB800881469 /* ToDoTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9A1582B60EDB800881469 /* ToDoTextFieldView.swift */; };
+		CAB9A15B2B60F6AE00881469 /* EndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9A15A2B60F6AE00881469 /* EndDateView.swift */; };
+		CAB9A15D2B60FBC700881469 /* ToDoManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9A15C2B60FBC700881469 /* ToDoManagerView.swift */; };
+		CAB9A15F2B61002300881469 /* MemoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9A15E2B61002300881469 /* MemoTextView.swift */; };
 		CAC39E272B59285100B5D4A5 /* dooripsplash3.json in Resources */ = {isa = PBXBuildFile; fileRef = CAC39E262B59285100B5D4A5 /* dooripsplash3.json */; };
 		CADA02532B4AC786001FCE89 /* MyToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */; };
 		CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */; };
@@ -261,6 +265,10 @@
 		CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonView.swift; sourceTree = "<group>"; };
+		CAB9A1582B60EDB800881469 /* ToDoTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTextFieldView.swift; sourceTree = "<group>"; };
+		CAB9A15A2B60F6AE00881469 /* EndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndDateView.swift; sourceTree = "<group>"; };
+		CAB9A15C2B60FBC700881469 /* ToDoManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerView.swift; sourceTree = "<group>"; };
+		CAB9A15E2B61002300881469 /* MemoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTextView.swift; sourceTree = "<group>"; };
 		CAC39E262B59285100B5D4A5 /* dooripsplash3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dooripsplash3.json; sourceTree = "<group>"; };
 		CADA02522B4AC786001FCE89 /* MyToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoViewController.swift; sourceTree = "<group>"; };
 		CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -771,6 +779,10 @@
 			isa = PBXGroup;
 			children = (
 				CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */,
+				CAB9A1582B60EDB800881469 /* ToDoTextFieldView.swift */,
+				CAB9A15A2B60F6AE00881469 /* EndDateView.swift */,
+				CAB9A15C2B60FBC700881469 /* ToDoManagerView.swift */,
+				CAB9A15E2B61002300881469 /* MemoTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1409,6 +1421,7 @@
 				F44D98642B4EB79700341893 /* Serviceable.swift in Sources */,
 				F4C5E7842B42A6830008735F /* UILabel+.swift in Sources */,
 				F44D985A2B4E9ED400341893 /* BaseResponse.swift in Sources */,
+				CAB9A15D2B60FBC700881469 /* ToDoManagerView.swift in Sources */,
 				941B1B782B50EB0C00D28EBA /* CodeResponseDTO.swift in Sources */,
 				F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */,
 				94C7DDBA2B4C77FF00541567 /* SettingsItem.swift in Sources */,
@@ -1417,6 +1430,7 @@
 				F4BEB4CF2B4838B60074B1B2 /* TestResultTicketView.swift in Sources */,
 				CA8CD6872B46B85A00CFDFBF /* UnderlineSegmentedControlView.swift in Sources */,
 				CA3EEE312B4D9A2500C23A41 /* TabBarView.swift in Sources */,
+				CAB9A15B2B60F6AE00881469 /* EndDateView.swift in Sources */,
 				F4BA26FA2B47198D00975CC2 /* ScreenUtils.swift in Sources */,
 				F4BEB4C02B480DAE0074B1B2 /* DOOLabel.swift in Sources */,
 				F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */,
@@ -1508,6 +1522,7 @@
 				F4015E2B2B5424F0006709F4 /* UserIdDefault.swift in Sources */,
 				F4BA26F22B42D07000975CC2 /* PersonalInfoWebViewController.swift in Sources */,
 				CA8CD6832B46B72E00CFDFBF /* TripMiddleView.swift in Sources */,
+				CAB9A15F2B61002300881469 /* MemoTextView.swift in Sources */,
 				F45CA15C2B51868C00F3790C /* NetworkErrorCode.swift in Sources */,
 				F444610B2B4D8EDE00674D74 /* DOOPopUpContainerView.swift in Sources */,
 				F4BEB4CD2B4833D30074B1B2 /* TestResultView.swift in Sources */,
@@ -1524,6 +1539,7 @@
 				945D1AD92B544E0D00C728E2 /* MemberTestStruct.swift in Sources */,
 				F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
+				CAB9A1592B60EDB800881469 /* ToDoTextFieldView.swift in Sources */,
 				F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */,
 				F45CA1652B53063600F3790C /* TravelTypeTestRequestDTO.swift in Sources */,
 				F44461062B4D7F1100674D74 /* UIWindow+.swift in Sources */,
