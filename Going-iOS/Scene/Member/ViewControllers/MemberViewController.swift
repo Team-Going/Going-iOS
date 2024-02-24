@@ -15,14 +15,14 @@ class MemberViewController: UIViewController {
     
     var tripId: Int = 0
     
-    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
-                                          ImageLiterals.Profile.imgSnowmanSRI,
-                                          ImageLiterals.Profile.imgTriangleSEP,
-                                          ImageLiterals.Profile.imgSquareSEI,
-                                          ImageLiterals.Profile.imgCloverARP,
-                                          ImageLiterals.Profile.imgCloudARI,
-                                          ImageLiterals.Profile.imgHexagonAEP,
-                                          ImageLiterals.Profile.imgCircleAEI]
+    let userProfileImageSet: [UIImage] = [UIImage(resource: .imgProfileSrp),
+                                          UIImage(resource: .imgProfileSri),
+                                          UIImage(resource: .imgProfileSep),
+                                          UIImage(resource: .imgProfileSei),
+                                          UIImage(resource: .imgProfileArp),
+                                          UIImage(resource: .imgProfileAri),
+                                          UIImage(resource: .imgProfileAep),
+                                          UIImage(resource: .imgProfileAei)]
     
     private var userType: Int = 0
     var memberData: MemberResponseStruct? {

@@ -20,16 +20,16 @@ final class DOONavigationBar: UIView {
         case testResult(String)
     }
     
-     lazy var backButton: UIButton = {
+    lazy var backButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(ImageLiterals.NavigationBar.buttonBack, for: .normal)
+        btn.setImage(UIImage(resource: .btnBack), for: .normal)
         btn.addTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
         return btn
     }()
     
     lazy var saveImageButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(ImageLiterals.NavigationBar.buttonSave, for: .normal)
+        btn.setImage(UIImage(resource: .btnSave), for: .normal)
         return btn
     }()
     
@@ -43,7 +43,7 @@ final class DOONavigationBar: UIView {
     
     private lazy var profileButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(ImageLiterals.NavigationBar.buttonProfile, for: .normal)
+        btn.setImage(UIImage(resource: .btnProfile), for: .normal)
         btn.addTarget(self, action: #selector(pushToMyProfileVC), for: .touchUpInside)
         return btn
     }()

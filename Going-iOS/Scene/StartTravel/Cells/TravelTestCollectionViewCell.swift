@@ -34,7 +34,8 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     
     private let indexBackgroundImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.TravelTest.indexImage
+//        img.image = ImageLiterals.TravelTest.indexImage
+        img.image = UIImage(resource: .imgRoundBackground)
         return img
     }()
     

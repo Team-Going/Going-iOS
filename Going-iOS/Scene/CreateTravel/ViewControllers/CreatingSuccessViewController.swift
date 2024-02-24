@@ -46,13 +46,13 @@ final class CreatingSuccessViewController: UIViewController {
     
     private let characterImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.StartTravelSplash.imgTripSplash
+        img.image = UIImage(resource: .imgTripSplash)
         return img
     }()
     
     private let ticketImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.CreateTravel.ticketLargeImage
+        img.image = UIImage(resource: .imgTicketCopy)
         img.isUserInteractionEnabled = true
         return img
     }()
@@ -77,7 +77,7 @@ final class CreatingSuccessViewController: UIViewController {
         button.setTitle(StringLiterals.CreatingSuccess.copyCode, for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
         button.setTitleColor(.gray300, for: .normal)
-        button.setImage(ImageLiterals.CreateTravel.buttonCopy, for: .normal)
+        button.setImage(UIImage(resource: .icCopy), for: .normal)
         button.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
         return button
     }()

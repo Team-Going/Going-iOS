@@ -40,7 +40,7 @@ final class SettingsCollectionViewCell: UICollectionViewCell {
     
     private let settingsIcon: UIImageView = {
         let icon = UIImageView()
-        icon.image = ImageLiterals.Settings.btnEnterLarge
+        icon.image = UIImage(resource: .btnEnterLarge)
         icon.isHidden = false
         return icon
     }()

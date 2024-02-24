@@ -15,7 +15,7 @@ final class StartTravelSplashViewController: UIViewController {
     
     private let characterImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.StartTravelSplash.imgTripSplash
+        img.image = UIImage(resource: .imgTripSplash)
         return img
     }()
     

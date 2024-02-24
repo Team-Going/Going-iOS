@@ -41,7 +41,7 @@ class DashBoardViewController: UIViewController {
     
     private lazy var settingsButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(ImageLiterals.DashBoard.btnSetting, for: .normal)
+        btn.setImage(UIImage(resource: .btnSetting), for: .normal)
         btn.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         return btn
     }()
@@ -62,7 +62,7 @@ class DashBoardViewController: UIViewController {
     
     private let characterImage:  UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.DashBoard.imgDashBoard
+        img.image = UIImage(resource: .imgDashboard)
         return img
     }()
     

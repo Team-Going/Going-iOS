@@ -45,7 +45,7 @@ final class JoiningSuccessViewController: UIViewController {
     
     private let letterImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.JoinTravel.imgJoinMessage
+        img.image = UIImage(resource: .imgTripMessage)
         return img
     }()
     
