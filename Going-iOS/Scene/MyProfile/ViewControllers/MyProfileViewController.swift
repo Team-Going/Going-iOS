@@ -31,7 +31,7 @@ final class MyProfileViewController: UIViewController {
     }()
     private let naviUnderLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
@@ -49,17 +49,17 @@ final class MyProfileViewController: UIViewController {
         img.contentMode = .scaleAspectFit
         img.layer.cornerRadius = 55
         img.clipsToBounds = true
-        img.layer.borderColor = UIColor.gray100.cgColor
+        img.layer.borderColor = UIColor(resource: .gray100).cgColor
         img.layer.borderWidth = 1
         return img
     }()
     
-    private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: .red500)
-    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray500)
+    private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: UIColor(resource: .red500))
+    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: UIColor(resource: .gray500))
     
     private let dividingBarView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         return view
     }()
         
@@ -67,9 +67,9 @@ final class MyProfileViewController: UIViewController {
         let view = TestResultView()
         view.nameLabel.isHidden = true
         view.userTypeLabel.font = .pretendard(.body1_bold)
-        view.userTypeLabel.textColor = .gray700
+        view.userTypeLabel.textColor = UIColor(resource: .gray700)
         view.typeDescLabel.font = .pretendard(.detail3_regular)
-        view.typeDescLabel.textColor = .gray300
+        view.typeDescLabel.textColor = UIColor(resource: .gray300)
         return view
     }()
     
@@ -83,20 +83,24 @@ final class MyProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarController?.tabBar.isHidden = true
+        hideTabbar()
         getUserProfile()
     }
 }
 
 private extension MyProfileViewController {
     
+    func hideTabbar() {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
+
+    }
     func setDelegate() {
         myResultView.delegate = self
     }
     
     func setStyle() {
-        contentView.backgroundColor = .white000
-        view.backgroundColor = .white000
+        contentView.backgroundColor = UIColor(resource: .white000)
+        view.backgroundColor = UIColor(resource: .white000)
     }
     
     func setHierarchy() {
@@ -270,7 +274,7 @@ extension MyProfileViewController {
     func reIssueJWTToken() {
         Task {
             do {
-                try await AuthService.shared.reIssueJWTToken()
+                try await AuthService.shared.postReIssueJWTToken()
             }
             catch {
                 guard let error = error as? NetworkError else { return }

@@ -14,7 +14,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.backgroundColor = .white
+        stackView.backgroundColor = UIColor(resource: .white000)
         stackView.isUserInteractionEnabled = true
         return stackView
     }()
@@ -28,7 +28,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     
     var friendNameLabel: UILabel = DOOLabel(
         font: .pretendard(.detail3_regular),
-        color: .gray500,
+        color: UIColor(resource: .gray500),
         alignment: .center
     )
 

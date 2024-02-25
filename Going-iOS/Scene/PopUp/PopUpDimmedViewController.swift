@@ -24,7 +24,7 @@ class PopUpDimmedViewController: UIViewController {
         super.viewWillAppear(animated)
         
         guard let presentingViewController else { return }
-        dimmedView.backgroundColor = .black000
+        dimmedView.backgroundColor = UIColor(resource: .black000)
         dimmedView.alpha = 0.6
         presentingViewController.view.addSubview(dimmedView)
         

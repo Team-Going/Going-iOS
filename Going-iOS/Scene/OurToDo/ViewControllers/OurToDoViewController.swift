@@ -7,9 +7,9 @@ final class OurToDoViewController: UIViewController {
     // MARK: - UI Property
     
     private lazy var contentView: UIView = UIView()
-   
-    private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: .gray50)
-    
+
+    private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: UIColor(resource: .gray50))
+
     private let tripHeaderView: TripHeaderView = TripHeaderView()
     
     private let tripMiddleView: TripMiddleView = TripMiddleView()
@@ -18,7 +18,7 @@ final class OurToDoViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .white000
+        scrollView.backgroundColor = UIColor(resource: .white000)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.isScrollEnabled = true
@@ -28,7 +28,7 @@ final class OurToDoViewController: UIViewController {
     private let stickyOurToDoHeaderView: OurToDoHeaderView = {
         let headerView = OurToDoHeaderView()
         headerView.isHidden = true
-        headerView.backgroundColor = .white000
+        headerView.backgroundColor = UIColor(resource: .white000)
         return headerView
     }()
     
@@ -43,13 +43,13 @@ final class OurToDoViewController: UIViewController {
     
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .red700
+        btn.backgroundColor = UIColor(resource: .red600)
         btn.setTitle(StringLiterals.OurToDo.ourtodo, for: .normal)
-        btn.setTitleColor(.white000, for: .normal)
+        btn.setTitleColor(UIColor(resource: .white000), for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
         btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
-        btn.imageView?.tintColor = .white000
+        btn.imageView?.tintColor = UIColor(resource: .white000)
         btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
         btn.layer.cornerRadius = ScreenUtils.getHeight(26)
@@ -61,13 +61,13 @@ final class OurToDoViewController: UIViewController {
     private let emptyViewIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.OurToDo.emptyViewIcon
-        imageView.tintColor = .gray100
+        imageView.tintColor = UIColor(resource: .gray100)
         return imageView
     }()
     
     private let emptyViewLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
-        color: .gray200,
+        color: UIColor(resource: .gray200),
         text: StringLiterals.OurToDo.pleaseAddToDo,
         alignment: .center
     )
@@ -124,16 +124,14 @@ final class OurToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emptyViewLabel.isHidden = true
-        self.navigationController?.isNavigationBarHidden = true
+        
         setHierarchy()
         setLayout()
         setDelegate()
         registerCell()
         setStyle()
-        self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
-        self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
-        self.initializeCode = true
+        setSegmentDidChange()
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -144,26 +142,38 @@ final class OurToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarController?.tabBar.isHidden = false
+        hideTabbar()
         getOurToDoHeaderData()
         getToDoData(progress: self.progress)
-        tripMiddleView.gradientView.setGradient(
-            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
-            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
-            axis: .horizontal)
+        setGradient()
+        
+     
     }
     
     override func viewDidLayoutSubviews() {
-        tripMiddleView.gradientView.setGradient(
-            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
-            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
-            axis: .horizontal)
+        setGradient()
     }
 }
 
 // MARK: - Private method
 
 private extension OurToDoViewController {
+    func setGradient() {
+        tripMiddleView.gradientView.setGradient(
+            firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
+            secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+            axis: .horizontal)
+    }
+    func hideTabbar() {
+        self.navigationController?.tabBarController?.tabBar.isHidden = false
+
+    }
+    
+    func setSegmentDidChange() {
+        self.didChangeValue(segment: self.ourToDoHeaderView.segmentedControl)
+        self.didChangeValue(segment: self.stickyOurToDoHeaderView.segmentedControl)
+        self.initializeCode = true
+    }
     
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
@@ -287,16 +297,18 @@ private extension OurToDoViewController {
     }
     
     func setStyle() {
-        self.view.backgroundColor = .gray50
-        self.navigationController?.navigationBar.barTintColor = .white000
-        contentView.backgroundColor = .gray50
+        emptyViewLabel.isHidden = true
+        self.navigationController?.isNavigationBarHidden = true
+        self.view.backgroundColor = UIColor(resource: .gray50)
+        self.navigationController?.navigationBar.barTintColor = UIColor(resource: .white000)
+        contentView.backgroundColor = UIColor(resource: .gray50)
         tripHeaderView.isUserInteractionEnabled = true
         tripMiddleView.isUserInteractionEnabled = true
-        emptyView.backgroundColor = .white000
+        emptyView.backgroundColor = UIColor(resource: .white000)
         ourToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         stickyOurToDoHeaderView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
     }
-    
+
     func registerCell() {
         self.ourToDoCollectionView.register(OurToDoCollectionViewCell.self, forCellWithReuseIdentifier: OurToDoCollectionViewCell.identifier)
     }
@@ -377,18 +389,18 @@ extension OurToDoViewController: UIScrollViewDelegate {
         
         if !shouldShowSticky {
             stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex = ourToDoHeaderView.segmentedControl.selectedSegmentIndex
-            self.view.backgroundColor = .gray50
-            self.navigationBarview.backgroundColor = .gray50
+            self.view.backgroundColor = UIColor(resource: .gray50)
+            self.navigationBarview.backgroundColor = UIColor(resource: .gray50)
         } else {
             ourToDoHeaderView.segmentedControl.selectedSegmentIndex = stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex
-            self.view.backgroundColor = .white000
-            self.navigationBarview.backgroundColor = .white000
+            self.view.backgroundColor = UIColor(resource: .white000)
+            self.navigationBarview.backgroundColor = UIColor(resource: .white000)
         }
         
         if topPadding + scrollView.contentOffset.y < 0 {
-            scrollView.backgroundColor = .gray50
+            scrollView.backgroundColor = UIColor(resource: .gray50)
         }else {
-            scrollView.backgroundColor = .white000
+            scrollView.backgroundColor = UIColor(resource: .white000)
         }
     }
 }
@@ -420,12 +432,12 @@ extension OurToDoViewController: UICollectionViewDataSource {
                 
         if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             ourToDoCell.ourToDoData = self.ourToDoData?[indexPath.row]
-            ourToDoCell.todoTitleLabel.textColor = UIColor.gray400
+            ourToDoCell.todoTitleLabel.textColor = UIColor(resource: .gray400)
             ourToDoCell.index = indexPath.row
             ourToDoCell.isComplete = false
         } else {
             ourToDoCell.ourToDoData = self.ourToDoData?[indexPath.row]
-            ourToDoCell.todoTitleLabel.textColor = UIColor.gray300
+            ourToDoCell.todoTitleLabel.textColor = UIColor(resource: .gray300)
             ourToDoCell.index = indexPath.row
             ourToDoCell.isComplete = true
         }

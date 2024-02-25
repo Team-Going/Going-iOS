@@ -58,7 +58,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     private let todoBackgroundView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 5
-        view.backgroundColor = UIColor.gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         return view
     }()
     
@@ -207,17 +207,17 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
         
         // 미완료 / 완료 / 나만보기 태그 색상 세팅
         if isComplete == true {
-            managerCell.changeLabelColor(color: .gray300)
+            managerCell.changeLabelColor(color: UIColor(resource: .gray300))
         }else{
             // owner
             if manager[indexPath.row].isOwner {
                 if self.myToDoData?.secret == true {
-                    managerCell.changeLabelColor(color: .gray400)
+                    managerCell.changeLabelColor(color: UIColor(resource: .gray400))
                 }else {
-                    managerCell.changeLabelColor(color: .red400)
+                    managerCell.changeLabelColor(color: UIColor(resource: .red500))
                 }
             }else {
-                managerCell.changeLabelColor(color: .gray400)
+                managerCell.changeLabelColor(color: UIColor(resource: .gray400))
             }
         }
         return managerCell

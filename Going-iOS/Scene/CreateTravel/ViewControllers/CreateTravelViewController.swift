@@ -24,15 +24,15 @@ final class CreateTravelViewController: UIViewController {
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("새로운 여행 만들기"))
     private let navigationUnderlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
     private let travelNameLabel = DOOLabel(font: .pretendard(.body2_bold),
-                                           color: .gray700,
+                                           color: UIColor(resource: .gray700),
                                            text: StringLiterals.CreateTravel.nameTitle)
     private let travelDateLabel = DOOLabel(font: .pretendard(.body2_bold),
-                                           color: .gray700,
+                                           color: UIColor(resource: .gray700),
                                            text: StringLiterals.CreateTravel.dateTitle)
     
     private var travelNameTextFieldCount: Int = 0
@@ -41,20 +41,20 @@ final class CreateTravelViewController: UIViewController {
         let field = UITextField()
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
-        field.setTextField(forPlaceholder: StringLiterals.CreateTravel.namePlaceHolder, forBorderColor: .gray200)
-        field.setPlaceholderColor(.gray200)
+        field.setTextField(forPlaceholder: StringLiterals.CreateTravel.namePlaceHolder, forBorderColor: UIColor(resource: .gray200))
+        field.setPlaceholderColor(UIColor(resource: .gray200))
         field.layer.cornerRadius = 6
-        field.textColor = .gray700
+        field.textColor = UIColor(resource: .gray700)
         field.addTarget(self, action: #selector(travelNameTextFieldDidChange), for: .editingChanged)
         return field
     }()
     
     private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular),
-                                               color: .gray200,
+                                               color: UIColor(resource: .gray200),
                                                text: "0/15")
     
     private let warningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .red500))
         label.isHidden = true
         return label
     }()
@@ -68,22 +68,22 @@ final class CreateTravelViewController: UIViewController {
     }()
     
     private let startDateLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "시작일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray200), text: "시작일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.gray200.cgColor
+        label.layer.borderColor = UIColor(resource: .gray200).cgColor
         return label
     }()
     
     private let endDateLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "종료일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray200), text: "종료일", padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.gray200.cgColor
+        label.layer.borderColor = UIColor(resource: .gray200).cgColor
         return label
     }()
     
-    private let dashLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700, text: "-")
+    private let dashLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700), text: "-")
     
     private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")
@@ -123,7 +123,7 @@ final class CreateTravelViewController: UIViewController {
 private extension CreateTravelViewController {
     
     func setStyle() {
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -283,27 +283,27 @@ private extension CreateTravelViewController {
         characterCountLabel.text = "\(text.count) / 15"
         
         if text.count >  15 {
-            travelNameTextField.textColor = .red500
+            travelNameTextField.textColor = UIColor(resource: .red500)
             warningLabel.isHidden = false
             warningLabel.text = "이름은 15자 이하여야 합니다"
             isTravelNameTextFieldGood = false
         } else if text.count == 0 {
             travelNameTextField.layer.borderColor =
-            UIColor.gray200.cgColor
-            characterCountLabel.textColor = .gray200
+            UIColor(resource: .gray200).cgColor
+            characterCountLabel.textColor = UIColor(resource: .gray200)
             warningLabel.isHidden = true
             isTravelNameTextFieldGood = false
         } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.isTravelNameTextFieldGood = false
-            travelNameTextField.layer.borderColor = UIColor.red500.cgColor
-            characterCountLabel.textColor = .red500
+            travelNameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
+            characterCountLabel.textColor = UIColor(resource: .red500)
             warningLabel.isHidden = false
             warningLabel.text = "이름에는 공백만 입력할 수 없어요."
         } else {
             self.isTravelNameTextFieldGood = true
-            travelNameTextField.layer.borderColor = UIColor.gray700.cgColor
-            characterCountLabel.textColor = .gray400
-            travelNameTextField.textColor = .gray400
+            travelNameTextField.layer.borderColor = UIColor(resource: .gray700).cgColor
+            characterCountLabel.textColor = UIColor(resource: .gray400)
+            travelNameTextField.textColor = UIColor(resource: .gray400)
             warningLabel.isHidden = true
         }
         updateCreateButtonState()
@@ -387,8 +387,8 @@ extension CreateTravelViewController: BottomSheetDelegate {
     func didSelectDate(date: Date) {
         let formattedDate = dateFormat(date: date)
         activeLabel?.text = formattedDate
-        activeLabel?.textColor = .gray700
-        activeLabel?.layer.borderColor = UIColor.gray700.cgColor
+        activeLabel?.textColor = UIColor(resource: .gray700)
+        activeLabel?.layer.borderColor = UIColor(resource: .gray700).cgColor
         activeLabel = nil
         
         updateCreateButtonState()
@@ -414,7 +414,7 @@ extension CreateTravelViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         travelNameTextFieldCheck()
         if let text = textField.text, text.isEmpty {
-            textField.layer.borderColor = UIColor.gray200.cgColor
+            textField.layer.borderColor = UIColor(resource: .gray200).cgColor
         }
     }
     

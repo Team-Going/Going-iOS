@@ -40,10 +40,10 @@ final class TestResultView: UIView {
         }
     }
     
-    var nameLabel = DOOLabel(font: .pretendard(.body2_medi), color: .gray600)
+    var nameLabel = DOOLabel(font: .pretendard(.body2_medi), color: UIColor(resource: .gray600))
     
-    let userTypeLabel = DOOLabel(font: .pretendard(.head1), color: .red500)
-    let typeDescLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray300)
+    let userTypeLabel = DOOLabel(font: .pretendard(.head1), color: UIColor(resource: .red500))
+    let typeDescLabel = DOOLabel(font: .pretendard(.detail1_regular), color: UIColor(resource: .gray300))
     
     private let tagStackView: UIStackView = {
         let stack = UIStackView()
@@ -72,7 +72,7 @@ final class TestResultView: UIView {
         let button = UIButton()
         button.setTitle("다시 해볼래요", for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
-        button.setTitleColor(.gray300, for: .normal)
+        button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.setUnderline()
         button.addTarget(self, action: #selector(backToTestButtonTapped), for: .touchUpInside)
         return button
@@ -110,7 +110,7 @@ private extension TestResultView {
     func makeLabel() -> DOOLabel {
         let label = DOOLabel(font: .pretendard(.detail2_regular), color: .red300, alignment: .center, padding: UIEdgeInsets(top: 1, left: 8, bottom: 1, right: 8))
         label.layer.borderWidth = 0.5
-        label.layer.borderColor = UIColor.red300.cgColor
+        label.layer.borderColor = UIColor(resource: .red300).cgColor
         label.layer.cornerRadius = 10
         return label
     }
@@ -174,7 +174,7 @@ private extension TestResultView {
     }
     
     func setStyle() {
-        self.backgroundColor = .white000
-        whiteView.backgroundColor = .white000
+        self.backgroundColor = UIColor(resource: .white000)
+        whiteView.backgroundColor = UIColor(resource: .white000)
     }
 }

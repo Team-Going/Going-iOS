@@ -17,26 +17,26 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         setStyle()
         setHierarchy()
         setLayout()
         setAnimation()
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        
+        networkCheck()
+    }
+    
+}
+
+private extension SplashViewController {
+    func networkCheck() {
         if !NetworkCheck.shared.isConnected {
             DOOToast.show(message: "네트워크 상태를 확인해주세요", duration: 3 ,insetFromBottom: 100, completion: {
                 exit(0)
             })
         }
     }
-    
-}
-
-private extension SplashViewController {
     
     func setAnimation() {
         lottieView.contentMode = .scaleAspectFill
@@ -48,8 +48,9 @@ private extension SplashViewController {
             }
         })
     }
+    
     func setStyle() {
-        self.view.backgroundColor = .red400
+        self.view.backgroundColor = UIColor(resource: .gray400)
     }
     
     func setHierarchy() {

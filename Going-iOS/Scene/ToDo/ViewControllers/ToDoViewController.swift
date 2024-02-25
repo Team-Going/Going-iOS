@@ -4,25 +4,23 @@ import SnapKit
 
 final class ToDoViewController: UIViewController {
 
-    private lazy var navigationBarView = DOONavigationBar(self,
-                                                          type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo),
-                                                          backgroundColor: .white000)
-    
+    private lazy var navigationBarView = DOONavigationBar(self, type: .backButtonWithTitle(StringLiterals.ToDo.inquiryToDo), backgroundColor: UIColor(resource: .white000))
+
     private let underlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .white000
+        scrollView.backgroundColor = UIColor(resource: .white000)
         return scrollView
     }()
     
     private let contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white000
+        view.backgroundColor = UIColor(resource: .white000)
         return view
     }()
     
@@ -153,27 +151,35 @@ final class ToDoViewController: UIViewController {
         setLayout()
         setDelegate()
         setStyle()
-        
-        if navigationBarTitle == "추가" {
-            navigationBarView.titleLabel.text = "할일 추가"
-            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.todoManagerView.allocators, "메모를 입력해 주세요"]
-        }
+        setInfo()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationBarView.backgroundColor = .gray50
+        self.navigationBarView.backgroundColor = UIColor(resource: .gray50)
         self.tabBarController?.tabBar.isHidden = false
         self.removeNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if navigationBarTitle == StringLiterals.ToDo.inquiry {
-            setInquiryStyle()
-        }
-        if navigationBarTitle == "조회" {
-            self.getDetailToDoDatas(todoId: self.todoId)
-        }
+        setNaviTitle()
         addNotification()
+    }
+    
+//    func setNaviTitle() {
+//        if navigationBarTitle == StringLiterals.ToDo.inquiry {
+//            setInquiryStyle()
+//        }
+//        if navigationBarTitle == "조회" {
+//            self.getDetailToDoDatas(todoId: self.todoId)
+//        }
+//    }
+    
+    func setInfo() {
+        if navigationBarTitle == "추가" {
+            navigationBarView.titleLabel.text = "할일 추가"
+            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.manager, "메모를 입력해 주세요"]
+        }
+
     }
     
     func setNaviTitle() {
@@ -362,10 +368,11 @@ private extension ToDoViewController {
     func setStyle() {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         view.addGestureRecognizer(tapGesture)
+
         navigationBarView.backgroundColor = .white000
     }
     
@@ -377,7 +384,7 @@ private extension ToDoViewController {
         bottomSheetVC.delegate = self
         doubleButtonView.delegate = self
     }
-    
+
     // 추가, 조회 뷰에 따라 하단 버튼을 세팅해주는 메서드
     func setButtonView(button: UIView) {
         isActivateView = navigationBarTitle != "조회" ? true : false
@@ -408,7 +415,7 @@ private extension ToDoViewController {
         bottomSheetVC.modalPresentationStyle = .overFullScreen
         self.present(bottomSheetVC, animated: false, completion: nil)
     }
-    
+
     func compareDate(userDate: Date) -> Bool {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
@@ -436,7 +443,7 @@ private extension ToDoViewController {
             return true
         }
     }
-    
+
     func updateSingleButtonState() {
         let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
         let isTodoTextFieldEmpty = self.todoTextFieldView.todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -502,6 +509,7 @@ extension ToDoViewController: BottomSheetDelegate {
         self.selectedDate = date
         
         let formattedDate = dateFormat(date: date)
+
         self.endDateView.deadlineTextfieldLabel.text = formattedDate
         self.endDateView.deadlineTextfieldLabel.textColor = .gray700
         self.endDateView.deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor

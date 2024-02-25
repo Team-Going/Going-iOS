@@ -55,21 +55,21 @@ extension DOOButton {
     private func updateButtonStyle() {
         switch currentType {
         case .enabled:
-            self.backgroundColor = .gray500
+            self.backgroundColor = UIColor(resource: .gray500)
             self.layer.borderColor = UIColor.clear.cgColor
-            self.setTitleColor(.white000, for: .normal)
+            self.setTitleColor(UIColor(resource: .white000), for: .normal)
             self.isEnabled = true
             
         case .unabled:
-            self.backgroundColor = .gray50
+            self.backgroundColor = UIColor(resource: .gray50)
             self.layer.borderColor = UIColor.clear.cgColor
-            self.setTitleColor(.gray200, for: .normal)
+            self.setTitleColor(UIColor(resource: .gray200), for: .normal)
             self.isEnabled = false
             
         case .white:
-            self.backgroundColor = .white000
-            self.layer.borderColor = UIColor.gray200.cgColor
-            self.setTitleColor(.gray600, for: .normal)
+            self.backgroundColor = UIColor(resource: .white000)
+            self.layer.borderColor = UIColor(resource: .gray200).cgColor
+            self.setTitleColor(UIColor(resource: .gray600), for: .normal)
             self.isEnabled = true
             self.layer.borderWidth = 1
         }

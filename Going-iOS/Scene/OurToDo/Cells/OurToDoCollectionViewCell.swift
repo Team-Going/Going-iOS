@@ -40,19 +40,19 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
     var todoBackgroundView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 5
-        view.backgroundColor = UIColor.gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         return view
     }()
     
     let todoTitleLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         alignment: .left
     )
    
     private lazy var deadlineLabel: UILabel = DOOLabel(
         font: .pretendard(.detail3_regular),
-        color: .gray300,
+        color: UIColor(resource: .gray300),
         alignment: .center
     )
     
@@ -119,7 +119,7 @@ private extension OurToDoCollectionViewCell {
     }
     
     func setStyle() {
-        managerCollectionView.backgroundColor = .gray50
+        managerCollectionView.backgroundColor = UIColor(resource: .gray50)
     }
     
     func setLabel(font: UIFont, textColor: UIColor, alignment: NSTextAlignment) -> UILabel {
@@ -156,14 +156,14 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource {
         managerCell.managerData = ourToDoData?.allocators[indexPath.row].name
 
         if isComplete == true {
-            managerCell.changeLabelColor(color: .gray300)
+            managerCell.changeLabelColor(color: UIColor(resource: .gray300))
         } else {
             
             
             if ourToDoData?.allocators[indexPath.row].isOwner == true {
-                managerCell.changeLabelColor(color: .red400)
+                managerCell.changeLabelColor(color: UIColor(resource: .red500))
             }else {
-                managerCell.changeLabelColor(color: .gray400)
+                managerCell.changeLabelColor(color: UIColor(resource: .gray400))
             }
         }
         return managerCell

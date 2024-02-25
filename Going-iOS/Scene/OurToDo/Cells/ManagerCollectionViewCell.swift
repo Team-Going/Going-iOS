@@ -17,10 +17,10 @@ class ManagerCollectionViewCell: UICollectionViewCell {
     
     var managerLabel: UILabel = {
         let label = DOOLabel(font: .pretendard(.detail2_regular), color: .clear, alignment: .center)
-        label.backgroundColor = UIColor.gray50
+        label.backgroundColor = UIColor(resource: .gray50)
         label.layer.cornerRadius = 4
         label.layer.borderWidth = 0.75
-        label.layer.borderColor = UIColor.gray400.cgColor
+        label.layer.borderColor = UIColor(resource: .gray400).cgColor
         return label
     }()
 

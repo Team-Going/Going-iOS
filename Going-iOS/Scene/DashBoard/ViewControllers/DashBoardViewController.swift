@@ -32,11 +32,11 @@ class DashBoardViewController: UIViewController {
     
     private let dashBoardNavigationBar: UIView = {
         let nav = UIView()
-        nav.backgroundColor = .white000
+        nav.backgroundColor = UIColor(resource: .white000)
         return nav
     }()
     
-    private var navigationTitle = DOOLabel(font: .pretendard(.head1), color: .gray700)
+    private var navigationTitle = DOOLabel(font: .pretendard(.head1), color: UIColor(resource: .gray700))
     
     // TODO: - 뷰 연결
     private lazy var settingsButton: UIButton = {
@@ -52,10 +52,10 @@ class DashBoardViewController: UIViewController {
     
     private let noDataview: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         return view
     }()
-    private let noDataLabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray200, text: "새로운 여행을 시작해 보세요")
+    private let noDataLabel = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray200), text: "새로운 여행을 시작해 보세요")
     
     private let characterImage:  UIImageView = {
         let img = UIImageView()
@@ -75,8 +75,8 @@ class DashBoardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.didChangeValue(sender: self.dashBoardHeaderView.segmentedControl)
         
+        setSegmentDidChange()
         setStyle()
         setHierarchy()
         setLayout()
@@ -99,9 +99,12 @@ class DashBoardViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension DashBoardViewController {
-    
+    func setSegmentDidChange() {
+        self.didChangeValue(sender: self.dashBoardHeaderView.segmentedControl)
+
+    }
     func setStyle() {
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -198,7 +201,7 @@ private extension DashBoardViewController {
     }
     
     func setCollectionView() {
-        dashBoardCollectionView.backgroundColor = .gray50
+        dashBoardCollectionView.backgroundColor = UIColor(resource: .gray50)
         dashBoardCollectionView.showsVerticalScrollIndicator = false
     }
     

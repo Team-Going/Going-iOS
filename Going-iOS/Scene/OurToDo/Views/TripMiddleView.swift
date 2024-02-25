@@ -27,21 +27,21 @@ final class TripMiddleView: UIView {
     
     private lazy var tripProgressLabel: UILabel = DOOLabel(
         font: .pretendard(.body2_medi),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         text: StringLiterals.OurToDo.ourProgress,
         alignment: .left
     )
     
     private lazy var percentageLabel: UILabel = DOOLabel(
         font: .pretendard(.body2_medi),
-        color: .red400,
+        color: UIColor(resource: .red500),
         alignment: .right
     )
     
     private var tripProgressBar: UIProgressView = {
         let progressBar = UIProgressView()
-        progressBar.trackTintColor = UIColor.gray100
-        progressBar.progressTintColor = UIColor.red400
+        progressBar.trackTintColor = UIColor(resource: .gray100)
+        progressBar.progressTintColor = UIColor(resource: .red500)
         progressBar.progressViewStyle = .default
         progressBar.clipsToBounds = true
         progressBar.layer.cornerRadius = 6
@@ -57,7 +57,7 @@ final class TripMiddleView: UIView {
     
     private let tripFriendsLabel: DOOLabel = DOOLabel(
         font: .pretendard(.body2_medi),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         text: StringLiterals.OurToDo.friends,
         alignment: .left
     )
@@ -81,9 +81,9 @@ final class TripMiddleView: UIView {
    
     private lazy var addButton: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .gray50
+        btn.backgroundColor = UIColor(resource: .gray50)
         btn.layer.borderWidth = 0.5
-        btn.layer.borderColor = UIColor.gray100.cgColor
+        btn.layer.borderColor = UIColor(resource: .gray100).cgColor
         btn.setImage(ImageLiterals.OurToDo.btnPlus, for: .normal)
         btn.addTarget(self, action: #selector(pushToAddFriendsView), for: .touchUpInside)
         return btn
@@ -91,7 +91,7 @@ final class TripMiddleView: UIView {
     
     private lazy var addLabel: UILabel = DOOLabel(
         font: .pretendard(.detail3_regular),
-        color: .gray500,
+        color: UIColor(resource: .gray500),
         text: StringLiterals.OurToDo.invite,
         alignment: .center
     )
@@ -102,7 +102,7 @@ final class TripMiddleView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.backgroundColor = .white000
+        stackView.backgroundColor = UIColor(resource: .white000)
         return stackView
     }()
     
@@ -249,12 +249,12 @@ private extension TripMiddleView {
     }
     
     func setStyle() {
-        self.backgroundColor = UIColor.gray50
-        tripFriendsContainer.backgroundColor = UIColor.white000
+        self.backgroundColor = UIColor(resource: .gray50)
+        tripFriendsContainer.backgroundColor = UIColor(resource: .white000)
         tripFriendsBtn.setImage(ImageLiterals.OurToDo.btnEnter, for: .normal)
         addButton.layer.cornerRadius = ScreenUtils.getHeight(23.5)
     }
-    
+
     func setDelegate() {
         self.tripFriendsCollectionView.dataSource = self
         self.tripFriendsCollectionView.delegate = self

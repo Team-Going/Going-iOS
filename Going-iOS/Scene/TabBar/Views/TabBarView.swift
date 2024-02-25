@@ -20,13 +20,13 @@ final class TabBarView: UIView {
     
     private let dividerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray200
+        view.backgroundColor = UIColor(resource: .gray200)
         return view
     }()
     
     private let tabBarStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = .white000
+        stackView.backgroundColor = UIColor(resource: .white000)
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
         stackView.axis = .horizontal
@@ -34,7 +34,7 @@ final class TabBarView: UIView {
     }()
     lazy var ourToDoTab: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .white000
+        btn.backgroundColor = UIColor(resource: .white000)
         btn.setImage(ImageLiterals.TabBar.tabbarOurToDoSelected, for: .normal)
         btn.setImage(ImageLiterals.TabBar.tabbarOurToDoSelected, for: .highlighted)
         btn.addTarget(self, action: #selector(tapOurToDoTabBar), for: .touchUpInside)
@@ -43,7 +43,7 @@ final class TabBarView: UIView {
     }()
     lazy var myToDoTab: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .white000
+        btn.backgroundColor = UIColor(resource: .white000)
         btn.setImage(ImageLiterals.TabBar.tabbarMyToDoUnselected, for: .normal)
         btn.setImage(ImageLiterals.TabBar.tabbarMyToDoUnselected, for: .highlighted)
         btn.addTarget(self, action: #selector(tapMyToDoTabBar), for: .touchUpInside)
@@ -110,7 +110,7 @@ private extension TabBarView {
     }
     
     func setStyle() {
-        self.backgroundColor = .white000
+        self.backgroundColor = UIColor(resource: .white000)
     }
 }
 

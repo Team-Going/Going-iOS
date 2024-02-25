@@ -7,38 +7,38 @@ final class InviteFriendPopUpViewController: PopUpDimmedViewController {
     private let popUpView = DOOPopUpContainerView()
     
     private let inviteTitleLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "초대하기")
-    private let inviteSubLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray300, text: "초대코드를 보내 여행 친구를 추가해 보세요")
+    private let inviteSubLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray300), text: "초대코드를 보내 여행 친구를 추가해 보세요")
     private let codeBackgroundView = {
         let view = UIView()
-        view.backgroundColor = .gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         view.layer.cornerRadius = 6
         return view
     }()
     // TODO: - 초대코드 받아온 걸로 수정
-    let codeLabel = DOOLabel(font: .pretendard(.head4), color: .gray700)
+    let codeLabel = DOOLabel(font: .pretendard(.head4), color: UIColor(resource: .gray700))
     private lazy var copyButton: UIButton = {
         let button = UIButton()
         button.setTitle("초대코드 복사하기", for: .normal)
-        button.setTitleColor(.gray300, for: .normal)
+        button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
-        button.backgroundColor = .gray50
+        button.backgroundColor = UIColor(resource: .gray50)
         button.setImage(ImageLiterals.CreateTravel.buttonCopy, for: .normal)
-        button.tintColor = .gray300
+        button.tintColor = UIColor(resource: .gray300)
         button.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
         button.semanticContentAttribute = .forceLeftToRight
         return button
     }()
     private let underlineView = {
         let view = UIView()
-        view.backgroundColor = .gray300
+        view.backgroundColor = UIColor(resource: .gray300)
         return view
     }()
     private lazy var completeButton: UIButton = {
         let button = UIButton()
         button.setTitle("완료", for: .normal)
-        button.setTitleColor(.white000, for: .normal)
+        button.setTitleColor(UIColor(resource: .white000), for: .normal)
         button.titleLabel?.font = .pretendard(.body1_bold)
-        button.backgroundColor = .gray500
+        button.backgroundColor = UIColor(resource: .gray500)
         button.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         return button
     }()

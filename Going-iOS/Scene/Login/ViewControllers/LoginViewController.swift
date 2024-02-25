@@ -44,7 +44,7 @@ final class LoginViewController: UIViewController {
         }
     }
     
-    private let titleLabel = DOOLabel(font: .pretendard(.head3), color: .gray500, text: StringLiterals.Login.title)
+    private let titleLabel = DOOLabel(font: .pretendard(.head3), color: UIColor(resource: .gray500), text: StringLiterals.Login.title)
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -70,8 +70,8 @@ final class LoginViewController: UIViewController {
         
         config.imagePadding = ScreenUtils.getWidth(70)
 
-        config.baseBackgroundColor = .yellow100
-        config.baseForegroundColor = .black000.withAlphaComponent(0.85)
+        config.baseBackgroundColor = UIColor(resource: .yellow100)
+        config.baseForegroundColor = UIColor(resource: .black000).withAlphaComponent(0.85)
         
         let button = UIButton(configuration: config)
         
@@ -82,7 +82,7 @@ final class LoginViewController: UIViewController {
     private lazy var personalInformationButton: UIButton = {
         let button = UIButton()
         button.setTitle(StringLiterals.Login.personalInformation, for: .normal)
-        button.setTitleColor(.gray300, for: .normal)
+        button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
         button.setImage(ImageLiterals.Login.warningImage, for: .normal)
         button.contentVerticalAlignment = .center
@@ -93,7 +93,7 @@ final class LoginViewController: UIViewController {
     
     private let underLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray300
+        view.backgroundColor = UIColor(resource: .gray300)
         return view
     }()
     
@@ -172,7 +172,7 @@ private extension LoginViewController {
     }
     
     func setStyle() {
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
     }
     
     

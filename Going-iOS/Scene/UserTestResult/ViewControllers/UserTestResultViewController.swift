@@ -26,7 +26,7 @@ final class UserTestResultViewController: UIViewController {
     
     private let naviUnderLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
@@ -43,7 +43,7 @@ final class UserTestResultViewController: UIViewController {
     private let resultImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .white000
+        imageView.backgroundColor = UIColor(resource: .white000)
         return imageView
     }()
     
@@ -53,9 +53,9 @@ final class UserTestResultViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .gray500
+        button.backgroundColor = UIColor(resource: .gray500)
         button.setTitle("doorip 시작하기", for: .normal)
-        button.setTitleColor(.white000, for: .normal)
+        button.setTitleColor(UIColor(resource: .white000), for: .normal)
         button.titleLabel?.font = .pretendard(.body1_bold)
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
@@ -80,9 +80,6 @@ final class UserTestResultViewController: UIViewController {
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         setGradient()
     }
@@ -99,9 +96,9 @@ private extension UserTestResultViewController {
     }
     
     func setStyle() {
-        contentView.backgroundColor = .black000
-        view.backgroundColor = .white000
-        resultView.backgroundColor = .white
+        contentView.backgroundColor = UIColor(resource: .black000)
+        view.backgroundColor = UIColor(resource: .white000)
+        resultView.backgroundColor = UIColor(resource: .white000)
     }
     
     func setHierarchy() {
