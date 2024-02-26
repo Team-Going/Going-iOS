@@ -69,7 +69,7 @@ final class MyToDoViewController: UIViewController {
     
     private let emptyViewLabel: UILabel = DOOLabel(
         font: .pretendard(.body3_medi),
-        color: .gray200,
+        color: UIColor(resource: .gray200),
         text: StringLiterals.OurToDo.pleaseAddToDo,
         alignment: .center
     )

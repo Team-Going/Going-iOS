@@ -15,20 +15,20 @@ class EndDateView: UIView {
 
     private let deadlineLabel = DOOLabel(
         font: .pretendard(.body2_bold),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         text: StringLiterals.ToDo.deadline
     )
     
     lazy var deadlineTextfieldLabel: DOOLabel = {
         let label = DOOLabel(
             font: .pretendard(.body3_medi),
-            color: .gray200,
+            color: UIColor(resource: .gray200),
             alignment: .left,
             padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
         )
         let gesture = UITapGestureRecognizer(target: self, action: #selector(selectEndDate))
-        label.backgroundColor = .white000
-        label.layer.borderColor = UIColor.gray200.cgColor
+        label.backgroundColor = UIColor(resource: .white000)
+        label.layer.borderColor = UIColor(resource: .gray200).cgColor
         label.layer.cornerRadius = 6
         label.layer.borderWidth = 1
         label.isUserInteractionEnabled = true
@@ -39,7 +39,7 @@ class EndDateView: UIView {
     lazy var dropdownButton: UIButton = {
         let btn = UIButton()
         btn.setImage(ImageLiterals.ToDo.disabledDropdown, for: .normal)
-        btn.backgroundColor = .white000
+        btn.backgroundColor = UIColor(resource: .white000)
         btn.addTarget(self, action: #selector(selectEndDate), for: .touchUpInside)
         return btn
     }()
@@ -60,8 +60,8 @@ class EndDateView: UIView {
     }
     
     func setInquiryEndDateStyle() {
-        deadlineTextfieldLabel.layer.borderColor = UIColor.gray700.cgColor
-        deadlineTextfieldLabel.textColor = .gray700
+        deadlineTextfieldLabel.layer.borderColor = UIColor(resource: .gray700).cgColor
+        deadlineTextfieldLabel.textColor = UIColor(resource: .gray700)
         dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
     }
     

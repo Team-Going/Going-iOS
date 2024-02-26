@@ -15,7 +15,7 @@ class ToDoManagerView: UIView {
 
     private let managerLabel: UILabel = DOOLabel(
         font: .pretendard(.body2_bold),
-        color: .gray700, 
+        color: UIColor(resource: .gray700),
         text: StringLiterals.ToDo.allocation
     )
     
@@ -61,13 +61,13 @@ class ToDoManagerView: UIView {
     /// 담당자 버튼 클릭 시 버튼 스타일 변경해주는 메소드
     func changeButtonConfig(isSelected: Bool, btn: UIButton) {
         if !isSelected {
-            btn.setTitleColor(.white000, for: .normal)
-            btn.backgroundColor = btn.tag == 0 ? UIColor.red500 : UIColor.gray400
-            btn.layer.borderColor = btn.tag == 0 ? UIColor.red500.cgColor : UIColor.gray400.cgColor
+            btn.setTitleColor(UIColor(resource: .white000), for: .normal)
+            btn.backgroundColor = btn.tag == 0 ? UIColor(resource: .red500) : UIColor(resource: .gray400)
+            btn.layer.borderColor = btn.tag == 0 ? UIColor(resource: .red500).cgColor : UIColor(resource: .gray400).cgColor
         }else {
-            btn.setTitleColor(.gray300, for: .normal)
-            btn.backgroundColor = .white000
-            btn.layer.borderColor = UIColor.gray300.cgColor
+            btn.setTitleColor(UIColor(resource: .gray300), for: .normal)
+            btn.backgroundColor = UIColor(resource: .white000)
+            btn.layer.borderColor = UIColor(resource: .gray300).cgColor
         }
     }
     
@@ -152,19 +152,19 @@ extension ToDoManagerView: UICollectionViewDataSource{
             //조회
             if isActivateView == false {
                 managerCell.managerButton.isSelected = true
-                managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                 if allocators[indexPath.row].isOwner {
-                    managerCell.managerButton.backgroundColor = .red500
-                    managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
                 } else {
-                    managerCell.managerButton.backgroundColor = .gray400
-                    managerCell.managerButton.layer.borderColor = UIColor.gray400.cgColor
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
                 }
             } // 추가
             else {
-                managerCell.managerButton.backgroundColor = .white000
-                managerCell.managerButton.setTitleColor(.gray300, for: .normal)
-                managerCell.managerButton.layer.borderColor = UIColor.gray300.cgColor
+                managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
+                managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
             }
         }// 마이투두
         else {
@@ -176,24 +176,24 @@ extension ToDoManagerView: UICollectionViewDataSource{
                     //설명라벨 세팅
                     if allocators[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
                         managerCell.managerButton.isEnabled = false
-                        managerCell.managerButton.backgroundColor = .white000
-                        managerCell.managerButton.layer.borderColor = UIColor.white000.cgColor
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .white000).cgColor
                         
-                        managerCell.managerButton.setTitleColor(.gray200, for: .normal)
+                        managerCell.managerButton.setTitleColor(UIColor(resource: .gray200), for: .normal)
                     } else {
                         managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
-                        managerCell.managerButton.setTitleColor(.red500, for: .normal)
-                        managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
-                        managerCell.managerButton.backgroundColor = .white000
+                        managerCell.managerButton.setTitleColor(UIColor(resource: .red500), for: .normal)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                     }
                 } else{
-                    managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                    managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                     if allocators[indexPath.row].isOwner { //owner
-                        managerCell.managerButton.backgroundColor = UIColor.red500
-                        managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
                     }else {
-                        managerCell.managerButton.backgroundColor = UIColor.gray400
-                        managerCell.managerButton.layer.borderColor = UIColor.gray400.cgColor
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
                     }
                 }
             }// 추가
@@ -201,14 +201,14 @@ extension ToDoManagerView: UICollectionViewDataSource{
                 //설명라벨 세팅
                 if allocators[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
                     managerCell.managerButton.isEnabled = true
-                    managerCell.managerButton.backgroundColor = .white000
-                    managerCell.managerButton.layer.borderColor = UIColor.white000.cgColor
-                    managerCell.managerButton.setTitleColor(.white000, for: .normal)
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .white000).cgColor
+                    managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                 } else {
                     managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
-                    managerCell.managerButton.setTitleColor(.red500, for: .normal)
-                    managerCell.managerButton.layer.borderColor = UIColor.red500.cgColor
-                    managerCell.managerButton.backgroundColor = .white000
+                    managerCell.managerButton.setTitleColor(UIColor(resource: .red500), for: .normal)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                     managerCell.managerButton.isUserInteractionEnabled = false
                 }
             }

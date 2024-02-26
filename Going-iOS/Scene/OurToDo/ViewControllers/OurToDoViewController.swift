@@ -34,7 +34,7 @@ final class OurToDoViewController: UIViewController {
     
     private lazy var ourToDoCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .white000
+        collectionView.backgroundColor = UIColor(resource: .white000)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isScrollEnabled = false

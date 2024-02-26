@@ -64,13 +64,13 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     
     private let todoTitleLabel = DOOLabel(
         font: .pretendard(.body3_medi),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         alignment: .left
     )
     
     private let deadlineLabel = DOOLabel(
         font: .pretendard(.detail3_regular),
-        color: .gray300,
+        color: UIColor(resource: .gray300),
         alignment: .center
     )
 
@@ -78,7 +78,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .gray50
+        collectionView.backgroundColor = UIColor(resource: .gray50)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
