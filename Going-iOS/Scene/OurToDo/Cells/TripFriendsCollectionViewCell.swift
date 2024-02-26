@@ -21,7 +21,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     
     var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.OurToDo.icCalendar
+        imageView.image = UIImage(resource: .icCalendar)
         imageView.layer.masksToBounds = true
         return imageView
     }()
@@ -47,7 +47,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     }
         
     func bindData(data: Participant) {
-        self.profileImageView.image = ImageLiterals.OurToDo.mainViewIcon
+        self.profileImageView.image = UIImage(resource: .imgOurtodoMain)
         self.friendNameLabel.text = data.name
     }
 }

@@ -38,7 +38,7 @@ class EndDateView: UIView {
     
     lazy var dropdownButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(ImageLiterals.ToDo.disabledDropdown, for: .normal)
+        btn.setImage(UIImage(resource: .disabledIcDropdown), for: .normal)
         btn.backgroundColor = UIColor(resource: .white000)
         btn.addTarget(self, action: #selector(selectEndDate), for: .touchUpInside)
         return btn
@@ -62,7 +62,7 @@ class EndDateView: UIView {
     func setInquiryEndDateStyle() {
         deadlineTextfieldLabel.layer.borderColor = UIColor(resource: .gray700).cgColor
         deadlineTextfieldLabel.textColor = UIColor(resource: .gray700)
-        dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
+        dropdownButton.setImage(UIImage(resource: .enabledIcDropdown), for: .normal)
     }
     
     @objc

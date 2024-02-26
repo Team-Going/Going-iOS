@@ -47,8 +47,8 @@ final class OurToDoViewController: UIViewController {
         btn.setTitle(StringLiterals.OurToDo.ourtodo, for: .normal)
         btn.setTitleColor(UIColor(resource: .white000), for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
-        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
-        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
+        btn.setImage(UIImage(resource: .btnPlusOurtodo), for: .normal)
+        btn.setImage(UIImage(resource: .btnPlusOurtodo), for: .highlighted)
         btn.imageView?.tintColor = UIColor(resource: .white000)
         btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
@@ -60,7 +60,7 @@ final class OurToDoViewController: UIViewController {
     
     private let emptyViewIconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.OurToDo.emptyViewIcon
+        imageView.image = UIImage(resource: .imgOurtodoEmpty)
         imageView.tintColor = UIColor(resource: .gray100)
         return imageView
     }()
@@ -74,7 +74,7 @@ final class OurToDoViewController: UIViewController {
     
     private let ourToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
-        imgView.image = ImageLiterals.OurToDo.mainViewIcon
+        imgView.image = UIImage(resource: .imgOurtodoMain)
         return imgView
     }()
     

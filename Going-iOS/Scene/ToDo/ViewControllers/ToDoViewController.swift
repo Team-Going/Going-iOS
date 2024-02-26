@@ -169,7 +169,7 @@ final class ToDoViewController: UIViewController {
     func setInfo() {
         if navigationBarTitle == "추가" {
             navigationBarView.titleLabel.text = "할일 추가"
-            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.manager, "메모를 입력해 주세요"]
+            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.todoManagerView.allocators, "메모를 입력해 주세요"]
         }
 
     }
@@ -464,7 +464,7 @@ extension ToDoViewController: ToDoTextFieldDelegate {
 extension ToDoViewController: EndDateViewDelegate {
     func presentToDatePicker() {
         showDatePicker()
-        self.endDateView.dropdownButton.setImage(ImageLiterals.ToDo.tappedDropdown, for: .normal)
+        self.endDateView.dropdownButton.setImage(UIImage(resource: .tapIcDropdown), for: .normal)
     }
 }
 
@@ -508,7 +508,7 @@ extension ToDoViewController: BottomSheetDelegate {
         self.endDateView.deadlineTextfieldLabel.text = formattedDate
         self.endDateView.deadlineTextfieldLabel.textColor = UIColor(resource: .gray700)
         self.endDateView.deadlineTextfieldLabel.layer.borderColor = UIColor(resource: .gray700).cgColor
-        self.endDateView.dropdownButton.setImage(ImageLiterals.ToDo.enabledDropdown, for: .normal)
+        self.endDateView.dropdownButton.setImage(UIImage(resource: .enabledIcDropdown), for: .normal)
         
         if compareDate(userDate: date) {
             updateSingleButtonState()

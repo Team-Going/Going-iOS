@@ -87,7 +87,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     
     lazy var checkButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(ImageLiterals.MyToDo.btnCheckBoxIncomplete, for: .normal)
+        btn.setImage(UIImage(resource: .btnCheckboxIncomplete), for: .normal)
         btn.addTarget(self, action: #selector(checkButtonTap), for: .touchUpInside)
         return btn
     }()
@@ -173,7 +173,7 @@ private extension MyToDoCollectionViewCell {
         let string = NSAttributedString(string: " \(string)" )
         let attachment = NSTextAttachment()
         // 완료/미완료에 따라 자물쇠 이미지 세팅
-        let image = isComplete! ? ImageLiterals.MyToDo.icLockLight : ImageLiterals.MyToDo.icLockDark
+        let image = isComplete! ? UIImage(resource: .icLockLight) : UIImage(resource: .icLockDark)
         attachment.image = image
         // 이미지와 라벨 수직 정렬 맞춰주기
         attachment.bounds = CGRect(x: 0, y: ScreenUtils.getHeight(-1), width: image.size.width, height: image.size.height)

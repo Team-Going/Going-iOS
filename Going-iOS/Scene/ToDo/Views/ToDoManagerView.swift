@@ -181,7 +181,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
                         
                         managerCell.managerButton.setTitleColor(UIColor(resource: .gray200), for: .normal)
                     } else {
-                        managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
+                        managerCell.managerButton.setImage(UIImage(resource: .icLock), for: .normal)
                         managerCell.managerButton.setTitleColor(UIColor(resource: .red500), for: .normal)
                         managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
                         managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
@@ -205,7 +205,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
                     managerCell.managerButton.layer.borderColor = UIColor(resource: .white000).cgColor
                     managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                 } else {
-                    managerCell.managerButton.setImage(ImageLiterals.ToDo.orangeLock, for: .normal)
+                    managerCell.managerButton.setImage(UIImage(resource: .icLock), for: .normal)
                     managerCell.managerButton.setTitleColor(UIColor(resource: .red500), for: .normal)
                     managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
                     managerCell.managerButton.backgroundColor = UIColor(resource: .white000)

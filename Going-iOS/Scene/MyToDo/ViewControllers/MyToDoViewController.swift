@@ -49,8 +49,8 @@ final class MyToDoViewController: UIViewController {
         btn.setTitle(StringLiterals.MyToDo.mytodo, for: .normal)
         btn.setTitleColor(UIColor(resource: .white000), for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
-        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .normal)
-        btn.setImage(ImageLiterals.OurToDo.btnPlusOurToDo, for: .highlighted)
+        btn.setImage(UIImage(resource: .btnPlusOurtodo), for: .normal)
+        btn.setImage(UIImage(resource: .btnPlusOurtodo), for: .highlighted)
         btn.imageView?.tintColor = UIColor(resource: .white000)
         btn.addTarget(self, action: #selector(pushToAddToDoView), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
@@ -62,7 +62,7 @@ final class MyToDoViewController: UIViewController {
     
     private let emptyViewIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.MyToDo.emptyViewIcon
+        imageView.image = UIImage(resource: .imgMytodoEmpty)
         imageView.tintColor = UIColor(resource: .gray100)
         return imageView
     }()
@@ -76,7 +76,7 @@ final class MyToDoViewController: UIViewController {
     
     private let myToDoMainImageView: UIImageView = {
         let imgView = UIImageView()
-        imgView.image = ImageLiterals.MyToDo.mainViewIcon
+        imgView.image = UIImage(resource: .imgMytodoMain)
         return imgView
     }()
     
@@ -327,11 +327,11 @@ private extension MyToDoViewController {
     func checkButtonTapped(index: Int, image: UIImage) {
         Task {
             let todo = self.myToDoData?[index] ?? ToDoAppData(todoId: 0, title: "", endDate: "", allocators: [], secret: false)
-            if image == ImageLiterals.MyToDo.btnCheckBoxComplete {
+            if image == UIImage(resource: .btnCheckboxComplete) {
                 self.myToDoData?.remove(at: index)
                 try await getIncompleteToDoData(todoId: todo.todoId)
                 await loadMyToDoData()
-            } else if image == ImageLiterals.MyToDo.btnCheckBoxIncomplete {
+            } else if image == UIImage(resource: .btnCheckboxIncomplete) {
                 self.myToDoData?.remove(at: index)
                 try await getCompleteToDoData(todoId: todo.todoId)
                 await loadMyToDoData()
@@ -435,13 +435,13 @@ extension MyToDoViewController: UICollectionViewDataSource{
         if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             myToDoCell.myToDoData = self.myToDoData?[indexPath.row]
             myToDoCell.textColor = UIColor(resource: .gray400)
-            myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxIncomplete
+            myToDoCell.buttonImg = UIImage(resource: .btnCheckboxIncomplete)
             myToDoCell.index = indexPath.row
             myToDoCell.isComplete = false
         } else {
             myToDoCell.myToDoData = self.myToDoData?[indexPath.row]
             myToDoCell.textColor = UIColor(resource: .gray300)
-            myToDoCell.buttonImg = ImageLiterals.MyToDo.btnCheckBoxComplete
+            myToDoCell.buttonImg = UIImage(resource: .btnCheckboxComplete)
             myToDoCell.index = indexPath.row
             myToDoCell.isComplete = true
         }
