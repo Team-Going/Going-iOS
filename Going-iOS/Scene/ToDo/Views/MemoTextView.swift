@@ -15,13 +15,13 @@ class MemoTextView: UIView {
     
     private let memoLabel = DOOLabel(
         font: .pretendard(.body2_bold),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         text: StringLiterals.ToDo.memo
     )
     
     let memoTextView: UITextView = {
         let tv = UITextView()
-        tv.backgroundColor = .white000
+        tv.backgroundColor = UIColor(resource: .white000)
         tv.textContainerInset = UIEdgeInsets(
             top: ScreenUtils.getHeight(12),
             left: ScreenUtils.getWidth(12),
@@ -29,8 +29,8 @@ class MemoTextView: UIView {
             right: ScreenUtils.getWidth(12)
         )
         tv.font = .pretendard(.body3_medi)
-        tv.textColor = .gray200
-        tv.layer.borderColor = UIColor.gray200.cgColor
+        tv.textColor = UIColor(resource: .gray200)
+        tv.layer.borderColor = UIColor(resource: .gray200).cgColor
         tv.layer.cornerRadius = 6
         tv.layer.borderWidth = 1
         return tv
@@ -38,12 +38,12 @@ class MemoTextView: UIView {
    
     private let countMemoCharacterLabel = DOOLabel(
         font: .pretendard(.detail2_regular),
-        color: .gray200,
+        color: UIColor(resource: .gray200),
         text: "0/1000"
     )
     
     private let memoWarningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .red500))
         label.isHidden = true
         return label
     }()
@@ -69,10 +69,10 @@ class MemoTextView: UIView {
     
     func setInquiryMemoStyle() {
         guard let memotext = memoTextView.text?.count else {return}
-        memoTextView.layer.borderColor = memoTextView.text == "" ? UIColor.gray200.cgColor : UIColor.gray700.cgColor
-        memoTextView.textColor = memoTextView.text == "" ? UIColor.gray200 : UIColor.gray700
+        memoTextView.layer.borderColor = memoTextView.text == "" ? UIColor(resource: .gray200).cgColor : UIColor(resource: .gray700).cgColor
+        memoTextView.textColor = memoTextView.text == "" ? UIColor(resource: .gray200) : UIColor(resource: .gray700)
         countMemoCharacterLabel.text = "\(memotext)/1000"
-        countMemoCharacterLabel.textColor = memoTextView.text == "" ? UIColor.gray200 : .gray700
+        countMemoCharacterLabel.textColor = memoTextView.text == "" ? UIColor(resource: .gray200) : UIColor(resource: .gray700)
     }
 
 }
@@ -117,11 +117,11 @@ private extension MemoTextView {
     func memoTextViewBlankCheck() {
         guard let textEmpty = memoTextView.text?.isEmpty else { return }
         if textEmpty {
-            memoTextView.layer.borderColor = UIColor.gray200.cgColor
-            self.countMemoCharacterLabel.textColor = .gray200
+            memoTextView.layer.borderColor = UIColor(resource: .gray200).cgColor
+            self.countMemoCharacterLabel.textColor = UIColor(resource: .gray200)
         } else {
-            memoTextView.layer.borderColor = UIColor.gray700.cgColor
-            self.countMemoCharacterLabel.textColor = .gray400
+            memoTextView.layer.borderColor = UIColor(resource: .gray700).cgColor
+            self.countMemoCharacterLabel.textColor = UIColor(resource: .gray400)
         }
     }
     
@@ -130,8 +130,8 @@ private extension MemoTextView {
         guard let text = memoTextView.text else { return }
         
         if text.count > 1000 {
-            memoTextView.layer.borderColor = UIColor.red500.cgColor
-            countMemoCharacterLabel.textColor = .red500
+            memoTextView.layer.borderColor = UIColor(resource: .red500).cgColor
+            countMemoCharacterLabel.textColor = UIColor(resource: .red500)
             memoWarningLabel.text = "메모는 1000자를 초과할 수 없습니다."
             memoWarningLabel.isHidden = false
         } else {
@@ -147,7 +147,7 @@ extension MemoTextView: UITextViewDelegate {
         
         if textView.text == memoTextviewPlaceholder {
             textView.text = ""
-            textView.textColor = .gray700
+            textView.textColor = UIColor(resource: .gray700)
         }
         textViewCountCheck()
     }
@@ -165,7 +165,7 @@ extension MemoTextView: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = memoTextviewPlaceholder
-            textView.textColor = .gray200
+            textView.textColor = UIColor(resource: .gray200)
             textViewCountCheck()
         }
     }

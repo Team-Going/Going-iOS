@@ -35,7 +35,7 @@ final class TripHeaderView: UIView {
         alignment: .left
     )
     
-    let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: ImageLiterals.OurToDo.icCalendar)
+    let tripDateLabelAttachImg: NSTextAttachment = NSTextAttachment(image: UIImage(resource: .icCalendar))
     
     
     // MARK: - Property

@@ -9,18 +9,18 @@ final class TripMiddleView: UIView {
     
     // MARK: - UI Property
     
-    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
-                                          ImageLiterals.Profile.imgSnowmanSRI,
-                                          ImageLiterals.Profile.imgTriangleSEP,
-                                          ImageLiterals.Profile.imgSquareSEI,
-                                          ImageLiterals.Profile.imgCloverARP,
-                                          ImageLiterals.Profile.imgCloudARI,
-                                          ImageLiterals.Profile.imgHexagonAEP,
-                                          ImageLiterals.Profile.imgCircleAEI]
+    let userProfileImageSet: [UIImage] = [UIImage(resource: .imgProfileSrp),
+                                          UIImage(resource: .imgProfileSri),
+                                          UIImage(resource: .imgProfileSep),
+                                          UIImage(resource: .imgProfileSei),
+                                          UIImage(resource: .imgProfileArp),
+                                          UIImage(resource: .imgProfileAri),
+                                          UIImage(resource: .imgProfileAep),
+                                          UIImage(resource: .imgProfileAei)]
     
     private let ticketBoxImgView: UIImageView = {
         let imgView = UIImageView()
-        imgView.image = ImageLiterals.OurToDo.ticketBox
+        imgView.image = UIImage(resource: .ticketBox)
         imgView.isUserInteractionEnabled = true
         return imgView
     }()
@@ -84,7 +84,7 @@ final class TripMiddleView: UIView {
         btn.backgroundColor = UIColor(resource: .gray50)
         btn.layer.borderWidth = 0.5
         btn.layer.borderColor = UIColor(resource: .gray100).cgColor
-        btn.setImage(ImageLiterals.OurToDo.btnPlus, for: .normal)
+        btn.setImage(UIImage(resource: .btnPlus), for: .normal)
         btn.addTarget(self, action: #selector(pushToAddFriendsView), for: .touchUpInside)
         return btn
     }()
@@ -251,7 +251,7 @@ private extension TripMiddleView {
     func setStyle() {
         self.backgroundColor = UIColor(resource: .gray50)
         tripFriendsContainer.backgroundColor = UIColor(resource: .white000)
-        tripFriendsBtn.setImage(ImageLiterals.OurToDo.btnEnter, for: .normal)
+        tripFriendsBtn.setImage(UIImage(resource: .btnEnter), for: .normal)
         addButton.layer.cornerRadius = ScreenUtils.getHeight(23.5)
     }
 

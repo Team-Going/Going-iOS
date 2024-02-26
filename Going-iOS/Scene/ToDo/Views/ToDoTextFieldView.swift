@@ -18,31 +18,31 @@ class ToDoTextFieldView: UIView {
 
     private let todoLabel = DOOLabel(
         font: .pretendard(.body2_bold),
-        color: .gray700,
+        color: UIColor(resource: .gray700),
         text: StringLiterals.ToDo.todo
     )
     
     lazy var todoTextfield: UITextField = {
         let tf = UITextField()
-        tf.setTextField(forPlaceholder: "", forBorderColor: .gray200, forCornerRadius: 6)
+        tf.setTextField(forPlaceholder: "", forBorderColor: UIColor(resource: .gray200), forCornerRadius: 6)
         tf.font = .pretendard(.body3_medi)
-        tf.setPlaceholderColor(.gray700)
-        tf.textColor = .gray700
-        tf.backgroundColor = .white000
+        tf.setPlaceholderColor(UIColor(resource: .gray700))
+        tf.textColor = UIColor(resource: .gray700)
+        tf.backgroundColor = UIColor(resource: .white000)
         tf.setLeftPadding(amount: 12)
         tf.addTarget(self, action: #selector(todoTextFieldChange), for: .editingChanged)
         return tf
     }()
     
     private let warningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: .red400)
+        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .red500))
         label.isHidden = true
         return label
     }()
     
     lazy var countToDoCharacterLabel = DOOLabel(
         font: .pretendard(.detail2_regular),
-        color: .gray200,
+        color: UIColor(resource: .gray200),
         text: "0/15"
     )
     
@@ -69,9 +69,9 @@ class ToDoTextFieldView: UIView {
     
     func setInquiryTextFieldStyle() {
         guard let todotext = todoTextfield.placeholder?.count else {return}
-        todoTextfield.layer.borderColor = UIColor.gray700.cgColor
-        todoTextfield.setPlaceholderColor(.gray700)
-        countToDoCharacterLabel.textColor = .gray700
+        todoTextfield.layer.borderColor = UIColor(resource: .gray700).cgColor
+        todoTextfield.setPlaceholderColor(UIColor(resource: .gray700))
+        countToDoCharacterLabel.textColor = UIColor(resource: .gray700)
         countToDoCharacterLabel.text = "\(todotext)/15"
     }
 
@@ -80,28 +80,28 @@ class ToDoTextFieldView: UIView {
         guard let text = todoTextfield.text else { return }
         
         if text.count > 15 {
-            todoTextfield.layer.borderColor = UIColor.red500.cgColor
-            countToDoCharacterLabel.textColor = .red500
+            todoTextfield.layer.borderColor = UIColor(resource: .red500).cgColor
+            countToDoCharacterLabel.textColor = UIColor(resource: .red500)
             warningLabel.text = "내용은 15자 이하여야 합니다"
             warningLabel.isHidden = false
             self.isTodoTextFieldGood = false
             
         } else if text.count == 0 {
-            todoTextfield.layer.borderColor = UIColor.gray200.cgColor
-            countToDoCharacterLabel.textColor = .gray200
+            todoTextfield.layer.borderColor = UIColor(resource: .gray200).cgColor
+            countToDoCharacterLabel.textColor = UIColor(resource: .gray200)
             warningLabel.isHidden = true
             self.isTodoTextFieldGood = false
             
         } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.isTodoTextFieldGood = false
             
-            todoTextfield.layer.borderColor = UIColor.red500.cgColor
-            countToDoCharacterLabel.textColor = .red500
+            todoTextfield.layer.borderColor = UIColor(resource: .red500).cgColor
+            countToDoCharacterLabel.textColor = UIColor(resource: .red500)
             warningLabel.text = "내용에는 공백만 입력할 수 없어요"
             warningLabel.isHidden = false
         }  else {
-            todoTextfield.layer.borderColor = UIColor.gray700.cgColor
-            countToDoCharacterLabel.textColor = .gray700
+            todoTextfield.layer.borderColor = UIColor(resource: .gray700).cgColor
+            countToDoCharacterLabel.textColor = UIColor(resource: .gray700)
             warningLabel.isHidden = true
             self.isTodoTextFieldGood = true
         }
