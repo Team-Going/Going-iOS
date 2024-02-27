@@ -15,15 +15,15 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
     
     private let popUpView = DOOPopUpContainerView()
     
-    private let deleteUserLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "정말 탈퇴하시겠어요?")
-    private let deleteUserDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray300, text: "탈퇴 시, 정보가 모두 없어져요")
+    private let deleteUserLabel = DOOLabel(font: .pretendard(.body1_bold), color: UIColor(resource: .gray600), text: "정말 탈퇴하시겠어요?")
+    private let deleteUserDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray300), text: "탈퇴 시, 정보가 모두 없어져요")
     
     private lazy var deleteUserButton: UIButton = {
         let button = UIButton()
         button.setTitle("탈퇴하기", for: .normal)
-        button.setTitleColor(.gray300, for: .normal)
+        button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_bold)
-        button.backgroundColor = .gray50
+        button.backgroundColor = UIColor(resource: .gray50)
         button.addTarget(self, action: #selector(delteUserButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -31,9 +31,9 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
     private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setTitle("남아있기", for: .normal)
-        button.setTitleColor(.white000, for: .normal)
+        button.setTitleColor(UIColor(resource: .white000), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_bold)
-        button.backgroundColor = .gray500
+        button.backgroundColor = UIColor(resource: .gray500)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -139,7 +139,7 @@ extension DeleteUserPopUpViewController: ViewControllerServiceable {
     func reIssueJWTToken() {
         Task {
             do {
-                try await AuthService.shared.reIssueJWTToken()
+                try await AuthService.shared.postReIssueJWTToken()
             }
             catch {
                 guard let error = error as? NetworkError else { return }

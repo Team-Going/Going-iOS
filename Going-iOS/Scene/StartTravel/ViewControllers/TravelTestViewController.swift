@@ -37,7 +37,7 @@ final class TravelTestViewController: UIViewController {
     
     private let navigationUnderlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
@@ -73,7 +73,7 @@ final class TravelTestViewController: UIViewController {
 
 private extension TravelTestViewController {
     func setStyle() {
-        view.backgroundColor = .white000
+        view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -119,7 +119,7 @@ private extension TravelTestViewController {
     }
     
     func setCollectionView() {
-        travelTestCollectionView.backgroundColor = .gray50
+        travelTestCollectionView.backgroundColor = UIColor(resource: .gray50)
         travelTestCollectionView.showsVerticalScrollIndicator = false
     }
     

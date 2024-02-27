@@ -12,15 +12,16 @@ final class OurToDoHeaderView: UIView {
     let segmentedControl: UnderlineSegmentedControlView = {
         let segmentedControl = UnderlineSegmentedControlView(items: ["해야 해요", "완료했어요"])
         segmentedControl.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.gray200,
+            NSAttributedString.Key.foregroundColor: UIColor(resource: .gray200),
             .font: UIFont.pretendard(.body2_bold)], for: .normal)
         segmentedControl.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor.gray500,
+            NSAttributedString.Key.foregroundColor: UIColor(resource: .gray500),
             .font: UIFont.pretendard(.body2_bold)], for: .selected)
         segmentedControl.apportionsSegmentWidthsByContent = true
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
+    
     private let underlineView: UIView = UIView()
 
     
@@ -52,6 +53,7 @@ private extension OurToDoHeaderView {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(1)
         }
+        
         segmentedControl.snp.makeConstraints{
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
@@ -61,8 +63,8 @@ private extension OurToDoHeaderView {
     }
     
     func setStyle() {
-        self.backgroundColor = .white000
-        underlineView.backgroundColor = .gray200
+        self.backgroundColor = UIColor(resource: .white000)
+        underlineView.backgroundColor = UIColor(resource: .gray200)
         segmentedControl.setWidth(ScreenUtils.getWidth(375) / 2, forSegmentAt: 0)
         segmentedControl.setWidth(ScreenUtils.getWidth(375) / 2, forSegmentAt: 1)
     }

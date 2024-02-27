@@ -18,7 +18,7 @@ final class DatePickerView: UIView {
         picker.datePickerMode = .date
         picker.isUserInteractionEnabled = true
         picker.locale = Locale(identifier: "ko-KR")
-        picker.tintColor = .gray700
+        picker.tintColor = UIColor(resource: .gray700)
         picker.timeZone = TimeZone(identifier: "Asia/Seoul")
         if #available(iOS 13.4, *) {
             picker.preferredDatePickerStyle = .wheels
@@ -45,7 +45,7 @@ final class DatePickerView: UIView {
 
 private extension DatePickerView {
     func setStyle() {
-        self.backgroundColor = .white000
+        self.backgroundColor = UIColor(resource: .white000)
     }
     
     func setHierarchy() {

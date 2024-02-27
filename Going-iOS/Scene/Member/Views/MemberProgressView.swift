@@ -20,22 +20,22 @@ final class MemberProgressView: UIView {
         didSet {
             guard let isLeft = testResultData?.isLeft else { return }
             if isLeft {
-                self.progressBarView.trackTintColor = .gray50
-                self.progressBarView.progressTintColor = .gray400
+                self.progressBarView.trackTintColor = UIColor(resource: .gray50)
+                self.progressBarView.progressTintColor = UIColor(resource: .gray400)
                 self.progressBarView.progress = Float(testResultData?.rate ?? 0) * 0.01
             } else {
                 let percentage = Float(testResultData?.rate ?? 0) * 0.01
-                self.progressBarView.trackTintColor = .gray400
-                self.progressBarView.progressTintColor = .gray50
+                self.progressBarView.trackTintColor = UIColor(resource: .gray400)
+                self.progressBarView.progressTintColor = UIColor(resource: .gray50)
                 self.progressBarView.setProgress(1 - percentage, animated: false)
             }
         }
     }
 
     private let questionLabel = DOOLabel(font: .pretendard(.body3_bold), 
-                                         color: .gray700,
+                                         color: UIColor(resource: .gray700), 
                                          text: "여행 스타일")
-    
+  
     private let progressBarView: UIProgressView = {
         let view = UIProgressView()
         view.layer.cornerRadius = 4
@@ -43,10 +43,10 @@ final class MemberProgressView: UIView {
         view.progressViewStyle = .bar
         return view
     }()
-    
-    private let leftOption = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700)
-    
-    private let rightOption = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700)
+
+    private let leftOption = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
+  
+    private let rightOption = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
     
     // MARK: - Life Cycle
 

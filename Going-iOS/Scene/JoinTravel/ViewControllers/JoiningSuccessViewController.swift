@@ -28,19 +28,19 @@ final class JoiningSuccessViewController: UIViewController {
                 self.dDayLabel.text = "D-\(data.dueDate)"
             }
             
-            self.dDayLabel.backgroundColor = .red100
-            self.dDayLabel.textColor = .red500
+            self.dDayLabel.backgroundColor = UIColor(resource: .red100)
+            self.dDayLabel.textColor = UIColor(resource: .red500)
         }
     }
     
     // MARK: - UI Properties
     
-    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: UIColor(resource: .gray50))
     
     private let joinSuccessLabel = DOOLabel(font: .pretendard(.head2), 
-                                            color: .gray700,
-                                            text: StringLiterals.JoiningSuccess.title,
-                                            numberOfLine: 2,
+                                            color: UIColor(resource: .gray700), 
+                                            text: StringLiterals.JoiningSuccess.title, 
+                                            numberOfLine: 2, 
                                             alignment: .center)
     
     private let letterImage: UIImageView = {
@@ -51,16 +51,16 @@ final class JoiningSuccessViewController: UIViewController {
     
     private let dDayLabelBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red100
+        view.backgroundColor = UIColor(resource: .red100)
         view.layer.cornerRadius = 6
         return view
     }()
     
-    private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .red400)
+    private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: UIColor(resource: .red500))
     
-    private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
+    private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: UIColor(resource: .gray700))
     
-    private let dateLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .gray300)
+    private let dateLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray300))
     
     private lazy var entranceButton: DOOButton = {
         let btn =  DOOButton(type: .enabled, title: StringLiterals.JoiningSuccess.confirmButton)
@@ -83,7 +83,7 @@ final class JoiningSuccessViewController: UIViewController {
 
 private extension JoiningSuccessViewController {
     func setStyle() {
-        view.backgroundColor = .gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         self.navigationController?.isNavigationBarHidden = true
     }
     

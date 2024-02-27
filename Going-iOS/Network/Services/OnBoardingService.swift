@@ -23,7 +23,7 @@ final class OnBoardingService: Serviceable {
     }
     
     
-    func travelTypeTest(requestDTO: TravelTypeTestRequestDTO) async throws {
+    func patchTravelTypeTest(requestDTO: TravelTypeTestRequestDTO) async throws {
         print(requestDTO)
         let param = requestDTO.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: param)

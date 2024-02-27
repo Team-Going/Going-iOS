@@ -52,17 +52,17 @@ class MemberViewController: UIViewController {
     
     private let navigationUnderLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
     private let memeberTitleLabel = DOOLabel(font: .pretendard(.body3_bold), 
-                                             color: .gray700,
+                                             color: UIColor(resource: .gray700), 
                                              text: "멤버")
     
     private lazy var tripFriendsCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
-        view.backgroundColor = UIColor.white000
+        view.backgroundColor = UIColor(resource: .white000)
         view.showsHorizontalScrollIndicator = false
         view.isScrollEnabled = false
         return view
@@ -87,7 +87,7 @@ class MemberViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.tabBarController?.tabBar.isHidden = true
+        hideTabbar()
         getAllData()
     }
 }
@@ -96,7 +96,12 @@ class MemberViewController: UIViewController {
 
 private extension MemberViewController {
     func setStyle() {
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
+    }
+    
+    func hideTabbar() {
+        self.navigationController?.tabBarController?.tabBar.isHidden = true
+
     }
     
     func setHierarchy() {
@@ -229,7 +234,7 @@ extension MemberViewController {
     func reIssueJWTToken() {
         Task {
             do {
-                try await AuthService.shared.reIssueJWTToken()
+                try await AuthService.shared.postReIssueJWTToken()
             }
             catch {
                 guard let error = error as? NetworkError else { return }

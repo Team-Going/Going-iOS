@@ -38,12 +38,12 @@ final class CreatingSuccessViewController: UIViewController {
 
     // MARK: - UI Properties
     
-    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: .gray50)
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: UIColor(resource: .gray50))
     
     private let createSuccessLabel = DOOLabel(font: .pretendard(.head2), 
-                                              color: .gray700,
+                                              color: UIColor(resource: .gray700), 
                                               text: StringLiterals.CreatingSuccess.title)
-    
+  
     private let characterImage: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(resource: .imgTripSplash)
@@ -59,32 +59,32 @@ final class CreatingSuccessViewController: UIViewController {
     
     private let dDayLabelBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red100
+        view.backgroundColor = UIColor(resource: .red100)
         view.layer.cornerRadius = 6
         return view
     }()
     
-    private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: .red400)
+    private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: UIColor(resource: .red500))
+  
+    private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: UIColor(resource: .gray700))
+  
+    private let dateLabel = DOOLabel(font: .pretendard(.detail1_regular), color: UIColor(resource: .gray300))
     
-    private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: .gray700)
-    
-    private let dateLabel = DOOLabel(font: .pretendard(.detail1_regular), color: .gray300)
-    
-    private let inviteCodeLabel = DOOLabel(font: .pretendard(.body1_medi), color: .gray700)
+    private let inviteCodeLabel = DOOLabel(font: .pretendard(.body1_medi), color: UIColor(resource: .gray700))
 
     private lazy var codeCopyButton: UIButton = {
         let button = UIButton()
         button.setTitle(StringLiterals.CreatingSuccess.copyCode, for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
-        button.setTitleColor(.gray300, for: .normal)
         button.setImage(UIImage(resource: .icCopy), for: .normal)
+        button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
         return button
     }()
     
     private let codeUnderLineView: UIView = {
         let line = UIView()
-        line.backgroundColor = .gray300
+        line.backgroundColor = UIColor(resource: .gray300)
         return line
     }()
     
@@ -115,7 +115,7 @@ final class CreatingSuccessViewController: UIViewController {
 
 private extension CreatingSuccessViewController {
     func setStyle() {
-        view.backgroundColor = .gray50
+        view.backgroundColor = UIColor(resource: .gray50)
         self.navigationController?.isNavigationBarHidden = true
         navigationBar.isHidden = true
     }

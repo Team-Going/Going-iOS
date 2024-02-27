@@ -9,7 +9,7 @@ import UIKit
 
 final class DOOToastView: UIView {
     
-    private let messageLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .white000, numberOfLine: 2, alignment: .center)
+    private let messageLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .white000), numberOfLine: 2, alignment: .center)
     
     init(message: String) {
         super.init(frame: .zero)
@@ -46,10 +46,10 @@ private extension DOOToastView {
     func setStyle() {
         self.layer.cornerRadius = 6
         self.clipsToBounds = true
-        self.backgroundColor = .gray700
+        self.backgroundColor = UIColor(resource: .gray700)
         self.messageLabel.font = .pretendard(.detail2_regular)
         self.messageLabel.textAlignment = .center
-        self.messageLabel.textColor = .white000
+        self.messageLabel.textColor = UIColor(resource: .white000)
     }
 }
 

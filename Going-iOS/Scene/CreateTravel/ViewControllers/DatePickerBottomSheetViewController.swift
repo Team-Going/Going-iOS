@@ -26,14 +26,14 @@ final class DatePickerBottomSheetViewController: UIViewController {
     let dimmedBackView: UIView = {
         let view = UIView()
         view.alpha = 0.1
-        view.layer.backgroundColor = UIColor.black000.cgColor
+        view.layer.backgroundColor = UIColor(resource: .black000).cgColor
         return view
     }()
     
     /// 바텀 시트 뷰
     private let bottomSheetView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white000
+        view.backgroundColor = UIColor(resource: .white000)
         view.roundCorners(cornerRadius: 6, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMinYCorner])
         return view
     }()
@@ -45,7 +45,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
         picker.locale = Locale(identifier: "ko-KR")
         picker.timeZone = TimeZone(identifier: "Asia/Seoul")
         
-        picker.tintColor = .gray700
+        picker.tintColor = UIColor(resource: .gray700)
         if #available(iOS 13.4, *) {
             picker.preferredDatePickerStyle = .wheels
         }
@@ -56,7 +56,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
     /// dismiss Indicator View
     private let dismissIndicatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray200
+        view.backgroundColor = UIColor(resource: .gray200)
         view.layer.cornerRadius = 3
         return view
     }()

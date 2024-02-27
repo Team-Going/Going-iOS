@@ -36,7 +36,7 @@ final class DOONavigationBar: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(.body1_bold)
-        label.textColor = .gray700
+        label.textColor = UIColor(resource: .gray700)
         label.textAlignment = .center
         return label
     }()
@@ -51,7 +51,7 @@ final class DOONavigationBar: UIView {
     private weak var viewController: UIViewController?
     private let type: NavigationBarType
     
-    init(_ viewController: UIViewController, type: NavigationBarType, backgroundColor: UIColor = .white000) {
+    init(_ viewController: UIViewController, type: NavigationBarType, backgroundColor: UIColor = UIColor(resource: .white000)) {
         self.viewController = viewController
         self.type = type
         super.init(frame: .zero)

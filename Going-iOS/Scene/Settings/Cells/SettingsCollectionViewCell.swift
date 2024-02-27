@@ -24,8 +24,8 @@ final class SettingsCollectionViewCell: UICollectionViewCell {
             } else if data.title == StringLiterals.Settings.logout {
                 self.settingsIcon.isHidden = true
                 self.versionInfoLabel.isHidden = true
-                self.titleLabel.textColor = .red500
-            } 
+                self.titleLabel.textColor = UIColor(resource: .red500)
+            }
         }
     }
     
@@ -34,7 +34,7 @@ final class SettingsCollectionViewCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(.body1_medi)
-        label.textColor = .gray700
+        label.textColor = UIColor(resource: .gray700)
         return label
     }()
     
@@ -48,7 +48,7 @@ final class SettingsCollectionViewCell: UICollectionViewCell {
     private let versionInfoLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(.detail1_regular)
-        label.textColor = .gray300
+        label.textColor = UIColor(resource: .gray300)
         label.text = "v1.1.0"
         label.isHidden = true
         return label
@@ -73,7 +73,7 @@ final class SettingsCollectionViewCell: UICollectionViewCell {
 
 private extension SettingsCollectionViewCell {
     func setStyle() {
-        self.backgroundColor = .white000
+        self.backgroundColor = UIColor(resource: .white000)
         self.layer.cornerRadius = 6
     }
     

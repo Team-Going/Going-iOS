@@ -21,7 +21,7 @@ final class MakeProfileViewController: UIViewController {
     private var userProfileData = UserProfileAppData(name: "", intro: "", platform: "")
     
     private let nameLabel = DOOLabel(font: .pretendard(.body2_bold),
-                                     color: .gray700,
+                                     color: UIColor(resource: .gray700),
                                      text: "닉네임")
     
     private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("프로필 생성"))
@@ -38,16 +38,16 @@ final class MakeProfileViewController: UIViewController {
         textField.setPlaceholder(placeholder: "3글자 이내로 작성해 주세요", fontColor: .gray200, font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
-        textField.textColor = .gray700
+        textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
-        textField.layer.borderColor = UIColor.gray200.cgColor
+        textField.layer.borderColor = UIColor(resource: .gray200).cgColor
         textField.addTarget(self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
         return textField
     }()
     
     private let nameWarningLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .red400
+        label.textColor = UIColor(resource: .red500)
         label.font = .pretendard(.detail2_regular)
         label.isHidden = true
         return label
@@ -59,7 +59,7 @@ final class MakeProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "0/3"
         label.font = .pretendard(.detail2_regular)
-        label.textColor = .gray200
+        label.textColor = UIColor(resource: .gray200)
         return label
     }()
     
@@ -67,19 +67,19 @@ final class MakeProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "한 줄 소개"
         label.font = .pretendard(.body2_bold)
-        label.textColor = .gray700
+        label.textColor = UIColor(resource: .gray700)
         return label
     }()
     
     private lazy var descTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
-        textField.setPlaceholder(placeholder: "여행을 떠나기 전 설레는 마음을 적어볼까요?", fontColor: .gray200, font: .pretendard(.body3_medi))
+        textField.setPlaceholder(placeholder: "여행을 떠나기 전 설레는 마음을 적어볼까요?", fontColor: UIColor(resource: .gray200), font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
-        textField.textColor = .gray700
+        textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
-        textField.layer.borderColor = UIColor.gray200.cgColor
+        textField.layer.borderColor = UIColor(resource: .gray200).cgColor
         textField.addTarget(self, action: #selector(descTextFieldDidChange), for: .editingChanged)
         return textField
     }()
@@ -90,13 +90,13 @@ final class MakeProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "0/20"
         label.font = .pretendard(.detail2_regular)
-        label.textColor = .gray200
+        label.textColor = UIColor(resource: .gray200)
         return label
     }()
     
     private let descWarningLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .red400
+        label.textColor = UIColor(resource: .red500)
         label.font = .pretendard(.detail2_regular)
         label.isHidden = true
         return label
@@ -105,10 +105,10 @@ final class MakeProfileViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(UIColor.gray200, for: .normal)
+        button.setTitleColor(UIColor(resource: .gray200), for: .normal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 6
-        button.backgroundColor = .gray50
+        button.backgroundColor = UIColor(resource: .gray50)
         return button
     }()
     
@@ -208,7 +208,7 @@ private extension MakeProfileViewController {
     }
     
     func setStyle() {
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
     }
     
     func setDelegate() {
@@ -220,28 +220,28 @@ private extension MakeProfileViewController {
         guard let text = nameTextField.text else { return }
 
             if text.count > 3 {
-                nameTextField.layer.borderColor = UIColor.red500.cgColor
-                nameTextFieldCountLabel.textColor = .red500
+                nameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
+                nameTextFieldCountLabel.textColor = UIColor(resource: .red500)
                 nameWarningLabel.text = "닉네임은 3자 이하여야 합니다"
                 nameWarningLabel.isHidden = false
                 self.isNameTextFieldGood = false
 
             } else if text.count == 0 {
-                nameTextField.layer.borderColor = UIColor.gray200.cgColor
-                nameTextFieldCountLabel.textColor = .gray200
+                nameTextField.layer.borderColor = UIColor(resource: .gray200).cgColor
+                nameTextFieldCountLabel.textColor = UIColor(resource: .gray200)
                 nameWarningLabel.isHidden = true
                 self.isNameTextFieldGood = false
 
             } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 self.isNameTextFieldGood = false
 
-                nameTextField.layer.borderColor = UIColor.red500.cgColor
-                nameTextFieldCountLabel.textColor = .red500
+                nameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
+                nameTextFieldCountLabel.textColor = UIColor(resource: .red500)
                 nameWarningLabel.text = "닉네임에는 공백만 입력할 수 없어요"
                 nameWarningLabel.isHidden = false
             }  else {
-                nameTextField.layer.borderColor = UIColor.gray700.cgColor
-                nameTextFieldCountLabel.textColor = .gray700
+                nameTextField.layer.borderColor = UIColor(resource: .gray700).cgColor
+                nameTextFieldCountLabel.textColor = UIColor(resource: .gray700)
                 nameWarningLabel.isHidden = true
                 self.isNameTextFieldGood = true
             }
@@ -266,20 +266,20 @@ private extension MakeProfileViewController {
         descTextFieldCountLabel.text = "\(text.count) / 20"
      
         if text.count > 20 {
-            descTextField.layer.borderColor = UIColor.red500.cgColor
-            descTextFieldCountLabel.textColor = .red500
+            descTextField.layer.borderColor = UIColor(resource: .red500).cgColor
+            descTextFieldCountLabel.textColor = UIColor(resource: .red500)
             descWarningLabel.text = "소개는 20자를 초과할 수 없어요"
             descWarningLabel.isHidden = false
             isDescTextFieldGood = false
         } else if text.count == 0 {
-            descTextField.layer.borderColor = UIColor.gray200.cgColor
-            descTextFieldCountLabel.textColor = .gray200
+            descTextField.layer.borderColor = UIColor(resource: .gray200).cgColor
+            descTextFieldCountLabel.textColor = UIColor(resource: .gray200)
             descWarningLabel.isHidden = true
             isDescTextFieldGood = false
         } else {
             self.isDescTextFieldGood = true
-            descTextField.layer.borderColor = UIColor.gray700.cgColor
-            descTextFieldCountLabel.textColor = .gray400
+            descTextField.layer.borderColor = UIColor(resource: .gray700).cgColor
+            descTextFieldCountLabel.textColor = UIColor(resource: .gray400)
             descWarningLabel.isHidden = true
         }
         
@@ -292,14 +292,14 @@ private extension MakeProfileViewController {
  
         if isNameTextFieldGood == true && isDescTextFieldGood == true/* && !isNameTextFieldEmpty &&  !isDescTextFieldEmpty && nameTextField.text!.count < 3*/ {
             nextButton.isEnabled = true
-            nextButton.backgroundColor = .gray500
+            nextButton.backgroundColor = UIColor(resource: .gray500)
             nextButton.titleLabel?.font = .pretendard(.body1_bold)
-            nextButton.setTitleColor(.white000, for: .normal)
+            nextButton.setTitleColor(UIColor(resource: .white000), for: .normal)
         } else {
             nextButton.isEnabled = false
-            nextButton.backgroundColor = .gray50
+            nextButton.backgroundColor = UIColor(resource: .gray50)
             nextButton.titleLabel?.font = .pretendard(.body1_bold)
-            nextButton.setTitleColor(.white000, for: .normal)
+            nextButton.setTitleColor(UIColor(resource: .white000), for: .normal)
         }
     }
     

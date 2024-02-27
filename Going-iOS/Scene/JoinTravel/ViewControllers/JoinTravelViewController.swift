@@ -18,7 +18,7 @@ final class JoinTravelViewController: UIViewController {
     private var codeCheckData: JoiningSuccessAppData? {
         didSet {
             if codeCheckData == nil {
-                codeTextField.layer.borderColor = UIColor.red500.cgColor
+                codeTextField.layer.borderColor = UIColor(resource: .red500).cgColor
                 warningLabel.isHidden = false
                 characterCountLabel.textColor = .red500
             } else {
@@ -37,12 +37,12 @@ final class JoinTravelViewController: UIViewController {
     
     private let navigationUnderlineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray100
+        view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
     private let codeTitleLabel = DOOLabel(font: .pretendard(.body2_bold), 
-                                          color: .gray700,
+                                          color: UIColor(resource: .gray700), 
                                           text: StringLiterals.JoinTravel.inviteCodeTitle)
     
     private let codeTextField: UITextField = {
@@ -50,21 +50,21 @@ final class JoinTravelViewController: UIViewController {
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, 
-                           forBorderColor: .gray200,
+                           forBorderColor: UIColor(resource: .gray200), 
                            forCornerRadius: 6)
-        field.setPlaceholderColor(.gray200)
-        field.textColor = .gray700
+        field.setPlaceholderColor(UIColor(resource: .gray200))
+        field.textColor = UIColor(resource: .gray700)
         field.autocapitalizationType = .none
         return field
     }()
-    
+   
     private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular), 
-                                               color: .gray200,
+                                               color: UIColor(resource: .gray200), 
                                                text: "0/6")
-    
+  
     private let warningLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.detail2_regular), 
-                             color: .red500,
+                             color: UIColor(resource: .red500), 
                              text:"잘못된 초대코드예요")
         label.isHidden = true
         return label
@@ -96,7 +96,7 @@ final class JoinTravelViewController: UIViewController {
 
 private extension JoinTravelViewController {
     func setStyle() {
-        view.backgroundColor = .white000
+        view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
     }
     
@@ -182,13 +182,13 @@ extension JoinTravelViewController: UITextFieldDelegate {
         let maxLength = 6
         
         if newLength == 0 {
-            textField.layer.borderColor =  UIColor.gray200.cgColor
-            characterCountLabel.textColor = .gray200
+            textField.layer.borderColor =  UIColor(resource: .gray200).cgColor
+            characterCountLabel.textColor = UIColor(resource: .gray200)
             characterCountLabel.text = "\(newLength)/" + "\(maxLength)"
             warningLabel.isHidden = true
         } else if newLength < maxLength + 1 {
-            textField.layer.borderColor =  UIColor.gray700.cgColor
-            characterCountLabel.textColor = .gray700
+            textField.layer.borderColor =  UIColor(resource: .gray700).cgColor
+            characterCountLabel.textColor = UIColor(resource: .gray700)
             characterCountLabel.text = "\(newLength)/" + "\(maxLength)"
             warningLabel.isHidden = true
         }
@@ -212,8 +212,8 @@ extension JoinTravelViewController: ViewControllerServiceable {
         case .userState(let code, let message):
             if code == "e4043" {
                 warningLabel.isHidden = false
-                codeTextField.layer.borderColor = UIColor.red500.cgColor
-                characterCountLabel.textColor = .red500
+                codeTextField.layer.borderColor = UIColor(resource: .red500).cgColor
+                characterCountLabel.textColor = UIColor(resource: .red500)
                 
             } else {
                 DOOToast.show(message: message, insetFromBottom: 80)

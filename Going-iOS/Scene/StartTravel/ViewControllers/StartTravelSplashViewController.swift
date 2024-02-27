@@ -20,7 +20,7 @@ final class StartTravelSplashViewController: UIViewController {
     }()
     
     private let startTravelTitleLabel = DOOLabel(font: .pretendard(.head3),
-                                                 color: .gray700,
+                                                 color: UIColor(resource: .gray700),
                                                  text: StringLiterals.StartTravel.startTravelTitle,
                                                  numberOfLine: 2,
                                                  alignment: .center)
@@ -50,7 +50,7 @@ final class StartTravelSplashViewController: UIViewController {
 
 private extension StartTravelSplashViewController {
     func setStyle() {
-        self.view.backgroundColor = .white000
+        self.view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
     }
     

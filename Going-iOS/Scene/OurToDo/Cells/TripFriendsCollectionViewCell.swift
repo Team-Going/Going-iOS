@@ -14,20 +14,21 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.backgroundColor = .white
+        stackView.backgroundColor = UIColor(resource: .white000)
         stackView.isUserInteractionEnabled = true
         return stackView
     }()
     
     var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.OurToDo.icCalendar
+        imageView.image = UIImage(resource: .icCalendar)
         imageView.layer.masksToBounds = true
         return imageView
     }()
+    
     var friendNameLabel: UILabel = DOOLabel(
         font: .pretendard(.detail3_regular),
-        color: .gray500,
+        color: UIColor(resource: .gray500),
         alignment: .center
     )
 
@@ -46,7 +47,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     }
         
     func bindData(data: Participant) {
-        self.profileImageView.image = ImageLiterals.OurToDo.mainViewIcon
+        self.profileImageView.image = UIImage(resource: .imgOurtodoMain)
         self.friendNameLabel.text = data.name
     }
 }

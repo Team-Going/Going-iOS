@@ -34,15 +34,14 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     
     private let indexBackgroundImage: UIImageView = {
         let img = UIImageView()
-//        img.image = ImageLiterals.TravelTest.indexImage
         img.image = UIImage(resource: .imgRoundBackground)
         return img
     }()
+
+    private let questionIndexLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .white000))
     
-    private let questionIndexLabel = DOOLabel(font: .pretendard(.detail3_regular), color: .white000)
-    
-    private let questionLabel = DOOLabel(font: .pretendard(.body3_medi), color: .gray700)
-    
+    private let questionLabel = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray700))
+  
     private let answerStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -53,12 +52,12 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     }()
     
     private var answerButtons = [UIButton]()
-    
-    private let leftOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700)
-    
-    private let middleOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700)
-    
-    private let rightOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: .gray700)
+
+    private let leftOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
+  
+    private let middleOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
+  
+    private let rightOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
     
     // MARK: - Life Cycles
     
@@ -79,8 +78,8 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     
     @objc
     func answerButtonTapped(_ sender: UIButton) {
-        answerButtons.forEach { $0.backgroundColor = .gray50 }
-        sender.backgroundColor = .gray400
+        answerButtons.forEach { $0.backgroundColor = UIColor(resource: .gray50) }
+        sender.backgroundColor = UIColor(resource: .gray400)
         delegate?.didSelectAnswer(in: self, selectedAnswer: sender.tag)
     }
 }
@@ -89,9 +88,9 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
 
 private extension TravelTestCollectionViewCell {
     func setStyle() {
-        backgroundColor = .white000
+        backgroundColor = UIColor(resource: .white000)
         layer.cornerRadius = 6
-        layer.borderColor = UIColor.gray100.cgColor
+        layer.borderColor = UIColor(resource: .gray100).cgColor
         layer.borderWidth = 1
     }
     
@@ -147,7 +146,7 @@ private extension TravelTestCollectionViewCell {
     func createButton(tag: Int) -> UIButton {
         let button = UIButton()
         button.tag = tag
-        button.backgroundColor = .gray50
+        button.backgroundColor = UIColor(resource: .gray50)
         button.addTarget(self, action: #selector(answerButtonTapped(_:)), for: .touchUpInside)
         button.layer.cornerRadius = 4
         return button

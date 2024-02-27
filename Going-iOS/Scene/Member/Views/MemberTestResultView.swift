@@ -57,9 +57,9 @@ final class MemberTestResultView: UIView {
 
 private extension MemberTestResultView {
     func setStyle() {
-        self.backgroundColor = .white000
+        self.backgroundColor = UIColor(resource: .white000)
         self.layer.cornerRadius = 6
-        self.layer.borderColor = UIColor.gray200.cgColor
+        self.layer.borderColor = UIColor(resource: .gray200).cgColor
         self.layer.borderWidth = 1
     }
     

@@ -46,7 +46,7 @@ extension UITextField {
         self.clipsToBounds = true
         self.layer.borderColor = forBorderColor.cgColor
         self.layer.borderWidth = 1
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(resource: .white000)
         
         if let cornerRadius = forCornerRadius {
             self.layer.cornerRadius = cornerRadius
