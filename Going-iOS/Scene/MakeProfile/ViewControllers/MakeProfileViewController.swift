@@ -112,6 +112,8 @@ final class MakeProfileViewController: UIViewController {
         return button
     }()
     
+    private lazy var keyboardLayoutGuide = view.keyboardLayoutGuide
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -125,19 +127,10 @@ final class MakeProfileViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        setNotification()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        removeKeyboardNotifications()
-    }
 }
 
 private extension MakeProfileViewController {
     func setHierarchy() {
-        
         self.view.addSubviews(navigationBar,
                               naviUnderLineView,
                               nameLabel,
@@ -152,7 +145,6 @@ private extension MakeProfileViewController {
     }
     
     func setLayout() {
-        
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(ScreenUtils.getHeight(50))
@@ -207,12 +199,12 @@ private extension MakeProfileViewController {
             $0.leading.equalTo(descTextField.snp.leading).offset(4)
         }
         
-        nextButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(6)
-            $0.leading.trailing.equalToSuperview().inset(24)
+        nextButton.snp.remakeConstraints {
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
+            $0.width.equalTo(ScreenUtils.getWidth(327))
+            $0.bottom.equalTo(keyboardLayoutGuide.snp.top).offset(-6)
         }
-        
     }
     
     func setStyle() {
@@ -222,42 +214,6 @@ private extension MakeProfileViewController {
     func setDelegate() {
         nameTextField.delegate = self
         descTextField.delegate = self
-    }
-    
-    func setNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc
-    func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            // 키보드 높이
-            let keyboardHeight = keyboardFrame.height
-            
-            // Bottom Safe Area 높이
-            let safeAreaBottomInset = view.safeAreaInsets.bottom
-            
-            // createTravelButton을 키보드 높이만큼 위로 이동하는 애니메이션 설정
-            UIView.animate(withDuration: 0.3) {
-                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + safeAreaBottomInset)
-            }
-        }
-    }
-    
-    /// 키보드에 따라 버튼 원래대로 움직이게 하는 메서드
-    @objc
-    func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.nextButton.transform = .identity
-        }
-    }
-    
-    func removeKeyboardNotifications(){
-        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
-        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func nameTextFieldCheck() {

@@ -33,16 +33,19 @@ final class JoiningSuccessViewController: UIViewController {
         }
     }
     
-    
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: UIColor(resource: .gray50))
     
-    private let joinSuccessLabel = DOOLabel(font: .pretendard(.head2), color: UIColor(resource: .gray700), text: StringLiterals.JoiningSuccess.title, numberOfLine: 2, alignment: .center)
+    private let joinSuccessLabel = DOOLabel(font: .pretendard(.head2), 
+                                            color: UIColor(resource: .gray700), 
+                                            text: StringLiterals.JoiningSuccess.title, 
+                                            numberOfLine: 2, 
+                                            alignment: .center)
     
     private let letterImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.JoinTravel.imgJoinMessage
+        img.image = UIImage(resource: .imgTripMessage)
         return img
     }()
     
@@ -79,7 +82,6 @@ final class JoiningSuccessViewController: UIViewController {
 // MARK: - Private Extension
 
 private extension JoiningSuccessViewController {
-    
     func setStyle() {
         view.backgroundColor = UIColor(resource: .gray50)
         self.navigationController?.isNavigationBarHidden = true
@@ -91,7 +93,9 @@ private extension JoiningSuccessViewController {
                          letterImage,
                          entranceButton)
         
-        letterImage.addSubviews(dDayLabelBackgroundView, travelTitleLabel, dateLabel)
+        letterImage.addSubviews(dDayLabelBackgroundView, 
+                                travelTitleLabel,
+                                dateLabel)
         dDayLabelBackgroundView.addSubview(dDayLabel)
     }
     

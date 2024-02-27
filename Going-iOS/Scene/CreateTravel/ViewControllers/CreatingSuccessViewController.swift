@@ -40,16 +40,19 @@ final class CreatingSuccessViewController: UIViewController {
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: UIColor(resource: .gray50))
     
-    private let createSuccessLabel = DOOLabel(font: .pretendard(.head2), color: UIColor(resource: .gray700), text: StringLiterals.CreatingSuccess.title)
+    private let createSuccessLabel = DOOLabel(font: .pretendard(.head2), 
+                                              color: UIColor(resource: .gray700), 
+                                              text: StringLiterals.CreatingSuccess.title)
+  
     private let characterImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.StartTravelSplash.imgTripSplash
+        img.image = UIImage(resource: .imgTripSplash)
         return img
     }()
     
     private let ticketImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.CreateTravel.ticketLargeImage
+        img.image = UIImage(resource: .imgTicketCopy)
         img.isUserInteractionEnabled = true
         return img
     }()
@@ -62,7 +65,9 @@ final class CreatingSuccessViewController: UIViewController {
     }()
     
     private let dDayLabel = DOOLabel(font: .pretendard(.detail2_bold), color: UIColor(resource: .red500))
+  
     private let travelTitleLabel = DOOLabel(font: .pretendard(.head3), color: UIColor(resource: .gray700))
+  
     private let dateLabel = DOOLabel(font: .pretendard(.detail1_regular), color: UIColor(resource: .gray300))
     
     private let inviteCodeLabel = DOOLabel(font: .pretendard(.body1_medi), color: UIColor(resource: .gray700))
@@ -71,11 +76,12 @@ final class CreatingSuccessViewController: UIViewController {
         let button = UIButton()
         button.setTitle(StringLiterals.CreatingSuccess.copyCode, for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
+        button.setImage(UIImage(resource: .icCopy), for: .normal)
         button.setTitleColor(UIColor(resource: .gray300), for: .normal)
-        button.setImage(ImageLiterals.CreateTravel.buttonCopy, for: .normal)
         button.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
         return button
     }()
+    
     private let codeUnderLineView: UIView = {
         let line = UIView()
         line.backgroundColor = UIColor(resource: .gray300)
@@ -90,7 +96,7 @@ final class CreatingSuccessViewController: UIViewController {
     
     private lazy var entranceToMainButton: DOOButton = {
         let btn = DOOButton(type: .enabled, title: StringLiterals.CreatingSuccess.entranceBtn)
-        btn.addTarget(self, action: #selector(pushToOurToDoVC), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(mainButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -128,6 +134,7 @@ private extension CreatingSuccessViewController {
                                 inviteCodeLabel,
                                 codeUnderLineView,
                                 codeCopyButton)
+        
         dDayLabelBackgroundView.addSubview(dDayLabel)
     }
     
@@ -260,7 +267,7 @@ private extension CreatingSuccessViewController {
     }
     
     @objc
-    func pushToOurToDoVC() {
+    func mainButtonTapped() {
         let vc = DOOTabbarViewController()
         if let ourtodoVC = vc.ourTODoVC.viewControllers[0] as? OurToDoViewController,
            let myToDoVC = vc.myToDoVC.viewControllers[0] as? MyToDoViewController {

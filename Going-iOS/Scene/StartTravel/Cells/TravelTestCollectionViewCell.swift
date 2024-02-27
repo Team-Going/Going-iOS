@@ -34,12 +34,14 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     
     private let indexBackgroundImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.TravelTest.indexImage
+        img.image = UIImage(resource: .imgRoundBackground)
         return img
     }()
+
     private let questionIndexLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .white000))
     
     private let questionLabel = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .gray700))
+  
     private let answerStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -48,9 +50,13 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
         stack.distribution = .equalSpacing
         return stack
     }()
+    
     private var answerButtons = [UIButton]()
+
     private let leftOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
+  
     private let middleOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
+  
     private let rightOptionLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
     
     // MARK: - Life Cycles

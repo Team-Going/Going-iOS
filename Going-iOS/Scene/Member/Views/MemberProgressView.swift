@@ -32,7 +32,10 @@ final class MemberProgressView: UIView {
         }
     }
 
-    private let questionLabel = DOOLabel(font: .pretendard(.body3_bold), color: UIColor(resource: .gray700), text: "여행 스타일")
+    private let questionLabel = DOOLabel(font: .pretendard(.body3_bold), 
+                                         color: UIColor(resource: .gray700), 
+                                         text: "여행 스타일")
+  
     private let progressBarView: UIProgressView = {
         let view = UIProgressView()
         view.layer.cornerRadius = 4
@@ -40,7 +43,9 @@ final class MemberProgressView: UIView {
         view.progressViewStyle = .bar
         return view
     }()
+
     private let leftOption = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
+  
     private let rightOption = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700))
     
     // MARK: - Life Cycle

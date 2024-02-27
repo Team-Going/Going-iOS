@@ -15,14 +15,14 @@ class MemberViewController: UIViewController {
     
     var tripId: Int = 0
     
-    let userProfileImageSet: [UIImage] = [ImageLiterals.Profile.imgHeartSRP,
-                                          ImageLiterals.Profile.imgSnowmanSRI,
-                                          ImageLiterals.Profile.imgTriangleSEP,
-                                          ImageLiterals.Profile.imgSquareSEI,
-                                          ImageLiterals.Profile.imgCloverARP,
-                                          ImageLiterals.Profile.imgCloudARI,
-                                          ImageLiterals.Profile.imgHexagonAEP,
-                                          ImageLiterals.Profile.imgCircleAEI]
+    let userProfileImageSet: [UIImage] = [UIImage(resource: .imgProfileSrp),
+                                          UIImage(resource: .imgProfileSri),
+                                          UIImage(resource: .imgProfileSep),
+                                          UIImage(resource: .imgProfileSei),
+                                          UIImage(resource: .imgProfileArp),
+                                          UIImage(resource: .imgProfileAri),
+                                          UIImage(resource: .imgProfileAep),
+                                          UIImage(resource: .imgProfileAei)]
     
     private var userType: Int = 0
     var memberData: MemberResponseStruct? {
@@ -36,6 +36,8 @@ class MemberViewController: UIViewController {
         }
     }
     
+    // MARK: - UI Properties
+
     private let memberScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
@@ -46,16 +48,17 @@ class MemberViewController: UIViewController {
     
     private let contentView = UIView()
 
-    // MARK: - UI Properties
-    
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("함께 하는 친구들"))
+    
     private let navigationUnderLineView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(resource: .gray100)
         return view
     }()
     
-    private let memeberTitleLabel = DOOLabel(font: .pretendard(.body3_bold), color: UIColor(resource: .gray700), text: "멤버")
+    private let memeberTitleLabel = DOOLabel(font: .pretendard(.body3_bold), 
+                                             color: UIColor(resource: .gray700), 
+                                             text: "멤버")
     
     private lazy var tripFriendsCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
@@ -65,11 +68,12 @@ class MemberViewController: UIViewController {
         return view
     }()
     
-    private let ourTasteTitleLabel = DOOLabel(font: .pretendard(.body3_bold), color: .gray700, text: "우리의 이번 여행은!")
+    private let ourTasteTitleLabel = DOOLabel(font: .pretendard(.body3_bold), 
+                                              color: .gray700,
+                                              text: "우리의 이번 여행은!")
     
     private let ourTestResultView = MemberTestResultView()
     
-        
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -101,8 +105,12 @@ private extension MemberViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar, navigationUnderLineView, memberScrollView)
+        view.addSubviews(navigationBar, 
+                         navigationUnderLineView,
+                         memberScrollView)
+        
         memberScrollView.addSubview(contentView)
+        
         contentView.addSubviews( memeberTitleLabel,
                          tripFriendsCollectionView,
                          ourTasteTitleLabel,
@@ -185,7 +193,8 @@ extension MemberViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = tripFriendsCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = tripFriendsCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell 
+        else { return UICollectionViewCell() }
         
         cell.friendNameLabel.text = memberData?.participants[indexPath.row].name
         userType = memberData?.participants[indexPath.row].result ?? 0

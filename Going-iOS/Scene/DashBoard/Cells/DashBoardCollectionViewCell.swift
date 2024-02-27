@@ -27,7 +27,7 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
                 self.calendarImageView.tintColor = UIColor(resource: .gray200)
                 self.travelStateBackgroundView.backgroundColor = UIColor(resource: .gray100)
                 self.travelStateLabel.textColor = UIColor(resource: .gray200)
-                
+           
             } else {
                 if detailData.day <= 0 {
                     self.travelStateLabel.text = "여행 중"
@@ -49,7 +49,7 @@ final class DashBoardCollectionViewCell: UICollectionViewCell {
 
     private let calendarImageView: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.OurToDo.icCalendar
+        img.image = UIImage(resource: .icCalendar)
         return img
     }()
     

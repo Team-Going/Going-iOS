@@ -8,8 +8,6 @@
 import UIKit
 
 final class StartTravelSplashViewController: UIViewController {
-
-    // MARK: - Properties
     
     // MARK: - UI Components
     
@@ -17,9 +15,10 @@ final class StartTravelSplashViewController: UIViewController {
     
     private let characterImage: UIImageView = {
         let img = UIImageView()
-        img.image = ImageLiterals.StartTravelSplash.imgTripSplash
+        img.image = UIImage(resource: .imgTripSplash)
         return img
     }()
+    
     private let startTravelTitleLabel = DOOLabel(font: .pretendard(.head3),
                                                  color: UIColor(resource: .gray700),
                                                  text: StringLiterals.StartTravel.startTravelTitle,
@@ -72,7 +71,6 @@ private extension StartTravelSplashViewController {
         
         characterImage.snp.makeConstraints {
             $0.width.equalTo(ScreenUtils.getWidth(230))
-//            $0.height.equalTo(ScreenUtils.getHeight(145))
             $0.top.equalTo(navigationBar.snp.bottom).offset(ScreenUtils.getHeight(152))
             $0.centerX.equalToSuperview()
         }

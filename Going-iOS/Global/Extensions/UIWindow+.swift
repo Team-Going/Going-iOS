@@ -9,6 +9,10 @@ import UIKit
 
 extension UIWindow {
     public static var current: UIWindow? {
-        UIApplication.shared.windows.first(where: \.isKeyWindow)
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene else {
+            return nil
+        }
+        return windowScene.windows.first(where: { $0.isKeyWindow })
     }
 }

@@ -37,6 +37,7 @@ final class JoinTravelTestViewController: UIViewController {
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("이번 여행은!"))
+    
     private let navigationUnderlineView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(resource: .gray100)
@@ -136,7 +137,9 @@ private extension JoinTravelTestViewController {
     }
     
     func setGradient() {
-        gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .vertical)
+        gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), 
+                                 secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+                                 axis: .vertical)
     }
     
     ///  모든 답변이 완료되었는지 확인하는 메서드
@@ -167,7 +170,8 @@ extension JoinTravelTestViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell 
+        else { return UICollectionViewCell() }
         cell.travelTestData = travelTestQuestionDummy[indexPath.row]
         cell.delegate = self
         return cell
@@ -176,19 +180,25 @@ extension JoinTravelTestViewController: UICollectionViewDataSource {
 
 extension JoinTravelTestViewController: UICollectionViewDelegateFlowLayout {
     /// minimun item spacing
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 12
     }
     
     /// cell size
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = ScreenUtils.getWidth(327)
         let height = ScreenUtils.getHeight(133)
         return CGSize(width: width, height: height)
     }
     
     /// content margin
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20, left: 24, bottom: 20, right: 24)
     }
 }
@@ -216,12 +226,18 @@ extension JoinTravelTestViewController: ViewControllerServiceable {
             self.navigationController?.pushViewController(nextVC, animated: true)
         case .userState(let code, let message):
             if code == "e4092" {
-                DOOToast.show(message: message, duration: 2, insetFromBottom: ScreenUtils.getHeight(100), completion: {
+                DOOToast.show(message: message, 
+                              duration: 2,
+                              insetFromBottom: ScreenUtils.getHeight(100),
+                              completion: {
                     self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
                     self.view.window?.makeKeyAndVisible()
                 } )
             } else if code == "e4006" {
-                DOOToast.show(message: message, duration: 2, insetFromBottom: ScreenUtils.getHeight(100), completion: {
+                DOOToast.show(message: message, 
+                              duration: 2,
+                              insetFromBottom: ScreenUtils.getHeight(100),
+                              completion: {
                     self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
                     self.view.window?.makeKeyAndVisible()
                 } )
