@@ -39,7 +39,7 @@ class ToDoManagerView: UIView {
     
     var navigationBarTitle: String = ""
     
-    var isActivateView: Bool = true
+//    var isActivateView: Bool = true
     
     var isSecret: Bool = false
     
@@ -149,9 +149,15 @@ extension ToDoManagerView: UICollectionViewDataSource{
         //혼자할일 + 라벨
         //아워투두
         if beforeVC == "our" {
-            //조회
-            if isActivateView == false {
-                managerCell.managerButton.isSelected = true
+            managerCell.managerButton.isSelected = self.navigationBarTitle == StringLiterals.ToDo.inquiry ? true : false
+
+            // 추가
+            if self.navigationBarTitle == StringLiterals.ToDo.add {
+                managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
+                managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
+            } else {
+                //조회 & 수정
                 managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                 if allocators[indexPath.row].isOwner {
                     managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
@@ -160,16 +166,11 @@ extension ToDoManagerView: UICollectionViewDataSource{
                     managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
                     managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
                 }
-            } // 추가
-            else {
-                managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
-                managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
-                managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
             }
         }// 마이투두
         else {
             // 조회
-            if isActivateView == false {
+            if self.navigationBarTitle == StringLiterals.ToDo.inquiry {
                 managerCell.managerButton.isSelected = true
                 // 혼자 할 일
                 if self.isSecret == true {
@@ -197,7 +198,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
                     }
                 }
             }// 추가
-            else {
+            else if self.navigationBarTitle == StringLiterals.ToDo.add {
                 //설명라벨 세팅
                 if allocators[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
                     managerCell.managerButton.isEnabled = true

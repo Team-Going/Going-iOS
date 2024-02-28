@@ -166,7 +166,10 @@ private extension OurToDoViewController {
     }
     func hideTabbar() {
         self.navigationController?.tabBarController?.tabBar.isHidden = false
-
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.backgroundColor = UIColor(resource: .gray50)
+        
+//        self.navigationBarView.backgroundColor = UIColor(resource: .gray50)
     }
     
     func setSegmentDidChange() {
