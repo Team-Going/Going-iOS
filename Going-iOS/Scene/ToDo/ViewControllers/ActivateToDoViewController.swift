@@ -69,7 +69,7 @@ final class ActivateToDoViewController: UIViewController {
     lazy var beforeVC: String = "" {
         didSet {
             self.todoManagerView.beforeVC = beforeVC
-            if navigationBarTitle == "추가" && beforeVC == "my" {
+            if navigationBarTitle == StringLiterals.ToDo.add && beforeVC == "my" {
                 self.todoManagerView.allocators = [.init(name: "혼자할일", isOwner: true)]
             }
         }
@@ -128,17 +128,15 @@ final class ActivateToDoViewController: UIViewController {
     
     var isActivateView: Bool? = false {
         didSet {
-            guard let isActivateView else {return}
-//            self.todoManagerView.isActivateView = isActivateView
             if self.navigationBarTitle == StringLiterals.ToDo.edit {
                 self.todoManagerView.navigationBarTitle = StringLiterals.ToDo.edit
             } else {
                 self.todoManagerView.navigationBarTitle = StringLiterals.ToDo.add
             }
-            self.todoTextFieldView.todoTextfield.isUserInteractionEnabled = isActivateView ? true : false
-            self.endDateView.deadlineTextfieldLabel.isUserInteractionEnabled = isActivateView ? true : false
-            self.todoManagerView.todoManagerCollectionView.isUserInteractionEnabled = isActivateView ? true : false
-            self.memoTextView.isUserInteractionEnabled = isActivateView ? true : false
+            self.todoTextFieldView.todoTextfield.isUserInteractionEnabled = true
+            self.endDateView.deadlineTextfieldLabel.isUserInteractionEnabled = true
+            self.todoManagerView.todoManagerCollectionView.isUserInteractionEnabled = true
+            self.memoTextView.isUserInteractionEnabled = true
         }
     }
     
@@ -153,6 +151,7 @@ final class ActivateToDoViewController: UIViewController {
         setDelegate()
         setStyle()
         setInfo()
+        setStatus()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -165,18 +164,28 @@ final class ActivateToDoViewController: UIViewController {
     }
     
     func setInfo() {
-        if navigationBarTitle == "추가" {
-            navigationBarView.titleLabel.text = "할일 추가"
+        if navigationBarTitle == StringLiterals.ToDo.add {
+            navigationBarView.titleLabel.text = StringLiterals.ToDo.addToDo
             setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.todoManagerView.allocators, "메모를 입력해 주세요"]
         }
 
     }
     
+    func setStatus() {
+        self.todoTextFieldView.todoTextfield.isUserInteractionEnabled = true
+        self.endDateView.deadlineTextfieldLabel.isUserInteractionEnabled = true
+        self.todoManagerView.todoManagerCollectionView.isUserInteractionEnabled = true
+        self.memoTextView.isUserInteractionEnabled = true
+    }
+    
     func setNaviTitle() {
+        self.tabBarController?.tabBar.isHidden = true
+
         switch navigationBarTitle {
-        case "수정":
-            navigationBarView.titleLabel.text = "할일 수정"
-            self.tabBarController?.tabBar.isHidden = true
+        case StringLiterals.ToDo.edit:
+            navigationBarView.titleLabel.text = StringLiterals.ToDo.editToDo
+        case StringLiterals.ToDo.add:
+            navigationBarView.titleLabel.text = StringLiterals.ToDo.addToDo
         default:
             return
         }
@@ -332,6 +341,7 @@ private extension ActivateToDoViewController {
         todoManagerView.delegate = self
         memoTextView.delegate = self
         bottomSheetVC.delegate = self
+        navigationBarView.delegate = self
     }
     
     // 조회 뷰 스타일 세팅 메서드
@@ -393,10 +403,10 @@ private extension ActivateToDoViewController {
             && isDateSet
             && isAllocatorFilled
             && self.memoTextView.memoTextView.text.count <= 1000 {
-            self.navigationBarView.saveTextButton.setTitleColor(.gray200, for: .normal)
+            self.navigationBarView.saveTextButton.setTitleColor(.red500, for: .normal)
             self.navigationBarView.saveTextButton.isEnabled = true
         } else {
-            self.navigationBarView.saveTextButton.setTitleColor(.red500, for: .normal)
+            self.navigationBarView.saveTextButton.setTitleColor(.gray200, for: .normal)
             self.navigationBarView.saveTextButton.isEnabled = false
         }
     }
@@ -486,7 +496,7 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
             self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: secret)
             print(self.saveToDoData)
             
-            if navigationBarTitle == "할일 추가" {
+            if navigationBarTitle == StringLiterals.ToDo.add {
                 postToDoData()
             } else {
                 //수정 서버 통신

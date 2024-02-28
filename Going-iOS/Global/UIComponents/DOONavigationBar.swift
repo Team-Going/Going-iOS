@@ -55,10 +55,11 @@ final class DOONavigationBar: UIView {
     
     lazy var saveTextButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("저장", for: .normal)
+        btn.setTitle(StringLiterals.ToDo.save, for: .normal)
         btn.setTitleColor(UIColor(resource: .gray200), for: .normal)
         btn.titleLabel?.font = .pretendard(.body2_bold)
         btn.isEnabled = false
+        btn.addTarget(self, action: #selector(saveTitleButtonTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -182,6 +183,7 @@ private extension DOONavigationBar {
     
     @objc
     func saveTitleButtonTapped() {
+        print("tap")
         self.delegate?.saveTextButtonTapped()
     }
 }

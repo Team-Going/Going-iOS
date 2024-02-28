@@ -36,12 +36,6 @@ final class ToDoViewController: UIViewController {
     
     private let buttonView: UIView = UIView()
     
-    private lazy var singleButtonView: DOOButton = {
-        let singleBtn = DOOButton(type: .unabled, title: StringLiterals.ToDo.toSave)
-        singleBtn.addTarget(self, action: #selector(saveToDo), for: .touchUpInside)
-        return singleBtn
-    }()
-    
     private lazy var doubleButtonView = DoubleButtonView()
     
     
@@ -131,18 +125,6 @@ final class ToDoViewController: UIViewController {
         }
     }
     
-    var isActivateView: Bool? = false {
-        didSet {
-            guard let isActivateView else {return}
-//            self.todoManagerView.isActivateView = isActivateView
-            self.todoManagerView.navigationBarTitle = StringLiterals.ToDo.inquiry
-            self.todoTextFieldView.todoTextfield.isUserInteractionEnabled = isActivateView ? true : false
-            self.endDateView.deadlineTextfieldLabel.isUserInteractionEnabled = isActivateView ? true : false
-            self.todoManagerView.todoManagerCollectionView.isUserInteractionEnabled = isActivateView ? true : false
-            self.memoTextView.isUserInteractionEnabled = isActivateView ? true : false
-        }
-    }
-    
     
     // MARK: - Life Cycle
     
@@ -153,137 +135,31 @@ final class ToDoViewController: UIViewController {
         setLayout()
         setDelegate()
         setStyle()
-        setInfo()
+        setStatus()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
 //        self.navigationBarView.backgroundColor = UIColor(resource: .gray50)
         self.tabBarController?.tabBar.isHidden = false
-        self.removeNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setNaviTitle()
-        addNotification()
-    }
-    
-    func setInfo() {
-        if navigationBarTitle == "추가" {
-            navigationBarView.titleLabel.text = "할일 추가"
-            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.todoManagerView.allocators, "메모를 입력해 주세요"]
-        }
-
     }
     
     func setNaviTitle() {
-        switch navigationBarTitle {
-        case "수정":
-            navigationBarView.titleLabel.text = "할일 수정"
-        case "조회":
-            navigationBarView.titleLabel.text = "할일 조회"
-            
-            self.getDetailToDoDatas(todoId: self.todoId)
-        default:
-            return
-        }
+        navigationBarView.titleLabel.text = StringLiterals.ToDo.inquiryToDo
+        self.todoManagerView.navigationBarTitle = StringLiterals.ToDo.inquiry
+        self.getDetailToDoDatas(todoId: self.todoId)
     }
     
-    // 키보드 관련 알림 등록
-    func addNotification() {
-        NotificationCenter.default.addObserver(self, 
-                                               selector: #selector(keyboardWillShow(_:)),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self, 
-                                               selector: #selector(keyboardWillHide(_:)),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+    func setStatus() {
+        self.todoTextFieldView.todoTextfield.isUserInteractionEnabled = false
+        self.endDateView.deadlineTextfieldLabel.isUserInteractionEnabled = false
+        self.todoManagerView.todoManagerCollectionView.isUserInteractionEnabled = false
+        self.memoTextView.isUserInteractionEnabled = false
     }
-    
-    // 키보드 관련 알림 등록
-    func removeNotification() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    // 키보드내리기
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-        self.view.endEditing(true)
-    }
-    
-    // MARK: - @objc Methods
-    
-    @objc func keyboardWillShow(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        
-        if self.memoTextView.memoTextView.isFirstResponder {
-            // memoTextView가 FirstResponder인 경우 contentInset을 조절
-            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - ScreenUtils.getHeight(60), right: 0)
-            scrollView.contentInset = contentInset
-            scrollView.scrollIndicatorInsets = contentInset
 
-            let rect = self.memoTextView.convert(self.memoTextView.bounds, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        // 컴포넌트의 Auto Layout 초기 상태로 복원
-        // 키보드가 사라질 때 scrollView의 contentInset 초기화
-        scrollView.contentInset = UIEdgeInsets.zero
-        scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
-        
-        // 버튼 뷰의 위치를 원래대로 조절.
-        buttonView.snp.remakeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
-            $0.bottom.equalTo(contentView.snp.bottom).inset(ScreenUtils.getHeight(40))
-            $0.height.equalTo(ScreenUtils.getHeight(50))
-        }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    @objc func viewTapped(sender: UITapGestureRecognizer) {
-        // 화면을 탭하면 키보드가 닫히도록 함
-        view.endEditing(true)
-    }
-    
-    // 저장 버튼 탭 시 데이터를 배열에 담아주고 아워투두 뷰로 돌아가는 메서드
-    @objc
-    func saveToDo() {
-        let todo = self.todoTextFieldView.todoTextfield.text ?? ""
-        let deadline = (self.endDateView.deadlineTextfieldLabel.text == "날짜를 선택해 주세요" ? "" : self.endDateView.deadlineTextfieldLabel.text) ?? ""
-        let memo = (self.memoTextView.memoTextView.text == self.memoTextView.memoTextviewPlaceholder ? "" : self.memoTextView.memoTextView.text) ?? ""
-        let secret = beforeVC == "our" ? false : true
-        if !todo.isEmpty && !deadline.isEmpty {
-            if !buttonIndex.isEmpty {
-                for i in buttonIndex {
-                    idSet.append(self.todoManagerView.fromOurTodoParticipants[i].participantId)
-                }
-            }
-            if beforeVC == "my" {
-                idSet = [myId]
-            } else {
-                
-            }
-            
-            self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: secret)
-            print(self.saveToDoData)
-            postToDoData()
-        }
-    }
-    
-    @objc
-    func todoTextFieldDidChange() {
-        guard let text = self.todoTextFieldView.todoTextfield.text else { return }
-        self.todoTextFieldView.todoTextFieldCount = text.count
-        self.todoTextFieldView.countToDoCharacterLabel.text = "\(self.todoTextFieldView.todoTextFieldCount)/15"
-        self.todoTextFieldView.todoTextFieldCheck()
-        updateSingleButtonState()
-    }
 }
 
 // MARK: - Prviate Methods
@@ -298,6 +174,7 @@ private extension ToDoViewController {
                                 todoManagerView,
                                 memoTextView,
                                 buttonView)
+        buttonView.addSubview(doubleButtonView)
     }
     
     func setLayout() {
@@ -327,9 +204,6 @@ private extension ToDoViewController {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(scrollView.snp.height).priority(.low)
         }
-        
-        guard let isActivateView else {return}
-        isActivateView ? setButtonView(button: singleButtonView) : setButtonView(button: doubleButtonView)
 
         todoTextFieldView.snp.makeConstraints {
             $0.top.equalTo(contentView).inset(ScreenUtils.getHeight(40))
@@ -360,36 +234,22 @@ private extension ToDoViewController {
             $0.height.equalTo(ScreenUtils.getHeight(50))
             $0.bottom.equalToSuperview().inset(40)
         }
+        
+        doubleButtonView.snp.makeConstraints{
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+        }
     }
         
     func setStyle() {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor(resource: .white000)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        view.addGestureRecognizer(tapGesture)
-
         navigationBarView.backgroundColor = UIColor(resource: .white000)
     }
     
     func setDelegate() {
-        todoTextFieldView.delegate = self
-        endDateView.delegate = self
-        todoManagerView.delegate = self
-        memoTextView.delegate = self
-        bottomSheetVC.delegate = self
         doubleButtonView.delegate = self
-    }
-
-    // 추가, 조회 뷰에 따라 하단 버튼을 세팅해주는 메서드
-    func setButtonView(button: UIView) {
-        isActivateView = navigationBarTitle != "조회" ? true : false
-        buttonView.addSubview(button)
-        button.snp.makeConstraints{
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-        }
     }
     
     // 조회 뷰 스타일 세팅 메서드
@@ -413,116 +273,16 @@ private extension ToDoViewController {
         self.present(bottomSheetVC, animated: false, completion: nil)
     }
 
-    func compareDate(userDate: Date) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 32400)
-        
-        //유저가 입력한 날짜를 스트링으로 바꿈
-        let formattedDateString = dateFormatter.string(from: userDate)
-        self.endDateView.deadlineTextfieldLabel.text = formattedDateString
-        
-        //유저가 선택한 날짜
-        let userPickedDate = userDate
-        
-        //유저의 위치 날짜
-        let today = Date()
-        
-        // 정확한 비교를 위해 시-분-초 절삭한 시간대
-        let calendar = Calendar.current
-        let deletedUser = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: userPickedDate)
-        let deletedToday = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: today)
-        
-        // 두 날짜 비교
-        if let deletedUser = deletedUser, let deletedToday = deletedToday, deletedUser < deletedToday {
-            return false
-        } else {
-            return true
-        }
-    }
-
-    func updateSingleButtonState() {
-        let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
-        let isTodoTextFieldEmpty = self.todoTextFieldView.todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        let isDateSet = self.endDateView.deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
-        
-        singleButtonView.currentType = ( !isTodoTextFieldEmpty
-                                         && self.todoTextFieldView.todoTextfield.text?.count ?? 0 <= 15
-                                         && isDateSet
-                                         && isAllocatorFilled
-                                         && self.memoTextView.memoTextView.text.count <= 1000) ? .enabled : .unabled
-    }
 }
 
 
 // MARK: - Extension
 
-extension ToDoViewController: ToDoTextFieldDelegate {
-    func checkTextFieldState() {
-        self.updateSingleButtonState()
-    }
-}
-
-extension ToDoViewController: EndDateViewDelegate {
-    func presentToDatePicker() {
-        showDatePicker()
-        self.endDateView.dropdownButton.setImage(UIImage(resource: .tapIcDropdown), for: .normal)
-    }
-}
-
-extension ToDoViewController: ToDoManagerViewDelegate {
-    func tapToDoManagerButton(_ sender: UIButton) {
-        guard let isActivateView = self.isActivateView else {return}
-        if isActivateView {
-            
-            self.todoManagerView.changeButtonConfig(isSelected: sender.isSelected, btn: sender)
-            
-            // 아워투두의 할일 추가의 경우
-            
-            if beforeVC == "our" {
-                if sender.isSelected {
-                    buttonIndex.removeAll(where: { $0 == sender.tag })
-                } else {
-                    buttonIndex.append(sender.tag)
-                }
-            }
-            updateSingleButtonState()
-            sender.isSelected = !sender.isSelected
-        }
-    }
-}
-
-extension ToDoViewController: MemoTextViewDelegate {
-    func checkMemoState() {
-        self.updateSingleButtonState()
-    }
-}
-
-extension ToDoViewController: BottomSheetDelegate {
-    
-    func datePickerDidChanged(date: Date) { return }
-    
-    func didSelectDate(date: Date) {
-        self.selectedDate = date
-        
-        let formattedDate = dateFormat(date: date)
-
-        self.endDateView.deadlineTextfieldLabel.text = formattedDate
-        self.endDateView.deadlineTextfieldLabel.textColor = UIColor(resource: .gray700)
-        self.endDateView.deadlineTextfieldLabel.layer.borderColor = UIColor(resource: .gray700).cgColor
-        self.endDateView.dropdownButton.setImage(UIImage(resource: .enabledIcDropdown), for: .normal)
-        
-        if compareDate(userDate: date) {
-            updateSingleButtonState()
-        }
-    }
-}
-
 extension ToDoViewController: DoubleButtonDelegate {
     func tapEditButton() {
 //        DOOToast.show(message: "해당 기능은 추후 업데이트 예정이에요 :)", insetFromBottom: ScreenUtils.getHeight(107))
         let activateToDoVC = ActivateToDoViewController()
-        activateToDoVC.navigationBarTitle = "수정"
+        activateToDoVC.navigationBarTitle = StringLiterals.ToDo.edit
         if let data = self.data {
             activateToDoVC.data = GetDetailToDoResponseStuct(title: data.title, endDate: data.endDate, allocators: data.allocators, memo: data.memo, secret: data.secret)
         }

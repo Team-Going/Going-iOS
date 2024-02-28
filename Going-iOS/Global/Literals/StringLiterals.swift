@@ -85,5 +85,6 @@ enum StringLiterals {
         static let memo = "메모"
         static let addToDo = "할일 추가"
         static let inquiryToDo = "할일 조회"
+        static let editToDo = "할일 수정"
     }
 }

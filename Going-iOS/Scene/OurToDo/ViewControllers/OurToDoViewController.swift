@@ -323,20 +323,6 @@ private extension OurToDoViewController {
         self.tripMiddleView.delegate = self
     }
     
-    /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
-    func setToDoView(before: String , naviBarTitle: String, isActivate: Bool) {
-        let todoVC = ToDoViewController()
-        todoVC.navigationBarTitle = naviBarTitle
-        guard let header = headerData else { return }
-        todoVC.tripId = self.tripId
-        todoVC.beforeVC = before
-        todoVC.fromOurTodoParticipants = header.participants
-        todoVC.manager = self.allocator
-        todoVC.isActivateView = isActivate
-        todoVC.todoId = self.todoId
-        self.navigationController?.pushViewController(todoVC, animated: false)
-    }
-    
     /// 투두 없는 경우 empty view 띄워주는 메소드
     func setEmptyView() {
         if self.ourToDoData?.count != 0 {
@@ -356,7 +342,15 @@ private extension OurToDoViewController {
     
     @objc
     func pushToAddToDoView() {
-        setToDoView(before: "our" , naviBarTitle: "추가", isActivate: true)
+        let todoVC = ActivateToDoViewController()
+        todoVC.navigationBarTitle = StringLiterals.ToDo.add
+        guard let header = headerData else { return }
+        todoVC.tripId = self.tripId
+        todoVC.beforeVC = "our"
+        todoVC.fromOurTodoParticipants = header.participants
+        todoVC.manager = self.allocator
+        todoVC.todoId = self.todoId
+        self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
     @objc
@@ -451,7 +445,18 @@ extension OurToDoViewController: UICollectionViewDataSource {
         
         self.todoId = self.ourToDoData?[indexPath.row].todoId ?? 0
         self.allocator =  self.ourToDoData?[indexPath.row].allocators ?? []
-        setToDoView(before: "our", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
+        
+        /// 할일  조회 뷰에 데이터 세팅 후 이동
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = StringLiterals.ToDo.inquiry
+        guard let header = headerData else { return }
+        todoVC.tripId = self.tripId
+        todoVC.beforeVC = "our"
+        todoVC.fromOurTodoParticipants = header.participants
+        todoVC.manager = self.allocator
+        todoVC.todoId = self.todoId
+        self.navigationController?.pushViewController(todoVC, animated: false)
+
     }
 }
 

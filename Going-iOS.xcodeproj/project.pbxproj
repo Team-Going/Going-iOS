@@ -54,6 +54,7 @@
 		94C7DDBA2B4C77FF00541567 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C7DDB92B4C77FF00541567 /* SettingsItem.swift */; };
 		94C7DDBC2B4CA08800541567 /* DOONavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C7DDBB2B4CA08800541567 /* DOONavigationBar.swift */; };
 		CA0519792B53C2AC00DE4F8F /* GetCompleteToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0519782B53C2AC00DE4F8F /* GetCompleteToDoResponseDTO.swift */; };
+		CA3C47A72B8ED8F7005AA206 /* ActivateToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3C47A62B8ED8F7005AA206 /* ActivateToDoViewController.swift */; };
 		CA3EEE312B4D9A2500C23A41 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE302B4D9A2500C23A41 /* TabBarView.swift */; };
 		CA3EEE342B4E908E00C23A41 /* InviteFriendPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE332B4E908E00C23A41 /* InviteFriendPopUpViewController.swift */; };
 		CA3EEE392B4FE96E00C23A41 /* GetMyToDoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3EEE382B4FE96E00C23A41 /* GetMyToDoResponseDTO.swift */; };
@@ -235,6 +236,7 @@
 		94C7DDB92B4C77FF00541567 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 		94C7DDBB2B4CA08800541567 /* DOONavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOONavigationBar.swift; sourceTree = "<group>"; };
 		CA0519782B53C2AC00DE4F8F /* GetCompleteToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCompleteToDoResponseDTO.swift; sourceTree = "<group>"; };
+		CA3C47A62B8ED8F7005AA206 /* ActivateToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateToDoViewController.swift; sourceTree = "<group>"; };
 		CA3EEE302B4D9A2500C23A41 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		CA3EEE332B4E908E00C23A41 /* InviteFriendPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendPopUpViewController.swift; sourceTree = "<group>"; };
 		CA3EEE382B4FE96E00C23A41 /* GetMyToDoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyToDoResponseDTO.swift; sourceTree = "<group>"; };
@@ -791,6 +793,7 @@
 			isa = PBXGroup;
 			children = (
 				CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */,
+				CA3C47A62B8ED8F7005AA206 /* ActivateToDoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1424,6 +1427,7 @@
 				CAB9A15D2B60FBC700881469 /* ToDoManagerView.swift in Sources */,
 				941B1B782B50EB0C00D28EBA /* CodeResponseDTO.swift in Sources */,
 				F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */,
+				CA3C47A72B8ED8F7005AA206 /* ActivateToDoViewController.swift in Sources */,
 				94C7DDBA2B4C77FF00541567 /* SettingsItem.swift in Sources */,
 				948FBC9E2B53CF1700D9C779 /* MemberViewController.swift in Sources */,
 				9457F04C2B4853AC009ACF25 /* TravelTestViewController.swift in Sources */,
