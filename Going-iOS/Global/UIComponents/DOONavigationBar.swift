@@ -48,6 +48,13 @@ final class DOONavigationBar: UIView {
         return btn
     }()
     
+    private lazy var travelInfoButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(resource: .btnTripinfo), for: .normal)
+        btn.addTarget(self, action: #selector(pushToTravelInfoVC), for: .touchUpInside)
+        return btn
+    }()
+    
     private weak var viewController: UIViewController?
     private let type: NavigationBarType
     
@@ -80,9 +87,13 @@ private extension DOONavigationBar {
             }
             
         case .ourToDo:
-            addSubview(backButton)
+            addSubviews(backButton, travelInfoButton)
             backButton.snp.makeConstraints {
                 $0.leading.equalToSuperview().inset(10)
+                $0.centerY.equalToSuperview()
+            }
+            travelInfoButton.snp.makeConstraints {
+                $0.trailing.equalToSuperview().inset(10)
                 $0.centerY.equalToSuperview()
             }
             backButton.removeTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
@@ -146,5 +157,10 @@ private extension DOONavigationBar {
     @objc
     func saveImageButtonTapped() {
         
+    }
+    
+    @objc
+    func pushToTravelInfoVC() {
+        print("button tapped")
     }
 }
