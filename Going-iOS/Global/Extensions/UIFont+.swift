@@ -10,7 +10,7 @@ import UIKit
 enum FontName {
     case head1, head2, head3, head4
     case body1_bold, body1_medi, body2_bold, body2_medi, body3_bold, body3_medi
-    case detail1_bold, detail1_regular, detail2_bold, detail2_regular, detail3_regular
+    case detail1_bold, detail1_regular, detail2_bold, detail2_regular, detail3_regular, detail3_semi
     
     var rawValue: String {
         switch self {
@@ -20,7 +20,7 @@ enum FontName {
             return "Pretendard-Bold"
         case .head3:
             return "Pretendard-SemiBold"
-        case .head4, .body1_medi, .body2_medi, .body3_medi:
+        case .head4, .body1_medi, .body2_medi, .body3_medi, .detail3_semi:
             return "Pretendard-Medium"
         case .detail1_regular, .detail2_regular, .detail3_regular:
             return "Pretendard-Regular"
@@ -48,6 +48,8 @@ enum FontName {
         case .detail2_bold, .detail2_regular:
             return 12
         case .detail3_regular:
+            return 11
+        case .detail3_semi:
             return 11
         }
     }
