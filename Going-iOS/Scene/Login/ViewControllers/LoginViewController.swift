@@ -48,14 +48,14 @@ final class LoginViewController: UIViewController {
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.Login.loginLogo
+        imageView.image = UIImage(resource: .loginLogo)
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
     private lazy var appleLoginButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(ImageLiterals.Login.appleLoginButton, for: .normal)
+        button.setBackgroundImage(UIImage(resource: .btnApplelogin), for: .normal)
         button.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -64,7 +64,7 @@ final class LoginViewController: UIViewController {
         var config = UIButton.Configuration.filled()
         config.title = "카카오 로그인"
         config.titleAlignment = .center
-        config.image = ImageLiterals.Login.kakaoLoginButton
+        config.image = UIImage(resource: .kakaologo)
         
         config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: ScreenUtils.getWidth(92))
         
@@ -84,7 +84,7 @@ final class LoginViewController: UIViewController {
         button.setTitle(StringLiterals.Login.personalInformation, for: .normal)
         button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
-        button.setImage(ImageLiterals.Login.warningImage, for: .normal)
+        button.setImage(UIImage(resource: .icWarningMini), for: .normal)
         button.contentVerticalAlignment = .center
         button.contentHorizontalAlignment = .leading
         button.addTarget(self, action: #selector(webViewButtonTapped), for: .touchUpInside)

@@ -13,7 +13,7 @@ final class UserTestSplashViewController: UIViewController {
     
     private let userTestSplashImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.Splash.userTestSplash
+        imageView.image = UIImage(resource: .imgTestsplash)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
