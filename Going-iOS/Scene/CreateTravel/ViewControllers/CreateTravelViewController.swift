@@ -32,37 +32,15 @@ final class CreateTravelViewController: UIViewController {
         return view
     }()
     
-    private let travelNameLabel = DOOLabel(font: .pretendard(.body2_bold),
-                                           color: UIColor(resource: .gray700),
-                                           text: StringLiterals.CreateTravel.nameTitle)
+    private lazy var travelNameView: TravelNameView = {
+        let view = TravelNameView()
+        view.travelNameTextField.addTarget(self, action: #selector(travelNameTextFieldDidChange), for: .editingChanged)
+        return view
+    }()
     
     private let travelDateLabel = DOOLabel(font: .pretendard(.body2_bold),
                                            color: UIColor(resource: .gray700),
                                            text: StringLiterals.CreateTravel.dateTitle)
-    
-    private var travelNameTextFieldCount: Int = 0
-
-    private lazy var travelNameTextField: UITextField = {
-        let field = UITextField()
-        field.setLeftPadding(amount: 12)
-        field.font = .pretendard(.body3_medi)
-        field.setTextField(forPlaceholder: StringLiterals.CreateTravel.namePlaceHolder, forBorderColor: UIColor(resource: .gray200))
-        field.setPlaceholderColor(UIColor(resource: .gray200))
-        field.layer.cornerRadius = 6
-        field.textColor = UIColor(resource: .gray700)
-        field.addTarget(self, action: #selector(travelNameTextFieldDidChange), for: .editingChanged)
-        return field
-    }()
-    
-    private let characterCountLabel = DOOLabel(font: .pretendard(.detail2_regular),
-                                               color: UIColor(resource: .gray200),
-                                               text: "0/15")
-    
-    private let warningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .red500))
-        label.isHidden = true
-        return label
-    }()
     
     private let dateHorizontalStackView: UIStackView = {
         let stack = UIStackView()
@@ -134,11 +112,8 @@ private extension CreateTravelViewController {
     func setHierarchy() {
         view.addSubviews(navigationBar,
                          navigationUnderlineView,
-                         travelNameLabel,
+                         travelNameView,
                          travelDateLabel,
-                         travelNameTextField,
-                         warningLabel,
-                         characterCountLabel,
                          dateHorizontalStackView,
                          createTravelButton)
         
@@ -160,30 +135,14 @@ private extension CreateTravelViewController {
             $0.height.equalTo(1)
         }
         
-        travelNameLabel.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom).offset(40)
-            $0.leading.equalToSuperview().inset(24)
-        }
-        
-        travelNameTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(travelNameLabel.snp.bottom).offset(8)
-            $0.width.equalTo(ScreenUtils.getWidth(327))
-            $0.height.equalTo(ScreenUtils.getHeight(48))
-        }
-        
-        warningLabel.snp.makeConstraints {
-            $0.top.equalTo(travelNameTextField.snp.bottom).offset(4)
-            $0.leading.equalTo(travelNameTextField.snp.leading).offset(4)
-        }
-        
-        characterCountLabel.snp.makeConstraints {
-            $0.top.equalTo(travelNameTextField.snp.bottom).offset(4)
-            $0.trailing.equalTo(travelNameTextField.snp.trailing).offset(-4)
+        travelNameView.snp.makeConstraints {
+            $0.top.equalTo(navigationUnderlineView.snp.bottom).offset(40)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(ScreenUtils.getHeight(101))
         }
         
         travelDateLabel.snp.makeConstraints {
-            $0.top.equalTo(travelNameTextField.snp.bottom).offset(38)
+            $0.top.equalTo(travelNameView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().inset(24)
         }
         
@@ -222,7 +181,7 @@ private extension CreateTravelViewController {
     
     func setDelegate() {
         bottomSheetVC.delegate = self
-        travelNameTextField.delegate = self
+        travelNameView.travelNameTextField.delegate = self
     }
     
     /// 텍스트 필드에 들어갈 텍스트를 DateFormatter로  변환하는 메서드
@@ -242,7 +201,7 @@ private extension CreateTravelViewController {
     // MARK: - Validation Methods
     
     func updateCreateButtonState() {
-        let isTravelNameTextFieldEmpty = travelNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
+        let isTravelNameTextFieldEmpty = travelNameView.travelNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
         
         let isStartDateSet = startDateLabel.text != "시작일"
         let isEndDateSet = endDateLabel.text != "종료일"
@@ -274,32 +233,32 @@ private extension CreateTravelViewController {
     }
     
     func travelNameTextFieldCheck() {
-        guard let text = travelNameTextField.text else { return }
-        characterCountLabel.text = "\(text.count) / 15"
+        guard let text = travelNameView.travelNameTextField.text else { return }
+        travelNameView.characterCountLabel.text = "\(text.count) / 15"
         
         if text.count >  15 {
-            travelNameTextField.textColor = UIColor(resource: .red500)
-            warningLabel.isHidden = false
-            warningLabel.text = "이름은 15자 이하여야 합니다"
+            travelNameView.travelNameTextField.textColor = UIColor(resource: .red500)
+            travelNameView.warningLabel.isHidden = false
+            travelNameView.warningLabel.text = "이름은 15자 이하여야 합니다"
             isTravelNameTextFieldGood = false
         } else if text.count == 0 {
-            travelNameTextField.layer.borderColor =
+            travelNameView.travelNameTextField.layer.borderColor =
             UIColor(resource: .gray200).cgColor
-            characterCountLabel.textColor = UIColor(resource: .gray200)
-            warningLabel.isHidden = true
+            travelNameView.characterCountLabel.textColor = UIColor(resource: .gray200)
+            travelNameView.warningLabel.isHidden = true
             isTravelNameTextFieldGood = false
         } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.isTravelNameTextFieldGood = false
-            travelNameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
-            characterCountLabel.textColor = UIColor(resource: .red500)
-            warningLabel.isHidden = false
-            warningLabel.text = "이름에는 공백만 입력할 수 없어요."
+            travelNameView.travelNameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
+            travelNameView.characterCountLabel.textColor = UIColor(resource: .red500)
+            travelNameView.warningLabel.isHidden = false
+            travelNameView.warningLabel.text = "이름에는 공백만 입력할 수 없어요."
         } else {
             self.isTravelNameTextFieldGood = true
-            travelNameTextField.layer.borderColor = UIColor(resource: .gray700).cgColor
-            characterCountLabel.textColor = UIColor(resource: .gray400)
-            travelNameTextField.textColor = UIColor(resource: .gray400)
-            warningLabel.isHidden = true
+            travelNameView.travelNameTextField.layer.borderColor = UIColor(resource: .gray700).cgColor
+            travelNameView.characterCountLabel.textColor = UIColor(resource: .gray400)
+            travelNameView.travelNameTextField.textColor = UIColor(resource: .gray400)
+            travelNameView.warningLabel.isHidden = true
         }
         updateCreateButtonState()
     }
@@ -400,7 +359,7 @@ extension CreateTravelViewController: UITextFieldDelegate {
 
 extension CreateTravelViewController {
     func toDTO() {
-        guard let name = travelNameTextField.text else { return }
+        guard let name = travelNameView.travelNameTextField.text else { return }
         guard let startDate = startDateLabel.text else { return }
         guard let endDate = endDateLabel.text else { return }
         createTravelData.travelTitle = name
