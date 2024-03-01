@@ -133,7 +133,8 @@ private extension TravelInfoViewController {
     
     @objc
     func quitTravelButtonTapped() {
-        print("button tapped")
+        let vc = QuitTravelPopUpViewController()
+        self.present(vc, animated: false)
     }
     
     @objc
