@@ -46,6 +46,7 @@
 		948FBCA92B53DE0F00D9C779 /* MemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA82B53DE0F00D9C779 /* MemberService.swift */; };
 		949AD11B2B90F58000BCE8F5 /* TravelNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11A2B90F58000BCE8F5 /* TravelNameView.swift */; };
 		949AD11D2B90F58800BCE8F5 /* TravelDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11C2B90F58800BCE8F5 /* TravelDateView.swift */; };
+		949AD11F2B9238F400BCE8F5 /* TravelInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */; };
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
 		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
 		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
@@ -228,6 +229,7 @@
 		948FBCA82B53DE0F00D9C779 /* MemberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberService.swift; sourceTree = "<group>"; };
 		949AD11A2B90F58000BCE8F5 /* TravelNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelNameView.swift; sourceTree = "<group>"; };
 		949AD11C2B90F58800BCE8F5 /* TravelDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDateView.swift; sourceTree = "<group>"; };
+		949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInfoViewController.swift; sourceTree = "<group>"; };
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
 		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -584,6 +586,30 @@
 			children = (
 				948FBCA22B53D05700D9C779 /* MemberProgressView.swift */,
 				948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		949AD1152B90F50100BCE8F5 /* TravelDetail */ = {
+			isa = PBXGroup;
+			children = (
+				949AD1172B90F51200BCE8F5 /* Views */,
+				949AD1162B90F50700BCE8F5 /* ViewControllers */,
+			);
+			path = TravelDetail;
+			sourceTree = "<group>";
+		};
+		949AD1162B90F50700BCE8F5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		949AD1172B90F51200BCE8F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1200,6 +1226,7 @@
 		F4F5219A2B3467FD000E6E1E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				949AD1152B90F50100BCE8F5 /* TravelDetail */,
 				948FBC9B2B53CEFE00D9C779 /* Member */,
 				9478E5392B4EFC9E0027606D /* MyProfile */,
 				CA3EEE2E2B4D99F800C23A41 /* TabBar */,
@@ -1514,6 +1541,7 @@
 				F44D98622B4EB72300341893 /* NetworkError.swift in Sources */,
 				F4FE6BA32B50AF26009C935E /* UserProfileAppData.swift in Sources */,
 				94C7DDBC2B4CA08800541567 /* DOONavigationBar.swift in Sources */,
+				949AD11F2B9238F400BCE8F5 /* TravelInfoViewController.swift in Sources */,
 				CA3EEE442B50276500C23A41 /* GetOurToDoResponseDTO.swift in Sources */,
 				9478E53C2B4EFCB90027606D /* MyProfileViewController.swift in Sources */,
 				9452343D2B51C40D006ACC59 /* TravelQuery.swift in Sources */,

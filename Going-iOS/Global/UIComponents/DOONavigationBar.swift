@@ -161,6 +161,7 @@ private extension DOONavigationBar {
     
     @objc
     func pushToTravelInfoVC() {
-        print("button tapped")
+        let vc = TravelInfoViewController()
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }
