@@ -49,7 +49,7 @@ final class TestResultTicketView: UIView {
         return stack
     }()
     
-    let titleLabel = DOOLabel(font: .pretendard(.detail2_bold), color: UIColor(resource: .gray700), numberOfLine: 2, alignment: .center)
+    let titleLabel = DOOLabel(font: .pretendard(.detail1_bold), color: UIColor(resource: .gray700), numberOfLine: 2, alignment: .center)
     
     private let descStackView: UIStackView = {
         let stack = UIStackView()
@@ -59,9 +59,9 @@ final class TestResultTicketView: UIView {
         return stack
     }()
     
-    lazy var firstDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
-    lazy var secondDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
-    lazy var thirdDescLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
+    lazy var firstDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
+    lazy var secondDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
+    lazy var thirdDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
