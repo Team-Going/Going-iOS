@@ -30,7 +30,7 @@ final class SettingsViewController: UIViewController {
         btn.setTitle("회원탈퇴", for: .normal)
         btn.titleLabel?.font = .pretendard(.detail2_regular)
         btn.setTitleColor(UIColor(resource: .gray300), for: .normal)
-        btn.setImage(ImageLiterals.Settings.btnResign, for: .normal)
+        btn.setImage(UIImage(resource: .icUnsubscribe), for: .normal)
         btn.addTarget(self, action: #selector(deleteUserButtonTapped), for: .touchUpInside)
         btn.semanticContentAttribute = .forceRightToLeft
         return btn

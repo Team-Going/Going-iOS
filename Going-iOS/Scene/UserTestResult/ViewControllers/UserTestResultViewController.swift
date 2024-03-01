@@ -64,7 +64,7 @@ final class UserTestResultViewController: UIViewController {
     
     private lazy var saveImageButton: UIButton = {
         let button = UIButton()
-        button.setImage(ImageLiterals.NavigationBar.buttonSave, for: .normal)
+        button.setImage(UIImage(resource: .btnSave), for: .normal)
         button.addTarget(self, action: #selector(saveImageButtonTapped), for: .touchUpInside)
         return button
     }()

@@ -25,7 +25,7 @@ final class MyProfileViewController: UIViewController {
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("내 여행 프로필"))
     private lazy var saveButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(ImageLiterals.NavigationBar.buttonSave, for: .normal)
+        btn.setImage(UIImage(resource: .btnSave), for: .normal)
         btn.addTarget(self, action: #selector(saveImageButtonTapped), for: .touchUpInside)
         return btn
     }()
