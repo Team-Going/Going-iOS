@@ -19,12 +19,16 @@ final class TravelNameView: UIView {
     
     lazy var travelNameTextField: UITextField = {
         let field = UITextField()
+        if let clearButton = field.value(forKeyPath: "_clearButton") as? UIButton {
+            clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+        }
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.CreateTravel.namePlaceHolder, forBorderColor: UIColor(resource: .gray200))
         field.setPlaceholderColor(UIColor(resource: .gray200))
         field.layer.cornerRadius = 6
         field.textColor = UIColor(resource: .gray700)
+        field.clearButtonMode = UITextField.ViewMode.whileEditing
         return field
     }()
     
