@@ -38,44 +38,8 @@ final class CreateTravelViewController: UIViewController {
         return view
     }()
     
-    private let travelDateLabel = DOOLabel(font: .pretendard(.body2_bold),
-                                           color: UIColor(resource: .gray700),
-                                           text: StringLiterals.CreateTravel.dateTitle)
-    
-    private let dateHorizontalStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.distribution = .equalSpacing
-        stack.spacing = 6
-        return stack
-    }()
-    
-    private let startDateLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), 
-                             color: UIColor(resource: .gray200), 
-                             text: "시작일", 
-                             padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
-        label.layer.cornerRadius = 6
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor(resource: .gray200).cgColor
-        return label
-    }()
-    
-    private let endDateLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), 
-                             color: UIColor(resource: .gray200), 
-                             text: "종료일", 
-                             padding: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0))
-        label.layer.cornerRadius = 6
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor(resource: .gray200).cgColor
-        return label
-    }()
-    
-    private let dashLabel = DOOLabel(font: .pretendard(.detail2_regular), 
-                                     color: UIColor(resource: .gray700), 
-                                     text: "-")
-    
+    private lazy var travelDateView = TravelDateView()
+   
     private lazy var createTravelButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "다음")
         btn.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
@@ -113,13 +77,8 @@ private extension CreateTravelViewController {
         view.addSubviews(navigationBar,
                          navigationUnderlineView,
                          travelNameView,
-                         travelDateLabel,
-                         dateHorizontalStackView,
+                         travelDateView,
                          createTravelButton)
-        
-        dateHorizontalStackView.addArrangedSubviews(startDateLabel,
-                                                    dashLabel,
-                                                    endDateLabel)
     }
     
     func setLayout() {
@@ -141,24 +100,10 @@ private extension CreateTravelViewController {
             $0.height.equalTo(ScreenUtils.getHeight(101))
         }
         
-        travelDateLabel.snp.makeConstraints {
+        travelDateView.snp.makeConstraints {
             $0.top.equalTo(travelNameView.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().inset(24)
-        }
-        
-        dateHorizontalStackView.snp.makeConstraints {
-            $0.top.equalTo(travelDateLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(24)
-        }
-        
-        startDateLabel.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.getHeight(48))
-            $0.width.equalTo(ScreenUtils.getWidth(154))
-        }
-        
-        endDateLabel.snp.makeConstraints {
-            $0.height.equalTo(ScreenUtils.getHeight(48))
-            $0.width.equalTo(ScreenUtils.getWidth(154))
+            $0.height.equalTo(ScreenUtils.getHeight(79))
         }
         
         createTravelButton.snp.remakeConstraints {
@@ -171,12 +116,12 @@ private extension CreateTravelViewController {
     
     func setGestureRecognizer() {
         let startDateTapGesture = UITapGestureRecognizer(target: self, action: #selector(startDateLabelTapped))
-        startDateLabel.isUserInteractionEnabled = true
-        startDateLabel.addGestureRecognizer(startDateTapGesture)
+        travelDateView.startDateLabel.isUserInteractionEnabled = true
+        travelDateView.startDateLabel.addGestureRecognizer(startDateTapGesture)
         
         let endDateTapGesture = UITapGestureRecognizer(target: self, action: #selector(endDateLabelTapped))
-        endDateLabel.isUserInteractionEnabled = true
-        endDateLabel.addGestureRecognizer(endDateTapGesture)
+        travelDateView.endDateLabel.isUserInteractionEnabled = true
+        travelDateView.endDateLabel.addGestureRecognizer(endDateTapGesture)
     }
     
     func setDelegate() {
@@ -203,8 +148,8 @@ private extension CreateTravelViewController {
     func updateCreateButtonState() {
         let isTravelNameTextFieldEmpty = travelNameView.travelNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
         
-        let isStartDateSet = startDateLabel.text != "시작일"
-        let isEndDateSet = endDateLabel.text != "종료일"
+        let isStartDateSet = travelDateView.startDateLabel.text != "시작일"
+        let isEndDateSet = travelDateView.endDateLabel.text != "종료일"
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
@@ -212,8 +157,8 @@ private extension CreateTravelViewController {
         var isDateValid = true
         var isEndDateNotPast = true
         
-        if let startDateText = startDateLabel.text?.trimmingCharacters(in: .whitespaces),
-           let endDateText = endDateLabel.text?.trimmingCharacters(in: .whitespaces),
+        if let startDateText = travelDateView.startDateLabel.text?.trimmingCharacters(in: .whitespaces),
+           let endDateText = travelDateView.endDateLabel.text?.trimmingCharacters(in: .whitespaces),
            let startDate = dateFormatter.date(from: startDateText),
            let endDate = dateFormatter.date(from: endDateText) {
             isDateValid = startDate <= endDate
@@ -267,14 +212,14 @@ private extension CreateTravelViewController {
     
     @objc
     func startDateLabelTapped() {
-        activeLabel = startDateLabel
-        showDatePicker(for: startDateLabel)
+        activeLabel = travelDateView.startDateLabel
+        showDatePicker(for: travelDateView.startDateLabel)
     }
     
     @objc
     func endDateLabelTapped() {
-        activeLabel = endDateLabel
-        showDatePicker(for: endDateLabel)
+        activeLabel = travelDateView.endDateLabel
+        showDatePicker(for: travelDateView.endDateLabel)
     }
     
     @objc
@@ -298,18 +243,18 @@ extension CreateTravelViewController: BottomSheetDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
-        if activeLabel == startDateLabel {
-            startDateLabel.text = formattedDate
+        if activeLabel == travelDateView.startDateLabel {
+            travelDateView.startDateLabel.text = formattedDate
             // endDate가 설정되어 있고 startDate가 endDate보다 뒤에 있는지 확인
-            if let endDateText = endDateLabel.text,
+            if let endDateText = travelDateView.endDateLabel.text,
                let endDate = dateFormatter.date(from: endDateText),
                date > endDate {
                 DOOToast.show(message: "여행 종료일보다 여행 시작일이 빨라요!", insetFromBottom: ScreenUtils.getHeight(374))
             }
-        } else if activeLabel == endDateLabel {
-            endDateLabel.text = formattedDate
+        } else if activeLabel == travelDateView.endDateLabel {
+            travelDateView.endDateLabel.text = formattedDate
             // startDate가 설정되어 있고 endDate가 startDate보다 앞에 있는지 확인
-            if let startDateText = startDateLabel.text,
+            if let startDateText = travelDateView.startDateLabel.text,
                let startDate = dateFormatter.date(from: startDateText),
                date < startDate {
                 DOOToast.show(message: "여행 종료일보다 여행 시작일이 빨라요!", insetFromBottom: ScreenUtils.getHeight(374))
@@ -360,8 +305,8 @@ extension CreateTravelViewController: UITextFieldDelegate {
 extension CreateTravelViewController {
     func toDTO() {
         guard let name = travelNameView.travelNameTextField.text else { return }
-        guard let startDate = startDateLabel.text else { return }
-        guard let endDate = endDateLabel.text else { return }
+        guard let startDate = travelDateView.startDateLabel.text else { return }
+        guard let endDate = travelDateView.endDateLabel.text else { return }
         createTravelData.travelTitle = name
         createTravelData.startDate = startDate
         createTravelData.endDate = endDate
