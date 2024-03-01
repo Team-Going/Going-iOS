@@ -66,8 +66,8 @@ final class UserTestSplashViewController: UIViewController {
 private extension UserTestSplashViewController {
     func hideTabbar() {
         self.navigationController?.tabBarController?.tabBar.isHidden = true
-
     }
+    
     func setHierarchy() {
         view.addSubviews(userTestSplashImageView, titleLabel, subTitleLabel, skipButton, nextButton)
     }
@@ -90,7 +90,7 @@ private extension UserTestSplashViewController {
         }
         
         skipButton.snp.makeConstraints {
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(182)
+            $0.bottom.equalTo(nextButton.snp.top).offset(-20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(ScreenUtils.getWidth(78))
         }
