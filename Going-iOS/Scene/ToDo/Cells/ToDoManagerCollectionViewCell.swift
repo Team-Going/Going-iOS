@@ -28,7 +28,7 @@ final class ToDoManagerCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         setLayout()
     }
     
@@ -42,7 +42,7 @@ final class ToDoManagerCollectionViewCell: UICollectionViewCell {
 
 private extension ToDoManagerCollectionViewCell {
     
-    func setHierachy() {
+    func setHierarchy() {
         contentView.addSubview(managerButton)
     }
     

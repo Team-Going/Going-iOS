@@ -12,6 +12,8 @@ import Photos
 
 final class MyProfileViewController: UIViewController {
     
+    // MARK: - Properties
+    
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
@@ -22,13 +24,17 @@ final class MyProfileViewController: UIViewController {
     
     private var testResultIndex: Int?
     
+    // MARK: - UI Properties
+    
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("내 여행 프로필"))
+    
     private lazy var saveButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(resource: .btnSave), for: .normal)
         btn.addTarget(self, action: #selector(saveImageButtonTapped), for: .touchUpInside)
         return btn
     }()
+    
     private let naviUnderLineView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(resource: .gray100)
@@ -73,6 +79,8 @@ final class MyProfileViewController: UIViewController {
         return view
     }()
     
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,12 +96,13 @@ final class MyProfileViewController: UIViewController {
     }
 }
 
+// MARK: - Private Methods
+
 private extension MyProfileViewController {
-    
     func hideTabbar() {
         self.navigationController?.tabBarController?.tabBar.isHidden = true
-
     }
+    
     func setDelegate() {
         myResultView.delegate = self
     }
@@ -104,8 +113,12 @@ private extension MyProfileViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar, saveButton, naviUnderLineView, myProfileScrollView)
+        view.addSubviews(navigationBar, 
+                         naviUnderLineView, 
+                         myProfileScrollView)
+        
         navigationBar.addSubview(saveButton)
+        
         myProfileScrollView.addSubviews(contentView)
         contentView.addSubviews(profileImageView,
                                 nickNameLabel,
@@ -175,7 +188,6 @@ private extension MyProfileViewController {
     }
     
     func saveImage() {
-        
         guard let saveImage = testResultData?.phoneSaveImage else {
             DOOToast.show(message: "이미지 저장 오류", insetFromBottom: 80)
             return
@@ -200,6 +212,8 @@ private extension MyProfileViewController {
             self.present(alert, animated: true)
         }
     }
+    
+    // MARK: - @objc methods
     
     @objc
     func saveImageButtonTapped() {
@@ -237,7 +251,7 @@ extension MyProfileViewController: CheckPhotoAccessProtocol {
 
 extension MyProfileViewController {
     func getUserProfile() {
-        Task{
+        Task {
             do {
                 let profileData = try await TravelService.shared.getProfileInfo()
                 self.testResultIndex = profileData.result
@@ -283,6 +297,7 @@ extension MyProfileViewController {
         }
     }
 }
+
 extension MyProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let nextVC = UserTestSplashViewController()

@@ -42,7 +42,7 @@ final class DoubleButtonView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         setLayout()
         
     }
@@ -57,7 +57,7 @@ final class DoubleButtonView: UIView {
 
 private extension DoubleButtonView {
     
-    func setHierachy() {
+    func setHierarchy() {
         self.addSubview(backgroundStackView)
         backgroundStackView.addArrangedSubviews(button1, button2)
     }

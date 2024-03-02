@@ -53,6 +53,7 @@ final class UserTestSplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setHierarchy()
         setLayout()
         setStyle()
@@ -73,7 +74,6 @@ private extension UserTestSplashViewController {
     }
     
     func setLayout() {
-        
         userTestSplashImageView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(202)
             $0.centerX.equalToSuperview()

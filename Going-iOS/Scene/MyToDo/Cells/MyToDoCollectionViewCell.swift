@@ -97,7 +97,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setHierachy()
+        setHierarchy()
         registerCell()
         setLayout()
         setDelegate()
@@ -120,7 +120,7 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
 
 private extension MyToDoCollectionViewCell {
     
-    func setHierachy() {
+    func setHierarchy() {
         contentView.addSubview(todoBackgroundView)
         todoBackgroundView.addSubviews(
             checkButton,
