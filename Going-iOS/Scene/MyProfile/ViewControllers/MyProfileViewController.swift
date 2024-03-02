@@ -17,7 +17,8 @@ final class MyProfileViewController: UIViewController {
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
-            self.profileImageView.image = data.profileImage
+            self.myProfileTopView.profileImageView.image = data.profileImage
+            self.resultImageView.image = data.typeImage
             self.myResultView.resultViewData = data
         }
     }
@@ -48,25 +49,16 @@ final class MyProfileViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
+    
     private let contentView = UIView()
     
-    private let profileImageView: UIImageView = {
-        let img = UIImageView()
-        img.contentMode = .scaleAspectFit
-        img.layer.cornerRadius = 55
-        img.clipsToBounds = true
-        img.layer.borderColor = UIColor(resource: .gray100).cgColor
-        img.layer.borderWidth = 1
-        return img
-    }()
+    private let myProfileTopView = MyProfileTopView()
     
-    private let nickNameLabel = DOOLabel(font: .pretendard(.head2), color: UIColor(resource: .red500))
-    private var descriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: UIColor(resource: .gray500))
-    
-    private let dividingBarView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(resource: .gray50)
-        return view
+    private let resultImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = UIColor(resource: .white000)
+        return imageView
     }()
         
     private let myResultView: TestResultView = {
@@ -110,6 +102,7 @@ private extension MyProfileViewController {
     func setStyle() {
         contentView.backgroundColor = UIColor(resource: .white000)
         view.backgroundColor = UIColor(resource: .white000)
+        self.myProfileScrollView.showsVerticalScrollIndicator = false
     }
     
     func setHierarchy() {
@@ -120,10 +113,9 @@ private extension MyProfileViewController {
         navigationBar.addSubview(saveButton)
         
         myProfileScrollView.addSubviews(contentView)
-        contentView.addSubviews(profileImageView,
-                                nickNameLabel,
-                                descriptionLabel,
-                                dividingBarView,
+        
+        contentView.addSubviews(myProfileTopView, 
+                                resultImageView,
                                 myResultView)
     }
     
@@ -147,8 +139,7 @@ private extension MyProfileViewController {
         
         myProfileScrollView.snp.makeConstraints {
             $0.top.equalTo(naviUnderLineView.snp.bottom)
-            $0.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
@@ -156,32 +147,21 @@ private extension MyProfileViewController {
             $0.width.equalTo(myProfileScrollView.frameLayoutGuide)
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
-        
-        profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(36)
-            $0.centerX.equalToSuperview()
-            $0.size.equalTo(ScreenUtils.getWidth(110))
-        }
-        
-        nickNameLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(profileImageView.snp.bottom).offset(12)
-            $0.height.equalTo(ScreenUtils.getHeight(33))
-        }
-        
-        descriptionLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(nickNameLabel.snp.bottom).offset(4)
-        }
-        
-        dividingBarView.snp.makeConstraints {
-            $0.bottom.equalTo(myResultView.snp.top)
+
+        myProfileTopView.snp.makeConstraints {
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(8))
+            $0.height.equalTo(ScreenUtils.getHeight(109))
+        }
+        
+        resultImageView.snp.makeConstraints {
+            $0.top.equalTo(myProfileTopView.snp.bottom)
+            $0.height.equalTo(228)
+            $0.width.equalTo(Constant.Screen.width)
         }
         
         myResultView.snp.makeConstraints {
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(32)
+            $0.top.equalTo(resultImageView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(contentView.snp.bottom)
         }
@@ -255,8 +235,8 @@ extension MyProfileViewController {
             do {
                 let profileData = try await TravelService.shared.getProfileInfo()
                 self.testResultIndex = profileData.result
-                self.descriptionLabel.text = profileData.intro
-                self.nickNameLabel.text = profileData.name
+                self.myProfileTopView.userDescriptionLabel.text = profileData.intro
+                self.myProfileTopView.userNameLabel.text = profileData.name
                 
                 guard let index = testResultIndex else { return }
                 self.testResultData = UserTypeTestResultAppData.dummy()[index]
