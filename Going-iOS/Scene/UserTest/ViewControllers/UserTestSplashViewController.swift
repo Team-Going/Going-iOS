@@ -11,6 +11,8 @@ import SnapKit
 
 final class UserTestSplashViewController: UIViewController {
     
+    var beforeVC: String = ""
+    
     private let userTestSplashImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(resource: .imgTestsplash)
@@ -33,7 +35,11 @@ final class UserTestSplashViewController: UIViewController {
     
     private lazy var skipButton: UIButton = {
         let button = UIButton()
-        button.setTitle("테스트 건너뛰기", for: .normal)
+        if beforeVC == "myProfile" {
+            button.setTitle("내 여행 프로필로 돌아가기", for: .normal)
+        } else {
+            button.setTitle("테스트 건너뛰기", for: .normal)
+        }
         button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
         button.setUnderline()
@@ -92,7 +98,6 @@ private extension UserTestSplashViewController {
         skipButton.snp.makeConstraints {
             $0.bottom.equalTo(nextButton.snp.top).offset(-20)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.getWidth(78))
         }
         
         nextButton.snp.makeConstraints {
@@ -106,13 +111,20 @@ private extension UserTestSplashViewController {
         view.backgroundColor = UIColor(resource: .white000)
     }
     
-    @objc func nextButtonTapped() {
+    @objc 
+    func nextButtonTapped() {
         let nextVC = UserTestViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc func skipButtonTapped() {
-        let nextVC = DashBoardViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+    @objc 
+    func skipButtonTapped() {
+        if beforeVC == "myProfile" {
+            let nextVC = MyProfileWithTravelTestViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            let nextVC = DashBoardViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }
