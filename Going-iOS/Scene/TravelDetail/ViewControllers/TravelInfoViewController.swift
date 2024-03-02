@@ -139,6 +139,7 @@ private extension TravelInfoViewController {
     
     @objc
     func editTravelButtonTapped() {
-        print("button tapped")
+        let vc = EditTravelViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
