@@ -218,7 +218,7 @@ extension JoinTravelViewController: ViewControllerServiceable {
                 warningLabel.isHidden = false
                 codeTextField.layer.borderColor = UIColor(resource: .red500).cgColor
                 characterCountLabel.textColor = UIColor(resource: .red500)
-                
+                HapticService.notification(.error).run()
             } else {
                 DOOToast.show(message: message, insetFromBottom: 80)
             }

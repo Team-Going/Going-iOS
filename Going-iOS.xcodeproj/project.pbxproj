@@ -49,6 +49,7 @@
 		949AD11F2B9238F400BCE8F5 /* TravelInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */; };
 		949AD1212B92450400BCE8F5 /* QuitTravelPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD1202B92450400BCE8F5 /* QuitTravelPopUpViewController.swift */; };
 		949AD1232B93381000BCE8F5 /* EditTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD1222B93381000BCE8F5 /* EditTravelViewController.swift */; };
+		94B50B722B933EFF00C709F6 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B712B933EFF00C709F6 /* HapticService.swift */; };
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
 		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
 		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
@@ -234,6 +235,7 @@
 		949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInfoViewController.swift; sourceTree = "<group>"; };
 		949AD1202B92450400BCE8F5 /* QuitTravelPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitTravelPopUpViewController.swift; sourceTree = "<group>"; };
 		949AD1222B93381000BCE8F5 /* EditTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTravelViewController.swift; sourceTree = "<group>"; };
+		94B50B712B933EFF00C709F6 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
 		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -984,6 +986,7 @@
 			isa = PBXGroup;
 			children = (
 				F4BA26F92B47198D00975CC2 /* ScreenUtils.swift */,
+				94B50B712B933EFF00C709F6 /* HapticService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1483,6 +1486,7 @@
 				F4F521B42B3484B4000E6E1E /* Config.swift in Sources */,
 				F44461102B4DD2BF00674D74 /* String+.swift in Sources */,
 				948FBCA72B53D12600D9C779 /* MemberResponseStruct.swift in Sources */,
+				94B50B722B933EFF00C709F6 /* HapticService.swift in Sources */,
 				F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */,
 				CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */,
 				CA3EEE552B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift in Sources */,
