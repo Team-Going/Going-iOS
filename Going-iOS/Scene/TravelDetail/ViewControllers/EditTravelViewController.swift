@@ -28,7 +28,7 @@ final class EditTravelViewController: UIViewController {
     private lazy var travelDateView = TravelDateView()
 
     private lazy var saveButton: DOOButton = {
-        let btn = DOOButton(type: .enabled, title: "저장하기")
+        let btn = DOOButton(type: .unabled, title: "저장하기")
         btn.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return btn
     }()
