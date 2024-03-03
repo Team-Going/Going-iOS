@@ -93,7 +93,6 @@ final class ToDoViewController: UIViewController {
     var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
-//            print("data \(data)")
             self.todoTextFieldView.todoTextfield.text = data.title
             self.endDateView.deadlineTextfieldLabel.text = data.endDate
             self.todoManagerView.allocators = data.allocators
@@ -102,8 +101,8 @@ final class ToDoViewController: UIViewController {
                 self.todoManagerView.allocators[0].name = "혼자할일"
                 self.todoManagerView.allocators.append(Allocators.EmptyData)
             }
-            if navigationBarTitle == "조회" {
-                navigationBarView.titleLabel.text = "할일 조회"
+            if navigationBarTitle == StringLiterals.ToDo.inquiry {
+                navigationBarView.titleLabel.text = StringLiterals.ToDo.inquiryToDo
                 setDefaultValue = [data.title, data.endDate, self.todoManagerView.allocators, data.memo ?? ""]
                 setInquiryStyle()
             }
@@ -286,6 +285,7 @@ extension ToDoViewController: DoubleButtonDelegate {
         if let data = self.data {
             activateToDoVC.data = GetDetailToDoResponseStuct(title: data.title, endDate: data.endDate, allocators: data.allocators, memo: data.memo, secret: data.secret)
         }
+        activateToDoVC.fromOurTodoParticipants = self.fromOurTodoParticipants
         self.navigationController?.pushViewController(activateToDoVC, animated: false)
         
     }

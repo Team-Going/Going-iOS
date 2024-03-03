@@ -112,14 +112,18 @@ extension ToDoManagerView: UICollectionViewDataSource{
         // 마이투두 - 할일추가 - 1로 픽스
         
         if beforeVC == "our" {
-            if navigationBarTitle == "추가" {
+            if navigationBarTitle == StringLiterals.ToDo.inquiry {
+                return self.allocators.count
+            } else {
+                return self.fromOurTodoParticipants.count
+            }
+        }
+        else {
+            if navigationBarTitle == StringLiterals.ToDo.edit {
                 return self.fromOurTodoParticipants.count
             } else {
                 return self.allocators.count
             }
-        }
-        else {
-            return self.allocators.count
         }
     }
     
@@ -130,26 +134,31 @@ extension ToDoManagerView: UICollectionViewDataSource{
         
         var name = ""
         if beforeVC == "our" {
-            if navigationBarTitle == "추가" {
+            if navigationBarTitle == StringLiterals.ToDo.inquiry {
+                name = allocators[indexPath.row].name
+            } else {
+                name = fromOurTodoParticipants[indexPath.row].name
+            }
+        } else {
+            if navigationBarTitle == StringLiterals.ToDo.edit {
                 name = fromOurTodoParticipants[indexPath.row].name
             } else {
                 name = allocators[indexPath.row].name
             }
-        } else {
-            name = allocators[indexPath.row].name
         }
         
         managerCell.managerButton.isEnabled = true
         managerCell.managerButton.setTitle(name, for: .normal)
         managerCell.managerButton.tag = indexPath.row
         managerCell.managerButton.addTarget(self, action: #selector(didTapToDoManagerButton(_:)), for: .touchUpInside)
+        
         //아워투두 -> 조회
         //다 선택된 옵션
         //마이투두 -> 조회
         //혼자할일 + 라벨
         //아워투두
         if beforeVC == "our" {
-            managerCell.managerButton.isSelected = self.navigationBarTitle == StringLiterals.ToDo.inquiry ? true : false
+            managerCell.managerButton.isSelected = self.navigationBarTitle == StringLiterals.ToDo.add ? false : true
 
             // 추가
             if self.navigationBarTitle == StringLiterals.ToDo.add {

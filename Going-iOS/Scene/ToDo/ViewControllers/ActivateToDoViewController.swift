@@ -96,17 +96,19 @@ final class ActivateToDoViewController: UIViewController {
     var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
-            print("data \(data)")
             self.todoTextFieldView.todoTextfield.text = data.title
             self.endDateView.deadlineTextfieldLabel.text = data.endDate
-            self.todoManagerView.allocators = data.allocators
             self.todoManagerView.isSecret = data.secret
             if data.secret == true {
                 self.todoManagerView.allocators[0].name = "혼자할일"
                 self.todoManagerView.allocators.append(Allocators.EmptyData)
             }
             if navigationBarTitle == StringLiterals.ToDo.edit {
-                setInquiryStyle()
+                self.todoManagerView.fromOurTodoParticipants = self.fromOurTodoParticipants
+                setDefaultValue = [data.title, data.endDate, self.todoManagerView.allocators, data.memo ?? ""]
+                setEditViewStyle()
+            } else {
+                self.todoManagerView.allocators = data.allocators
             }
             self.memoTextView.memoTextView.text = data.memo
             
@@ -344,8 +346,8 @@ private extension ActivateToDoViewController {
         navigationBarView.delegate = self
     }
     
-    // 조회 뷰 스타일 세팅 메서드
-    func setInquiryStyle() {
+    // 수정 뷰 스타일 세팅 메서드
+    func setEditViewStyle() {
         self.todoTextFieldView.setInquiryTextFieldStyle()
         self.endDateView.setInquiryEndDateStyle()
         self.memoTextView.setInquiryMemoStyle()
@@ -525,17 +527,6 @@ extension ActivateToDoViewController: ViewControllerServiceable {
 }
 
 extension ActivateToDoViewController {
-    func getDetailToDoDatas(todoId: Int) {
-        Task {
-            do {
-                self.data = try await ToDoService.shared.getDetailToDoData(todoId: todoId)
-            }
-            catch {
-                guard let error = error as? NetworkError else { return }
-                handleError(error)
-            }
-        }
-    }
     
     func postToDoData() {
         Task {

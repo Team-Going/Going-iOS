@@ -89,6 +89,8 @@ final class OurToDoViewController: UIViewController {
     
     var allocator: [Allocators] = []
     
+    var allParticipants: [Participant] = []
+    
     var initializeCode: Bool = false
     
     var progress: String = "incomplete"
@@ -142,7 +144,7 @@ final class OurToDoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        hideTabbar()
+        showTabBar()
         getOurToDoHeaderData()
         getToDoData(progress: self.progress)
         setGradient()
@@ -164,7 +166,7 @@ private extension OurToDoViewController {
             secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
             axis: .horizontal)
     }
-    func hideTabbar() {
+    func showTabBar() {
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = UIColor(resource: .gray50)
