@@ -157,6 +157,8 @@ extension ToDoManagerView: UICollectionViewDataSource{
         //마이투두 -> 조회
         //혼자할일 + 라벨
         //아워투두
+        
+        print("todomanager \(allocators)")
         if beforeVC == "our" {
             managerCell.managerButton.isSelected = self.navigationBarTitle == StringLiterals.ToDo.add ? false : true
 
@@ -168,12 +170,40 @@ extension ToDoManagerView: UICollectionViewDataSource{
             } else {
                 //조회 & 수정
                 managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
-                if allocators[indexPath.row].isOwner {
-                    managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
-                    managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
+                //수정
+                if self.navigationBarTitle == StringLiterals.ToDo.edit {
+                    for i in allocators {
+                        //담당자로 배정되어 있는 경우
+                        if self.fromOurTodoParticipants[indexPath.row].name == i.name {
+                            //담당자이면서 owner인 경우
+                            if i.isOwner {
+                                managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
+                                managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
+                                managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
+                            }
+                            //담당자이면서 owner가 아닌 경우
+                            else {
+                                managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
+                                managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
+                                managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
+                            }
+                            break
+                        }
+                        //담당자로 배정되어 있지 않은 경우
+                        else {
+                            managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                            managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
+                            managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
+                        }
+                    }
                 } else {
-                    managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
-                    managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
+                    if allocators[indexPath.row].isOwner {
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
+                    } else {
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
+                    }
                 }
             }
         }// 마이투두

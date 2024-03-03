@@ -87,25 +87,27 @@ final class ActivateToDoViewController: UIViewController {
         }
     }
     
-    lazy var manager: [Allocators] = [] {
+    lazy var allocator: [Allocators] = [] {
         didSet {
-            self.todoManagerView.allocators = manager
+            self.todoManagerView.allocators = allocator
         }
     }
     
     var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
+            print("todo \(data)")
             self.todoTextFieldView.todoTextfield.text = data.title
             self.endDateView.deadlineTextfieldLabel.text = data.endDate
             self.todoManagerView.isSecret = data.secret
             if data.secret == true {
-                self.todoManagerView.allocators[0].name = "혼자할일"
+//                self.todoManagerView.allocators[0].name = "혼자할일"
+                self.todoManagerView.allocators.append(Allocators(name: "혼자할일", isOwner: true))
                 self.todoManagerView.allocators.append(Allocators.EmptyData)
             }
             if navigationBarTitle == StringLiterals.ToDo.edit {
                 self.todoManagerView.fromOurTodoParticipants = self.fromOurTodoParticipants
-                setDefaultValue = [data.title, data.endDate, self.todoManagerView.allocators, data.memo ?? ""]
+                setDefaultValue = [data.title, data.endDate, data.allocators, data.memo ?? ""]
                 setEditViewStyle()
             } else {
                 self.todoManagerView.allocators = data.allocators
@@ -125,6 +127,7 @@ final class ActivateToDoViewController: UIViewController {
             self.todoManagerView.allocators = value[2] as? [Allocators] ?? []
             self.memoTextView.memoTextviewPlaceholder = value[3] as? String ?? ""
             self.memoTextView.memoTextView.text = value[3] as? String ?? ""
+            print("setdefault \(self.todoManagerView.allocators)")
         }
     }
     

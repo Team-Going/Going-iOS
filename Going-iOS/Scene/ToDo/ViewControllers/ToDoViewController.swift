@@ -83,12 +83,12 @@ final class ToDoViewController: UIViewController {
             self.todoManagerView.fromOurTodoParticipants = fromOurTodoParticipants
         }
     }
-    
-    lazy var manager: [Allocators] = [] {
-        didSet {
-            self.todoManagerView.allocators = manager
-        }
-    }
+//    
+//    lazy var allocator: [Allocators] = [] {
+//        didSet {
+//            self.todoManagerView.allocators = allocator
+//        }
+//    }
     
     var data: GetDetailToDoResponseStuct? {
         didSet {
@@ -282,6 +282,7 @@ extension ToDoViewController: DoubleButtonDelegate {
 //        DOOToast.show(message: "해당 기능은 추후 업데이트 예정이에요 :)", insetFromBottom: ScreenUtils.getHeight(107))
         let activateToDoVC = ActivateToDoViewController()
         activateToDoVC.navigationBarTitle = StringLiterals.ToDo.edit
+        activateToDoVC.beforeVC = self.beforeVC
         if let data = self.data {
             activateToDoVC.data = GetDetailToDoResponseStuct(title: data.title, endDate: data.endDate, allocators: data.allocators, memo: data.memo, secret: data.secret)
         }
@@ -317,6 +318,7 @@ extension ToDoViewController {
         Task {
             do {
                 self.data = try await ToDoService.shared.getDetailToDoData(todoId: todoId)
+                print("detail \(self.data)")
             }
             catch {
                 guard let error = error as? NetworkError else { return }

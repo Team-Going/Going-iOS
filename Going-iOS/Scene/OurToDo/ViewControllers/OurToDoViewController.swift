@@ -350,7 +350,7 @@ private extension OurToDoViewController {
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
         todoVC.fromOurTodoParticipants = header.participants
-        todoVC.manager = self.allocator
+        todoVC.allocator = self.allocator
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
@@ -449,13 +449,15 @@ extension OurToDoViewController: UICollectionViewDataSource {
         self.allocator =  self.ourToDoData?[indexPath.row].allocators ?? []
         
         /// 할일  조회 뷰에 데이터 세팅 후 이동
+        /// fromOurTodoParticipants -> 전체 참여자
+        /// manager -> 투두 배정자
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = StringLiterals.ToDo.inquiry
         guard let header = headerData else { return }
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
         todoVC.fromOurTodoParticipants = header.participants
-        todoVC.manager = self.allocator
+//        todoVC.allocator = self.allocator
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
 
@@ -523,6 +525,7 @@ extension OurToDoViewController {
         Task {
             do {
                 self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: tripId, category: "our", progress: progress)
+                print(self.ourToDoData)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
