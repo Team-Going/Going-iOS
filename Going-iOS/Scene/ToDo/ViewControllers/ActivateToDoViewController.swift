@@ -70,9 +70,6 @@ final class ActivateToDoViewController: UIViewController {
     lazy var beforeVC: String = "" {
         didSet {
             self.todoManagerView.beforeVC = beforeVC
-            if navigationBarTitle == StringLiterals.ToDo.add && beforeVC == "my" {
-                self.todoManagerView.allocators = [Allocators(name: "혼자할일", isOwner: true), Allocators.EmptyData]
-            }
         }
     }
     
@@ -89,13 +86,12 @@ final class ActivateToDoViewController: UIViewController {
         }
     }
     
-    lazy var allocator: [Allocators] = [] {
-        didSet {
-            self.todoManagerView.allocators = allocator
-        }
-    }
+//    lazy var allocator: [Allocators] = [] {
+//        didSet {
+//            self.todoManagerView.allocators = allocator
+//        }
+//    }
     
-    //할일 조회에서 넘어온 데이터
     var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
@@ -103,18 +99,13 @@ final class ActivateToDoViewController: UIViewController {
             self.todoTextFieldView.todoTextfield.text = data.title
             self.endDateView.deadlineTextfieldLabel.text = data.endDate
             self.todoManagerView.isSecret = data.secret
-
+            self.todoManagerView.allParticipants = data.allocators
+            
             if navigationBarTitle == StringLiterals.ToDo.edit {
-                self.todoManagerView.fromOurTodoParticipants = self.fromOurTodoParticipants
-                self.todoManagerView.allocators = data.allocators
+//                self.todoManagerView.fromOurTodoParticipants = self.fromOurTodoParticipants
+//                self.todoManagerView.allParticipants = data.allocators
                 setDefaultValue = [data.title, data.endDate, data.allocators, data.memo ?? ""]
                 setEditViewStyle()
-            } else {
-                if data.secret == true {
-                    self.todoManagerView.allocators = [Allocators(name: "혼자할일", isOwner: true), Allocators.EmptyData]
-                } else {
-                    self.todoManagerView.allocators = data.allocators
-                }
             }
             self.memoTextView.memoTextView.text = data.memo
             
@@ -135,9 +126,7 @@ final class ActivateToDoViewController: UIViewController {
                 self.memoTextView.memoTextView.text = value[3] as? String ?? ""
             }
             self.endDateView.deadlineTextfieldLabel.text = value[1] as? String
-            self.todoManagerView.allocators = value[2] as? [Allocators] ?? []
-
-            print("setdefault \(self.todoManagerView.allocators)")
+            self.todoManagerView.allParticipants = value[2] as? [DetailAllocators] ?? []
         }
     }
     
@@ -181,7 +170,7 @@ final class ActivateToDoViewController: UIViewController {
     func setInfo() {
         if navigationBarTitle == StringLiterals.ToDo.add {
             navigationBarView.titleLabel.text = StringLiterals.ToDo.addToDo
-            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.todoManagerView.allocators, "메모를 입력해 주세요"]
+            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.todoManagerView.allParticipants, "메모를 입력해 주세요"]
         }
 
     }
@@ -199,6 +188,7 @@ final class ActivateToDoViewController: UIViewController {
         switch navigationBarTitle {
         case StringLiterals.ToDo.edit:
             navigationBarView.titleLabel.text = StringLiterals.ToDo.editToDo
+            self.getDetailToDoDatas(tripId: self.tripId, todoId: self.todoId)
         case StringLiterals.ToDo.add:
             navigationBarView.titleLabel.text = StringLiterals.ToDo.addToDo
         default:
@@ -500,7 +490,9 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
         if !todo.isEmpty && !deadline.isEmpty {
             if !buttonIndex.isEmpty {
                 for i in buttonIndex {
-                    idSet.append(self.todoManagerView.fromOurTodoParticipants[i].participantId)
+//                    idSet.append(self.todoManagerView.fromOurTodoParticipants[i].participantId)
+                    idSet.append(self.todoManagerView.allocators[i].participantID)
+
                 }
             }
             if beforeVC == "my" && navigationBarTitle == StringLiterals.ToDo.add {
@@ -519,7 +511,6 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
                 self.navigationController?.popToRootViewController(animated: false)
                 print("save: \(self.saveToDoData)")
                 DOOToast.show(message: "할일을 수정했어요", insetFromBottom: ScreenUtils.getHeight(106))
-
             }
         }
     }
@@ -545,6 +536,17 @@ extension ActivateToDoViewController: ViewControllerServiceable {
 }
 
 extension ActivateToDoViewController {
+    func getDetailToDoDatas(tripId: Int, todoId: Int) {
+        Task {
+            do {
+                self.data = try await ToDoService.shared.getDetailToDoData(tripId: tripId, todoId: todoId)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
     
     func postToDoData() {
         Task {

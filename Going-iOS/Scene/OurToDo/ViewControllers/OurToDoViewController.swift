@@ -350,7 +350,7 @@ private extension OurToDoViewController {
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
         todoVC.fromOurTodoParticipants = header.participants
-        todoVC.allocator = self.allocator
+//        todoVC.allocator = self.allocator
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
@@ -456,7 +456,7 @@ extension OurToDoViewController: UICollectionViewDataSource {
         guard let header = headerData else { return }
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
-        todoVC.fromOurTodoParticipants = header.participants
+//        todoVC.fromOurTodoParticipants = header.participants
 //        todoVC.allocator = self.allocator
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)

@@ -66,9 +66,6 @@ final class ToDoViewController: UIViewController {
     lazy var beforeVC: String = "" {
         didSet {
             self.todoManagerView.beforeVC = beforeVC
-            if navigationBarTitle == "추가" && beforeVC == "my" {
-                self.todoManagerView.allocators = [.init(name: "혼자할일", isOwner: true)]
-            }
         }
     }
     
@@ -79,31 +76,23 @@ final class ToDoViewController: UIViewController {
         }
     }
     
-    lazy var fromOurTodoParticipants: [Participant] = [] {
-        didSet {
-            self.todoManagerView.fromOurTodoParticipants = fromOurTodoParticipants
-        }
-    }
-//    
-//    lazy var allocator: [Allocators] = [] {
-//        didSet {
-//            self.todoManagerView.allocators = allocator
-//        }
-//    }
-    
     var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
             self.todoTextFieldView.todoTextfield.text = data.title
             self.endDateView.deadlineTextfieldLabel.text = data.endDate
             self.todoManagerView.isSecret = data.secret
-            if data.secret == true {
-                self.todoManagerView.allocators = [Allocators(name: "혼자할일", isOwner: true), Allocators.EmptyData]
+            self.todoManagerView.allParticipants = data.allocators
+
+            navigationBarView.titleLabel.text = StringLiterals.ToDo.inquiryToDo
+            
+            if data.secret ||
+                (self.beforeVC == "my" && self.navigationBarTitle == StringLiterals.ToDo.add) {
+                self.todoManagerView.allocators = [DetailAllocators.SecretData, DetailAllocators.SecretInfoData]
             } else {
                 self.todoManagerView.allocators = data.allocators
             }
-            navigationBarView.titleLabel.text = StringLiterals.ToDo.inquiryToDo
-            setDefaultValue = [data.title, data.endDate, self.todoManagerView.allocators, data.memo ?? ""]
+            setDefaultValue = [data.title, data.endDate, data.memo ?? ""]
             setInquiryStyle()
             self.memoTextView.memoTextView.text = data.memo
             
@@ -117,9 +106,9 @@ final class ToDoViewController: UIViewController {
             self.todoTextFieldView.todoTextfieldPlaceholder = value[0] as? String ?? ""
             self.todoTextFieldView.todoTextfield.placeholder = value[0] as? String ?? ""
             self.endDateView.deadlineTextfieldLabel.text = value[1] as? String
-            self.todoManagerView.allocators = value[2] as? [Allocators] ?? []
-            self.memoTextView.memoTextviewPlaceholder = value[3] as? String ?? ""
-            self.memoTextView.memoTextView.text = value[3] as? String ?? ""
+//            self.todoManagerView.allocators = value[2] as? [DetailAllocators] ?? []
+            self.memoTextView.memoTextviewPlaceholder = value[2] as? String ?? ""
+            self.memoTextView.memoTextView.text = value[2] as? String ?? ""
         }
     }
     
@@ -148,7 +137,7 @@ final class ToDoViewController: UIViewController {
     func setNaviTitle() {
         navigationBarView.titleLabel.text = StringLiterals.ToDo.inquiryToDo
         self.todoManagerView.navigationBarTitle = StringLiterals.ToDo.inquiry
-        self.getDetailToDoDatas(todoId: self.todoId)
+        self.getDetailToDoDatas(tripId: self.tripId, todoId: self.todoId)
     }
     
     func setStatus() {
@@ -282,10 +271,8 @@ extension ToDoViewController: DoubleButtonDelegate {
         let activateToDoVC = ActivateToDoViewController()
         activateToDoVC.navigationBarTitle = StringLiterals.ToDo.edit
         activateToDoVC.beforeVC = self.beforeVC
-        if let data = self.data {
-            activateToDoVC.data = GetDetailToDoResponseStuct(title: data.title, endDate: data.endDate, allocators: data.allocators, memo: data.memo, secret: data.secret)
-        }
-        activateToDoVC.fromOurTodoParticipants = self.fromOurTodoParticipants
+        activateToDoVC.todoId = self.todoId
+        activateToDoVC.tripId = self.tripId
         self.navigationController?.pushViewController(activateToDoVC, animated: false)
         
     }
@@ -313,11 +300,10 @@ extension ToDoViewController: ViewControllerServiceable {
 }
 
 extension ToDoViewController {
-    func getDetailToDoDatas(todoId: Int) {
+    func getDetailToDoDatas(tripId: Int, todoId: Int) {
         Task {
             do {
-                self.data = try await ToDoService.shared.getDetailToDoData(todoId: todoId)
-                print("detail \(self.data)")
+                self.data = try await ToDoService.shared.getDetailToDoData(tripId: tripId, todoId: todoId)
             }
             catch {
                 guard let error = error as? NetworkError else { return }

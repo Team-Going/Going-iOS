@@ -33,15 +33,15 @@ class ToDoManagerView: UIView {
 
     var fromOurTodoParticipants: [Participant] = []
     
-    var allocators: [Allocators] = []
+    var allParticipants: [DetailAllocators] = []
+    
+    var allocators: [DetailAllocators] = []
     
     var beforeVC: String = ""
     
     var navigationBarTitle: String = ""
-    
-//    var isActivateView: Bool = true
-    
-    var isSecret: Bool = false
+        
+    lazy var isSecret: Bool = false
     
     weak var delegate: ToDoManagerViewDelegate?
     
@@ -113,16 +113,15 @@ extension ToDoManagerView: UICollectionViewDataSource{
         // 마이투두 - 할일추가 - 1로 픽스
         
         if beforeVC == "our" {
-            if navigationBarTitle == StringLiterals.ToDo.inquiry {
-                return self.allocators.count
-            } else {
+            if navigationBarTitle == StringLiterals.ToDo.add {
                 return self.fromOurTodoParticipants.count
             }
+            return self.allParticipants.count
         }
-        else { //TODO: - 추후 수정 필요
+        else {
+            //'혼자 할일' 추가 및 조회의 경우
             if navigationBarTitle == StringLiterals.ToDo.edit {
-//                return self.fromOurTodoParticipants.count
-                return self.allocators.count
+                return self.allParticipants.count
             } else {
                 return self.allocators.count
             }
@@ -135,17 +134,22 @@ extension ToDoManagerView: UICollectionViewDataSource{
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoManagerCollectionViewCell.identifier, for: indexPath) as? ToDoManagerCollectionViewCell else {return UICollectionViewCell()}
         
         var name = ""
+        //아워투두
         if beforeVC == "our" {
-            if navigationBarTitle == StringLiterals.ToDo.inquiry {
-                name = allocators[indexPath.row].name
-            } else {
+            if navigationBarTitle == StringLiterals.ToDo.add {
                 name = fromOurTodoParticipants[indexPath.row].name
+            }else {
+                name = allParticipants[indexPath.row].name
             }
-        } else { //TODO: - 추후 수정 필요
+        }
+        //마이투두
+        else {
+            //마이투두 -> 수정
             if navigationBarTitle == StringLiterals.ToDo.edit {
-//                name = fromOurTodoParticipants[indexPath.row].name
-                name = allocators[indexPath.row].name
-            } else {
+                name = allParticipants[indexPath.row].name
+            }
+            //마이투두 -> 추가 & 조회
+            else {
                 name = allocators[indexPath.row].name
             }
         }
@@ -159,75 +163,55 @@ extension ToDoManagerView: UICollectionViewDataSource{
         //다 선택된 옵션
         //마이투두 -> 조회
         //혼자할일 + 라벨
-        //아워투두
         
-        print("todomanager \(allocators)")
+        //아워투두
         if beforeVC == "our" {
 //            managerCell.managerButton.isSelected = self.navigationBarTitle == StringLiterals.ToDo.add ? false : true
 
-            // 추가
+            //아워투두 -> 추가
             if self.navigationBarTitle == StringLiterals.ToDo.add {
-                managerCell.managerButton.isSelected = false
+//                managerCell.managerButton.isSelected = false
                 managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                 managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
                 managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
-            } else {
-                //조회 & 수정
-                managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
-                //수정
-                if self.navigationBarTitle == StringLiterals.ToDo.edit {
-                    for i in allocators {
-                        //담당자로 배정되어 있는 경우
-                        if self.fromOurTodoParticipants[indexPath.row].name == i.name {
-                            managerCell.managerButton.isSelected = true
-
-                            //담당자이면서 owner인 경우
-                            if i.isOwner {
-                                managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
-                                managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
-                                managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
-                            }
-                            //담당자이면서 owner가 아닌 경우
-                            else {
-                                managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
-                                managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
-                                managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
-                            }
-                            break
-                        }
-                        //담당자로 배정되어 있지 않은 경우
-                        else {
-//                            managerCell.managerButton.isSelected = false
-                            managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
-                            managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
-                            managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
-                        }
-                    }
-                } 
-                //조회
-                else {
+            } 
+            //아워투두 -> 수정 & 조회
+            else {
+                //담당자로 배정되어 있는 경우
+                if self.allParticipants[indexPath.row].isAllocated {
                     managerCell.managerButton.isSelected = true
-                    managerCell.managerButton.isEnabled = false
                     
-                    if allocators[indexPath.row].isOwner {
+                    //담당자이면서 owner인 경우
+                    if self.allParticipants[indexPath.row].isOwner {
                         managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
+                        managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                         managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
-                    } else {
+                    }
+                    //담당자이면서 owner가 아닌 경우
+                    else {
                         managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
+                        managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                         managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
                     }
                 }
+                //담당자로 배정되어 있지 않은 경우
+                else {
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                    managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
+                }
             }
-        }// 마이투두
+        }
+        //마이투두
         else {
             managerCell.managerButton.isEnabled = false
 
-            // 조회
+            //마이투두 -> 조회
             if self.navigationBarTitle == StringLiterals.ToDo.inquiry {
                 managerCell.managerButton.isSelected = true
 
-                // 혼자 할 일
-                if self.isSecret == true {
+                //'혼자 할 일'을 조회할 경우
+                if self.isSecret {
                     //설명라벨 세팅
                     if allocators[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
                         managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
@@ -239,19 +223,32 @@ extension ToDoManagerView: UICollectionViewDataSource{
                         managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
                         managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                     }
-                } else{
-                    managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
-                    if allocators[indexPath.row].isOwner { //owner
-                        managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
-                        managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
-                    }else {
-                        managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
-                        managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
+                } 
+                //그 외의 경우
+                else{
+                    if self.allocators[indexPath.row].isAllocated {
+                        //담당자이면서 owner인 경우
+                        if self.allocators[indexPath.row].isOwner {
+                            managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
+                            managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
+                            managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
+                        }
+                        //담당자이면서 owner가 아닌 경우
+                        else {
+                            managerCell.managerButton.backgroundColor = UIColor(resource: .gray400)
+                            managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
+                            managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
+                        }
+                    }
+                    else {
+                        managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                        managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
+                        managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
                     }
                 }
-            }// 추가
+            }
+            //마이투두 -> 추가
             else if self.navigationBarTitle == StringLiterals.ToDo.add {
-                managerCell.managerButton.isSelected = false
 
                 //설명라벨 세팅
                 if allocators[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
@@ -267,21 +264,14 @@ extension ToDoManagerView: UICollectionViewDataSource{
                     managerCell.managerButton.isUserInteractionEnabled = false
                 }
             }
-            //수정
+            //마이투두 -> 수정
             else {
                 managerCell.managerButton.isEnabled = true
-
-                // 혼자 할 일
-                if self.isSecret == true {
-                    managerCell.managerButton.isSelected = true
-                    managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
-                    managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
-                    managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
-                } else{
-
-                    // TODO: - 추후 참여자 모두 태그 세팅 후 로직 수정 필요
+                
+                //담당자인 경우
+                if self.allParticipants[indexPath.row].isAllocated {
                     //담당자이면서 owner인 경우
-                    if allocators[indexPath.row].isOwner {
+                    if self.allParticipants[indexPath.row].isOwner {
                         managerCell.managerButton.backgroundColor = UIColor(resource: .red500)
                         managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                         managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
@@ -292,6 +282,12 @@ extension ToDoManagerView: UICollectionViewDataSource{
                         managerCell.managerButton.setTitleColor(UIColor(resource: .white000), for: .normal)
                         managerCell.managerButton.layer.borderColor = UIColor(resource: .gray400).cgColor
                     }
+                }
+                //담당자가 아닌 경우
+                else {
+                    managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
+                    managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
+                    managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
                 }
             }
         }
@@ -312,18 +308,14 @@ extension ToDoManagerView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
                 
-        if beforeVC == "my" {
-           if (self.isSecret == true && navigationBarTitle == StringLiterals.ToDo.inquiry) ||
-                navigationBarTitle == StringLiterals.ToDo.add {
-                if indexPath.row == 0 {
-                    return CGSize(width: ScreenUtils.getWidth(66), height: ScreenUtils.getHeight(20))
-                } else {
-                    return CGSize(width: ScreenUtils.getWidth(140), height: ScreenUtils.getHeight(18))
-                }
+        if (self.isSecret && navigationBarTitle == StringLiterals.ToDo.inquiry) || (beforeVC == "my"  && navigationBarTitle == StringLiterals.ToDo.add ) {
+            if indexPath.row == 0 {
+                return CGSize(width: ScreenUtils.getWidth(66), height: ScreenUtils.getHeight(20))
             } else {
-                return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+                return CGSize(width: ScreenUtils.getWidth(140), height: ScreenUtils.getHeight(18))
             }
+        } else {
+            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
         }
-        return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
     }
 }
