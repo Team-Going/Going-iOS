@@ -1,5 +1,5 @@
 //
-//  ProfileWithTravelTestHeaderView.swift
+//  TravelProfileHeaderView.swift
 //  Going-iOS
 //
 //  Created by 윤영서 on 3/3/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileWithTravelTestHeaderView: UIView {
+final class TravelProfileHeaderView: UIView {
         
     // MARK: - UI Properties
     
@@ -43,7 +43,7 @@ final class ProfileWithTravelTestHeaderView: UIView {
 
 // MARK: - Private Methods
 
-private extension ProfileWithTravelTestHeaderView {
+private extension TravelProfileHeaderView {
     func setHierarchy() {
         addSubviews(underlineView, segmentedControl)
     }

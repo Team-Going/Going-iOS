@@ -120,8 +120,8 @@ private extension UserTestSplashViewController {
     @objc 
     func skipButtonTapped() {
         if beforeVC == "myProfile" {
-            let nextVC = MyProfileWithTravelTestViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            let nextVC = MyTravelProfileViewController()
+            self.navigationController?.pushViewController(nextVC, animated: false)
         } else {
             let nextVC = DashBoardViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)

@@ -1,5 +1,5 @@
 //
-//  MyProfileWithTravelTestViewController.swift
+//  MyTravelProfileViewController.swift
 //  Going-iOS
 //
 //  Created by 윤영서 on 3/3/24.
@@ -11,7 +11,7 @@ import UIKit
 import Photos
 import SnapKit
 
-final class MyProfileWithTravelTestViewController: UIViewController {
+final class MyTravelProfileViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -47,7 +47,7 @@ final class MyProfileWithTravelTestViewController: UIViewController {
     
     private let myProfileTopView = MyProfileTopView()
     
-    private let profileWithTravelTestHeaderView = ProfileWithTravelTestHeaderView()
+    private let travelProfileHeaderView = TravelProfileHeaderView()
     
     private let emptyUserTestView = EmptyUserTestView()
     
@@ -73,7 +73,7 @@ final class MyProfileWithTravelTestViewController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension MyProfileWithTravelTestViewController {
+private extension MyTravelProfileViewController {
     func setStyle() {
         view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
@@ -83,7 +83,7 @@ private extension MyProfileWithTravelTestViewController {
         view.addSubviews(navigationBar,
                          naviUnderLineView,
                          myProfileTopView,
-                         profileWithTravelTestHeaderView,
+                         travelProfileHeaderView,
                          emptyUserTestView,
                          userTestResultScrollView)
         
@@ -114,20 +114,20 @@ private extension MyProfileWithTravelTestViewController {
             $0.height.equalTo(ScreenUtils.getHeight(109))
         }
         
-        profileWithTravelTestHeaderView.snp.makeConstraints {
+        travelProfileHeaderView.snp.makeConstraints {
             $0.top.equalTo(myProfileTopView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
         emptyUserTestView.snp.makeConstraints {
-            $0.top.equalTo(profileWithTravelTestHeaderView.snp.bottom)
+            $0.top.equalTo(travelProfileHeaderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-6)
         }
         
         userTestResultScrollView.snp.makeConstraints {
-            $0.top.equalTo(profileWithTravelTestHeaderView.snp.bottom)
+            $0.top.equalTo(travelProfileHeaderView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }    
@@ -137,15 +137,14 @@ private extension MyProfileWithTravelTestViewController {
     }
     
     func setSegmentDidChange() {
-        self.didChangeValue(sender: self.profileWithTravelTestHeaderView.segmentedControl)
+        self.didChangeValue(sender: self.travelProfileHeaderView.segmentedControl)
     }
     
     func setSegment() {
-        profileWithTravelTestHeaderView.segmentedControl.addTarget(self,
+        travelProfileHeaderView.segmentedControl.addTarget(self,
                                                        action: #selector(didChangeValue(sender:)),
                                                        for: .valueChanged)
     }
-    
     
     func saveImage() {
         guard let saveImage = testResultData?.phoneSaveImage else {
@@ -191,7 +190,7 @@ private extension MyProfileWithTravelTestViewController {
     }
 }
 
-extension MyProfileWithTravelTestViewController: CheckPhotoAccessProtocol {
+extension MyTravelProfileViewController: CheckPhotoAccessProtocol {
     func checkAccess() {
         switch PHPhotoLibrary.authorizationStatus(for: .addOnly) {
             
@@ -219,7 +218,7 @@ extension MyProfileWithTravelTestViewController: CheckPhotoAccessProtocol {
     }
 }
 
-extension MyProfileWithTravelTestViewController: TestResultViewDelegate {
+extension MyTravelProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let vc = UserTestSplashViewController()
         self.navigationController?.pushViewController(vc, animated: false)
@@ -229,7 +228,7 @@ extension MyProfileWithTravelTestViewController: TestResultViewDelegate {
 
 // MARK: - Network
 
-extension MyProfileWithTravelTestViewController {
+extension MyTravelProfileViewController {
     func getUserProfile() {
         Task {
             do {
@@ -249,7 +248,7 @@ extension MyProfileWithTravelTestViewController {
     }
 }
 
-extension MyProfileWithTravelTestViewController: ViewControllerServiceable {
+extension MyTravelProfileViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .unAuthorizedError, .reIssueJWT:
@@ -264,7 +263,7 @@ extension MyProfileWithTravelTestViewController: ViewControllerServiceable {
     }
 }
 
-extension MyProfileWithTravelTestViewController {
+extension MyTravelProfileViewController {
     func reIssueJWTToken() {
         Task {
             do {
