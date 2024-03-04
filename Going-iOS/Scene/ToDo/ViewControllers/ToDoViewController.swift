@@ -49,9 +49,7 @@ final class ToDoViewController: UIViewController {
     var tripId: Int = 0
     
     var myId: Int = 0
-    
-    private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
-    
+        
     private var saveToDoData: CreateToDoRequestStruct = .init(title: "", endDate: "", allocators: [], memo: "", secret: false)
 
     

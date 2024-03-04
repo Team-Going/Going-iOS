@@ -270,6 +270,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
                 
                 //담당자인 경우
                 if self.allParticipants[indexPath.row].isAllocated {
+                    managerCell.managerButton.isSelected = true
                     //담당자이면서 owner인 경우
                     if self.allParticipants[indexPath.row].isOwner {
                         managerCell.managerButton.backgroundColor = UIColor(resource: .red500)

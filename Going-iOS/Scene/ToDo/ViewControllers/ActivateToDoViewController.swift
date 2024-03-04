@@ -52,9 +52,7 @@ final class ActivateToDoViewController: UIViewController {
     var tripId: Int = 0
     
     var myId: Int = 0
-    
-    private var toDorequestData = CreateToDoRequestStruct(title: "", endDate: "", allocators: [], memo: "", secret: false)
-    
+        
     private var saveToDoData: CreateToDoRequestStruct = .init(title: "", endDate: "", allocators: [], memo: "", secret: false)
 
     
@@ -86,12 +84,6 @@ final class ActivateToDoViewController: UIViewController {
         }
     }
     
-//    lazy var allocator: [Allocators] = [] {
-//        didSet {
-//            self.todoManagerView.allocators = allocator
-//        }
-//    }
-    
     var data: GetDetailToDoResponseStuct? {
         didSet {
             guard let data else {return}
@@ -102,10 +94,15 @@ final class ActivateToDoViewController: UIViewController {
             self.todoManagerView.allParticipants = data.allocators
             
             if navigationBarTitle == StringLiterals.ToDo.edit {
-//                self.todoManagerView.fromOurTodoParticipants = self.fromOurTodoParticipants
-//                self.todoManagerView.allParticipants = data.allocators
-                setDefaultValue = [data.title, data.endDate, data.allocators, data.memo ?? ""]
-                setEditViewStyle()
+                setDefaultValue = [data.title, data.endDate, data.allocators, data.memo]
+            }
+            
+            setEditViewStyle()
+
+            for index in 0..<data.allocators.count {
+                if data.allocators[index].isAllocated {
+                    buttonIndex.append(index)
+                }
             }
             self.memoTextView.memoTextView.text = data.memo
             
@@ -170,7 +167,12 @@ final class ActivateToDoViewController: UIViewController {
     func setInfo() {
         if navigationBarTitle == StringLiterals.ToDo.add {
             navigationBarView.titleLabel.text = StringLiterals.ToDo.addToDo
-            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.todoManagerView.allParticipants, "메모를 입력해 주세요"]
+            if beforeVC == "my" {
+                self.todoManagerView.allocators = [DetailAllocators.SecretData, DetailAllocators.SecretInfoData]
+            } else {
+                self.todoManagerView.allocators = self.todoManagerView.allParticipants
+            }
+            setDefaultValue = ["할일을 입력해 주세요", "날짜를 선택해 주세요", self.todoManagerView.allocators, "메모를 입력해 주세요"]
         }
 
     }
@@ -490,16 +492,20 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
         if !todo.isEmpty && !deadline.isEmpty {
             if !buttonIndex.isEmpty {
                 for i in buttonIndex {
-//                    idSet.append(self.todoManagerView.fromOurTodoParticipants[i].participantId)
-                    idSet.append(self.todoManagerView.allocators[i].participantID)
-
+                   if navigationBarTitle == StringLiterals.ToDo.edit &&
+                        self.todoManagerView.allParticipants[i].isAllocated {
+                        idSet.append(self.todoManagerView.allParticipants[i].participantID)
+                    } else {
+                        if !secret {
+                            idSet.append(self.todoManagerView.fromOurTodoParticipants[i].participantId)
+                        }
+                    }
                 }
+            } 
+            else {
+                idSet = [self.myId]
             }
-            if beforeVC == "my" && navigationBarTitle == StringLiterals.ToDo.add {
-                idSet = [myId]
-            } else {
-                
-            }
+        
             
             self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: secret)
             print(self.saveToDoData)
@@ -514,7 +520,6 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
             }
         }
     }
-    
     
 }
 
