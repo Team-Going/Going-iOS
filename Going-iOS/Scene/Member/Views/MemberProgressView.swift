@@ -32,7 +32,9 @@ final class MemberProgressView: UIView {
         }
     }
 
-    private let questionLabel = DOOLabel(font: .pretendard(.body3_bold), 
+    // MARK: - UI Properties
+    
+    private let questionLabel = DOOLabel(font: .pretendard(.body3_bold),
                                          color: UIColor(resource: .gray700), 
                                          text: "여행 스타일")
   
@@ -68,7 +70,7 @@ final class MemberProgressView: UIView {
 
 private extension MemberProgressView {
     func setStyle() {
-        self.backgroundColor = .white000
+        self.backgroundColor = UIColor(resource: .white000)
     }
     
     func setHierarchy() {
