@@ -55,6 +55,7 @@ class ToDoTextFieldView: UIView {
     
     var todoTextfieldPlaceholder: String = ""
 
+    var navigationBarTitle: String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,7 +69,12 @@ class ToDoTextFieldView: UIView {
     }
     
     func setInquiryTextFieldStyle() {
-        guard let todotext = todoTextfield.placeholder?.count else {return}
+        var todotext = 0
+        if navigationBarTitle == StringLiterals.ToDo.edit {
+            todotext = todoTextfield.text?.count ?? 0
+        } else {
+            todotext = todoTextfield.placeholder?.count ?? 0
+        }
         todoTextfield.layer.borderColor = UIColor(resource: .gray700).cgColor
         todoTextfield.setPlaceholderColor(UIColor(resource: .gray700))
         countToDoCharacterLabel.textColor = UIColor(resource: .gray700)

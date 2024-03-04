@@ -75,6 +75,7 @@ final class ToDoViewController: UIViewController {
     lazy var navigationBarTitle: String = "" {
         didSet {
             self.todoManagerView.navigationBarTitle = navigationBarTitle
+            self.todoTextFieldView.navigationBarTitle = navigationBarTitle
         }
     }
     
@@ -95,17 +96,15 @@ final class ToDoViewController: UIViewController {
             guard let data else {return}
             self.todoTextFieldView.todoTextfield.text = data.title
             self.endDateView.deadlineTextfieldLabel.text = data.endDate
-            self.todoManagerView.allocators = data.allocators
             self.todoManagerView.isSecret = data.secret
             if data.secret == true {
-                self.todoManagerView.allocators[0].name = "혼자할일"
-                self.todoManagerView.allocators.append(Allocators.EmptyData)
+                self.todoManagerView.allocators = [Allocators(name: "혼자할일", isOwner: true), Allocators.EmptyData]
+            } else {
+                self.todoManagerView.allocators = data.allocators
             }
-            if navigationBarTitle == StringLiterals.ToDo.inquiry {
-                navigationBarView.titleLabel.text = StringLiterals.ToDo.inquiryToDo
-                setDefaultValue = [data.title, data.endDate, self.todoManagerView.allocators, data.memo ?? ""]
-                setInquiryStyle()
-            }
+            navigationBarView.titleLabel.text = StringLiterals.ToDo.inquiryToDo
+            setDefaultValue = [data.title, data.endDate, self.todoManagerView.allocators, data.memo ?? ""]
+            setInquiryStyle()
             self.memoTextView.memoTextView.text = data.memo
             
             self.todoManagerView.todoManagerCollectionView.reloadData()
