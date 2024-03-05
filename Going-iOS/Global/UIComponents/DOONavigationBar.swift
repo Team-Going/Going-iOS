@@ -9,6 +9,10 @@ import UIKit
 
 import SnapKit
 
+protocol DOONavigationBarDelegate: AnyObject {
+    func saveTextButtonTapped()
+}
+
 final class DOONavigationBar: UIView {
     
     enum NavigationBarType {
@@ -18,6 +22,7 @@ final class DOONavigationBar: UIView {
         case titleLabelOnly(String)
         case backButtonWithTitle(String)
         case testResult(String)
+        case rightItemWithTitle(String)
     }
     
     lazy var backButton: UIButton = {
@@ -48,6 +53,16 @@ final class DOONavigationBar: UIView {
         return btn
     }()
     
+    lazy var saveTextButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle(StringLiterals.ToDo.save, for: .normal)
+        btn.setTitleColor(UIColor(resource: .gray200), for: .normal)
+        btn.titleLabel?.font = .pretendard(.body2_bold)
+        btn.isEnabled = false
+        btn.addTarget(self, action: #selector(saveTitleButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+  
     private lazy var travelInfoButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(resource: .btnTripinfo), for: .normal)
@@ -57,6 +72,7 @@ final class DOONavigationBar: UIView {
     
     private weak var viewController: UIViewController?
     private let type: NavigationBarType
+    weak var delegate: DOONavigationBarDelegate?
     
     init(_ viewController: UIViewController, type: NavigationBarType, backgroundColor: UIColor = UIColor(resource: .white000)) {
         self.viewController = viewController
@@ -135,7 +151,24 @@ private extension DOONavigationBar {
                 $0.width.height.equalTo(ScreenUtils.getHeight(48))
                 $0.trailing.equalToSuperview().inset(10)
             }
+        
+        case .rightItemWithTitle(let title):
+            titleLabel.text = title
+            addSubviews(titleLabel, backButton, saveTextButton)
+            titleLabel.snp.makeConstraints {
+                $0.center.equalToSuperview()
+            }
+            backButton.snp.makeConstraints {
+                $0.leading.equalToSuperview().inset(10)
+                $0.centerY.equalToSuperview()
+            }
+            saveTextButton.snp.makeConstraints {
+                $0.centerY.equalToSuperview()
+                $0.height.equalTo(23)
+                $0.trailing.equalToSuperview().inset(23)
+            }
         }
+        
     }
     
     @objc
@@ -159,6 +192,12 @@ private extension DOONavigationBar {
         
     }
     
+    @objc
+    func saveTitleButtonTapped() {
+        print("tap")
+        self.delegate?.saveTextButtonTapped()
+    }
+  
     @objc
     func pushToTravelInfoVC() {
         let vc = TravelInfoViewController()
