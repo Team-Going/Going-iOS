@@ -131,7 +131,7 @@ final class MyToDoViewController: UIViewController {
         super.viewDidLoad()
     
         hideNavi()
-        setHierachy()
+        setHierarchy()
         setDelegate()
         getMyToDoHeaderData()
         registerCell()
@@ -179,7 +179,7 @@ private extension MyToDoViewController {
         self.didChangeValue(sender: self.stickyMyToDoHeaderView.segmentedControl)
     }
     
-    func setHierachy() {
+    func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
         scrollView.addSubviews(contentView, stickyMyToDoHeaderView)
         contentView.addSubviews(tripHeaderView,

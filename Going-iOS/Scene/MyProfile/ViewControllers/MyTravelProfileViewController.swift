@@ -1,25 +1,28 @@
 //
-//  MyProfileViewController.swift
+//  MyTravelProfileViewController.swift
 //  Going-iOS
 //
-//  Created by 윤영서 on 1/11/24.
+//  Created by 윤영서 on 3/3/24.
 //
+
 
 import UIKit
 
-import SnapKit
 import Photos
+import SnapKit
 
-final class MyProfileViewController: UIViewController {
+final class MyTravelProfileViewController: UIViewController {
     
     // MARK: - Properties
+    
+    var segmentIndex: Int = 0
     
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
             self.myProfileTopView.profileImageView.image = data.profileImage
-            self.resultImageView.image = data.typeImage
-            self.myResultView.resultViewData = data
+            self.userTestResultScrollView.resultImageView.image = data.typeImage
+            self.userTestResultScrollView.myResultView.resultViewData = data
         }
     }
     
@@ -42,36 +45,15 @@ final class MyProfileViewController: UIViewController {
         return view
     }()
     
-    private let myProfileScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.isScrollEnabled = true
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.showsHorizontalScrollIndicator = false
-        return scrollView
-    }()
-    
-    private let contentView = UIView()
-    
     private let myProfileTopView = MyProfileTopView()
     
-    private let resultImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = UIColor(resource: .white000)
-        return imageView
-    }()
-        
-    private let myResultView: TestResultView = {
-        let view = TestResultView()
-        view.nameLabel.isHidden = true
-        view.userTypeLabel.font = .pretendard(.body1_bold)
-        view.userTypeLabel.textColor = UIColor(resource: .gray700)
-        view.typeDescLabel.font = .pretendard(.detail3_regular)
-        view.typeDescLabel.textColor = UIColor(resource: .gray300)
-        return view
-    }()
+    private let travelProfileHeaderView = TravelProfileHeaderView()
     
-    // MARK: - Life Cycle
+    private let emptyUserTestView = EmptyUserTestView()
+    
+    private let userTestResultScrollView = UserTestResultScrollView()
+
+    // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,43 +62,32 @@ final class MyProfileViewController: UIViewController {
         setHierarchy()
         setLayout()
         setDelegate()
+        setSegmentDidChange()
+        setSegment()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        hideTabbar()
         getUserProfile()
     }
 }
 
 // MARK: - Private Methods
 
-private extension MyProfileViewController {
-    func hideTabbar() {
-        self.navigationController?.tabBarController?.tabBar.isHidden = true
-    }
-    
-    func setDelegate() {
-        myResultView.delegate = self
-    }
-    
+private extension MyTravelProfileViewController {
     func setStyle() {
-        contentView.backgroundColor = UIColor(resource: .white000)
         view.backgroundColor = UIColor(resource: .white000)
-        self.myProfileScrollView.showsVerticalScrollIndicator = false
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar, 
-                         naviUnderLineView, 
-                         myProfileScrollView)
+        view.addSubviews(navigationBar,
+                         naviUnderLineView,
+                         myProfileTopView,
+                         travelProfileHeaderView,
+                         emptyUserTestView,
+                         userTestResultScrollView)
         
         navigationBar.addSubview(saveButton)
-        
-        myProfileScrollView.addSubviews(contentView)
-        
-        contentView.addSubviews(myProfileTopView, 
-                                resultImageView,
-                                myResultView)
     }
     
     func setLayout() {
@@ -137,34 +108,42 @@ private extension MyProfileViewController {
             $0.height.equalTo(1)
         }
         
-        myProfileScrollView.snp.makeConstraints {
-            $0.top.equalTo(naviUnderLineView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.width.equalTo(myProfileScrollView.frameLayoutGuide)
-            $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
-        }
-
         myProfileTopView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalTo(naviUnderLineView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(109))
         }
         
-        resultImageView.snp.makeConstraints {
+        travelProfileHeaderView.snp.makeConstraints {
             $0.top.equalTo(myProfileTopView.snp.bottom)
-            $0.height.equalTo(228)
-            $0.width.equalTo(Constant.Screen.width)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
-        myResultView.snp.makeConstraints {
-            $0.top.equalTo(resultImageView.snp.bottom)
+        emptyUserTestView.snp.makeConstraints {
+            $0.top.equalTo(travelProfileHeaderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-6)
         }
+        
+        userTestResultScrollView.snp.makeConstraints {
+            $0.top.equalTo(travelProfileHeaderView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }    
+    
+    func setDelegate() {
+        userTestResultScrollView.myResultView.delegate = self
+    }
+    
+    func setSegmentDidChange() {
+        self.didChangeValue(sender: self.travelProfileHeaderView.segmentedControl)
+    }
+    
+    func setSegment() {
+        travelProfileHeaderView.segmentedControl.addTarget(self,
+                                                       action: #selector(didChangeValue(sender:)),
+                                                       for: .valueChanged)
     }
     
     func saveImage() {
@@ -195,13 +174,23 @@ private extension MyProfileViewController {
     
     // MARK: - @objc methods
     
-    @objc
-    func saveImageButtonTapped() {
+    @objc func saveImageButtonTapped() {
         checkAccess()
+    }
+    
+    @objc
+    func didChangeValue(sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            self.segmentIndex = 0
+            userTestResultScrollView.isHidden = false
+        } else {
+            self.segmentIndex = 1
+            userTestResultScrollView.isHidden = true
+        }
     }
 }
 
-extension MyProfileViewController: CheckPhotoAccessProtocol {
+extension MyTravelProfileViewController: CheckPhotoAccessProtocol {
     func checkAccess() {
         switch PHPhotoLibrary.authorizationStatus(for: .addOnly) {
             
@@ -218,8 +207,8 @@ extension MyProfileViewController: CheckPhotoAccessProtocol {
                 default:
                     print("그 밖의 권한이 부여 되었습니다.")
                 }
-                
             }
+            
         case .restricted, .limited, .authorized:
             saveImage()
             UserDefaults.standard.set(true, forKey: "photoPermissionKey")
@@ -229,7 +218,17 @@ extension MyProfileViewController: CheckPhotoAccessProtocol {
     }
 }
 
-extension MyProfileViewController {
+extension MyTravelProfileViewController: TestResultViewDelegate {
+    func backToTestButton() {
+        let vc = UserTestSplashViewController()
+        self.navigationController?.pushViewController(vc, animated: false)
+        vc.beforeVC = "myProfile"
+    }
+}
+
+// MARK: - Network
+
+extension MyTravelProfileViewController {
     func getUserProfile() {
         Task {
             do {
@@ -249,7 +248,7 @@ extension MyProfileViewController {
     }
 }
 
-extension MyProfileViewController: ViewControllerServiceable {
+extension MyTravelProfileViewController: ViewControllerServiceable {
     func handleError(_ error: NetworkError) {
         switch error {
         case .unAuthorizedError, .reIssueJWT:
@@ -264,7 +263,7 @@ extension MyProfileViewController: ViewControllerServiceable {
     }
 }
 
-extension MyProfileViewController {
+extension MyTravelProfileViewController {
     func reIssueJWTToken() {
         Task {
             do {
@@ -275,12 +274,5 @@ extension MyProfileViewController {
                 handleError(error)
             }
         }
-    }
-}
-
-extension MyProfileViewController: TestResultViewDelegate {
-    func backToTestButton() {
-        let nextVC = UserTestSplashViewController()
-        self.navigationController?.pushViewController(nextVC, animated: false)
     }
 }

@@ -104,7 +104,6 @@ class DashBoardViewController: UIViewController {
 private extension DashBoardViewController {
     func setSegmentDidChange() {
         self.didChangeValue(sender: self.dashBoardHeaderView.segmentedControl)
-
     }
 
     func setStyle() {

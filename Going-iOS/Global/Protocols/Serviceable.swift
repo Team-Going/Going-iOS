@@ -51,7 +51,7 @@ extension Serviceable {
             throw NetworkError.serverError
         }
 
-        print("✅✅✅✅✅✅✅✅✅✅✅✅✅원래 API호출성공✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅")
+        print("✅API호출성공✅")
         return model.data
     }
 }

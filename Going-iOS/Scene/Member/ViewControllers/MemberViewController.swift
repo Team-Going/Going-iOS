@@ -27,7 +27,7 @@ class MemberViewController: UIViewController {
     private var userType: Int = 0
     var memberData: MemberResponseStruct? {
         didSet {
-            self.tripFriendsCollectionView.reloadData() 
+            self.membersProfileCollectionView.reloadData() 
             self.ourTestResultView.progressView1.testResultData = memberData?.styles[0]
             self.ourTestResultView.progressView2.testResultData = memberData?.styles[1]
             self.ourTestResultView.progressView3.testResultData = memberData?.styles[2]
@@ -48,7 +48,7 @@ class MemberViewController: UIViewController {
     
     private let contentView = UIView()
 
-    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("함께 하는 친구들"))
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("우리의 여행 취향"))
     
     private let navigationUnderLineView: UIView = {
         let view = UIView()
@@ -56,21 +56,34 @@ class MemberViewController: UIViewController {
         return view
     }()
     
-    private let memeberTitleLabel = DOOLabel(font: .pretendard(.body3_bold), 
-                                             color: UIColor(resource: .gray700), 
-                                             text: "멤버")
+    private let tasteDescBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(resource: .gray50)
+        view.layer.cornerRadius = 6
+        view.clipsToBounds = true
+        return view
+    }()
     
-    private lazy var tripFriendsCollectionView: UICollectionView = {
+    private let commonTasteLabel = DOOLabel(font: .pretendard(.detail1_bold), 
+                                            color: UIColor(resource: .red500),
+                                            text: "식당, 여행 계획")
+    
+    private lazy var tasteDescLabel = DOOLabel(font: .pretendard(.detail1_bold), 
+                                               color: UIColor(resource: .gray700),
+                                               text: "취향이 잘 맞는 조합이네요!",
+                                               alignment: .center)
+
+    private let memberProfileDescLabel = DOOLabel(font: .pretendard(.detail3_regular),
+                                             color: UIColor(resource: .gray400),
+                                             text: "프로필 사진을 눌러서 친구의 취향을 구경해보세요")
+    
+    private lazy var membersProfileCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
         view.backgroundColor = UIColor(resource: .white000)
         view.showsHorizontalScrollIndicator = false
         view.isScrollEnabled = false
         return view
     }()
-    
-    private let ourTasteTitleLabel = DOOLabel(font: .pretendard(.body3_bold), 
-                                              color: .gray700,
-                                              text: "우리의 이번 여행은!")
     
     private let ourTestResultView = MemberTestResultView()
     
@@ -101,7 +114,6 @@ private extension MemberViewController {
     
     func hideTabbar() {
         self.navigationController?.tabBarController?.tabBar.isHidden = true
-
     }
     
     func setHierarchy() {
@@ -111,10 +123,12 @@ private extension MemberViewController {
         
         memberScrollView.addSubview(contentView)
         
-        contentView.addSubviews( memeberTitleLabel,
-                         tripFriendsCollectionView,
-                         ourTasteTitleLabel,
-                         ourTestResultView)
+        contentView.addSubviews(tasteDescBackgroundView,
+                                memberProfileDescLabel,
+                                membersProfileCollectionView,
+                                ourTestResultView)
+        
+        tasteDescBackgroundView.addSubviews(commonTasteLabel, tasteDescLabel)
     }
     
     func setLayout() {
@@ -142,26 +156,33 @@ private extension MemberViewController {
             $0.height.greaterThanOrEqualTo(view.snp.height).priority(.low)
         }
         
-        memeberTitleLabel.snp.makeConstraints {
+        tasteDescBackgroundView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(24)
-            $0.leading.equalToSuperview().inset(24)
-            $0.height.equalTo(ScreenUtils.getHeight(23))
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.getWidth(327))
+            $0.height.equalTo(ScreenUtils.getHeight(48))
         }
         
-        tripFriendsCollectionView.snp.makeConstraints {
-            $0.top.equalTo(memeberTitleLabel.snp.bottom).offset(8)
-            $0.leading.trailing.equalToSuperview().inset(24)
+        tasteDescLabel.snp.makeConstraints {
+            $0.center.equalTo(tasteDescBackgroundView)
+        }
+        
+        memberProfileDescLabel.snp.makeConstraints {
+            $0.top.equalTo(tasteDescBackgroundView.snp.bottom).offset(18)
+            $0.centerX.equalToSuperview()
+        }
+        
+        membersProfileCollectionView.snp.makeConstraints {
+            $0.top.equalTo(memberProfileDescLabel.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.getWidth(315))
             $0.height.equalTo(ScreenUtils.getHeight(67))
         }
         
-        ourTasteTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(tripFriendsCollectionView.snp.bottom).offset(26)
-            $0.leading.equalToSuperview().inset(24)
-        }
-        
         ourTestResultView.snp.makeConstraints {
-            $0.top.equalTo(ourTasteTitleLabel.snp.bottom).offset(14)
-            $0.leading.trailing.equalToSuperview().inset(23)
+            $0.top.equalTo(membersProfileCollectionView.snp.bottom).offset(24)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -174,12 +195,12 @@ private extension MemberViewController {
     }
     
     func registerCell() {
-        tripFriendsCollectionView.register(TripFriendsCollectionViewCell.self, forCellWithReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier)
+        membersProfileCollectionView.register(TripFriendsCollectionViewCell.self, forCellWithReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier)
     }
     
     func setDelegate() {
-        tripFriendsCollectionView.delegate = self
-        tripFriendsCollectionView.dataSource = self
+        membersProfileCollectionView.delegate = self
+        membersProfileCollectionView.dataSource = self
     }
 }
 
@@ -193,7 +214,7 @@ extension MemberViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = tripFriendsCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell 
+        guard let cell = membersProfileCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell 
         else { return UICollectionViewCell() }
         
         cell.friendNameLabel.text = memberData?.participants[indexPath.row].name

@@ -44,6 +44,11 @@
 		948FBCA52B53D07900D9C779 /* MemberTestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */; };
 		948FBCA72B53D12600D9C779 /* MemberResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA62B53D12600D9C779 /* MemberResponseStruct.swift */; };
 		948FBCA92B53DE0F00D9C779 /* MemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA82B53DE0F00D9C779 /* MemberService.swift */; };
+		94B50B752B934E9800C709F6 /* MyProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B742B934E9800C709F6 /* MyProfileTopView.swift */; };
+		94B50B7B2B937D4700C709F6 /* MyTravelProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B7A2B937D4700C709F6 /* MyTravelProfileViewController.swift */; };
+		94B50B7D2B937FA100C709F6 /* TravelProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */; };
+		94B50B812B93896300C709F6 /* EmptyUserTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B802B93896300C709F6 /* EmptyUserTestView.swift */; };
+		94B50B852B93969800C709F6 /* UserTestResultScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */; };
 		949AD11B2B90F58000BCE8F5 /* TravelNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11A2B90F58000BCE8F5 /* TravelNameView.swift */; };
 		949AD11D2B90F58800BCE8F5 /* TravelDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11C2B90F58800BCE8F5 /* TravelDateView.swift */; };
 		949AD11F2B9238F400BCE8F5 /* TravelInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */; };
@@ -231,6 +236,11 @@
 		948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTestResultView.swift; sourceTree = "<group>"; };
 		948FBCA62B53D12600D9C779 /* MemberResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponseStruct.swift; sourceTree = "<group>"; };
 		948FBCA82B53DE0F00D9C779 /* MemberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberService.swift; sourceTree = "<group>"; };
+		94B50B742B934E9800C709F6 /* MyProfileTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileTopView.swift; sourceTree = "<group>"; };
+		94B50B7A2B937D4700C709F6 /* MyTravelProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTravelProfileViewController.swift; sourceTree = "<group>"; };
+		94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelProfileHeaderView.swift; sourceTree = "<group>"; };
+		94B50B802B93896300C709F6 /* EmptyUserTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUserTestView.swift; sourceTree = "<group>"; };
+		94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestResultScrollView.swift; sourceTree = "<group>"; };
 		949AD11A2B90F58000BCE8F5 /* TravelNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelNameView.swift; sourceTree = "<group>"; };
 		949AD11C2B90F58800BCE8F5 /* TravelDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDateView.swift; sourceTree = "<group>"; };
 		949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInfoViewController.swift; sourceTree = "<group>"; };
@@ -548,6 +558,7 @@
 		9478E5392B4EFC9E0027606D /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
+				94B50B732B934DA400C709F6 /* Views */,
 				9478E53A2B4EFCA60027606D /* ViewControllers */,
 			);
 			path = MyProfile;
@@ -557,8 +568,20 @@
 			isa = PBXGroup;
 			children = (
 				9478E53B2B4EFCB90027606D /* MyProfileViewController.swift */,
+				94B50B7A2B937D4700C709F6 /* MyTravelProfileViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		94B50B732B934DA400C709F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				94B50B742B934E9800C709F6 /* MyProfileTopView.swift */,
+				94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */,
+				94B50B802B93896300C709F6 /* EmptyUserTestView.swift */,
+				94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		948767A22B4C23A700BCF843 /* Settings */ = {
@@ -1454,6 +1477,7 @@
 				945234392B51B61D006ACC59 /* DashBoardResponseSturct.swift in Sources */,
 				F49B352A2B35E9BD0080A19F /* UIStackView+.swift in Sources */,
 				F4FE6B9E2B50AAE2009C935E /* SignUpRequestDTO.swift in Sources */,
+				94B50B7D2B937FA100C709F6 /* TravelProfileHeaderView.swift in Sources */,
 				94C2C9AE2B470ACD00B92CAC /* DatePickerView.swift in Sources */,
 				CA8CD6812B46B70700CFDFBF /* TripHeaderView.swift in Sources */,
 				F44D98602B4EB70500341893 /* HTTPHeaderField.swift in Sources */,
@@ -1520,11 +1544,13 @@
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
 				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
 				945234432B52F6E3006ACC59 /* JoinTravelTestViewController.swift in Sources */,
+				94B50B7B2B937D4700C709F6 /* MyTravelProfileViewController.swift in Sources */,
 				941B1B892B5138B400D28EBA /* TravelService.swift in Sources */,
 				F45CA1622B53043400F3790C /* OnBoardingService.swift in Sources */,
 				94761A0A2B4E5F5200D7C589 /* CreateTravelStruct.swift in Sources */,
 				9478E5362B4EF4850027606D /* WebViewController.swift in Sources */,
 				94442EC82B4B18E500FDBB26 /* StartTravelSplashViewController.swift in Sources */,
+				94B50B812B93896300C709F6 /* EmptyUserTestView.swift in Sources */,
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				F4FE6B802B4FCCA4009C935E /* GetProfileDTO.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
@@ -1549,6 +1575,8 @@
 				CA3EEE502B5073D300C23A41 /* ToDoAppData.swift in Sources */,
 				949AD1212B92450400BCE8F5 /* QuitTravelPopUpViewController.swift in Sources */,
 				941B1B872B510FB800D28EBA /* CreateTravelRequestAppData.swift in Sources */,
+				94B50B752B934E9800C709F6 /* MyProfileTopView.swift in Sources */,
+				94B50B852B93969800C709F6 /* UserTestResultScrollView.swift in Sources */,
 				CA8CD67F2B46B64000CFDFBF /* OurToDoViewController.swift in Sources */,
 				F4015E2D2B557EDA006709F4 /* DOOTabbarViewController.swift in Sources */,
 				F4F5218C2B346373000E6E1E /* UserDefaultToken.swift in Sources */,

@@ -116,7 +116,7 @@ final class ToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setHierachy()
+        setHierarchy()
         setLayout()
         setDelegate()
         setStyle()
@@ -151,7 +151,7 @@ final class ToDoViewController: UIViewController {
 
 private extension ToDoViewController {
     
-    func setHierachy() {
+    func setHierarchy() {
         self.view.addSubviews(navigationBarView, underlineView, scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(todoTextFieldView,
