@@ -487,9 +487,13 @@ extension OurToDoViewController: UICollectionViewDelegateFlowLayout {
 
 extension OurToDoViewController: TripMiddleViewDelegate {
     func presentToInviteFriendVC() {
-        let inviteFriendVC = InviteFriendPopUpViewController()
-        inviteFriendVC.codeLabel.text = self.inviteCode
-        self.present(inviteFriendVC, animated: false)
+        if headerData?.participants.count ?? 0 < 6 {
+            let inviteFriendVC = InviteFriendPopUpViewController()
+            inviteFriendVC.codeLabel.text = self.inviteCode
+            self.present(inviteFriendVC, animated: false)
+        } else {
+            DOOToast.show(message: StringLiterals.OurToDo.maximumToastMSG, insetFromBottom: ScreenUtils.getHeight(114))
+        }
     }
     
     func pushToMemberVC() {
