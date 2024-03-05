@@ -52,7 +52,7 @@ final class OurToDoViewController: UIViewController {
     
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = UIColor(resource: .red600)
+        btn.backgroundColor = UIColor(resource: .red500)
         btn.setTitle(StringLiterals.OurToDo.ourtodo, for: .normal)
         btn.setTitleColor(UIColor(resource: .white000), for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
