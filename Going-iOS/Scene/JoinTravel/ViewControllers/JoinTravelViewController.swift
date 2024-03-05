@@ -47,6 +47,9 @@ final class JoinTravelViewController: UIViewController {
     
     private let codeTextField: UITextField = {
         let field = UITextField()
+        if let clearButton = field.value(forKeyPath: "_clearButton") as? UIButton {
+            clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+        }
         field.setLeftPadding(amount: 12)
         field.font = .pretendard(.body3_medi)
         field.setTextField(forPlaceholder: StringLiterals.JoinTravel.placeHolder, 
@@ -55,6 +58,7 @@ final class JoinTravelViewController: UIViewController {
         field.setPlaceholderColor(UIColor(resource: .gray200))
         field.textColor = UIColor(resource: .gray700)
         field.autocapitalizationType = .none
+        field.clearButtonMode = UITextField.ViewMode.whileEditing
         return field
     }()
    
@@ -214,7 +218,7 @@ extension JoinTravelViewController: ViewControllerServiceable {
                 warningLabel.isHidden = false
                 codeTextField.layer.borderColor = UIColor(resource: .red500).cgColor
                 characterCountLabel.textColor = UIColor(resource: .red500)
-                
+                HapticService.notification(.error).run()
             } else {
                 DOOToast.show(message: message, insetFromBottom: 80)
             }

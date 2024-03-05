@@ -34,7 +34,7 @@ final class UserTestViewController: UIViewController {
     
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.UserTest.background
+        imageView.image = UIImage(resource: .imgTest)
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
