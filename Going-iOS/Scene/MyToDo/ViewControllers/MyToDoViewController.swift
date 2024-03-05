@@ -103,6 +103,7 @@ final class MyToDoViewController: UIViewController {
         didSet {
             guard let data = headerData else { return }
             self.myId = data.participantId
+            print("my participantId \(data.participantId)")
             self.tripHeaderView.tripNameLabel.text = data.title
             self.tripHeaderView.tripDdayLabel.text = "나에게 남은 할일 \(data.count)개"
             
@@ -311,7 +312,6 @@ private extension MyToDoViewController {
       
     }
     
-    
     ///  할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
     func setInquiryToDoView(before: String, naviBarTitle: String) {
         let todoVC = ToDoViewController()
@@ -505,6 +505,7 @@ extension MyToDoViewController {
         Task {
             do {
                 self.myToDoData = try await ToDoService.shared.getToDoData(tripId: self.tripId, category: "my", progress: progress)
+                print("mytodo \(self.myToDoData)")
             }
             catch {
                 guard let error = error as? NetworkError else { return }

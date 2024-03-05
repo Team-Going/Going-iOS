@@ -126,7 +126,6 @@ final class OurToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         setHierarchy()
         setLayout()
         setDelegate()
@@ -148,7 +147,6 @@ final class OurToDoViewController: UIViewController {
         getOurToDoHeaderData()
         getToDoData(progress: self.progress)
         setGradient()
-        
      
     }
     
@@ -160,18 +158,18 @@ final class OurToDoViewController: UIViewController {
 // MARK: - Private method
 
 private extension OurToDoViewController {
+    
     func setGradient() {
         tripMiddleView.gradientView.setGradient(
             firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
             secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
             axis: .horizontal)
     }
+    
     func showTabBar() {
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = UIColor(resource: .gray50)
-        
-//        self.navigationBarView.backgroundColor = UIColor(resource: .gray50)
     }
     
     func setSegmentDidChange() {
@@ -350,7 +348,6 @@ private extension OurToDoViewController {
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
         todoVC.fromOurTodoParticipants = header.participants
-//        todoVC.allocator = self.allocator
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
@@ -449,15 +446,11 @@ extension OurToDoViewController: UICollectionViewDataSource {
         self.allocator =  self.ourToDoData?[indexPath.row].allocators ?? []
         
         /// 할일  조회 뷰에 데이터 세팅 후 이동
-        /// fromOurTodoParticipants -> 전체 참여자
-        /// manager -> 투두 배정자
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = StringLiterals.ToDo.inquiry
         guard let header = headerData else { return }
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
-//        todoVC.fromOurTodoParticipants = header.participants
-//        todoVC.allocator = self.allocator
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
 
@@ -525,7 +518,7 @@ extension OurToDoViewController {
         Task {
             do {
                 self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: tripId, category: "our", progress: progress)
-                print(self.ourToDoData)
+                print("todo data \(self.ourToDoData)")
             }
             catch {
                 guard let error = error as? NetworkError else { return }
