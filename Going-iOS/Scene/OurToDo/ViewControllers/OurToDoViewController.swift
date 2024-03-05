@@ -16,6 +16,15 @@ final class OurToDoViewController: UIViewController {
     
     private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
     
+    private lazy var tripPreferenceImageView: UIImageView = {
+        let imgView = UIImageView()
+        imgView.isUserInteractionEnabled = true
+        imgView.image = UIImage(resource: .btnTasteview)
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToOurTripPreferences(_:)))
+        imgView.addGestureRecognizer(gesture)
+        return imgView
+    }()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = UIColor(resource: .white000)
@@ -180,6 +189,7 @@ private extension OurToDoViewController {
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, 
                                 tripMiddleView,
+                                tripPreferenceImageView,
                                 ourToDoMainImageView,
                                 ourToDoHeaderView,
                                 ourToDoCollectionView,
@@ -214,7 +224,13 @@ private extension OurToDoViewController {
         tripMiddleView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom).offset(ScreenUtils.getHeight(20))
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(235))
+            $0.height.equalTo(ScreenUtils.getHeight(210))
+        }
+        
+        tripPreferenceImageView.snp.makeConstraints {
+            $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(8))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
         ourToDoMainImageView.snp.makeConstraints {
@@ -225,7 +241,7 @@ private extension OurToDoViewController {
         }
         
         ourToDoHeaderView.snp.makeConstraints{
-            $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(28))
+            $0.top.equalTo(tripPreferenceImageView.snp.bottom).offset(ScreenUtils.getHeight(20))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
@@ -277,6 +293,12 @@ private extension OurToDoViewController {
         } else {
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    @objc
+    func pushToOurTripPreferences(_ sender : UITapGestureRecognizer) {
+        // TODO: - 추후 뷰 연결
+        print("pushToOurTripPreferences")
     }
     
     func loadData() async {
