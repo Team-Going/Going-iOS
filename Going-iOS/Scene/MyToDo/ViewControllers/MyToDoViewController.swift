@@ -312,11 +312,10 @@ private extension MyToDoViewController {
     }
     
     
-    /// 할일 추가/ 할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
-    func setToDoView(before: String, naviBarTitle: String, isActivate: Bool) {
+    ///  할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
+    func setInquiryToDoView(before: String, naviBarTitle: String) {
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = naviBarTitle
-        todoVC.isActivateView = isActivate
         todoVC.beforeVC = before
         todoVC.myId = self.myId
         todoVC.todoId = self.todoId
@@ -360,7 +359,13 @@ private extension MyToDoViewController {
     //추가버튼눌렀을때
     @objc
     func pushToAddToDoView() {
-        setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.add, isActivate: true)
+        let todoVC = ActivateToDoViewController()
+        todoVC.navigationBarTitle = StringLiterals.ToDo.add
+        todoVC.beforeVC = "my"
+        todoVC.myId = self.myId
+        todoVC.todoId = self.todoId
+        todoVC.tripId = self.tripId
+        self.navigationController?.pushViewController(todoVC, animated: false)
     }
     
     @objc
@@ -450,7 +455,7 @@ extension MyToDoViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.todoId = self.myToDoData?[indexPath.row].todoId ?? 0
-        setToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry, isActivate: false)
+        setInquiryToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry)
     }
 }
 

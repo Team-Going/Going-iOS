@@ -19,8 +19,8 @@ final class ToDoService: Serviceable {
         return model.map { $0.toAppData() }
     }
     
-    func getDetailToDoData(todoId: Int) async throws -> GetDetailToDoResponseStuct {
-        let urlRequest = try NetworkRequest(path: "/api/trips/todos/\(todoId)", httpMethod: .get).makeURLRequest(networkType: .withJWT)
+    func getDetailToDoData(tripId: Int, todoId: Int) async throws -> GetDetailToDoResponseStuct {
+        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)/todos/\(todoId)", httpMethod: .get).makeURLRequest(networkType: .withJWT)
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         

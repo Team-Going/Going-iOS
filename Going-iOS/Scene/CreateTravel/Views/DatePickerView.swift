@@ -20,9 +20,7 @@ final class DatePickerView: UIView {
         picker.locale = Locale(identifier: "ko-KR")
         picker.tintColor = UIColor(resource: .gray700)
         picker.timeZone = TimeZone(identifier: "Asia/Seoul")
-        if #available(iOS 13.4, *) {
-            picker.preferredDatePickerStyle = .wheels
-        }
+        picker.preferredDatePickerStyle = .wheels
         return picker
     }()
         
