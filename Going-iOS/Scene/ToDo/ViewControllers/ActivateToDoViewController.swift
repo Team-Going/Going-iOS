@@ -411,14 +411,14 @@ private extension ActivateToDoViewController {
     }
 
     func updateSaveButtonState() {
-        let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
+//        let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
         let isTodoTextFieldEmpty = self.todoTextFieldView.todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let isDateSet = self.endDateView.deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
         
         if !isTodoTextFieldEmpty 
             && self.todoTextFieldView.todoTextfield.text?.count ?? 0 <= 15
             && isDateSet
-            && isAllocatorFilled
+//            && isAllocatorFilled
             && self.memoTextView.memoTextView.text.count <= 1000 {
             self.navigationBarView.saveTextButton.setTitleColor(.red500, for: .normal)
             self.navigationBarView.saveTextButton.isEnabled = true
@@ -500,28 +500,26 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
         let memo = (self.memoTextView.memoTextView.text == self.memoTextView.memoTextviewPlaceholder ? "" : self.memoTextView.memoTextView.text) ?? ""
         let secret = beforeVC == "our" ? false : true
         if !todo.isEmpty && !deadline.isEmpty {
-            if !buttonIndex.isEmpty {
-                for i in buttonIndex {
-                    //마이투두
-                    if secret {
-                        //마이투두 -> '혼자 할 일'이거나 추가 작업인 경우
-                        if self.isSecret || navigationBarTitle == StringLiterals.ToDo.add{
-                            idSet = [self.myId]
-                        } else {
-                            idSet.append(self.todoManagerView.allParticipants[i].participantID)
-                        }
-                    }
-                    //아워투두
-                    else {
-                        //아워투두 -> 추가 작업인 경우
-                        if navigationBarTitle == StringLiterals.ToDo.add {
-                            idSet.append(self.todoManagerView.fromOurTodoParticipants[i].participantId)
-                        } else {
-                            idSet.append(self.todoManagerView.allParticipants[i].participantID)
-                        }
+            for i in buttonIndex {
+                //마이투두
+                if secret {
+                    //마이투두 -> '혼자 할 일'이거나 추가 작업인 경우
+                    if self.isSecret || navigationBarTitle == StringLiterals.ToDo.add{
+                        idSet = [self.myId]
+                    } else {
+                        idSet.append(self.todoManagerView.allParticipants[i].participantID)
                     }
                 }
-            } 
+                //아워투두
+                else {
+                    //아워투두 -> 추가 작업인 경우
+                    if navigationBarTitle == StringLiterals.ToDo.add {
+                        idSet.append(self.todoManagerView.fromOurTodoParticipants[i].participantId)
+                    } else {
+                        idSet.append(self.todoManagerView.allParticipants[i].participantID)
+                    }
+                }
+            }
             
             self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: isSecret)
             print(self.saveToDoData)
