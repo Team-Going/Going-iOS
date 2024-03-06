@@ -411,14 +411,12 @@ private extension ActivateToDoViewController {
     }
 
     func updateSaveButtonState() {
-//        let isAllocatorFilled = ((beforeVC == "our") && (buttonIndex.isEmpty == false)) || (beforeVC == "my")
         let isTodoTextFieldEmpty = self.todoTextFieldView.todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let isDateSet = self.endDateView.deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
         
         if !isTodoTextFieldEmpty 
             && self.todoTextFieldView.todoTextfield.text?.count ?? 0 <= 15
             && isDateSet
-//            && isAllocatorFilled
             && self.memoTextView.memoTextView.text.count <= 1000 {
             self.navigationBarView.saveTextButton.setTitleColor(.red500, for: .normal)
             self.navigationBarView.saveTextButton.isEnabled = true
