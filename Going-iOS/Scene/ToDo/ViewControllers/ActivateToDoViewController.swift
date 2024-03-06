@@ -523,7 +523,7 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
                 }
             } 
             
-            self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: secret)
+            self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: isSecret)
             print(self.saveToDoData)
             
             if navigationBarTitle == StringLiterals.ToDo.add {
@@ -580,9 +580,9 @@ extension ActivateToDoViewController {
         Task {
             do {
                 try await ToDoService.shared.patchEditToDo(tripId: tripId, todoId: todoId, requestBody: saveToDoData)
-                self.navigationController?.popToRootViewController(animated: false)
                 print("save: \(self.saveToDoData)")
             }
+            self.navigationController?.popToRootViewController(animated: false)
             DOOToast.show(message: "할일을 수정했어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
