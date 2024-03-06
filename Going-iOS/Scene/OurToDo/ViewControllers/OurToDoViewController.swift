@@ -89,7 +89,9 @@ final class OurToDoViewController: UIViewController {
     
     
     // MARK: - Property
-        
+       
+    let maximumAllocator: Int = 6
+    
     var tripId: Int = 0
     
     var todoId: Int = 0
@@ -487,7 +489,7 @@ extension OurToDoViewController: UICollectionViewDelegateFlowLayout {
 
 extension OurToDoViewController: TripMiddleViewDelegate {
     func presentToInviteFriendVC() {
-        if headerData?.participants.count ?? 0 < 6 {
+        if headerData?.participants.count ?? 0 < maximumAllocator {
             let inviteFriendVC = InviteFriendPopUpViewController()
             inviteFriendVC.codeLabel.text = self.inviteCode
             self.present(inviteFriendVC, animated: false)
