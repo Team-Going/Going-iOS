@@ -98,24 +98,15 @@ extension SplashViewController: ViewControllerServiceable {
 }
 
 extension SplashViewController {
+    
     func checkUserStatus() {
-        
         if UserDefaults.standard.string(forKey: UserDefaultToken.accessToken.rawValue) == nil {
             let nextVC = LoginViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)
-        }
-        
-        Task {
-            do {
-                //
-                try await OnBoardingService.shared.getSplashInfo()
-                let nextVC = DashBoardViewController()
-                self.navigationController?.pushViewController(nextVC, animated: true)
-            }
-            catch {
-                guard let error = error as? NetworkError else { return }
-                handleError(error)
-            }
+        } else {
+            let nextVC = DashBoardViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
+    
 }
