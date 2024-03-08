@@ -284,6 +284,13 @@ private extension OurToDoViewController {
         }
     }
     
+    @objc
+    func pushToTravelInfoVC() {
+        let infoVC = TravelInfoViewController()
+        infoVC.tripId = self.tripId
+        self.navigationController?.pushViewController(infoVC, animated: false)
+    }
+    
     func loadData() async {
         self.setEmptyView()
 
