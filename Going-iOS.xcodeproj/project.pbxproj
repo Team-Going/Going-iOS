@@ -1430,6 +1430,7 @@
 				F4F521A82B347BF2000E6E1E /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				F4F521BC2B34A091000E6E1E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F4439E472B56314A00D7C881 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				94A76E2A2B978C4E0083E3AD /* XCRemoteSwiftPackageReference "MultiProgressView" */,
 			);
 			productRefGroup = F4F521722B3440D7000E6E1E /* Products */;
 			projectDirPath = "";
@@ -1870,6 +1871,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		94A76E2A2B978C4E0083E3AD /* XCRemoteSwiftPackageReference "MultiProgressView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-gallagher/MultiProgressView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		F4439E472B56314A00D7C881 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -1905,6 +1914,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		94A76E2B2B978C4E0083E3AD /* MultiProgressView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94A76E2A2B978C4E0083E3AD /* XCRemoteSwiftPackageReference "MultiProgressView" */;
+			productName = MultiProgressView;
+		};
 		F4439E482B56314A00D7C881 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F4439E472B56314A00D7C881 /* XCRemoteSwiftPackageReference "lottie-ios" */;
