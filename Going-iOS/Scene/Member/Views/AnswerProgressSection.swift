@@ -21,6 +21,7 @@ class AnswerProgressSection: ProgressViewSection {
         addSubview(rightBorder)
         rightBorder.snp.makeConstraints {
             $0.width.equalTo(ScreenUtils.getWidth(1))
+            $0.height.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.height.equalToSuperview()
         }

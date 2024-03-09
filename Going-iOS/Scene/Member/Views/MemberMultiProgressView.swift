@@ -16,9 +16,17 @@ final class MemberMultiProgressView: UIView {
     
     var testResultData: Style? {
         didSet {
-            self.multiProgressView.setProgress(section: 0, to: Float(testResultData?.rates[0] ?? 0) * 0.01)
-            self.multiProgressView.setProgress(section: 1, to: Float(testResultData?.rates[1] ?? 0) * 0.01)
-            self.multiProgressView.setProgress(section: 2, to: Float(testResultData?.rates[2] ?? 0) * 0.01)
+            guard let rates = testResultData?.rates else { return }
+            
+            self.multiProgressView.setProgress(section: 0, to: Float(rates[0]) * 0.01)
+            self.multiProgressView.setProgress(section: 1, to: Float(rates[1]) * 0.01)
+            self.multiProgressView.setProgress(section: 2, to: Float(rates[2]) * 0.01)
+            
+            guard let counts = testResultData?.counts else { return }
+            
+            self.leftOptionStackView.memberCountLabel.text = "\(counts[0])" + "명"
+            self.middleOptionStackView.memberCountLabel.text = "\(counts[1])" + "명"
+            self.rightOptionStackView.memberCountLabel.text = "\(counts[2])" + "명"
         }
     }
     
@@ -26,12 +34,13 @@ final class MemberMultiProgressView: UIView {
     
     private let questionLabel = DOOLabel(font: .pretendard(.body3_bold),
                                          color: UIColor(resource: .gray700))
-  
+    
     private lazy var multiProgressView: MultiProgressView = {
         let progress = MultiProgressView()
         progress.trackBackgroundColor = UIColor(resource: .gray100)
         progress.lineCap = .round
         progress.cornerRadius = 4
+        progress.dataSource = self
         return progress
     }()
     
@@ -50,7 +59,7 @@ final class MemberMultiProgressView: UIView {
     private let rightOptionStackView = AnswerStackView(answerType: .right)
     
     // MARK: - Life Cycles
-
+    
     init(frame: CGRect, testData: MemberTravelTestStruct) {
         super.init(frame: frame)
         
@@ -58,7 +67,7 @@ final class MemberMultiProgressView: UIView {
         self.leftOptionStackView.answerLabel.text = testData.optionContent.leftOption
         self.middleOptionStackView.answerLabel.text = testData.optionContent.middleOption
         self.rightOptionStackView.answerLabel.text = testData.optionContent.rightOption
-
+        
         setStyle()
         setHierarchy()
         setLayout()
@@ -102,5 +111,17 @@ private extension MemberMultiProgressView {
             $0.height.equalTo(ScreenUtils.getHeight(12))
             $0.centerX.equalToSuperview()
         }
+    }
+}
+
+extension MemberMultiProgressView: MultiProgressViewDataSource {
+    func numberOfSections(in progressView: MultiProgressView) -> Int {
+        return 3
+    }
+    
+    func progressView(_ progressView: MultiProgressView, viewForSection section: Int) -> ProgressViewSection {
+        let bar = AnswerProgressSection()
+        bar.configure(withAnswerType: AnswerType(rawValue: section) ?? .center)
+        return bar
     }
 }

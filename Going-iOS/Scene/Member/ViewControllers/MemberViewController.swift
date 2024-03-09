@@ -9,14 +9,14 @@ import UIKit
 
 import SnapKit
 
-class MemberViewController: UIViewController {
+final class MemberViewController: UIViewController {
     
     // MARK: - Network
     
     var tripId: Int = 0
     
     private var userType: Int = 0
-
+    
     let userProfileImageSet: [UIImage] = [UIImage(resource: .imgProfileSrp),
                                           UIImage(resource: .imgProfileSri),
                                           UIImage(resource: .imgProfileSep),
@@ -28,17 +28,37 @@ class MemberViewController: UIViewController {
     
     var memberData: MemberResponseStruct? {
         didSet {
-            self.membersProfileCollectionView.reloadData() 
-            self.ourTestResultView.progressView1.testResultData = memberData?.styles[0]
-            self.ourTestResultView.progressView2.testResultData = memberData?.styles[1]
-            self.ourTestResultView.progressView3.testResultData = memberData?.styles[2]
-            self.ourTestResultView.progressView4.testResultData = memberData?.styles[3]
-            self.ourTestResultView.progressView5.testResultData = memberData?.styles[4]
+            membersProfileCollectionView.reloadData()
+            
+            guard let styles = memberData?.styles else { return }
+            
+            self.ourTestResultView.progressView1.testResultData = styles[0]
+            self.ourTestResultView.progressView2.testResultData = styles[1]
+            self.ourTestResultView.progressView3.testResultData = styles[2]
+            self.ourTestResultView.progressView4.testResultData = styles[3]
+            self.ourTestResultView.progressView5.testResultData = styles[4]
+            
+            guard let bestPrefer = memberData?.bestPrefer else { return }
+            
+            if bestPrefer.count == 0 {
+                self.redTasteLabel.text = "달라서 즐거운 여행!"
+                self.grayTasteLabel.text = "친구와 서로의 취향을 이야기해 봐요"
+                
+            } else if bestPrefer.count == 5 {
+                self.redTasteLabel.text = "최고의 여행 친구!"
+                self.grayTasteLabel.text = "모든 여행 취향이 일치해요"
+                
+            } else {
+                let preferences = bestPrefer.map { $0.replacingOccurrences(of: "여행 ", with: "") }
+                let formattedText = preferences.joined(separator: ", ")
+                self.redTasteLabel.text = formattedText
+                self.grayTasteLabel.text = "에 대한 여행 취향이 잘 맞네요"
+            }
         }
     }
     
     // MARK: - UI Properties
-
+    
     private let memberScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
@@ -48,7 +68,7 @@ class MemberViewController: UIViewController {
     }()
     
     private let contentView = UIView()
-
+    
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("우리의 여행 취향"))
     
     private let navigationUnderLineView: UIView = {
@@ -65,18 +85,24 @@ class MemberViewController: UIViewController {
         return view
     }()
     
-    private let commonTasteLabel = DOOLabel(font: .pretendard(.detail1_bold), 
-                                            color: UIColor(resource: .red500),
-                                            text: "식당, 여행 계획")
+    private let tasteLabelHorizStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .equalSpacing
+        return stack
+    }()
     
-    private lazy var tasteDescLabel = DOOLabel(font: .pretendard(.detail1_bold), 
+    private let redTasteLabel = DOOLabel(font: .pretendard(.detail1_bold),
+                                         color: UIColor(resource: .red500),
+                                         alignment: .center)
+    
+    private lazy var grayTasteLabel = DOOLabel(font: .pretendard(.detail1_bold),
                                                color: UIColor(resource: .gray700),
-                                               text: "취향이 잘 맞는 조합이네요!",
                                                alignment: .center)
-
+    
     private let memberProfileDescLabel = DOOLabel(font: .pretendard(.detail3_regular),
-                                             color: UIColor(resource: .gray400),
-                                             text: "프로필 사진을 눌러서 친구의 취향을 구경해보세요")
+                                                  color: UIColor(resource: .gray400),
+                                                  text: "프로필 사진을 눌러서 친구의 취향을 구경해보세요")
     
     private lazy var membersProfileCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
@@ -92,7 +118,7 @@ class MemberViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setStyle()
         setHierarchy()
         setLayout()
@@ -118,7 +144,7 @@ private extension MemberViewController {
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar, 
+        view.addSubviews(navigationBar,
                          navigationUnderLineView,
                          memberScrollView)
         
@@ -129,7 +155,9 @@ private extension MemberViewController {
                                 membersProfileCollectionView,
                                 ourTestResultView)
         
-        tasteDescBackgroundView.addSubviews(commonTasteLabel, tasteDescLabel)
+        tasteDescBackgroundView.addSubview(tasteLabelHorizStackView)
+        
+        tasteLabelHorizStackView.addArrangedSubviews(redTasteLabel, grayTasteLabel)
     }
     
     func setLayout() {
@@ -163,9 +191,9 @@ private extension MemberViewController {
             $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
-        
-        tasteDescLabel.snp.makeConstraints {
-            $0.center.equalTo(tasteDescBackgroundView)
+
+        tasteLabelHorizStackView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
         memberProfileDescLabel.snp.makeConstraints {
@@ -197,7 +225,8 @@ private extension MemberViewController {
     }
     
     func registerCell() {
-        membersProfileCollectionView.register(TripFriendsCollectionViewCell.self, forCellWithReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier)
+        membersProfileCollectionView.register(TripFriendsCollectionViewCell.self, 
+                                              forCellWithReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier)
     }
     
     func setDelegate() {

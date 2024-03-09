@@ -17,8 +17,7 @@ class AnswerStackView: UIStackView {
     
     private lazy var colorView = UIView()
     
-    // TODO: - struct 사용
-    private let memberCountLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray400), text: "3명")
+    let memberCountLabel = DOOLabel(font: .pretendard(.detail3_regular), color: UIColor(resource: .gray400))
     
     init(answerType: AnswerType) {
         super.init(frame: .zero)
