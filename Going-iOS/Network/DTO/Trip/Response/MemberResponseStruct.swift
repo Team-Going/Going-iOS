@@ -19,4 +19,5 @@ struct MemberResponseStruct: Response {
 
 struct Style: Response {
     let rates: [Int]
+    let counts: [Int]
 }
