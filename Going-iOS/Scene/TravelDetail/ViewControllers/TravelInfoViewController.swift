@@ -166,8 +166,9 @@ private extension TravelInfoViewController {
     
     @objc
     func editTravelButtonTapped() {
-        let vc = EditTravelViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let editVC = EditTravelViewController()
+        editVC.tripId = self.tripId
+        self.navigationController?.pushViewController(editVC, animated: true)
     }
 }
 
@@ -211,4 +212,3 @@ extension TravelInfoViewController {
         }
     }
 }
-
