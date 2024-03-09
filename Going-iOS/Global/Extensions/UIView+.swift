@@ -52,7 +52,4 @@ extension UIView {
             layer.render(in: rendererContext.cgContext)
         }
     }
-    
-    
-    
 }

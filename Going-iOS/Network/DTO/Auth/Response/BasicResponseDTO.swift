@@ -12,5 +12,4 @@ struct BasicResponseDTO: Response, DTO {
     let status: Int
     let code: String
     let message: String
-    
 }
