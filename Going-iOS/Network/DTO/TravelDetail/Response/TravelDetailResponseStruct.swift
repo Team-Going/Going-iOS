@@ -11,7 +11,7 @@ import Foundation
 
 struct TravelDetailResponseStruct: Response {
     let tripID: Int
-    let title, startDate, endDate: String
+    var title, startDate, endDate: String
 
     enum CodingKeys: String, CodingKey {
         case tripID = "tripId"

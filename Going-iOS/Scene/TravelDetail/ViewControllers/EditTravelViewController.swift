@@ -23,7 +23,9 @@ final class EditTravelViewController: UIViewController {
             self.travelNameView.characterCountLabel.text = "\(travelData?.title.count ?? 0)" + "/15"
         }
     }
-        
+    
+    var currentTravelData = TravelDetailResponseStruct(tripID: 0, title: "", startDate: "", endDate: "")
+
     private var patchRequestBody: EditTravelRequestStruct = .init(title: "", startDate: "", endDate: "")
 
     private weak var activeLabel: UILabel?
@@ -182,14 +184,17 @@ private extension EditTravelViewController {
     func updateCreateButtonState() {
         let isTravelNameTextFieldEmpty = travelNameView.travelNameTextField.text!.trimmingCharacters(in: .whitespaces).isEmpty
         
-        let isStartDateSet = travelDateView.startDateLabel.text != "시작일"
-        let isEndDateSet = travelDateView.endDateLabel.text != "종료일"
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
         var isDateValid = true
         var isEndDateNotPast = true
+        
+        guard let initialData = travelData else { return }
+        let currentData = currentTravelData
+        let isChanged = initialData.title != currentData.title || 
+                        initialData.startDate != currentData.startDate ||
+                        initialData.endDate != currentData.endDate
         
         if let startDateText = travelDateView.startDateLabel.text?.trimmingCharacters(in: .whitespaces),
            let endDateText = travelDateView.endDateLabel.text?.trimmingCharacters(in: .whitespaces),
@@ -204,11 +209,10 @@ private extension EditTravelViewController {
         }
         
         saveButton.currentType = (!isTravelNameTextFieldEmpty
-                                          && isStartDateSet
-                                          && isEndDateSet
                                           && isTravelNameTextFieldGood
                                           && isDateValid
-                                          && isEndDateNotPast) ? .enabled : .unabled
+                                          && isEndDateNotPast 
+                                          && isChanged) ? .enabled : .unabled
     }
     
     func travelNameTextFieldCheck() {
@@ -258,6 +262,9 @@ private extension EditTravelViewController {
     
     @objc
     func travelNameTextFieldDidChange() {
+        guard let title = travelNameView.travelNameTextField.text else { return }
+        currentTravelData.title = title
+        
         travelNameTextFieldCheck()
     }
     
@@ -304,12 +311,13 @@ extension EditTravelViewController: UITextFieldDelegate {
 }
 
 extension EditTravelViewController: BottomSheetDelegate {
-    func didSelectDate(date: Date) {
+    func datePickerDidChanged(date: Date) {
         let formattedDate = dateFormat(date: date)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
         if activeLabel == travelDateView.startDateLabel {
+            currentTravelData.startDate = formattedDate
             travelDateView.startDateLabel.text = formattedDate
             // endDate가 설정되어 있고 startDate가 endDate보다 뒤에 있는지 확인
             if let endDateText = travelDateView.endDateLabel.text,
@@ -318,6 +326,7 @@ extension EditTravelViewController: BottomSheetDelegate {
                 DOOToast.show(message: "여행 종료일보다 여행 시작일이 빨라요!", insetFromBottom: ScreenUtils.getHeight(374))
             }
         } else if activeLabel == travelDateView.endDateLabel {
+            currentTravelData.endDate = formattedDate
             travelDateView.endDateLabel.text = formattedDate
             // startDate가 설정되어 있고 endDate가 startDate보다 앞에 있는지 확인
             if let startDateText = travelDateView.startDateLabel.text,
@@ -326,10 +335,11 @@ extension EditTravelViewController: BottomSheetDelegate {
                 DOOToast.show(message: "여행 종료일보다 여행 시작일이 빨라요!", insetFromBottom: ScreenUtils.getHeight(374))
             }
         }
+        updateCreateButtonState()
     }
     
-    func datePickerDidChanged(date: Date) {
-        return
+    func didSelectDate(date: Date) {
+        updateCreateButtonState()
     }
 }
 
