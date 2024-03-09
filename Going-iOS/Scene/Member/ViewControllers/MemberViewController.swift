@@ -15,6 +15,8 @@ class MemberViewController: UIViewController {
     
     var tripId: Int = 0
     
+    private var userType: Int = 0
+
     let userProfileImageSet: [UIImage] = [UIImage(resource: .imgProfileSrp),
                                           UIImage(resource: .imgProfileSri),
                                           UIImage(resource: .imgProfileSep),
@@ -24,7 +26,6 @@ class MemberViewController: UIViewController {
                                           UIImage(resource: .imgProfileAep),
                                           UIImage(resource: .imgProfileAei)]
     
-    private var userType: Int = 0
     var memberData: MemberResponseStruct? {
         didSet {
             self.membersProfileCollectionView.reloadData() 
@@ -182,6 +183,7 @@ private extension MemberViewController {
         ourTestResultView.snp.makeConstraints {
             $0.top.equalTo(membersProfileCollectionView.snp.bottom).offset(24)
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.bottom.equalToSuperview()
         }
     }
