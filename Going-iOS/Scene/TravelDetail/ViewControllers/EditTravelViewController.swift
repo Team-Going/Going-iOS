@@ -218,6 +218,9 @@ private extension EditTravelViewController {
     func travelNameTextFieldCheck() {
         guard let text = travelNameView.travelNameTextField.text else { return }
         travelNameView.characterCountLabel.text = "\(text.count) / 15"
+        currentTravelData.title = text
+        
+        updateCreateButtonState()
         
         if text.count >  15 {
             travelNameView.travelNameTextField.textColor = UIColor(resource: .red500)
@@ -243,7 +246,6 @@ private extension EditTravelViewController {
             travelNameView.travelNameTextField.textColor = UIColor(resource: .gray400)
             travelNameView.warningLabel.isHidden = true
         }
-        updateCreateButtonState()
     }
     
     // MARK: - @objc Methods
@@ -262,9 +264,6 @@ private extension EditTravelViewController {
     
     @objc
     func travelNameTextFieldDidChange() {
-        guard let title = travelNameView.travelNameTextField.text else { return }
-        currentTravelData.title = title
-        
         travelNameTextFieldCheck()
     }
     
