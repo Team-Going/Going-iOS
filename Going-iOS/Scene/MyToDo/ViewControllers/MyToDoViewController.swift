@@ -311,7 +311,6 @@ private extension MyToDoViewController {
       
     }
     
-    
     ///  할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
     func setInquiryToDoView(before: String, naviBarTitle: String) {
         let todoVC = ToDoViewController()

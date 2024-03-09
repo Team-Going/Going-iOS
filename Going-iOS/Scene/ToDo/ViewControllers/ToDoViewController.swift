@@ -104,7 +104,6 @@ final class ToDoViewController: UIViewController {
             self.todoTextFieldView.todoTextfieldPlaceholder = value[0] as? String ?? ""
             self.todoTextFieldView.todoTextfield.placeholder = value[0] as? String ?? ""
             self.endDateView.deadlineTextfieldLabel.text = value[1] as? String
-//            self.todoManagerView.allocators = value[2] as? [DetailAllocators] ?? []
             self.memoTextView.memoTextviewPlaceholder = value[2] as? String ?? ""
             self.memoTextView.memoTextView.text = value[2] as? String ?? ""
         }
@@ -124,7 +123,6 @@ final class ToDoViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-//        self.navigationBarView.backgroundColor = UIColor(resource: .gray50)
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -265,10 +263,10 @@ private extension ToDoViewController {
 
 extension ToDoViewController: DoubleButtonDelegate {
     func tapEditButton() {
-//        DOOToast.show(message: "해당 기능은 추후 업데이트 예정이에요 :)", insetFromBottom: ScreenUtils.getHeight(107))
         let activateToDoVC = ActivateToDoViewController()
         activateToDoVC.navigationBarTitle = StringLiterals.ToDo.edit
         activateToDoVC.beforeVC = self.beforeVC
+        activateToDoVC.myId = self.myId
         activateToDoVC.todoId = self.todoId
         activateToDoVC.tripId = self.tripId
         self.navigationController?.pushViewController(activateToDoVC, animated: false)
