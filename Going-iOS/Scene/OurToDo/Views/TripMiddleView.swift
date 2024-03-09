@@ -268,7 +268,7 @@ private extension TripMiddleView {
 
 // MARK: - Extension
 
-extension TripMiddleView: UICollectionViewDelegate {}
+extension TripMiddleView: UICollectionViewDelegate { }
 
 extension TripMiddleView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -279,9 +279,12 @@ extension TripMiddleView: UICollectionViewDataSource {
         guard let friendsCell = collectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.identifier, for: indexPath) as? TripFriendsCollectionViewCell else {return UICollectionViewCell()}
         friendsCell.bindData(data: self.friendProfile[indexPath.row])
         
-        userType = participants?[indexPath.row].result ?? 0
-        friendsCell.profileImageView.image = userProfileImageSet[userType]
-
+        if userType >= 0 && userType < userProfileImageSet.count {
+            friendsCell.profileImageView.image = userProfileImageSet[userType]
+        } else {
+            // 대체 이미지 설정 또는 기타 처리
+            friendsCell.profileImageView.image = UIImage(resource: .imgProfileGuest)
+        }
         return friendsCell
     }
 }

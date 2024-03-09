@@ -216,12 +216,17 @@ extension MemberViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = membersProfileCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell 
+        guard let cell = membersProfileCollectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier, for: indexPath) as? TripFriendsCollectionViewCell
         else { return UICollectionViewCell() }
         
         cell.friendNameLabel.text = memberData?.participants[indexPath.row].name
-        userType = memberData?.participants[indexPath.row].result ?? 0
-        cell.profileImageView.image = userProfileImageSet[userType]
+
+        if userType >= 0 && userType < userProfileImageSet.count {
+            cell.profileImageView.image = userProfileImageSet[userType]
+        } else {
+            // 대체 이미지 설정 또는 기타 처리
+            cell.profileImageView.image = UIImage(resource: .imgProfileGuest)
+        }
         return cell
     }
 }
