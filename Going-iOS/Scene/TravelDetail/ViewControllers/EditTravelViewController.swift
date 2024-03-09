@@ -334,6 +334,7 @@ extension EditTravelViewController: BottomSheetDelegate {
                 DOOToast.show(message: "여행 종료일보다 여행 시작일이 빨라요!", insetFromBottom: ScreenUtils.getHeight(374))
             }
         }
+        travelNameTextFieldCheck()
         updateCreateButtonState()
     }
     
@@ -386,7 +387,6 @@ extension EditTravelViewController {
         Task {
             do {
                 try await TravelDetailService.shared.patchTravelInfo(tripId: tripId, requestBody: patchRequestBody)
-                print("save: \(self.patchRequestBody)")
             }
             self.navigationController?.popToRootViewController(animated: false)
             DOOToast.show(message: "여행 정보가 수정되었어요", insetFromBottom: ScreenUtils.getHeight(103))
