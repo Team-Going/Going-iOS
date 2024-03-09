@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941898652B9CD84200CBFEF6 /* TravelTestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941898642B9CD84200CBFEF6 /* TravelTestResultView.swift */; };
 		941B1B782B50EB0C00D28EBA /* CodeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B1B772B50EB0C00D28EBA /* CodeResponseDTO.swift */; };
 		941B1B7C2B50ECED00D28EBA /* JoiningSuccessAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B1B7B2B50ECED00D28EBA /* JoiningSuccessAppData.swift */; };
 		941B1B812B51089400D28EBA /* CodeRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B1B802B51089400D28EBA /* CodeRequestDTO.swift */; };
@@ -206,6 +207,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		941898642B9CD84200CBFEF6 /* TravelTestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestResultView.swift; sourceTree = "<group>"; };
 		941B1B772B50EB0C00D28EBA /* CodeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeResponseDTO.swift; sourceTree = "<group>"; };
 		941B1B7B2B50ECED00D28EBA /* JoiningSuccessAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningSuccessAppData.swift; sourceTree = "<group>"; };
 		941B1B802B51089400D28EBA /* CodeRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeRequestDTO.swift; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 				94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */,
 				94B50B802B93896300C709F6 /* EmptyUserTestView.swift */,
 				94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */,
+				941898642B9CD84200CBFEF6 /* TravelTestResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1561,6 +1564,7 @@
 				941B1B832B510D9D00D28EBA /* CreateTravelRequestDTO.swift in Sources */,
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
 				F44D98662B4EB7F700341893 /* NetworkRequest.swift in Sources */,
+				941898652B9CD84200CBFEF6 /* TravelTestResultView.swift in Sources */,
 				F44D985E2B4EB6E000341893 /* HTTPMethod.swift in Sources */,
 				945234472B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
