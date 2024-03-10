@@ -183,3 +183,11 @@ private extension TravelTestCollectionViewCell {
         }
     }
 }
+
+extension TravelTestCollectionViewCell {
+    func configureButtonColors(with selectedAnswerIndex: Int?) {
+        for (index, button) in answerButtons.enumerated() {
+            button.backgroundColor = (index == selectedAnswerIndex) ? UIColor(resource: .gray400) : UIColor(resource: .gray50)
+        }
+    }
+}

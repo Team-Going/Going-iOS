@@ -31,7 +31,22 @@ class TravelDetailService: Serviceable {
         let requestData = requestBody.toDictionary()
         let body = try JSONSerialization.data(withJSONObject: requestData)
         
-        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)", httpMethod: .patch, body: body).makeURLRequest(networkType: .withJWT)
+        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)", 
+                                            httpMethod: .patch,
+                                            body: body).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        try dataDecodeAndhandleErrorCode(data: data, decodeType: BasicResponseDTO.self)
+    }
+    
+    func patchTravelTest(tripId: Int, requestBody: EditTravelTestRequestStruct) async throws {
+        let requestData = requestBody.toDictionary()
+        let body = try JSONSerialization.data(withJSONObject: requestData)
+        
+        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)/participant", 
+                                            httpMethod: .patch,
+                                            body: body).makeURLRequest(networkType: .withJWT)
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         

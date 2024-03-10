@@ -9,8 +9,9 @@ import UIKit
 
 import SnapKit
 
-protocol RetryTestResultViewDelegate: AnyObject {
+protocol TravelTestResultViewDelegate: AnyObject {
     func retryTravelTestButton()
+    func userDidSelectAnswer()
 }
 
 final class TravelTestResultView: UIView {
@@ -26,14 +27,16 @@ final class TravelTestResultView: UIView {
             self.travelTestCollectionView.reloadData()
         }
     }
-        
-    weak var delegate: RetryTestResultViewDelegate?
+ 
+    var resultIntArray: [Int] = []
+    
+    weak var delegate: TravelTestResultViewDelegate?
     
     private let travelTestQuestionDummy = TravelTestQuestionStruct.travelTestDummy
     
     // MARK: - UI Properties
     
-    private lazy var travelTestCollectionView: UICollectionView = {
+    lazy var travelTestCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -117,6 +120,7 @@ extension TravelTestResultView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
+        cell.delegate = self
         cell.travelTestData = travelTestQuestionDummy[indexPath.row]
 
         if beforVC == StringLiterals.MyProfile.myTravelProfile && !styleResult.isEmpty{
@@ -124,7 +128,22 @@ extension TravelTestResultView: UICollectionViewDataSource {
             cell.setButtonDisable()
         }
         
+        // 여기서 유저의 이전 선택을 해당 셀에 반영
+        if resultIntArray.count > 0 {
+            let selectedAnswerIndex = resultIntArray[indexPath.row] // 유저가 선택한 인덱스
+            cell.configureButtonColors(with: selectedAnswerIndex)
+        }
+
         return cell
+    }
+}
+
+extension TravelTestResultView: TravelTestCollectionViewCellDelegate {
+    func didSelectAnswer(in cell: TravelTestCollectionViewCell, selectedAnswer: Int) {
+        guard let indexPath = travelTestCollectionView.indexPath(for: cell) else { return }
+        resultIntArray[indexPath.row] = selectedAnswer - 1 // 유저의 새로운 선택으로 업데이트
+
+        delegate?.userDidSelectAnswer()
     }
 }
 

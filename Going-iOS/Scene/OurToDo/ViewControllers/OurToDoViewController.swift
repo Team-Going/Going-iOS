@@ -333,7 +333,6 @@ private extension OurToDoViewController {
   
     @objc
     func pushToOurTripPreferences(_ sender : UITapGestureRecognizer) {
-        // TODO: - 추후 뷰 연결
         let memberVC = MemberViewController()
         memberVC.tripId = self.tripId
         self.navigationController?.pushViewController(memberVC, animated: false)

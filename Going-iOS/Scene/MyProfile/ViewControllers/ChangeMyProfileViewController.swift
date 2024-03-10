@@ -9,22 +9,20 @@ import UIKit
 
 import SnapKit
 
-final class MakeProfileViewController: UIViewController {
-    
-    var socialToken: String?
-    
+final class ChangeMyProfileViewController: UIViewController {
+        
     private var userName: String?
     
     private var isNameTextFieldGood: Bool = false
     private var isDescTextFieldGood: Bool = false
     
-    private var userProfileData = UserProfileAppData(name: "", intro: "", platform: "")
+    private var userProfileData = ChangeMyProfileDTO(name: "", intro: "")
     
     private let nameLabel = DOOLabel(font: .pretendard(.body2_bold),
                                      color: UIColor(resource: .gray700),
                                      text: "닉네임")
     
-    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("프로필 생성"))
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("프로필 수정"))
     
     private let naviUnderLineView: UIView = {
         let view = UIView()
@@ -32,7 +30,7 @@ final class MakeProfileViewController: UIViewController {
         return view
     }()
     
-    private lazy var nameTextField: UITextField = {
+    lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
         textField.setPlaceholder(placeholder: "3글자 이내로 작성해 주세요", fontColor: .gray200, font: .pretendard(.body3_medi))
@@ -75,7 +73,7 @@ final class MakeProfileViewController: UIViewController {
         return label
     }()
     
-    private lazy var descTextField: UITextField = {
+    lazy var descTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
         textField.setPlaceholder(placeholder: "여행을 떠나기 전 설레는 마음을 적어볼까요?", fontColor: UIColor(resource: .gray200), font: .pretendard(.body3_medi))
@@ -112,7 +110,7 @@ final class MakeProfileViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let button = UIButton()
-        button.setTitle("다음", for: .normal)
+        button.setTitle("저장", for: .normal)
         button.setTitleColor(UIColor(resource: .gray200), for: .normal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 6
@@ -137,7 +135,7 @@ final class MakeProfileViewController: UIViewController {
     }
 }
 
-private extension MakeProfileViewController {
+private extension ChangeMyProfileViewController {
     func setHierarchy() {
         self.view.addSubviews(navigationBar,
                               naviUnderLineView,
@@ -318,29 +316,18 @@ private extension MakeProfileViewController {
             self.userProfileData.name = nameText
         }
         
-                
         if let descText = descTextField.text {
             self.userProfileData.intro = descText
         }
         
-        if UserDefaults.standard.bool(forKey: IsAppleLogined.isAppleLogin.rawValue) {
-            self.userProfileData.platform = SocialPlatform.apple.rawValue
-        } else {
-            self.userProfileData.platform = SocialPlatform.kakao.rawValue
-        }
-        
-        //회원가입API
-        guard let token = self.socialToken else { return }
-        let signUpBody = self.userProfileData.toDTOData()
-        self.userName = nameTextField.text
-        
+        //내프로필 수정 서버통신
+        let signUpBody = self.userProfileData
         
         Task {
             do {
-                try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
-                let nextVC = UserTestSplashViewController()
-                UserDefaults.standard.set(true, forKey: "isFromMakeProfileVC")
-                self.navigationController?.pushViewController(nextVC, animated: true)
+                try await ProfileService.shared.patchMyProfileData(myProfileData: signUpBody)
+                self.navigationController?.popViewController(animated: true)
+                DOOToast.show(message: "프로필을 수정했어요", insetFromBottom: 80)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -350,7 +337,7 @@ private extension MakeProfileViewController {
     }
 }
 
-extension MakeProfileViewController: ViewControllerServiceable {
+extension ChangeMyProfileViewController: ViewControllerServiceable {
     //추후에 에러코드에 따른 토스트 메세지 구현해야됨
     func handleError(_ error: NetworkError) {
         switch error {
@@ -368,7 +355,7 @@ extension MakeProfileViewController: ViewControllerServiceable {
     }
 }
 
-extension MakeProfileViewController: UITextFieldDelegate {
+extension ChangeMyProfileViewController: UITextFieldDelegate {
     
     //TextField에 변경사항이 생기면, 화면의 TextField에 실제로 작성되기 전에 호출되는 함수
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

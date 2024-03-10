@@ -13,6 +13,10 @@ final class QuitTravelPopUpViewController: PopUpDimmedViewController {
     
     // MARK: - UI Properties
     
+    var tripId: Int?
+    
+    var leaveTravelDismissCompletion: (() -> Void)?
+    
     private let popUpView = DOOPopUpContainerView()
     
     private let quitTravelLabel = DOOLabel(font: .pretendard(.body1_bold),
@@ -114,7 +118,44 @@ private extension QuitTravelPopUpViewController {
     
     @objc
     func quitButtonTapped() {
-        print("button tapped")
-        // TODO: - 여행 나가기 서버 통신
+        guard let tripId else { return }
+        patchLeaveTravel(tripId: tripId)
+    }
+}
+
+extension QuitTravelPopUpViewController {
+    
+    func patchLeaveTravel(tripId: Int) {
+        Task {
+            do {
+                try await TravelService.shared.patchLeaveTravel(tripId: tripId)
+                
+                guard let leaveTravelDismissCompletion else {return}
+                self.dismiss(animated: false) {
+                    leaveTravelDismissCompletion()
+                }
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+        
+    }
+}
+
+extension QuitTravelPopUpViewController: ViewControllerServiceable {
+    
+    func handleError(_ error: NetworkError) {
+        switch error {
+          
+        case .unAuthorizedError, .reIssueJWT:
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+            print(error.description)
+        }
     }
 }

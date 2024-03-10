@@ -97,6 +97,7 @@ private extension MyProfileViewController {
     
     func setDelegate() {
         myResultView.delegate = self
+        myProfileTopView.delegate = self
     }
     
     func setStyle() {
@@ -281,6 +282,16 @@ extension MyProfileViewController {
 extension MyProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let nextVC = UserTestSplashViewController()
+        UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
         self.navigationController?.pushViewController(nextVC, animated: false)
+    }
+}
+
+extension MyProfileViewController: MyProfileTopViewDelegate {
+    func changeMyProfileButtonTapped() {
+        let nextVC = ChangeMyProfileViewController()
+        nextVC.nameTextField.text = myProfileTopView.userNameLabel.text
+        nextVC.descTextField.text = myProfileTopView.userDescriptionLabel.text
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

@@ -9,7 +9,14 @@ import UIKit
 
 import SnapKit
 
+protocol MyProfileTopViewDelegate: AnyObject {
+    func changeMyProfileButtonTapped()
+}
+
 final class MyProfileTopView: UIView {
+    
+    weak var delegate: MyProfileTopViewDelegate?
+
     
     // TODO: - 유저 테스트 수행 여부에 따른 프로필 이미지 분기 처리
     
@@ -132,8 +139,7 @@ private extension MyProfileTopView {
     
     @objc
     func editProfileButtonTapped() {
-//        let vc =
-//        self.navigationController?.pushViewController(vc, animated: true)
-        print("button tapped")
+        delegate?.changeMyProfileButtonTapped()
+
     }
 }

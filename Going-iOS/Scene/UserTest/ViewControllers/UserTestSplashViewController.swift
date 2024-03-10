@@ -35,11 +35,16 @@ final class UserTestSplashViewController: UIViewController {
     
     private lazy var skipButton: UIButton = {
         let button = UIButton()
-        if beforeVC == "myProfile" {
+        
+        //내 프로필조회뷰 or 내여행프로필뷰에서 온 경우
+        if UserDefaults.standard.bool(forKey: "isFromMakeProfileVC") == false {
             button.setTitle("내 여행 프로필로 돌아가기", for: .normal)
+          
+        //최초 진입해서 성향테스트뷰에서 온 경우
         } else {
             button.setTitle("테스트 건너뛰기", for: .normal)
         }
+        
         button.setTitleColor(UIColor(resource: .gray300), for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
         button.setUnderline()
@@ -119,9 +124,8 @@ private extension UserTestSplashViewController {
     
     @objc 
     func skipButtonTapped() {
-        if beforeVC == "myProfile" {
-            let nextVC = MyTravelProfileViewController()
-            self.navigationController?.pushViewController(nextVC, animated: false)
+        if UserDefaults.standard.bool(forKey: "isFromMakeProfileVC") == false {
+            self.navigationController?.popViewController(animated: true)
         } else {
             let nextVC = DashBoardViewController()
             self.navigationController?.pushViewController(nextVC, animated: true)

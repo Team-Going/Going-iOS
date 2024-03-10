@@ -16,6 +16,7 @@ final class TravelTestViewController: UIViewController {
     private let travelTestQuestionDummy = TravelTestQuestionStruct.travelTestDummy
     
     var createRequestData: CreateTravelRequestAppData?
+    
     var responseData: CreateTravelResponseAppData? {
         didSet {
             DispatchQueue.main.async {
@@ -26,7 +27,8 @@ final class TravelTestViewController: UIViewController {
         }
     }
     
-    private var testTravelRequestDTO = CreateTravelRequestDTO(title: "", startDate: "", endDate: "", styleA: 0, styleB: 0, styleC: 0, styleD: 0, styleE: 0)
+    private var testTravelRequestDTO = CreateTravelRequestDTO(title: "", startDate: "", endDate: "", 
+                                                              styleA: 0, styleB: 0, styleC: 0, styleD: 0, styleE: 0)
 
     /// 선택된 답변을 저장할 배열
     private lazy var selectedAnswers: [Int?] = Array(repeating: nil, count: travelTestQuestionDummy.count)
@@ -134,7 +136,9 @@ private extension TravelTestViewController {
     }
     
     func setGradient() {
-        gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), axis: .vertical)
+        gradientView.setGradient(firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0), 
+                                 secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), 
+                                 axis: .vertical)
     }
     
     ///  모든 답변이 완료되었는지 확인하는 메서드

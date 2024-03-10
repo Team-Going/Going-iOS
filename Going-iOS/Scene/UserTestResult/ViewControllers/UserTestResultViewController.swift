@@ -11,7 +11,7 @@ import SnapKit
 import Photos
 
 final class UserTestResultViewController: UIViewController {
-        
+    
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
@@ -19,7 +19,7 @@ final class UserTestResultViewController: UIViewController {
             self.resultView.resultViewData = data
         }
     }
-
+    
     private var testResultIndex: Int?
     
     private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 캐릭터"))
@@ -54,7 +54,13 @@ final class UserTestResultViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(resource: .gray500)
-        button.setTitle("doorip 시작하기", for: .normal)
+        
+        if UserDefaults.standard.bool(forKey: "isFromMakeProfileVC") == false {
+            button.setTitle("내 여행 프로필로 돌아가기", for: .normal)
+        } else {
+            button.setTitle("doorip 시작하기", for: .normal)
+        }
+        
         button.setTitleColor(UIColor(resource: .white000), for: .normal)
         button.titleLabel?.font = .pretendard(.body1_bold)
         button.layer.cornerRadius = 6
@@ -77,7 +83,7 @@ final class UserTestResultViewController: UIViewController {
         setLayout()
         setDelegate()
         getProfileInfo()
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -182,8 +188,28 @@ private extension UserTestResultViewController {
     
     @objc
     func nextButtonTapped() {
-        let nextVC = DashBoardViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+        if UserDefaults.standard.bool(forKey: "isFromMakeProfileVC") == false {
+            
+            guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+                // 뷰 스택에서 MyProfileViewController를 찾아서 거기까지 pop 합니다.
+                for viewController in viewControllerStack {
+                    
+                    //내 프로필로 갈건지
+                    if let myyProfileVC = viewController as? MyProfileViewController {
+                        self.navigationController?.popToViewController(myyProfileVC, animated: true)
+                    }
+                    
+                    //내 여행프로필로 갈건지
+                    if let myTravelyProfileVC = viewController as? MyTravelProfileViewController {
+                        self.navigationController?.popToViewController(myTravelyProfileVC, animated: true)
+                    }
+                }
+        } else {
+            let nextVC = DashBoardViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        
     }
     
     func showPermissionAlert() {
@@ -268,7 +294,14 @@ extension UserTestResultViewController: ViewControllerServiceable {
 
 extension UserTestResultViewController: TestResultViewDelegate {
     func backToTestButton() {
-        let nextVC = UserTestSplashViewController()
-        self.navigationController?.pushViewController(nextVC, animated: false)
+        
+        // 뷰 스택에서 UserTestSplashViewController를 찾아서 거기까지 pop
+        guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+        for viewController in viewControllerStack {
+            if let userTestSplashVC = viewController as? UserTestSplashViewController {
+                self.navigationController?.popToViewController(userTestSplashVC, animated: true)
+            }
+        }
+        
     }
 }

@@ -278,12 +278,15 @@ extension MyTravelProfileViewController: CheckPhotoAccessProtocol {
 extension MyTravelProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let vc = UserTestSplashViewController()
+        UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
         self.navigationController?.pushViewController(vc, animated: false)
-        vc.beforeVC = "myProfile"
+        
     }
 }
 
-extension MyTravelProfileViewController: RetryTestResultViewDelegate {
+extension MyTravelProfileViewController: TravelTestResultViewDelegate {
+    func userDidSelectAnswer() { return }
+    
     func retryTravelTestButton() {
         let vc = TravelTestViewController()
         self.navigationController?.pushViewController(vc, animated: false)
