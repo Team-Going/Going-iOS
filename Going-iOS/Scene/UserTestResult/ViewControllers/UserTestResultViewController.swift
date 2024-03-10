@@ -11,7 +11,7 @@ import SnapKit
 import Photos
 
 final class UserTestResultViewController: UIViewController {
-        
+    
     private var testResultData: UserTypeTestResultAppData? {
         didSet {
             guard let data = testResultData else { return }
@@ -19,7 +19,7 @@ final class UserTestResultViewController: UIViewController {
             self.resultView.resultViewData = data
         }
     }
-
+    
     private var testResultIndex: Int?
     
     private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("나의 여행 캐릭터"))
@@ -77,7 +77,7 @@ final class UserTestResultViewController: UIViewController {
         setLayout()
         setDelegate()
         getProfileInfo()
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -268,7 +268,14 @@ extension UserTestResultViewController: ViewControllerServiceable {
 
 extension UserTestResultViewController: TestResultViewDelegate {
     func backToTestButton() {
-        let nextVC = UserTestSplashViewController()
-        self.navigationController?.pushViewController(nextVC, animated: false)
+        
+        // 뷰 스택에서 UserTestSplashViewController를 찾아서 거기까지 pop
+        guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+        for viewController in viewControllerStack {
+            if let userTestSplashVC = viewController as? UserTestSplashViewController {
+                self.navigationController?.popToViewController(userTestSplashVC, animated: true)
+            }
+        }
+        
     }
 }
