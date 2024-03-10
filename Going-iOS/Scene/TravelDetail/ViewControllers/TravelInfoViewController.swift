@@ -161,6 +161,12 @@ private extension TravelInfoViewController {
     @objc
     func quitTravelButtonTapped() {
         let vc = QuitTravelPopUpViewController()
+        vc.leaveTravelDismissCompletion = { [weak self] in
+            guard let self else {return}
+            self.navigationController?.pushViewController(DashBoardViewController(), animated: false)
+            DOOToast.show(message: "여행방에서 나왔어요", insetFromBottom: 120)
+        }
+        vc.tripId = self.tripId
         self.present(vc, animated: false)
     }
     
