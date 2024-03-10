@@ -16,7 +16,17 @@ protocol RetryTestResultViewDelegate: AnyObject {
 final class TravelTestResultView: UIView {
     
     // MARK: - Properties
-    
+        
+    var beforVC: String = ""
+
+    var participantId: Int = 0
+
+    var styleResult: [Int] = [] {
+        didSet {
+            self.travelTestCollectionView.reloadData()
+        }
+    }
+        
     weak var delegate: RetryTestResultViewDelegate?
     
     private let travelTestQuestionDummy = TravelTestQuestionStruct.travelTestDummy
@@ -108,6 +118,12 @@ extension TravelTestResultView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
         cell.travelTestData = travelTestQuestionDummy[indexPath.row]
+
+        if beforVC == "MyTravelProfile" && !styleResult.isEmpty{
+            cell.styleResult = styleResult[indexPath.row]
+            cell.setButtonDisable()
+        }
+        
         return cell
     }
 }

@@ -27,6 +27,8 @@ final class MyTravelProfileViewController: UIViewController {
     }
     
     private var testResultIndex: Int?
+    
+    lazy var participantId: Int = 0
         
     // MARK: - UI Properties
     
@@ -69,7 +71,7 @@ final class MyTravelProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getUserProfile()
+        getPersonalProfile(participantId: participantId)
     }
 }
 
@@ -253,13 +255,21 @@ extension MyTravelProfileViewController: RetryTestResultViewDelegate {
 // MARK: - Network
 
 extension MyTravelProfileViewController {
-    func getUserProfile() {
+    
+    func getPersonalProfile(participantId: Int) {
         Task {
             do {
-                let profileData = try await TravelService.shared.getProfileInfo()
+                let profileData = try await MemberService.shared.getPersonalProfile(participantId: participantId)
                 self.testResultIndex = profileData.result
                 self.myProfileTopView.userDescriptionLabel.text = profileData.intro
                 self.myProfileTopView.userNameLabel.text = profileData.name
+                self.travelTestResultView.beforVC = "MyTravelProfile"
+                self.travelTestResultView.participantId = participantId
+                self.travelTestResultView.styleResult = [profileData.styleA,
+                                                         profileData.styleB,
+                                                         profileData.styleC,
+                                                         profileData.styleD,
+                                                         profileData.styleE]
                 
                 guard let index = testResultIndex else { return }
                 self.testResultData = UserTypeTestResultAppData.dummy()[index]

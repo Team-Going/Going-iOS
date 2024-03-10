@@ -523,10 +523,10 @@ extension OurToDoViewController: TripMiddleViewDelegate {
         }
     }
     
-    func pushToMemberVC() {
-        let vc = MemberViewController()
-        vc.tripId = self.tripId
-        self.navigationController?.pushViewController(vc, animated: false)
+    func pushToMemberVC(participantId: Int) {
+        let myTravelProfileVC = MyTravelProfileViewController()
+        myTravelProfileVC.participantId = participantId
+        self.navigationController?.pushViewController(myTravelProfileVC, animated: false)
     }
 }
 

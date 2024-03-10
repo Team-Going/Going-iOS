@@ -29,6 +29,13 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
             self.rightOptionLabel.text = data.optionContent.rightOption
         }
     }
+        
+    var styleResult: Int? {
+        didSet {
+            guard let value = styleResult else { return }
+            setStyleTagResultButton(result: value)
+        }
+    }
 
     // MARK: - UI Components
     
@@ -72,6 +79,18 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // 취향 태그 결과값에 따라 버튼 색상 세팅하는 메소드
+    func setStyleTagResultButton(result: Int) {
+        answerButtons[result-1].backgroundColor = UIColor(resource: .gray400)
+    }
+    
+    // 프로필 조회 시 취향 태그 버튼 비활성화하는 메소드
+    func setButtonDisable() {
+        for index in 0...4 {
+            answerButtons[index].isEnabled = false
+        }
     }
     
     // MARK: - @objc Methods

@@ -27,4 +27,26 @@ class MemberService: Serviceable {
         
         return model
     }
+    
+    /// 개인 프로필 조회 API
+    func getPersonalProfile(participantId: Int) async throws -> GetPersonalProfileDTO {
+    
+        let urlRequest = try NetworkRequest(path: "/api/trips/participants/\(participantId)", httpMethod: .get).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: GetPersonalProfileDTO.self)
+        else { return GetPersonalProfileDTO(name: "", 
+                                            intro: "",
+                                            result: 0,
+                                            styleA: -2,
+                                            styleB: -2,
+                                            styleC: -2, 
+                                            styleD: -2,
+                                            styleE: -2,
+                                            isOwner: false) }
+        
+        return model
+    }
+    
 }

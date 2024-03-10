@@ -2,7 +2,7 @@ import UIKit
 
 protocol TripMiddleViewDelegate: AnyObject {
     func presentToInviteFriendVC()
-    func pushToMemberVC()
+    func pushToMemberVC(participantId: Int)
 }
 
 final class TripMiddleView: UIView {
@@ -111,6 +111,8 @@ final class TripMiddleView: UIView {
     
     private var userType: Int = 0
     
+    var participantId: Int = 0
+    
     var friendProfile: [Participant] = []
     
     weak var delegate: TripMiddleViewDelegate?
@@ -155,13 +157,13 @@ final class TripMiddleView: UIView {
     
     @objc
     func pushToInquiryFriendsView() {
-        self.delegate?.pushToMemberVC()
+        self.delegate?.pushToMemberVC(participantId: participantId)
     }
     
     //친구라벨 눌렀을 때
     @objc 
     func didTapView(_ sender: UITapGestureRecognizer) {
-        self.delegate?.pushToMemberVC()
+        self.delegate?.pushToMemberVC(participantId: participantId)
     }
 }
 
@@ -259,7 +261,13 @@ private extension TripMiddleView {
 
 // MARK: - Extension
 
-extension TripMiddleView: UICollectionViewDelegate { }
+extension TripMiddleView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.participantId = participants?[indexPath.row].participantId ?? 0
+        self.delegate?.pushToMemberVC(participantId: self.participantId)
+    }
+}
 
 extension TripMiddleView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
