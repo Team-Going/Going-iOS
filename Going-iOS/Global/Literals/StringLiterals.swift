@@ -66,6 +66,7 @@ enum StringLiterals {
         static let pleaseAddToDo = "할일을 추가해 보세요"
         static let emptyAllocator = " 앗! 누가하지?"
         static let maximumToastMSG = "여행은 최대 6명까지 함께할 수 있어요"
+        static let tripPreferenceLabelText = "우리의 여행 취향 보러가기"
     }
     
     enum MyToDo {
@@ -88,5 +89,11 @@ enum StringLiterals {
         static let addToDo = "할일 추가"
         static let inquiryToDo = "할일 조회"
         static let editToDo = "할일 수정"
+    }
+    
+    enum MyProfile {
+        static let myTravelProfile = "MyTravelProfile"
+        static let myProfileTitle = "내 여행 프로필"
+        static let friendProfileTitle = "친구 여행 프로필"
     }
 }

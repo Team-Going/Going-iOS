@@ -2,7 +2,7 @@ import UIKit
 
 protocol TripMiddleViewDelegate: AnyObject {
     func presentToInviteFriendVC()
-    func pushToMemberVC()
+    func pushToMemberVC(participantId: Int)
 }
 
 final class TripMiddleView: UIView {
@@ -111,6 +111,8 @@ final class TripMiddleView: UIView {
     
     private var userType: Int = 0
     
+    var participantId: Int = 0
+    
     var friendProfile: [Participant] = []
     
     weak var delegate: TripMiddleViewDelegate?
@@ -155,13 +157,13 @@ final class TripMiddleView: UIView {
     
     @objc
     func pushToInquiryFriendsView() {
-        self.delegate?.pushToMemberVC()
+        self.delegate?.pushToMemberVC(participantId: participantId)
     }
     
     //친구라벨 눌렀을 때
     @objc 
     func didTapView(_ sender: UITapGestureRecognizer) {
-        self.delegate?.pushToMemberVC()
+        self.delegate?.pushToMemberVC(participantId: participantId)
     }
 }
 
@@ -242,7 +244,6 @@ private extension TripMiddleView {
     func setStyle() {
         self.backgroundColor = UIColor(resource: .gray50)
         tripFriendsContainer.backgroundColor = UIColor(resource: .white000)
-        tripFriendsBtn.setImage(UIImage(resource: .btnEnter), for: .normal)
         addButton.layer.cornerRadius = ScreenUtils.getHeight(22.5)
     }
 
@@ -259,7 +260,13 @@ private extension TripMiddleView {
 
 // MARK: - Extension
 
-extension TripMiddleView: UICollectionViewDelegate { }
+extension TripMiddleView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.participantId = participants?[indexPath.row].participantId ?? 0
+        self.delegate?.pushToMemberVC(participantId: self.participantId)
+    }
+}
 
 extension TripMiddleView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -269,6 +276,8 @@ extension TripMiddleView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let friendsCell = collectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.identifier, for: indexPath) as? TripFriendsCollectionViewCell else {return UICollectionViewCell()}
         friendsCell.bindData(data: self.friendProfile[indexPath.row])
+        
+        self.userType = participants?[indexPath.row].result ?? -2
         
         if userType >= 0 && userType < userProfileImageSet.count {
             friendsCell.profileImageView.image = userProfileImageSet[userType]

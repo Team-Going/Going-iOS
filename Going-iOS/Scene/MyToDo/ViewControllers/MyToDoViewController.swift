@@ -277,6 +277,7 @@ private extension MyToDoViewController {
         self.scrollView.delegate = self
         self.myToDoCollectionView.delegate = self
         self.myToDoCollectionView.dataSource = self
+        self.navigationBarview.delegate = self
     }
 
     func registerCell() {
@@ -530,5 +531,15 @@ extension MyToDoViewController {
             guard let error = error as? NetworkError else { return }
             handlingError(error)
         }
+    }
+}
+
+extension MyToDoViewController: DOONavigationBarDelegate {
+    func saveTextButtonTapped() {}
+    
+    func pushToTravelInfoVC() {
+        let infoVC = TravelInfoViewController()
+        infoVC.tripId = self.tripId
+        self.navigationController?.pushViewController(infoVC, animated: true)
     }
 }

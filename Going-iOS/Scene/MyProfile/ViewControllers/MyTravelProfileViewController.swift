@@ -27,6 +27,12 @@ final class MyTravelProfileViewController: UIViewController {
     }
     
     private var testResultIndex: Int?
+    
+    lazy var participantId: Int = 0
+    
+    var isOwner: Bool = false
+    
+    var isEmpty: Bool = false
         
     // MARK: - UI Properties
     
@@ -61,6 +67,7 @@ final class MyTravelProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
+        setOwnerOption()
         setHierarchy()
         setLayout()
         setDelegate()
@@ -69,13 +76,19 @@ final class MyTravelProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getUserProfile()
+        getPersonalProfile(participantId: participantId)
+        hideTabBar()
     }
 }
 
 // MARK: - Private Methods
 
 private extension MyTravelProfileViewController {
+    
+    func hideTabBar() {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     func setStyle() {
         view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
@@ -182,6 +195,32 @@ private extension MyTravelProfileViewController {
         }
     }
     
+    func setOwnerOption() {
+        if isOwner {
+            navigationBar.titleLabel.text = StringLiterals.MyProfile.myProfileTitle
+            saveButton.isHidden = false
+            myProfileTopView.editProfileButton.isHidden = false
+            userTestResultScrollView.myResultView.backToTestButton.isHidden = false
+            travelTestResultView.retryTravelTestButton.isHidden = false
+        } else {
+            navigationBar.titleLabel.text = StringLiterals.MyProfile.friendProfileTitle
+            saveButton.isHidden = true
+            myProfileTopView.editProfileButton.isHidden = true
+            userTestResultScrollView.myResultView.backToTestButton.isHidden = true
+            travelTestResultView.retryTravelTestButton.isHidden = true
+        }
+    }
+    
+    func setEmptyView() {
+        if isEmpty {
+            userTestResultScrollView.isHidden = true
+            emptyUserTestView.isHidden = false
+        } else {
+            userTestResultScrollView.isHidden = false
+            emptyUserTestView.isHidden = true
+        }
+    }
+    
     // MARK: - @objc methods
     
     @objc func saveImageButtonTapped() {
@@ -194,6 +233,7 @@ private extension MyTravelProfileViewController {
             self.segmentIndex = 0
             userTestResultScrollView.isHidden = false
             travelTestResultView.isHidden = true
+            setEmptyView()
         } else {
             self.segmentIndex = 1
             emptyUserTestView.isHidden = true
@@ -256,16 +296,31 @@ extension MyTravelProfileViewController: TravelTestResultViewDelegate {
 // MARK: - Network
 
 extension MyTravelProfileViewController {
-    func getUserProfile() {
+    
+    func getPersonalProfile(participantId: Int) {
         Task {
             do {
-                let profileData = try await TravelService.shared.getProfileInfo()
+                let profileData = try await MemberService.shared.getPersonalProfile(participantId: participantId)
                 self.testResultIndex = profileData.result
                 self.myProfileTopView.userDescriptionLabel.text = profileData.intro
                 self.myProfileTopView.userNameLabel.text = profileData.name
+                self.travelTestResultView.beforVC = StringLiterals.MyProfile.myTravelProfile
+                self.travelTestResultView.participantId = participantId
+                self.travelTestResultView.styleResult = [profileData.styleA,
+                                                         profileData.styleB,
+                                                         profileData.styleC,
+                                                         profileData.styleD,
+                                                         profileData.styleE]
                 
                 guard let index = testResultIndex else { return }
-                self.testResultData = UserTypeTestResultAppData.dummy()[index]
+                if index != -1 {
+                    self.testResultData = UserTypeTestResultAppData.dummy()[index]
+                    self.isEmpty = false
+                } else {
+                    self.isEmpty = true
+                    setEmptyView()
+                }
+                self.myProfileTopView.userType = index
             }
             catch {
                 guard let error = error as? NetworkError else { return }

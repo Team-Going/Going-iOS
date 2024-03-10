@@ -17,7 +17,17 @@ protocol TravelTestResultViewDelegate: AnyObject {
 final class TravelTestResultView: UIView {
     
     // MARK: - Properties
-    
+        
+    var beforVC: String = ""
+
+    var participantId: Int = 0
+
+    var styleResult: [Int] = [] {
+        didSet {
+            self.travelTestCollectionView.reloadData()
+        }
+    }
+ 
     var resultIntArray: [Int] = []
     
     weak var delegate: TravelTestResultViewDelegate?
@@ -113,6 +123,11 @@ extension TravelTestResultView: UICollectionViewDataSource {
         cell.delegate = self
         cell.travelTestData = travelTestQuestionDummy[indexPath.row]
 
+        if beforVC == StringLiterals.MyProfile.myTravelProfile && !styleResult.isEmpty{
+            cell.styleResult = styleResult[indexPath.row]
+            cell.setButtonDisable()
+        }
+        
         // 여기서 유저의 이전 선택을 해당 셀에 반영
         if resultIntArray.count > 0 {
             let selectedAnswerIndex = resultIntArray[indexPath.row] // 유저가 선택한 인덱스

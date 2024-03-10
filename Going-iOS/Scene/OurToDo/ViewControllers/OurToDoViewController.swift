@@ -8,14 +8,7 @@ final class OurToDoViewController: UIViewController {
     
     private lazy var contentView: UIView = UIView()
 
-    private lazy var navigationBarview = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: UIColor(resource: .gray50))
-
-    private lazy var travelInfoButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(resource: .btnTripinfo), for: .normal)
-        btn.addTarget(self, action: #selector(pushToTravelInfoVC), for: .touchUpInside)
-        return btn
-    }()
+    private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: UIColor(resource: .gray50))
     
     private let tripHeaderView: TripHeaderView = TripHeaderView()
     
@@ -94,6 +87,23 @@ final class OurToDoViewController: UIViewController {
         return imgView
     }()
     
+    private lazy var tripPreferenceLabel: UILabel = {
+        let label = DOOLabel(font: .pretendard(.body2_bold),
+                             color: UIColor(resource: .gray700),
+                             text: StringLiterals.OurToDo.tripPreferenceLabelText)
+        label.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToOurTripPreferences(_:)))
+        label.addGestureRecognizer(gesture)
+        return label
+    }()
+    
+    private lazy var tripPreferenceButton: UIButton = {
+        let btn = UIButton()
+        btn.addTarget(self, action: #selector(pushToOurTripPreferences(_:)), for: .touchUpInside)
+        btn.setImage(UIImage(resource: .btnEnter), for: .normal)
+        btn.tintColor = UIColor(resource: .gray700)
+        return btn
+    }()
     
     // MARK: - Property
        
@@ -103,12 +113,12 @@ final class OurToDoViewController: UIViewController {
     
     var todoId: Int = 0
     
+    var ownerId: Int = 0
+    
     var segmentIndex: Int = 0
     
     var allocator: [Allocators] = []
-    
-    var allParticipants: [Participant] = []
-    
+        
     var initializeCode: Bool = false
     
     var progress: String = "incomplete"
@@ -125,6 +135,7 @@ final class OurToDoViewController: UIViewController {
             self.tripHeaderView.tripData = data
             tripMiddleView.participants = data.participants
             self.tripMiddleView.progress = data.progress
+            self.ownerId = data.participants[0].participantId
         }
     }
     
@@ -198,7 +209,6 @@ private extension OurToDoViewController {
     
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
-        navigationBarview.addSubview(travelInfoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, 
                                 tripMiddleView,
@@ -207,6 +217,7 @@ private extension OurToDoViewController {
                                 ourToDoHeaderView,
                                 ourToDoCollectionView,
                                 emptyView)
+        tripPreferenceImageView.addSubviews(tripPreferenceLabel, tripPreferenceButton)
         emptyView.addSubviews(emptyViewIconImageView, emptyViewLabel)
     }
     
@@ -215,11 +226,6 @@ private extension OurToDoViewController {
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(44))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
-        }
-        
-        travelInfoButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(12)
         }
         
         scrollView.snp.makeConstraints{
@@ -249,6 +255,18 @@ private extension OurToDoViewController {
             $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
             $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        tripPreferenceLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(17))
+            $0.width.equalTo(ScreenUtils.getWidth(155))
+        }
+        
+        tripPreferenceButton.snp.makeConstraints {
+            $0.leading.equalTo(tripPreferenceLabel.snp.trailing)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(ScreenUtils.getWidth(20))
         }
         
         ourToDoMainImageView.snp.makeConstraints {
@@ -312,19 +330,12 @@ private extension OurToDoViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
-    @objc
-    func pushToTravelInfoVC() {
-        let infoVC = TravelInfoViewController()
-        infoVC.tripId = self.tripId
-        self.navigationController?.pushViewController(infoVC, animated: false)
-    }
   
     @objc
     func pushToOurTripPreferences(_ sender : UITapGestureRecognizer) {
-        let vc = MemberViewController()
-        vc.tripId = self.tripId
-        self.navigationController?.pushViewController(vc, animated: false)
+        let memberVC = MemberViewController()
+        memberVC.tripId = self.tripId
+        self.navigationController?.pushViewController(memberVC, animated: false)
     }
     
     func loadData() async {
@@ -366,6 +377,7 @@ private extension OurToDoViewController {
         self.ourToDoCollectionView.dataSource = self
         self.ourToDoCollectionView.delegate = self
         self.tripMiddleView.delegate = self
+        self.navigationBarview.delegate = self
     }
     
     /// 투두 없는 경우 empty view 띄워주는 메소드
@@ -375,7 +387,7 @@ private extension OurToDoViewController {
             self.emptyViewIconImageView.isHidden = true
             self.emptyViewLabel.isHidden = true
             self.ourToDoCollectionView.isHidden = false
-        }else {
+        } else {
             self.emptyView.isHidden = false
             self.emptyViewIconImageView.isHidden = false
             self.emptyViewLabel.isHidden = false
@@ -493,7 +505,6 @@ extension OurToDoViewController: UICollectionViewDataSource {
         /// 할일  조회 뷰에 데이터 세팅 후 이동
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = StringLiterals.ToDo.inquiry
-        guard let header = headerData else { return }
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
         todoVC.todoId = self.todoId
@@ -524,8 +535,28 @@ extension OurToDoViewController: TripMiddleViewDelegate {
         }
     }
     
-    func pushToMemberVC() {
-        // TODO: - delegate 메서드 삭제
+    func pushToMemberVC(participantId: Int) {
+        let myTravelProfileVC = MyTravelProfileViewController()
+        myTravelProfileVC.participantId = participantId
+        
+        // 본인인 경우
+        if self.ownerId == participantId {
+            myTravelProfileVC.isOwner = true
+        } else {
+            myTravelProfileVC.isOwner = false
+        }
+        
+        self.navigationController?.pushViewController(myTravelProfileVC, animated: false)
+    }
+}
+
+extension OurToDoViewController: DOONavigationBarDelegate {
+    func saveTextButtonTapped() {}
+    
+    func pushToTravelInfoVC() {
+        let infoVC = TravelInfoViewController()
+        infoVC.tripId = self.tripId
+        self.navigationController?.pushViewController(infoVC, animated: true)
     }
 }
 

@@ -35,7 +35,7 @@ final class MyProfileTopView: UIView {
     
     let userDescriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: UIColor(resource: .gray500))
     
-    private lazy var editProfileButton: UIButton = {
+    lazy var editProfileButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("프로필 수정", for: .normal)
         btn.setTitleColor(UIColor(resource: .gray400), for: .normal)
@@ -53,6 +53,26 @@ final class MyProfileTopView: UIView {
         view.backgroundColor = UIColor(resource: .gray50)
         return view
     }()
+    
+    var userType: Int? {
+        didSet {
+            guard let userType else { return }
+            if userType != -1 {
+                profileImageView.image = userProfileImageSet[userType]
+            } else {
+                profileImageView.image =  UIImage(resource: .imgProfileGuest)
+            }
+        }
+    }
+    
+    let userProfileImageSet: [UIImage] = [UIImage(resource: .imgProfileSrp),
+                                          UIImage(resource: .imgProfileSri),
+                                          UIImage(resource: .imgProfileSep),
+                                          UIImage(resource: .imgProfileSei),
+                                          UIImage(resource: .imgProfileArp),
+                                          UIImage(resource: .imgProfileAri),
+                                          UIImage(resource: .imgProfileAep),
+                                          UIImage(resource: .imgProfileAei)]
     
     // MARK: - Life Cycles
     

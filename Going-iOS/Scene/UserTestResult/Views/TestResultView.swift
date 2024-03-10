@@ -68,7 +68,7 @@ final class TestResultView: UIView {
     private let secondTickeView = TestResultTicketView()
     private let thirdTickeView = TestResultTicketView()
     
-    private lazy var backToTestButton: UIButton = {
+    lazy var backToTestButton: UIButton = {
         let button = UIButton()
         button.setTitle("다시 해볼래요", for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)

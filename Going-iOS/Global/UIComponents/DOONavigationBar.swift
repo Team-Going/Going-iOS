@@ -11,6 +11,7 @@ import SnapKit
 
 protocol DOONavigationBarDelegate: AnyObject {
     func saveTextButtonTapped()
+    func pushToTravelInfoVC()
 }
 
 final class DOONavigationBar: UIView {
@@ -102,26 +103,13 @@ private extension DOONavigationBar {
                 $0.centerY.equalToSuperview()
             }
             
-        case .ourToDo:
+        case .ourToDo, .myToDo:
             addSubviews(backButton, travelInfoButton)
             backButton.snp.makeConstraints {
                 $0.leading.equalToSuperview().inset(10)
                 $0.centerY.equalToSuperview()
             }
             travelInfoButton.snp.makeConstraints {
-                $0.trailing.equalToSuperview().inset(10)
-                $0.centerY.equalToSuperview()
-            }
-            backButton.removeTarget(self, action: #selector(popToPreviousVC), for: .touchUpInside)
-            backButton.addTarget(self, action: #selector(popToRootVC), for: .touchUpInside)
-            
-        case .myToDo:
-            addSubviews(backButton, profileButton)
-            backButton.snp.makeConstraints {
-                $0.leading.equalToSuperview().inset(10)
-                $0.centerY.equalToSuperview()
-            }
-            profileButton.snp.makeConstraints {
                 $0.trailing.equalToSuperview().inset(10)
                 $0.centerY.equalToSuperview()
             }
@@ -200,7 +188,6 @@ private extension DOONavigationBar {
   
     @objc
     func pushToTravelInfoVC() {
-        let vc = TravelInfoViewController()
-        viewController?.navigationController?.pushViewController(vc, animated: true)
+        self.delegate?.pushToTravelInfoVC()
     }
 }
