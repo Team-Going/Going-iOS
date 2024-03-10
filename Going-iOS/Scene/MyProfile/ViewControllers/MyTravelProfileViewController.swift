@@ -301,7 +301,7 @@ extension MyTravelProfileViewController {
                 self.testResultIndex = profileData.result
                 self.myProfileTopView.userDescriptionLabel.text = profileData.intro
                 self.myProfileTopView.userNameLabel.text = profileData.name
-                self.travelTestResultView.beforVC = "MyTravelProfile"
+                self.travelTestResultView.beforVC = StringLiterals.MyProfile.myTravelProfile
                 self.travelTestResultView.participantId = participantId
                 self.travelTestResultView.styleResult = [profileData.styleA,
                                                          profileData.styleB,

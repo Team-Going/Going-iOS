@@ -90,7 +90,7 @@ final class ToDoViewController: UIViewController {
             } else {
                 self.todoManagerView.allocators = data.allocators
             }
-            setDefaultValue = [data.title, data.endDate, data.memo ?? ""]
+            setDefaultValue = [data.title, data.endDate, data.memo]
             setInquiryStyle()
             self.memoTextView.memoTextView.text = data.memo
             

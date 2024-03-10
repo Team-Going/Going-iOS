@@ -87,6 +87,23 @@ final class OurToDoViewController: UIViewController {
         return imgView
     }()
     
+    private lazy var tripPreferenceLabel: UILabel = {
+        let label = DOOLabel(font: .pretendard(.body2_bold),
+                             color: UIColor(resource: .gray700),
+                             text: StringLiterals.OurToDo.tripPreferenceLabelText)
+        label.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToOurTripPreferences(_:)))
+        label.addGestureRecognizer(gesture)
+        return label
+    }()
+    
+    private lazy var tripPreferenceButton: UIButton = {
+        let btn = UIButton()
+        btn.addTarget(self, action: #selector(pushToOurTripPreferences(_:)), for: .touchUpInside)
+        btn.setImage(UIImage(resource: .btnEnter), for: .normal)
+        btn.tintColor = UIColor(resource: .gray700)
+        return btn
+    }()
     
     // MARK: - Property
        
@@ -200,6 +217,7 @@ private extension OurToDoViewController {
                                 ourToDoHeaderView,
                                 ourToDoCollectionView,
                                 emptyView)
+        tripPreferenceImageView.addSubviews(tripPreferenceLabel, tripPreferenceButton)
         emptyView.addSubviews(emptyViewIconImageView, emptyViewLabel)
     }
     
@@ -237,6 +255,18 @@ private extension OurToDoViewController {
             $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
             $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        tripPreferenceLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(17))
+            $0.width.equalTo(ScreenUtils.getWidth(155))
+        }
+        
+        tripPreferenceButton.snp.makeConstraints {
+            $0.leading.equalTo(tripPreferenceLabel.snp.trailing)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(ScreenUtils.getWidth(20))
         }
         
         ourToDoMainImageView.snp.makeConstraints {
@@ -304,7 +334,9 @@ private extension OurToDoViewController {
     @objc
     func pushToOurTripPreferences(_ sender : UITapGestureRecognizer) {
         // TODO: - 추후 뷰 연결
-        print("pushToOurTripPreferences")
+        let memberVC = MemberViewController()
+        memberVC.tripId = self.tripId
+        self.navigationController?.pushViewController(memberVC, animated: false)
     }
     
     func loadData() async {

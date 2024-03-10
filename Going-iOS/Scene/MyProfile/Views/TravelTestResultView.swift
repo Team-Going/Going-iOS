@@ -119,7 +119,7 @@ extension TravelTestResultView: UICollectionViewDataSource {
         guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
         cell.travelTestData = travelTestQuestionDummy[indexPath.row]
 
-        if beforVC == "MyTravelProfile" && !styleResult.isEmpty{
+        if beforVC == StringLiterals.MyProfile.myTravelProfile && !styleResult.isEmpty{
             cell.styleResult = styleResult[indexPath.row]
             cell.setButtonDisable()
         }

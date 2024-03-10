@@ -244,7 +244,6 @@ private extension TripMiddleView {
     func setStyle() {
         self.backgroundColor = UIColor(resource: .gray50)
         tripFriendsContainer.backgroundColor = UIColor(resource: .white000)
-        tripFriendsBtn.setImage(UIImage(resource: .btnEnter), for: .normal)
         addButton.layer.cornerRadius = ScreenUtils.getHeight(22.5)
     }
 
