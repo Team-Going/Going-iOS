@@ -64,6 +64,8 @@ enum StringLiterals {
         static let complete = "완료했어요"
         static let ourtodo = "같이 할일  "
         static let pleaseAddToDo = "할일을 추가해 보세요"
+        static let emptyAllocator = " 앗! 누가하지?"
+        static let maximumToastMSG = "여행은 최대 6명까지 함께할 수 있어요"
     }
     
     enum MyToDo {

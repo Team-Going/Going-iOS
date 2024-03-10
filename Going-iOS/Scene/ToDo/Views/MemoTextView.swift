@@ -26,7 +26,7 @@ class MemoTextView: UIView {
             top: ScreenUtils.getHeight(12),
             left: ScreenUtils.getWidth(12),
             bottom: ScreenUtils.getHeight(12),
-            right: ScreenUtils.getWidth(12)
+            right: ScreenUtils.getWidth(32)
         )
         tv.font = .pretendard(.body3_medi)
         tv.textColor = UIColor(resource: .gray200)
@@ -36,6 +36,14 @@ class MemoTextView: UIView {
         return tv
     }()
    
+    private lazy var clearButton: UIButton = {
+        let btn = UIButton()
+        btn.isHidden = true
+        btn.setImage(UIImage(resource: .btnDelete), for: .normal)
+        btn.addTarget(self, action: #selector(clearText), for: .touchUpInside)
+        return btn
+    }()
+    
     private let countMemoCharacterLabel = DOOLabel(
         font: .pretendard(.detail2_regular),
         color: UIColor(resource: .gray200),
@@ -83,6 +91,7 @@ private extension MemoTextView {
         self.addSubviews(memoLabel,
                          memoTextView,
                          memoWarningLabel,
+                         clearButton,
                          countMemoCharacterLabel
         )
     }
@@ -97,6 +106,12 @@ private extension MemoTextView {
             $0.top.equalTo(memoLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(140))
+        }
+        
+        clearButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(ScreenUtils.getHeight(42))
+            $0.size.equalTo(ScreenUtils.getHeight(20))
+            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(12))
         }
         
         countMemoCharacterLabel.snp.makeConstraints{
@@ -119,9 +134,13 @@ private extension MemoTextView {
         if textEmpty {
             memoTextView.layer.borderColor = UIColor(resource: .gray200).cgColor
             self.countMemoCharacterLabel.textColor = UIColor(resource: .gray200)
+            clearButton.isHidden = true
+            clearButton.isEnabled = false
         } else {
             memoTextView.layer.borderColor = UIColor(resource: .gray700).cgColor
             self.countMemoCharacterLabel.textColor = UIColor(resource: .gray400)
+            clearButton.isHidden = false
+            clearButton.isEnabled = true
         }
     }
     
@@ -138,6 +157,15 @@ private extension MemoTextView {
             memoWarningLabel.isHidden = true
         }
     }
+    
+    @objc
+    func clearText() {
+        memoTextView.text = ""
+        countMemoCharacterLabel.text = "\(memoTextView.text.count)/1000"
+        textViewCountCheck()
+        memoTextViewBlankCheck()
+    }
+    
 }
 
 extension MemoTextView: UITextViewDelegate {
@@ -148,8 +176,14 @@ extension MemoTextView: UITextViewDelegate {
         if textView.text == memoTextviewPlaceholder {
             textView.text = ""
             textView.textColor = UIColor(resource: .gray700)
+        } else {
+            clearButton.isHidden = false
+            clearButton.isEnabled = true
         }
+
         textViewCountCheck()
+        memoTextViewBlankCheck()
+        self.delegate?.checkMemoState()
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -168,6 +202,9 @@ extension MemoTextView: UITextViewDelegate {
             textView.textColor = UIColor(resource: .gray200)
             textViewCountCheck()
         }
+        
+        clearButton.isHidden = true
+        clearButton.isEnabled = false
     }
     
     func textViewDidChange(_ textView: UITextView) {

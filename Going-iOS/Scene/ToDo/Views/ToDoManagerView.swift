@@ -144,13 +144,12 @@ extension ToDoManagerView: UICollectionViewDataSource{
         }
         //마이투두
         else {
-            //마이투두 -> 수정
-            if navigationBarTitle == StringLiterals.ToDo.edit {
-                name = allParticipants[indexPath.row].name
-            }
-            //마이투두 -> 추가 & 조회
-            else {
+            //마이투두 -> '혼자 할 일'이거나 추가 작업인 경우
+            if navigationBarTitle == StringLiterals.ToDo.add || isSecret {
                 name = allocators[indexPath.row].name
+            }
+            else {
+                name = allParticipants[indexPath.row].name
             }
         }
         
@@ -166,11 +165,8 @@ extension ToDoManagerView: UICollectionViewDataSource{
         
         //아워투두
         if beforeVC == "our" {
-//            managerCell.managerButton.isSelected = self.navigationBarTitle == StringLiterals.ToDo.add ? false : true
-
             //아워투두 -> 추가
             if self.navigationBarTitle == StringLiterals.ToDo.add {
-//                managerCell.managerButton.isSelected = false
                 managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                 managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
                 managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
@@ -247,9 +243,9 @@ extension ToDoManagerView: UICollectionViewDataSource{
                     }
                 }
             }
-            //마이투두 -> 추가
-            else if self.navigationBarTitle == StringLiterals.ToDo.add {
-
+            //마이투두 -> 추가 작업이거나 '혼자 할 일'을 수정하려는 작업인 경우
+            else if self.navigationBarTitle == StringLiterals.ToDo.add ||
+                        (self.navigationBarTitle == StringLiterals.ToDo.edit && isSecret) {
                 //설명라벨 세팅
                 if allocators[indexPath.row].name == "나만 볼 수 있는 할일이에요" {
                     managerCell.managerButton.isEnabled = false
@@ -264,7 +260,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
                     managerCell.managerButton.isUserInteractionEnabled = false
                 }
             }
-            //마이투두 -> 수정
+            //마이투두 -> '혼자 할 일'을 제외한 수정 작업
             else {
                 managerCell.managerButton.isEnabled = true
                 
@@ -309,7 +305,8 @@ extension ToDoManagerView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
                 
-        if (self.isSecret && navigationBarTitle == StringLiterals.ToDo.inquiry) || (beforeVC == "my"  && navigationBarTitle == StringLiterals.ToDo.add ) {
+        if (isSecret) ||
+            (beforeVC == "my"  && navigationBarTitle == StringLiterals.ToDo.add ) {
             if indexPath.row == 0 {
                 return CGSize(width: ScreenUtils.getWidth(66), height: ScreenUtils.getHeight(20))
             } else {

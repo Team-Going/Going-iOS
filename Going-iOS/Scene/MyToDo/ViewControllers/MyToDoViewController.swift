@@ -45,7 +45,7 @@ final class MyToDoViewController: UIViewController {
     
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = UIColor(resource: .red600)
+        btn.backgroundColor = UIColor(resource: .red500)
         btn.setTitle(StringLiterals.MyToDo.mytodo, for: .normal)
         btn.setTitleColor(UIColor(resource: .white000), for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
@@ -310,7 +310,6 @@ private extension MyToDoViewController {
         }
       
     }
-    
     
     ///  할일  조회 뷰에 데이터 세팅하고 이동하는 메소드
     func setInquiryToDoView(before: String, naviBarTitle: String) {
