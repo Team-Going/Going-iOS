@@ -14,6 +14,13 @@ struct CreateTravelRequestAppData: AppData {
 
 extension CreateTravelRequestAppData {
     func toDTOData() -> CreateTravelRequestDTO {
-        return CreateTravelRequestDTO(title: self.travelTitle, startDate: self.startDate, endDate: self.endDate, styleA: self.a, styleB: self.b, styleC: self.c, styleD: self.d, styleE: self.e)
+        return CreateTravelRequestDTO(title: self.travelTitle, 
+                                      startDate: self.startDate,
+                                      endDate: self.endDate,
+                                      styleA: self.a,
+                                      styleB: self.b,
+                                      styleC: self.c,
+                                      styleD: self.d,
+                                      styleE: self.e)
     }
 }

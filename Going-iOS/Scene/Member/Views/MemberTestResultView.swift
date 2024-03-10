@@ -16,20 +16,20 @@ final class MemberTestResultView: UIView {
     private let resultStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 12
+        stack.spacing = 24
         stack.distribution = .equalSpacing
         return stack
     }()
+
+    var progressView1 = MemberMultiProgressView(frame: .zero, testData: MemberTravelTestStruct.memberTestData[0])
     
-    var progressView1 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[0])
+    var progressView2 = MemberMultiProgressView(frame: .zero, testData: MemberTravelTestStruct.memberTestData[1])
     
-    var progressView2 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[1])
+    var progressView3 = MemberMultiProgressView(frame: .zero, testData: MemberTravelTestStruct.memberTestData[2])
     
-    var progressView3 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[2])
+    var progressView4 = MemberMultiProgressView(frame: .zero, testData: MemberTravelTestStruct.memberTestData[3])
     
-    var progressView4 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[3])
-    
-    var progressView5 = MemberProgressView(frame: .zero, testData: MemberTestStruct.memberTestData[4])
+    var progressView5 = MemberMultiProgressView(frame: .zero, testData: MemberTravelTestStruct.memberTestData[4])
     
     private lazy var dividingLine1: UIImageView = { setLineImage() }()
     
@@ -39,8 +39,7 @@ final class MemberTestResultView: UIView {
     
     private lazy var dividingLine4: UIImageView = { setLineImage() }()
     
-    
-    // MARK: - Life Cycle
+    // MARK: - Life Cycles
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,6 +53,8 @@ final class MemberTestResultView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+// MARK: - Private Extensions
 
 private extension MemberTestResultView {
     func setStyle() {
@@ -74,14 +75,14 @@ private extension MemberTestResultView {
     
     func setLayout() {
         resultStackView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(20)
-            $0.leading.trailing.equalToSuperview().inset(18)
+            $0.top.bottom.equalToSuperview().inset(24)
+            $0.leading.trailing.equalToSuperview().inset(16)
         }
         
-        [progressView1, progressView2, progressView3, progressView4, progressView5].forEach {
+        [ progressView1, progressView2, progressView3, progressView4, progressView5 ].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalTo(ScreenUtils.getWidth(291))
-                $0.height.equalTo(ScreenUtils.getHeight(73))
+                $0.height.equalTo(ScreenUtils.getHeight(64))
             }
         }
     }

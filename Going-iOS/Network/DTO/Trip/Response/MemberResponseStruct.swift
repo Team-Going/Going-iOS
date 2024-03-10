@@ -8,13 +8,16 @@
 import Foundation
 
 // MARK: - MemberResponseStruct
+
 struct MemberResponseStruct: Response {
+    let bestPrefer: [String]
     let participants: [Participant]
     let styles: [Style]
 }
 
 // MARK: - Style
+
 struct Style: Response {
-    let rate: Int
-    let isLeft: Bool
+    let rates: [Int]
+    let counts: [Int]
 }

@@ -38,7 +38,7 @@ final class DatePickerBottomSheetViewController: UIViewController {
         return view
     }()
 
-    private lazy var datePickerView: UIDatePicker = {
+    lazy var datePickerView: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
         picker.isUserInteractionEnabled = true

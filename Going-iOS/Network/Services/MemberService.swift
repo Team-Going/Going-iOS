@@ -19,7 +19,11 @@ class MemberService: Serviceable {
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
-        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: MemberResponseStruct.self) else { return MemberResponseStruct(participants: [], styles: []) }
+        guard let model = try dataDecodeAndhandleErrorCode(data: data, 
+                                                           decodeType: MemberResponseStruct.self)
+        else { return MemberResponseStruct(bestPrefer: [],
+                                           participants: [],
+                                           styles: []) }
         
         return model
     }

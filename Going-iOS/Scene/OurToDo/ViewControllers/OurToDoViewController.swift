@@ -8,8 +8,15 @@ final class OurToDoViewController: UIViewController {
     
     private lazy var contentView: UIView = UIView()
 
-    private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: UIColor(resource: .gray50))
+    private lazy var navigationBarview = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: UIColor(resource: .gray50))
 
+    private lazy var travelInfoButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(resource: .btnTripinfo), for: .normal)
+        btn.addTarget(self, action: #selector(pushToTravelInfoVC), for: .touchUpInside)
+        return btn
+    }()
+    
     private let tripHeaderView: TripHeaderView = TripHeaderView()
     
     private let tripMiddleView: TripMiddleView = TripMiddleView()
@@ -191,6 +198,7 @@ private extension OurToDoViewController {
     
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
+        navigationBarview.addSubview(travelInfoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, 
                                 tripMiddleView,
@@ -207,6 +215,11 @@ private extension OurToDoViewController {
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(44))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        travelInfoButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(12)
         }
         
         scrollView.snp.makeConstraints{
@@ -300,6 +313,13 @@ private extension OurToDoViewController {
         }
     }
     
+    @objc
+    func pushToTravelInfoVC() {
+        let infoVC = TravelInfoViewController()
+        infoVC.tripId = self.tripId
+        self.navigationController?.pushViewController(infoVC, animated: false)
+    }
+  
     @objc
     func pushToOurTripPreferences(_ sender : UITapGestureRecognizer) {
         // TODO: - 추후 뷰 연결

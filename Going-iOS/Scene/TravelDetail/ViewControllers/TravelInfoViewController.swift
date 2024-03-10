@@ -10,6 +10,19 @@ import UIKit
 import SnapKit
 
 final class TravelInfoViewController: UIViewController {
+    
+    // MARK: - Properties
+    
+    var tripId: Int = 0
+    
+    var travelData: TravelDetailResponseStruct? {
+        didSet {
+            self.travelNameView.travelNameTextField.placeholder = travelData?.title
+            self.travelDateView.startDateLabel.text = travelData?.startDate
+            self.travelDateView.endDateLabel.text = travelData?.endDate
+            self.travelNameView.characterCountLabel.text = "\(travelData?.title.count ?? 0)" + "/15"
+        }
+    }
 
     // MARK: - UI Properites
     
@@ -61,6 +74,8 @@ final class TravelInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         hideTabbar()
+        getAllTravelData(tripId: tripId)
+        setColor()
     }
 }
 
@@ -129,6 +144,18 @@ private extension TravelInfoViewController {
         self.navigationController?.tabBarController?.tabBar.isHidden = true
     }
     
+    func setColor() {
+        self.travelNameView.travelNameTextField.setPlaceholderColor(UIColor(resource: .gray700))
+        self.travelNameView.travelNameTextField.layer.borderColor = UIColor(resource: .gray700).cgColor
+        self.travelNameView.characterCountLabel.textColor = UIColor(resource: .gray700)
+        
+        self.travelDateView.endDateLabel.textColor = UIColor(resource: .gray700)
+        self.travelDateView.endDateLabel.layer.borderColor = UIColor(resource: .gray700).cgColor
+        
+        self.travelDateView.startDateLabel.textColor = UIColor(resource: .gray700)
+        self.travelDateView.startDateLabel.layer.borderColor = UIColor(resource: .gray700).cgColor
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -139,7 +166,49 @@ private extension TravelInfoViewController {
     
     @objc
     func editTravelButtonTapped() {
-        let vc = EditTravelViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let editVC = EditTravelViewController()
+        editVC.tripId = self.tripId
+        self.navigationController?.pushViewController(editVC, animated: true)
+    }
+}
+
+extension TravelInfoViewController {
+    func handleError(_ error: NetworkError) {
+        switch error {
+        case .serverError:
+            DOOToast.show(message: "서버 오류", insetFromBottom: 80)
+        case .unAuthorizedError, .reIssueJWT:
+            DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
+            let nextVC = LoginViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+            DOOToast.show(message: error.description, insetFromBottom: 80)
+        }
+    }
+    
+    func reIssueJWTToken() {
+        Task {
+            do {
+                try await AuthService.shared.postReIssueJWTToken()
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
+    }
+    
+    // MARK: - Network
+    
+    func getAllTravelData(tripId: Int) {
+        Task {
+            do {
+                self.travelData = try await TravelDetailService.shared.getTravelDetailInfo(tripId: tripId)
+            }
+            catch {
+                guard let error = error as? NetworkError else { return }
+                handleError(error)
+            }
+        }
     }
 }
