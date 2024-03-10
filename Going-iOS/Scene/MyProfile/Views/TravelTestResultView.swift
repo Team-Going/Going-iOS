@@ -9,15 +9,18 @@ import UIKit
 
 import SnapKit
 
-protocol RetryTestResultViewDelegate: AnyObject {
+protocol TravelTestResultViewDelegate: AnyObject {
     func retryTravelTestButton()
+    func userDidSelectAnswer()
 }
 
 final class TravelTestResultView: UIView {
     
     // MARK: - Properties
     
-    weak var delegate: RetryTestResultViewDelegate?
+    var resultIntArray: [Int] = []
+    
+    weak var delegate: TravelTestResultViewDelegate?
     
     private let travelTestQuestionDummy = TravelTestQuestionStruct.travelTestDummy
     
