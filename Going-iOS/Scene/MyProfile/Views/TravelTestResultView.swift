@@ -26,7 +26,7 @@ final class TravelTestResultView: UIView {
     
     // MARK: - UI Properties
     
-    private lazy var travelTestCollectionView: UICollectionView = {
+    lazy var travelTestCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -36,7 +36,7 @@ final class TravelTestResultView: UIView {
         return collectionView
     }()
 
-    private lazy var retryTravelTestButton: UIButton = {
+    lazy var retryTravelTestButton: UIButton = {
         let button = UIButton()
         button.setTitle("다시 해볼래요", for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
@@ -110,8 +110,25 @@ extension TravelTestResultView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = travelTestCollectionView.dequeueReusableCell(withReuseIdentifier: TravelTestCollectionViewCell.cellIdentifier, for: indexPath) as? TravelTestCollectionViewCell else { return UICollectionViewCell() }
+        cell.delegate = self
         cell.travelTestData = travelTestQuestionDummy[indexPath.row]
+
+        // 여기서 유저의 이전 선택을 해당 셀에 반영
+        if resultIntArray.count > 0 {
+            let selectedAnswerIndex = resultIntArray[indexPath.row] // 유저가 선택한 인덱스
+            cell.configureButtonColors(with: selectedAnswerIndex)
+        }
+
         return cell
+    }
+}
+
+extension TravelTestResultView: TravelTestCollectionViewCellDelegate {
+    func didSelectAnswer(in cell: TravelTestCollectionViewCell, selectedAnswer: Int) {
+        guard let indexPath = travelTestCollectionView.indexPath(for: cell) else { return }
+        resultIntArray[indexPath.row] = selectedAnswer - 1 // 유저의 새로운 선택으로 업데이트
+
+        delegate?.userDidSelectAnswer()
     }
 }
 

@@ -525,9 +525,7 @@ extension OurToDoViewController: TripMiddleViewDelegate {
     }
     
     func pushToMemberVC() {
-        let vc = MemberViewController()
-        vc.tripId = self.tripId
-        self.navigationController?.pushViewController(vc, animated: false)
+        // TODO: - delegate 메서드 삭제
     }
 }
 
