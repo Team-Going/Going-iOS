@@ -290,9 +290,8 @@ extension MyProfileViewController: TestResultViewDelegate {
 extension MyProfileViewController: MyProfileTopViewDelegate {
     func changeMyProfileButtonTapped() {
         let nextVC = ChangeMyProfileViewController()
-        
+        nextVC.nameTextField.text = myProfileTopView.userNameLabel.text
+        nextVC.descTextField.text = myProfileTopView.userDescriptionLabel.text
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
-    
 }

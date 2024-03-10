@@ -24,7 +24,7 @@ final class ChangeMyProfileViewController: UIViewController {
                                      color: UIColor(resource: .gray700),
                                      text: "닉네임")
     
-    private lazy var navigationBar = DOONavigationBar(self, type: .titleLabelOnly("프로필 생성"))
+    private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("프로필 수정"))
     
     private let naviUnderLineView: UIView = {
         let view = UIView()
@@ -32,7 +32,7 @@ final class ChangeMyProfileViewController: UIViewController {
         return view
     }()
     
-    private lazy var nameTextField: UITextField = {
+    lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
         textField.setPlaceholder(placeholder: "3글자 이내로 작성해 주세요", fontColor: .gray200, font: .pretendard(.body3_medi))
@@ -41,6 +41,10 @@ final class ChangeMyProfileViewController: UIViewController {
         textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor(resource: .gray200).cgColor
+        if let clearButton = textField.value(forKeyPath: "_clearButton") as? UIButton {
+                   clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+               }
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.addTarget(self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
         return textField
     }()
@@ -71,7 +75,7 @@ final class ChangeMyProfileViewController: UIViewController {
         return label
     }()
     
-    private lazy var descTextField: UITextField = {
+    lazy var descTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
         textField.setPlaceholder(placeholder: "여행을 떠나기 전 설레는 마음을 적어볼까요?", fontColor: UIColor(resource: .gray200), font: .pretendard(.body3_medi))
@@ -80,6 +84,10 @@ final class ChangeMyProfileViewController: UIViewController {
         textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor(resource: .gray200).cgColor
+        if let clearButton = textField.value(forKeyPath: "_clearButton") as? UIButton {
+                   clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+               }
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.addTarget(self, action: #selector(descTextFieldDidChange), for: .editingChanged)
         return textField
     }()

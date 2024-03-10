@@ -41,6 +41,10 @@ final class MakeProfileViewController: UIViewController {
         textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor(resource: .gray200).cgColor
+        if let clearButton = textField.value(forKeyPath: "_clearButton") as? UIButton {
+                   clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+               }
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.addTarget(self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
         return textField
     }()
@@ -80,6 +84,10 @@ final class MakeProfileViewController: UIViewController {
         textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
         textField.layer.borderColor = UIColor(resource: .gray200).cgColor
+        if let clearButton = textField.value(forKeyPath: "_clearButton") as? UIButton {
+                   clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+               }
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.addTarget(self, action: #selector(descTextFieldDidChange), for: .editingChanged)
         return textField
     }()
