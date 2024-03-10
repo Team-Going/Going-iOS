@@ -103,12 +103,12 @@ final class OurToDoViewController: UIViewController {
     
     var todoId: Int = 0
     
+    var ownerId: Int = 0
+    
     var segmentIndex: Int = 0
     
     var allocator: [Allocators] = []
-    
-    var allParticipants: [Participant] = []
-    
+        
     var initializeCode: Bool = false
     
     var progress: String = "incomplete"
@@ -125,6 +125,7 @@ final class OurToDoViewController: UIViewController {
             self.tripHeaderView.tripData = data
             tripMiddleView.participants = data.participants
             self.tripMiddleView.progress = data.progress
+            self.ownerId = data.participants[0].participantId
         }
     }
     
@@ -526,6 +527,14 @@ extension OurToDoViewController: TripMiddleViewDelegate {
     func pushToMemberVC(participantId: Int) {
         let myTravelProfileVC = MyTravelProfileViewController()
         myTravelProfileVC.participantId = participantId
+        
+        // 본인인 경우
+        if self.ownerId == participantId {
+            myTravelProfileVC.isOwner = true
+        } else {
+            myTravelProfileVC.isOwner = false
+        }
+        
         self.navigationController?.pushViewController(myTravelProfileVC, animated: false)
     }
 }

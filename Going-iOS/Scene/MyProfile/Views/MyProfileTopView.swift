@@ -28,7 +28,7 @@ final class MyProfileTopView: UIView {
     
     let userDescriptionLabel = DOOLabel(font: .pretendard(.detail1_regular), color: UIColor(resource: .gray500))
     
-    private lazy var editProfileButton: UIButton = {
+    lazy var editProfileButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("프로필 수정", for: .normal)
         btn.setTitleColor(UIColor(resource: .gray400), for: .normal)

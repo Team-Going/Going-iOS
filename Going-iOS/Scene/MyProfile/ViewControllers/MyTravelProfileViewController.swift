@@ -29,6 +29,8 @@ final class MyTravelProfileViewController: UIViewController {
     private var testResultIndex: Int?
     
     lazy var participantId: Int = 0
+    
+    var isOwner: Bool = false
         
     // MARK: - UI Properties
     
@@ -63,6 +65,7 @@ final class MyTravelProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setStyle()
+        setOwnerOption()
         setHierarchy()
         setLayout()
         setDelegate()
@@ -72,12 +75,18 @@ final class MyTravelProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getPersonalProfile(participantId: participantId)
+        hideTabBar()
     }
 }
 
 // MARK: - Private Methods
 
 private extension MyTravelProfileViewController {
+    
+    func hideTabBar() {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     func setStyle() {
         view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
@@ -181,6 +190,20 @@ private extension MyTravelProfileViewController {
             alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
             
             self.present(alert, animated: true)
+        }
+    }
+    
+    func setOwnerOption() {
+        if isOwner {
+            navigationBar.titleLabel.text = StringLiterals.MyProfile.myProfileTitle
+            myProfileTopView.editProfileButton.isHidden = false
+            userTestResultScrollView.myResultView.backToTestButton.isHidden = false
+            travelTestResultView.retryTravelTestButton.isHidden = false
+        } else {
+            navigationBar.titleLabel.text = StringLiterals.MyProfile.friendProfileTitle
+            myProfileTopView.editProfileButton.isHidden = true
+            userTestResultScrollView.myResultView.backToTestButton.isHidden = true
+            travelTestResultView.retryTravelTestButton.isHidden = true
         }
     }
     

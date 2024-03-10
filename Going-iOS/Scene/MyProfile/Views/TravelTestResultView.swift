@@ -43,7 +43,7 @@ final class TravelTestResultView: UIView {
         return collectionView
     }()
 
-    private lazy var retryTravelTestButton: UIButton = {
+    lazy var retryTravelTestButton: UIButton = {
         let button = UIButton()
         button.setTitle("다시 해볼래요", for: .normal)
         button.titleLabel?.font = .pretendard(.detail2_regular)
