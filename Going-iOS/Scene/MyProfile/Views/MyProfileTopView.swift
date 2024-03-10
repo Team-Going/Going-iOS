@@ -47,6 +47,26 @@ final class MyProfileTopView: UIView {
         return view
     }()
     
+    var userType: Int? {
+        didSet {
+            guard let userType else { return }
+            if userType != -1 {
+                profileImageView.image = userProfileImageSet[userType]
+            } else {
+                profileImageView.image =  UIImage(resource: .imgProfileGuest)
+            }
+        }
+    }
+    
+    let userProfileImageSet: [UIImage] = [UIImage(resource: .imgProfileSrp),
+                                          UIImage(resource: .imgProfileSri),
+                                          UIImage(resource: .imgProfileSep),
+                                          UIImage(resource: .imgProfileSei),
+                                          UIImage(resource: .imgProfileArp),
+                                          UIImage(resource: .imgProfileAri),
+                                          UIImage(resource: .imgProfileAep),
+                                          UIImage(resource: .imgProfileAei)]
+    
     // MARK: - Life Cycles
     
     override init(frame: CGRect) {

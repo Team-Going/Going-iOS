@@ -317,6 +317,7 @@ extension MyTravelProfileViewController {
                     self.isEmpty = true
                     setEmptyView()
                 }
+                self.myProfileTopView.userType = index
             }
             catch {
                 guard let error = error as? NetworkError else { return }
