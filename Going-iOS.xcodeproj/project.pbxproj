@@ -16,7 +16,7 @@
 		941B1B872B510FB800D28EBA /* CreateTravelRequestAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B1B862B510FB800D28EBA /* CreateTravelRequestAppData.swift */; };
 		941B1B892B5138B400D28EBA /* TravelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B1B882B5138B400D28EBA /* TravelService.swift */; };
 		941D3A252B9DABF4009A34A7 /* EditTravelTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941D3A242B9DABF4009A34A7 /* EditTravelTestViewController.swift */; };
-		941D3A272B9DBAC5009A34A7 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941D3A262B9DBAC5009A34A7 /* ProfileService.swift */; };
+		941D3A272B9DBAC5009A34A7 /* TravelProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941D3A262B9DBAC5009A34A7 /* TravelProfileService.swift */; };
 		941D3A292B9DBB98009A34A7 /* MemberProfileResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941D3A282B9DBB98009A34A7 /* MemberProfileResponseStruct.swift */; };
 		942419402B54870C00B765C0 /* GetDetailToDoStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424193F2B54870C00B765C0 /* GetDetailToDoStruct.swift */; };
 		94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94442EB52B4ABB4A00FDBB26 /* DashBoardViewController.swift */; };
@@ -220,7 +220,7 @@
 		941B1B862B510FB800D28EBA /* CreateTravelRequestAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelRequestAppData.swift; sourceTree = "<group>"; };
 		941B1B882B5138B400D28EBA /* TravelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelService.swift; sourceTree = "<group>"; };
 		941D3A242B9DABF4009A34A7 /* EditTravelTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTravelTestViewController.swift; sourceTree = "<group>"; };
-		941D3A262B9DBAC5009A34A7 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		941D3A262B9DBAC5009A34A7 /* TravelProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelProfileService.swift; sourceTree = "<group>"; };
 		941D3A282B9DBB98009A34A7 /* MemberProfileResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberProfileResponseStruct.swift; sourceTree = "<group>"; };
 		9424193F2B54870C00B765C0 /* GetDetailToDoStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDetailToDoStruct.swift; sourceTree = "<group>"; };
 		94442EB52B4ABB4A00FDBB26 /* DashBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
@@ -1287,7 +1287,7 @@
 				F45CA1612B53043400F3790C /* OnBoardingService.swift */,
 				948FBCA82B53DE0F00D9C779 /* MemberService.swift */,
 				94A2AE732B9B87A900C4B755 /* TravelDetailService.swift */,
-				941D3A262B9DBAC5009A34A7 /* ProfileService.swift */,
+				941D3A262B9DBAC5009A34A7 /* TravelProfileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1559,7 +1559,7 @@
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
 				941D3A292B9DBB98009A34A7 /* MemberProfileResponseStruct.swift in Sources */,
-				941D3A272B9DBAC5009A34A7 /* ProfileService.swift in Sources */,
+				941D3A272B9DBAC5009A34A7 /* TravelProfileService.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
 				94C7DDB52B4C756600541567 /* SettingsCollectionViewCell.swift in Sources */,

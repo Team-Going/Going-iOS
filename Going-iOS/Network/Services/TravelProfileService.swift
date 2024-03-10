@@ -1,5 +1,5 @@
 //
-//  ProfileService.swift
+//  TravelProfileService.swift
 //  Going-iOS
 //
 //  Created by 윤영서 on 3/10/24.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class ProfileService: Serviceable {
-    static let shared = ProfileService()
+final class TravelProfileService: Serviceable {
+    static let shared = TravelProfileService()
     
     private init() {}
     

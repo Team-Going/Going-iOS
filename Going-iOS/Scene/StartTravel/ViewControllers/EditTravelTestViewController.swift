@@ -191,7 +191,7 @@ extension EditTravelTestViewController {
     func getTravelTestData() {
         Task {
             do {
-                self.travelTestData = try await ProfileService.shared.getTravelProfileInfo(participantId: participantId)
+                self.travelTestData = try await TravelProfileService.shared.getTravelProfileInfo(participantId: participantId)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
