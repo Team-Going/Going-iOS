@@ -23,7 +23,7 @@ final class TravelService: Serviceable {
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
-        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: CodeResponseDTO.self) 
+        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: CodeResponseDTO.self)
         else { return JoiningSuccessAppData(travelId: 0, travelName: "", startDate: "", endDate: "", dueDate: 0) }
         
         return model.toAppData()
@@ -39,7 +39,7 @@ final class TravelService: Serviceable {
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         guard let model = try dataDecodeAndhandleErrorCode(data: data,
-                                                           decodeType: CreateTravelResponseDTO.self) 
+                                                           decodeType: CreateTravelResponseDTO.self)
         else { return CreateTravelResponseAppData(tripId: 0, title: "", startDate: "", endDate: "", code: "", day: 0) }
         
         return model.toAppData()
@@ -49,11 +49,11 @@ final class TravelService: Serviceable {
     func getAllTravel(status: String) async throws -> DashBoardResponseSturct {
         let query = TravelQuery(progress: status)
         let urlRequest = try NetworkRequest(path: "/api/trips",
-                                            httpMethod: .get, 
+                                            httpMethod: .get,
                                             query: query).makeURLRequest(networkType: .withJWT)
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         guard let model = try dataDecodeAndhandleErrorCode(data: data,
-                                                           decodeType: DashBoardResponseSturct.self) 
+                                                           decodeType: DashBoardResponseSturct.self)
         else { return DashBoardResponseSturct(name: "", trips: []) }
         return model
     }
@@ -66,8 +66,8 @@ final class TravelService: Serviceable {
                                             httpMethod: .post,
                                             body: body).makeURLRequest(networkType: .withJWT)
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
-        guard let model = try dataDecodeAndhandleErrorCode(data: data, 
-                                                           decodeType: JoinTravelTestResponseStruct.self) 
+        guard let model = try dataDecodeAndhandleErrorCode(data: data,
+                                                           decodeType: JoinTravelTestResponseStruct.self)
         else { return JoinTravelTestResponseStruct(tripId: 0) }
         return model
     }
