@@ -83,4 +83,13 @@ final class TravelService: Serviceable {
         
         return model
     }
+    
+    //여행나가기 API
+    func patchLeaveTravel(tripId: Int) async throws {
+        let urlRequest = try NetworkRequest(path: "/api/trips/\(tripId)/leave", httpMethod: .patch).makeURLRequest(networkType: .withJWT)
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        try dataDecodeAndhandleErrorCode(data: data, decodeType: BasicResponseDTO.self)
+    }
 }
