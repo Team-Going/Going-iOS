@@ -322,8 +322,9 @@ private extension OurToDoViewController {
   
     @objc
     func pushToOurTripPreferences(_ sender : UITapGestureRecognizer) {
-        // TODO: - 추후 뷰 연결
-        print("pushToOurTripPreferences")
+        let vc = MemberViewController()
+        vc.tripId = self.tripId
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     func loadData() async {
@@ -524,9 +525,7 @@ extension OurToDoViewController: TripMiddleViewDelegate {
     }
     
     func pushToMemberVC() {
-        let vc = MemberViewController()
-        vc.tripId = self.tripId
-        self.navigationController?.pushViewController(vc, animated: false)
+        // TODO: - delegate 메서드 삭제
     }
 }
 

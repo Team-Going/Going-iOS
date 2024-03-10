@@ -244,7 +244,9 @@ extension MyTravelProfileViewController: TestResultViewDelegate {
     }
 }
 
-extension MyTravelProfileViewController: RetryTestResultViewDelegate {
+extension MyTravelProfileViewController: TravelTestResultViewDelegate {
+    func userDidSelectAnswer() { return }
+    
     func retryTravelTestButton() {
         let vc = TravelTestViewController()
         self.navigationController?.pushViewController(vc, animated: false)
