@@ -104,6 +104,7 @@
 		CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */; };
 		CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */; };
 		CA8CD6A82B483FD000CFDFBF /* DoubleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */; };
+		CAB05E872B9DB01100A8C847 /* GetPersonalProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB05E862B9DB01100A8C847 /* GetPersonalProfileDTO.swift */; };
 		CAB9A1592B60EDB800881469 /* ToDoTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9A1582B60EDB800881469 /* ToDoTextFieldView.swift */; };
 		CAB9A15B2B60F6AE00881469 /* EndDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9A15A2B60F6AE00881469 /* EndDateView.swift */; };
 		CAB9A15D2B60FBC700881469 /* ToDoManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9A15C2B60FBC700881469 /* ToDoManagerView.swift */; };
@@ -303,6 +304,7 @@
 		CA8CD69D2B47F60C00CFDFBF /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		CA8CD6A32B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA8CD6A72B483FD000CFDFBF /* DoubleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleButtonView.swift; sourceTree = "<group>"; };
+		CAB05E862B9DB01100A8C847 /* GetPersonalProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPersonalProfileDTO.swift; sourceTree = "<group>"; };
 		CAB9A1582B60EDB800881469 /* ToDoTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTextFieldView.swift; sourceTree = "<group>"; };
 		CAB9A15A2B60F6AE00881469 /* EndDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndDateView.swift; sourceTree = "<group>"; };
 		CAB9A15C2B60FBC700881469 /* ToDoManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManagerView.swift; sourceTree = "<group>"; };
@@ -1360,6 +1362,7 @@
 			isa = PBXGroup;
 			children = (
 				F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */,
+				CAB05E862B9DB01100A8C847 /* GetPersonalProfileDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1659,6 +1662,7 @@
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				941B1B852B510F3C00D28EBA /* CreateTravelResponseDTO.swift in Sources */,
 				F4E9E9CF2B593AB000B0EAAC /* NetworkCheck.swift in Sources */,
+				CAB05E872B9DB01100A8C847 /* GetPersonalProfileDTO.swift in Sources */,
 				F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */,
 				945234492B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift in Sources */,
 				F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */,
