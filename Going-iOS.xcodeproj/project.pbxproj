@@ -178,6 +178,9 @@
 		F4F521B22B347BF2000E6E1E /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521B12B347BF2000E6E1E /* KakaoSDKCommon */; };
 		F4F521B42B3484B4000E6E1E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F521B32B3484B4000E6E1E /* Config.swift */; };
 		F4F521BE2B34A091000E6E1E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F4F521BD2B34A091000E6E1E /* SnapKit */; };
+		F4F7C4AA2B9E019000B89DE9 /* ChangeMyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F7C4A92B9E019000B89DE9 /* ChangeMyProfileViewController.swift */; };
+		F4F7C4AC2B9E03EC00B89DE9 /* ChangeMyProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F7C4AB2B9E03EC00B89DE9 /* ChangeMyProfileDTO.swift */; };
+		F4F7C4AE2B9E04A800B89DE9 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F7C4AD2B9E04A800B89DE9 /* ProfileService.swift */; };
 		F4FE6B802B4FCCA4009C935E /* GetProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */; };
 		F4FE6B872B504C8C009C935E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B862B504C8C009C935E /* AuthService.swift */; };
 		F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */; };
@@ -373,6 +376,9 @@
 		F4F5218B2B346373000E6E1E /* UserDefaultToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultToken.swift; sourceTree = "<group>"; };
 		F4F521952B346576000E6E1E /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		F4F521B32B3484B4000E6E1E /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		F4F7C4A92B9E019000B89DE9 /* ChangeMyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMyProfileViewController.swift; sourceTree = "<group>"; };
+		F4F7C4AB2B9E03EC00B89DE9 /* ChangeMyProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMyProfileDTO.swift; sourceTree = "<group>"; };
+		F4F7C4AD2B9E04A800B89DE9 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		F4FE6B7F2B4FCCA4009C935E /* GetProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDTO.swift; sourceTree = "<group>"; };
 		F4FE6B862B504C8C009C935E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		F4FE6B8D2B50514F009C935E /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
@@ -585,6 +591,7 @@
 			children = (
 				9478E53B2B4EFCB90027606D /* MyProfileViewController.swift */,
 				94B50B7A2B937D4700C709F6 /* MyTravelProfileViewController.swift */,
+				F4F7C4A92B9E019000B89DE9 /* ChangeMyProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -998,6 +1005,7 @@
 			isa = PBXGroup;
 			children = (
 				F45CA1642B53063600F3790C /* TravelTypeTestRequestDTO.swift */,
+				F4F7C4AB2B9E03EC00B89DE9 /* ChangeMyProfileDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1277,6 +1285,7 @@
 				F45CA1612B53043400F3790C /* OnBoardingService.swift */,
 				948FBCA82B53DE0F00D9C779 /* MemberService.swift */,
 				94A2AE732B9B87A900C4B755 /* TravelDetailService.swift */,
+				F4F7C4AD2B9E04A800B89DE9 /* ProfileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1514,6 +1523,7 @@
 				F4FE6B942B50863D009C935E /* SocialPlatform.swift in Sources */,
 				94A76E342B997D6E0083E3AD /* AnswerProgressSection.swift in Sources */,
 				9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */,
+				F4F7C4AC2B9E03EC00B89DE9 /* ChangeMyProfileDTO.swift in Sources */,
 				F4FE6B922B50861A009C935E /* LoginType.swift in Sources */,
 				CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */,
 				945234392B51B61D006ACC59 /* DashBoardResponseSturct.swift in Sources */,
@@ -1586,6 +1596,7 @@
 				949AD1232B93381000BCE8F5 /* EditTravelViewController.swift in Sources */,
 				F44460FD2B4D098B00674D74 /* CheckPhotoAccessProtocol.swift in Sources */,
 				F485D4892B47CB8B007317F4 /* UserTestSplashViewController.swift in Sources */,
+				F4F7C4AA2B9E019000B89DE9 /* ChangeMyProfileViewController.swift in Sources */,
 				94442EBD2B4AC6F500FDBB26 /* TravelInfoStruct.swift in Sources */,
 				945234432B52F6E3006ACC59 /* JoinTravelTestViewController.swift in Sources */,
 				94B50B7B2B937D4700C709F6 /* MyTravelProfileViewController.swift in Sources */,
@@ -1599,6 +1610,7 @@
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				F4FE6B802B4FCCA4009C935E /* GetProfileDTO.swift in Sources */,
 				94A2AE702B9B871500C4B755 /* TravelDetailResponseStruct.swift in Sources */,
+				F4F7C4AE2B9E04A800B89DE9 /* ProfileService.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				949AD11B2B90F58000BCE8F5 /* TravelNameView.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
