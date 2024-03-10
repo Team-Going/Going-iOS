@@ -25,7 +25,6 @@ final class ProfileService: Serviceable {
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
-        guard let model = try dataDecodeAndhandleErrorCode(data: data, decodeType: BasicResponseDTO.self) else { throw NetworkError.jsonDecodingError }
-        
+        try dataDecodeAndhandleErrorCode(data: data, decodeType: BasicResponseDTO.self)
     }
 }

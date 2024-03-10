@@ -104,7 +104,7 @@ final class ChangeMyProfileViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let button = UIButton()
-        button.setTitle("다음", for: .normal)
+        button.setTitle("저장", for: .normal)
         button.setTitleColor(UIColor(resource: .gray200), for: .normal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 6
@@ -319,7 +319,7 @@ private extension ChangeMyProfileViewController {
         
         Task {
             do {
-                try await ProfileService.shared.patchMyProfileData(myProfileData: self.userProfileData)
+                try await ProfileService.shared.patchMyProfileData(myProfileData: signUpBody)
                 self.navigationController?.popViewController(animated: true)
             }
             catch {
