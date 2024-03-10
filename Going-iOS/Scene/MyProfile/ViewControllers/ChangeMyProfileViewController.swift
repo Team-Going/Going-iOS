@@ -10,9 +10,7 @@ import UIKit
 import SnapKit
 
 final class ChangeMyProfileViewController: UIViewController {
-    
-//    var socialToken: String?
-    
+        
     private var userName: String?
     
     private var isNameTextFieldGood: Bool = false
