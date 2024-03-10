@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		941898652B9CD84200CBFEF6 /* TravelTestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941898642B9CD84200CBFEF6 /* TravelTestResultView.swift */; };
 		941B1B782B50EB0C00D28EBA /* CodeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B1B772B50EB0C00D28EBA /* CodeResponseDTO.swift */; };
 		941B1B7C2B50ECED00D28EBA /* JoiningSuccessAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B1B7B2B50ECED00D28EBA /* JoiningSuccessAppData.swift */; };
 		941B1B812B51089400D28EBA /* CodeRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B1B802B51089400D28EBA /* CodeRequestDTO.swift */; };
@@ -31,7 +32,6 @@
 		9457F0522B4859BB009ACF25 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */; };
 		9457F0552B485A68009ACF25 /* TravelTestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0542B485A68009ACF25 /* TravelTestCollectionViewCell.swift */; };
 		9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */; };
-		945D1AD92B544E0D00C728E2 /* MemberTestStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D1AD82B544E0D00C728E2 /* MemberTestStruct.swift */; };
 		945D1ADD2B5479EE00C728E2 /* CreateToDoRequestStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D1ADC2B5479EE00C728E2 /* CreateToDoRequestStruct.swift */; };
 		946190A62B47FAB300A38A42 /* JoiningSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */; };
 		946190A82B47FAC100A38A42 /* JoinTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */; };
@@ -40,21 +40,29 @@
 		9478E5362B4EF4850027606D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9478E5352B4EF4850027606D /* WebViewController.swift */; };
 		9478E53C2B4EFCB90027606D /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9478E53B2B4EFCB90027606D /* MyProfileViewController.swift */; };
 		948FBC9E2B53CF1700D9C779 /* MemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBC9D2B53CF1700D9C779 /* MemberViewController.swift */; };
-		948FBCA32B53D05700D9C779 /* MemberProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA22B53D05700D9C779 /* MemberProgressView.swift */; };
 		948FBCA52B53D07900D9C779 /* MemberTestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */; };
 		948FBCA72B53D12600D9C779 /* MemberResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA62B53D12600D9C779 /* MemberResponseStruct.swift */; };
 		948FBCA92B53DE0F00D9C779 /* MemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948FBCA82B53DE0F00D9C779 /* MemberService.swift */; };
-		94B50B752B934E9800C709F6 /* MyProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B742B934E9800C709F6 /* MyProfileTopView.swift */; };
-		94B50B7B2B937D4700C709F6 /* MyTravelProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B7A2B937D4700C709F6 /* MyTravelProfileViewController.swift */; };
-		94B50B7D2B937FA100C709F6 /* TravelProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */; };
-		94B50B812B93896300C709F6 /* EmptyUserTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B802B93896300C709F6 /* EmptyUserTestView.swift */; };
-		94B50B852B93969800C709F6 /* UserTestResultScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */; };
 		949AD11B2B90F58000BCE8F5 /* TravelNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11A2B90F58000BCE8F5 /* TravelNameView.swift */; };
 		949AD11D2B90F58800BCE8F5 /* TravelDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11C2B90F58800BCE8F5 /* TravelDateView.swift */; };
 		949AD11F2B9238F400BCE8F5 /* TravelInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */; };
 		949AD1212B92450400BCE8F5 /* QuitTravelPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD1202B92450400BCE8F5 /* QuitTravelPopUpViewController.swift */; };
 		949AD1232B93381000BCE8F5 /* EditTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949AD1222B93381000BCE8F5 /* EditTravelViewController.swift */; };
+		94A2AE6A2B9AFBB100C4B755 /* MemberTravelTestStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2AE692B9AFBB100C4B755 /* MemberTravelTestStruct.swift */; };
+		94A2AE6C2B9AFD8900C4B755 /* MemberMultiProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2AE6B2B9AFD8900C4B755 /* MemberMultiProgressView.swift */; };
+		94A2AE702B9B871500C4B755 /* TravelDetailResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2AE6F2B9B871500C4B755 /* TravelDetailResponseStruct.swift */; };
+		94A2AE742B9B87A900C4B755 /* TravelDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2AE732B9B87A900C4B755 /* TravelDetailService.swift */; };
+		94A2AE772B9C333300C4B755 /* EditTravelRequestStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A2AE762B9C333300C4B755 /* EditTravelRequestStruct.swift */; };
+		94A76E2C2B978C4E0083E3AD /* MultiProgressView in Frameworks */ = {isa = PBXBuildFile; productRef = 94A76E2B2B978C4E0083E3AD /* MultiProgressView */; };
+		94A76E302B988E6E0083E3AD /* AnswerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A76E2F2B988E6E0083E3AD /* AnswerType.swift */; };
+		94A76E322B9976620083E3AD /* AnswerStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A76E312B9976620083E3AD /* AnswerStackView.swift */; };
+		94A76E342B997D6E0083E3AD /* AnswerProgressSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A76E332B997D6E0083E3AD /* AnswerProgressSection.swift */; };
 		94B50B722B933EFF00C709F6 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B712B933EFF00C709F6 /* HapticService.swift */; };
+		94B50B752B934E9800C709F6 /* MyProfileTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B742B934E9800C709F6 /* MyProfileTopView.swift */; };
+		94B50B7B2B937D4700C709F6 /* MyTravelProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B7A2B937D4700C709F6 /* MyTravelProfileViewController.swift */; };
+		94B50B7D2B937FA100C709F6 /* TravelProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */; };
+		94B50B812B93896300C709F6 /* EmptyUserTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B802B93896300C709F6 /* EmptyUserTestView.swift */; };
+		94B50B852B93969800C709F6 /* UserTestResultScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */; };
 		94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A02B46F94000B92CAC /* DOOButton.swift */; };
 		94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */; };
 		94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */; };
@@ -199,6 +207,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		941898642B9CD84200CBFEF6 /* TravelTestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestResultView.swift; sourceTree = "<group>"; };
 		941B1B772B50EB0C00D28EBA /* CodeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeResponseDTO.swift; sourceTree = "<group>"; };
 		941B1B7B2B50ECED00D28EBA /* JoiningSuccessAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningSuccessAppData.swift; sourceTree = "<group>"; };
 		941B1B802B51089400D28EBA /* CodeRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeRequestDTO.swift; sourceTree = "<group>"; };
@@ -223,7 +232,6 @@
 		9457F0512B4859BB009ACF25 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		9457F0542B485A68009ACF25 /* TravelTestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestCollectionViewCell.swift; sourceTree = "<group>"; };
 		9457F0572B486BC3009ACF25 /* TravelTestQuestionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestQuestionStruct.swift; sourceTree = "<group>"; };
-		945D1AD82B544E0D00C728E2 /* MemberTestStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTestStruct.swift; sourceTree = "<group>"; };
 		945D1ADC2B5479EE00C728E2 /* CreateToDoRequestStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateToDoRequestStruct.swift; sourceTree = "<group>"; };
 		946190A52B47FAB300A38A42 /* JoiningSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningSuccessViewController.swift; sourceTree = "<group>"; };
 		946190A72B47FAC100A38A42 /* JoinTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTravelViewController.swift; sourceTree = "<group>"; };
@@ -232,21 +240,28 @@
 		9478E5352B4EF4850027606D /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9478E53B2B4EFCB90027606D /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		948FBC9D2B53CF1700D9C779 /* MemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewController.swift; sourceTree = "<group>"; };
-		948FBCA22B53D05700D9C779 /* MemberProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberProgressView.swift; sourceTree = "<group>"; };
 		948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTestResultView.swift; sourceTree = "<group>"; };
 		948FBCA62B53D12600D9C779 /* MemberResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberResponseStruct.swift; sourceTree = "<group>"; };
 		948FBCA82B53DE0F00D9C779 /* MemberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberService.swift; sourceTree = "<group>"; };
-		94B50B742B934E9800C709F6 /* MyProfileTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileTopView.swift; sourceTree = "<group>"; };
-		94B50B7A2B937D4700C709F6 /* MyTravelProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTravelProfileViewController.swift; sourceTree = "<group>"; };
-		94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelProfileHeaderView.swift; sourceTree = "<group>"; };
-		94B50B802B93896300C709F6 /* EmptyUserTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUserTestView.swift; sourceTree = "<group>"; };
-		94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestResultScrollView.swift; sourceTree = "<group>"; };
 		949AD11A2B90F58000BCE8F5 /* TravelNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelNameView.swift; sourceTree = "<group>"; };
 		949AD11C2B90F58800BCE8F5 /* TravelDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDateView.swift; sourceTree = "<group>"; };
 		949AD11E2B9238F400BCE8F5 /* TravelInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInfoViewController.swift; sourceTree = "<group>"; };
 		949AD1202B92450400BCE8F5 /* QuitTravelPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitTravelPopUpViewController.swift; sourceTree = "<group>"; };
 		949AD1222B93381000BCE8F5 /* EditTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTravelViewController.swift; sourceTree = "<group>"; };
+		94A2AE692B9AFBB100C4B755 /* MemberTravelTestStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTravelTestStruct.swift; sourceTree = "<group>"; };
+		94A2AE6B2B9AFD8900C4B755 /* MemberMultiProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberMultiProgressView.swift; sourceTree = "<group>"; };
+		94A2AE6F2B9B871500C4B755 /* TravelDetailResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDetailResponseStruct.swift; sourceTree = "<group>"; };
+		94A2AE732B9B87A900C4B755 /* TravelDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDetailService.swift; sourceTree = "<group>"; };
+		94A2AE762B9C333300C4B755 /* EditTravelRequestStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTravelRequestStruct.swift; sourceTree = "<group>"; };
+		94A76E2F2B988E6E0083E3AD /* AnswerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerType.swift; sourceTree = "<group>"; };
+		94A76E312B9976620083E3AD /* AnswerStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerStackView.swift; sourceTree = "<group>"; };
+		94A76E332B997D6E0083E3AD /* AnswerProgressSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerProgressSection.swift; sourceTree = "<group>"; };
 		94B50B712B933EFF00C709F6 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
+		94B50B742B934E9800C709F6 /* MyProfileTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileTopView.swift; sourceTree = "<group>"; };
+		94B50B7A2B937D4700C709F6 /* MyTravelProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTravelProfileViewController.swift; sourceTree = "<group>"; };
+		94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelProfileHeaderView.swift; sourceTree = "<group>"; };
+		94B50B802B93896300C709F6 /* EmptyUserTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUserTestView.swift; sourceTree = "<group>"; };
+		94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTestResultScrollView.swift; sourceTree = "<group>"; };
 		94C2C9A02B46F94000B92CAC /* DOOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOButton.swift; sourceTree = "<group>"; };
 		94C2C9A52B46FE6900B92CAC /* CreateTravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTravelViewController.swift; sourceTree = "<group>"; };
 		94C2C9A92B47096200B92CAC /* DatePickerBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -378,6 +393,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94A76E2C2B978C4E0083E3AD /* MultiProgressView in Frameworks */,
 				F4F521B22B347BF2000E6E1E /* KakaoSDKCommon in Frameworks */,
 				F4F521A72B34733E000E6E1E /* Kingfisher in Frameworks */,
 				F4F521AA2B347BF2000E6E1E /* KakaoSDK in Frameworks */,
@@ -513,7 +529,7 @@
 		945D1AD72B544DF900C728E2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				945D1AD82B544E0D00C728E2 /* MemberTestStruct.swift */,
+				94A2AE692B9AFBB100C4B755 /* MemberTravelTestStruct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -573,17 +589,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		94B50B732B934DA400C709F6 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				94B50B742B934E9800C709F6 /* MyProfileTopView.swift */,
-				94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */,
-				94B50B802B93896300C709F6 /* EmptyUserTestView.swift */,
-				94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		948767A22B4C23A700BCF843 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,8 +620,11 @@
 		948FBC9F2B53CFCE00D9C779 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				948FBCA22B53D05700D9C779 /* MemberProgressView.swift */,
 				948FBCA42B53D07900D9C779 /* MemberTestResultView.swift */,
+				94A76E2F2B988E6E0083E3AD /* AnswerType.swift */,
+				94A76E312B9976620083E3AD /* AnswerStackView.swift */,
+				94A76E332B997D6E0083E3AD /* AnswerProgressSection.swift */,
+				94A2AE6B2B9AFD8900C4B755 /* MemberMultiProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -624,7 +632,6 @@
 		949AD1152B90F50100BCE8F5 /* TravelDetail */ = {
 			isa = PBXGroup;
 			children = (
-				949AD1172B90F51200BCE8F5 /* Views */,
 				949AD1162B90F50700BCE8F5 /* ViewControllers */,
 			);
 			path = TravelDetail;
@@ -640,9 +647,39 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		949AD1172B90F51200BCE8F5 /* Views */ = {
+		94A2AE6D2B9B86E200C4B755 /* TravelDetail */ = {
 			isa = PBXGroup;
 			children = (
+				94A2AE752B9C331F00C4B755 /* Request */,
+				94A2AE6E2B9B86F100C4B755 /* Response */,
+			);
+			path = TravelDetail;
+			sourceTree = "<group>";
+		};
+		94A2AE6E2B9B86F100C4B755 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				94A2AE6F2B9B871500C4B755 /* TravelDetailResponseStruct.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		94A2AE752B9C331F00C4B755 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				94A2AE762B9C333300C4B755 /* EditTravelRequestStruct.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		94B50B732B934DA400C709F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				94B50B742B934E9800C709F6 /* MyProfileTopView.swift */,
+				94B50B7C2B937FA100C709F6 /* TravelProfileHeaderView.swift */,
+				94B50B802B93896300C709F6 /* EmptyUserTestView.swift */,
+				94B50B842B93969800C709F6 /* UserTestResultScrollView.swift */,
+				941898642B9CD84200CBFEF6 /* TravelTestResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1217,6 +1254,7 @@
 		F4F521972B34676D000E6E1E /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				94A2AE6D2B9B86E200C4B755 /* TravelDetail */,
 				CA3EEE512B5073EB00C23A41 /* ToDo */,
 				941B1B752B50EAAE00D28EBA /* Trip */,
 				F4FE6BA82B513909009C935E /* Splash */,
@@ -1238,6 +1276,7 @@
 				941B1B882B5138B400D28EBA /* TravelService.swift */,
 				F45CA1612B53043400F3790C /* OnBoardingService.swift */,
 				948FBCA82B53DE0F00D9C779 /* MemberService.swift */,
+				94A2AE732B9B87A900C4B755 /* TravelDetailService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1396,6 +1435,7 @@
 				F4F521B12B347BF2000E6E1E /* KakaoSDKCommon */,
 				F4F521BD2B34A091000E6E1E /* SnapKit */,
 				F4439E482B56314A00D7C881 /* Lottie */,
+				94A76E2B2B978C4E0083E3AD /* MultiProgressView */,
 			);
 			productName = "Going-iOS";
 			productReference = F4F521712B3440D7000E6E1E /* Going-iOS.app */;
@@ -1430,6 +1470,7 @@
 				F4F521A82B347BF2000E6E1E /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				F4F521BC2B34A091000E6E1E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F4439E472B56314A00D7C881 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				94A76E2A2B978C4E0083E3AD /* XCRemoteSwiftPackageReference "MultiProgressView" */,
 			);
 			productRefGroup = F4F521722B3440D7000E6E1E /* Products */;
 			projectDirPath = "";
@@ -1471,6 +1512,7 @@
 				F4FE6B982B508B95009C935E /* OurToDoService.swift in Sources */,
 				941B1B7C2B50ECED00D28EBA /* JoiningSuccessAppData.swift in Sources */,
 				F4FE6B942B50863D009C935E /* SocialPlatform.swift in Sources */,
+				94A76E342B997D6E0083E3AD /* AnswerProgressSection.swift in Sources */,
 				9457F0582B486BC3009ACF25 /* TravelTestQuestionStruct.swift in Sources */,
 				F4FE6B922B50861A009C935E /* LoginType.swift in Sources */,
 				CA8CD69E2B47F60C00CFDFBF /* ToDoViewController.swift in Sources */,
@@ -1504,7 +1546,6 @@
 				F45CA1672B5306D600F3790C /* BasicResponseDTO.swift in Sources */,
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
-				948FBCA32B53D05700D9C779 /* MemberProgressView.swift in Sources */,
 				F4F521752B3440D7000E6E1E /* AppDelegate.swift in Sources */,
 				CA8CD6892B46B89D00CFDFBF /* ManagerCollectionViewCell.swift in Sources */,
 				94C7DDB52B4C756600541567 /* SettingsCollectionViewCell.swift in Sources */,
@@ -1515,12 +1556,15 @@
 				F44461102B4DD2BF00674D74 /* String+.swift in Sources */,
 				948FBCA72B53D12600D9C779 /* MemberResponseStruct.swift in Sources */,
 				94B50B722B933EFF00C709F6 /* HapticService.swift in Sources */,
+				94A76E302B988E6E0083E3AD /* AnswerType.swift in Sources */,
 				F485D48D2B47CF58007317F4 /* UserTestQuestionStruct.swift in Sources */,
 				CA8CD6A42B48041B00CFDFBF /* ToDoManagerCollectionViewCell.swift in Sources */,
+				94A2AE6C2B9AFD8900C4B755 /* MemberMultiProgressView.swift in Sources */,
 				CA3EEE552B50AEE300C23A41 /* GetDetailToDoResponseDTO.swift in Sources */,
 				941B1B832B510D9D00D28EBA /* CreateTravelRequestDTO.swift in Sources */,
 				F4C5E7822B429B620008735F /* UIFont+.swift in Sources */,
 				F44D98662B4EB7F700341893 /* NetworkRequest.swift in Sources */,
+				941898652B9CD84200CBFEF6 /* TravelTestResultView.swift in Sources */,
 				F44D985E2B4EB6E000341893 /* HTTPMethod.swift in Sources */,
 				945234472B52F9A6006ACC59 /* JoinTravelTestRequestStruct.swift in Sources */,
 				F4C5E76E2B4286A50008735F /* ImageLiterals.swift in Sources */,
@@ -1546,6 +1590,7 @@
 				945234432B52F6E3006ACC59 /* JoinTravelTestViewController.swift in Sources */,
 				94B50B7B2B937D4700C709F6 /* MyTravelProfileViewController.swift in Sources */,
 				941B1B892B5138B400D28EBA /* TravelService.swift in Sources */,
+				94A76E322B9976620083E3AD /* AnswerStackView.swift in Sources */,
 				F45CA1622B53043400F3790C /* OnBoardingService.swift in Sources */,
 				94761A0A2B4E5F5200D7C589 /* CreateTravelStruct.swift in Sources */,
 				9478E5362B4EF4850027606D /* WebViewController.swift in Sources */,
@@ -1553,6 +1598,7 @@
 				94B50B812B93896300C709F6 /* EmptyUserTestView.swift in Sources */,
 				F4BEB4CA2B482FDC0074B1B2 /* UserTestResultViewController.swift in Sources */,
 				F4FE6B802B4FCCA4009C935E /* GetProfileDTO.swift in Sources */,
+				94A2AE702B9B871500C4B755 /* TravelDetailResponseStruct.swift in Sources */,
 				94C2C9AA2B47096200B92CAC /* DatePickerBottomSheetViewController.swift in Sources */,
 				949AD11B2B90F58000BCE8F5 /* TravelNameView.swift in Sources */,
 				94C2C9A62B46FE6900B92CAC /* CreateTravelViewController.swift in Sources */,
@@ -1563,10 +1609,12 @@
 				94761A072B4DD18B00D7C589 /* LogOutPopUpViewController.swift in Sources */,
 				F4BA26F52B455A7300975CC2 /* MakeProfileViewController.swift in Sources */,
 				F4C5E7882B42AC010008735F /* StringLiterals.swift in Sources */,
+				94A2AE742B9B87A900C4B755 /* TravelDetailService.swift in Sources */,
 				CA3EEE3B2B4FED8300C23A41 /* MyToDoHeaderAppData.swift in Sources */,
 				F4FE6B8E2B50514F009C935E /* LoginRequestDTO.swift in Sources */,
 				F45CA15E2B52E1DA00F3790C /* LogoutResponseDTO.swift in Sources */,
 				945D1ADD2B5479EE00C728E2 /* CreateToDoRequestStruct.swift in Sources */,
+				94A2AE6A2B9AFBB100C4B755 /* MemberTravelTestStruct.swift in Sources */,
 				CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */,
 				CA0519792B53C2AC00DE4F8F /* GetCompleteToDoResponseDTO.swift in Sources */,
 				F44D98682B4EC71900341893 /* ViewControllerServiceable.swift in Sources */,
@@ -1606,13 +1654,13 @@
 				F49B352E2B35EB270080A19F /* CALayer+.swift in Sources */,
 				F44461092B4D8EB300674D74 /* PopUpDimmedViewController.swift in Sources */,
 				948FBCA92B53DE0F00D9C779 /* MemberService.swift in Sources */,
+				94A2AE772B9C333300C4B755 /* EditTravelRequestStruct.swift in Sources */,
 				942419402B54870C00B765C0 /* GetDetailToDoStruct.swift in Sources */,
 				F4BA26FC2B471A1800975CC2 /* Constant.swift in Sources */,
 				941B1B852B510F3C00D28EBA /* CreateTravelResponseDTO.swift in Sources */,
 				F4E9E9CF2B593AB000B0EAAC /* NetworkCheck.swift in Sources */,
 				F4FE6BA02B50AB46009C935E /* SignUpResponseDTO.swift in Sources */,
 				945234492B52F9B5006ACC59 /* JoinTravelTestResponseStruct.swift in Sources */,
-				945D1AD92B544E0D00C728E2 /* MemberTestStruct.swift in Sources */,
 				F4FE6BA52B50B401009C935E /* IsAppleLogined.swift in Sources */,
 				F485D48F2B47CF9B007317F4 /* UserTestViewController.swift in Sources */,
 				CAB9A1592B60EDB800881469 /* ToDoTextFieldView.swift in Sources */,
@@ -1870,6 +1918,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		94A76E2A2B978C4E0083E3AD /* XCRemoteSwiftPackageReference "MultiProgressView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-gallagher/MultiProgressView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		F4439E472B56314A00D7C881 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -1905,6 +1961,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		94A76E2B2B978C4E0083E3AD /* MultiProgressView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94A76E2A2B978C4E0083E3AD /* XCRemoteSwiftPackageReference "MultiProgressView" */;
+			productName = MultiProgressView;
+		};
 		F4439E482B56314A00D7C881 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F4439E472B56314A00D7C881 /* XCRemoteSwiftPackageReference "lottie-ios" */;

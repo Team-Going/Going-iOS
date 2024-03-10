@@ -27,7 +27,7 @@ final class MyTravelProfileViewController: UIViewController {
     }
     
     private var testResultIndex: Int?
-    
+        
     // MARK: - UI Properties
     
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("내 여행 프로필"))
@@ -52,7 +52,9 @@ final class MyTravelProfileViewController: UIViewController {
     private let emptyUserTestView = EmptyUserTestView()
     
     private let userTestResultScrollView = UserTestResultScrollView()
-
+    
+    private let travelTestResultView = TravelTestResultView()
+    
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
@@ -85,7 +87,8 @@ private extension MyTravelProfileViewController {
                          myProfileTopView,
                          travelProfileHeaderView,
                          emptyUserTestView,
-                         userTestResultScrollView)
+                         userTestResultScrollView,
+                         travelTestResultView)
         
         navigationBar.addSubview(saveButton)
     }
@@ -130,10 +133,17 @@ private extension MyTravelProfileViewController {
             $0.top.equalTo(travelProfileHeaderView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-    }    
+        
+        travelTestResultView.snp.makeConstraints {
+            $0.top.equalTo(travelProfileHeaderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+        }
+    }
     
     func setDelegate() {
         userTestResultScrollView.myResultView.delegate = self
+        travelTestResultView.delegate = self
     }
     
     func setSegmentDidChange() {
@@ -183,12 +193,17 @@ private extension MyTravelProfileViewController {
         if sender.selectedSegmentIndex == 0 {
             self.segmentIndex = 0
             userTestResultScrollView.isHidden = false
+            travelTestResultView.isHidden = true
         } else {
             self.segmentIndex = 1
+            emptyUserTestView.isHidden = true
             userTestResultScrollView.isHidden = true
+            travelTestResultView.isHidden = false
         }
     }
 }
+
+// MARK: - Save Images
 
 extension MyTravelProfileViewController: CheckPhotoAccessProtocol {
     func checkAccess() {
@@ -218,12 +233,21 @@ extension MyTravelProfileViewController: CheckPhotoAccessProtocol {
     }
 }
 
+// MARK: Delegates
+
 extension MyTravelProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let vc = UserTestSplashViewController()
         UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
         self.navigationController?.pushViewController(vc, animated: false)
         
+    }
+}
+
+extension MyTravelProfileViewController: RetryTestResultViewDelegate {
+    func retryTravelTestButton() {
+        let vc = TravelTestViewController()
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 }
 

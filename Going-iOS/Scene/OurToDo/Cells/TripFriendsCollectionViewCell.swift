@@ -67,7 +67,7 @@ private extension TripFriendsCollectionViewCell {
         }
         
         profileImageView.snp.makeConstraints{
-            $0.size.equalTo(ScreenUtils.getHeight(48))
+            $0.size.equalTo(ScreenUtils.getHeight(45))
         }
         
         friendNameLabel.snp.makeConstraints{
@@ -76,6 +76,6 @@ private extension TripFriendsCollectionViewCell {
     }
     
     func setStyle() {
-        profileImageView.layer.cornerRadius = ScreenUtils.getHeight(23.5)
+        profileImageView.layer.cornerRadius = ScreenUtils.getHeight(22.5)
     }
 }

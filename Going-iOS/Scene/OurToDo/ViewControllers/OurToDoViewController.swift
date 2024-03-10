@@ -8,13 +8,29 @@ final class OurToDoViewController: UIViewController {
     
     private lazy var contentView: UIView = UIView()
 
-    private lazy var navigationBarview = DOONavigationBar(self, type: .ourToDo, backgroundColor: UIColor(resource: .gray50))
+    private lazy var navigationBarview = DOONavigationBar(self, type: .backButtonOnly, backgroundColor: UIColor(resource: .gray50))
 
+    private lazy var travelInfoButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(resource: .btnTripinfo), for: .normal)
+        btn.addTarget(self, action: #selector(pushToTravelInfoVC), for: .touchUpInside)
+        return btn
+    }()
+    
     private let tripHeaderView: TripHeaderView = TripHeaderView()
     
     private let tripMiddleView: TripMiddleView = TripMiddleView()
     
     private let ourToDoHeaderView: OurToDoHeaderView = OurToDoHeaderView()
+    
+    private lazy var tripPreferenceImageView: UIImageView = {
+        let imgView = UIImageView()
+        imgView.isUserInteractionEnabled = true
+        imgView.image = UIImage(resource: .btnTasteview)
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(pushToOurTripPreferences(_:)))
+        imgView.addGestureRecognizer(gesture)
+        return imgView
+    }()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -43,7 +59,7 @@ final class OurToDoViewController: UIViewController {
     
     private lazy var addToDoButton: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = UIColor(resource: .red600)
+        btn.backgroundColor = UIColor(resource: .red500)
         btn.setTitle(StringLiterals.OurToDo.ourtodo, for: .normal)
         btn.setTitleColor(UIColor(resource: .white000), for: .normal)
         btn.titleLabel?.font = .pretendard(.body1_bold)
@@ -80,7 +96,9 @@ final class OurToDoViewController: UIViewController {
     
     
     // MARK: - Property
-        
+       
+    let maximumAllocator: Int = 6
+    
     var tripId: Int = 0
     
     var todoId: Int = 0
@@ -126,7 +144,6 @@ final class OurToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         setHierarchy()
         setLayout()
         setDelegate()
@@ -148,7 +165,6 @@ final class OurToDoViewController: UIViewController {
         getOurToDoHeaderData()
         getToDoData(progress: self.progress)
         setGradient()
-        
      
     }
     
@@ -160,18 +176,18 @@ final class OurToDoViewController: UIViewController {
 // MARK: - Private method
 
 private extension OurToDoViewController {
+    
     func setGradient() {
         tripMiddleView.gradientView.setGradient(
             firstColor: UIColor(red: 1, green: 1, blue: 1, alpha: 0),
             secondColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
             axis: .horizontal)
     }
+    
     func showTabBar() {
         self.navigationController?.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = UIColor(resource: .gray50)
-        
-//        self.navigationBarView.backgroundColor = UIColor(resource: .gray50)
     }
     
     func setSegmentDidChange() {
@@ -182,9 +198,11 @@ private extension OurToDoViewController {
     
     func setHierarchy() {
         self.view.addSubviews(navigationBarview, scrollView, addToDoButton)
+        navigationBarview.addSubview(travelInfoButton)
         scrollView.addSubviews(contentView, stickyOurToDoHeaderView)
         contentView.addSubviews(tripHeaderView, 
                                 tripMiddleView,
+                                tripPreferenceImageView,
                                 ourToDoMainImageView,
                                 ourToDoHeaderView,
                                 ourToDoCollectionView,
@@ -197,6 +215,11 @@ private extension OurToDoViewController {
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(44))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(50))
+        }
+        
+        travelInfoButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(12)
         }
         
         scrollView.snp.makeConstraints{
@@ -219,7 +242,13 @@ private extension OurToDoViewController {
         tripMiddleView.snp.makeConstraints{
             $0.top.equalTo(tripHeaderView.snp.bottom).offset(ScreenUtils.getHeight(20))
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(235))
+            $0.height.equalTo(ScreenUtils.getHeight(210))
+        }
+        
+        tripPreferenceImageView.snp.makeConstraints {
+            $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(8))
+            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(24))
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
         
         ourToDoMainImageView.snp.makeConstraints {
@@ -230,7 +259,7 @@ private extension OurToDoViewController {
         }
         
         ourToDoHeaderView.snp.makeConstraints{
-            $0.top.equalTo(tripMiddleView.snp.bottom).offset(ScreenUtils.getHeight(28))
+            $0.top.equalTo(tripPreferenceImageView.snp.bottom).offset(ScreenUtils.getHeight(20))
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(ScreenUtils.getHeight(49))
         }
@@ -282,6 +311,19 @@ private extension OurToDoViewController {
         } else {
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    @objc
+    func pushToTravelInfoVC() {
+        let infoVC = TravelInfoViewController()
+        infoVC.tripId = self.tripId
+        self.navigationController?.pushViewController(infoVC, animated: false)
+    }
+  
+    @objc
+    func pushToOurTripPreferences(_ sender : UITapGestureRecognizer) {
+        // TODO: - 추후 뷰 연결
+        print("pushToOurTripPreferences")
     }
     
     func loadData() async {
@@ -350,7 +392,6 @@ private extension OurToDoViewController {
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
         todoVC.fromOurTodoParticipants = header.participants
-//        todoVC.allocator = self.allocator
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
     }
@@ -449,15 +490,11 @@ extension OurToDoViewController: UICollectionViewDataSource {
         self.allocator =  self.ourToDoData?[indexPath.row].allocators ?? []
         
         /// 할일  조회 뷰에 데이터 세팅 후 이동
-        /// fromOurTodoParticipants -> 전체 참여자
-        /// manager -> 투두 배정자
         let todoVC = ToDoViewController()
         todoVC.navigationBarTitle = StringLiterals.ToDo.inquiry
         guard let header = headerData else { return }
         todoVC.tripId = self.tripId
         todoVC.beforeVC = "our"
-//        todoVC.fromOurTodoParticipants = header.participants
-//        todoVC.allocator = self.allocator
         todoVC.todoId = self.todoId
         self.navigationController?.pushViewController(todoVC, animated: false)
 
@@ -477,9 +514,13 @@ extension OurToDoViewController: UICollectionViewDelegateFlowLayout {
 
 extension OurToDoViewController: TripMiddleViewDelegate {
     func presentToInviteFriendVC() {
-        let inviteFriendVC = InviteFriendPopUpViewController()
-        inviteFriendVC.codeLabel.text = self.inviteCode
-        self.present(inviteFriendVC, animated: false)
+        if headerData?.participants.count ?? 0 < maximumAllocator {
+            let inviteFriendVC = InviteFriendPopUpViewController()
+            inviteFriendVC.codeLabel.text = self.inviteCode
+            self.present(inviteFriendVC, animated: false)
+        } else {
+            DOOToast.show(message: StringLiterals.OurToDo.maximumToastMSG, insetFromBottom: ScreenUtils.getHeight(114))
+        }
     }
     
     func pushToMemberVC() {
@@ -525,7 +566,6 @@ extension OurToDoViewController {
         Task {
             do {
                 self.ourToDoData = try await ToDoService.shared.getToDoData(tripId: tripId, category: "our", progress: progress)
-                print(self.ourToDoData)
             }
             catch {
                 guard let error = error as? NetworkError else { return }

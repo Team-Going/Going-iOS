@@ -25,6 +25,11 @@ class ToDoTextFieldView: UIView {
     lazy var todoTextfield: UITextField = {
         let tf = UITextField()
         tf.setTextField(forPlaceholder: "", forBorderColor: UIColor(resource: .gray200), forCornerRadius: 6)
+        if let clearButton = tf.value(forKeyPath: "_clearButton") as? UIButton {
+            clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+        }
+        tf.setLeftPadding(amount: 12)
+        tf.clearButtonMode = .whileEditing
         tf.font = .pretendard(.body3_medi)
         tf.setPlaceholderColor(UIColor(resource: .gray700))
         tf.textColor = UIColor(resource: .gray700)

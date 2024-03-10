@@ -174,11 +174,10 @@ private extension TripMiddleView {
         ticketBoxImgView.addSubviews(tripProgressLabel,
                                      percentageLabel,
                                      tripProgressBar,
-                                     tripFriendsContainer,
+                                     tripFriendsLabel,
                                      tripFriendsCollectionView,
                                      gradientView,
                                      addStackView)
-        tripFriendsContainer.addSubviews(tripFriendsLabel, tripFriendsBtn)
         addStackView.addArrangedSubviews(addButton, addLabel)
     }
     
@@ -192,59 +191,51 @@ private extension TripMiddleView {
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(20))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.width.equalTo(ScreenUtils.getWidth(100))
+            $0.height.equalTo(ScreenUtils.getHeight(23))
         }
         
         percentageLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(20))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.height.equalTo(ScreenUtils.getHeight(23))
         }
         
         tripProgressBar.snp.makeConstraints{
-            $0.top.equalTo(tripProgressLabel.snp.bottom).offset(ScreenUtils.getHeight(12))
+            $0.top.equalTo(tripProgressLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.height.equalTo(ScreenUtils.getHeight(10))
         }
         
-        tripFriendsContainer.snp.makeConstraints{
-            $0.top.equalTo(tripProgressBar.snp.bottom).offset(ScreenUtils.getHeight(52))
-            $0.leading.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
+        tripFriendsLabel.snp.makeConstraints{
+            $0.top.equalTo(tripProgressBar.snp.bottom).offset(ScreenUtils.getHeight(32))
+            $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(16))
+            $0.width.equalTo(ScreenUtils.getWidth(100))
             $0.height.equalTo(ScreenUtils.getHeight(23))
         }
         
-        tripFriendsLabel.snp.makeConstraints{
-            $0.top.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.width.equalTo(ScreenUtils.getWidth(100))
-        }
-        
-        tripFriendsBtn.snp.makeConstraints{
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(tripFriendsLabel.snp.trailing)
-        }
-        
         tripFriendsCollectionView.snp.makeConstraints{
-            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(ScreenUtils.getHeight(12))
+            $0.top.equalTo(tripFriendsLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.leading.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(64))
             $0.height.equalTo(ScreenUtils.getHeight(67))
         }
         
         addStackView.snp.makeConstraints{
-            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(ScreenUtils.getHeight(12))
+            $0.top.equalTo(tripFriendsLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
-            $0.width.equalTo(ScreenUtils.getHeight(48))
+            $0.width.equalTo(ScreenUtils.getHeight(45))
             $0.height.equalTo(ScreenUtils.getHeight(67))
         }
         
         gradientView.snp.makeConstraints{
-            $0.top.equalTo(tripFriendsContainer.snp.bottom).offset(ScreenUtils.getHeight(12))
+            $0.top.equalTo(tripFriendsLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.trailing.equalTo(addStackView.snp.leading)
-            $0.width.equalTo(ScreenUtils.getWidth(49))
+            $0.width.equalTo(ScreenUtils.getWidth(45))
             $0.height.equalTo(ScreenUtils.getHeight(67))
         }
         
         addButton.snp.makeConstraints{
-            $0.size.equalTo(ScreenUtils.getHeight(48))
+            $0.size.equalTo(ScreenUtils.getHeight(45))
         }
     }
     
@@ -252,7 +243,7 @@ private extension TripMiddleView {
         self.backgroundColor = UIColor(resource: .gray50)
         tripFriendsContainer.backgroundColor = UIColor(resource: .white000)
         tripFriendsBtn.setImage(UIImage(resource: .btnEnter), for: .normal)
-        addButton.layer.cornerRadius = ScreenUtils.getHeight(23.5)
+        addButton.layer.cornerRadius = ScreenUtils.getHeight(22.5)
     }
 
     func setDelegate() {
@@ -268,7 +259,7 @@ private extension TripMiddleView {
 
 // MARK: - Extension
 
-extension TripMiddleView: UICollectionViewDelegate {}
+extension TripMiddleView: UICollectionViewDelegate { }
 
 extension TripMiddleView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -279,9 +270,12 @@ extension TripMiddleView: UICollectionViewDataSource {
         guard let friendsCell = collectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.identifier, for: indexPath) as? TripFriendsCollectionViewCell else {return UICollectionViewCell()}
         friendsCell.bindData(data: self.friendProfile[indexPath.row])
         
-        userType = participants?[indexPath.row].result ?? 0
-        friendsCell.profileImageView.image = userProfileImageSet[userType]
-
+        if userType >= 0 && userType < userProfileImageSet.count {
+            friendsCell.profileImageView.image = userProfileImageSet[userType]
+        } else {
+            // 대체 이미지 설정 또는 기타 처리
+            friendsCell.profileImageView.image = UIImage(resource: .imgProfileGuest)
+        }
         return friendsCell
     }
 }

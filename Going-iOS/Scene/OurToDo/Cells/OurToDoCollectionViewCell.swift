@@ -146,26 +146,39 @@ extension OurToDoCollectionViewCell: UICollectionViewDelegate {}
 extension OurToDoCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return ourToDoData?.allocators.count ?? 0
+        //담당자가 없는 경우
+        if ourToDoData?.allocators.count == 0 {
+            return 1
+        } else {
+            return ourToDoData?.allocators.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
         
-        managerCell.managerData = ourToDoData?.allocators[indexPath.row].name
-
-        if isComplete == true {
-            managerCell.changeLabelColor(color: UIColor(resource: .gray300))
-        } else {
-            
-            
-            if ourToDoData?.allocators[indexPath.row].isOwner == true {
-                managerCell.changeLabelColor(color: UIColor(resource: .red500))
-            }else {
-                managerCell.changeLabelColor(color: UIColor(resource: .gray400))
+        //담당자가 없는 경우
+        if self.ourToDoData?.allocators.count == 0 {
+            managerCell.isEmpty = true
+            managerCell.managerData = StringLiterals.OurToDo.emptyAllocator
+        } 
+        //담당자가 있는 경우
+        else {
+            managerCell.isEmpty = false
+            managerCell.managerLabel.backgroundColor = UIColor.clear
+            managerCell.managerData = ourToDoData?.allocators[indexPath.row].name
+            if isComplete == true {
+                managerCell.changeLabelColor(color: UIColor(resource: .gray300))
+            } else {
+                if ourToDoData?.allocators[indexPath.row].isOwner == true {
+                    managerCell.changeLabelColor(color: UIColor(resource: .red500))
+                }else {
+                    managerCell.changeLabelColor(color: UIColor(resource: .gray400))
+                }
             }
         }
+
         return managerCell
     }
 }
@@ -181,6 +194,11 @@ extension OurToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: ScreenUtils.getWidth(42) , height: ScreenUtils.getHeight(20))
+        
+        if ourToDoData?.allocators.count == 0 {
+            return CGSize(width: ScreenUtils.getWidth(94) , height: ScreenUtils.getHeight(20))
+        } else {
+            return CGSize(width: ScreenUtils.getWidth(42) , height: ScreenUtils.getHeight(20))
+        }
     }
 }
