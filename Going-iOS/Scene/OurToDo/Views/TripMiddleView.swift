@@ -278,6 +278,8 @@ extension TripMiddleView: UICollectionViewDataSource {
         guard let friendsCell = collectionView.dequeueReusableCell(withReuseIdentifier: TripFriendsCollectionViewCell.identifier, for: indexPath) as? TripFriendsCollectionViewCell else {return UICollectionViewCell()}
         friendsCell.bindData(data: self.friendProfile[indexPath.row])
         
+        self.userType = participants?[indexPath.row].result ?? -2
+        
         if userType >= 0 && userType < userProfileImageSet.count {
             friendsCell.profileImageView.image = userProfileImageSet[userType]
         } else {
