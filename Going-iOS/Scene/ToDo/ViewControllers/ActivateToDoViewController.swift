@@ -489,7 +489,8 @@ extension ActivateToDoViewController: BottomSheetDelegate {
 }
 
 extension ActivateToDoViewController: DOONavigationBarDelegate {
-
+    func pushToTravelInfoVC() {}
+    
     // 저장 버튼 탭 시 데이터를 배열에 담아주고 메인 뷰로 돌아가는 메서드
 
     func saveTextButtonTapped() {
