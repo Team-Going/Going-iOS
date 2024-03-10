@@ -1,5 +1,5 @@
 {
-  "originHash" : "13a4349c97b8c144287eb3c451f5996124abab3b3eca9566c42400ee45d24e9b",
+  "originHash" : "fb503752994db89c7f9ae3fa6cf45e2d2c41418f1cc8348000afc21e9de02af1",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -35,6 +35,33 @@
       "state" : {
         "revision" : "3f1202f254ad5d71f6c5b518ed2d6b9e2abe6969",
         "version" : "4.3.4"
+      }
+    },
+    {
+      "identity" : "multiprogressview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mac-gallagher/MultiProgressView.git",
+      "state" : {
+        "revision" : "c4d920787553c9736f8c932170b318589b0eb1b2",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "nimble",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Quick/Nimble",
+      "state" : {
+        "revision" : "7a46a5fc86cb917f69e3daf79fcb045283d8f008",
+        "version" : "8.1.2"
+      }
+    },
+    {
+      "identity" : "quick",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Quick/Quick",
+      "state" : {
+        "revision" : "09b3becb37cb2163919a3842a4c5fa6ec7130792",
+        "version" : "2.2.1"
       }
     },
     {
