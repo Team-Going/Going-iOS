@@ -281,6 +281,7 @@ extension MyProfileViewController {
 extension MyProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let nextVC = UserTestSplashViewController()
+        UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
 }
