@@ -417,6 +417,11 @@ extension MyToDoViewController: UIScrollViewDelegate {
 }
 
 extension MyToDoViewController: MyToDoCollectionViewDelegate {
+    func pushToInquiry(todoId: Int) {
+        self.todoId = todoId
+        setInquiryToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry)
+    }
+    
     
     func getButtonIndex(index: Int, image: UIImage) {
         checkButtonTapped(index: index, image: image)
@@ -424,7 +429,12 @@ extension MyToDoViewController: MyToDoCollectionViewDelegate {
 
 }
 
-extension MyToDoViewController: UICollectionViewDelegate {}
+extension MyToDoViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.todoId = self.myToDoData?[indexPath.row].todoId ?? 0
+        setInquiryToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry)
+    }
+}
 
 extension MyToDoViewController: UICollectionViewDataSource{
 
@@ -434,7 +444,9 @@ extension MyToDoViewController: UICollectionViewDataSource{
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        guard let myToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyToDoCollectionViewCell.identifier, for: indexPath) as? MyToDoCollectionViewCell else {return UICollectionViewCell()}
+        guard let myToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyToDoCollectionViewCell.identifier, for: indexPath) as? MyToDoCollectionViewCell
+        else {return UICollectionViewCell()}
+        
         myToDoCell.delegate = self
         
         if stickyMyToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
@@ -451,11 +463,6 @@ extension MyToDoViewController: UICollectionViewDataSource{
             myToDoCell.isComplete = true
         }
         return myToDoCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.todoId = self.myToDoData?[indexPath.row].todoId ?? 0
-        setInquiryToDoView(before: "my", naviBarTitle: StringLiterals.ToDo.inquiry)
     }
 }
 

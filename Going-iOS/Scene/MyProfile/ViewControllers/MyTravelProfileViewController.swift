@@ -203,12 +203,14 @@ private extension MyTravelProfileViewController {
             myProfileTopView.editProfileButton.isHidden = false
             userTestResultScrollView.myResultView.backToTestButton.isHidden = false
             travelTestResultView.retryTravelTestButton.isHidden = false
+            travelProfileHeaderView.segmentedControl.setTitle("나의 여행 캐릭터", forSegmentAt: 0)
         } else {
             navigationBar.titleLabel.text = StringLiterals.MyProfile.friendProfileTitle
             saveButton.isHidden = true
             myProfileTopView.editProfileButton.isHidden = true
             userTestResultScrollView.myResultView.backToTestButton.isHidden = true
             travelTestResultView.retryTravelTestButton.isHidden = true
+            travelProfileHeaderView.segmentedControl.setTitle("친구의 여행 캐릭터", forSegmentAt: 0)
         }
     }
     
