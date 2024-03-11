@@ -30,6 +30,8 @@ final class MyTravelProfileViewController: UIViewController {
     
     lazy var participantId: Int = 0
     
+    var tripId: Int = 0
+    
     var isOwner: Bool = false
     
     var isEmpty: Bool = false
@@ -291,7 +293,9 @@ extension MyTravelProfileViewController: TravelTestResultViewDelegate {
     func userDidSelectAnswer() { return }
     
     func retryTravelTestButton() {
-        let vc = TravelTestViewController()
+        let vc = EditTravelTestViewController()
+        vc.participantId = self.participantId
+        vc.tripId = self.tripId
         self.navigationController?.pushViewController(vc, animated: false)
     }
 }
