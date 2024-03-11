@@ -83,7 +83,7 @@ final class TravelTestCollectionViewCell: UICollectionViewCell {
     
     // 취향 태그 결과값에 따라 버튼 색상 세팅하는 메소드
     func setStyleTagResultButton(result: Int) {
-        answerButtons[result-1].backgroundColor = UIColor(resource: .gray400)
+        answerButtons[result].backgroundColor = UIColor(resource: .gray400)
     }
     
     // 프로필 조회 시 취향 태그 버튼 비활성화하는 메소드
