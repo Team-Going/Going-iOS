@@ -68,6 +68,8 @@ final class MyTravelProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        travelTestResultView.isOwner = self.isOwner
+        
         setStyle()
         setOwnerOption()
         setHierarchy()
@@ -204,14 +206,12 @@ private extension MyTravelProfileViewController {
             saveButton.isHidden = false
             myProfileTopView.editProfileButton.isHidden = false
             userTestResultScrollView.myResultView.backToTestButton.isHidden = false
-            travelTestResultView.retryTravelTestButton.isHidden = false
             travelProfileHeaderView.segmentedControl.setTitle("나의 여행 캐릭터", forSegmentAt: 0)
         } else {
             navigationBar.titleLabel.text = StringLiterals.MyProfile.friendProfileTitle
             saveButton.isHidden = true
             myProfileTopView.editProfileButton.isHidden = true
             userTestResultScrollView.myResultView.backToTestButton.isHidden = true
-            travelTestResultView.retryTravelTestButton.isHidden = true
             travelProfileHeaderView.segmentedControl.setTitle("친구의 여행 캐릭터", forSegmentAt: 0)
         }
     }
@@ -290,14 +290,15 @@ extension MyTravelProfileViewController: TestResultViewDelegate {
 }
 
 extension MyTravelProfileViewController: TravelTestResultViewDelegate {
-    func userDidSelectAnswer() { return }
-    
-    func retryTravelTestButton() {
+    func retryButtonTapped() {
         let vc = EditTravelTestViewController()
         vc.participantId = self.participantId
         vc.tripId = self.tripId
         self.navigationController?.pushViewController(vc, animated: false)
     }
+    
+    func userDidSelectAnswer() { return }
+    
 }
 
 // MARK: - Network

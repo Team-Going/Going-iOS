@@ -45,7 +45,6 @@ final class EditTravelTestViewController: UIViewController {
     
     private let travelTestResultView: TravelTestResultView = {
         let view = TravelTestResultView()
-        view.retryTravelTestButton.isHidden = true
         return view
     }()
     
@@ -152,6 +151,10 @@ private extension EditTravelTestViewController {
 }
 
 extension EditTravelTestViewController: TravelTestResultViewDelegate {
+    func retryButtonTapped() {
+        return
+    }
+    
     func userDidSelectAnswer() {
         editButton.currentType = .enabled
         

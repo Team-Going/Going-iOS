@@ -118,6 +118,7 @@
 		CADA02592B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */; };
 		F4015E2B2B5424F0006709F4 /* UserIdDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4015E2A2B5424F0006709F4 /* UserIdDefault.swift */; };
 		F4015E2D2B557EDA006709F4 /* DOOTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4015E2C2B557EDA006709F4 /* DOOTabbarViewController.swift */; };
+		F41512562B9F726900E97478 /* TravelTestResultCollectionViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41512552B9F726900E97478 /* TravelTestResultCollectionViewFooter.swift */; };
 		F41F5D792B4EF431000D0472 /* ToDoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41F5D782B4EF431000D0472 /* ToDoService.swift */; };
 		F42F70412B53F1F400B27592 /* ReIssueJWTRequsetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F70402B53F1F300B27592 /* ReIssueJWTRequsetDTO.swift */; };
 		F430A98A2B4AD24800D482C4 /* UserTypeTestResultAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */; };
@@ -325,6 +326,7 @@
 		CADA02582B4ACF4D001FCE89 /* MyToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyToDoCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4015E2A2B5424F0006709F4 /* UserIdDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdDefault.swift; sourceTree = "<group>"; };
 		F4015E2C2B557EDA006709F4 /* DOOTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DOOTabbarViewController.swift; sourceTree = "<group>"; };
+		F41512552B9F726900E97478 /* TravelTestResultCollectionViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTestResultCollectionViewFooter.swift; sourceTree = "<group>"; };
 		F41F5D782B4EF431000D0472 /* ToDoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoService.swift; sourceTree = "<group>"; };
 		F42F70402B53F1F300B27592 /* ReIssueJWTRequsetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReIssueJWTRequsetDTO.swift; sourceTree = "<group>"; };
 		F430A9892B4AD24700D482C4 /* UserTypeTestResultAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeTestResultAppData.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				9457F0542B485A68009ACF25 /* TravelTestCollectionViewCell.swift */,
+				F41512552B9F726900E97478 /* TravelTestResultCollectionViewFooter.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1570,6 +1573,7 @@
 				F44D98702B4ECB2200341893 /* DataTypeProtocol.swift in Sources */,
 				F45CA1672B5306D600F3790C /* BasicResponseDTO.swift in Sources */,
 				94442EB62B4ABB4A00FDBB26 /* DashBoardViewController.swift in Sources */,
+				F41512562B9F726900E97478 /* TravelTestResultCollectionViewFooter.swift in Sources */,
 				94C2C9A12B46F94000B92CAC /* DOOButton.swift in Sources */,
 				941D3A292B9DBB98009A34A7 /* MemberProfileResponseStruct.swift in Sources */,
 				941D3A272B9DBAC5009A34A7 /* TravelProfileService.swift in Sources */,
