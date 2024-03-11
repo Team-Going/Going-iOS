@@ -327,7 +327,7 @@ private extension ChangeMyProfileViewController {
             do {
                 try await ProfileService.shared.patchMyProfileData(myProfileData: signUpBody)
                 self.navigationController?.popViewController(animated: true)
-                DOOToast.show(message: "프로필을 수정했어요", insetFromBottom: 80)
+                DOOToast.show(message: "프로필을 수정했어요", insetFromBottom: 115)
             }
             catch {
                 guard let error = error as? NetworkError else { return }
