@@ -124,7 +124,7 @@ final class MakeProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UserDefaults.standard.set(true, forKey: "isFromMakeProfileVC")
         setStyle()
         setHierarchy()
         setLayout()
@@ -217,6 +217,7 @@ private extension MakeProfileViewController {
     
     func setStyle() {
         self.view.backgroundColor = UIColor(resource: .white000)
+        
     }
     
     func setDelegate() {
@@ -339,7 +340,6 @@ private extension MakeProfileViewController {
             do {
                 try await AuthService.shared.postSignUp(token: token, signUpBody: signUpBody)
                 let nextVC = UserTestSplashViewController()
-                UserDefaults.standard.set(true, forKey: "isFromMakeProfileVC")
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             catch {

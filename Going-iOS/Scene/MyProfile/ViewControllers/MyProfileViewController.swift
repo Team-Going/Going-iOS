@@ -283,6 +283,11 @@ extension MyProfileViewController {
                 guard let testResultIndex else { return }
                 if self.testResultIndex != -1 {
                     self.testResultData = UserTypeTestResultAppData.dummy()[testResultIndex]
+                    self.resultImageView.isHidden = false
+                    self.myResultView.isHidden = false
+                    self.emptyUserTestView.isHidden = true
+                    self.myProfileScrollView.isScrollEnabled = true
+                    self.doUserTestButton.isHidden = true
                 } else {
                     setEmptyViewCase()
                 }
@@ -328,7 +333,7 @@ extension MyProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let nextVC = UserTestSplashViewController()
         UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
-        self.navigationController?.pushViewController(nextVC, animated: false)
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
