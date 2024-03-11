@@ -330,8 +330,9 @@ extension MyTravelProfileViewController {
                     self.isEmpty = false
                 } else {
                     self.isEmpty = true
-                    setEmptyView()
                 }
+                setEmptyView()
+
                 self.myProfileTopView.userType = index
             }
             catch {
