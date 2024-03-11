@@ -144,7 +144,8 @@ extension TravelTestResultView: UICollectionViewDataSource {
             cell.travelTestData = travelTestQuestionDummy[indexPath.row]
             
             if beforVC == StringLiterals.MyProfile.myTravelProfile && !styleResult.isEmpty{
-                cell.styleResult = styleResult[indexPath.row]
+//                cell.styleResult = styleResult[indexPath.row]
+                cell.configureButtonColors(with: styleResult[indexPath.row])
                 cell.setButtonDisable()
             }
             

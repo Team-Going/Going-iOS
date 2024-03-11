@@ -77,11 +77,14 @@ final class MyTravelProfileViewController: UIViewController {
         setDelegate()
         setSegmentDidChange()
         setSegment()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getPersonalProfile(participantId: participantId)
         hideTabBar()
+        travelTestResultView.travelTestCollectionView.setContentOffset(.zero, animated: false)
+        userTestResultScrollView.setContentOffset(.zero, animated: false)
     }
 }
 
