@@ -9,9 +9,15 @@ import UIKit
 
 import SnapKit
 
+protocol EmptyUserTestViewProtocol: AnyObject {
+    func goToTestButtonTapped()
+}
+
 final class EmptyUserTestView: UIView {
     
     // MARK: - UI Properties
+    
+    weak var delegate: EmptyUserTestViewProtocol?
     
     private let emptyImageView: UIImageView = {
         let img = UIImageView()
@@ -84,6 +90,6 @@ private extension EmptyUserTestView {
     
     @objc
     func doUserTestButtonTapped() {
-        print("tapped")
+        delegate?.goToTestButtonTapped()
     }
 }
