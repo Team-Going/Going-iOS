@@ -250,12 +250,16 @@ extension MemberViewController: UICollectionViewDataSource {
         
         cell.friendNameLabel.text = memberData?.participants[indexPath.row].name
 
-        if userType >= 0 && userType < userProfileImageSet.count {
-            cell.profileImageView.image = userProfileImageSet[userType]
+        guard let memberResultNum = memberData?.participants[indexPath.row].result else { return UICollectionViewCell() }
+        
+        
+        if memberResultNum != -1 {
+            cell.profileImageView.image = userProfileImageSet[memberResultNum]
         } else {
-            // 대체 이미지 설정 또는 기타 처리
             cell.profileImageView.image = UIImage(resource: .imgProfileGuest)
+
         }
+        
         return cell
     }
 }
