@@ -395,6 +395,16 @@ private extension OurToDoViewController {
         }
     }
     
+    func setInquiryToDoView() {
+        /// 할일  조회 뷰에 데이터 세팅 후 이동
+        let todoVC = ToDoViewController()
+        todoVC.navigationBarTitle = StringLiterals.ToDo.inquiry
+        todoVC.tripId = self.tripId
+        todoVC.beforeVC = "our"
+        todoVC.todoId = self.todoId
+        self.navigationController?.pushViewController(todoVC, animated: false)
+    }
+    
     // MARK: - objc method
     
     @objc
@@ -472,7 +482,25 @@ extension OurToDoViewController: TabBarDelegate {
     }
 }
 
-extension OurToDoViewController: UICollectionViewDelegate {}
+extension OurToDoViewController: OurToDoCollectionViewDelegate {
+    func pushToInquiry(todoId: Int, allocators: [Allocators]) {
+        self.todoId = todoId
+        self.allocator = allocators
+
+        setInquiryToDoView()
+    }
+    
+}
+
+extension OurToDoViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.todoId = self.ourToDoData?[indexPath.row].todoId ?? 0
+        self.allocator =  self.ourToDoData?[indexPath.row].allocators ?? []
+        
+        setInquiryToDoView()
+    }
+}
 
 extension OurToDoViewController: UICollectionViewDataSource {
     
@@ -481,7 +509,10 @@ extension OurToDoViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let ourToDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: OurToDoCollectionViewCell.identifier, for: indexPath) as? OurToDoCollectionViewCell else {return UICollectionViewCell()}
+        
+        ourToDoCell.delegate = self
                 
         if stickyOurToDoHeaderView.segmentedControl.selectedSegmentIndex == 0 {
             ourToDoCell.ourToDoData = self.ourToDoData?[indexPath.row]
@@ -495,21 +526,6 @@ extension OurToDoViewController: UICollectionViewDataSource {
             ourToDoCell.isComplete = true
         }
         return ourToDoCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        self.todoId = self.ourToDoData?[indexPath.row].todoId ?? 0
-        self.allocator =  self.ourToDoData?[indexPath.row].allocators ?? []
-        
-        /// 할일  조회 뷰에 데이터 세팅 후 이동
-        let todoVC = ToDoViewController()
-        todoVC.navigationBarTitle = StringLiterals.ToDo.inquiry
-        todoVC.tripId = self.tripId
-        todoVC.beforeVC = "our"
-        todoVC.todoId = self.todoId
-        self.navigationController?.pushViewController(todoVC, animated: false)
-
     }
 }
 

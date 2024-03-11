@@ -2,6 +2,7 @@ import UIKit
 
 protocol MyToDoCollectionViewDelegate: AnyObject {
     func getButtonIndex(index: Int, image: UIImage)
+    func pushToInquiry(todoId: Int)
 }
 
 class MyToDoCollectionViewCell: UICollectionViewCell {
@@ -11,6 +12,8 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
     static let identifier = "MyToDoCollectionViewCell"
     
     weak var delegate: MyToDoCollectionViewDelegate?
+    
+    var todoId: Int = 0
     
     var manager: [Allocators] = []
     
@@ -74,14 +77,15 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         alignment: .center
     )
 
-    private let  managerCollectionView: UICollectionView = {
+    lazy var  managerCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor(resource: .gray50)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.isScrollEnabled = false
+        collectionView.isUserInteractionEnabled = true
+        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
         return collectionView
     }()
     
@@ -112,6 +116,11 @@ class MyToDoCollectionViewCell: UICollectionViewCell {
         let index = self.index ?? 0
         let image = self.checkButton.imageView?.image ?? UIImage()
         self.delegate?.getButtonIndex(index: index, image: image)
+    }
+    
+    @objc
+    func tapManagerCollectionView(_ sender: UITapGestureRecognizer) {
+        self.delegate?.pushToInquiry(todoId: todoId)
     }
 }
 
@@ -195,6 +204,8 @@ extension MyToDoCollectionViewCell: UICollectionViewDataSource{
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
         
         let data = self.myToDoData ?? ToDoAppData(todoId: 0, title: "", endDate: "", allocators: [], secret: false)
+        
+        self.todoId = data.todoId
         
         if data.secret {
             managerCell.managerData = "혼자할일"

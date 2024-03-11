@@ -1,7 +1,7 @@
 import UIKit
 
 protocol OurToDoCollectionViewDelegate: AnyObject {
-    func pushToToDo()
+    func pushToInquiry(todoId: Int, allocators: [Allocators])
 }
 
 final class OurToDoCollectionViewCell: UICollectionViewCell {
@@ -35,6 +35,10 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var todoId: Int = 0
+    
+    var allocators: [Allocators] = []
+    
     // MARK: - UI Properties
     
     var todoBackgroundView: UIView = {
@@ -63,6 +67,7 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
+        collectionView.isUserInteractionEnabled = true
         collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapManagerCollectionView(_:))))
         return collectionView
     }()
@@ -86,7 +91,7 @@ final class OurToDoCollectionViewCell: UICollectionViewCell {
     
     @objc
     func tapManagerCollectionView(_ sender: UITapGestureRecognizer) {
-        self.delegate?.pushToToDo()
+        self.delegate?.pushToInquiry(todoId: todoId, allocators: allocators)
     }
 }
 
@@ -157,6 +162,9 @@ extension OurToDoCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagerCollectionViewCell.identifier, for: indexPath) as? ManagerCollectionViewCell else {return UICollectionViewCell()}
+        
+        self.todoId = self.ourToDoData?.todoId ?? 0
+        self.allocators = self.ourToDoData?.allocators ?? []
         
         //담당자가 없는 경우
         if self.ourToDoData?.allocators.count == 0 {
