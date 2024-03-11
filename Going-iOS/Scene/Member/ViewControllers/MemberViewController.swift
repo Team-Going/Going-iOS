@@ -13,6 +13,8 @@ final class MemberViewController: UIViewController {
     
     // MARK: - Network
     
+    var inviteCode: String?
+    
     var tripId: Int = 0
     
     var ownerId: Int?
@@ -28,33 +30,49 @@ final class MemberViewController: UIViewController {
                                           UIImage(resource: .imgProfileAep),
                                           UIImage(resource: .imgProfileAei)]
     
+    
+    private let noFriendsEmptyView: NoFriendsEmptyView = {
+        let view = NoFriendsEmptyView()
+        view.isHidden = true
+        return view
+    }()
+    
+    
     var memberData: MemberResponseStruct? {
         didSet {
-            membersProfileCollectionView.reloadData()
             
-            guard let styles = memberData?.styles else { return }
-            
-            self.ourTestResultView.progressView1.testResultData = styles[0]
-            self.ourTestResultView.progressView2.testResultData = styles[1]
-            self.ourTestResultView.progressView3.testResultData = styles[2]
-            self.ourTestResultView.progressView4.testResultData = styles[3]
-            self.ourTestResultView.progressView5.testResultData = styles[4]
-            
-            guard let bestPrefer = memberData?.bestPrefer else { return }
-            
-            if bestPrefer.count == 0 {
-                self.redTasteLabel.text = "달라서 즐거운 여행!"
-                self.grayTasteLabel.text = " 친구와 서로의 취향을 이야기해 봐요"
+            if memberData?.participants.count != 1 {
                 
-            } else if bestPrefer.count == 5 {
-                self.redTasteLabel.text = "최고의 여행 친구!"
-                self.grayTasteLabel.text = " 모든 여행 취향이 일치해요"
+                membersProfileCollectionView.reloadData()
                 
+                guard let styles = memberData?.styles else { return }
+                
+                self.ourTestResultView.progressView1.testResultData = styles[0]
+                self.ourTestResultView.progressView2.testResultData = styles[1]
+                self.ourTestResultView.progressView3.testResultData = styles[2]
+                self.ourTestResultView.progressView4.testResultData = styles[3]
+                self.ourTestResultView.progressView5.testResultData = styles[4]
+                
+                guard let bestPrefer = memberData?.bestPrefer else { return }
+                
+                if bestPrefer.count == 0 {
+                    self.redTasteLabel.text = "달라서 즐거운 여행!"
+                    self.grayTasteLabel.text = " 친구와 서로의 취향을 이야기해 봐요"
+                    
+                } else if bestPrefer.count == 5 {
+                    self.redTasteLabel.text = "최고의 여행 친구!"
+                    self.grayTasteLabel.text = " 모든 여행 취향이 일치해요"
+                    
+                } else {
+                    let preferences = bestPrefer.map { $0.replacingOccurrences(of: "여행 ", with: "") }
+                    let formattedText = preferences.joined(separator: ", ")
+                    self.redTasteLabel.text = formattedText
+                    self.grayTasteLabel.text = "에 대한 여행 취향이 잘 맞네요"
+                }
             } else {
-                let preferences = bestPrefer.map { $0.replacingOccurrences(of: "여행 ", with: "") }
-                let formattedText = preferences.joined(separator: ", ")
-                self.redTasteLabel.text = formattedText
-                self.grayTasteLabel.text = "에 대한 여행 취향이 잘 맞네요"
+                self.memberScrollView.isHidden = true
+                self.noFriendsEmptyView.isHidden = false
+                
             }
         }
     }
@@ -148,7 +166,8 @@ private extension MemberViewController {
     func setHierarchy() {
         view.addSubviews(navigationBar,
                          navigationUnderLineView,
-                         memberScrollView)
+                         memberScrollView,
+                         noFriendsEmptyView)
         
         memberScrollView.addSubview(contentView)
         
@@ -173,6 +192,11 @@ private extension MemberViewController {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
+        }
+        
+        noFriendsEmptyView.snp.makeConstraints {
+            $0.top.equalTo(navigationUnderLineView.snp.bottom)
+            $0.trailing.leading.bottom.equalToSuperview()
         }
         
         memberScrollView.snp.makeConstraints {
@@ -234,6 +258,7 @@ private extension MemberViewController {
     func setDelegate() {
         membersProfileCollectionView.delegate = self
         membersProfileCollectionView.dataSource = self
+        noFriendsEmptyView.delegate = self
     }
     
     func pushToMemberVC(participantId: Int) {
@@ -324,5 +349,13 @@ extension MemberViewController {
                 handleError(error)
             }
         }
+    }
+}
+
+extension MemberViewController: NoFriendsEmptyViewProtocol {
+    func inviteFriendButtonTapped() {
+        let vc = InviteFriendPopUpViewController()
+        vc.codeLabel.text = self.inviteCode
+        self.present(vc, animated: false)
     }
 }
