@@ -538,7 +538,7 @@ extension OurToDoViewController: TripMiddleViewDelegate {
     func pushToMemberVC(participantId: Int) {
         let myTravelProfileVC = MyTravelProfileViewController()
         myTravelProfileVC.participantId = participantId
-        
+        myTravelProfileVC.tripId = self.tripId
         // 본인인 경우
         if self.ownerId == participantId {
             myTravelProfileVC.isOwner = true
