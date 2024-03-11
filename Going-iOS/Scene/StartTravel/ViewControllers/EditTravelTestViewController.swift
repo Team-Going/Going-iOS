@@ -205,7 +205,7 @@ extension EditTravelTestViewController {
             do {
                 try await TravelDetailService.shared.patchTravelTest(tripId: tripId, requestBody: patchRequestBody)
             }
-            self.navigationController?.popToRootViewController(animated: false)
+            self.navigationController?.popViewController(animated: false)
             DOOToast.show(message: "취향태그를 수정했어요", insetFromBottom: ScreenUtils.getHeight(103))
         }
     }
