@@ -79,6 +79,8 @@ class DashBoardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
+        
         setSegmentDidChange()
         setStyle()
         setHierarchy()

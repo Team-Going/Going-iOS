@@ -157,6 +157,7 @@ private extension MyTravelProfileViewController {
     func setDelegate() {
         userTestResultScrollView.myResultView.delegate = self
         travelTestResultView.delegate = self
+        myProfileTopView.delegate = self
     }
     
     func setSegmentDidChange() {
@@ -356,5 +357,14 @@ extension MyTravelProfileViewController {
                 handleError(error)
             }
         }
+    }
+}
+
+extension MyTravelProfileViewController: MyProfileTopViewDelegate {
+    func changeMyProfileButtonTapped() {
+        let nextVC = ChangeMyProfileViewController()
+        nextVC.nameTextField.text = myProfileTopView.userNameLabel.text
+        nextVC.descTextField.text = myProfileTopView.userDescriptionLabel.text
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

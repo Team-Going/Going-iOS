@@ -23,6 +23,8 @@ final class MyProfileViewController: UIViewController {
         }
     }
     
+    private let emptyUserTestView = EmptyUserTestView()
+    
     private var testResultIndex: Int?
     
     // MARK: - UI Properties
@@ -71,6 +73,13 @@ final class MyProfileViewController: UIViewController {
         return view
     }()
     
+    private lazy var doUserTestButton: DOOButton = {
+        let btn = DOOButton(type: .enabled, title: "여행 캐릭터 검사하러 가기")
+        btn.addTarget(self, action: #selector(doUserTestButtonTapped), for: .touchUpInside)
+        btn.isHidden = true
+        return btn
+    }()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -104,20 +113,32 @@ private extension MyProfileViewController {
         contentView.backgroundColor = UIColor(resource: .white000)
         view.backgroundColor = UIColor(resource: .white000)
         self.myProfileScrollView.showsVerticalScrollIndicator = false
+        self.emptyUserTestView.isHidden = true
+    }
+    
+    func setEmptyViewCase() {
+        self.resultImageView.isHidden = true
+        self.myResultView.isHidden = true
+        self.emptyUserTestView.isHidden = false
+        self.myProfileScrollView.isScrollEnabled = false
+        self.doUserTestButton.isHidden = false
+        self.myProfileTopView.profileImageView.image = UIImage(resource: .imgProfileGuest)
     }
     
     func setHierarchy() {
-        view.addSubviews(navigationBar, 
-                         naviUnderLineView, 
-                         myProfileScrollView)
+        view.addSubviews(navigationBar,
+                         naviUnderLineView,
+                         myProfileScrollView,
+                         doUserTestButton)
         
         navigationBar.addSubview(saveButton)
         
         myProfileScrollView.addSubviews(contentView)
         
-        contentView.addSubviews(myProfileTopView, 
+        contentView.addSubviews(myProfileTopView,
                                 resultImageView,
-                                myResultView)
+                                myResultView,
+                                emptyUserTestView)
     }
     
     func setLayout() {
@@ -155,6 +176,11 @@ private extension MyProfileViewController {
             $0.height.equalTo(ScreenUtils.getHeight(109))
         }
         
+        emptyUserTestView.snp.makeConstraints {
+            $0.top.equalTo(myProfileTopView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
         resultImageView.snp.makeConstraints {
             $0.top.equalTo(myProfileTopView.snp.bottom)
             $0.height.equalTo(228)
@@ -165,6 +191,13 @@ private extension MyProfileViewController {
             $0.top.equalTo(resultImageView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
+        }
+        
+        doUserTestButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-6)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(Constant.Screen.width - 48)
+            $0.height.equalTo(ScreenUtils.getHeight(50))
         }
     }
     
@@ -199,6 +232,14 @@ private extension MyProfileViewController {
     @objc
     func saveImageButtonTapped() {
         checkAccess()
+    }
+    
+    //성향테스트안했을 때, 성향테스트스플래시로 보내줌
+    @objc
+    func doUserTestButtonTapped() {
+        let nextVC = UserTestSplashViewController()
+        UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -239,8 +280,17 @@ extension MyProfileViewController {
                 self.myProfileTopView.userDescriptionLabel.text = profileData.intro
                 self.myProfileTopView.userNameLabel.text = profileData.name
                 
-                guard let index = testResultIndex else { return }
-                self.testResultData = UserTypeTestResultAppData.dummy()[index]
+                guard let testResultIndex else { return }
+                if self.testResultIndex != -1 {
+                    self.testResultData = UserTypeTestResultAppData.dummy()[testResultIndex]
+                    self.resultImageView.isHidden = false
+                    self.myResultView.isHidden = false
+                    self.emptyUserTestView.isHidden = true
+                    self.myProfileScrollView.isScrollEnabled = true
+                    self.doUserTestButton.isHidden = true
+                } else {
+                    setEmptyViewCase()
+                }
             }
             catch {
                 guard let error = error as? NetworkError else { return }
@@ -283,7 +333,7 @@ extension MyProfileViewController: TestResultViewDelegate {
     func backToTestButton() {
         let nextVC = UserTestSplashViewController()
         UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
-        self.navigationController?.pushViewController(nextVC, animated: false)
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

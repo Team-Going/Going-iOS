@@ -127,8 +127,8 @@ private extension UserTestSplashViewController {
         if UserDefaults.standard.bool(forKey: "isFromMakeProfileVC") == false {
             self.navigationController?.popViewController(animated: true)
         } else {
-            let nextVC = DashBoardViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
+            self.view.window?.makeKeyAndVisible()
         }
     }
 }

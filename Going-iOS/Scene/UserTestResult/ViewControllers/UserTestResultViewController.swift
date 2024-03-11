@@ -189,6 +189,9 @@ private extension UserTestResultViewController {
     @objc
     func nextButtonTapped() {
         
+        self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
+        self.view.window?.makeKeyAndVisible()
+        
         if UserDefaults.standard.bool(forKey: "isFromMakeProfileVC") == false {
             
             guard let viewControllerStack = self.navigationController?.viewControllers else { return }
@@ -294,7 +297,6 @@ extension UserTestResultViewController: ViewControllerServiceable {
 
 extension UserTestResultViewController: TestResultViewDelegate {
     func backToTestButton() {
-        
         // 뷰 스택에서 UserTestSplashViewController를 찾아서 거기까지 pop
         guard let viewControllerStack = self.navigationController?.viewControllers else { return }
         for viewController in viewControllerStack {
