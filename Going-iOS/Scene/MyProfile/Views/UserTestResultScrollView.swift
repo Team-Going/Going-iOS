@@ -51,6 +51,7 @@ final class UserTestResultScrollView: UIScrollView {
 
 private extension UserTestResultScrollView {
     func setStyle() {
+        self.showsVerticalScrollIndicator = false
         self.backgroundColor = UIColor(resource: .white000)
     }
     
