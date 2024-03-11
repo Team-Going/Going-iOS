@@ -68,6 +68,8 @@ final class MyTravelProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        travelTestResultView.isOwner = self.isOwner
+        
         setStyle()
         setOwnerOption()
         setHierarchy()
@@ -75,11 +77,14 @@ final class MyTravelProfileViewController: UIViewController {
         setDelegate()
         setSegmentDidChange()
         setSegment()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getPersonalProfile(participantId: participantId)
         hideTabBar()
+        travelTestResultView.travelTestCollectionView.setContentOffset(.zero, animated: false)
+        userTestResultScrollView.setContentOffset(.zero, animated: false)
     }
 }
 
@@ -160,6 +165,7 @@ private extension MyTravelProfileViewController {
         userTestResultScrollView.myResultView.delegate = self
         travelTestResultView.delegate = self
         myProfileTopView.delegate = self
+        emptyUserTestView.delegate = self
     }
     
     func setSegmentDidChange() {
@@ -204,14 +210,12 @@ private extension MyTravelProfileViewController {
             saveButton.isHidden = false
             myProfileTopView.editProfileButton.isHidden = false
             userTestResultScrollView.myResultView.backToTestButton.isHidden = false
-            travelTestResultView.retryTravelTestButton.isHidden = false
             travelProfileHeaderView.segmentedControl.setTitle("나의 여행 캐릭터", forSegmentAt: 0)
         } else {
             navigationBar.titleLabel.text = StringLiterals.MyProfile.friendProfileTitle
             saveButton.isHidden = true
             myProfileTopView.editProfileButton.isHidden = true
             userTestResultScrollView.myResultView.backToTestButton.isHidden = true
-            travelTestResultView.retryTravelTestButton.isHidden = true
             travelProfileHeaderView.segmentedControl.setTitle("친구의 여행 캐릭터", forSegmentAt: 0)
         }
     }
@@ -290,14 +294,15 @@ extension MyTravelProfileViewController: TestResultViewDelegate {
 }
 
 extension MyTravelProfileViewController: TravelTestResultViewDelegate {
-    func userDidSelectAnswer() { return }
-    
-    func retryTravelTestButton() {
+    func retryButtonTapped() {
         let vc = EditTravelTestViewController()
         vc.participantId = self.participantId
         vc.tripId = self.tripId
         self.navigationController?.pushViewController(vc, animated: false)
     }
+    
+    func userDidSelectAnswer() { return }
+    
 }
 
 // MARK: - Network
@@ -325,8 +330,9 @@ extension MyTravelProfileViewController {
                     self.isEmpty = false
                 } else {
                     self.isEmpty = true
-                    setEmptyView()
                 }
+                setEmptyView()
+
                 self.myProfileTopView.userType = index
             }
             catch {
@@ -371,6 +377,14 @@ extension MyTravelProfileViewController: MyProfileTopViewDelegate {
         let nextVC = ChangeMyProfileViewController()
         nextVC.nameTextField.text = myProfileTopView.userNameLabel.text
         nextVC.descTextField.text = myProfileTopView.userDescriptionLabel.text
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
+
+extension MyTravelProfileViewController: EmptyUserTestViewProtocol {
+    func goToTestButtonTapped() {
+        let nextVC = UserTestSplashViewController()
+        UserDefaults.standard.set(false, forKey: "isFromMakeProfileVC")
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

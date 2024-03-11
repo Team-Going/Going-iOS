@@ -334,7 +334,9 @@ private extension OurToDoViewController {
     @objc
     func pushToOurTripPreferences(_ sender : UITapGestureRecognizer) {
         let memberVC = MemberViewController()
+        memberVC.inviteCode = self.inviteCode
         memberVC.tripId = self.tripId
+        memberVC.ownerId = self.ownerId
         self.navigationController?.pushViewController(memberVC, animated: false)
     }
     

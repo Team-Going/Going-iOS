@@ -189,8 +189,7 @@ private extension UserTestResultViewController {
     @objc
     func nextButtonTapped() {
         
-        self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
-        self.view.window?.makeKeyAndVisible()
+        
         
         if UserDefaults.standard.bool(forKey: "isFromMakeProfileVC") == false {
             
@@ -209,8 +208,8 @@ private extension UserTestResultViewController {
                     }
                 }
         } else {
-            let nextVC = DashBoardViewController()
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            self.view.window?.rootViewController = UINavigationController(rootViewController: DashBoardViewController())
+            self.view.window?.makeKeyAndVisible()
         }
         
     }
