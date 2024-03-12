@@ -49,7 +49,10 @@ final class TestResultTicketView: UIView {
         return stack
     }()
     
-    let titleLabel = DOOLabel(font: .pretendard(.detail1_bold), color: UIColor(resource: .gray700), numberOfLine: 2, alignment: .center)
+    let titleLabel = DOOLabel(font: .pretendard(.detail1_bold),
+                              color: UIColor(resource: .gray700),
+                              numberOfLine: 2,
+                              alignment: .center)
     
     private let descStackView: UIStackView = {
         let stack = UIStackView()
@@ -59,9 +62,15 @@ final class TestResultTicketView: UIView {
         return stack
     }()
     
-    lazy var firstDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
-    lazy var secondDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
-    lazy var thirdDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray700), numberOfLine: 2)
+    lazy var firstDescLabel = DOOLabel(font: .pretendard(.detail2_regular),
+                                       color: UIColor(resource: .gray700),
+                                       numberOfLine: 2)
+    lazy var secondDescLabel = DOOLabel(font: .pretendard(.detail2_regular),
+                                        color: UIColor(resource: .gray700),
+                                        numberOfLine: 2)
+    lazy var thirdDescLabel = DOOLabel(font: .pretendard(.detail2_regular),
+                                       color: UIColor(resource: .gray700),
+                                       numberOfLine: 2)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,9 +89,12 @@ private extension TestResultTicketView {
     
     func setHierarchy() {
         self.addSubviews(ticketBackgroundImage)
-        ticketBackgroundImage.addSubview(wholeStackView)
-        wholeStackView.addArrangedSubviews(titleLabel, descStackView)
-        descStackView.addArrangedSubviews(firstDescLabel, secondDescLabel, thirdDescLabel)
+
+        ticketBackgroundImage.addSubviews(titleLabel, descStackView)
+        
+        descStackView.addArrangedSubviews(firstDescLabel,
+                                          secondDescLabel,
+                                          thirdDescLabel)
     }
     
     func setLayout() {
@@ -90,19 +102,16 @@ private extension TestResultTicketView {
             $0.edges.equalToSuperview()
         }
         
-        wholeStackView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(14)
-            $0.top.bottom.equalToSuperview().inset(16)
-            $0.height.equalTo(ScreenUtils.getHeight(110))
-        }
-
         titleLabel.snp.makeConstraints {
-            $0.width.equalTo(ScreenUtils.getWidth(52))
-            $0.height.equalTo(ScreenUtils.getHeight(36))
+            $0.leading.equalToSuperview().inset(14)
+            $0.centerY.equalToSuperview()
+            $0.width.equalTo(ScreenUtils.getWidth(57))
+            $0.height.equalTo(ScreenUtils.getHeight(40))
         }
         
         descStackView.snp.makeConstraints {
-            $0.centerY.equalTo(ticketBackgroundImage)
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(11)
             $0.width.equalTo(ScreenUtils.getWidth(213))
         }
     }
