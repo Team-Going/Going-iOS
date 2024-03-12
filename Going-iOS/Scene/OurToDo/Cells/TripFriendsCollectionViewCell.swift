@@ -13,6 +13,7 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
     var profileStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 4
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = UIColor(resource: .white000)
         stackView.isUserInteractionEnabled = true
@@ -65,11 +66,7 @@ private extension TripFriendsCollectionViewCell {
         profileStackView.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
-        
-        profileImageView.snp.makeConstraints{
-            $0.size.equalTo(ScreenUtils.getHeight(45))
-        }
-        
+
         friendNameLabel.snp.makeConstraints{
             $0.height.equalTo(ScreenUtils.getHeight(17))
         }
