@@ -44,31 +44,27 @@ final class NoFriendsEmptyView: UIView {
         setHierarchy()
         setLayout()
         setStyle()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     @objc
     func inviteFriendButtonTapped() {
         delegate?.inviteFriendButtonTapped()
     }
-    
 }
 
 private extension NoFriendsEmptyView {
-    
-    
     func setStyle() {
         self.backgroundColor = UIColor(resource: .white000)
     }
     
     func setHierarchy() {
-        self.addSubviews(emptyImageView, emptyLabel, inviteFriendButton)
-        
+        self.addSubviews(emptyImageView,
+                         emptyLabel,
+                         inviteFriendButton)
     }
     
     func setLayout() {
