@@ -32,7 +32,7 @@ extension TravelTestQuestionStruct {
                                  optionContent: TravelAnswerStruct(leftOption: "유명 맛집", rightOption: "가까운 곳")),
         TravelTestQuestionStruct(questionIndex: 4,
                                  questionContent: "기억하고 싶은 순간에!",
-                                 optionContent: TravelAnswerStruct(leftOption: "사진필수", rightOption: "눈에 담기")),
+                                 optionContent: TravelAnswerStruct(leftOption: "사진 필수", rightOption: "눈에 담기")),
         TravelTestQuestionStruct(questionIndex: 5,
                                  questionContent: "하루 일정을 어떻게 채우나요?",
                                  optionContent: TravelAnswerStruct(leftOption: "알차게", rightOption: "여유롭게"))
