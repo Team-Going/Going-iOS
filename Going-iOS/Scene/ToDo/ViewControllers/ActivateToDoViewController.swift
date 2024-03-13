@@ -9,7 +9,7 @@ import UIKit
 
 final class ActivateToDoViewController: UIViewController {
 
-    private lazy var navigationBarView = DOONavigationBar(self, 
+    private lazy var navigationBarView = DOONavigationBar(self,
                                                           type: .rightItemWithTitle(StringLiterals.ToDo.edit),
                                                           backgroundColor: UIColor(resource: .white000))
 
@@ -69,6 +69,9 @@ final class ActivateToDoViewController: UIViewController {
     lazy var beforeVC: String = "" {
         didSet {
             self.todoManagerView.beforeVC = beforeVC
+            if self.navigationBarTitle == StringLiterals.ToDo.add && beforeVC == "my" {
+                self.isSecret = true
+            }
         }
     }
     
@@ -179,7 +182,7 @@ final class ActivateToDoViewController: UIViewController {
             } else {
                 self.todoManagerView.allocators = self.todoManagerView.allParticipants
             }
-            setDefaultValue = ["할일을 입력해 주세요", 
+            setDefaultValue = ["할일을 입력해 주세요",
                                "날짜를 선택해 주세요",
                                self.todoManagerView.allocators,
                                "메모를 입력해 주세요"]
@@ -414,7 +417,7 @@ private extension ActivateToDoViewController {
         let isTodoTextFieldEmpty = self.todoTextFieldView.todoTextfield.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let isDateSet = self.endDateView.deadlineTextfieldLabel.text != "날짜를 선택해 주세요"
         
-        if !isTodoTextFieldEmpty 
+        if !isTodoTextFieldEmpty
             && self.todoTextFieldView.todoTextfield.text?.count ?? 0 <= 15
             && isDateSet
             && self.memoTextView.memoTextView.text.count <= 1000 {
@@ -450,7 +453,7 @@ extension ActivateToDoViewController: ToDoManagerViewDelegate {
         //선택 취소된 경우
         if sender.isSelected {
             buttonIndex.removeAll(where: { $0 == sender.tag })
-        } 
+        }
         //선택된 경우
         else {
             buttonIndex.append(sender.tag)
@@ -502,8 +505,8 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
             for i in buttonIndex {
                 //마이투두
                 if secret {
-                    //마이투두 -> '혼자 할 일'이거나 추가 작업인 경우
-                    if self.isSecret || navigationBarTitle == StringLiterals.ToDo.add{
+                    //마이투두 -> '혼자 할 일'인 경우
+                    if self.isSecret {
                         idSet = [self.myId]
                     } else {
                         idSet.append(self.todoManagerView.allParticipants[i].participantID)
@@ -518,6 +521,10 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
                         idSet.append(self.todoManagerView.allParticipants[i].participantID)
                     }
                 }
+            }
+            
+            if navigationBarTitle == StringLiterals.ToDo.add && secret {
+                idSet = [self.myId]
             }
             
             self.saveToDoData = CreateToDoRequestStruct(title: todo, endDate: deadline, allocators: idSet, memo: memo, secret: isSecret)
@@ -567,8 +574,9 @@ extension ActivateToDoViewController {
         Task {
             do {
                 try await ToDoService.shared.postCreateToDo(tripId: tripId, requestBody: saveToDoData)
-                self.navigationController?.popViewController(animated: true)
+                print("post: \(self.saveToDoData)")
             }
+            self.navigationController?.popViewController(animated: true)
             DOOToast.show(message: "할일을 추가했어요", insetFromBottom: ScreenUtils.getHeight(106))
         }
     }
@@ -584,3 +592,4 @@ extension ActivateToDoViewController {
         }
     }
 }
+
