@@ -120,7 +120,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
         }
         else {
             //'혼자 할일' 추가 및 조회의 경우
-            if navigationBarTitle == StringLiterals.ToDo.edit {
+            if navigationBarTitle == StringLiterals.ToDo.edit && !self.isSecret{
                 return self.allParticipants.count
             } else {
                 return self.allocators.count
@@ -170,7 +170,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
                 managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                 managerCell.managerButton.setTitleColor(UIColor(resource: .gray300), for: .normal)
                 managerCell.managerButton.layer.borderColor = UIColor(resource: .gray300).cgColor
-            } 
+            }
             //아워투두 -> 수정 & 조회
             else {
                 //담당자로 배정되어 있는 경우
@@ -219,7 +219,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
                         managerCell.managerButton.layer.borderColor = UIColor(resource: .red500).cgColor
                         managerCell.managerButton.backgroundColor = UIColor(resource: .white000)
                     }
-                } 
+                }
                 //그 외의 경우
                 else{
                     if self.allocators[indexPath.row].isAllocated {
@@ -317,3 +317,4 @@ extension ToDoManagerView: UICollectionViewDelegateFlowLayout {
         }
     }
 }
+
