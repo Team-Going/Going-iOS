@@ -26,7 +26,7 @@ final class QuitTravelPopUpViewController: PopUpDimmedViewController {
     private let quitTravelDescLabel: DOOLabel = {
         let label = DOOLabel(font: .pretendard(.detail2_regular),
                              color: UIColor(resource: .gray300),
-                             text: "나가기를 하면 정보가 모두 삭제되고,\n여행 목록에서도 삭제됩니다")
+                             text: "나가기를 하면 정보가 모두 삭제되고,\n여행 목록에서도 삭제돼요")
         label.numberOfLines = 2
         label.setLineSpacing(spacing: 3)
         label.textAlignment = .center
