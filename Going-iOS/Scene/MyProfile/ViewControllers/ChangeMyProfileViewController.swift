@@ -38,7 +38,7 @@ final class ChangeMyProfileViewController: UIViewController {
         textField.layer.borderWidth = 1
         textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
-        textField.layer.borderColor = UIColor(resource: .gray200).cgColor
+        textField.layer.borderColor = UIColor(resource: .gray400).cgColor
         if let clearButton = textField.value(forKeyPath: "_clearButton") as? UIButton {
                    clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
                }
@@ -57,11 +57,11 @@ final class ChangeMyProfileViewController: UIViewController {
     
     private var nameTextFieldCount: Int = 0
     
-    private let nameTextFieldCountLabel: UILabel = {
+    private lazy var nameTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0/3"
+        label.text = "\(nameTextField.text?.count ?? 0)" + "/3"
         label.font = .pretendard(.detail2_regular)
-        label.textColor = UIColor(resource: .gray200)
+        label.textColor = UIColor(resource: .gray400)
         return label
     }()
     
@@ -81,7 +81,7 @@ final class ChangeMyProfileViewController: UIViewController {
         textField.layer.borderWidth = 1
         textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
-        textField.layer.borderColor = UIColor(resource: .gray200).cgColor
+        textField.layer.borderColor = UIColor(resource: .gray400).cgColor
         if let clearButton = textField.value(forKeyPath: "_clearButton") as? UIButton {
                    clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
                }
@@ -92,11 +92,11 @@ final class ChangeMyProfileViewController: UIViewController {
     
     private var descTextFieldCount: Int = 0
     
-    private let descTextFieldCountLabel: UILabel = {
+    private lazy var descTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0/20"
+        label.text = "\(self.descTextField.text?.count ?? 0)" + "/20"
         label.font = .pretendard(.detail2_regular)
-        label.textColor = UIColor(resource: .gray200)
+        label.textColor = UIColor(resource: .gray400)
         return label
     }()
     
