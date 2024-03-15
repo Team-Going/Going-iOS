@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class ChangeMyProfileViewController: UIViewController {
-        
+    
     private var userName: String?
     
     private var isNameTextFieldGood: Bool = false
@@ -33,15 +33,17 @@ final class ChangeMyProfileViewController: UIViewController {
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
-        textField.setPlaceholder(placeholder: "3글자 이내로 작성해 주세요", fontColor: .gray200, font: .pretendard(.body3_medi))
+        textField.setPlaceholder(placeholder: "3글자 이내로 작성해 주세요", 
+                                 fontColor: .gray200,
+                                 font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
         textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
-        textField.layer.borderColor = UIColor(resource: .gray200).cgColor
+        textField.layer.borderColor = UIColor(resource: .gray400).cgColor
         if let clearButton = textField.value(forKeyPath: "_clearButton") as? UIButton {
-                   clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
-               }
+            clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+        }
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.addTarget(self, action: #selector(nameTextFieldDidChange), for: .editingChanged)
         return textField
@@ -57,11 +59,11 @@ final class ChangeMyProfileViewController: UIViewController {
     
     private var nameTextFieldCount: Int = 0
     
-    private let nameTextFieldCountLabel: UILabel = {
+    private lazy var nameTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0/3"
+        label.text = "\(nameTextField.text?.count ?? 0)" + "/3"
         label.font = .pretendard(.detail2_regular)
-        label.textColor = UIColor(resource: .gray200)
+        label.textColor = UIColor(resource: .gray400)
         return label
     }()
     
@@ -76,15 +78,17 @@ final class ChangeMyProfileViewController: UIViewController {
     lazy var descTextField: UITextField = {
         let textField = UITextField()
         textField.setLeftPadding(amount: 12)
-        textField.setPlaceholder(placeholder: "여행을 떠나기 전 설레는 마음을 적어볼까요?", fontColor: UIColor(resource: .gray200), font: .pretendard(.body3_medi))
+        textField.setPlaceholder(placeholder: "여행을 떠나기 전 설레는 마음을 적어볼까요?", 
+                                 fontColor: UIColor(resource: .gray200), 
+                                 font: .pretendard(.body3_medi))
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
         textField.textColor = UIColor(resource: .gray700)
         textField.font = .pretendard(.body3_medi)
-        textField.layer.borderColor = UIColor(resource: .gray200).cgColor
+        textField.layer.borderColor = UIColor(resource: .gray400).cgColor
         if let clearButton = textField.value(forKeyPath: "_clearButton") as? UIButton {
-                   clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
-               }
+            clearButton.setImage(UIImage(resource: .btnDelete), for: .normal)
+        }
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.addTarget(self, action: #selector(descTextFieldDidChange), for: .editingChanged)
         return textField
@@ -92,11 +96,11 @@ final class ChangeMyProfileViewController: UIViewController {
     
     private var descTextFieldCount: Int = 0
     
-    private let descTextFieldCountLabel: UILabel = {
+    private lazy var descTextFieldCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "0/20"
+        label.text = "\(self.descTextField.text?.count ?? 0)" + "/20"
         label.font = .pretendard(.detail2_regular)
-        label.textColor = UIColor(resource: .gray200)
+        label.textColor = UIColor(resource: .gray400)
         return label
     }()
     
@@ -224,36 +228,36 @@ private extension ChangeMyProfileViewController {
     
     func nameTextFieldCheck() {
         guard let text = nameTextField.text else { return }
-
-            if text.count > 3 {
-                nameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
-                nameTextFieldCountLabel.textColor = UIColor(resource: .red500)
-                nameWarningLabel.text = "닉네임은 3자 이하여야 합니다"
-                nameWarningLabel.isHidden = false
-                self.isNameTextFieldGood = false
-
-            } else if text.count == 0 {
-                nameTextField.layer.borderColor = UIColor(resource: .gray200).cgColor
-                nameTextFieldCountLabel.textColor = UIColor(resource: .gray200)
-                nameWarningLabel.isHidden = true
-                self.isNameTextFieldGood = false
-
-            } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                self.isNameTextFieldGood = false
-
-                nameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
-                nameTextFieldCountLabel.textColor = UIColor(resource: .red500)
-                nameWarningLabel.text = "닉네임에는 공백만 입력할 수 없어요"
-                nameWarningLabel.isHidden = false
-            }  else {
-                nameTextField.layer.borderColor = UIColor(resource: .gray700).cgColor
-                nameTextFieldCountLabel.textColor = UIColor(resource: .gray700)
-                nameWarningLabel.isHidden = true
-                self.isNameTextFieldGood = true
-            }
+        
+        if text.count > 3 {
+            nameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
+            nameTextFieldCountLabel.textColor = UIColor(resource: .red500)
+            nameWarningLabel.text = "닉네임은 3자 이하여야 합니다"
+            nameWarningLabel.isHidden = false
+            self.isNameTextFieldGood = false
+            
+        } else if text.count == 0 {
+            nameTextField.layer.borderColor = UIColor(resource: .gray200).cgColor
+            nameTextFieldCountLabel.textColor = UIColor(resource: .gray200)
+            nameWarningLabel.isHidden = true
+            self.isNameTextFieldGood = false
+            
+        } else if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            self.isNameTextFieldGood = false
+            
+            nameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
+            nameTextFieldCountLabel.textColor = UIColor(resource: .red500)
+            nameWarningLabel.text = "닉네임에는 공백만 입력할 수 없어요"
+            nameWarningLabel.isHidden = false
+        }  else {
+            nameTextField.layer.borderColor = UIColor(resource: .gray700).cgColor
+            nameTextFieldCountLabel.textColor = UIColor(resource: .gray700)
+            nameWarningLabel.isHidden = true
+            self.isNameTextFieldGood = true
+        }
         
         nameTextFieldCountLabel.text = "\(text.count) / 3"
-            updateNextButtonState()
+        updateNextButtonState()
     }
     
     @objc
@@ -268,9 +272,9 @@ private extension ChangeMyProfileViewController {
     
     func descTextFieldCheck() {
         guard let text = descTextField.text else { return }
-      
+        
         descTextFieldCountLabel.text = "\(text.count) / 20"
-     
+        
         if text.count > 20 {
             descTextField.layer.borderColor = UIColor(resource: .red500).cgColor
             descTextFieldCountLabel.textColor = UIColor(resource: .red500)
@@ -291,11 +295,11 @@ private extension ChangeMyProfileViewController {
         
         updateNextButtonState()
     }
-
+    
     
     func updateNextButtonState() {
         // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
- 
+        
         if isNameTextFieldGood == true && isDescTextFieldGood == true/* && !isNameTextFieldEmpty &&  !isDescTextFieldEmpty && nameTextField.text!.count < 3*/ {
             nextButton.isEnabled = true
             nextButton.backgroundColor = UIColor(resource: .gray500)
@@ -311,7 +315,7 @@ private extension ChangeMyProfileViewController {
     
     @objc
     func nextButtonTapped() {
-                
+        
         if let nameText = nameTextField.text {
             self.userProfileData.name = nameText
         }

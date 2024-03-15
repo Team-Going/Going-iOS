@@ -19,6 +19,8 @@ final class EditTravelTestViewController: UIViewController {
     
     var resultIntArray: [Int] = []
     
+    var isChanged: Bool = false
+    
     var travelTestData: MemberProfileResponseStruct? {
         didSet {
             guard let data = travelTestData else { return }
@@ -140,6 +142,16 @@ private extension EditTravelTestViewController {
                                  axis: .vertical)
     }
     
+    
+    func compareSelectedAnswer() {
+        let patchResultsArray = [patchRequestBody.styleA,
+                                 patchRequestBody.styleB,
+                                 patchRequestBody.styleC,
+                                 patchRequestBody.styleD,
+                                 patchRequestBody.styleE]
+        isChanged = resultIntArray != patchResultsArray
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -156,12 +168,10 @@ extension EditTravelTestViewController: TravelTestResultViewDelegate {
     }
     
     func userDidSelectAnswer() {
-        editButton.currentType = .enabled
-        
         setPatchTravelTestData()
+        compareSelectedAnswer()
+        editButton.currentType = isChanged ? .enabled : .unabled
     }
-    
-    func retryTravelTestButton() { return }
 }
 
 extension EditTravelTestViewController {
