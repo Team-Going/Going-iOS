@@ -16,11 +16,6 @@ protocol MyProfileTopViewDelegate: AnyObject {
 final class MyProfileTopView: UIView {
     
     weak var delegate: MyProfileTopViewDelegate?
-
-    
-    // TODO: - 유저 테스트 수행 여부에 따른 프로필 이미지 분기 처리
-    
-    // TODO: - 서버통신 이전에 대입해둔거 지우기
     
     // MARK: - UI Properties
     
@@ -140,6 +135,5 @@ private extension MyProfileTopView {
     @objc
     func editProfileButtonTapped() {
         delegate?.changeMyProfileButtonTapped()
-
     }
 }

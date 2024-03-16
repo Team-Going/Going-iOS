@@ -13,10 +13,17 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
     
     var deleteUserDismissCompletion: (() -> Void)?
     
+    // MARK: - UI Properties
+    
     private let popUpView = DOOPopUpContainerView()
     
-    private let deleteUserLabel = DOOLabel(font: .pretendard(.body1_bold), color: UIColor(resource: .gray600), text: "정말 탈퇴하시겠어요?")
-    private let deleteUserDescLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray300), text: "탈퇴 시, 정보가 모두 없어져요")
+    private let deleteUserLabel = DOOLabel(font: .pretendard(.body1_bold), 
+                                           color: UIColor(resource: .gray600),
+                                           text: "정말 탈퇴하시겠어요?")
+    
+    private let deleteUserDescLabel = DOOLabel(font: .pretendard(.detail2_regular), 
+                                               color: UIColor(resource: .gray300),
+                                               text: "탈퇴 시, 정보가 모두 없어져요")
     
     private lazy var deleteUserButton: UIButton = {
         let button = UIButton()
@@ -38,6 +45,8 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
         return button
     }()
     
+    // MARK: - Life Cycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,11 +55,16 @@ final class DeleteUserPopUpViewController: PopUpDimmedViewController {
     }
 }
 
+// MARK: - Private Methods
+
 private extension DeleteUserPopUpViewController {
-    
     func setHierarchy() {
-        view.addSubview(popUpView)
-        popUpView.addSubviews(deleteUserLabel, deleteUserDescLabel, deleteUserButton, backButton)
+        view.addSubviews(dimmedView, popUpView)
+
+        popUpView.addSubviews(deleteUserLabel, 
+                              deleteUserDescLabel,
+                              deleteUserButton,
+                              backButton)
     }
     
     func setLayout() {
@@ -86,6 +100,8 @@ private extension DeleteUserPopUpViewController {
             $0.trailing.equalToSuperview()
         }
     }
+    
+    // MARK: - @objc methods
     
     @objc
     func delteUserButtonTapped() {
@@ -148,6 +164,3 @@ extension DeleteUserPopUpViewController: ViewControllerServiceable {
         }
     }
 }
-
-
-

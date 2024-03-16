@@ -8,7 +8,12 @@
 import UIKit
 
 class PopUpDimmedViewController: UIViewController {
-    private let dimmedView = UIView()
+    
+    // MARK: - UI Properties
+    
+    let dimmedView = UIView()
+    
+    // MARK: - Life Cycles
     
     init() {
         super.init(nibName: nil, bundle: nil)

@@ -11,12 +11,14 @@ import SnapKit
 
 final class QuitTravelPopUpViewController: PopUpDimmedViewController {
     
-    // MARK: - UI Properties
+    // MARK: - Properties
     
     var tripId: Int?
     
     var leaveTravelDismissCompletion: (() -> Void)?
     
+    // MARK: - UI Properties
+
     private let popUpView = DOOPopUpContainerView()
     
     private let quitTravelLabel = DOOLabel(font: .pretendard(.body1_bold),
@@ -124,7 +126,6 @@ private extension QuitTravelPopUpViewController {
 }
 
 extension QuitTravelPopUpViewController {
-    
     func patchLeaveTravel(tripId: Int) {
         Task {
             do {
@@ -145,7 +146,6 @@ extension QuitTravelPopUpViewController {
 }
 
 extension QuitTravelPopUpViewController: ViewControllerServiceable {
-    
     func handleError(_ error: NetworkError) {
         switch error {
           
