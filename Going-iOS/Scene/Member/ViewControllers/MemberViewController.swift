@@ -196,7 +196,8 @@ private extension MemberViewController {
         
         noFriendsEmptyView.snp.makeConstraints {
             $0.top.equalTo(navigationUnderLineView.snp.bottom)
-            $0.trailing.leading.bottom.equalToSuperview()
+            $0.trailing.leading.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         memberScrollView.snp.makeConstraints {
