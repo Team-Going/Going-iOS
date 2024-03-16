@@ -20,13 +20,16 @@ class PopUpDimmedViewController: UIViewController {
         fatalError()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setGetsture()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let presentingViewController else { return }
-        dimmedView.backgroundColor = UIColor(resource: .black000)
-        dimmedView.alpha = 0.6
-        presentingViewController.view.addSubview(dimmedView)
+        dimmedView.backgroundColor = UIColor.black000.withAlphaComponent(0.6)
         
         dimmedView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -45,5 +48,23 @@ class PopUpDimmedViewController: UIViewController {
         } completion: { _ in
             self.dimmedView.removeFromSuperview()
         }
+    }
+}
+
+// MARK: - Private methods
+
+private extension PopUpDimmedViewController {
+    /// dimmedView에 탭 제스처 추가
+    func setGetsture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped))
+        dimmedView.addGestureRecognizer(tapGesture)
+        dimmedView.isUserInteractionEnabled = true
+    }
+    
+    // MARK: - @objc methods
+    
+    @objc
+    func dimmedViewTapped() {
+        self.dismiss(animated: false)
     }
 }
