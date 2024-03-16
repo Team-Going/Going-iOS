@@ -165,6 +165,7 @@ private extension TravelInfoViewController {
             guard let self else {return}
             self.navigationController?.pushViewController(DashBoardViewController(), animated: false)
             DOOToast.show(message: "여행방에서 나왔어요", insetFromBottom: 120)
+            HapticService.impact(.medium).run()
         }
         vc.tripId = self.tripId
         self.present(vc, animated: false)
