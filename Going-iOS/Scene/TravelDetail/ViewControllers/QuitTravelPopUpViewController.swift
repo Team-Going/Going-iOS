@@ -67,8 +67,8 @@ final class QuitTravelPopUpViewController: PopUpDimmedViewController {
 
 private extension QuitTravelPopUpViewController {
     func setHierarchy() {
-        view.addSubview(popUpView)
-        
+        view.addSubviews(dimmedView, popUpView)
+
         popUpView.addSubviews(quitTravelLabel,
                               quitTravelDescLabel,
                               cancelButton,

@@ -53,9 +53,9 @@ final class InviteFriendPopUpViewController: PopUpDimmedViewController {
 }
 
 private extension InviteFriendPopUpViewController {
-    
     func setHierarchy() {
-        view.addSubview(popUpView)
+        view.addSubviews(dimmedView, popUpView)
+        
         popUpView.addSubviews(
             inviteTitleLabel,
             inviteSubLabel,

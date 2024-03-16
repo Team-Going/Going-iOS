@@ -52,7 +52,7 @@ final class LogOutPopUpViewController: PopUpDimmedViewController {
 private extension LogOutPopUpViewController {
     
     func setHierarchy() {
-        view.addSubview(popUpView)
+        view.addSubviews(dimmedView, popUpView)
         popUpView.addSubviews(logOutLabel, backButton, logOutButton)
     }
     
