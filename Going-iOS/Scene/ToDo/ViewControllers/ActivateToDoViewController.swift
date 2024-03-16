@@ -497,6 +497,7 @@ extension ActivateToDoViewController: DOONavigationBarDelegate {
     // 저장 버튼 탭 시 데이터를 배열에 담아주고 메인 뷰로 돌아가는 메서드
 
     func saveTextButtonTapped() {
+        HapticService.impact(.medium).run()
         let todo = self.todoTextFieldView.todoTextfield.text ?? ""
         let deadline = (self.endDateView.deadlineTextfieldLabel.text == "날짜를 선택해 주세요" ? "" : self.endDateView.deadlineTextfieldLabel.text) ?? ""
         let memo = (self.memoTextView.memoTextView.text == self.memoTextView.memoTextviewPlaceholder ? "" : self.memoTextView.memoTextView.text) ?? ""
