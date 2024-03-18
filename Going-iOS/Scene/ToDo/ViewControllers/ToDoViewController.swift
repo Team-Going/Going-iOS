@@ -325,6 +325,7 @@ extension ToDoViewController {
                 self.navigationController?.popViewController(animated: true)
             }
             DOOToast.show(message: "할일을 삭제했어요", insetFromBottom: ScreenUtils.getHeight(106))
+            HapticService.impact(.medium).run()
         }
     }
 }

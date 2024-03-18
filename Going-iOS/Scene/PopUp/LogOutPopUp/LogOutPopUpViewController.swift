@@ -12,7 +12,9 @@ import SnapKit
 final class LogOutPopUpViewController: PopUpDimmedViewController {
     
     // MARK: - UI Components
+    
     private let popUpView = DOOPopUpContainerView()
+    
     var logoutDismissCompletion: (() -> Void)?
     
     private let logOutLabel = DOOLabel(font: .pretendard(.body1_bold), color: UIColor(resource: .gray600), text: "정말 로그아웃하시겠어요?")
@@ -41,7 +43,7 @@ final class LogOutPopUpViewController: PopUpDimmedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         setHierarchy()
         setLayout()
     }
@@ -52,8 +54,11 @@ final class LogOutPopUpViewController: PopUpDimmedViewController {
 private extension LogOutPopUpViewController {
     
     func setHierarchy() {
-        view.addSubview(popUpView)
-        popUpView.addSubviews(logOutLabel, backButton, logOutButton)
+        view.addSubviews(dimmedView, popUpView)
+        
+        popUpView.addSubviews(logOutLabel,
+                              backButton,
+                              logOutButton)
     }
     
     func setLayout() {
@@ -87,7 +92,7 @@ private extension LogOutPopUpViewController {
     
     @objc
     func logOutButtonTapped() {
-            postLogout()
+        postLogout()
     }
     
     @objc
@@ -100,7 +105,7 @@ extension LogOutPopUpViewController: ViewControllerServiceable {
     
     func handleError(_ error: NetworkError) {
         switch error {
-          
+            
         case .unAuthorizedError, .reIssueJWT:
             DOOToast.show(message: "토큰만료, 재로그인필요", insetFromBottom: 80)
             let nextVC = LoginViewController()
@@ -113,7 +118,6 @@ extension LogOutPopUpViewController: ViewControllerServiceable {
 }
 
 extension LogOutPopUpViewController {
-    
     func postLogout() {
         Task {
             do {

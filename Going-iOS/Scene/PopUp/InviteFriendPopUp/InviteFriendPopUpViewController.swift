@@ -6,16 +6,23 @@ final class InviteFriendPopUpViewController: PopUpDimmedViewController {
     
     private let popUpView = DOOPopUpContainerView()
     
-    private let inviteTitleLabel = DOOLabel(font: .pretendard(.body1_bold), color: .gray600, text: "초대하기")
-    private let inviteSubLabel = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .gray300), text: "초대코드를 보내 여행 친구를 추가해 보세요")
+    private let inviteTitleLabel = DOOLabel(font: .pretendard(.body1_bold),
+                                            color: .gray600,
+                                            text: "초대하기")
+    
+    private let inviteSubLabel = DOOLabel(font: .pretendard(.detail2_regular),
+                                          color: UIColor(resource: .gray300),
+                                          text: "초대코드를 보내 여행 친구를 추가해 보세요")
+    
     private let codeBackgroundView = {
         let view = UIView()
         view.backgroundColor = UIColor(resource: .gray50)
         view.layer.cornerRadius = 6
         return view
     }()
-    // TODO: - 초대코드 받아온 걸로 수정
+    
     let codeLabel = DOOLabel(font: .pretendard(.head4), color: UIColor(resource: .gray700))
+    
     private lazy var copyButton: UIButton = {
         let button = UIButton()
         button.setTitle("초대코드 복사하기", for: .normal)
@@ -28,11 +35,13 @@ final class InviteFriendPopUpViewController: PopUpDimmedViewController {
         button.semanticContentAttribute = .forceLeftToRight
         return button
     }()
+    
     private let underlineView = {
         let view = UIView()
         view.backgroundColor = UIColor(resource: .gray300)
         return view
     }()
+    
     private lazy var completeButton: UIButton = {
         let button = UIButton()
         button.setTitle("완료", for: .normal)
@@ -48,22 +57,23 @@ final class InviteFriendPopUpViewController: PopUpDimmedViewController {
         
         setHierarchy()
         setLayout()
-
     }
 }
 
 private extension InviteFriendPopUpViewController {
-    
     func setHierarchy() {
-        view.addSubview(popUpView)
+        view.addSubviews(dimmedView, popUpView)
+        
         popUpView.addSubviews(
             inviteTitleLabel,
             inviteSubLabel,
             codeBackgroundView,
             completeButton
         )
-        codeBackgroundView.addSubviews(codeLabel, copyButton, underlineView)
         
+        codeBackgroundView.addSubviews(codeLabel,
+                                       copyButton,
+                                       underlineView)
     }
     
     func setLayout() {
@@ -121,6 +131,7 @@ private extension InviteFriendPopUpViewController {
     func copyButtonTapped() {
         UIPasteboard.general.string = self.codeLabel.text
         DOOToast.show(message: "초대코드가 복사되었어요", insetFromBottom: ScreenUtils.getHeight(101))
+        HapticService.impact(.light).run()
     }
     
     @objc
@@ -128,4 +139,3 @@ private extension InviteFriendPopUpViewController {
         self.dismiss(animated: false)
     }
 }
-
