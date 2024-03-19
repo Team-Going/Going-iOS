@@ -40,7 +40,7 @@ class ToDoTextFieldView: UIView {
     }()
     
     private let warningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .red500))
+        let label = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .red500))
         label.isHidden = true
         return label
     }()
