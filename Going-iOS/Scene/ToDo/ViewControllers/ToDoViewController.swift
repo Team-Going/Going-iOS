@@ -140,7 +140,7 @@ final class ToDoViewController: UIViewController {
         self.todoTextFieldView.todoTextfield.isUserInteractionEnabled = false
         self.endDateView.deadlineTextfieldLabel.isUserInteractionEnabled = false
         self.todoManagerView.todoManagerCollectionView.isUserInteractionEnabled = false
-        self.memoTextView.isUserInteractionEnabled = false
+        self.memoTextView.memoTextView.isEditable = false
     }
 
 }
