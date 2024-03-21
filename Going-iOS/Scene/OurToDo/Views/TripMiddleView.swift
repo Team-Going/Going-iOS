@@ -232,7 +232,7 @@ private extension TripMiddleView {
         gradientView.snp.makeConstraints{
             $0.top.equalTo(tripFriendsLabel.snp.bottom).offset(ScreenUtils.getHeight(8))
             $0.trailing.equalTo(addStackView.snp.leading)
-            $0.width.equalTo(ScreenUtils.getWidth(45))
+            $0.width.equalTo(ScreenUtils.getWidth(20))
             $0.height.equalTo(ScreenUtils.getHeight(67))
         }
         

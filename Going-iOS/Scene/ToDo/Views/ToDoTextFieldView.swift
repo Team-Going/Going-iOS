@@ -40,7 +40,7 @@ class ToDoTextFieldView: UIView {
     }()
     
     private let warningLabel: DOOLabel = {
-        let label = DOOLabel(font: .pretendard(.body3_medi), color: UIColor(resource: .red500))
+        let label = DOOLabel(font: .pretendard(.detail2_regular), color: UIColor(resource: .red500))
         label.isHidden = true
         return label
     }()
@@ -93,7 +93,7 @@ class ToDoTextFieldView: UIView {
         if text.count > 15 {
             todoTextfield.layer.borderColor = UIColor(resource: .red500).cgColor
             countToDoCharacterLabel.textColor = UIColor(resource: .red500)
-            warningLabel.text = "내용은 15자 이하여야 합니다"
+            warningLabel.text = "내용은 15자 이하여야 해요"
             warningLabel.isHidden = false
             self.isTodoTextFieldGood = false
             

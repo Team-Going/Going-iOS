@@ -218,7 +218,8 @@ private extension MyToDoViewController {
             $0.top.equalTo(tripHeaderView)
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(16))
             $0.width.equalTo(ScreenUtils.getWidth(137))
-            $0.height.equalTo(ScreenUtils.getHeight(100))
+//            $0.height.equalTo(ScreenUtils.getHeight(100))
+            $0.bottom.equalTo(tripHeaderView.snp.bottom)
         }
         
         myToDoHeaderView.snp.makeConstraints{
