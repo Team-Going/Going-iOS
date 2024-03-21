@@ -220,6 +220,8 @@ private extension UserTestViewController {
         for case let button as UIButton in questionStackView.arrangedSubviews {
             button.backgroundColor = UIColor(resource: .gray50)
             button.layer.borderWidth = 0
+            button.titleLabel?.font = .pretendard(.body3_medi)
+
         }
         
         // 클릭된 버튼의 색상 변경
@@ -227,6 +229,7 @@ private extension UserTestViewController {
         sender.layer.borderColor = UIColor(resource: .red500).cgColor
         sender.layer.borderWidth = 1
         sender.titleLabel?.textColor = UIColor(resource: .gray700)
+        sender.titleLabel?.font = .pretendard(.body3_bold)
         
         selectedButton = sender
         
