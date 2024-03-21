@@ -60,7 +60,6 @@ class ToDoManagerView: UIView {
     
     /// 담당자 버튼 클릭 시 버튼 스타일 변경해주는 메소드
     func changeButtonConfig(isSelected: Bool, btn: UIButton) {
-        print("button config \(isSelected)  \(btn.titleLabel?.text)")
         if !isSelected {
             btn.setTitleColor(UIColor(resource: .white000), for: .normal)
             btn.backgroundColor = btn.tag == 0 ? UIColor(resource: .red500) : UIColor(resource: .gray400)

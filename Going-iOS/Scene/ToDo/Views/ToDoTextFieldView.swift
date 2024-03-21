@@ -60,7 +60,19 @@ class ToDoTextFieldView: UIView {
     
     var todoTextfieldPlaceholder: String = ""
 
-    var navigationBarTitle: String = ""
+    lazy var navigationBarTitle: String = "" {
+        didSet {
+            if navigationBarTitle != StringLiterals.ToDo.inquiry {
+                self.addSubview(countToDoCharacterLabel)
+                
+                countToDoCharacterLabel.snp.makeConstraints{
+                    $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
+                    $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(4))
+                }
+
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,15 +87,18 @@ class ToDoTextFieldView: UIView {
     
     func setInquiryTextFieldStyle() {
         var todotext = 0
+        // '할일 수정'
         if navigationBarTitle == StringLiterals.ToDo.edit {
             todotext = todoTextfield.text?.count ?? 0
-        } else {
+            countToDoCharacterLabel.textColor = UIColor(resource: .gray700)
+            countToDoCharacterLabel.text = "\(todotext)/15"
+        } 
+        // '할일 조회'
+        else {
             todotext = todoTextfield.placeholder?.count ?? 0
         }
         todoTextfield.layer.borderColor = UIColor(resource: .gray700).cgColor
         todoTextfield.setPlaceholderColor(UIColor(resource: .gray700))
-        countToDoCharacterLabel.textColor = UIColor(resource: .gray700)
-        countToDoCharacterLabel.text = "\(todotext)/15"
     }
 
     
@@ -133,8 +148,7 @@ private extension ToDoTextFieldView {
     func setHierarchy() {
         self.addSubviews(todoLabel, 
                          todoTextfield,
-                         warningLabel ,
-                         countToDoCharacterLabel)
+                         warningLabel)
     }
     
     func setLayout() {
@@ -153,11 +167,6 @@ private extension ToDoTextFieldView {
         warningLabel.snp.makeConstraints {
             $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
             $0.leading.equalTo(todoTextfield.snp.leading).offset(4)
-        }
-        
-        countToDoCharacterLabel.snp.makeConstraints{
-            $0.top.equalTo(todoTextfield.snp.bottom).offset(4)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(4))
         }
     }
 }
