@@ -1859,7 +1859,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2024031301;
+				CURRENT_PROJECT_VERSION = 2024031501;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HV6BJXV65Q;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1901,7 +1901,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Going-iOS/Going-iOS.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2024031301;
+				CURRENT_PROJECT_VERSION = 2024031501;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = HV6BJXV65Q;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1944,7 +1944,7 @@
 				F4F521842B3440DA000E6E1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		F4F521852B3440DA000E6E1E /* Build configuration list for PBXNativeTarget "Going-iOS" */ = {
 			isa = XCConfigurationList;
@@ -1953,7 +1953,7 @@
 				F4F521872B3440DA000E6E1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
