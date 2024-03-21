@@ -225,7 +225,7 @@ private extension EditTravelViewController {
         if text.count >  15 {
             travelNameView.travelNameTextField.textColor = UIColor(resource: .red500)
             travelNameView.warningLabel.isHidden = false
-            travelNameView.warningLabel.text = "이름은 15자 이하여야 합니다"
+            travelNameView.warningLabel.text = "이름은 15자 이하여야 해요"
             isTravelNameTextFieldGood = false
         } else if text.count == 0 {
             travelNameView.travelNameTextField.layer.borderColor =

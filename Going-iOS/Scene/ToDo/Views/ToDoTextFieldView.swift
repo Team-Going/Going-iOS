@@ -93,7 +93,7 @@ class ToDoTextFieldView: UIView {
         if text.count > 15 {
             todoTextfield.layer.borderColor = UIColor(resource: .red500).cgColor
             countToDoCharacterLabel.textColor = UIColor(resource: .red500)
-            warningLabel.text = "내용은 15자 이하여야 합니다"
+            warningLabel.text = "내용은 15자 이하여야 해요"
             warningLabel.isHidden = false
             self.isTodoTextFieldGood = false
             

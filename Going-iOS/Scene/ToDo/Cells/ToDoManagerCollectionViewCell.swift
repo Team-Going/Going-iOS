@@ -13,7 +13,7 @@ final class ToDoManagerCollectionViewCell: UICollectionViewCell {
     lazy var managerButton: UIButton = {
         let btn = UIButton()
         btn.isSelected = false
-        btn.titleLabel?.font = .pretendard(.detail1_regular)
+        btn.titleLabel?.font = .pretendard(.detail2_regular)
         btn.setTitleColor(UIColor(resource: .gray300), for: .normal)
         btn.backgroundColor = UIColor(resource: .white000)
         btn.layer.borderWidth = 0.5

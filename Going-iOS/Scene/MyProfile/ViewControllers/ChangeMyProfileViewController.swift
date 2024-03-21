@@ -232,7 +232,7 @@ private extension ChangeMyProfileViewController {
         if text.count > 3 {
             nameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
             nameTextFieldCountLabel.textColor = UIColor(resource: .red500)
-            nameWarningLabel.text = "닉네임은 3자 이하여야 합니다"
+            nameWarningLabel.text = "닉네임은 3자 이하여야 해요"
             nameWarningLabel.isHidden = false
             self.isNameTextFieldGood = false
             
