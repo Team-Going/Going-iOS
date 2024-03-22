@@ -235,6 +235,7 @@ private extension ChangeMyProfileViewController {
     func nameTextFieldCheck() {
         guard let text = nameTextField.text else { return }
         
+        //변경사항 있는지 확인
         if text != userName {
             self.isTextFieldChanged = true
         } else {
@@ -285,6 +286,7 @@ private extension ChangeMyProfileViewController {
     func descTextFieldCheck() {
         guard let text = descTextField.text else { return }
         
+        //변경사항 있는지 확인
         if text != descText {
             self.isTextFieldChanged = true
         } else {
@@ -316,8 +318,8 @@ private extension ChangeMyProfileViewController {
     
     
     func updateNextButtonState() {
-        // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
         
+        // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아니고, 텍스트 변경 있을때만,  nextButton 활성화
         if isNameTextFieldGood == true && isDescTextFieldGood == true && isTextFieldChanged == true {
             nextButton.isEnabled = true
             nextButton.backgroundColor = UIColor(resource: .gray500)
@@ -327,7 +329,7 @@ private extension ChangeMyProfileViewController {
             nextButton.isEnabled = false
             nextButton.backgroundColor = UIColor(resource: .gray50)
             nextButton.titleLabel?.font = .pretendard(.body1_bold)
-            nextButton.setTitleColor(UIColor(resource: .white000), for: .normal)
+            nextButton.setTitleColor(UIColor(resource: .gray200), for: .normal)
         }
     }
     
