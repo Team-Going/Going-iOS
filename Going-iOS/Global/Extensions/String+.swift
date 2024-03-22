@@ -18,4 +18,13 @@ extension String {
         
         return consonantScalarRange ~= scalar
     }
+
+    func containsEmoji() -> Bool {
+        for scalar in unicodeScalars {
+            if scalar.properties.isEmoji {
+                return true
+            }
+        }
+        return false
+    }
 }
