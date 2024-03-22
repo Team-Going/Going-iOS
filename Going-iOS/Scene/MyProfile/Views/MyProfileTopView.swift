@@ -23,6 +23,8 @@ final class MyProfileTopView: UIView {
         let img = UIImageView()
         img.layer.cornerRadius = 28
         img.clipsToBounds = true
+        img.layer.borderWidth = 0.5
+        img.layer.borderColor = UIColor(resource: .gray100).cgColor
         return img
     }()
     

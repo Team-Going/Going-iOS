@@ -36,6 +36,7 @@ final class TravelInfoViewController: UIViewController {
     
     private lazy var travelNameView: TravelNameView = {
         let view = TravelNameView()
+        view.characterCountLabel.isHidden = true
         view.travelNameTextField.isUserInteractionEnabled = false
         return view
     }()
