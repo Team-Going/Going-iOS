@@ -28,6 +28,7 @@ final class ToDoManagerCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = .white000
         setHierarchy()
         setLayout()
     }
