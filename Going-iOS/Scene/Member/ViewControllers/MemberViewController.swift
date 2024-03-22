@@ -230,7 +230,7 @@ private extension MemberViewController {
         
         membersProfileCollectionView.snp.makeConstraints {
             $0.top.equalTo(memberProfileDescLabel.snp.bottom).offset(16)
-            $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(24)
             $0.width.equalTo(ScreenUtils.getWidth(315))
             $0.height.equalTo(ScreenUtils.getHeight(67))
         }
@@ -246,8 +246,8 @@ private extension MemberViewController {
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 8
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getHeight(48) , height: ScreenUtils.getHeight(67))
+        flowLayout.minimumInteritemSpacing = 6
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(45), height: ScreenUtils.getHeight(67))
         return flowLayout
     }
     
