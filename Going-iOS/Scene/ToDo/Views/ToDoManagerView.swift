@@ -367,7 +367,26 @@ extension ToDoManagerView: UICollectionViewDelegateFlowLayout {
                 return CGSize(width: ScreenUtils.getWidth(140), height: ScreenUtils.getHeight(18))
             }
         } else {
-            setName(index: indexPath.row)
+            
+            //아워투두
+                    if beforeVC == "our" {
+                        if navigationBarTitle == StringLiterals.ToDo.add {
+                            name = fromOurTodoParticipants[indexPath.row].name
+                        }else {
+                            name = allParticipants[indexPath.row].name
+                        }
+                    }
+                    //마이투두
+                    else {
+                        //마이투두 -> '혼자 할 일'이거나 추가 작업인 경우
+                        if navigationBarTitle == StringLiterals.ToDo.add || isSecret {
+                            name = allocators[indexPath.row].name
+                        }
+                        else {
+                            name = allParticipants[indexPath.row].name
+                        }
+                    }
+
             
             if name.containsEmoji() {
                 return CGSize(width: ScreenUtils.getWidth(60), height: ScreenUtils.getHeight(20))
