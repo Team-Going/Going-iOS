@@ -24,6 +24,8 @@ class TripFriendsCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(resource: .icCalendar)
         imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor(resource: .gray100).cgColor
         return imageView
     }()
     
