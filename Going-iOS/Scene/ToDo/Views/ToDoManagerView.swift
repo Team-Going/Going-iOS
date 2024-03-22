@@ -30,7 +30,9 @@ class ToDoManagerView: UIView {
         collectionView.register(ToDoManagerCollectionViewCell.self, forCellWithReuseIdentifier: ToDoManagerCollectionViewCell.identifier)
         return collectionView
     }()
-    
+
+    var name: String = ""
+
     var fromOurTodoParticipants: [Participant] = []
     
     var allParticipants: [DetailAllocators] = []
@@ -124,7 +126,6 @@ private extension ToDoManagerView {
         todoManagerCollectionView.delegate = self
         todoManagerCollectionView.dataSource = self
     }
-    
 }
 
 
@@ -366,7 +367,13 @@ extension ToDoManagerView: UICollectionViewDelegateFlowLayout {
                 return CGSize(width: ScreenUtils.getWidth(140), height: ScreenUtils.getHeight(18))
             }
         } else {
-            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+            setName(index: indexPath.row)
+            
+            if name.containsEmoji() {
+                return CGSize(width: ScreenUtils.getWidth(60), height: ScreenUtils.getHeight(20))
+            } else {
+                return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+            }
         }
     }
 }

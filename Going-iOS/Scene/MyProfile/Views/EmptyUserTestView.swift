@@ -25,13 +25,17 @@ final class EmptyUserTestView: UIView {
         return img
     }()
     
-    private let emptyDescLabel = DOOLabel(font: .pretendard(.body3_medi),
-                                          color: .gray200,
-                                          text: "여행 캐릭터 검사를 아직 진행하지 않았어요\n지금 바로 나를 대신 할 여행 캐릭터를 만나보세요!",
-                                          numberOfLine: 2,
-                                          alignment: .center)
+    let emptyDescLabel: DOOLabel = {
+        let label = DOOLabel(font: .pretendard(.body3_bold), 
+                             color: UIColor(resource: .gray200),
+                             text: "여행 캐릭터 검사를 아직 진행하지 않았어요\n지금 바로 나를 대신 할 여행 캐릭터를 만나보세요!",
+                             numberOfLine: 2)
+        label.setLineSpacing(spacing: 6)
+        label.textAlignment = .center
+        return label
+    }()
     
-    private lazy var doUserTestButton: DOOButton = {
+    lazy var doUserTestButton: DOOButton = {
         let btn = DOOButton(type: .enabled, title: "여행 캐릭터 검사하러 가기")
         btn.addTarget(self, action: #selector(doUserTestButtonTapped), for: .touchUpInside)
         return btn
@@ -75,7 +79,7 @@ private extension EmptyUserTestView {
         
         emptyDescLabel.snp.makeConstraints {
             $0.top.equalTo(emptyImageView.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().inset(54)
+            $0.centerX.equalToSuperview()
         }
         
         doUserTestButton.snp.makeConstraints {
