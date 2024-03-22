@@ -33,6 +33,7 @@ final class LoginViewController: UIViewController {
                     } else {
                         //성향테스트스플래시뷰로 이동
                         let nextVC = UserTestSplashViewController()
+                        UserDefaults.standard.set(true, forKey: "isFromMakeProfileVC")
                         self.navigationController?.pushViewController(nextVC, animated: true)
                     }
                 }

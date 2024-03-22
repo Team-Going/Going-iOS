@@ -308,7 +308,7 @@ private extension MakeProfileViewController {
             nextButton.isEnabled = false
             nextButton.backgroundColor = UIColor(resource: .gray50)
             nextButton.titleLabel?.font = .pretendard(.body1_bold)
-            nextButton.setTitleColor(UIColor(resource: .white000), for: .normal)
+            nextButton.setTitleColor(UIColor(resource: .gray200), for: .normal)
         }
     }
     
