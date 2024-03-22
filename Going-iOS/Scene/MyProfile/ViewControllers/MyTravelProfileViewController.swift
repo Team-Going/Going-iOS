@@ -108,6 +108,7 @@ private extension MyTravelProfileViewController {
     func setStyle() {
         view.backgroundColor = UIColor(resource: .white000)
         self.navigationController?.isNavigationBarHidden = true
+        self.userTestResultScrollView.showsHorizontalScrollIndicator = false
     }
     
     func setHierarchy() {

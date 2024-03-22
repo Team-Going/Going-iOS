@@ -122,7 +122,7 @@ final class MemberViewController: UIViewController {
     
     private let memberProfileDescLabel = DOOLabel(font: .pretendard(.detail3_regular),
                                                   color: UIColor(resource: .gray400),
-                                                  text: "프로필 사진을 눌러서 친구의 취향을 구경해보세요")
+                                                  text: "프로필 사진을 눌러서 친구의 취향을 구경해 보세요")
     
     private lazy var membersProfileCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
@@ -230,7 +230,7 @@ private extension MemberViewController {
         
         membersProfileCollectionView.snp.makeConstraints {
             $0.top.equalTo(memberProfileDescLabel.snp.bottom).offset(16)
-            $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(24)
             $0.width.equalTo(ScreenUtils.getWidth(315))
             $0.height.equalTo(ScreenUtils.getHeight(67))
         }
@@ -246,8 +246,8 @@ private extension MemberViewController {
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 8
-        flowLayout.itemSize = CGSize(width: ScreenUtils.getHeight(48) , height: ScreenUtils.getHeight(67))
+        flowLayout.minimumInteritemSpacing = 6
+        flowLayout.itemSize = CGSize(width: ScreenUtils.getWidth(45), height: ScreenUtils.getHeight(67))
         return flowLayout
     }
     

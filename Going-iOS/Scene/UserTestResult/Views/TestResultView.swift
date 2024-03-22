@@ -167,7 +167,7 @@ private extension TestResultView {
         whiteView.snp.makeConstraints {
             $0.top.equalTo(backToTestButton.snp.bottom).offset(5)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(ScreenUtils.getHeight(30))
+            $0.height.equalTo(ScreenUtils.getHeight(20))
             $0.bottom.equalToSuperview()
             
         }
