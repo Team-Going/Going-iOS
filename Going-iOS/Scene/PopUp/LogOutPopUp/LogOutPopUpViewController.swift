@@ -124,6 +124,7 @@ extension LogOutPopUpViewController {
                 try await AuthService.shared.patchLogout()
                 UserDefaults.standard.removeObject(forKey: UserDefaultToken.accessToken.rawValue)
                 UserDefaults.standard.removeObject(forKey: UserDefaultToken.refreshToken.rawValue)
+//                UserDefaults.standard.set(true, forKey: "isFromMakeProfileVC")
                 
                 guard let logoutDismissCompletion else {return}
                 self.dismiss(animated: false) {
