@@ -31,6 +31,8 @@ class ToDoManagerView: UIView {
         return collectionView
     }()
 
+    var name: String = ""
+
     var fromOurTodoParticipants: [Participant] = []
     
     var allParticipants: [DetailAllocators] = []
@@ -60,7 +62,6 @@ class ToDoManagerView: UIView {
     
     /// 담당자 버튼 클릭 시 버튼 스타일 변경해주는 메소드
     func changeButtonConfig(isSelected: Bool, btn: UIButton) {
-        print("button config \(isSelected)  \(btn.titleLabel?.text)")
         if !isSelected {
             btn.setTitleColor(UIColor(resource: .white000), for: .normal)
             btn.backgroundColor = btn.tag == 0 ? UIColor(resource: .red500) : UIColor(resource: .gray400)
@@ -103,6 +104,26 @@ private extension ToDoManagerView {
         todoManagerCollectionView.dataSource = self
     }
 
+    func setName(index: Int) {
+        //아워투두
+        if beforeVC == "our" {
+            if navigationBarTitle == StringLiterals.ToDo.add {
+                name = fromOurTodoParticipants[index].name
+            }else {
+                name = allParticipants[index].name
+            }
+        }
+        //마이투두
+        else {
+            //마이투두 -> '혼자 할 일'이거나 추가 작업인 경우
+            if navigationBarTitle == StringLiterals.ToDo.add || isSecret {
+                name = allocators[index].name
+            }
+            else {
+                name = allParticipants[index].name
+            }
+        }
+    }
 }
 
 
@@ -133,25 +154,7 @@ extension ToDoManagerView: UICollectionViewDataSource{
         
         guard let managerCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoManagerCollectionViewCell.identifier, for: indexPath) as? ToDoManagerCollectionViewCell else {return UICollectionViewCell()}
         
-        var name = ""
-        //아워투두
-        if beforeVC == "our" {
-            if navigationBarTitle == StringLiterals.ToDo.add {
-                name = fromOurTodoParticipants[indexPath.row].name
-            }else {
-                name = allParticipants[indexPath.row].name
-            }
-        }
-        //마이투두
-        else {
-            //마이투두 -> '혼자 할 일'이거나 추가 작업인 경우
-            if navigationBarTitle == StringLiterals.ToDo.add || isSecret {
-                name = allocators[indexPath.row].name
-            }
-            else {
-                name = allParticipants[indexPath.row].name
-            }
-        }
+        setName(index: indexPath.row)
         
         managerCell.managerButton.isEnabled = true
         managerCell.managerButton.setTitle(name, for: .normal)
@@ -313,7 +316,13 @@ extension ToDoManagerView: UICollectionViewDelegateFlowLayout {
                 return CGSize(width: ScreenUtils.getWidth(140), height: ScreenUtils.getHeight(18))
             }
         } else {
-            return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+            setName(index: indexPath.row)
+            
+            if name.containsEmoji() {
+                return CGSize(width: ScreenUtils.getWidth(60), height: ScreenUtils.getHeight(20))
+            } else {
+                return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+            }
         }
     }
 }

@@ -62,6 +62,19 @@ class MemoTextView: UIView {
     var memoTextviewPlaceholder: String = ""
     
     weak var delegate: MemoTextViewDelegate?
+    
+    lazy var navigationBarTitle: String = "" {
+        didSet {
+            if navigationBarTitle != StringLiterals.ToDo.inquiry {
+                self.addSubview(countMemoCharacterLabel)
+                
+                countMemoCharacterLabel.snp.makeConstraints{
+                    $0.top.equalTo(memoTextView.snp.bottom).offset(4)
+                    $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(4))
+                }
+            }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -91,9 +104,7 @@ private extension MemoTextView {
         self.addSubviews(memoLabel,
                          memoTextView,
                          memoWarningLabel,
-                         clearButton,
-                         countMemoCharacterLabel
-        )
+                         clearButton)
     }
     
     func setLayout() {
@@ -112,11 +123,6 @@ private extension MemoTextView {
             $0.top.equalToSuperview().inset(ScreenUtils.getHeight(42))
             $0.size.equalTo(ScreenUtils.getHeight(20))
             $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(12))
-        }
-        
-        countMemoCharacterLabel.snp.makeConstraints{
-            $0.top.equalTo(memoTextView.snp.bottom).offset(4)
-            $0.trailing.equalToSuperview().inset(ScreenUtils.getWidth(4))
         }
         
         memoWarningLabel.snp.makeConstraints {

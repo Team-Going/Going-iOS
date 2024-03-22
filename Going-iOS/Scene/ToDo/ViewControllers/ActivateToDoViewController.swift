@@ -79,6 +79,7 @@ final class ActivateToDoViewController: UIViewController {
         didSet {
             self.todoManagerView.navigationBarTitle = navigationBarTitle
             self.todoTextFieldView.navigationBarTitle = navigationBarTitle
+            self.memoTextView.navigationBarTitle = navigationBarTitle
         }
     }
     

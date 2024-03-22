@@ -32,7 +32,17 @@ final class MyTravelProfileViewController: UIViewController {
     
     var tripId: Int = 0
     
-    var isOwner: Bool = false
+    lazy var isOwner: Bool = false {
+        didSet {
+            if isOwner {
+                emptyUserTestView.emptyDescLabel.text = "여행 캐릭터 검사를 아직 진행하지 않았어요\n지금 바로 나를 대신 할 여행 캐릭터를 만나보세요!"
+                emptyUserTestView.doUserTestButton.isHidden = false
+            } else {
+                emptyUserTestView.emptyDescLabel.text = "여행 캐릭터 검사를 아직 진행하지 않았어요"
+                emptyUserTestView.doUserTestButton.isHidden = true
+            }
+        }
+    }
     
     var isEmpty: Bool = false
         
