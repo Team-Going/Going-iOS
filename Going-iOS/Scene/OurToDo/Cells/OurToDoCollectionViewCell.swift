@@ -211,6 +211,7 @@ extension OurToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
                 return CGSize(width: ScreenUtils.getWidth(60), height: ScreenUtils.getHeight(20))
             } else {
                 return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
-            }        }
+            }       
+        }
     }
 }
