@@ -68,6 +68,10 @@ private extension TripFriendsCollectionViewCell {
         profileStackView.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
+        
+        profileImageView.snp.makeConstraints {
+            $0.size.equalTo(ScreenUtils.getWidth(45))
+        }
 
         friendNameLabel.snp.makeConstraints{
             $0.height.equalTo(ScreenUtils.getHeight(17))
