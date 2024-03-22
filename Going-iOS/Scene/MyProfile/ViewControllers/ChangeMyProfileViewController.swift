@@ -12,9 +12,12 @@ import SnapKit
 final class ChangeMyProfileViewController: UIViewController {
     
     private var userName: String?
+    private var descText: String?
     
     private var isNameTextFieldGood: Bool = false
     private var isDescTextFieldGood: Bool = false
+    
+    private var isTextFieldChanged: Bool = false
     
     private var userProfileData = ChangeMyProfileDTO(name: "", intro: "")
     
@@ -132,6 +135,9 @@ final class ChangeMyProfileViewController: UIViewController {
         setLayout()
         setDelegate()
         updateNextButtonState()
+        userName = nameTextField.text
+        descText = descTextField.text
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -229,6 +235,12 @@ private extension ChangeMyProfileViewController {
     func nameTextFieldCheck() {
         guard let text = nameTextField.text else { return }
         
+        if text != userName {
+            self.isTextFieldChanged = true
+        } else {
+            self.isTextFieldChanged = false
+        }
+        
         if text.count > 3 {
             nameTextField.layer.borderColor = UIColor(resource: .red500).cgColor
             nameTextFieldCountLabel.textColor = UIColor(resource: .red500)
@@ -273,6 +285,12 @@ private extension ChangeMyProfileViewController {
     func descTextFieldCheck() {
         guard let text = descTextField.text else { return }
         
+        if text != descText {
+            self.isTextFieldChanged = true
+        } else {
+            self.isTextFieldChanged = false
+        }
+        
         descTextFieldCountLabel.text = "\(text.count) / 20"
         
         if text.count > 20 {
@@ -300,7 +318,7 @@ private extension ChangeMyProfileViewController {
     func updateNextButtonState() {
         // nameTextField와 descTextField의 텍스트가 비어 있지 않고 nameTextField가 빈칸처리 아닐 때, nextButton 활성화
         
-        if isNameTextFieldGood == true && isDescTextFieldGood == true/* && !isNameTextFieldEmpty &&  !isDescTextFieldEmpty && nameTextField.text!.count < 3*/ {
+        if isNameTextFieldGood == true && isDescTextFieldGood == true && isTextFieldChanged == true {
             nextButton.isEnabled = true
             nextButton.backgroundColor = UIColor(resource: .gray500)
             nextButton.titleLabel?.font = .pretendard(.body1_bold)
