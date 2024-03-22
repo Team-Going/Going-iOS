@@ -122,7 +122,7 @@ final class MemberViewController: UIViewController {
     
     private let memberProfileDescLabel = DOOLabel(font: .pretendard(.detail3_regular),
                                                   color: UIColor(resource: .gray400),
-                                                  text: "프로필 사진을 눌러서 친구의 취향을 구경해보세요")
+                                                  text: "프로필 사진을 눌러서 친구의 취향을 구경해 보세요")
     
     private lazy var membersProfileCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: setCollectionViewLayout())
