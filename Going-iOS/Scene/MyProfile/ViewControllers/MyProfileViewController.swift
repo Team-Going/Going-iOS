@@ -190,8 +190,7 @@ private extension MyProfileViewController {
         
         myResultView.snp.makeConstraints {
             $0.top.equalTo(resultImageView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
         
         doUserTestButton.snp.makeConstraints {
