@@ -206,7 +206,11 @@ extension OurToDoCollectionViewCell: UICollectionViewDelegateFlowLayout {
         if ourToDoData?.allocators.count == 0 {
             return CGSize(width: ScreenUtils.getWidth(94) , height: ScreenUtils.getHeight(20))
         } else {
-            return CGSize(width: ScreenUtils.getWidth(42) , height: ScreenUtils.getHeight(20))
-        }
+            let name = ourToDoData?.allocators[indexPath.row].name ?? ""
+            if name.containsEmoji() {
+                return CGSize(width: ScreenUtils.getWidth(60), height: ScreenUtils.getHeight(20))
+            } else {
+                return CGSize(width: ScreenUtils.getWidth(42), height: ScreenUtils.getHeight(20))
+            }        }
     }
 }
