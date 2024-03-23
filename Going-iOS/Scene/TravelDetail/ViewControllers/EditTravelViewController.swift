@@ -21,21 +21,31 @@ final class EditTravelViewController: UIViewController {
             self.travelDateView.startDateLabel.text = travelData?.startDate
             self.travelDateView.endDateLabel.text = travelData?.endDate
             self.travelNameView.characterCountLabel.text = "\(travelData?.title.count ?? 0)" + "/15"
+            self.initialTravelName = travelData?.title
+            self.initialStartDate = travelData?.startDate
+            self.initialEndDate = travelData?.endDate
         }
     }
     
     var currentTravelData = TravelDetailResponseStruct(tripID: 0, title: "", startDate: "", endDate: "")
-
+    
     private var patchRequestBody: EditTravelRequestStruct = .init(title: "", startDate: "", endDate: "")
-
+    
     private weak var activeLabel: UILabel?
     
     private var isTravelNameTextFieldGood: Bool = false
     
+    private var initialTravelName: String?
+    private var initialStartDate: String?
+    private var initialEndDate: String?
+    
+    private var isTravelNameChanged: Bool = false
+    private var isTravelDateChanged: Bool = false
+    
     // MARK: - UI Properites
     
     private lazy var keyboardLayoutGuide = view.keyboardLayoutGuide
-
+    
     private lazy var navigationBar = DOONavigationBar(self, type: .backButtonWithTitle("여행 정보 수정"))
     
     private let navigationUnderlineView: UIView = {
@@ -51,7 +61,7 @@ final class EditTravelViewController: UIViewController {
     }()
     
     private let travelDateView = TravelDateView()
-
+    
     private lazy var saveButton: DOOButton = {
         let btn = DOOButton(type: .unabled, title: "저장하기")
         btn.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
@@ -71,7 +81,7 @@ final class EditTravelViewController: UIViewController {
         setGestureRecognizer()
         setDelegate()
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
@@ -189,12 +199,7 @@ private extension EditTravelViewController {
         
         var isDateValid = true
         var isEndDateNotPast = true
-        
-        guard let initialData = travelData else { return }
-        let currentData = currentTravelData
-        let isChanged = initialData.title != currentData.title || 
-                        initialData.startDate != currentData.startDate ||
-                        initialData.endDate != currentData.endDate
+        let isChanged = isTravelDateChanged || isTravelNameChanged
         
         if let startDateText = travelDateView.startDateLabel.text?.trimmingCharacters(in: .whitespaces),
            let endDateText = travelDateView.endDateLabel.text?.trimmingCharacters(in: .whitespaces),
@@ -209,14 +214,22 @@ private extension EditTravelViewController {
         }
         
         saveButton.currentType = (!isTravelNameTextFieldEmpty
-                                          && isTravelNameTextFieldGood
-                                          && isDateValid
-                                          && isEndDateNotPast 
-                                          && isChanged) ? .enabled : .unabled
+                                  && isTravelNameTextFieldGood
+                                  && isDateValid
+                                  && isEndDateNotPast
+                                  && isChanged) ? .enabled : .unabled
     }
     
     func travelNameTextFieldCheck() {
         guard let text = travelNameView.travelNameTextField.text else { return }
+        
+        //변경사항 있는지 확인
+        if text != initialTravelName {
+            self.isTravelNameChanged = true
+        } else {
+            self.isTravelNameChanged = false
+        }
+        
         travelNameView.characterCountLabel.text = "\(text.count) / 15"
         currentTravelData.title = text
         
@@ -291,7 +304,7 @@ extension EditTravelViewController: UITextFieldDelegate {
         }
         return true
     }
-
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         travelNameTextFieldCheck()
     }
@@ -317,7 +330,12 @@ extension EditTravelViewController: BottomSheetDelegate {
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
         if activeLabel == travelDateView.startDateLabel {
-            currentTravelData.startDate = formattedDate
+            if formattedDate != initialStartDate {
+                isTravelDateChanged = true
+            } else {
+                isTravelDateChanged = false
+            }
+            
             travelDateView.startDateLabel.text = formattedDate
             // endDate가 설정되어 있고 startDate가 endDate보다 뒤에 있는지 확인
             if let endDateText = travelDateView.endDateLabel.text,
@@ -326,7 +344,13 @@ extension EditTravelViewController: BottomSheetDelegate {
                 DOOToast.show(message: "여행 종료일보다 여행 시작일이 빨라요!", insetFromBottom: ScreenUtils.getHeight(374))
             }
         } else if activeLabel == travelDateView.endDateLabel {
-            currentTravelData.endDate = formattedDate
+            
+            if formattedDate != initialEndDate {
+                isTravelDateChanged = true
+            } else {
+                isTravelDateChanged = false
+            }
+            
             travelDateView.endDateLabel.text = formattedDate
             // startDate가 설정되어 있고 endDate가 startDate보다 앞에 있는지 확인
             if let startDateText = travelDateView.startDateLabel.text,
