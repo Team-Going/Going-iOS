@@ -30,13 +30,11 @@ final class MemberViewController: UIViewController {
                                           UIImage(resource: .imgProfileAep),
                                           UIImage(resource: .imgProfileAei)]
     
-    
     private let noFriendsEmptyView: NoFriendsEmptyView = {
         let view = NoFriendsEmptyView()
         view.isHidden = true
         return view
     }()
-    
     
     var memberData: MemberResponseStruct? {
         didSet {
@@ -72,7 +70,6 @@ final class MemberViewController: UIViewController {
             } else {
                 self.memberScrollView.isHidden = true
                 self.noFriendsEmptyView.isHidden = false
-                
             }
         }
     }
@@ -134,6 +131,12 @@ final class MemberViewController: UIViewController {
     
     private let ourTestResultView = MemberTestResultView()
     
+    private let whiteBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(resource: .white000)
+        return view
+    }()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -167,6 +170,7 @@ private extension MemberViewController {
         view.addSubviews(navigationBar,
                          navigationUnderLineView,
                          memberScrollView,
+                         whiteBackgroundView,
                          noFriendsEmptyView)
         
         memberScrollView.addSubview(contentView)
@@ -194,6 +198,11 @@ private extension MemberViewController {
             $0.height.equalTo(1)
         }
         
+        whiteBackgroundView.snp.makeConstraints {
+            $0.top.equalTo(navigationUnderLineView.snp.bottom)
+            $0.bottom.leading.trailing.equalToSuperview()
+        }
+        
         noFriendsEmptyView.snp.makeConstraints {
             $0.top.equalTo(navigationUnderLineView.snp.bottom)
             $0.trailing.leading.equalToSuperview()
@@ -218,7 +227,7 @@ private extension MemberViewController {
             $0.width.equalTo(ScreenUtils.getWidth(327))
             $0.height.equalTo(ScreenUtils.getHeight(48))
         }
-
+        
         tasteLabelHorizStackView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
@@ -252,7 +261,7 @@ private extension MemberViewController {
     }
     
     func registerCell() {
-        membersProfileCollectionView.register(TripFriendsCollectionViewCell.self, 
+        membersProfileCollectionView.register(TripFriendsCollectionViewCell.self,
                                               forCellWithReuseIdentifier: TripFriendsCollectionViewCell.cellIdentifier)
     }
     
@@ -297,7 +306,7 @@ extension MemberViewController: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         
         cell.friendNameLabel.text = memberData?.participants[indexPath.row].name
-
+        
         guard let memberResultNum = memberData?.participants[indexPath.row].result else { return UICollectionViewCell() }
         
         
@@ -305,7 +314,7 @@ extension MemberViewController: UICollectionViewDataSource {
             cell.profileImageView.image = userProfileImageSet[memberResultNum]
         } else {
             cell.profileImageView.image = UIImage(resource: .imgProfileGuest)
-
+            
         }
         
         return cell
