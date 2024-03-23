@@ -40,6 +40,7 @@ final class MemberViewController: UIViewController {
         didSet {
             
             if memberData?.participants.count != 1 {
+                whiteBackgroundView.isHidden = true
                 
                 membersProfileCollectionView.reloadData()
                 
@@ -67,6 +68,7 @@ final class MemberViewController: UIViewController {
                     self.redTasteLabel.text = formattedText
                     self.grayTasteLabel.text = "에 대한 여행 취향이 잘 맞네요"
                 }
+                
             } else {
                 self.memberScrollView.isHidden = true
                 self.noFriendsEmptyView.isHidden = false
